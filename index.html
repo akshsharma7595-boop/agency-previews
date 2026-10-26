@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Converting Digital Flagships | Portfolio Previews</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #090b10;
+            --surface: #121620;
+            --border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem; }
+        .container { max-width: 800px; width: 100%; text-align: center; }
+        .badge { display: inline-block; padding: 0.35rem 0.85rem; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 9999px; color: var(--accent); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.25rem; }
+        h1 { font-size: 2.25rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.75rem; background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        p.subtitle { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2.5rem; max-width: 580px; margin-left: auto; margin-right: auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+        .card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(56, 189, 248, 0.12); }
+        .tag { font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .card h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem; }
+        .card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 1rem; }
+        .btn-link { margin-top: auto; font-size: 0.85rem; font-weight: 600; color: #fff; display: inline-flex; align-items: center; gap: 0.25rem; }
+        footer { margin-top: 3rem; color: #64748b; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="badge">Production Cloud Previews</div>
+        <h1>Interactive Flagship Prototypes</h1>
+        <p class="subtitle">Curated modern digital web experiences engineered for high-ticket local leaders across luxury architecture, medical, automotive, and real estate.</p>
+        <div class="grid">
+            <a href="./realestate/" class="card">
+                <div class="tag">Real Estate & Advisory</div>
+                <h2>Aura Living & Estates</h2>
+                <p>Private luxury residences and commercial advisory showcase.</p>
+                <div class="btn-link">Launch Demo &rarr;</div>
+            </a>
+            <a href="./interior/" class="card">
+                <div class="tag">Architecture & Interiors</div>
+                <h2>Studio Form & Space</h2>
+                <p>Bespoke turnkey residential & commercial architectural portfolio.</p>
+                <div class="btn-link">Launch Demo &rarr;</div>
+            </a>
+            <a href="./salon/" class="card">
+                <div class="tag">Auto PPF / Salons</div>
+                <h2>Apex Detail & Esthetics</h2>
+                <p>High-ticket automotive detailing, ceramic coatings, and studio aesthetics.</p>
+                <div class="btn-link">Launch Demo &rarr;</div>
+            </a>
+            <a href="./clinic/" class="card">
+                <div class="tag">Medical & Dentistry</div>
+                <h2>Elite Smile & Implants</h2>
+                <p>Advanced restorative dental aesthetics and implantology center.</p>
+                <div class="btn-link">Launch Demo &rarr;</div>
+            </a>
+            <a href="./gym/" class="card">
+                <div class="tag">Fitness & Wellness</div>
+                <h2>Titan Athletic Club</h2>
+                <p>High-performance private training club and conditioning facility.</p>
+                <div class="btn-link">Launch Demo &rarr;</div>
+            </a>
+        </div>
+        <footer>Designed for high-performance direct client testing and conversion.</footer>
+    </div>
+</body>
+</html>

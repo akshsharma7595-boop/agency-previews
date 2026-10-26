@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Clinic Website Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --primary-light: #f0fdfa;
+      --accent: #0284c7;
+    }
+    .bg-brand { background-color: var(--primary); }
+    .bg-brand-dark:hover { background-color: var(--primary-dark); }
+    .bg-brand-light { background-color: var(--primary-light); }
+    .text-brand { color: var(--primary); }
+    .border-brand { border-color: var(--primary); }
+    .ring-brand:focus { --tw-ring-color: var(--primary); }
+    @media print {
+      #pitch-toolbar { display: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-teal-600 selection:text-white">
+
+  <!-- PITCH STUDIO TOOLBAR (For you to switch leads & copy emails; hideable with 1 click or ?preview=1) -->
+  <div id="pitch-toolbar" class="bg-slate-900 text-white border-b border-slate-700 sticky top-0 z-50 shadow-xl">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          Pitch Studio Mode
+        </span>
+        <label for="lead-selector" class="text-slate-400 font-medium">Select Lead:</label>
+        <select id="lead-selector" class="bg-slate-800 text-white border border-slate-600 rounded-lg px-3 py-1.5 font-medium focus:outline-none focus:border-teal-400">
+          <!-- Populated from clinics-data.js -->
+        </select>
+        <button onclick="openCustomModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 px-3 py-1.5 rounded-lg font-medium transition">
+          + Customize / New Clinic
+        </button>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="openPitchDrawer()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5 shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          View Cold Email & Pitch
+        </button>
+        <button onclick="hideToolbarForScreenshot()" title="Hide toolbar for clean screenshot or Loom video" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+          Hide Bar (Screenshot Mode)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating button to restore toolbar when hidden -->
+  <button id="restore-toolbar-btn" onclick="showToolbar()" class="hidden fixed bottom-4 left-4 z-50 bg-slate-900/90 hover:bg-slate-900 text-white text-xs px-3 py-2 rounded-full shadow-lg border border-slate-700 backdrop-blur">
+    Show Pitch Toolbar
+  </button>
+
+  <!-- TOP ANNOUNCEMENT / CONTACT BAR -->
+  <div class="bg-slate-900 text-slate-300 text-xs sm:text-sm py-2 px-4 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center gap-4">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-teal-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          <span id="top-locality">Mumbai, Maharashtra</span>
+        </span>
+        <span class="hidden md:flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-teal-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span id="top-hours">Mon – Sat: 10:00 AM – 8:30 PM</span>
+        </span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a id="top-phone-link" href="tel:+919820000000" class="hover:text-white font-medium flex items-center gap-1">
+          <svg class="w-3.5 h-3.5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+          <span id="top-phone">+91 98200 00000</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN NAVIGATION -->
+  <header class="bg-white/95 backdrop-blur sticky top-0 z-40 border-b border-slate-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl bg-brand text-white flex items-center justify-center font-extrabold text-xl shadow-md" id="logo-badge">
+          C
+        </div>
+        <div>
+          <span id="nav-clinic-name" class="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight block leading-none">
+            Clinic Name
+          </span>
+          <span id="nav-specialty-tag" class="text-xs font-semibold text-brand tracking-wide uppercase mt-1 block">
+            Specialized Healthcare
+          </span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+        <a href="#services" class="hover:text-slate-900 transition">Treatments</a>
+        <a href="#about" class="hover:text-slate-900 transition">Meet the Doctor</a>
+        <a href="#reviews" class="hover:text-slate-900 transition">Patient Stories</a>
+        <a href="#location" class="hover:text-slate-900 transition">Clinic Location</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#book" class="bg-brand bg-brand-dark text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md hover:shadow-lg transition flex items-center gap-2">
+          <span>Book Appointment</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-white to-slate-50 pt-10 pb-20 lg:pt-16 lg:pb-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Column -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-light border border-teal-200 text-brand text-xs sm:text-sm font-bold">
+            <span class="flex h-2 w-2 rounded-full bg-brand"></span>
+            <span id="hero-badge">Trusted Clinic in Mumbai</span>
+          </div>
+
+          <h1 id="hero-headline" class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12]">
+            Compassionate, Expert Care for Your Family
+          </h1>
+
+          <p id="hero-subheadline" class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
+            Experience personalized medical attention using modern diagnostic technology, transparent treatment plans, and zero long waiting times.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-3.5 pt-2">
+            <a href="#book" class="bg-brand bg-brand-dark text-white px-7 py-4 rounded-xl font-bold text-base shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2.5">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+              <span>Book Instant Appointment</span>
+            </a>
+            <a id="hero-call-btn" href="tel:+919820000000" class="bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 px-7 py-4 rounded-xl font-bold text-base shadow-sm transition flex items-center justify-center gap-2">
+              <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+              <span id="hero-call-text">Call Clinic Directly</span>
+            </a>
+          </div>
+
+          <!-- Trust Metrics Bar -->
+          <div class="pt-6 border-t border-slate-200 grid grid-cols-3 gap-4 max-w-lg">
+            <div>
+              <div class="flex items-center gap-1 text-amber-500 font-extrabold text-xl sm:text-2xl">
+                <span id="stat-rating">4.9</span>
+                <span>★</span>
+              </div>
+              <p class="text-xs text-slate-500 font-medium mt-0.5">Patient Rating</p>
+            </div>
+            <div>
+              <div class="font-extrabold text-xl sm:text-2xl text-slate-900" id="stat-patients">5,000+</div>
+              <p class="text-xs text-slate-500 font-medium mt-0.5">Happy Patients</p>
+            </div>
+            <div>
+              <div class="font-extrabold text-xl sm:text-2xl text-slate-900">100%</div>
+              <p class="text-xs text-slate-500 font-medium mt-0.5">Hygienic & Safe</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Visual + Quick Booking Card -->
+        <div class="lg:col-span-5">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900">
+            <img id="hero-image" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80" alt="Clinic Interior" class="w-full h-[380px] sm:h-[440px] object-cover opacity-90" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/30 to-transparent"></div>
+            <div class="absolute bottom-0 inset-x-0 p-6 text-white">
+              <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-full bg-brand text-white flex items-center justify-center font-bold text-lg shrink-0">
+                    ✓
+                  </div>
+                  <div>
+                    <p id="card-doctor-name" class="font-bold text-base">Expert Medical Consultation</p>
+                    <p id="card-locality" class="text-xs text-slate-200">Same-day appointments available • Walk-ins welcome</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TREATMENTS & SERVICES SECTION -->
+  <section id="services" class="py-20 bg-white border-t border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-brand font-bold text-xs uppercase tracking-widest">Our Specialties & Treatments</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">Comprehensive Care Under One Roof</h2>
+        <p class="text-slate-600 mt-3 text-base">We combine clinical expertise with patient-first comfort so you get accurate diagnosis and lasting relief.</p>
+      </div>
+
+      <div id="services-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Populated dynamically based on specialty -->
+      </div>
+    </div>
+  </section>
+
+  <!-- MEET THE DOCTOR / WHY CHOOSE US -->
+  <section id="about" class="py-20 bg-slate-50 border-t border-slate-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-5">
+          <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-slate-100">
+            <div class="w-16 h-16 rounded-2xl bg-brand-light text-brand flex items-center justify-center font-extrabold text-2xl mb-5">
+              Dr
+            </div>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand">Lead Specialist</span>
+            <h3 id="about-doctor-name" class="text-2xl font-extrabold text-slate-900 mt-1">Chief Medical Specialist</h3>
+            <p id="about-clinic-name" class="text-sm font-semibold text-slate-500 mt-0.5">Clinic Name</p>
+            <p id="about-bio" class="text-slate-600 text-sm leading-relaxed mt-4">
+              Dedicated to delivering ethical, evidence-based treatments tailored to every patient's unique needs. Known across the neighborhood for gentle care, clear communication, and long-term results.
+            </p>
+            <div class="mt-6 pt-6 border-t border-slate-100 space-y-3 text-sm">
+              <div class="flex items-center gap-2.5 text-slate-700 font-medium">
+                <span class="text-brand font-bold">✓</span> Personalized 1-on-1 Patient Consultation
+              </div>
+              <div class="flex items-center gap-2.5 text-slate-700 font-medium">
+                <span class="text-brand font-bold">✓</span> International Sterilization & Safety Standards
+              </div>
+              <div class="flex items-center gap-2.5 text-slate-700 font-medium">
+                <span class="text-brand font-bold">✓</span> Transparent Pricing — No Hidden Charges
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-6">
+          <span class="text-brand font-bold text-xs uppercase tracking-widest">Why Patients Trust Us</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+            Modern Healthcare Designed Around Your Comfort
+          </h2>
+          <p class="text-slate-600 leading-relaxed">
+            Finding a reliable doctor shouldn't be stressful. At <strong id="why-clinic-name" class="text-slate-900">our clinic</strong>, we make booking simple, keep wait times minimal, and explain every step of your treatment clearly before we begin.
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-5 pt-2">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+              <div class="font-bold text-slate-900 text-base">Zero Hassle WhatsApp Booking</div>
+              <p class="text-slate-600 text-sm mt-1">Pick your preferred slot online and confirm directly on WhatsApp in seconds.</p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+              <div class="font-bold text-slate-900 text-base">Advanced Equipment</div>
+              <p class="text-slate-600 text-sm mt-1">Modern diagnostic and treatment tools for faster, painless recovery.</p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+              <div class="font-bold text-slate-900 text-base">Prime Local Accessibility</div>
+              <p class="text-slate-600 text-sm mt-1">Conveniently located in <span id="why-locality">Mumbai</span> with easy access for families & seniors.</p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+              <div class="font-bold text-slate-900 text-base">Follow-Up Support</div>
+              <p class="text-slate-600 text-sm mt-1">Dedicated post-visit guidance and reminders so your recovery stays on track.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PATIENT TESTIMONIALS -->
+  <section id="reviews" class="py-20 bg-white border-t border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-brand font-bold text-xs uppercase tracking-widest">Patient Stories</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">What Local Patients Say</h2>
+      </div>
+      <div id="reviews-grid" class="grid md:grid-cols-3 gap-6">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK APPOINTMENT + GOOGLE MAPS SECTION -->
+  <section id="book" class="py-20 bg-slate-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Booking Form -->
+        <div class="lg:col-span-6 bg-white text-slate-900 rounded-3xl p-6 sm:p-10 shadow-2xl">
+          <span class="text-brand font-bold text-xs uppercase tracking-widest">Instant Appointment Request</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Book Your Visit in 30 Seconds</h2>
+          <p class="text-slate-600 text-sm mt-2">Fill in your details below — your appointment request will be sent directly to our clinic reception via WhatsApp or Email.</p>
+
+          <form onsubmit="handleAppointmentSubmit(event)" class="mt-6 space-y-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Patient Full Name *</label>
+              <input id="form-name" type="text" required placeholder="e.g., Rahul Verma" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:border-teal-600 text-sm" />
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Phone / WhatsApp Number *</label>
+                <input id="form-phone" type="tel" required placeholder="+91 98XXXXXXXX" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:border-teal-600 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Preferred Time Slot *</label>
+                <select id="form-slot" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:border-teal-600 text-sm bg-white">
+                  <option value="Today - Morning (10 AM - 1 PM)">Today - Morning (10 AM - 1 PM)</option>
+                  <option value="Today - Evening (5 PM - 8:30 PM)">Today - Evening (5 PM - 8:30 PM)</option>
+                  <option value="Tomorrow - Morning">Tomorrow - Morning</option>
+                  <option value="Tomorrow - Evening">Tomorrow - Evening</option>
+                  <option value="This Weekend">This Weekend</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Treatment / Concern</label>
+              <select id="form-service" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:border-teal-600 text-sm bg-white">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+            <button type="submit" class="w-full bg-brand bg-brand-dark text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2 text-base">
+              <span>Confirm Appointment via WhatsApp</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </button>
+            <p class="text-center text-xs text-slate-400">No advance payment required • Instant confirmation from clinic desk</p>
+          </form>
+        </div>
+
+        <!-- Location & Map -->
+        <div id="location" class="lg:col-span-6 space-y-6">
+          <div>
+            <span class="text-teal-400 font-bold text-xs uppercase tracking-widest">Visit Our Clinic</span>
+            <h3 id="footer-clinic-name" class="text-3xl font-extrabold mt-1">Clinic Name</h3>
+            <p id="footer-address" class="text-slate-300 mt-2 text-base leading-relaxed">
+              Mumbai, Maharashtra
+            </p>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="bg-slate-800/80 border border-slate-700 p-4 rounded-2xl">
+              <div class="text-xs text-slate-400 uppercase font-bold">Direct Phone</div>
+              <a id="footer-phone" href="tel:+919820000000" class="text-lg font-bold text-white mt-1 block hover:text-teal-400">+91 98200 00000</a>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700 p-4 rounded-2xl">
+              <div class="text-xs text-slate-400 uppercase font-bold">Email Desk</div>
+              <a id="footer-email" href="mailto:clinic@gmail.com" class="text-sm font-bold text-white mt-1.5 block truncate hover:text-teal-400">clinic@gmail.com</a>
+            </div>
+          </div>
+
+          <!-- Embedded Google Map (No API key needed) -->
+          <div class="rounded-2xl overflow-hidden border-2 border-slate-700 h-72 bg-slate-800 shadow-lg">
+            <iframe
+              id="google-map-iframe"
+              class="w-full h-full border-0"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://maps.google.com/maps?q=Mumbai&t=&z=14&ie=UTF8&iwloc=&output=embed">
+            </iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-slate-950 text-slate-500 text-xs py-8 border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-between items-center gap-4">
+      <p>© <span id="copyright-year">2026</span> <span id="copyright-clinic">Clinic</span>. All rights reserved.</p>
+      <p>Designed for fast patient booking & local search visibility.</p>
+    </div>
+  </footer>
+
+  <!-- COLD EMAIL & WHATSAPP PITCH DRAWER MODAL -->
+  <div id="pitch-drawer" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">Outreach Generator</span>
+          <h3 class="text-xl font-extrabold text-slate-900" id="pitch-modal-title">Cold Email & WhatsApp Pitch</h3>
+        </div>
+        <button onclick="closePitchDrawer()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold leading-none">&times;</button>
+      </div>
+
+      <div class="mt-5 space-y-5">
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs sm:text-sm space-y-1">
+          <div><strong class="text-slate-700">To Email:</strong> <span id="pitch-to-email" class="font-mono text-emerald-700 select-all"></span></div>
+          <div><strong class="text-slate-700">Phone / WhatsApp:</strong> <span id="pitch-to-phone" class="font-mono text-slate-800 select-all"></span></div>
+          <div><strong class="text-slate-700">Subject Line:</strong> <span id="pitch-subject" class="font-semibold text-slate-900 select-all"></span></div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1.5 gap-2 flex-wrap">
+            <label class="text-xs font-bold uppercase text-slate-600">Cold Email Body (From: akshsharma.web@gmail.com)</label>
+            <div class="flex items-center gap-2">
+              <a id="open-gmail-btn" href="#" target="_blank" class="text-xs bg-rose-600 hover:bg-rose-500 text-white px-3 py-1 rounded-lg font-semibold">Open in Gmail Compose ↗</a>
+              <button onclick="copyText('pitch-email-body')" class="text-xs bg-slate-900 hover:bg-slate-700 text-white px-3 py-1 rounded-lg font-semibold">Copy Email</button>
+            </div>
+          </div>
+          <textarea id="pitch-email-body" rows="7" class="w-full p-3.5 rounded-xl border border-slate-300 font-mono text-xs text-slate-800 bg-white focus:outline-none"></textarea>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="text-xs font-bold uppercase text-slate-600">WhatsApp Follow-Up Pitch (High Reply Rate)</label>
+            <button onclick="copyText('pitch-whatsapp-body')" class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1 rounded-lg font-semibold">Copy WhatsApp Msg</button>
+          </div>
+          <textarea id="pitch-whatsapp-body" rows="5" class="w-full p-3.5 rounded-xl border border-slate-300 font-mono text-xs text-slate-800 bg-white focus:outline-none"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOMIZE NEW CLINIC MODAL -->
+  <div id="custom-modal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+        <h3 class="text-xl font-extrabold text-slate-900">Instant Clinic Customizer</h3>
+        <button onclick="closeCustomModal()" class="text-slate-400 hover:text-slate-700 text-2xl font-bold leading-none">&times;</button>
+      </div>
+      <form onsubmit="applyCustomClinic(event)" class="mt-4 space-y-3.5 text-sm">
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Clinic Name *</label>
+          <input id="cust-name" type="text" required placeholder="e.g., SmileCraft Dental Studio" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Doctor Name</label>
+            <input id="cust-doc" type="text" placeholder="e.g., Dr. Neha Shah" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Specialty Preset</label>
+            <select id="cust-spec" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white">
+              <option value="dental">Dental Clinic</option>
+              <option value="skin">Skin / Dermatology</option>
+              <option value="physio">Physiotherapy & Rehab</option>
+              <option value="general">General / Family / Pediatric</option>
+              <option value="eye">Eye Care / Ophthalmology</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Locality / Address *</label>
+            <input id="cust-loc" type="text" required placeholder="e.g., Bandra West, Mumbai" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Phone / WhatsApp *</label>
+            <input id="cust-phone" type="text" required placeholder="+91 98201 12345" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Email Address</label>
+          <input id="cust-email" type="email" placeholder="doctor@gmail.com" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300" />
+        </div>
+        <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-xl mt-2">
+          Generate Live Preview
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="clinics-data.js"></script>
+</body>
+</html>

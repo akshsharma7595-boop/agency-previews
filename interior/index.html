@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Luxury Interior Design & Turnkey Architecture | Mumbai</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              gold: '#D4AF37',
+              goldLight: '#E8CA65',
+              dark: '#121214',
+              surface: '#1A1A1E',
+              card: '#222227',
+              border: '#2E2E36',
+              textMuted: '#9E9EA8'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #121214;
+      color: #F3F3F6;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .gold-gradient {
+      background: linear-gradient(135deg, #ECC868 0%, #D4AF37 50%, #A67C1E 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-btn {
+      background: linear-gradient(135deg, #ECC868 0%, #D4AF37 100%);
+      color: #121214;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+    .gold-btn:hover {
+      background: linear-gradient(135deg, #F3D98A 0%, #ECC868 100%);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+      transform: translateY(-2px);
+    }
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-hover:hover {
+      border-color: #D4AF37;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body class="selection:bg-brand-gold selection:text-brand-dark">
+
+  <!-- Top Announcement Bar -->
+  <header class="bg-brand-surface border-b border-brand-border py-2 text-xs text-center text-brand-textMuted px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center space-x-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="header-locality">Mumbai & Suburbs • Premium Turnkey Execution</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span>⭐ 4.9/5 Rating (80+ Verified Homes Delivered)</span>
+        <a id="top-phone-link" href="#" class="text-brand-gold font-medium hover:underline flex items-center">
+          <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
+          <span id="top-phone-text">+91 98670 71331</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur-md border-b border-brand-border/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-gold to-amber-700 flex items-center justify-center text-brand-dark font-serif font-bold text-xl">
+          <span id="brand-initial">D</span>
+        </div>
+        <div>
+          <h1 id="brand-name" class="font-serif font-bold text-xl tracking-tight text-white">Designs by Chandni Shah</h1>
+          <p id="brand-tagline" class="text-xs text-brand-gold uppercase tracking-wider font-medium">Luxury Living & Turnkey Interiors</p>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+        <a href="#portfolio" class="hover:text-brand-gold transition">Portfolio</a>
+        <a href="#services" class="hover:text-brand-gold transition">Services</a>
+        <a href="#estimator" class="hover:text-brand-gold transition">Cost Estimator</a>
+        <a href="#process" class="hover:text-brand-gold transition">Process</a>
+        <a href="#reviews" class="hover:text-brand-gold transition">Reviews</a>
+      </div>
+
+      <div>
+        <a id="nav-cta-btn" href="#" target="_blank" class="gold-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide flex items-center shadow-lg">
+          <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+          Book Free Consultation
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 md:py-28 overflow-hidden">
+    <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-brand-surface border border-brand-border text-xs text-brand-gold font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
+            <span id="hero-badge">Curated Interior Architecture • Mumbai</span>
+          </div>
+
+          <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white">
+            Transforming Mumbai Homes into <span class="gold-gradient">Timeless Living</span> Spaces.
+          </h2>
+
+          <p id="hero-subtitle" class="text-base sm:text-lg text-brand-textMuted max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            From modern 2BHK & 3BHK high-rise apartments to sprawling penthouses, we craft bespoke interiors with 3D visualization, transparent billing, and guaranteed 45-day handover.
+          </p>
+
+          <!-- Key Trust Metrics -->
+          <div class="grid grid-cols-3 gap-4 pt-2 max-w-lg mx-auto lg:mx-0">
+            <div class="bg-brand-surface/80 border border-brand-border p-3 rounded-xl text-center">
+              <div class="font-serif text-2xl font-bold text-white">80+</div>
+              <div class="text-[11px] text-brand-textMuted">Homes Handed Over</div>
+            </div>
+            <div class="bg-brand-surface/80 border border-brand-border p-3 rounded-xl text-center">
+              <div class="font-serif text-2xl font-bold text-brand-gold">45 Days</div>
+              <div class="text-[11px] text-brand-textMuted">On-Time Execution</div>
+            </div>
+            <div class="bg-brand-surface/80 border border-brand-border p-3 rounded-xl text-center">
+              <div class="font-serif text-2xl font-bold text-white">10 Yrs</div>
+              <div class="text-[11px] text-brand-textMuted">Material Warranty</div>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+            <a id="hero-whatsapp-btn" href="#" target="_blank" class="w-full sm:w-auto gold-btn px-8 py-4 rounded-xl text-sm font-semibold flex items-center justify-center shadow-xl">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+              Get Free 3D Design & Quote
+            </a>
+            <a href="#estimator" class="w-full sm:w-auto px-6 py-4 rounded-xl text-sm font-semibold border border-brand-border hover:border-brand-gold text-gray-300 hover:text-white transition flex items-center justify-center bg-brand-surface/40">
+              Calculate Project Cost →
+            </a>
+          </div>
+
+          <p class="text-xs text-brand-textMuted flex items-center justify-center lg:justify-start space-x-2">
+            <span>🔒 100% Free Consultation</span>
+            <span>•</span>
+            <span>No Cost Estimate with Detailed BOQ</span>
+            <span>•</span>
+            <span>Strict Budget Adherence</span>
+          </p>
+        </div>
+
+        <!-- Hero Visual Showcase -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative rounded-2xl overflow-hidden border border-brand-border bg-brand-surface shadow-2xl">
+            <img id="hero-img" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=80" alt="Luxury Living Room Interior" class="w-full h-[440px] object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"></div>
+            
+            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-brand-surface/90 backdrop-blur-md border border-brand-border">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] text-brand-gold uppercase tracking-wider font-semibold">Recent Handover</span>
+                  <h4 id="recent-project-name" class="font-serif font-bold text-white text-base">3BHK Penthouse • Mumbai</h4>
+                  <p class="text-xs text-brand-textMuted">Custom Italian marble, fluted veneer, ambient warm LEDs</p>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs font-semibold text-emerald-400">Delivered in 42 Days</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Budget Estimator -->
+  <section id="estimator" class="py-16 bg-brand-surface border-y border-brand-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-bold text-brand-gold tracking-widest uppercase">Instant Calculator</span>
+        <h3 class="font-serif text-3xl font-bold text-white mt-1">Estimate Your Home Interior Budget</h3>
+        <p class="text-sm text-brand-textMuted mt-2">Get an instant ballpark cost breakdown based on Mumbai market rates.</p>
+      </div>
+
+      <div class="bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8 shadow-xl">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">1. Apartment Configuration</label>
+            <select id="calc-config" class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold" onchange="calculateBudget()">
+              <option value="1bhk">1 BHK (450 - 550 sq ft)</option>
+              <option value="2bhk" selected>2 BHK (650 - 850 sq ft)</option>
+              <option value="3bhk">3 BHK (1,000 - 1,400 sq ft)</option>
+              <option value="4bhk">4 BHK / Duplex (1,600+ sq ft)</option>
+              <option value="commercial">Commercial Office / Studio</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">2. Design Finish & Scope</label>
+            <select id="calc-finish" class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold" onchange="calculateBudget()">
+              <option value="standard">Essential Quality (Laminates, Modular Kitchen)</option>
+              <option value="premium" selected>Premium Luxury (Acrylic, PU Polish, False Ceiling)</option>
+              <option value="ultra">Ultra Luxe (Italian Marble, Veneer, Automation)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">3. Possession Timeline</label>
+            <select id="calc-timeline" class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold">
+              <option>Immediate / Key in Hand</option>
+              <option>Within 1 to 2 Months</option>
+              <option>Under Construction (Planning stage)</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Calculated Output -->
+        <div class="bg-brand-dark/90 border border-brand-border p-6 rounded-xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <div class="text-xs text-brand-textMuted uppercase tracking-wider">Estimated Project Budget</div>
+            <div id="calc-result" class="font-serif text-3xl sm:text-4xl font-bold gold-gradient mt-1">₹7.5 Lakhs - ₹11 Lakhs</div>
+            <div class="text-xs text-brand-textMuted mt-1">Includes Design, Modular Kitchen, Wardrobes, False Ceiling, Lighting & Execution.</div>
+          </div>
+
+          <a id="calc-whatsapp-btn" href="#" target="_blank" class="w-full md:w-auto gold-btn px-6 py-3.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center whitespace-nowrap shadow-md">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+            Send My Estimate on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Gallery -->
+  <section id="portfolio" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div>
+        <span class="text-xs font-bold text-brand-gold tracking-widest uppercase">Our Work</span>
+        <h3 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">Featured Interior Projects</h3>
+        <p class="text-sm text-brand-textMuted mt-2">Every home custom-engineered with millimeter-precision and European hardware.</p>
+      </div>
+      <div class="mt-4 md:mt-0 flex gap-2 overflow-x-auto pb-2">
+        <button class="px-4 py-1.5 rounded-full text-xs font-medium bg-brand-gold text-brand-dark font-semibold">All Projects</button>
+        <button class="px-4 py-1.5 rounded-full text-xs font-medium bg-brand-surface border border-brand-border text-gray-300 hover:text-white">Living Rooms</button>
+        <button class="px-4 py-1.5 rounded-full text-xs font-medium bg-brand-surface border border-brand-border text-gray-300 hover:text-white">Modular Kitchens</button>
+        <button class="px-4 py-1.5 rounded-full text-xs font-medium bg-brand-surface border border-brand-border text-gray-300 hover:text-white">Bedrooms</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- Project 1 -->
+      <div class="bg-brand-surface rounded-2xl overflow-hidden border border-brand-border card-hover group">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" alt="Scandinavian Living" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <span class="absolute top-3 left-3 bg-brand-dark/80 backdrop-blur-md border border-brand-border text-[11px] font-semibold text-brand-gold px-2.5 py-1 rounded-full">Turnkey 3BHK</span>
+        </div>
+        <div class="p-5">
+          <h4 class="font-serif font-bold text-lg text-white">The Minimalist Haven</h4>
+          <p class="text-xs text-brand-textMuted mt-1">Fluted paneling, warm ambient cove lighting, customized lounger sectionals.</p>
+          <div class="flex items-center justify-between mt-4 pt-3 border-t border-brand-border/60 text-xs">
+            <span class="text-gray-400">📍 Mumbai Suburbs</span>
+            <span class="text-brand-gold font-medium">Delivered in 45 Days</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="bg-brand-surface rounded-2xl overflow-hidden border border-brand-border card-hover group">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80" alt="Modular Kitchen" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <span class="absolute top-3 left-3 bg-brand-dark/80 backdrop-blur-md border border-brand-border text-[11px] font-semibold text-brand-gold px-2.5 py-1 rounded-full">Modular Island</span>
+        </div>
+        <div class="p-5">
+          <h4 class="font-serif font-bold text-lg text-white">German Acrylic Kitchen</h4>
+          <p class="text-xs text-brand-textMuted mt-1">Quartz countertops, Blum soft-close tandem boxes, breakfast bar with pendant brass lights.</p>
+          <div class="flex items-center justify-between mt-4 pt-3 border-t border-brand-border/60 text-xs">
+            <span class="text-gray-400">📍 Premium High-Rise</span>
+            <span class="text-brand-gold font-medium">10-Yr Hardware Warranty</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="bg-brand-surface rounded-2xl overflow-hidden border border-brand-border card-hover group">
+        <div class="relative h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1540518614846-7ede433c4ef5?auto=format&fit=crop&w=800&q=80" alt="Master Suite" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          <span class="absolute top-3 left-3 bg-brand-dark/80 backdrop-blur-md border border-brand-border text-[11px] font-semibold text-brand-gold px-2.5 py-1 rounded-full">Master Bedroom</span>
+        </div>
+        <div class="p-5">
+          <h4 class="font-serif font-bold text-lg text-white">The Royal Suite</h4>
+          <p class="text-xs text-brand-textMuted mt-1">Tinted glass walk-in wardrobe with sensor lighting, custom headboard & study nook.</p>
+          <div class="flex items-center justify-between mt-4 pt-3 border-t border-brand-border/60 text-xs">
+            <span class="text-gray-400">📍 Sea-Facing Residence</span>
+            <span class="text-brand-gold font-medium">Complete Turnkey</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Turnkey Services -->
+  <section id="services" class="py-20 bg-brand-surface border-y border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-bold text-brand-gold tracking-widest uppercase">End-to-End Capabilities</span>
+        <h3 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">Turnkey Interior Services</h3>
+        <p class="text-sm text-brand-textMuted mt-2">Zero subcontractor headaches. Single point of contact from 3D blueprints to handover.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="bg-brand-card p-6 rounded-2xl border border-brand-border card-hover">
+          <div class="w-12 h-12 rounded-xl bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold mb-4 text-xl">
+            📐
+          </div>
+          <h4 class="font-serif font-bold text-lg text-white">3D Visualization & VR</h4>
+          <p class="text-xs text-brand-textMuted mt-2 leading-relaxed">Photorealistic 3D renders so you see every centimeter of your home before execution begins.</p>
+        </div>
+
+        <div class="bg-brand-card p-6 rounded-2xl border border-brand-border card-hover">
+          <div class="w-12 h-12 rounded-xl bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold mb-4 text-xl">
+            🍳
+          </div>
+          <h4 class="font-serif font-bold text-lg text-white">Modular Kitchens</h4>
+          <p class="text-xs text-brand-textMuted mt-2 leading-relaxed">Factory-pressed marine-grade BWR plywood, anti-scratch acrylics & European hardware.</p>
+        </div>
+
+        <div class="bg-brand-card p-6 rounded-2xl border border-brand-border card-hover">
+          <div class="w-12 h-12 rounded-xl bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold mb-4 text-xl">
+            💡
+          </div>
+          <h4 class="font-serif font-bold text-lg text-white">Ceiling & Smart Lighting</h4>
+          <p class="text-xs text-brand-textMuted mt-2 leading-relaxed">Gyproc POP designs, magnetic track lights, dimmable ambient coves & smart home switches.</p>
+        </div>
+
+        <div class="bg-brand-card p-6 rounded-2xl border border-brand-border card-hover">
+          <div class="w-12 h-12 rounded-xl bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold mb-4 text-xl">
+            🛋️
+          </div>
+          <h4 class="font-serif font-bold text-lg text-white">Custom Furniture</h4>
+          <p class="text-xs text-brand-textMuted mt-2 leading-relaxed">Made-to-measure sofa sectionals, hydraulic beds, console tables, and fluted acoustic wall paneling.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Step Process -->
+  <section id="process" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs font-bold text-brand-gold tracking-widest uppercase">The Process</span>
+      <h3 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">4 Steps to Your Dream Home</h3>
+      <p class="text-sm text-brand-textMuted mt-2">Transparent timeline, fixed price commitment, and zero surprise charges.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+      
+      <div class="bg-brand-surface p-6 rounded-2xl border border-brand-border relative">
+        <span class="font-serif text-4xl font-bold text-brand-gold/30 absolute top-4 right-4">01</span>
+        <h4 class="font-serif font-bold text-lg text-white mt-2">Design Brief</h4>
+        <p class="text-xs text-brand-textMuted mt-2 leading-relaxed">On-site site measurement, lifestyle consultation, and mood board curation.</p>
+      </div>
+
+      <div class="bg-brand-surface p-6 rounded-2xl border border-brand-border relative">
+        <span class="font-serif text-4xl font-bold text-brand-gold/30 absolute top-4 right-4">02</span>
+        <h4 class="font-serif font-bold text-lg text-white mt-2">3D Blueprint & BOQ</h4>
+        <p class="text-xs text-brand-textMuted mt-2 leading-relaxed">Photorealistic 3D layouts and line-item material cost transparent sheet.</p>
+      </div>
+
+      <div class="bg-brand-surface p-6 rounded-2xl border border-brand-border relative">
+        <span class="font-serif text-4xl font-bold text-brand-gold/30 absolute top-4 right-4">03</span>
+        <h4 class="font-serif font-bold text-lg text-white mt-2">Factory Execution</h4>
+        <p class="text-xs text-brand-textMuted mt-2 leading-relaxed">Precision CNC cutting off-site to minimize on-site dust, noise, and delays.</p>
+      </div>
+
+      <div class="bg-brand-surface p-6 rounded-2xl border border-brand-border relative">
+        <span class="font-serif text-4xl font-bold text-brand-gold/30 absolute top-4 right-4">04</span>
+        <h4 class="font-serif font-bold text-lg text-white mt-2">45-Day Handover</h4>
+        <p class="text-xs text-brand-textMuted mt-2 leading-relaxed">Deep cleaning, 100-point quality audit, warranty certificates, and keys handed over.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="py-16 bg-gradient-to-r from-brand-surface via-brand-card to-brand-surface border-y border-brand-border text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h3 class="font-serif text-3xl sm:text-4xl font-bold text-white">Ready to Design Your Dream Space?</h3>
+      <p class="text-sm text-brand-textMuted mt-3 max-w-xl mx-auto">
+        Book a complimentary 30-minute design consultation with our principal interior architect. We'll review your floor plan and share custom concepts.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a id="footer-whatsapp-btn" href="#" target="_blank" class="gold-btn px-8 py-4 rounded-xl text-sm font-semibold flex items-center justify-center shadow-xl">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+          Chat with Designer on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-brand-dark text-center text-xs text-brand-textMuted border-t border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        © 2026 <span id="footer-brand-name">Designs by Chandni Shah</span>. All rights reserved.
+      </div>
+      <div id="footer-address">
+        Mumbai, Maharashtra, India
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Sticky WhatsApp CTA for Mobile -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <a id="floating-whatsapp-btn" href="#" target="_blank" class="gold-btn px-4 py-3 rounded-full shadow-2xl flex items-center space-x-2 text-xs font-bold border border-amber-300">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+      <span>Book Consultation</span>
+    </a>
+  </div>
+
+  <!-- Dynamic Studio Switcher via URL Params -->
+  <script>
+    const studios = {
+      "designs-by-chandni-shah": {
+        name: "Designs by Chandni Shah",
+        initial: "C",
+        tagline: "Luxury Residential Interiors & Home Renovations",
+        locality: "Borivali & Kandivali West, Mumbai",
+        phone: "+91 98200 12345",
+        phoneClean: "919820012345",
+        address: "Borivali West / Kandivali West, Mumbai - 400092",
+        recentProject: "3BHK Residence • Kandivali West"
+      },
+      "unique-interiors-solution": {
+        name: "Unique Interiors Solution",
+        initial: "U",
+        tagline: "Complete Turnkey Interior Design & 3D Execution",
+        locality: "Jogeshwari West & Andheri, Mumbai",
+        phone: "+91 98670 71331",
+        phoneClean: "919867071331",
+        address: "CEN199, New Link Rd, Jogeshwari West, Mumbai - 400102",
+        recentProject: "2BHK Luxury Turnkey • Andheri West"
+      }
+    };
+
+    function getParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    const currentSlug = getParam("studio") || "designs-by-chandni-shah";
+    const data = studios[currentSlug] || studios["designs-by-chandni-shah"];
+
+    // Populate data
+    document.getElementById("page-title").innerText = `${data.name} | Luxury Interior Architecture Mumbai`;
+    document.getElementById("brand-name").innerText = data.name;
+    document.getElementById("footer-brand-name").innerText = data.name;
+    document.getElementById("brand-initial").innerText = data.initial;
+    document.getElementById("brand-tagline").innerText = data.tagline;
+    document.getElementById("header-locality").innerText = `${data.locality} • Premium Turnkey Execution`;
+    document.getElementById("hero-badge").innerText = `${data.locality} • Bespoke Interiors`;
+    document.getElementById("top-phone-text").innerText = data.phone;
+    document.getElementById("top-phone-link").href = `tel:${data.phoneClean}`;
+    document.getElementById("footer-address").innerText = data.address;
+    document.getElementById("recent-project-name").innerText = data.recentProject;
+
+    // Setup WhatsApp links
+    function updateWhatsAppLinks(calcText = "") {
+      const baseMsg = `Hi ${data.name}! I saw your luxury interior portfolio. I'm looking to design my home in Mumbai and would love to get a free design consultation and estimate.${calcText ? ' ' + calcText : ''}`;
+      const waUrl = `https://wa.me/${data.phoneClean}?text=${encodeURIComponent(baseMsg)}`;
+      
+      document.getElementById("nav-cta-btn").href = waUrl;
+      document.getElementById("hero-whatsapp-btn").href = waUrl;
+      document.getElementById("footer-whatsapp-btn").href = waUrl;
+      document.getElementById("floating-whatsapp-btn").href = waUrl;
+      document.getElementById("calc-whatsapp-btn").href = waUrl;
+    }
+    updateWhatsAppLinks();
+
+    function calculateBudget() {
+      const config = document.getElementById("calc-config").value;
+      const finish = document.getElementById("calc-finish").value;
+      
+      const rates = {
+        "1bhk": { "standard": "₹3.5L - ₹5L", "premium": "₹5L - ₹7.5L", "ultra": "₹8L - ₹12L" },
+        "2bhk": { "standard": "₹5.5L - ₹7.5L", "premium": "₹7.5L - ₹11L", "ultra": "₹12L - ₹18L" },
+        "3bhk": { "standard": "₹8.5L - ₹12L", "premium": "₹12L - ₹17L", "ultra": "₹18L - ₹28L" },
+        "4bhk": { "standard": "₹14L - ₹19L", "premium": "₹19L - ₹28L", "ultra": "₹28L - ₹45L+" },
+        "commercial": { "standard": "₹1,200/sqft", "premium": "₹1,800/sqft", "ultra": "₹2,500+/sqft" }
+      };
+
+      const est = rates[config][finish];
+      document.getElementById("calc-result").innerText = est;
+      updateWhatsAppLinks(`(Estimated for ${config.toUpperCase()} under ${finish.toUpperCase()} finish: ${est})`);
+    }
+  </script>
+</body>
+</html>

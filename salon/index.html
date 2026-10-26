@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Luxury Unisex Salon, Hair Studio & Spa | Mumbai</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            salon: {
+              rose: '#D48166',
+              roseHover: '#BF6E54',
+              roseGold: '#D8A08D',
+              dark: '#141416',
+              surface: '#1D1D21',
+              card: '#24242A',
+              border: '#32323A',
+              cream: '#FAF6F0'
+            }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #141416;
+      color: #F5F5F7;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .rose-gradient {
+      background: linear-gradient(135deg, #F3C4B6 0%, #D48166 50%, #9F4B34 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .rose-btn {
+      background: linear-gradient(135deg, #E69D87 0%, #D48166 100%);
+      color: #141416;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+    .rose-btn:hover {
+      background: linear-gradient(135deg, #F3C4B6 0%, #E69D87 100%);
+      box-shadow: 0 8px 25px rgba(212, 129, 102, 0.4);
+      transform: translateY(-2px);
+    }
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-hover:hover {
+      border-color: #D48166;
+      transform: translateY(-4px);
+    }
+  </style>
+</head>
+<body class="selection:bg-salon-rose selection:text-white">
+
+  <!-- Announcement Bar -->
+  <header class="bg-salon-surface border-b border-salon-border py-2 text-xs text-center text-gray-400 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center space-x-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="header-locality">Mumbai & Suburbs • Appointments Available Today</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span>✨ 20% Off Your First Visit with Online Booking</span>
+        <a id="top-phone-link" href="#" class="text-salon-roseGold font-medium hover:underline flex items-center">
+          <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
+          <span id="top-phone-text">+91 98200 45678</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-40 bg-salon-dark/95 backdrop-blur-md border-b border-salon-border/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-salon-roseGold to-salon-rose flex items-center justify-center text-salon-dark font-serif font-bold text-xl">
+          <span id="brand-initial">G</span>
+        </div>
+        <div>
+          <h1 id="brand-name" class="font-serif font-bold text-2xl tracking-tight text-white">The Glam Lab Salon</h1>
+          <p id="brand-tagline" class="text-xs text-salon-roseGold uppercase tracking-wider font-medium">Luxury Unisex Styling & Aesthetics</p>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+        <a href="#services" class="hover:text-salon-roseGold transition">Treatments</a>
+        <a href="#menu" class="hover:text-salon-roseGold transition">Price Menu</a>
+        <a href="#lookbook" class="hover:text-salon-roseGold transition">Lookbook</a>
+        <a href="#reviews" class="hover:text-salon-roseGold transition">Reviews</a>
+      </div>
+
+      <div>
+        <a id="nav-cta-btn" href="#" target="_blank" class="rose-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide flex items-center shadow-lg">
+          <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+          Book Appointment (WhatsApp)
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 md:py-28 overflow-hidden">
+    <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#D48166_1px,transparent_1px)] [background-size:24px_24px]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-salon-surface border border-salon-border text-xs text-salon-roseGold font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-salon-rose animate-ping"></span>
+            <span id="hero-badge">Bespoke Hair & Beauty • Mumbai</span>
+          </div>
+
+          <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white">
+            Unveil Your Most <span class="rose-gradient">Radiant</span> Self.
+          </h2>
+
+          <p id="hero-subtitle" class="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+            Award-winning unisex hair styling, luxury dermal facials, balayage color transformations, and restorative spa therapies crafted by master artists.
+          </p>
+
+          <!-- Key Metrics -->
+          <div class="grid grid-cols-3 gap-4 pt-2 max-w-lg mx-auto lg:mx-0">
+            <div class="bg-salon-surface border border-salon-border p-3 rounded-xl text-center">
+              <div class="font-serif text-2xl font-bold text-white">4.9 ⭐</div>
+              <div class="text-[11px] text-gray-400">Google Rating</div>
+            </div>
+            <div class="bg-salon-surface border border-salon-border p-3 rounded-xl text-center">
+              <div class="font-serif text-2xl font-bold text-salon-roseGold">10k+</div>
+              <div class="text-[11px] text-gray-400">Happy Clients</div>
+            </div>
+            <div class="bg-salon-surface border border-salon-border p-3 rounded-xl text-center">
+              <div class="font-serif text-2xl font-bold text-white">100%</div>
+              <div class="text-[11px] text-gray-400">Cruelty-Free / Pro</div>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+            <a id="hero-whatsapp-btn" href="#" target="_blank" class="w-full sm:w-auto rose-btn px-8 py-4 rounded-xl text-sm font-semibold flex items-center justify-center shadow-xl">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+              Book Slot on WhatsApp (20% Off)
+            </a>
+            <a href="#menu" class="w-full sm:w-auto px-6 py-4 rounded-xl text-sm font-semibold border border-salon-border hover:border-salon-rose text-gray-300 hover:text-white transition flex items-center justify-center bg-salon-surface/50">
+              View Price Card & Menu ↓
+            </a>
+          </div>
+
+          <p class="text-xs text-gray-400 flex items-center justify-center lg:justify-start space-x-2">
+            <span>✨ Walk-ins Welcome</span>
+            <span>•</span>
+            <span>Instant Confirmation</span>
+            <span>•</span>
+            <span>Sanitized Studio</span>
+          </p>
+        </div>
+
+        <!-- Visual Hero Card -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative rounded-2xl overflow-hidden border border-salon-border bg-salon-surface shadow-2xl">
+            <img id="hero-img" src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1000&q=80" alt="Salon Interior" class="w-full h-[450px] object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-salon-dark via-transparent to-transparent"></div>
+            
+            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-salon-surface/90 backdrop-blur-md border border-salon-border">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] text-salon-roseGold uppercase tracking-wider font-semibold">Today's Special Offer</span>
+                  <h4 class="font-serif font-bold text-white text-base">Keratin Spa + Haircut Combo</h4>
+                  <p class="text-xs text-gray-400">Includes L'Oreal powerdose & deep scalp detox</p>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs font-bold text-salon-roseGold">₹2,999</span>
+                  <span class="text-[10px] block line-through text-gray-500">₹4,500</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Treatment Price Card & Instant Booking -->
+  <section id="menu" class="py-20 bg-salon-surface border-y border-salon-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold text-salon-roseGold tracking-widest uppercase">Treatment Menu</span>
+        <h3 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">Services & Transparent Pricing</h3>
+        <p class="text-sm text-gray-400 mt-2">Pick any service to instantly book your slot and claim your 20% discount.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Hair -->
+        <div class="bg-salon-card p-6 rounded-2xl border border-salon-border card-hover flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-2xl">✂️</span>
+              <span class="text-xs font-semibold px-2.5 py-1 bg-salon-rose/10 text-salon-roseGold rounded-full">Hair Studio</span>
+            </div>
+            <h4 class="font-serif font-bold text-xl text-white">Signature Hair Design</h4>
+            <ul class="text-xs text-gray-300 space-y-3 mt-4">
+              <li class="flex justify-between border-b border-salon-border/50 pb-2">
+                <span>Stylist Precision Haircut</span>
+                <span class="font-semibold text-white">₹799+</span>
+              </li>
+              <li class="flex justify-between border-b border-salon-border/50 pb-2">
+                <span>Global Color / Balayage</span>
+                <span class="font-semibold text-white">₹3,499+</span>
+              </li>
+              <li class="flex justify-between border-b border-salon-border/50 pb-2">
+                <span>Keratin / Cysteine Smoothing</span>
+                <span class="font-semibold text-white">₹4,999+</span>
+              </li>
+              <li class="flex justify-between">
+                <span>Olaplex Hair Repair Spa</span>
+                <span class="font-semibold text-white">₹1,999</span>
+              </li>
+            </ul>
+          </div>
+          <a href="#" onclick="bookService('Hair Styling & Color'); return false;" class="mt-6 rose-btn py-2.5 rounded-xl text-xs font-semibold text-center block">
+            Book Hair Appointment →
+          </a>
+        </div>
+
+        <!-- Skin & Facials -->
+        <div class="bg-salon-card p-6 rounded-2xl border border-salon-border card-hover flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-2xl">✨</span>
+              <span class="text-xs font-semibold px-2.5 py-1 bg-salon-rose/10 text-salon-roseGold rounded-full">Skin Aesthetics</span>
+            </div>
+            <h4 class="font-serif font-bold text-xl text-white">Dermal Skin Therapy</h4>
+            <ul class="text-xs text-gray-300 space-y-3 mt-4">
+              <li class="flex justify-between border-b border-salon-border/50 pb-2">
+                <span>Hydra-Infusion Glow Facial</span>
+                <span class="font-semibold text-white">₹2,499</span>
+              </li>
+              <li class="flex justify-between border-b border-salon-border/50 pb-2">
+                <span>Korean Glass Skin Ritual</span>
+                <span class="font-semibold text-white">₹3,999</span>
+              </li>
+              <li class="flex justify-between border-b border-salon-border/50 pb-2">
+                <span>Anti-Acne Blue Light Peel</span>
+                <span class="font-semibold text-white">₹1,899</span>
+              </li>
+              <li class="flex justify-between">
+                <span>Diamond Microdermabrasion</span>
+                <span class="font-semibold text-white">₹2,799</span>
+              </li>
+            </ul>
+          </div>
+          <a href="#" onclick="bookService('Skin Facial & Aesthetics'); return false;" class="mt-6 rose-btn py-2.5 rounded-xl text-xs font-semibold text-center block">
+            Book Skin Treatment →
+          </a>
+        </div>
+
+        <!-- Spa & Body -->
+        <div class="bg-salon-card p-6 rounded-2xl border border-salon-border card-hover flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-2xl">🌿</span>
+              <span class="text-xs font-semibold px-2.5 py-1 bg-salon-rose/10 text-salon-roseGold rounded-full">Wellness Spa</span>
+            </div>
+            <h4 class="font-serif font-bold text-xl text-white">Body Rituals & Spa</h4>
+            <ul class="text-xs text-gray-300 space-y-3 mt-4">
+              <li class="flex justify-between border-b border-salon-border/50 pb-2">
+                <span>Swedish Aromatherapy (60m)</span>
+                <span class="font-semibold text-white">₹1,999</span>
+              </li>
+              <li class="flex justify-between border-b border-salon-border/50 pb-2">
+                <span>Deep Tissue Muscle Relief</span>
+                <span class="font-semibold text-white">₹2,499</span>
+              </li>
+              <li class="flex justify-between border-b border-salon-border/50 pb-2">
+                <span>Full Body Polish & Wrap</span>
+                <span class="font-semibold text-white">₹2,999</span>
+              </li>
+              <li class="flex justify-between">
+                <span>Foot Reflexology & Scrub</span>
+                <span class="font-semibold text-white">₹999</span>
+              </li>
+            </ul>
+          </div>
+          <a href="#" onclick="bookService('Wellness Body Spa'); return false;" class="mt-6 rose-btn py-2.5 rounded-xl text-xs font-semibold text-center block">
+            Book Spa Therapy →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Lookbook Gallery -->
+  <section id="lookbook" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <span class="text-xs font-bold text-salon-roseGold tracking-widest uppercase">Visual Lookbook</span>
+      <h3 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">Real Client Transformations</h3>
+      <p class="text-sm text-gray-400 mt-2">Follow us on Instagram for daily looks, balayage trends, and bridal makeovers.</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="rounded-xl overflow-hidden h-64 border border-salon-border card-hover group">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80" alt="Haircut & Color" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+      </div>
+      <div class="rounded-xl overflow-hidden h-64 border border-salon-border card-hover group">
+        <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=600&q=80" alt="Facial glow" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+      </div>
+      <div class="rounded-xl overflow-hidden h-64 border border-salon-border card-hover group">
+        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80" alt="Hair styling" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+      </div>
+      <div class="rounded-xl overflow-hidden h-64 border border-salon-border card-hover group">
+        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80" alt="Spa relaxing" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="py-16 bg-gradient-to-r from-salon-surface via-salon-card to-salon-surface border-y border-salon-border text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h3 class="font-serif text-3xl sm:text-4xl font-bold text-white">Ready for Your Next Glam Session?</h3>
+      <p class="text-sm text-gray-300 mt-3 max-w-xl mx-auto">
+        Skip the queue. Book your preferred time slot directly on WhatsApp and enjoy 20% off your service bill today.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a id="footer-whatsapp-btn" href="#" target="_blank" class="rose-btn px-8 py-4 rounded-xl text-sm font-semibold flex items-center justify-center shadow-xl">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+          Reserve Slot on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-salon-dark text-center text-xs text-gray-500 border-t border-salon-border">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        © 2026 <span id="footer-brand-name">The Glam Lab Salon</span>. All rights reserved.
+      </div>
+      <div id="footer-address">
+        Mumbai, Maharashtra, India
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Sticky WhatsApp CTA for Mobile -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <a id="floating-whatsapp-btn" href="#" target="_blank" class="rose-btn px-4 py-3 rounded-full shadow-2xl flex items-center space-x-2 text-xs font-bold border border-rose-300">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+      <span>Book (20% Off)</span>
+    </a>
+  </div>
+
+  <!-- Dynamic Salon Switcher via URL Params -->
+  <script>
+    const salons = {
+      "the-glam-lab-bandra": {
+        name: "The Glam Lab Salon",
+        initial: "G",
+        tagline: "Luxury Unisex Styling, Balayage & Aesthetics",
+        locality: "Bandra & Andheri, Mumbai",
+        phone: "+91 98200 45678",
+        phoneClean: "919820045678",
+        address: "Near Linking Road, Bandra West, Mumbai - 400050"
+      },
+      "ks-beauty-lounge-borivali": {
+        name: "KS Beauty Lounge",
+        initial: "K",
+        tagline: "Premium Hair, Bridal Makeover & Skin Lounge",
+        locality: "Chandavarkar Rd, Borivali West, Mumbai",
+        phone: "+91 98205 11223",
+        phoneClean: "919820511223",
+        address: "Shop 1/2, Kapoor Apt, Chandavarkar Rd, Borivali West, Mumbai - 400092"
+      },
+      "mi-amor-unisex-powai": {
+        name: "Mi Amor Unisex Salon",
+        initial: "M",
+        tagline: "Boutique Styling, Keratin & Body Therapies",
+        locality: "Galleria Mall, Hiranandani, Powai",
+        phone: "+91 98190 77889",
+        phoneClean: "919819077889",
+        address: "1st Flr, Galleria Shopping Mall, Powai, Mumbai - 400076"
+      }
+    };
+
+    function getParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    const currentSlug = getParam("salon") || "the-glam-lab-bandra";
+    const data = salons[currentSlug] || salons["the-glam-lab-bandra"];
+
+    // Populate data
+    document.getElementById("page-title").innerText = `${data.name} | Luxury Unisex Salon & Spa Mumbai`;
+    document.getElementById("brand-name").innerText = data.name;
+    document.getElementById("footer-brand-name").innerText = data.name;
+    document.getElementById("brand-initial").innerText = data.initial;
+    document.getElementById("brand-tagline").innerText = data.tagline;
+    document.getElementById("header-locality").innerText = `${data.locality} • Appointments Available Today`;
+    document.getElementById("hero-badge").innerText = `${data.locality} • Bespoke Hair & Aesthetics`;
+    document.getElementById("top-phone-text").innerText = data.phone;
+    document.getElementById("top-phone-link").href = `tel:${data.phoneClean}`;
+    document.getElementById("footer-address").innerText = data.address;
+
+    function getWhatsAppUrl(service = "General Appointment") {
+      const msg = `Hi ${data.name}! I saw your luxury salon website. I'd like to book an appointment for ${service} and claim the 20% first visit discount!`;
+      return `https://wa.me/${data.phoneClean}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function setupLinks() {
+      const waUrl = getWhatsAppUrl();
+      document.getElementById("nav-cta-btn").href = waUrl;
+      document.getElementById("hero-whatsapp-btn").href = waUrl;
+      document.getElementById("footer-whatsapp-btn").href = waUrl;
+      document.getElementById("floating-whatsapp-btn").href = waUrl;
+    }
+    setupLinks();
+
+    function bookService(serviceName) {
+      const waUrl = getWhatsAppUrl(serviceName);
+      window.open(waUrl, "_blank");
+    }
+  </script>
+</body>
+</html>

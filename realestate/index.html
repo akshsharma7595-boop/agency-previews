@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Prime Properties & RERA Real Estate Advisory | Mumbai</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            re: {
+              gold: '#C9A84C',
+              goldLight: '#E2C375',
+              navy: '#0B132B',
+              navyLight: '#1C2541',
+              card: '#162038',
+              border: '#2A3656',
+              accent: '#3A506B'
+            }
+          },
+          fontFamily: {
+            serif: ['"Cinzel"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0B132B;
+      color: #F0F4F8;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .gold-gradient {
+      background: linear-gradient(135deg, #F5D77F 0%, #C9A84C 50%, #947225 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-btn {
+      background: linear-gradient(135deg, #E2C375 0%, #C9A84C 100%);
+      color: #0B132B;
+      font-weight: 700;
+      transition: all 0.25s ease;
+    }
+    .gold-btn:hover {
+      background: linear-gradient(135deg, #F5D77F 0%, #E2C375 100%);
+      box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4);
+      transform: translateY(-2px);
+    }
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-hover:hover {
+      border-color: #C9A84C;
+      transform: translateY(-4px);
+    }
+  </style>
+</head>
+<body class="selection:bg-re-gold selection:text-re-navy">
+
+  <!-- RERA Top Bar -->
+  <header class="bg-re-navyLight border-b border-re-border py-2 text-xs text-center text-gray-300 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center space-x-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="header-locality">Mumbai & Suburbs • Verified RERA Real Estate Advisory</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span>⭐ 4.9/5 Rating (₹150Cr+ Real Estate Brokered)</span>
+        <a id="top-phone-link" href="#" class="text-re-gold font-medium hover:underline flex items-center">
+          <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
+          <span id="top-phone-text">+91 98200 12890</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-40 bg-re-navy/95 backdrop-blur-md border-b border-re-border/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-re-gold to-amber-700 flex items-center justify-center text-re-navy font-serif font-bold text-xl">
+          <span id="brand-initial">R</span>
+        </div>
+        <div>
+          <h1 id="brand-name" class="font-serif font-bold text-xl tracking-wide text-white">Raajesh Property Consultant</h1>
+          <p id="brand-tagline" class="text-xs text-re-gold uppercase tracking-wider font-semibold">Premium Residential & Commercial Advisory</p>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+        <a href="#properties" class="hover:text-re-gold transition">Featured Listings</a>
+        <a href="#why-us" class="hover:text-re-gold transition">Why Work With Us</a>
+        <a href="#list-property" class="hover:text-re-gold transition">Sell Your Property</a>
+        <a href="#contact" class="hover:text-re-gold transition">Direct WhatsApp</a>
+      </div>
+
+      <div>
+        <a id="nav-cta-btn" href="#" target="_blank" class="gold-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide flex items-center shadow-lg">
+          <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+          Schedule Site Visit
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 md:py-28 overflow-hidden">
+    <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#C9A84C_1px,transparent_1px)] [background-size:24px_24px]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-re-navyLight border border-re-border text-xs text-re-gold font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-re-gold"></span>
+            <span id="hero-badge">Verified Luxury Residences • Mumbai</span>
+          </div>
+
+          <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white">
+            Find Your Next Home in <span class="gold-gradient">Mumbai's Prime</span> Locations.
+          </h2>
+
+          <p id="hero-subtitle" class="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+            Skip untrusted portal listings. Direct access to developer-mandated 2BHK, 3BHK, luxury penthouses, and commercial spaces with zero duplicate calls.
+          </p>
+
+          <!-- Key Metrics -->
+          <div class="grid grid-cols-3 gap-4 pt-2 max-w-lg mx-auto lg:mx-0">
+            <div class="bg-re-navyLight border border-re-border p-3 rounded-xl text-center">
+              <div class="font-serif text-2xl font-bold text-white">100%</div>
+              <div class="text-[11px] text-gray-400">RERA Verified</div>
+            </div>
+            <div class="bg-re-navyLight border border-re-border p-3 rounded-xl text-center">
+              <div class="font-serif text-2xl font-bold text-re-gold">₹0</div>
+              <div class="text-[11px] text-gray-400">Brokerage on New</div>
+            </div>
+            <div class="bg-re-navyLight border border-re-border p-3 rounded-xl text-center">
+              <div class="font-serif text-2xl font-bold text-white">15+ Yrs</div>
+              <div class="text-[11px] text-gray-400">Local Authority</div>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+            <a id="hero-whatsapp-btn" href="#" target="_blank" class="w-full sm:w-auto gold-btn px-8 py-4 rounded-xl text-sm font-semibold flex items-center justify-center shadow-xl">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+              Get Latest Inventory PDF (WhatsApp)
+            </a>
+            <a href="#properties" class="w-full sm:w-auto px-6 py-4 rounded-xl text-sm font-semibold border border-re-border hover:border-re-gold text-gray-300 hover:text-white transition flex items-center justify-center bg-re-navyLight/60">
+              Explore Available Units ↓
+            </a>
+          </div>
+
+          <p class="text-xs text-gray-400 flex items-center justify-center lg:justify-start space-x-2">
+            <span>🛡️ Clear Title Guaranteed</span>
+            <span>•</span>
+            <span>Zero Spam Calls</span>
+            <span>•</span>
+            <span>Direct Developer Pricing</span>
+          </p>
+        </div>
+
+        <!-- Hero Visual Showcase -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative rounded-2xl overflow-hidden border border-re-border bg-re-navyLight shadow-2xl">
+            <img id="hero-img" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1000&q=80" alt="Luxury Mumbai Residence" class="w-full h-[450px] object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-re-navy via-transparent to-transparent"></div>
+            
+            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-re-card/95 backdrop-blur-md border border-re-border">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] text-re-gold uppercase tracking-wider font-bold">Exclusive Mandate</span>
+                  <h4 class="font-serif font-bold text-white text-base">3BHK Deck Residence</h4>
+                  <p class="text-xs text-gray-300">1,150 Sq. Ft. Carpet • Sea View Deck</p>
+                </div>
+                <div class="text-right">
+                  <span class="text-sm font-bold text-re-gold">₹3.85 Cr*</span>
+                  <span class="text-[10px] block text-emerald-400">Ready to Move</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Properties Showcase -->
+  <section id="properties" class="py-20 bg-re-navyLight border-y border-re-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="text-xs font-bold text-re-gold tracking-widest uppercase">Curated Inventory</span>
+          <h3 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">Featured Prime Properties</h3>
+          <p class="text-sm text-gray-400 mt-2">Verified ready-to-move & under-construction units with complete documentation.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Unit 1 -->
+        <div class="bg-re-card rounded-2xl overflow-hidden border border-re-border card-hover group">
+          <div class="relative h-60 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Luxury 2BHK" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-re-navy/90 backdrop-blur-md text-[11px] font-bold text-re-gold px-2.5 py-1 rounded-full border border-re-border">2 BHK Premium</span>
+            <span class="absolute top-3 right-3 bg-emerald-600/90 text-[11px] font-bold text-white px-2 py-0.5 rounded-full">New Launch</span>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-baseline mb-2">
+              <h4 class="font-serif font-bold text-xl text-white">The Grand Horizon</h4>
+              <span class="font-serif font-bold text-lg text-re-gold">₹1.85 Cr*</span>
+            </div>
+            <p class="text-xs text-gray-300">📍 Andheri West / Lokhandwala, Mumbai</p>
+            <div class="grid grid-cols-3 gap-2 my-4 text-[11px] bg-re-navy/70 p-2.5 rounded-lg text-center border border-re-border/50 text-gray-300">
+              <div><strong class="text-white block">720 sq ft</strong> Carpet</div>
+              <div><strong class="text-white block">2 Bed</strong> 2 Bath</div>
+              <div><strong class="text-white block">Mid 2027</strong> Possession</div>
+            </div>
+            <a href="#" onclick="inquireProperty('The Grand Horizon (2BHK, ₹1.85 Cr)'); return false;" class="gold-btn w-full py-2.5 rounded-xl text-xs font-bold text-center block">
+              Download Brochure on WhatsApp →
+            </a>
+          </div>
+        </div>
+
+        <!-- Unit 2 -->
+        <div class="bg-re-card rounded-2xl overflow-hidden border border-re-border card-hover group">
+          <div class="relative h-60 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Luxury 3BHK" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-re-navy/90 backdrop-blur-md text-[11px] font-bold text-re-gold px-2.5 py-1 rounded-full border border-re-border">3 BHK Sky Deck</span>
+            <span class="absolute top-3 right-3 bg-re-gold/90 text-[11px] font-bold text-re-navy px-2 py-0.5 rounded-full">Ready Possession</span>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-baseline mb-2">
+              <h4 class="font-serif font-bold text-xl text-white">Imperial Heights</h4>
+              <span class="font-serif font-bold text-lg text-re-gold">₹3.40 Cr*</span>
+            </div>
+            <p class="text-xs text-gray-300">📍 Goregaon East / Film City Road, Mumbai</p>
+            <div class="grid grid-cols-3 gap-2 my-4 text-[11px] bg-re-navy/70 p-2.5 rounded-lg text-center border border-re-border/50 text-gray-300">
+              <div><strong class="text-white block">1,180 sq ft</strong> Carpet</div>
+              <div><strong class="text-white block">3 Bed</strong> 3 Bath</div>
+              <div><strong class="text-white block">OC Received</strong> Immediate</div>
+            </div>
+            <a href="#" onclick="inquireProperty('Imperial Heights (3BHK, ₹3.40 Cr)'); return false;" class="gold-btn w-full py-2.5 rounded-xl text-xs font-bold text-center block">
+              Schedule Private Viewing →
+            </a>
+          </div>
+        </div>
+
+        <!-- Unit 3 -->
+        <div class="bg-re-card rounded-2xl overflow-hidden border border-re-border card-hover group">
+          <div class="relative h-60 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Commercial Office" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-re-navy/90 backdrop-blur-md text-[11px] font-bold text-re-gold px-2.5 py-1 rounded-full border border-re-border">Commercial IT Park</span>
+            <span class="absolute top-3 right-3 bg-blue-500/90 text-[11px] font-bold text-white px-2 py-0.5 rounded-full">High ROI Lease</span>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-baseline mb-2">
+              <h4 class="font-serif font-bold text-xl text-white">Apex Business Tower</h4>
+              <span class="font-serif font-bold text-lg text-re-gold">₹2.10 Cr*</span>
+            </div>
+            <p class="text-xs text-gray-300">📍 Chakala, Andheri East (Near Metro)</p>
+            <div class="grid grid-cols-3 gap-2 my-4 text-[11px] bg-re-navy/70 p-2.5 rounded-lg text-center border border-re-border/50 text-gray-300">
+              <div><strong class="text-white block">950 sq ft</strong> Chargeable</div>
+              <div><strong class="text-white block">Furnished</strong> 18 Seats</div>
+              <div><strong class="text-white block">7.8% ROI</strong> Pre-Leased</div>
+            </div>
+            <a href="#" onclick="inquireProperty('Apex Business Tower Commercial (₹2.10 Cr)'); return false;" class="gold-btn w-full py-2.5 rounded-xl text-xs font-bold text-center block">
+              Get Commercial ROI Sheet →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Sell Your Property With Us -->
+  <section id="list-property" class="py-20 max-w-5xl mx-auto px-4 sm:px-6">
+    <div class="bg-gradient-to-br from-re-navyLight via-re-card to-re-navy border border-re-border rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+      <div class="relative z-10 max-w-2xl">
+        <span class="text-xs font-bold text-re-gold tracking-widest uppercase">For Property Owners</span>
+        <h3 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">Want to Sell or Rent Your Property Fast?</h3>
+        <p class="text-sm text-gray-300 mt-3 leading-relaxed">
+          Get your apartment or commercial space listed exclusively in front of our verified network of 5,000+ pre-approved buyers, corporate HNIs, and NRI investors without spam callers.
+        </p>
+        <div class="mt-8">
+          <a id="sell-whatsapp-btn" href="#" target="_blank" class="gold-btn px-8 py-4 rounded-xl text-sm font-bold inline-flex items-center shadow-xl">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+            List My Property via WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-re-navy text-center text-xs text-gray-400 border-t border-re-border">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        © 2026 <span id="footer-brand-name">Raajesh Property Consultant</span>. RERA Registered Broker.
+      </div>
+      <div id="footer-address">
+        Mumbai, Maharashtra, India
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Sticky WhatsApp CTA for Mobile -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <a id="floating-whatsapp-btn" href="#" target="_blank" class="gold-btn px-4 py-3 rounded-full shadow-2xl flex items-center space-x-2 text-xs font-bold border border-amber-300">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.181-.076.355.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+      <span>WhatsApp Property Broker</span>
+    </a>
+  </div>
+
+  <!-- Dynamic Switcher via URL Params -->
+  <script>
+    const brokers = {
+      "raajesh-property-andheri": {
+        name: "Raajesh Property Consultant",
+        initial: "R",
+        tagline: "Luxury Residential & Commercial Brokerage",
+        locality: "Versova, Lokhandwala & Juhu, Mumbai",
+        phone: "+91 98200 12890",
+        phoneClean: "919820012890",
+        address: "Versova Road, Andheri West, Mumbai - 400053"
+      },
+      "bharat-estate-goregaon": {
+        name: "Bharat Estate Agency",
+        initial: "B",
+        tagline: "Residential Resale & Corporate High-Rise Leasing",
+        locality: "Film City Road, Goregaon East, Mumbai",
+        phone: "+91 98204 33112",
+        phoneClean: "919820433112",
+        address: "Film City Road, Goregaon East, Mumbai - 400063"
+      }
+    };
+
+    function getParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    const currentSlug = getParam("broker") || "raajesh-property-andheri";
+    const data = brokers[currentSlug] || brokers["raajesh-property-andheri"];
+
+    // Populate data
+    document.getElementById("page-title").innerText = `${data.name} | Verified Real Estate Consultant Mumbai`;
+    document.getElementById("brand-name").innerText = data.name;
+    document.getElementById("footer-brand-name").innerText = data.name;
+    document.getElementById("brand-initial").innerText = data.initial;
+    document.getElementById("brand-tagline").innerText = data.tagline;
+    document.getElementById("header-locality").innerText = `${data.locality} • Verified RERA Real Estate Advisory`;
+    document.getElementById("hero-badge").innerText = `${data.locality} • Prime Mandates`;
+    document.getElementById("top-phone-text").innerText = data.phone;
+    document.getElementById("top-phone-link").href = `tel:${data.phoneClean}`;
+    document.getElementById("footer-address").innerText = data.address;
+
+    function getBrokerWhatsAppUrl(topic = "General Inquiry") {
+      const msg = `Hi ${data.name}! I saw your prime Mumbai real estate portfolio. I'm inquiring about: ${topic}. Could you share the inventory and floor plan details?`;
+      return `https://wa.me/${data.phoneClean}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function setupLinks() {
+      const waUrl = getBrokerWhatsAppUrl("Available 2BHK/3BHK Inventory in Mumbai");
+      document.getElementById("nav-cta-btn").href = waUrl;
+      document.getElementById("hero-whatsapp-btn").href = waUrl;
+      document.getElementById("floating-whatsapp-btn").href = waUrl;
+      
+      const sellUrl = `https://wa.me/${data.phoneClean}?text=${encodeURIComponent(`Hi ${data.name}! I am an owner looking to sell/rent out my property in Mumbai. Could we discuss listing it?`)}`;
+      document.getElementById("sell-whatsapp-btn").href = sellUrl;
+    }
+    setupLinks();
+
+    function inquireProperty(propName) {
+      const waUrl = getBrokerWhatsAppUrl(`Site Visit & Details for ${propName}`);
+      window.open(waUrl, "_blank");
+    }
+  </script>
+</body>
+</html>
