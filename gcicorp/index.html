@@ -3,85 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Global Corporate Inc. (GCI) & SCIENTIA Capital | Next-Gen Institutional Wealth Architecture</title>
-  <meta name="description" content="Global Corporate Inc. (GCI) & Scientia Capital — Micro Family Office, Quantitative Hedge Strategies, and Mutual Fund Portfolio Restructuring.">
+  <title>Global Corporate Inc. | Micro Family Office & Wealth Advisory</title>
+  <meta name="description" content="Global Corporate Inc. (GCI) — Dedicated Micro Family Office, Bespoke Wealth Advisory, Mutual Fund Restructuring, and Intergenerational Estate Planning.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
-    /* ==========================================================================
-       DYNAMIC THEME ENGINE (SWITCHABLE ACCENTS & VIBRANCY)
-       ========================================================================== */
     :root {
-      /* Theme 1: Hyper Chroma (Default) */
-      --bg-base: #05070f;
-      --bg-card: rgba(13, 18, 36, 0.7);
-      --bg-card-hover: rgba(22, 29, 56, 0.85);
-      --border-card: rgba(255, 255, 255, 0.12);
-      
-      --accent-primary: #00f5ff;
-      --accent-secondary: #8b5cf6;
-      --accent-tertiary: #ff007a;
-      --accent-emerald: #00ff9d;
-      --accent-amber: #ffb800;
-      
-      --glow-primary: rgba(0, 245, 255, 0.35);
-      --glow-secondary: rgba(139, 92, 246, 0.35);
-      --glow-tertiary: rgba(255, 0, 122, 0.35);
-      
-      --gradient-brand: linear-gradient(135deg, #00f5ff 0%, #8b5cf6 50%, #ff007a 100%);
-      --gradient-text: linear-gradient(135deg, #ffffff 15%, #00f5ff 55%, #8b5cf6 85%, #ff007a 100%);
-      --gradient-border: linear-gradient(135deg, #00f5ff, #8b5cf6, #ff007a);
-      
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-    }
-
-    /* Theme 2: Emerald Alpha (Quant Hedge Fund) */
-    body.theme-emerald {
-      --accent-primary: #00ffa3;
-      --accent-secondary: #00d2ff;
-      --accent-tertiary: #10b981;
-      --accent-emerald: #05ffa1;
-      --accent-amber: #f59e0b;
-      --glow-primary: rgba(0, 255, 163, 0.35);
-      --glow-secondary: rgba(0, 210, 255, 0.35);
-      --glow-tertiary: rgba(16, 185, 129, 0.35);
-      --gradient-brand: linear-gradient(135deg, #00ffa3 0%, #00d2ff 60%, #10b981 100%);
-      --gradient-text: linear-gradient(135deg, #ffffff 20%, #00ffa3 55%, #00d2ff 85%, #10b981 100%);
-      --gradient-border: linear-gradient(135deg, #00ffa3, #00d2ff, #10b981);
-    }
-
-    /* Theme 3: Monaco Gold (Imperial Sovereign) */
-    body.theme-gold {
-      --accent-primary: #ffd700;
-      --accent-secondary: #ff8800;
-      --accent-tertiary: #f59e0b;
-      --accent-emerald: #10b981;
-      --accent-amber: #ffd700;
-      --glow-primary: rgba(255, 215, 0, 0.4);
-      --glow-secondary: rgba(255, 136, 0, 0.4);
-      --glow-tertiary: rgba(245, 158, 11, 0.4);
-      --gradient-brand: linear-gradient(135deg, #ffd700 0%, #ff8800 60%, #e11d48 100%);
-      --gradient-text: linear-gradient(135deg, #ffffff 20%, #ffd700 55%, #ff8800 85%, #ff4500 100%);
-      --gradient-border: linear-gradient(135deg, #ffd700, #ff8800, #e11d48);
-    }
-
-    /* Theme 4: Cosmic Nebula (Ultra Violet & Rose) */
-    body.theme-nebula {
-      --accent-primary: #c084fc;
-      --accent-secondary: #f43f5e;
-      --accent-tertiary: #38bdf8;
-      --accent-emerald: #34d399;
-      --accent-amber: #fbbf24;
-      --glow-primary: rgba(192, 132, 252, 0.4);
-      --glow-secondary: rgba(244, 63, 94, 0.4);
-      --glow-tertiary: rgba(56, 189, 248, 0.4);
-      --gradient-brand: linear-gradient(135deg, #c084fc 0%, #f43f5e 50%, #38bdf8 100%);
-      --gradient-text: linear-gradient(135deg, #ffffff 20%, #c084fc 55%, #f43f5e 85%, #38bdf8 100%);
-      --gradient-border: linear-gradient(135deg, #c084fc, #f43f5e, #38bdf8);
+      --bg-deep: #090a0d;
+      --bg-surface: #101218;
+      --bg-surface-elevated: #161922;
+      --gold-accent: #c5a880;
+      --gold-light: #e5cfb3;
+      --gold-muted: rgba(197, 168, 128, 0.2);
+      --gold-border: rgba(197, 168, 128, 0.28);
+      --text-primary: #f7f7f5;
+      --text-secondary: #a3a6ad;
+      --text-muted: #6e727c;
+      --border-subtle: rgba(255, 255, 255, 0.07);
     }
 
     * {
@@ -92,1301 +32,493 @@
     }
 
     body {
-      background-color: var(--bg-base);
-      color: var(--text-main);
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
       font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-      overflow-x: hidden;
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 15px;
       -webkit-font-smoothing: antialiased;
-      transition: background-color 0.5s ease;
-    }
-
-    /* ==========================================================================
-       VIBRANT DYNAMIC AURORA & LIQUID GLOW CANVAS
-       ========================================================================== */
-    .aurora-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-      opacity: 0.9;
-    }
-
-    .aurora-light {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      animation: auroraOrbit 22s infinite alternate ease-in-out;
-      will-change: transform, opacity;
-    }
-
-    .light-1 {
-      width: 700px;
-      height: 700px;
-      background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
-      top: -200px;
-      right: -100px;
-      opacity: 0.25;
-      animation-duration: 20s;
-    }
-
-    .light-2 {
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%);
-      top: 30%;
-      left: -250px;
-      opacity: 0.28;
-      animation-duration: 26s;
-    }
-
-    .light-3 {
-      width: 650px;
-      height: 650px;
-      background: radial-gradient(circle, var(--accent-tertiary) 0%, transparent 70%);
-      bottom: -150px;
-      right: 10%;
-      opacity: 0.22;
-      animation-duration: 24s;
-    }
-
-    .cyber-grid-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-      z-index: 0;
-      mask-image: radial-gradient(ellipse at 50% 30%, rgba(0, 0, 0, 1) 20%, transparent 80%);
-      -webkit-mask-image: radial-gradient(ellipse at 50% 30%, rgba(0, 0, 0, 1) 20%, transparent 80%);
-    }
-
-    @keyframes auroraOrbit {
-      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-      50% { transform: translate(80px, 60px) scale(1.12) rotate(45deg); }
-      100% { transform: translate(-60px, 100px) scale(0.92) rotate(90deg); }
-    }
-
-    #particles-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.55;
-    }
-
-    .content-wrapper {
-      position: relative;
-      z-index: 2;
     }
 
     .container {
-      max-width: 1260px;
+      max-width: 1140px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 28px;
     }
 
-    /* ==========================================================================
-       STREAMING FINANCIAL TICKER BAR
-       ========================================================================== */
-    .ticker-bar {
-      background: rgba(5, 7, 15, 0.96);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 11px;
-      font-family: 'Space Grotesk', monospace;
-      padding: 9px 0;
-      overflow: hidden;
-      white-space: nowrap;
+    /* Subtle Architectural Grid Lines */
+    .bg-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    .page-wrapper {
       position: relative;
-      z-index: 110;
-      backdrop-filter: blur(12px);
+      z-index: 1;
     }
 
-    .ticker-track {
-      display: inline-flex;
-      gap: 48px;
-      animation: tickerRun 28s linear infinite;
-    }
-
-    @keyframes tickerRun {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    .ticker-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text-muted);
-    }
-
-    .ticker-val {
-      color: #fff;
-      font-weight: 700;
-    }
-
-    .ticker-badge-green {
-      background: rgba(0, 255, 157, 0.15);
-      color: var(--accent-emerald);
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 10px;
-      border: 1px solid rgba(0, 255, 157, 0.3);
-    }
-
-    .ticker-badge-cyan {
-      background: rgba(0, 245, 255, 0.15);
-      color: var(--accent-primary);
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 10px;
-      border: 1px solid rgba(0, 245, 255, 0.3);
-    }
-
-    /* ==========================================================================
-       NAVBAR & THEME CHANGER
-       ========================================================================== */
+    /* Navigation */
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(5, 7, 15, 0.82);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.3s ease;
+      background: rgba(9, 10, 13, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     .nav-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 80px;
+      height: 76px;
     }
 
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 15px;
+    .brand {
       text-decoration: none;
-    }
-
-    .brand-icon-box {
-      width: 48px;
-      height: 48px;
-      background: var(--gradient-brand);
-      border-radius: 14px;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-weight: 900;
-      color: #05070f;
-      font-size: 24px;
-      box-shadow: 0 0 30px var(--glow-primary);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex-direction: column;
     }
 
-    .brand-icon-box::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-      transform: rotate(45deg);
-      animation: iconShine 4s infinite;
+    .brand-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 22px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 600;
     }
 
-    @keyframes iconShine {
-      0% { transform: translateX(-100%) rotate(45deg); }
-      20%, 100% { transform: translateX(100%) rotate(45deg); }
-    }
-
-    .brand-logo:hover .brand-icon-box {
-      transform: scale(1.06) rotate(3deg);
-      box-shadow: 0 0 40px var(--glow-primary);
-    }
-
-    .brand-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 20px;
-      letter-spacing: -0.4px;
-      background: linear-gradient(135deg, #ffffff 40%, var(--accent-primary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1.1;
-    }
-
-    .brand-sub {
+    .brand-tag {
       font-size: 10px;
       letter-spacing: 3px;
-      color: var(--accent-secondary);
-      font-weight: 800;
       text-transform: uppercase;
-      display: block;
+      color: var(--gold-accent);
+      font-weight: 500;
     }
 
-    .nav-menu {
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 36px;
       list-style: none;
     }
 
-    .nav-menu a {
-      color: var(--text-muted);
+    .nav-links a {
+      color: var(--text-secondary);
       text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      transition: all 0.25s ease;
-      position: relative;
-      padding: 6px 0;
-    }
-
-    .nav-menu a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--gradient-brand);
-      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      border-radius: 2px;
-    }
-
-    .nav-menu a:hover {
-      color: #fff;
-    }
-
-    .nav-menu a:hover::after {
-      width: 100%;
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    /* Floating Theme Switcher Pill */
-    .theme-switcher-pill {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 30px;
-      padding: 4px 8px;
-      backdrop-filter: blur(12px);
-    }
-
-    .theme-dot {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      outline: none;
-      position: relative;
-    }
-
-    .theme-dot:hover, .theme-dot.active {
-      transform: scale(1.25);
-      border-color: #fff;
-      box-shadow: 0 0 12px currentColor;
-    }
-
-    .dot-chroma { background: linear-gradient(135deg, #00f5ff, #ff007a); color: #00f5ff; }
-    .dot-emerald { background: linear-gradient(135deg, #00ffa3, #00d2ff); color: #00ffa3; }
-    .dot-gold { background: linear-gradient(135deg, #ffd700, #ff8800); color: #ffd700; }
-    .dot-nebula { background: linear-gradient(135deg, #c084fc, #f43f5e); color: #c084fc; }
-
-    /* Ultra Buttons */
-    .btn-gradient {
-      background: var(--gradient-brand);
-      background-size: 200% 200%;
-      color: #05070f;
-      font-weight: 800;
       font-size: 13px;
-      letter-spacing: 0.3px;
-      padding: 13px 26px;
-      border-radius: 12px;
-      text-decoration: none;
-      border: none;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-accent);
+    }
+
+    .btn-gold {
+      background: transparent;
+      border: 1px solid var(--gold-accent);
+      color: var(--gold-light);
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 10px 22px;
+      border-radius: 4px;
       cursor: pointer;
-      box-shadow: 0 4px 25px var(--glow-primary);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      transition: all 0.3s ease;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      position: relative;
-      overflow: hidden;
     }
 
-    .btn-gradient:hover {
-      background-position: 100% 100%;
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 8px 35px var(--glow-secondary);
-      color: #fff;
+    .btn-gold:hover {
+      background: var(--gold-accent);
+      color: #090a0d;
     }
 
-    .btn-glass {
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      font-weight: 700;
-      padding: 14px 28px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-size: 14px;
-      border: 1px solid var(--border-card);
-      transition: all 0.3s ease;
-      backdrop-filter: blur(16px);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn-glass:hover {
-      border-color: var(--accent-primary);
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px var(--glow-primary);
-    }
-
-    /* ==========================================================================
-       HERO SECTION WITH 3D INTERACTIVE GYROSCOPE TILT
-       ========================================================================== */
+    /* Hero Section */
     .hero {
-      padding: 110px 0 90px;
-      min-height: 88vh;
-      display: flex;
-      align-items: center;
+      padding: 120px 0 100px;
+      border-bottom: 1px solid var(--border-subtle);
       position: relative;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .live-chip-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(13, 18, 36, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 7px 20px;
-      border-radius: 40px;
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--accent-primary);
-      letter-spacing: 2px;
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
       text-transform: uppercase;
-      margin-bottom: 28px;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 0 25px var(--glow-primary);
-      animation: floatBadge 4s ease-in-out infinite;
-    }
-
-    @keyframes floatBadge {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-
-    .pulse-dot {
-      width: 9px;
-      height: 9px;
-      background: var(--accent-emerald);
-      border-radius: 50%;
-      box-shadow: 0 0 14px var(--accent-emerald);
-      animation: radarPulse 1.6s infinite;
-    }
-
-    @keyframes radarPulse {
-      0% { transform: scale(0.85); opacity: 0.7; }
-      50% { transform: scale(1.5); opacity: 1; }
-      100% { transform: scale(0.85); opacity: 0.7; }
+      color: var(--gold-accent);
+      margin-bottom: 20px;
+      display: inline-block;
+      font-weight: 600;
     }
 
     .hero-heading {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Cormorant Garamond', Georgia, serif;
       font-size: 64px;
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -2px;
-      margin-bottom: 26px;
-    }
-
-    .gradient-hero-text {
-      background: var(--gradient-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-      text-shadow: 0 0 40px var(--glow-primary);
-    }
-
-    .hero-desc {
-      font-size: 19px;
-      line-height: 1.7;
-      color: var(--text-muted);
-      margin-bottom: 40px;
-      max-width: 580px;
-    }
-
-    .hero-btn-row {
-      display: flex;
-      gap: 18px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    /* Hero Trust Metrics Pill Row */
-    .trust-metrics-row {
-      display: flex;
-      gap: 32px;
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .trust-metric-item {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .trust-metric-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 28px;
-      font-weight: 800;
-      color: #fff;
-      display: flex;
-      align-items: baseline;
-      gap: 2px;
-    }
-
-    .trust-metric-num span {
-      color: var(--accent-primary);
-      font-size: 20px;
-    }
-
-    .trust-metric-label {
-      font-size: 12px;
-      color: var(--text-dim);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* 3D Glass Bento Terminal Card */
-    .tilt-card-wrap {
-      perspective: 1200px;
-    }
-
-    .bento-hero-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 28px;
-      padding: 36px;
-      backdrop-filter: blur(32px);
-      -webkit-backdrop-filter: blur(32px);
-      box-shadow: 0 35px 80px rgba(0, 0, 0, 0.8), 0 0 50px var(--glow-primary);
-      position: relative;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      transition: transform 0.15s ease-out, border-color 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    /* Iridescent Border Shine Effect */
-    .bento-hero-card::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border-radius: 30px;
-      padding: 2px;
-      background: var(--gradient-border);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0.6;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
-
-    .bento-hero-card:hover::before {
-      opacity: 1;
-    }
-
-    .terminal-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 18px;
-      margin-bottom: 24px;
-    }
-
-    .terminal-tag {
-      font-family: 'Space Grotesk', monospace;
-      font-size: 12px;
-      color: var(--accent-primary);
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .grid-2col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .mini-stat {
-      background: rgba(5, 7, 15, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 18px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .mini-stat::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: var(--gradient-brand);
-    }
-
-    .mini-stat-label {
-      font-size: 11px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      font-weight: 700;
-      margin-bottom: 6px;
-      letter-spacing: 0.5px;
-    }
-
-    .mini-stat-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 28px;
-      font-weight: 800;
-      color: #fff;
-    }
-
-    .mini-stat-badge {
-      font-size: 11px;
-      font-weight: 700;
-      margin-top: 4px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    /* Live Interactive Alpha Chart Widget */
-    .visualizer-box {
-      background: rgba(5, 7, 15, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
-      padding: 22px;
-      position: relative;
-    }
-
-    .visualizer-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .timeframe-pill-row {
-      display: flex;
-      gap: 6px;
-    }
-
-    .tf-btn {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: var(--text-muted);
-      font-size: 10px;
-      font-weight: 700;
-      padding: 4px 9px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .tf-btn.active, .tf-btn:hover {
-      background: var(--accent-primary);
-      color: #05070f;
-      border-color: var(--accent-primary);
-    }
-
-    .chart-container {
-      width: 100%;
-      height: 130px;
-    }
-
-    .neon-svg-line {
-      fill: none;
-      stroke: var(--accent-primary);
-      stroke-width: 3.5;
-      stroke-linecap: round;
-      filter: drop-shadow(0 0 12px var(--glow-primary));
-      transition: all 0.5s ease;
-    }
-
-    /* Floating Status Pill */
-    .floating-audit-callout {
-      position: absolute;
-      bottom: -18px;
-      right: 24px;
-      background: rgba(13, 18, 36, 0.95);
-      border: 1px solid var(--accent-emerald);
-      padding: 8px 16px;
-      border-radius: 30px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 11px;
-      font-weight: 800;
-      color: #fff;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--glow-primary);
-      animation: floatBadge 3.5s ease-in-out infinite 1s;
-    }
-
-    /* ==========================================================================
-       BENTO GRID CAPABILITIES SHOWCASE
-       ========================================================================== */
-    .bento-section {
-      padding: 120px 0;
-      position: relative;
-    }
-
-    .section-header {
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto 70px;
-    }
-
-    .section-tag {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 3.5px;
-      color: var(--accent-primary);
-      text-transform: uppercase;
-      margin-bottom: 14px;
-      display: inline-block;
-    }
-
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 46px;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.15;
-      margin-bottom: 20px;
-      letter-spacing: -1px;
-    }
-
-    .section-desc {
-      font-size: 17px;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    .bento-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 24px;
-      padding: 40px 34px;
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .bento-card:hover {
-      border-color: var(--accent-primary);
-      transform: translateY(-8px);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px var(--glow-primary);
-    }
-
-    .bento-card-large {
-      grid-column: span 2;
-    }
-
-    .bento-glow-spot {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      filter: blur(90px);
-      pointer-events: none;
-      opacity: 0.2;
-      transition: opacity 0.4s;
-    }
-
-    .spot-1 { background: var(--accent-primary); top: -80px; right: -80px; }
-    .spot-2 { background: var(--accent-secondary); bottom: -80px; left: -80px; }
-    .spot-3 { background: var(--accent-tertiary); top: -80px; left: -80px; }
-
-    .bento-card:hover .bento-glow-spot {
-      opacity: 0.35;
-    }
-
-    .bento-badge-tag {
-      font-size: 11px;
-      font-family: 'Space Grotesk', monospace;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 20px;
-      display: inline-block;
-      margin-bottom: 20px;
-      border: 1px solid transparent;
-    }
-
-    .tag-cyan {
-      background: rgba(0, 245, 255, 0.12);
-      color: var(--accent-primary);
-      border-color: rgba(0, 245, 255, 0.3);
-    }
-
-    .tag-purple {
-      background: rgba(139, 92, 246, 0.12);
-      color: var(--accent-secondary);
-      border-color: rgba(139, 92, 246, 0.3);
-    }
-
-    .tag-emerald {
-      background: rgba(0, 255, 157, 0.12);
-      color: var(--accent-emerald);
-      border-color: rgba(0, 255, 157, 0.3);
-    }
-
-    .tag-amber {
-      background: rgba(255, 184, 0, 0.12);
-      color: var(--accent-amber);
-      border-color: rgba(255, 184, 0, 0.3);
-    }
-
-    .bento-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      margin-bottom: 24px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .bento-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 26px;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 14px;
+      font-weight: 400;
+      line-height: 1.1;
       letter-spacing: -0.5px;
-    }
-
-    .bento-card p {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 26px;
-    }
-
-    .bento-features {
-      list-style: none;
-      margin-bottom: 32px;
-    }
-
-    .bento-features li {
-      font-size: 14px;
-      color: var(--text-main);
-      padding: 8px 0;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .bento-features li::before {
-      content: '✦';
-      color: var(--accent-primary);
-      font-size: 14px;
-    }
-
-    /* ==========================================================================
-       INTERACTIVE 60-SEC PORTFOLIO LEAKAGE & HEALTH AUDIT
-       ========================================================================== */
-    .diagnostic-section {
-      padding: 100px 0;
-      background: rgba(13, 18, 36, 0.4);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
-    }
-
-    .diag-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 28px;
-      padding: 48px;
-      box-shadow: 0 35px 80px rgba(0, 0, 0, 0.8), 0 0 50px var(--glow-primary);
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 50px;
-      align-items: center;
-    }
-
-    .diag-options-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 24px;
-    }
-
-    .diag-pill-btn {
-      background: rgba(5, 7, 15, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 14px;
-      padding: 16px;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.25s ease;
       color: #fff;
-    }
-
-    .diag-pill-btn:hover {
-      border-color: var(--accent-primary);
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .diag-pill-btn.active {
-      border-color: var(--accent-primary);
-      background: rgba(0, 245, 255, 0.12);
-      box-shadow: 0 0 20px var(--glow-primary);
-    }
-
-    .diag-pill-title {
-      font-weight: 800;
-      font-size: 14px;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .diag-pill-sub {
-      font-size: 11px;
-      color: var(--text-dim);
-    }
-
-    .score-visualizer-card {
-      background: rgba(5, 7, 15, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 24px;
-      padding: 36px;
-      text-align: center;
-      position: relative;
-    }
-
-    .gauge-circle-wrap {
-      position: relative;
-      width: 170px;
-      height: 170px;
-      margin: 0 auto 20px;
-    }
-
-    .gauge-svg {
-      transform: rotate(-90deg);
-      width: 170px;
-      height: 170px;
-    }
-
-    .gauge-bg {
-      fill: none;
-      stroke: rgba(255, 255, 255, 0.1);
-      stroke-width: 12;
-    }
-
-    .gauge-fill {
-      fill: none;
-      stroke: var(--accent-primary);
-      stroke-width: 12;
-      stroke-linecap: round;
-      stroke-dasharray: 440;
-      stroke-dashoffset: 220;
-      transition: stroke-dashoffset 1s ease, stroke 0.5s ease;
-      filter: drop-shadow(0 0 10px var(--glow-primary));
-    }
-
-    .gauge-center-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-
-    .gauge-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 38px;
-      font-weight: 900;
-      color: #fff;
-    }
-
-    .gauge-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    /* ==========================================================================
-       INTERACTIVE WEALTH COMPOUNDING SIMULATOR SECTION
-       ========================================================================== */
-    .simulator-wrap {
-      padding: 120px 0;
-      position: relative;
-    }
-
-    .sim-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 28px;
-      padding: 50px;
-      box-shadow: 0 35px 90px rgba(0, 0, 0, 0.85), 0 0 50px var(--glow-primary);
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .slider-row {
-      margin-bottom: 30px;
-    }
-
-    .slider-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
-
-    .slider-title {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .slider-output {
-      font-family: 'Space Grotesk', monospace;
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--accent-primary);
-    }
-
-    input[type=range] {
-      width: 100%;
-      height: 8px;
-      background: #1e293b;
-      border-radius: 8px;
-      outline: none;
-      -webkit-appearance: none;
-      cursor: pointer;
-    }
-
-    input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 24px;
-      height: 24px;
-      background: var(--gradient-brand);
-      border: 2px solid #fff;
-      border-radius: 50%;
-      box-shadow: 0 0 18px var(--glow-primary);
-      transition: transform 0.15s ease;
-    }
-
-    input[type=range]::-webkit-slider-thumb:hover {
-      transform: scale(1.3);
-    }
-
-    .sim-result-card {
-      background: rgba(5, 7, 15, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 24px;
-      padding: 40px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-    }
-
-    .sim-result-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--gradient-brand);
-    }
-
-    .corpus-label {
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent-primary);
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .corpus-val {
-      font-family: 'Syne', sans-serif;
-      font-size: 54px;
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 14px;
-      text-shadow: 0 0 40px var(--glow-primary);
-    }
-
-    .corpus-split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 24px;
-      margin-top: 24px;
-    }
-
-    .split-box {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .split-title {
-      font-size: 11px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      margin-bottom: 4px;
-      font-weight: 700;
-    }
-
-    .split-amount {
-      font-family: 'Space Grotesk', monospace;
-      font-size: 19px;
-      font-weight: 800;
-      color: #fff;
-    }
-
-    /* ==========================================================================
-       5-STEP DISCIPLINED PROCESS ROADMAP
-       ========================================================================== */
-    .process-section {
-      padding: 110px 0;
-      position: relative;
-    }
-
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 20px;
-      position: relative;
-    }
-
-    .step-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 20px;
-      padding: 30px 20px;
-      text-align: center;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-    }
-
-    .step-box:hover {
-      border-color: var(--accent-primary);
-      transform: translateY(-8px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px var(--glow-primary);
-    }
-
-    .step-num {
-      width: 48px;
-      height: 48px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--accent-primary);
-      border-radius: 50%;
-      margin: 0 auto 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-weight: 900;
-      font-size: 17px;
-      color: var(--accent-primary);
-      box-shadow: 0 0 20px var(--glow-primary);
-      transition: all 0.3s;
-    }
-
-    .step-box:hover .step-num {
-      background: var(--gradient-brand);
-      color: #05070f;
-      transform: scale(1.1);
-    }
-
-    .step-name {
-      font-size: 16px;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 10px;
-    }
-
-    .step-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* ==========================================================================
-       DUAL EXECUTIVE OFFICES SHOWCASE (JAMNAGAR & MUMBAI)
-       ========================================================================== */
-    .offices-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 36px;
-      margin-bottom: 70px;
-    }
-
-    .office-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 24px;
-      padding: 42px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .office-card:hover {
-      border-color: var(--accent-primary);
-      transform: translateY(-6px);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px var(--glow-primary);
-    }
-
-    .office-badge {
-      display: inline-block;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent-primary);
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    .office-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 28px;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 14px;
-    }
-
-    .office-address {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.7;
+      max-width: 820px;
       margin-bottom: 28px;
     }
 
-    .office-links {
+    .hero-heading em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-subhead {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 660px;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .hero-actions {
       display: flex;
-      gap: 16px;
+      gap: 20px;
       align-items: center;
       flex-wrap: wrap;
     }
 
-    .office-link-btn {
-      color: #fff;
+    .btn-text {
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 13px;
-      font-weight: 700;
-      display: inline-flex;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 10px 0;
+      position: relative;
+      transition: color 0.25s;
+    }
+
+    .btn-text::after {
+      content: '';
+      position: absolute;
+      bottom: 6px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--text-muted);
+      transition: background 0.25s;
+    }
+
+    .btn-text:hover {
+      color: #fff;
+    }
+
+    .btn-text:hover::after {
+      background: var(--gold-accent);
+    }
+
+    /* Philosophy Quote Section */
+    .philosophy-section {
+      padding: 90px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 60px;
+      align-items: baseline;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-accent);
+      font-weight: 600;
+    }
+
+    .philosophy-quote {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.35;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+
+    .philosophy-desc {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* Services Covered */
+    .services-section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section-header {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 44px;
+      font-weight: 400;
+      color: #fff;
+      margin-top: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 38px 30px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .service-card:hover {
+      border-color: var(--gold-border);
+      background: var(--bg-surface-elevated);
+      transform: translateY(-3px);
+    }
+
+    .service-card-num {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 18px;
+      color: var(--gold-accent);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* Our Process */
+    .process-section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .process-intro-card {
+      background: var(--bg-surface);
+      border-left: 2px solid var(--gold-accent);
+      padding: 32px 36px;
+      margin-bottom: 50px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .process-intro-card p {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 22px;
+      line-height: 1.5;
+      color: #fff;
+      font-weight: 400;
+    }
+
+    .process-columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .process-step {
+      padding-top: 20px;
+      border-top: 1px solid var(--gold-border);
+    }
+
+    .process-step-tag {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .process-step h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .process-step p {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* Strategy & Principles */
+    .principles-section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .principle-box {
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 30px 24px;
+      background: var(--bg-surface);
+      transition: border-color 0.25s;
+    }
+
+    .principle-box:hover {
+      border-color: var(--gold-border);
+    }
+
+    .principle-box h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .principle-box p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* Offices & Contact - Refined, Minimalist Footprint */
+    .contact-section {
+      padding: 80px 0 60px;
+    }
+
+    .offices-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .office-block {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 28px 30px;
+    }
+
+    .office-tag {
+      font-size: 10.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-accent);
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .office-block h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .office-text {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 18px;
+      font-weight: 300;
+    }
+
+    .office-contacts {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+      flex-wrap: wrap;
+    }
+
+    .office-contacts a {
+      color: var(--gold-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .office-contacts a:hover {
+      color: #fff;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 30px 0;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 10px 20px;
-      border-radius: 10px;
-      transition: all 0.25s ease;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
-    .office-link-btn:hover {
-      border-color: var(--accent-primary);
-      color: var(--accent-primary);
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 20px var(--glow-primary);
-    }
-
-    /* ==========================================================================
-       MODAL POPUP & FORMS
-       ========================================================================== */
+    /* Modal */
     .modal-backdrop {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      z-index: 300;
+      background: rgba(9, 10, 13, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 200;
       display: none;
       align-items: center;
       justify-content: center;
@@ -1397,611 +529,324 @@
       display: flex;
     }
 
-    .modal-window {
-      background: #090e1f;
-      border: 1px solid var(--accent-primary);
-      border-radius: 28px;
-      max-width: 540px;
+    .modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--gold-border);
+      border-radius: 4px;
+      max-width: 480px;
       width: 100%;
-      padding: 44px;
+      padding: 38px;
       position: relative;
-      box-shadow: 0 35px 100px rgba(0, 0, 0, 0.95), 0 0 60px var(--glow-primary);
-      animation: modalSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    @keyframes modalSlideIn {
-      from { transform: translateY(30px) scale(0.95); opacity: 0; }
-      to { transform: translateY(0) scale(1); opacity: 1; }
-    }
-
-    .modal-window-close {
+    .modal-close {
       position: absolute;
-      top: 22px;
-      right: 22px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
       color: var(--text-muted);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      font-size: 16px;
+      font-size: 20px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
     }
 
-    .modal-window-close:hover {
-      background: #fff;
-      color: #05070f;
+    .form-group {
+      margin-bottom: 16px;
     }
 
-    .input-group {
-      margin-bottom: 20px;
-    }
-
-    .input-label {
+    .form-label {
       display: block;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      font-weight: 800;
-      letter-spacing: 0.8px;
+      color: var(--gold-accent);
+      margin-bottom: 6px;
+      font-weight: 600;
     }
 
-    .input-field, .select-field {
+    .form-input, .form-select {
       width: 100%;
-      background: rgba(5, 7, 15, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 12px;
-      padding: 14px 18px;
+      background: var(--bg-deep);
+      border: 1px solid var(--border-subtle);
+      border-radius: 3px;
+      padding: 11px 14px;
       color: #fff;
-      font-size: 15px;
-      outline: none;
-      transition: all 0.25s ease;
-    }
-
-    .input-field:focus, .select-field:focus {
-      border-color: var(--accent-primary);
-      box-shadow: 0 0 20px var(--glow-primary);
-    }
-
-    /* ==========================================================================
-       FOOTER
-       ========================================================================== */
-    footer {
-      background: #020409;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 70px 0 36px;
       font-size: 14px;
-      color: var(--text-dim);
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.2s;
     }
 
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
+    .form-input:focus, .form-select:focus {
+      border-color: var(--gold-accent);
     }
 
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding-top: 28px;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    @media (max-width: 960px) {
-      .hero-grid, .sim-box, .diag-box, .offices-grid, .footer-grid {
-        grid-template-columns: 1fr;
-      }
-      .bento-grid {
-        grid-template-columns: 1fr;
-      }
-      .bento-card-large {
-        grid-column: span 1;
-      }
-      .steps-grid {
-        grid-template-columns: 1fr;
-      }
-      .hero-heading {
-        font-size: 42px;
-      }
-      .nav-menu {
-        display: none;
-      }
-      .trust-metrics-row {
-        flex-direction: column;
-        gap: 20px;
-      }
+    @media (max-width: 900px) {
+      .hero-heading { font-size: 42px; }
+      .philosophy-grid { grid-template-columns: 1fr; gap: 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-columns { grid-template-columns: 1fr; }
+      .principles-grid { grid-template-columns: 1fr 1fr; }
+      .offices-wrap { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Financial Ticker Tape -->
-  <div class="ticker-bar">
-    <div class="ticker-track">
-      <div class="ticker-item"><span>NIFTY 50:</span> <span class="ticker-val">24,460.85</span> <span class="ticker-badge-green">▲ +0.68%</span></div>
-      <div class="ticker-item"><span>SENSEX:</span> <span class="ticker-val">80,369.03</span> <span class="ticker-badge-green">▲ +0.72%</span></div>
-      <div class="ticker-item"><span>SCIENTIA QUANT ALPHA:</span> <span class="ticker-val">18.4% CAGR</span> <span class="ticker-badge-cyan">★ BENCHMARK OUTPERFORMANCE</span></div>
-      <div class="ticker-item"><span>MULTI-ASSET SHARPE RATIO:</span> <span class="ticker-val">2.34</span> <span class="ticker-badge-green">LOWEST DRAWDOWN</span></div>
-      <div class="ticker-item"><span>FAMILY OFFICE RETENTION:</span> <span class="ticker-val">99.2%</span> <span class="ticker-badge-cyan">✦ VERIFIED FIDUCIARY</span></div>
-      <!-- Loop Items -->
-      <div class="ticker-item"><span>NIFTY 50:</span> <span class="ticker-val">24,460.85</span> <span class="ticker-badge-green">▲ +0.68%</span></div>
-      <div class="ticker-item"><span>SENSEX:</span> <span class="ticker-val">80,369.03</span> <span class="ticker-badge-green">▲ +0.72%</span></div>
-      <div class="ticker-item"><span>SCIENTIA QUANT ALPHA:</span> <span class="ticker-val">18.4% CAGR</span> <span class="ticker-badge-cyan">★ BENCHMARK OUTPERFORMANCE</span></div>
-      <div class="ticker-item"><span>MULTI-ASSET SHARPE RATIO:</span> <span class="ticker-val">2.34</span> <span class="ticker-badge-green">LOWEST DRAWDOWN</span></div>
-    </div>
-  </div>
+  <div class="bg-grid"></div>
 
-  <!-- Animated Glowing Aurora Blobs -->
-  <div class="aurora-container">
-    <div class="aurora-light light-1"></div>
-    <div class="aurora-light light-2"></div>
-    <div class="aurora-light light-3"></div>
-  </div>
-
-  <div class="cyber-grid-overlay"></div>
-  <canvas id="particles-canvas"></canvas>
-
-  <div class="content-wrapper">
-    <!-- Navbar with Live Theme Studio Switcher -->
+  <div class="page-wrapper">
+    <!-- Header -->
     <header>
       <div class="container nav-inner">
-        <a href="#" class="brand-logo">
-          <div class="brand-icon-box">G</div>
-          <div>
-            <div class="brand-name">Global Corporate Inc.</div>
-            <span class="brand-sub">SCIENTIA CAPITAL</span>
-          </div>
+        <a href="#" class="brand">
+          <span class="brand-title">Global Corporate Inc.</span>
+          <span class="brand-tag">Micro Family Office</span>
         </a>
 
-        <ul class="nav-menu">
-          <li><a href="#services">Capabilities</a></li>
-          <li><a href="#diagnostic">Portfolio Audit</a></li>
-          <li><a href="#simulator">Wealth Engine</a></li>
-          <li><a href="#process">Roadmap</a></li>
+        <ul class="nav-links">
+          <li><a href="#philosophy">Philosophy</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#principles">Principles</a></li>
           <li><a href="#offices">Offices</a></li>
         </ul>
 
-        <div class="nav-actions">
-          <!-- Live Theme Color Switcher -->
-          <div class="theme-switcher-pill" title="Switch Visual Color Theme">
-            <button class="theme-dot dot-chroma active" onclick="setTheme('')" title="Hyper Chroma (Default)"></button>
-            <button class="theme-dot dot-emerald" onclick="setTheme('theme-emerald')" title="Emerald Alpha (Quant)"></button>
-            <button class="theme-dot dot-gold" onclick="setTheme('theme-gold')" title="Monaco Imperial Gold"></button>
-            <button class="theme-dot dot-nebula" onclick="setTheme('theme-nebula')" title="Cosmic Nebula"></button>
-          </div>
-
-          <button class="btn-gradient" onclick="openLeadModal('Private Client Mandate')">
-            <span>Executive Consultation</span>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-        </div>
+        <button class="btn-gold" onclick="openConsultation('Private Consultation')">
+          Private Consultation
+        </button>
       </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
       <div class="container">
-        <div class="hero-grid">
-          <div>
-            <div class="live-chip-badge">
-              <span class="pulse-dot"></span>
-              Micro Family Office & Hedge Strategies
-            </div>
-            <h1 class="hero-heading">
-              Invest in <br>
-              <span class="gradient-hero-text">Generational Alpha</span>
-            </h1>
-            <p class="hero-desc">
-              We are a premier asset management firm driving long-term, risk-calibrated sustainable returns. Dedicated to discerning individuals, prominent business dynasties, and visionary entrepreneurs.
-            </p>
-            <div class="hero-btn-row">
-              <button class="btn-gradient" onclick="openLeadModal('Portfolio Forensics Audit')">
-                Request Portfolio Audit
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-              <a href="#simulator" class="btn-glass">
-                ⚡ Launch Interactive Wealth Engine
-              </a>
-            </div>
-
-            <div class="trust-metrics-row">
-              <div class="trust-metric-item">
-                <div class="trust-metric-num">₹ 1,450<span>+ Cr</span></div>
-                <div class="trust-metric-label">Institutional AUM Monitored</div>
-              </div>
-              <div class="trust-metric-item">
-                <div class="trust-metric-num">18.4<span>%</span></div>
-                <div class="trust-metric-label">Scientia Multi-Asset CAGR</div>
-              </div>
-              <div class="trust-metric-item">
-                <div class="trust-metric-num">99.2<span>%</span></div>
-                <div class="trust-metric-label">Client Trust Retention</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Hero 3D Gyroscope Bento Terminal -->
-          <div class="tilt-card-wrap">
-            <div class="bento-hero-card" id="heroTiltCard">
-              <div class="terminal-top">
-                <span class="terminal-tag">SCIENTIA QUANTITATIVE DESK</span>
-                <span style="font-size: 11px; color: var(--accent-emerald); font-weight: 800;">● REAL-TIME STRATEGY</span>
-              </div>
-
-              <div class="grid-2col">
-                <div class="mini-stat">
-                  <div class="mini-stat-label">Systematic Alpha CAGR</div>
-                  <div class="mini-stat-num" style="color: var(--accent-primary);">18.4%</div>
-                  <div class="mini-stat-badge" style="color: var(--accent-emerald);">▲ +4.2% Above Benchmarks</div>
-                </div>
-                <div class="mini-stat">
-                  <div class="mini-stat-label">Drawdown Defense Score</div>
-                  <div class="mini-stat-num" style="color: var(--accent-secondary);">99.8%</div>
-                  <div class="mini-stat-badge" style="color: var(--accent-tertiary);">✦ Institutional Hedging</div>
-                </div>
-              </div>
-
-              <!-- Interactive Chart Visualizer -->
-              <div class="visualizer-box">
-                <div class="visualizer-header">
-                  <span style="font-size: 12px; font-weight: 700; color: #fff;">Performance Alpha Trajectory</span>
-                  <div class="timeframe-pill-row">
-                    <button class="tf-btn" onclick="updateChart('1Y', this)">1Y</button>
-                    <button class="tf-btn active" onclick="updateChart('3Y', this)">3Y</button>
-                    <button class="tf-btn" onclick="updateChart('5Y', this)">5Y</button>
-                  </div>
-                </div>
-                <div class="chart-container">
-                  <svg viewBox="0 0 340 120" style="width: 100%; height: 100%; overflow: visible;" id="heroChartSvg">
-                    <defs>
-                      <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="var(--accent-primary)" stop-opacity="0.35"/>
-                        <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
-                      </linearGradient>
-                    </defs>
-                    <path id="chartArea" d="M 0,105 Q 60,95 110,70 T 200,48 T 270,22 T 340,8 L 340,120 L 0,120 Z" fill="url(#areaGradient)"/>
-                    <path class="neon-svg-line" id="chartLine" d="M 0,105 Q 60,95 110,70 T 200,48 T 270,22 T 340,8"/>
-                  </svg>
-                </div>
-              </div>
-
-              <div class="floating-audit-callout">
-                <span class="pulse-dot"></span>
-                <span>Audit Savings Avg: 1.4% TER Purged / Yr</span>
-              </div>
-            </div>
-          </div>
+        <span class="hero-eyebrow">Micro Family Office & Wealth Advisory</span>
+        <h1 class="hero-heading">
+          Invest in <em>Your Future.</em><br>
+          Driving Long-Term Sustainable Returns.
+        </h1>
+        <p class="hero-subhead">
+          We are a management firm dedicated to empowering legacies through clarity of vision, disciplined wealth planning, and bespoke family office governance.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-gold" onclick="openConsultation('Mandate Inquiry')">
+            Inquire Confidential Mandate
+          </button>
+          <a href="#services" class="btn-text">
+            Explore Capabilities →
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Bento Grid Services Showcase -->
-    <section class="bento-section" id="services">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Institutional Capabilities</span>
-          <h2 class="section-title">Bespoke Wealth Architecture</h2>
-          <p class="section-desc">
-            Experience seamless investing and diversify your portfolio with our comprehensive Mutual Funds, Micro Family Office, and Quantitative Trading strategies.
+    <!-- Philosophy Narrative Section -->
+    <section class="philosophy-section" id="philosophy">
+      <div class="container philosophy-grid">
+        <div>
+          <span class="section-label">Our Philosophy</span>
+          <h2 style="font-family:'Cormorant Garamond',Georgia,serif; font-size:26px; color:#fff; font-weight:400; margin-top:8px;">
+            Committed to Responsible Investment
+          </h2>
+        </div>
+        <div>
+          <p class="philosophy-quote">
+            "At Global Corporate Inc, we believe that true wealth isn't just measured by assets—it's defined by clarity of vision, strength of planning, and the legacy you leave behind."
+          </p>
+          <p class="philosophy-desc">
+            At the heart of our philosophy is a commitment to transparency, ethical practices, and client-first thinking. We ensure that every investment decision is made with purpose and your best interest in mind. For us, success isn't just about growing assets; it's about growing together and building enduring value for generations.
           </p>
         </div>
+      </div>
+    </section>
 
-        <div class="bento-grid">
-          <!-- Bento 1: Micro Family Office (Large) -->
-          <div class="bento-card bento-card-large">
-            <div class="bento-glow-spot spot-1"></div>
+    <!-- Services Covered Section -->
+    <section class="services-section" id="services">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Capabilities</span>
+          <h2 class="section-title">Services Covered</h2>
+        </div>
+
+        <div class="services-grid">
+          <!-- 1. Micro Family Office -->
+          <div class="service-card">
             <div>
-              <span class="bento-badge-tag tag-cyan">Flagship Mandate</span>
-              <div class="bento-icon">🏛️</div>
-              <h3>Micro Family Office Services</h3>
+              <span class="service-card-num">01</span>
+              <h3>Micro Family Office Support</h3>
               <p>
-                Tailored governance and wealth oversight for business families seeking structured consolidation, inter-generational estate planning, and private liquidity management under a single dedicated umbrella.
+                Tailored governance and oversight for business families seeking structured wealth management, inter-generational succession planning, and administrative consolidation under a single trusted umbrella.
               </p>
-              <ul class="bento-features">
-                <li>Consolidated Multi-Asset Aggregation & Real-Time Reporting</li>
-                <li>Succession Planning, Family Trusts & Governance Restructuring</li>
-                <li>Private Deal Flow & Direct Co-Investment Opportunities</li>
-              </ul>
             </div>
-            <button class="btn-gradient" style="align-self: flex-start;" onclick="openLeadModal('Micro Family Office Mandate')">
-              Inquire Family Mandate
-            </button>
           </div>
 
-          <!-- Bento 2: Scientia Capital Hedge Strategy -->
-          <div class="bento-card">
-            <div class="bento-glow-spot spot-2"></div>
+          <!-- 2. Investment Advisory -->
+          <div class="service-card">
             <div>
-              <span class="bento-badge-tag tag-purple">Quantitative Alpha</span>
-              <div class="bento-icon">⚡</div>
-              <h3>Scientia Capital Strategies</h3>
+              <span class="service-card-num">02</span>
+              <h3>Investment Advisory</h3>
               <p>
-                Data-driven, quantitative investment strategies designed to generate market-neutral alpha while aggressively insulating portfolios from systemic tail-risk.
+                Data-driven, risk-aware strategies designed to optimize allocation and unlock long-term growth opportunities across diverse asset classes while insulating capital from systemic downturns.
               </p>
-              <ul class="bento-features">
-                <li>Quantitative Market Neutral Factor Models</li>
-                <li>Disciplined Asymmetric Risk Allocation</li>
-                <li>Multi-Asset Tail Risk Hedging</li>
-              </ul>
             </div>
-            <button class="btn-glass" style="width: 100%; justify-content: center;" onclick="openLeadModal('Scientia Hedge Strategies')">Explore Scientia</button>
           </div>
 
-          <!-- Bento 3: Mutual Funds Restructuring -->
-          <div class="bento-card">
-            <div class="bento-glow-spot spot-3"></div>
+          <!-- 3. Mutual Fund Restructuring -->
+          <div class="service-card">
             <div>
-              <span class="bento-badge-tag tag-emerald">Fiduciary Forensics</span>
-              <div class="bento-icon">⚖️</div>
+              <span class="service-card-num">03</span>
               <h3>Mutual Fund Restructuring</h3>
               <p>
-                Auditing existing MF portfolios to eliminate overlapping holdings, slash drag from redundant TER fees, and optimize distribution into high-conviction direct alpha vehicles.
+                In-depth forensic audit of existing mutual fund portfolios to identify hidden expense drag, purge overlapping holdings, and realign fund selection with exact risk-adjusted benchmarks.
               </p>
-              <ul class="bento-features">
-                <li>Overlap & Hidden Expense Ratio (TER) Purge</li>
-                <li>Asset-Class Lifecycle Calibration</li>
-                <li>Automated Rebalancing Execution</li>
-              </ul>
             </div>
-            <button class="btn-glass" style="width: 100%; justify-content: center;" onclick="openLeadModal('MF Restructuring')">Audit My Holdings</button>
           </div>
 
-          <!-- Bento 4: Tax Optimization & Wealth Retention (Large) -->
-          <div class="bento-card bento-card-large">
-            <div class="bento-glow-spot spot-1"></div>
+          <!-- 4. Financial Planning -->
+          <div class="service-card">
             <div>
-              <span class="bento-badge-tag tag-amber">Capital Defense</span>
-              <div class="bento-icon">🛡️</div>
-              <h3>Tax Retention & Holistic Financial Planning</h3>
+              <span class="service-card-num">04</span>
+              <h3>Financial Planning</h3>
               <p>
-                Smart, legally compliant strategies engineered to minimize capital gains liabilities, optimize cross-border structures, and enhance post-tax wealth compounding across decades.
+                Holistic, goal-based financial roadmaps that adapt seamlessly to life's evolving milestones, ensuring liquidity buffers, retirement solvency, and family security.
               </p>
-              <ul class="bento-features">
-                <li>Capital Gains Harvesting & Re-Investment Frameworks</li>
-                <li>Estate Duty & Succession Shielding</li>
-                <li>Goal-Based Roadmaps Adapting to Life Transitions</li>
-              </ul>
             </div>
-            <button class="btn-glass" style="align-self: flex-start;" onclick="openLeadModal('Tax & Wealth Retention')">Consult Specialist</button>
+          </div>
+
+          <!-- 5. Tax Strategy -->
+          <div class="service-card">
+            <div>
+              <span class="service-card-num">05</span>
+              <h3>Tax Strategy & Wealth Retention</h3>
+              <p>
+                Smart, legally compliant frameworks engineered to minimize capital gains liabilities, optimize structural holdings, and maximize post-tax wealth preservation across decades.
+              </p>
+            </div>
+          </div>
+
+          <!-- 6. Debt & Cash Flow Management -->
+          <div class="service-card">
+            <div>
+              <span class="service-card-num">06</span>
+              <h3>Debt Investment & Cash Flow Management</h3>
+              <p>
+                Disciplined fixed-income advisory and liquidity structuring to ensure stable recurring cash yields, capital protection, and optimal treasury utilization for prominent enterprises.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive 60-Second Institutional Portfolio Health Diagnostic -->
-    <section class="diagnostic-section" id="diagnostic">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Interactive Forensics</span>
-          <h2 class="section-title">60-Second Portfolio Health Diagnostic</h2>
-          <p class="section-desc">
-            Select your current asset allocation profile below to uncover hidden expense drag, overlapping risks, and your potential restructuring upside.
-          </p>
-        </div>
-
-        <div class="diag-box">
-          <div>
-            <h3 style="font-family:'Syne',sans-serif; font-size:22px; margin-bottom:18px; color:#fff;">Select Current Asset Makeup:</h3>
-            <div class="diag-options-grid">
-              <div class="diag-pill-btn active" onclick="setDiagnostic('regular-mf', this)">
-                <div class="diag-pill-title"><span>Regular Mutual Funds</span> <span>⚠️ High TER</span></div>
-                <div class="diag-pill-sub">Bank/Distributor Regular Schemes</div>
-              </div>
-              <div class="diag-pill-btn" onclick="setDiagnostic('direct-equity', this)">
-                <div class="diag-pill-title"><span>Direct Equity Concentration</span> <span>⚡ Volatile</span></div>
-                <div class="diag-pill-sub">Stock picking without hedge protection</div>
-              </div>
-              <div class="diag-pill-btn" onclick="setDiagnostic('real-estate', this)">
-                <div class="diag-pill-title"><span>Property & Fixed Income</span> <span>🔒 Illiquid</span></div>
-                <div class="diag-pill-sub">Heavy real estate & traditional FDs</div>
-              </div>
-              <div class="diag-pill-btn" onclick="setDiagnostic('structured-aif', this)">
-                <div class="diag-pill-title"><span>AIF / PMS High Net-Worth</span> <span>✦ Institutional</span></div>
-                <div class="diag-pill-sub">Advanced private mandates</div>
-              </div>
-            </div>
-
-            <div style="background:rgba(255,255,255,0.03); border-radius:14px; padding:20px; border:1px solid rgba(255,255,255,0.08);">
-              <div style="font-size:12px; font-weight:800; color:var(--accent-primary); text-transform:uppercase; margin-bottom:6px;">Forensic Findings:</div>
-              <div id="diag-insight-text" style="font-size:14px; color:var(--text-muted); line-height:1.6;">
-                Typical distributor regular funds charge 1.2%–1.8% annual distributor commissions. On a ₹2 Cr portfolio, this burns ₹2.4 Lakhs to ₹3.6 Lakhs every single year in silent fee leakage.
-              </div>
-            </div>
-          </div>
-
-          <div class="score-visualizer-card">
-            <div class="gauge-circle-wrap">
-              <svg class="gauge-svg" viewBox="0 0 160 160">
-                <circle class="gauge-bg" cx="80" cy="80" r="70"/>
-                <circle class="gauge-fill" id="diagGaugeFill" cx="80" cy="80" r="70"/>
-              </svg>
-              <div class="gauge-center-text">
-                <div class="gauge-num" id="diagScoreVal">52%</div>
-                <div class="gauge-label">Efficiency</div>
-              </div>
-            </div>
-
-            <div style="font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:800; color:#fff; margin-bottom:8px;" id="diagScoreTitle">
-              Significant Fee Leakage Detected
-            </div>
-            <p style="font-size:13px; color:var(--text-muted); margin-bottom:24px;" id="diagScoreSub">
-              Restructuring into direct institutional alpha could recover an estimated +1.4% to +2.8% net annual CAGR.
-            </p>
-
-            <button class="btn-gradient" style="width:100%; justify-content:center;" onclick="openLeadModal('Portfolio Optimization Diagnostic')">
-              Get Complete Forensic Audit Report
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Interactive Wealth Simulator Section -->
-    <section class="simulator-wrap" id="simulator">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Interactive Forecasting</span>
-          <h2 class="section-title">Strategic Wealth Compounding Simulator</h2>
-          <p class="section-desc">
-            Model your capital trajectory under Global Corporate Inc.'s multi-asset quantitative allocation and quarterly disciplined rebalancing.
-          </p>
-        </div>
-
-        <div class="sim-box">
-          <div class="sim-controls">
-            <div class="slider-row">
-              <div class="slider-header">
-                <span class="slider-title">Initial Portfolio Capital</span>
-                <span class="slider-output" id="out-capital">₹ 50.00 Lakhs</span>
-              </div>
-              <input type="range" id="sim-capital" min="1000000" max="100000000" step="500000" value="5000000" oninput="runSimulation()">
-            </div>
-
-            <div class="slider-row">
-              <div class="slider-header">
-                <span class="slider-title">Monthly Strategic Infusion</span>
-                <span class="slider-output" id="out-monthly">₹ 1.00 Lakhs</span>
-              </div>
-              <input type="range" id="sim-monthly" min="25000" max="2500000" step="25000" value="100000" oninput="runSimulation()">
-            </div>
-
-            <div class="slider-row">
-              <div class="slider-header">
-                <span class="slider-title">Compounding Horizon</span>
-                <span class="slider-output" id="out-years">10 Years</span>
-              </div>
-              <input type="range" id="sim-years" min="3" max="25" step="1" value="10" oninput="runSimulation()">
-            </div>
-
-            <div class="slider-row">
-              <div class="slider-header">
-                <span class="slider-title">Target Portfolio CAGR</span>
-                <span class="slider-output" id="out-rate">15.0%</span>
-              </div>
-              <input type="range" id="sim-rate" min="8" max="24" step="0.5" value="15" oninput="runSimulation()">
-            </div>
-          </div>
-
-          <div class="sim-result-card">
-            <div class="corpus-label">Projected Corpus Value</div>
-            <div class="corpus-val" id="out-total">₹ 4.82 Cr</div>
-            <p style="font-size: 13px; color: var(--text-muted);">
-              Calculated with automated systematic rebalancing and alpha-optimized mutual fund allocation.
-            </p>
-
-            <div class="corpus-split">
-              <div class="split-box">
-                <div class="split-title">Principal Invested</div>
-                <div class="split-amount" id="out-invested">₹ 1.70 Cr</div>
-              </div>
-              <div class="split-box">
-                <div class="split-title">Wealth Compounded</div>
-                <div class="split-amount" id="out-wealth" style="color: var(--accent-emerald);">₹ 3.12 Cr</div>
-              </div>
-            </div>
-
-            <button class="btn-gradient" style="margin-top: 28px; width: 100%; justify-content: center;" onclick="openLeadModal('Wealth Plan Lock-In')">
-              Lock In This Custom Allocation
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5-Step Process Roadmap -->
+    <!-- Our Process Section -->
     <section class="process-section" id="process">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag">Disciplined Execution</span>
-          <h2 class="section-title">The Institutional Onboarding Process</h2>
-          <p class="section-desc">
-            Understanding clients' existing portfolios and drawing out a scientific distribution of funds to achieve your specific lifecycle goals.
+          <span class="section-label">Advisory Methodology</span>
+          <h2 class="section-title">Our Process</h2>
+        </div>
+
+        <div class="process-intro-card">
+          <p>
+            "Understanding clients' existing mutual fund portfolios and drawing out a distribution of funds, basis the inherent fund asset class, and simultaneously matching it with client risk profile."
           </p>
         </div>
 
-        <div class="steps-grid">
-          <div class="step-box">
-            <div class="step-num">1</div>
-            <h4 class="step-name">Deep Forensics</h4>
-            <p class="step-desc">Rigorous audit of existing MF, equity, PMS and tax liabilities.</p>
+        <div class="process-columns">
+          <div class="process-step">
+            <span class="process-step-tag">Phase I</span>
+            <h4>Portfolio Forensics</h4>
+            <p>
+              We conduct a granular examination of existing equity, debt, and fund holdings to uncover hidden fees, asset overlaps, and unintended risk exposure.
+            </p>
           </div>
-          <div class="step-box">
-            <div class="step-num">2</div>
-            <h4 class="step-name">Risk Profiling</h4>
-            <p class="step-desc">Quantifying drawdown tolerance and intergenerational liquidity buffers.</p>
+
+          <div class="process-step">
+            <span class="process-step-tag">Phase II</span>
+            <h4>Risk & Allocation Matching</h4>
+            <p>
+              Structuring a balanced distribution of funds calibrated precisely to your time horizon, drawdown tolerance, and specific family cash-flow milestones.
+            </p>
           </div>
-          <div class="step-box">
-            <div class="step-num">3</div>
-            <h4 class="step-name">Blueprint</h4>
-            <p class="step-desc">Constructing bespoke multi-asset architecture aligned with mandates.</p>
-          </div>
-          <div class="step-box">
-            <div class="step-num">4</div>
-            <h4 class="step-name">Execution</h4>
-            <p class="step-desc">Frictionless onboarding, direct fund routing, and fee purging.</p>
-          </div>
-          <div class="step-box">
-            <div class="step-num">5</div>
-            <h4 class="step-name">Active Oversight</h4>
-            <p class="step-desc">Continuous stress-testing, automated rebalancing, and direct partner reviews.</p>
+
+          <div class="process-step">
+            <span class="process-step-tag">Phase III</span>
+            <h4>Fiduciary Oversight</h4>
+            <p>
+              Continuous active monitoring, disciplined rebalancing, and transparent periodic reviews ensuring your holdings remain aligned as markets evolve.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Dual Office Footprint -->
-    <section class="bento-section" id="offices" style="padding-top: 30px;">
+    <!-- Strategy / Principles Section -->
+    <section class="principles-section" id="principles">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag">Operating Footprint</span>
-          <h2 class="section-title">Registered Headquarters & Executive Hubs</h2>
-          <p class="section-desc">
-            Direct fiduciary access across premier financial corridors.
-          </p>
+          <span class="section-label">Why Choose GCI</span>
+          <h2 class="section-title">Foundational Principles</h2>
         </div>
 
-        <div class="offices-grid">
+        <div class="principles-grid">
+          <div class="principle-box">
+            <h4>Client-Centric Philosophy</h4>
+            <p>Your priorities come first. Every recommendation is made with your long-term interest and peace of mind at heart.</p>
+          </div>
+
+          <div class="principle-box">
+            <h4>Independent & Unbiased</h4>
+            <p>We are not tied to any financial product providers, ensuring our guidance is always objective and aligned with your goals.</p>
+          </div>
+
+          <div class="principle-box">
+            <h4>Confidential & Discreet</h4>
+            <p>Your privacy is sacred. We maintain the highest standards of discretion and fiduciary confidentiality in all our dealings.</p>
+          </div>
+
+          <div class="principle-box">
+            <h4>Proactive & Transparent</h4>
+            <p>We believe in clear communication, frequent reviews, and keeping you fully informed at every step of your journey.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compact Dual Offices & Contact -->
+    <section class="contact-section" id="offices">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 36px;">
+          <span class="section-label">Presence</span>
+          <h2 class="section-title" style="font-size: 34px;">Registered & Branch Offices</h2>
+        </div>
+
+        <div class="offices-wrap">
           <!-- Gujarat Office -->
-          <div class="office-card">
-            <span class="office-badge">Registered Office (Gujarat)</span>
+          <div class="office-block">
+            <span class="office-tag">Gujarat — Registered Office</span>
             <h3>Jamnagar Corporate Suite</h3>
-            <p class="office-address">
+            <p class="office-text">
               102, White House, Bedi Road,<br>
-              Jamnagar, Gujarat – 361 008, India.
+              Jamnagar – 361 008, Gujarat, India.
             </p>
-            <div class="office-links">
-              <a href="tel:+912240050922" class="office-link-btn">
-                📞 +91 22 40050922
-              </a>
-              <a href="mailto:mail@gcicorp.in" class="office-link-btn">
-                ✉️ mail@gcicorp.in
-              </a>
+            <div class="office-contacts">
+              <a href="tel:+912240050922">Tel: +91 22 40050922</a>
+              <a href="mailto:mail@gcicorp.in">mail@gcicorp.in</a>
             </div>
           </div>
 
           <!-- Mumbai Office -->
-          <div class="office-card" style="border-color: var(--accent-primary);">
-            <span class="office-badge" style="color: var(--accent-emerald);">Regional Financial Hub (Mumbai)</span>
+          <div class="office-block">
+            <span class="office-tag">Mumbai — Branch Office</span>
             <h3>Wadala Executive Branch</h3>
-            <p class="office-address">
+            <p class="office-text">
               217, Shilpin Centre, 2nd Floor, 40 G.D Ambekar Road,<br>
               Opp. Desai Harmony, Wadala West, Mumbai – 400 031.
             </p>
-            <div class="office-links">
-              <a href="tel:+912240100922" class="office-link-btn">
-                📞 +91 22 40100922
-              </a>
-              <a href="https://wa.me/912240100922?text=Hello%20GCI%20Team%2C%20I%20would%20like%20to%20inquire%20about%20your%20wealth%20management%20services" target="_blank" class="office-link-btn" style="color:var(--accent-emerald); border-color:var(--accent-emerald);">
-                💬 WhatsApp Connect
-              </a>
+            <div class="office-contacts">
+              <a href="tel:+912240100922">Tel: +91 22 40100922</a>
+              <a href="https://wa.me/912240100922?text=Hello%20GCI%20Team%2C%20I%20would%20like%20to%20inquire%20about%20your%20Micro%20Family%20Office%20services" target="_blank">WhatsApp Direct</a>
             </div>
           </div>
         </div>
@@ -2010,317 +855,85 @@
 
     <!-- Footer -->
     <footer>
-      <div class="container">
-        <div class="footer-grid">
-          <div>
-            <div class="brand-name" style="font-size: 24px; margin-bottom: 14px;">Global Corporate Inc.</div>
-            <p style="color: var(--text-muted); line-height: 1.7;">
-              SCIENTIA Capital Hedge Fund & Micro Family Office Advisory. Fiduciary, independent, and quantitative management for discerning business families.
-            </p>
-          </div>
-          <div>
-            <h4 style="color:#fff; font-size:14px; margin-bottom:18px; text-transform:uppercase; letter-spacing:1px;">Capabilities</h4>
-            <p style="margin-bottom:10px;"><a href="#services" style="color:var(--text-muted); text-decoration:none;">Micro Family Office</a></p>
-            <p style="margin-bottom:10px;"><a href="#services" style="color:var(--text-muted); text-decoration:none;">Scientia Quant Alpha</a></p>
-            <p style="margin-bottom:10px;"><a href="#services" style="color:var(--text-muted); text-decoration:none;">MF Portfolio Audit</a></p>
-            <p style="margin-bottom:10px;"><a href="#services" style="color:var(--text-muted); text-decoration:none;">Tax Structuring</a></p>
-          </div>
-          <div>
-            <h4 style="color:#fff; font-size:14px; margin-bottom:18px; text-transform:uppercase; letter-spacing:1px;">Direct Desk</h4>
-            <p style="margin-bottom:10px; color:var(--text-muted);">mail@gcicorp.in</p>
-            <p style="margin-bottom:10px; color:var(--text-muted);">+91 22 40100922 (Mumbai)</p>
-            <p style="margin-bottom:10px; color:var(--text-muted);">+91 22 40050922 (Gujarat)</p>
-          </div>
-          <div>
-            <h4 style="color:#fff; font-size:14px; margin-bottom:18px; text-transform:uppercase; letter-spacing:1px;">Corporate</h4>
-            <p style="margin-bottom:10px; color:var(--text-muted);">Jamnagar 361 008</p>
-            <p style="margin-bottom:10px; color:var(--text-muted);">Wadala West, Mumbai 400 031</p>
-            <p style="margin-bottom:10px; color:var(--text-muted);">CIN / SEBI Compliant Fiduciary</p>
-          </div>
+      <div class="container footer-inner">
+        <div>
+          © 2026 Global Corporate Inc. All Rights Reserved. Fiduciary Wealth Advisory.
         </div>
-
-        <div class="footer-bottom">
-          <div>© 2026 Global Corporate Inc. (GCI) & SCIENTIA Capital. All Rights Reserved.</div>
-          <div style="color: var(--accent-primary);">Strictly Confidential & Proprietary Advisory Frameworks.</div>
+        <div>
+          Jamnagar (Regd) & Wadala West, Mumbai
         </div>
       </div>
     </footer>
   </div>
 
-  <!-- Lead Capture Modal -->
-  <div class="modal-backdrop" id="leadModal" onclick="closeModalOnBackdrop(event)">
-    <div class="modal-window">
-      <button class="modal-window-close" onclick="closeLeadModal()">✕</button>
-      <div style="font-size: 11px; letter-spacing: 2px; color: var(--accent-primary); text-transform: uppercase; font-weight: 800; margin-bottom: 8px;">Confidential Mandate</div>
-      <h3 style="font-family: 'Syne', sans-serif; font-size: 28px; color: #fff; margin-bottom: 8px;" id="modalHeading">Private Consultation</h3>
-      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 26px;">Directly routed to our Mumbai / Gujarat Executive Advisory Desk.</p>
+  <!-- Consultation Modal -->
+  <div class="modal-backdrop" id="consultationModal" onclick="closeOnBackdrop(event)">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeConsultation()">✕</button>
+      <span class="form-label" style="margin-bottom:8px;">Confidential Mandate</span>
+      <h3 style="font-family:'Cormorant Garamond',Georgia,serif; font-size:26px; color:#fff; margin-bottom:6px;" id="modalTitle">
+        Private Consultation
+      </h3>
+      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:24px; font-weight:300;">
+        Directly routed to our executive advisory desk.
+      </p>
 
-      <form onsubmit="handleFormSubmission(event)">
-        <div class="input-group">
-          <label class="input-label">Full Name</label>
-          <input type="text" class="input-field" id="client-name" placeholder="e.g. Vikram Singhania" required>
+      <form onsubmit="handleInquiry(event)">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" id="inq-name" placeholder="Your Name" required>
         </div>
-        <div class="input-group">
-          <label class="input-label">Phone / WhatsApp</label>
-          <input type="tel" class="input-field" id="client-phone" placeholder="e.g. +91 98200 XXXXX" required>
+        <div class="form-group">
+          <label class="form-label">Phone / WhatsApp</label>
+          <input type="tel" class="form-input" id="inq-phone" placeholder="+91 XXXXX XXXXX" required>
         </div>
-        <div class="input-group">
-          <label class="input-label">Email Address</label>
-          <input type="email" class="input-field" id="client-email" placeholder="e.g. vikram@enterprise.com" required>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" id="inq-email" placeholder="name@domain.com" required>
         </div>
-        <div class="input-group">
-          <label class="input-label">Advisory Interest</label>
-          <select class="select-field" id="client-service">
-            <option>Micro Family Office Advisory</option>
-            <option>Mutual Fund Portfolio Health Check</option>
-            <option>Scientia Capital Quantitative Hedge Mandate</option>
-            <option>Tax Optimization & Estate Succession</option>
+        <div class="form-group">
+          <label class="form-label">Service of Interest</label>
+          <select class="form-select" id="inq-service">
+            <option>Micro Family Office Support</option>
+            <option>Investment Advisory</option>
+            <option>Mutual Fund Portfolio Audit & Restructuring</option>
+            <option>Financial Planning</option>
+            <option>Tax Strategy & Wealth Retention</option>
+            <option>Debt Investment Advisory</option>
           </select>
         </div>
 
-        <button type="submit" class="btn-gradient" style="width: 100%; justify-content: center; margin-top: 14px; padding: 15px;">
-          Submit Confidential Request
+        <button type="submit" class="btn-gold" style="width:100%; justify-content:center; margin-top:14px; padding:12px;">
+          Submit Confidential Inquiry
         </button>
       </form>
     </div>
   </div>
 
-  <!-- Interactive Scripts Engine -->
   <script>
-    // Theme Switcher Engine
-    function setTheme(themeName) {
-      document.body.className = themeName;
-      document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
-      if (!themeName) document.querySelector('.dot-chroma').classList.add('active');
-      else if (themeName === 'theme-emerald') document.querySelector('.dot-emerald').classList.add('active');
-      else if (themeName === 'theme-gold') document.querySelector('.dot-gold').classList.add('active');
-      else if (themeName === 'theme-nebula') document.querySelector('.dot-nebula').classList.add('active');
-    }
-
-    // Interactive 3D Card Tilt with Specular Gyroscope Effect
-    const tiltCard = document.getElementById('heroTiltCard');
-    if (tiltCard) {
-      tiltCard.addEventListener('mousemove', (e) => {
-        const rect = tiltCard.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -10;
-        const rotateY = ((x - centerX) / centerX) * 10;
-        tiltCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-      });
-
-      tiltCard.addEventListener('mouseleave', () => {
-        tiltCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-      });
-    }
-
-    // Interactive Alpha Chart Switcher
-    const chartPaths = {
-      '1Y': {
-        line: 'M 0,110 Q 70,80 130,90 T 220,55 T 280,35 T 340,15',
-        area: 'M 0,110 Q 70,80 130,90 T 220,55 T 280,35 T 340,15 L 340,120 L 0,120 Z'
-      },
-      '3Y': {
-        line: 'M 0,105 Q 60,95 110,70 T 200,48 T 270,22 T 340,8',
-        area: 'M 0,105 Q 60,95 110,70 T 200,48 T 270,22 T 340,8 L 340,120 L 0,120 Z'
-      },
-      '5Y': {
-        line: 'M 0,115 Q 50,105 100,85 T 180,60 T 260,30 T 340,4',
-        area: 'M 0,115 Q 50,105 100,85 T 180,60 T 260,30 T 340,4 L 340,120 L 0,120 Z'
-      }
-    };
-
-    function updateChart(tf, btn) {
-      document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const data = chartPaths[tf];
-      if (data) {
-        document.getElementById('chartLine').setAttribute('d', data.line);
-        document.getElementById('chartArea').setAttribute('d', data.area);
-      }
-    }
-
-    // Diagnostic Tool Logic
-    const diagProfiles = {
-      'regular-mf': {
-        score: 52,
-        dashoffset: 211,
-        stroke: '#f43f5e',
-        title: 'Significant Fee Leakage Detected',
-        sub: 'Typical distributor regular funds charge 1.2%–1.8% in commissions. Restructuring into direct alpha can save ₹3.6L/yr on ₹2 Cr.',
-        insight: 'Typical distributor regular funds charge 1.2%–1.8% annual distributor commissions. On a ₹2 Cr portfolio, this burns ₹2.4 Lakhs to ₹3.6 Lakhs every single year in silent fee leakage.'
-      },
-      'direct-equity': {
-        score: 64,
-        dashoffset: 158,
-        stroke: '#fbbf24',
-        title: 'Excess Downside Tail-Risk',
-        sub: 'Unhedged equity exposure suffers severe market drawdowns. Scientia quantitative factor hedging cushions capital drops.',
-        insight: 'Concentrated direct stock holdings lack systematic hedging during cyclical pullbacks. Adding quantitative tail-hedging preserves principal without sacrificing upside.'
-      },
-      'real-estate': {
-        score: 44,
-        dashoffset: 246,
-        stroke: '#f43f5e',
-        title: 'High Illiquidity & Tax Inefficiency',
-        sub: 'Heavy real estate holdings suffer high friction and capital gain tax drag. Liquid multi-asset models offer superior post-tax IRR.',
-        insight: 'Real estate yields average only 2.5%–3.5% post-maintenance with extreme illiquidity. Rebalancing into high-liquidity quantitative debt/equity drastically improves cash flow.'
-      },
-      'structured-aif': {
-        score: 88,
-        dashoffset: 52,
-        stroke: '#00ffa3',
-        title: 'Institutional Grade Efficiency',
-        sub: 'Solid structure. Optimization focus: fine-tuning family governance, direct co-investments, and cross-border estate protection.',
-        insight: 'Your portfolio operates at high institutional efficiency. GCI Micro Family Office enhances this with private trust consolidation and bespoke succession planning.'
-      }
-    };
-
-    function setDiagnostic(profileKey, btn) {
-      document.querySelectorAll('.diag-pill-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const p = diagProfiles[profileKey];
-      if (p) {
-        document.getElementById('diagScoreVal').innerText = p.score + '%';
-        document.getElementById('diagScoreTitle').innerText = p.title;
-        document.getElementById('diagScoreSub').innerText = p.sub;
-        document.getElementById('diag-insight-text').innerText = p.insight;
-        const fill = document.getElementById('diagGaugeFill');
-        fill.style.strokeDashoffset = p.dashoffset;
-        fill.style.stroke = p.stroke;
-      }
-    }
-
-    // Dynamic Particle Canvas
-    const canvas = document.getElementById('particles-canvas');
-    const ctx = canvas.getContext('2d');
-    let pts = [];
-    const count = 52;
-
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.8;
-        this.vy = (Math.random() - 0.5) * 0.8;
-        this.r = Math.random() * 2 + 1;
-        this.color = Math.random() > 0.5 ? 'rgba(0, 245, 255, 0.7)' : 'rgba(139, 92, 246, 0.7)';
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-      }
-    }
-
-    for (let i = 0; i < count; i++) pts.push(new Particle());
-
-    function renderParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < pts.length; i++) {
-        pts[i].update();
-        pts[i].draw();
-        for (let j = i + 1; j < pts.length; j++) {
-          const dx = pts[i].x - pts[j].x;
-          const dy = pts[i].y - pts[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 140) {
-            ctx.beginPath();
-            ctx.moveTo(pts[i].x, pts[i].y);
-            ctx.lineTo(pts[j].x, pts[j].y);
-            ctx.strokeStyle = `rgba(0, 245, 255, ${0.14 * (1 - dist / 140)})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(renderParticles);
-    }
-    renderParticles();
-
-    // Wealth Simulator Logic
-    function formatINR(val) {
-      if (val >= 10000000) return '₹ ' + (val / 10000000).toFixed(2) + ' Cr';
-      if (val >= 100000) return '₹ ' + (val / 100000).toFixed(2) + ' Lakhs';
-      return '₹ ' + Math.round(val).toLocaleString('en-IN');
-    }
-
-    function runSimulation() {
-      const p = parseFloat(document.getElementById('sim-capital').value);
-      const m = parseFloat(document.getElementById('sim-monthly').value);
-      const y = parseFloat(document.getElementById('sim-years').value);
-      const r = parseFloat(document.getElementById('sim-rate').value) / 100;
-
-      document.getElementById('out-capital').innerText = formatINR(p);
-      document.getElementById('out-monthly').innerText = formatINR(m);
-      document.getElementById('out-years').innerText = y + ' Years';
-      document.getElementById('out-rate').innerText = (r * 100).toFixed(1) + '%';
-
-      const totalMonths = y * 12;
-      const monthlyRate = r / 12;
-
-      const fvLump = p * Math.pow(1 + r, y);
-      const fvSip = m * ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate) * (1 + monthlyRate);
-
-      const totalCorpus = fvLump + fvSip;
-      const totalInvested = p + (m * totalMonths);
-      const wealthCreated = totalCorpus - totalInvested;
-
-      document.getElementById('out-total').innerText = formatINR(totalCorpus);
-      document.getElementById('out-invested').innerText = formatINR(totalInvested);
-      document.getElementById('out-wealth').innerText = formatINR(wealthCreated);
-    }
-    runSimulation();
-
-    // Modal Operations
-    function openLeadModal(service) {
-      const m = document.getElementById('leadModal');
-      m.classList.add('active');
+    function openConsultation(service) {
+      document.getElementById('consultationModal').classList.add('active');
       if (service) {
-        document.getElementById('modalHeading').innerText = service;
-        const sel = document.getElementById('client-service');
-        for (let i = 0; i < sel.options.length; i++) {
-          if (sel.options[i].text.toLowerCase().includes(service.toLowerCase())) {
-            sel.selectedIndex = i;
-            break;
-          }
-        }
+        document.getElementById('modalTitle').innerText = service;
       }
     }
-    function closeLeadModal() {
-      document.getElementById('leadModal').classList.remove('active');
+    function closeConsultation() {
+      document.getElementById('consultationModal').classList.remove('active');
     }
-    function closeModalOnBackdrop(e) {
-      if (e.target.id === 'leadModal') closeLeadModal();
+    function closeOnBackdrop(e) {
+      if (e.target.id === 'consultationModal') closeConsultation();
     }
-
-    function handleFormSubmission(e) {
+    function handleInquiry(e) {
       e.preventDefault();
-      const name = document.getElementById('client-name').value;
-      const phone = document.getElementById('client-phone').value;
-      const email = document.getElementById('client-email').value;
-      const service = document.getElementById('client-service').value;
+      const name = document.getElementById('inq-name').value;
+      const phone = document.getElementById('inq-phone').value;
+      const email = document.getElementById('inq-email').value;
+      const service = document.getElementById('inq-service').value;
 
-      const text = encodeURIComponent(`Hi GCI Executive Desk, I submitted an institutional inquiry via gcicorp.in:\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\n\nPlease share your private consultation schedule.`);
+      const text = encodeURIComponent(`Hello GCI Team, I would like to inquire about your advisory services:\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}`);
       window.open(`https://wa.me/912240100922?text=${text}`, '_blank');
-      closeLeadModal();
-      alert('Thank you! Your confidential mandate inquiry has been routed to our Mumbai executive desk.');
+      closeConsultation();
+      alert('Thank you. Your mandate inquiry has been routed to our Mumbai executive desk.');
     }
   </script>
 </body>
