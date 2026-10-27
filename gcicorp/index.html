@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Global Corporate Inc. | Micro Family Office & Wealth Advisory</title>
-  <meta name="description" content="Global Corporate Inc. (GCI) — Dedicated Micro Family Office, Bespoke Wealth Advisory, Mutual Fund Restructuring, and Intergenerational Estate Planning.">
+  <title>Global Corporate Inc. | Micro Family Office</title>
+  <meta name="description" content="Global Corporate Inc. (GCI) — Micro Family Office, Investment Advisory, Mutual Fund Restructuring, and Wealth Management.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,18 +12,16 @@
   <style>
     :root {
       --bg-deep: #08090c;
-      --bg-surface: #0f1117;
-      --bg-surface-elevated: #161822;
+      --bg-surface: #0e1017;
+      --bg-surface-elevated: #151822;
       --gold-accent: #c5a880;
       --gold-light: #e8d5be;
-      --gold-dark: #9e825b;
-      --gold-glow: rgba(197, 168, 128, 0.2);
-      --gold-border: rgba(197, 168, 128, 0.24);
+      --gold-border: rgba(197, 168, 128, 0.22);
       --text-primary: #f8f8f6;
       --text-secondary: #a7abb4;
       --text-muted: #6b707d;
       --border-subtle: rgba(255, 255, 255, 0.08);
-      --glass-card: rgba(15, 17, 24, 0.78);
+      --glass-card: rgba(14, 16, 23, 0.72);
     }
 
     * {
@@ -44,12 +42,12 @@
     }
 
     .container {
-      max-width: 1180px;
+      max-width: 1140px;
       margin: 0 auto;
       padding: 0 28px;
     }
 
-    /* Ambient Background Video Layer from GCI Corp */
+    /* Ambient Video Layer from Former Website */
     .bg-video-container {
       position: fixed;
       top: 0;
@@ -65,8 +63,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.28;
-      filter: saturate(0.9) brightness(0.7);
+      opacity: 0.35;
+      filter: saturate(0.9) brightness(0.65);
     }
 
     .bg-video-overlay {
@@ -76,9 +74,8 @@
       width: 100%;
       height: 100%;
       background: 
-        radial-gradient(circle at 80% 20%, rgba(197, 168, 128, 0.12) 0%, transparent 60%),
-        radial-gradient(circle at 20% 80%, rgba(15, 17, 24, 0.9) 0%, transparent 70%),
-        linear-gradient(to bottom, rgba(8, 9, 12, 0.75) 0%, rgba(8, 9, 12, 0.88) 50%, #08090c 100%);
+        radial-gradient(circle at 75% 25%, rgba(197, 168, 128, 0.12) 0%, transparent 60%),
+        linear-gradient(to bottom, rgba(8, 9, 12, 0.7) 0%, rgba(8, 9, 12, 0.85) 50%, #08090c 100%);
     }
 
     .page-wrapper {
@@ -91,18 +88,17 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(8, 9, 12, 0.85);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      background: rgba(8, 9, 12, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
-      transition: all 0.3s ease;
     }
 
     .nav-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 80px;
+      height: 78px;
     }
 
     .brand {
@@ -113,24 +109,18 @@
     }
 
     .brand-mark {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border: 1px solid var(--gold-border);
-      border-radius: 6px;
+      border-radius: 4px;
       background: rgba(197, 168, 128, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--gold-light);
-      box-shadow: 0 0 18px var(--gold-glow);
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
     }
 
     .brand-title {
@@ -154,7 +144,7 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 36px;
+      gap: 34px;
       list-style: none;
     }
 
@@ -170,23 +160,8 @@
       padding: 4px 0;
     }
 
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0%;
-      height: 1px;
-      background: var(--gold-accent);
-      transition: width 0.25s ease;
-    }
-
     .nav-links a:hover {
       color: var(--gold-light);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
     }
 
     .btn-gold {
@@ -197,7 +172,7 @@
       letter-spacing: 1.5px;
       text-transform: uppercase;
       font-weight: 600;
-      padding: 11px 24px;
+      padding: 10px 22px;
       border-radius: 4px;
       cursor: pointer;
       text-decoration: none;
@@ -205,31 +180,25 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
 
     .btn-gold:hover {
       background: var(--gold-accent);
       color: #08090c;
-      box-shadow: 0 6px 25px var(--gold-glow);
-      transform: translateY(-2px);
     }
 
-    /* Hero Section with Split Animation Column */
+    /* Hero Section */
     .hero {
-      padding: 110px 0 100px;
+      padding: 140px 0 120px;
       border-bottom: 1px solid var(--border-subtle);
       position: relative;
-      min-height: 84vh;
+      min-height: 80vh;
       display: flex;
       align-items: center;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 60px;
-      align-items: center;
+    .hero-content {
+      max-width: 860px;
     }
 
     .hero-eyebrow {
@@ -237,57 +206,40 @@
       letter-spacing: 4px;
       text-transform: uppercase;
       color: var(--gold-accent);
-      margin-bottom: 22px;
+      margin-bottom: 24px;
       display: inline-flex;
       align-items: center;
       gap: 10px;
       font-weight: 600;
     }
 
-    .pulse-gold-dot {
-      width: 7px;
-      height: 7px;
-      background: var(--gold-accent);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--gold-accent);
-      animation: pulseGold 2s infinite ease-in-out;
-    }
-
-    @keyframes pulseGold {
-      0% { transform: scale(0.9); opacity: 0.6; }
-      50% { transform: scale(1.4); opacity: 1; }
-      100% { transform: scale(0.9); opacity: 0.6; }
-    }
-
     .hero-heading {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 66px;
+      font-size: 72px;
       font-weight: 400;
-      line-height: 1.08;
-      letter-spacing: -0.5px;
+      line-height: 1.05;
+      letter-spacing: -1px;
       color: #fff;
-      margin-bottom: 26px;
+      margin-bottom: 28px;
     }
 
     .hero-heading em {
       font-style: italic;
       color: var(--gold-light);
-      border-bottom: 1px solid rgba(197, 168, 128, 0.35);
-      padding-bottom: 2px;
     }
 
     .hero-subhead {
-      font-size: 18px;
-      line-height: 1.75;
+      font-size: 20px;
+      line-height: 1.7;
       color: var(--text-secondary);
-      max-width: 580px;
-      margin-bottom: 40px;
+      max-width: 680px;
+      margin-bottom: 44px;
       font-weight: 300;
     }
 
     .hero-actions {
       display: flex;
-      gap: 22px;
+      gap: 24px;
       align-items: center;
       flex-wrap: wrap;
     }
@@ -323,108 +275,15 @@
       background: var(--gold-accent);
     }
 
-    /* Side Animation Showcase Box */
-    .hero-stage-card {
-      background: var(--glass-card);
-      border: 1px solid var(--gold-border);
-      border-radius: 12px;
-      padding: 30px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), 0 0 40px var(--gold-glow);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
-
-    .stage-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border-subtle);
-      margin-bottom: 20px;
-    }
-
-    .stage-title {
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--gold-accent);
-      font-weight: 600;
-    }
-
-    .stage-status {
-      font-size: 11px;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .canvas-wrapper {
-      width: 100%;
-      height: 250px;
-      position: relative;
-      border-radius: 8px;
-      overflow: hidden;
-      background: rgba(8, 9, 12, 0.65);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    #financialCanvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .stage-badges-row {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .stage-badge-item {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(197, 168, 128, 0.15);
-      padding: 11px 16px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 12.5px;
-      color: var(--text-secondary);
-      transition: all 0.25s ease;
-    }
-
-    .stage-badge-item:hover {
-      background: rgba(197, 168, 128, 0.08);
-      border-color: var(--gold-accent);
-      color: #fff;
-      transform: translateX(4px);
-    }
-
-    .stage-badge-item span:first-child {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .stage-badge-item .gold-glyph {
-      color: var(--gold-accent);
-      font-size: 14px;
-    }
-
     /* Philosophy Quote Section */
     .philosophy-section {
       padding: 100px 0;
       border-bottom: 1px solid var(--border-subtle);
-      position: relative;
     }
 
     .philosophy-grid {
       display: grid;
-      grid-template-columns: 1fr 1.65fr;
+      grid-template-columns: 1fr 1.8fr;
       gap: 60px;
       align-items: baseline;
     }
@@ -459,7 +318,6 @@
     .services-section {
       padding: 110px 0;
       border-bottom: 1px solid var(--border-subtle);
-      position: relative;
     }
 
     .section-header {
@@ -478,58 +336,40 @@
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 26px;
+      gap: 24px;
     }
 
     .service-card {
       background: var(--glass-card);
       border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 40px 32px;
-      transition: all 0.35s ease;
+      border-radius: 6px;
+      padding: 38px 30px;
+      transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: transparent;
-      transition: background 0.3s;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
 
     .service-card:hover {
       border-color: var(--gold-border);
       background: var(--bg-surface-elevated);
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px var(--gold-glow);
-    }
-
-    .service-card:hover::before {
-      background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
+      transform: translateY(-4px);
     }
 
     .service-card-num {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 20px;
+      font-size: 19px;
       color: var(--gold-accent);
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       display: block;
       font-weight: 500;
     }
 
     .service-card h3 {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 25px;
+      font-size: 24px;
       font-weight: 500;
       color: #fff;
       margin-bottom: 14px;
@@ -552,18 +392,17 @@
     .process-intro-card {
       background: var(--glass-card);
       border-left: 3px solid var(--gold-accent);
+      padding: 34px 38px;
+      margin-bottom: 50px;
+      border-radius: 0 6px 6px 0;
       border-top: 1px solid var(--border-subtle);
       border-right: 1px solid var(--border-subtle);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 36px 40px;
-      margin-bottom: 50px;
-      border-radius: 0 8px 8px 0;
-      backdrop-filter: blur(16px);
     }
 
     .process-intro-card p {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 24px;
+      font-size: 23px;
       line-height: 1.5;
       color: #fff;
       font-weight: 400;
@@ -573,25 +412,19 @@
     .process-columns {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      gap: 30px;
     }
 
     .process-step {
-      padding: 28px 24px;
+      padding: 26px 24px;
       border-top: 1px solid var(--gold-border);
       background: var(--glass-card);
-      border-radius: 6px;
-      transition: all 0.25s;
-    }
-
-    .process-step:hover {
-      background: var(--bg-surface-elevated);
-      border-color: var(--gold-accent);
+      border-radius: 4px;
     }
 
     .process-step-tag {
       font-size: 11px;
-      letter-spacing: 2.5px;
+      letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--gold-accent);
       font-weight: 600;
@@ -601,14 +434,14 @@
 
     .process-step h4 {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 23px;
+      font-size: 22px;
       color: #fff;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       font-weight: 500;
     }
 
     .process-step p {
-      font-size: 14px;
+      font-size: 13.5px;
       color: var(--text-secondary);
       line-height: 1.7;
       font-weight: 300;
@@ -616,36 +449,33 @@
 
     /* Strategy & Principles */
     .principles-section {
-      padding: 110px 0;
+      padding: 100px 0;
       border-bottom: 1px solid var(--border-subtle);
     }
 
     .principles-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+      gap: 22px;
     }
 
     .principle-box {
       border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 34px 26px;
+      border-radius: 6px;
+      padding: 30px 24px;
       background: var(--glass-card);
-      transition: all 0.3s;
-      backdrop-filter: blur(16px);
+      transition: border-color 0.25s;
     }
 
     .principle-box:hover {
       border-color: var(--gold-border);
-      transform: translateY(-4px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
     }
 
     .principle-box h4 {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 21px;
+      font-size: 20px;
       color: #fff;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       font-weight: 500;
     }
 
@@ -656,95 +486,85 @@
       font-weight: 300;
     }
 
-    /* Offices & Contact - Refined, Minimalist Footprint */
-    .contact-section {
-      padding: 90px 0 70px;
+    /* ==========================================================================
+       CLEAN, COMPACT FOOTER WITH DIRECT ADDRESSES (NO BLOAT / NO STANDALONE SECTION)
+       ========================================================================== */
+    footer {
+      background: #060709;
+      border-top: 1px solid var(--border-subtle);
+      padding: 50px 0 30px;
+      font-size: 13px;
+      color: var(--text-secondary);
     }
 
-    .offices-wrap {
+    .footer-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 36px;
-      margin-bottom: 50px;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 36px;
+      align-items: start;
     }
 
-    .office-block {
-      background: var(--glass-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 32px 34px;
-      transition: border-color 0.25s;
-      backdrop-filter: blur(16px);
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 22px;
+      color: #fff;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 8px;
     }
 
-    .office-block:hover {
-      border-color: var(--gold-border);
+    .footer-brand-sub {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--gold-accent);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 12px;
     }
 
-    .office-tag {
-      font-size: 10.5px;
+    .footer-office-title {
+      font-size: 11px;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--gold-accent);
       font-weight: 600;
-      margin-bottom: 12px;
-      display: block;
+      margin-bottom: 8px;
     }
 
-    .office-block h3 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 23px;
-      color: #fff;
-      margin-bottom: 12px;
-      font-weight: 500;
-    }
-
-    .office-text {
-      font-size: 14px;
+    .footer-office-address {
+      font-size: 13px;
       color: var(--text-secondary);
-      line-height: 1.65;
-      margin-bottom: 20px;
+      line-height: 1.6;
+      margin-bottom: 8px;
       font-weight: 300;
     }
 
-    .office-contacts {
-      display: flex;
-      gap: 22px;
-      font-size: 13.5px;
-      flex-wrap: wrap;
-    }
-
-    .office-contacts a {
+    .footer-office-contact a {
       color: var(--gold-light);
       text-decoration: none;
+      font-size: 12.5px;
+      margin-right: 14px;
       transition: color 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
 
-    .office-contacts a:hover {
+    .footer-office-contact a:hover {
       color: #fff;
     }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border-subtle);
-      padding: 34px 0;
-      font-size: 12.5px;
-      color: var(--text-muted);
-      background: rgba(8, 9, 12, 0.9);
-    }
-
-    .footer-inner {
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 22px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      font-size: 12px;
+      color: var(--text-muted);
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px;
     }
 
-    /* Modal */
+    /* Consultation Modal */
     .modal-backdrop {
       position: fixed;
       top: 0;
@@ -752,8 +572,8 @@
       width: 100vw;
       height: 100vh;
       background: rgba(8, 9, 12, 0.94);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       z-index: 200;
       display: none;
       align-items: center;
@@ -768,10 +588,10 @@
     .modal-card {
       background: var(--bg-surface);
       border: 1px solid var(--gold-border);
-      border-radius: 8px;
-      max-width: 480px;
+      border-radius: 6px;
+      max-width: 460px;
       width: 100%;
-      padding: 40px;
+      padding: 36px;
       position: relative;
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
     }
@@ -788,7 +608,7 @@
     }
 
     .form-group {
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .form-label {
@@ -806,7 +626,7 @@
       background: var(--bg-deep);
       border: 1px solid var(--border-subtle);
       border-radius: 4px;
-      padding: 12px 16px;
+      padding: 11px 14px;
       color: #fff;
       font-size: 14px;
       outline: none;
@@ -818,21 +638,20 @@
       border-color: var(--gold-accent);
     }
 
-    @media (max-width: 960px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .hero-heading { font-size: 44px; }
-      .philosophy-grid { grid-template-columns: 1fr; gap: 24px; }
+    @media (max-width: 900px) {
+      .hero-heading { font-size: 46px; }
+      .philosophy-grid { grid-template-columns: 1fr; gap: 20px; }
       .services-grid { grid-template-columns: 1fr; }
       .process-columns { grid-template-columns: 1fr; }
       .principles-grid { grid-template-columns: 1fr 1fr; }
-      .offices-wrap { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
       .nav-links { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Ambient Video Motion Layer from GCI Corp -->
+  <!-- Ambient Video Motion Layer from Former GCI Corp Website -->
   <div class="bg-video-container">
     <video class="bg-video-stream" autoplay muted loop playsinline preload="auto">
       <source src="https://video.wixstatic.com/video/c837a6_a0fc857cd93943eab3d86dffd8b6b4e6/720p/mp4/file.mp4" type="video/mp4">
@@ -846,9 +665,9 @@
       <div class="container nav-inner">
         <a href="#" class="brand">
           <div class="brand-mark">G</div>
-          <div class="brand-text">
-            <span class="brand-title">Global Corporate Inc.</span>
-            <span class="brand-tag">Micro Family Office</span>
+          <div>
+            <div class="brand-title">Global Corporate Inc.</div>
+            <div class="brand-tag">Micro Family Office</div>
           </div>
         </a>
 
@@ -857,7 +676,7 @@
           <li><a href="#services">Services</a></li>
           <li><a href="#process">Process</a></li>
           <li><a href="#principles">Principles</a></li>
-          <li><a href="#offices">Offices</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
 
         <button class="btn-gold" onclick="openConsultation('Private Consultation')">
@@ -866,62 +685,27 @@
       </div>
     </header>
 
-    <!-- Hero Section with Side Financial Markets Visual Stage -->
+    <!-- Clean, Cinematic Hero Section -->
     <section class="hero">
       <div class="container">
-        <div class="hero-grid">
-          <div>
-            <div class="hero-eyebrow">
-              <span class="pulse-gold-dot"></span>
-              Micro Family Office & Wealth Advisory
-            </div>
-            <h1 class="hero-heading">
-              Invest in <em>Your Future.</em><br>
-              Driving Long-Term Sustainable Returns.
-            </h1>
-            <p class="hero-subhead">
-              We are a management firm dedicated to empowering legacies through clarity of vision, disciplined wealth planning, and bespoke family office governance.
-            </p>
-            <div class="hero-actions">
-              <button class="btn-gold" onclick="openConsultation('Mandate Inquiry')">
-                Inquire Confidential Mandate
-              </button>
-              <a href="#services" class="btn-text">
-                Explore Capabilities →
-              </a>
-            </div>
+        <div class="hero-content">
+          <div class="hero-eyebrow">
+            Micro Family Office & Wealth Advisory
           </div>
-
-          <!-- Side Financial Markets & Capital Architecture Visual Stage -->
-          <div class="hero-stage-card">
-            <div class="stage-header">
-              <span class="stage-title">Fiduciary Architecture</span>
-              <span class="stage-status">
-                <span class="pulse-gold-dot"></span>
-                Active Governance
-              </span>
-            </div>
-
-            <!-- Interactive 3D Gold Wave & Financial Flow Canvas -->
-            <div class="canvas-wrapper">
-              <canvas id="financialCanvas"></canvas>
-            </div>
-
-            <!-- Fiduciary Pillars -->
-            <div class="stage-badges-row">
-              <div class="stage-badge-item">
-                <span><span class="gold-glyph">✦</span> Strategic Asset Calibration</span>
-                <span style="font-size: 11px; color: var(--gold-accent); text-transform: uppercase;">Direct Fiduciary</span>
-              </div>
-              <div class="stage-badge-item">
-                <span><span class="gold-glyph">✦</span> Multi-Asset Risk Profiling</span>
-                <span style="font-size: 11px; color: var(--gold-accent); text-transform: uppercase;">Capital Defense</span>
-              </div>
-              <div class="stage-badge-item">
-                <span><span class="gold-glyph">✦</span> Intergenerational Wealth Oversight</span>
-                <span style="font-size: 11px; color: var(--gold-accent); text-transform: uppercase;">Dynasty Trust</span>
-              </div>
-            </div>
+          <h1 class="hero-heading">
+            Invest in <em>Your Future.</em><br>
+            We Are a Management Firm, Driving Long Term Sustainable Returns.
+          </h1>
+          <p class="hero-subhead">
+            Dedicated to empowering business families, entrepreneurs, and visionary leaders through bespoke governance, disciplined wealth planning, and responsible stewardship.
+          </p>
+          <div class="hero-actions">
+            <button class="btn-gold" onclick="openConsultation('Mandate Inquiry')">
+              Inquire Confidential Mandate
+            </button>
+            <a href="#services" class="btn-text">
+              Our Investment Strategies →
+            </a>
           </div>
         </div>
       </div>
@@ -1044,15 +828,15 @@
             <span class="process-step-tag">Phase I</span>
             <h4>Portfolio Forensics</h4>
             <p>
-              We conduct a granular examination of existing equity, debt, and fund holdings to uncover hidden fees, asset overlaps, and unintended risk exposure.
+              Granular forensics of existing fund, equity, and debt holdings to uncover hidden fee leakages and asset overlaps.
             </p>
           </div>
 
           <div class="process-step">
             <span class="process-step-tag">Phase II</span>
-            <h4>Risk & Allocation Matching</h4>
+            <h4>Asset Calibration</h4>
             <p>
-              Structuring a balanced distribution of funds calibrated precisely to your time horizon, drawdown tolerance, and specific family cash-flow milestones.
+              Drawing out scientific distribution of capital calibrated to lifecycle horizons and drawdowns.
             </p>
           </div>
 
@@ -1060,7 +844,7 @@
             <span class="process-step-tag">Phase III</span>
             <h4>Fiduciary Oversight</h4>
             <p>
-              Continuous active monitoring, disciplined rebalancing, and transparent periodic reviews ensuring your holdings remain aligned as markets evolve.
+              Continuous monitoring, disciplined rebalancing, and direct executive reviews.
             </p>
           </div>
         </div>
@@ -1099,54 +883,46 @@
       </div>
     </section>
 
-    <!-- Compact Dual Offices & Contact -->
-    <section class="contact-section" id="offices">
+    <!-- Compact Clean Footer (No Big Space / Standalone Section for Addresses) -->
+    <footer id="contact">
       <div class="container">
-        <div class="section-header" style="margin-bottom: 36px;">
-          <span class="section-label">Presence</span>
-          <h2 class="section-title" style="font-size: 34px;">Registered & Branch Offices</h2>
-        </div>
-
-        <div class="offices-wrap">
-          <!-- Gujarat Office -->
-          <div class="office-block">
-            <span class="office-tag">Gujarat — Registered Office</span>
-            <h3>Jamnagar Corporate Suite</h3>
-            <p class="office-text">
-              102, White House, Bedi Road,<br>
-              Jamnagar – 361 008, Gujarat, India.
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand-name">Global Corporate Inc.</div>
+            <div class="footer-brand-sub">Micro Family Office</div>
+            <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; font-weight: 300; max-width: 320px;">
+              Fiduciary wealth management dedicated to business families and visionary entrepreneurs.
             </p>
-            <div class="office-contacts">
+          </div>
+
+          <div>
+            <div class="footer-office-title">Gujarat (Regd Off)</div>
+            <p class="footer-office-address">
+              102, White House, Bedi Road,<br>
+              Jamnagar 361 008, Gujarat.
+            </p>
+            <div class="footer-office-contact">
               <a href="tel:+912240050922">📞 +91 22 40050922</a>
               <a href="mailto:mail@gcicorp.in">✉️ mail@gcicorp.in</a>
             </div>
           </div>
 
-          <!-- Mumbai Office -->
-          <div class="office-block">
-            <span class="office-tag">Mumbai — Branch Office</span>
-            <h3>Wadala Executive Branch</h3>
-            <p class="office-text">
-              217, Shilpin Centre, 2nd Floor, 40 G.D Ambekar Road,<br>
-              Opp. Desai Harmony, Wadala West, Mumbai – 400 031.
+          <div>
+            <div class="footer-office-title">Mumbai Branch</div>
+            <p class="footer-office-address">
+              217, Shilpin Centre, 2nd Flr, 40 G.D Ambekar Rd,<br>
+              Opp Desai Harmony, Wadala West, Mumbai 400 031.
             </p>
-            <div class="office-contacts">
+            <div class="footer-office-contact">
               <a href="tel:+912240100922">📞 +91 22 40100922</a>
-              <a href="https://wa.me/912240100922?text=Hello%20GCI%20Team%2C%20I%20would%20like%20to%20inquire%20about%20your%20Micro%20Family%20Office%20services" target="_blank">💬 WhatsApp Direct</a>
+              <a href="https://wa.me/912240100922?text=Hello%20GCI%20Team%2C%20I%20would%20like%20to%20inquire%20about%20your%20Micro%20Family%20Office%20services" target="_blank">💬 WhatsApp</a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Footer -->
-    <footer>
-      <div class="container footer-inner">
-        <div>
-          © 2026 Global Corporate Inc. All Rights Reserved. Fiduciary Wealth Advisory.
-        </div>
-        <div>
-          Jamnagar (Regd) & Wadala West, Mumbai
+        <div class="footer-bottom">
+          <div>© 2026 Global Corporate Inc. All Rights Reserved.</div>
+          <div>Strictly Confidential Fiduciary Advisory.</div>
         </div>
       </div>
     </footer>
@@ -1196,87 +972,7 @@
     </div>
   </div>
 
-  <!-- Interactive 3D Gold Wave & Financial Flow Canvas Script -->
   <script>
-    const canvas = document.getElementById('financialCanvas');
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let time = 0;
-    let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
-
-    function initCanvas() {
-      const rect = canvas.parentElement.getBoundingClientRect();
-      width = canvas.width = rect.width;
-      height = canvas.height = rect.height;
-      mouse.x = mouse.targetX = width / 2;
-      mouse.y = mouse.targetY = height / 2;
-    }
-    window.addEventListener('resize', initCanvas);
-    initCanvas();
-
-    canvas.parentElement.addEventListener('mousemove', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.targetX = e.clientX - rect.left;
-      mouse.targetY = e.clientY - rect.top;
-    });
-
-    // 3D Harmonized Sine Wave Flow (Simulating Global Capital Markets & Risk Calibration)
-    function renderFlow() {
-      ctx.clearRect(0, 0, width, height);
-
-      // Smooth mouse follow
-      mouse.x += (mouse.targetX - mouse.x) * 0.05;
-      mouse.y += (mouse.targetY - mouse.y) * 0.05;
-
-      time += 0.015;
-      const numLines = 6;
-      const step = 8;
-
-      for (let l = 0; l < numLines; l++) {
-        ctx.beginPath();
-        const lineOffset = l * 0.4;
-        const alpha = 0.15 + (l / numLines) * 0.45;
-        
-        ctx.strokeStyle = `rgba(197, 168, 128, ${alpha})`;
-        ctx.lineWidth = 1.2 + (l * 0.25);
-
-        for (let x = 0; x <= width; x += step) {
-          const normX = x / width;
-          // Dual sine wave modulation with mouse influence
-          const mouseDist = Math.abs(x - mouse.x) / width;
-          const mouseLift = Math.max(0, 1 - mouseDist * 3) * ((mouse.y - height / 2) * 0.35);
-
-          const y1 = Math.sin(normX * 4 + time + lineOffset) * 28;
-          const y2 = Math.cos(normX * 2.5 - time * 0.8 + lineOffset) * 16;
-          const finalY = (height / 2) + y1 + y2 + mouseLift + ((l - numLines / 2) * 10);
-
-          if (x === 0) ctx.moveTo(x, finalY);
-          else ctx.lineTo(x, finalY);
-        }
-        ctx.stroke();
-      }
-
-      // Floating Fiduciary Nodes along the curves
-      const nodeCount = 5;
-      for (let i = 0; i < nodeCount; i++) {
-        const nx = (width * 0.15) + (i * (width * 0.18));
-        const normX = nx / width;
-        const ny = (height / 2) + Math.sin(normX * 4 + time + (i * 0.5)) * 26 + ((i % 2 === 0 ? 1 : -1) * 12);
-        
-        ctx.beginPath();
-        ctx.arc(nx, ny, 3.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#e8d5be';
-        ctx.shadowColor = 'rgba(197, 168, 128, 0.8)';
-        ctx.shadowBlur = 10;
-        ctx.fill();
-        ctx.shadowBlur = 0; // reset
-      }
-
-      requestAnimationFrame(renderFlow);
-    }
-    renderFlow();
-
-    // Modal Operations
     function openConsultation(service) {
       document.getElementById('consultationModal').classList.add('active');
       if (service) {
