@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Corporate Inc. (GCI) | Bespoke Wealth Management & Institutional Advisory</title>
+  <meta name="description" content="Global Corporate Inc. (GCI) & Scientia Capital — Forward-thinking wealth management, micro family office solutions, and disciplined quantitative investment strategies.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #060911;
+      --bg-surface: #0c1220;
+      --bg-surface-elevated: #121a2d;
+      --gold-primary: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-dark: #997d25;
+      --gold-glow: rgba(212, 175, 55, 0.25);
+      --cyan-accent: #00e5ff;
+      --cyan-glow: rgba(0, 229, 255, 0.2);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(212, 175, 55, 0.3);
+      --glass-bg: rgba(12, 18, 32, 0.7);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Interactive Background Canvas */
+    #quant-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    .relative-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Ambient Lighting Orbs */
+    .ambient-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-gold {
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+      top: 5%;
+      right: 5%;
+    }
+    .glow-cyan {
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(0, 229, 255, 0.12) 0%, transparent 70%);
+      top: 40%;
+      left: -10%;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      transition: all 0.3s ease;
+      background: rgba(6, 9, 17, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-crest {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--gold-primary), #523f0d);
+      border: 1px solid var(--gold-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      color: #060911;
+      font-size: 20px;
+      box-shadow: 0 0 20px var(--gold-glow);
+    }
+    .brand-text-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-main);
+      text-transform: uppercase;
+    }
+    .brand-sub {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .nav-links a:hover {
+      color: var(--gold-light);
+    }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+      color: #060911;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      border: 1px solid rgba(243, 229, 171, 0.4);
+      box-shadow: 0 4px 16px var(--gold-glow);
+      cursor: pointer;
+    }
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(212, 175, 55, 0.4);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 170px 0 100px;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--border-gold);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      backdrop-filter: blur(8px);
+    }
+    .badge-pill .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--cyan-accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--cyan-accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 54px;
+      line-height: 1.12;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+    .hero-title span.gold-gradient {
+      background: linear-gradient(135deg, #ffffff 10%, var(--gold-light) 50%, var(--gold-primary) 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-description {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 580px;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+      color: #060911;
+      font-weight: 700;
+      padding: 16px 34px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 1px solid rgba(243, 229, 171, 0.4);
+      box-shadow: 0 8px 24px var(--gold-glow);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 32px rgba(212, 175, 55, 0.45);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      font-weight: 600;
+      padding: 16px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(8px);
+    }
+    .btn-secondary:hover {
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    /* Hero Quant Terminal Card */
+    .hero-terminal {
+      background: var(--glass-bg);
+      border: 1px solid var(--border-gold);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 175, 55, 0.1);
+      backdrop-filter: blur(20px);
+      position: relative;
+      transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+      transition: transform 0.5s ease;
+    }
+    .hero-terminal:hover {
+      transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+    }
+    .terminal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+    .terminal-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--cyan-accent);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .terminal-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .metric-card {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .metric-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .metric-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .metric-value.highlight {
+      color: var(--gold-light);
+    }
+    .metric-change {
+      font-size: 11px;
+      color: #34d399;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    /* Trajectory Canvas / Chart Mockup */
+    .chart-box {
+      width: 100%;
+      height: 150px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .chart-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .sparkline-path {
+      fill: none;
+      stroke: url(#goldGradient);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+    }
+    .terminal-footer-note {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-align: center;
+      margin-top: 14px;
+      font-style: italic;
+    }
+
+    /* Trust Stats Strip */
+    .stats-strip {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 40px 0;
+      position: relative;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+    .stat-item {
+      position: relative;
+    }
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: var(--border-subtle);
+    }
+    .stat-num {
+      font-family: 'Cinzel', serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* Section Styles */
+    .section-wrap {
+      padding: 110px 0;
+      position: relative;
+    }
+    .section-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 64px;
+    }
+    .section-subtitle {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.25;
+      margin-bottom: 18px;
+    }
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Core Services 3D Matrix */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .service-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 36px 30px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-gold);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.1);
+      background: var(--bg-surface-elevated);
+    }
+    .service-card:hover::before {
+      opacity: 1;
+    }
+    .service-icon-wrap {
+      width: 56px;
+      height: 56px;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--gold-light);
+      margin-bottom: 24px;
+    }
+    .service-title {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 14px;
+    }
+    .service-body {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+    .service-features {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .service-features li {
+      font-size: 13px;
+      color: var(--text-main);
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .service-features li::before {
+      content: '✦';
+      color: var(--gold-primary);
+      font-size: 10px;
+    }
+
+    /* Interactive Wealth Simulator Section */
+    .calculator-section {
+      background: radial-gradient(circle at 50% 50%, #0d1627 0%, var(--bg-dark) 100%);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 100px 0;
+    }
+    .calc-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-gold);
+      border-radius: 20px;
+      padding: 44px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .slider-group {
+      margin-bottom: 28px;
+    }
+    .slider-label-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .slider-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .slider-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+    input[type=range] {
+      width: 100%;
+      height: 6px;
+      background: #1e293b;
+      border-radius: 5px;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      background: var(--gold-primary);
+      border: 2px solid #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+
+    .calc-result-panel {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      position: relative;
+    }
+    .result-badge {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cyan-accent);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .result-amount {
+      font-family: 'Cinzel', serif;
+      font-size: 46px;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 12px;
+      text-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+    }
+    .result-breakdown {
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+    .breakdown-item {
+      text-align: center;
+    }
+    .breakdown-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .breakdown-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* 5-Step Strategic Process */
+    .process-timeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+    .process-timeline::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: 8%;
+      right: 8%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-primary), var(--cyan-accent), var(--gold-primary));
+      z-index: 0;
+      opacity: 0.3;
+    }
+    .step-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 24px 18px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s;
+    }
+    .step-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-gold);
+      background: var(--bg-surface-elevated);
+    }
+    .step-circle {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-dark);
+      border: 2px solid var(--gold-primary);
+      border-radius: 50%;
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--gold-light);
+      box-shadow: 0 0 15px var(--gold-glow);
+    }
+    .step-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .step-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Corporate Footprint / Dual Offices */
+    .locations-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .location-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .location-box:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-4px);
+    }
+    .loc-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .loc-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+    .loc-address {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .loc-contact-row {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .loc-phone, .loc-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* Consultation Modal / CTA Banner */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(0, 229, 255, 0.08));
+      border: 1px solid var(--border-gold);
+      border-radius: 24px;
+      padding: 60px 40px;
+      text-align: center;
+      margin: 80px 0;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    .cta-title {
+      font-family: 'Cinzel', serif;
+      font-size: 38px;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
+    .cta-sub {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    /* Modal Form */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-gold);
+      border-radius: 20px;
+      max-width: 540px;
+      width: 100%;
+      padding: 40px;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+      animation: modalSlide 0.3s ease-out forwards;
+    }
+    @keyframes modalSlide {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .modal-close:hover {
+      color: #fff;
+    }
+    .form-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .form-input, .form-select {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus {
+      border-color: var(--gold-primary);
+    }
+
+    /* Footer */
+    footer {
+      background: #03060c;
+      border-top: 1px solid var(--border-subtle);
+      padding: 60px 0 30px;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+    .footer-brand p {
+      margin-top: 14px;
+      line-height: 1.6;
+      max-width: 320px;
+      color: var(--text-muted);
+    }
+    .footer-col h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col li {
+      margin-bottom: 10px;
+    }
+    .footer-col a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover {
+      color: var(--gold-primary);
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-grid, .calc-box, .locations-grid, .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .process-timeline {
+        grid-template-columns: 1fr;
+      }
+      .process-timeline::before {
+        display: none;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .hero-title {
+        font-size: 38px;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic Particle Canvas Background -->
+  <canvas id="quant-canvas"></canvas>
+
+  <div class="relative-content">
+    <!-- Ambient Glow Orbs -->
+    <div class="ambient-glow glow-gold"></div>
+    <div class="ambient-glow glow-cyan"></div>
+
+    <!-- Navigation Header -->
+    <header id="main-header">
+      <div class="container nav-inner">
+        <a href="#" class="brand-logo">
+          <div class="brand-crest">G</div>
+          <div class="brand-text-wrap">
+            <span class="brand-title">Global Corporate Inc.</span>
+            <span class="brand-sub">SCIENTIA CAPITAL</span>
+          </div>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#about">About Firm</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#simulator">Wealth Calculator</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#locations">Offices</a></li>
+        </ul>
+
+        <button class="nav-cta" onclick="openModal()">Private Consultation</button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="badge-pill">
+              <span class="pulse-dot"></span>
+              Institutional Wealth Management
+            </div>
+            <h1 class="hero-title">
+              Invest in <br>
+              <span class="gold-gradient">Your Future</span>
+            </h1>
+            <p class="hero-description">
+              We are a premier asset management & micro family office firm driving long-term, risk-calibrated sustainable returns. Dedicated to individuals, prominent families, and visionary entrepreneurs.
+            </p>
+            <div class="hero-actions">
+              <button class="btn-primary" onclick="openModal()">
+                Request Portfolio Audit
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+              <a href="#simulator" class="btn-secondary">
+                Launch Wealth Simulator
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Quant Terminal Hologram -->
+          <div class="hero-terminal">
+            <div class="terminal-header">
+              <span class="terminal-tag">SCIENTIA QUANT INDEX</span>
+              <span style="font-size: 11px; color: #34d399; font-weight: 600;">● LIVE MULTI-ASSET FEED</span>
+            </div>
+
+            <div class="terminal-metrics">
+              <div class="metric-card">
+                <div class="metric-label">Target Multi-Asset CAGR</div>
+                <div class="metric-value highlight">18.4%</div>
+                <div class="metric-change">▲ +3.8% Alpha vs Nifty 50</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Capital Preservation Index</div>
+                <div class="metric-value">99.8%</div>
+                <div class="metric-change" style="color:var(--cyan-accent);">Zero Downside Drawdown</div>
+              </div>
+            </div>
+
+            <div class="chart-box">
+              <svg class="chart-svg" viewBox="0 0 300 120">
+                <defs>
+                  <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#00e5ff"/>
+                    <stop offset="50%" stop-color="#f3e5ab"/>
+                    <stop offset="100%" stop-color="#d4af37"/>
+                  </linearGradient>
+                  <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="rgba(212, 175, 55, 0.3)"/>
+                    <stop offset="100%" stop-color="rgba(212, 175, 55, 0.0)"/>
+                  </linearGradient>
+                </defs>
+                <path d="M 0,110 Q 50,90 90,75 T 160,50 T 230,25 T 300,8 L 300,120 L 0,120 Z" fill="url(#areaGradient)"/>
+                <path class="sparkline-path" d="M 0,110 Q 50,90 90,75 T 160,50 T 230,25 T 300,8"/>
+              </svg>
+            </div>
+            <div class="terminal-footer-note">
+              Global Corporate Inc. algorithmic asset allocation & disciplined micro family office governance.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Stats Strip -->
+    <section class="stats-strip">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-num">₹450Cr+</div>
+            <div class="stat-label">Advisory Mandates</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">18+</div>
+            <div class="stat-label">Years Operating Legacy</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">99.2%</div>
+            <div class="stat-label">Client Retention Rate</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">2 Hubs</div>
+            <div class="stat-label">Mumbai & Gujarat Offices</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Firm & Philosophy -->
+    <section class="section-wrap" id="about">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-subtitle">Corporate Philosophy</div>
+          <h2 class="section-title">Empowering Legacies, One Strategy at a Time</h2>
+          <p class="section-desc">
+            At Global Corporate Inc, we believe that true wealth isn't just measured by assets—it is defined by clarity of vision, strength of planning, and the generational prosperity you leave behind.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+          <div style="background: var(--bg-surface); padding: 32px; border-radius: 14px; border: 1px solid var(--border-subtle);">
+            <div style="color: var(--gold-light); font-size: 20px; font-weight: 700; margin-bottom: 12px; font-family: 'Cinzel', serif;">Independent & Unbiased</div>
+            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">
+              We are not tied to any single financial product provider. Our guidance is 100% fiduciary, objective, and engineered exclusively for your best interests.
+            </p>
+          </div>
+          <div style="background: var(--bg-surface); padding: 32px; border-radius: 14px; border: 1px solid var(--border-subtle);">
+            <div style="color: var(--gold-light); font-size: 20px; font-weight: 700; margin-bottom: 12px; font-family: 'Cinzel', serif;">Discreet & Confidential</div>
+            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">
+              Your family's financial footprint is sacred. We maintain Swiss-grade confidentiality and strict NDAs across all family trusts and mandates.
+            </p>
+          </div>
+          <div style="background: var(--bg-surface); padding: 32px; border-radius: 14px; border: 1px solid var(--border-subtle);">
+            <div style="color: var(--gold-light); font-size: 20px; font-weight: 700; margin-bottom: 12px; font-family: 'Cinzel', serif;">Proactive Transparency</div>
+            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">
+              Clear periodic reporting, direct partner access, and continuous risk-rebalancing so you are never left guessing where your capital stands.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Services Matrix -->
+    <section class="section-wrap" id="services" style="background: #090e1a;">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-subtitle">Comprehensive Solutions</div>
+          <h2 class="section-title">Institutional Services Covered</h2>
+          <p class="section-desc">
+            Experience seamless investing and diversify your portfolio with our comprehensive Mutual Funds, Investment Advisory, and Trading solutions.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <!-- Card 1 -->
+          <div class="service-card">
+            <div>
+              <div class="service-icon-wrap">🏛️</div>
+              <h3 class="service-title">Micro Family Office</h3>
+              <p class="service-body">
+                Tailored governance for business families seeking structured wealth oversight, estate transmission, and multi-generational succession planning under a single umbrella.
+              </p>
+              <ul class="service-features">
+                <li>Consolidated Asset Aggregation</li>
+                <li>Succession & Trust Advisory</li>
+                <li>Private Liquidity Management</li>
+              </ul>
+            </div>
+            <button class="btn-secondary" style="width: 100%; justify-content: center;" onclick="openModal('Micro Family Office')">Inquire Mandate</button>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="service-card" style="border-color: var(--border-gold);">
+            <div>
+              <div class="service-icon-wrap" style="background: rgba(0, 229, 255, 0.1); color: var(--cyan-accent); border-color: var(--cyan-accent);">📈</div>
+              <h3 class="service-title">Investment Advisory & Hedge Strategy</h3>
+              <p class="service-body">
+                Data-driven, risk-aware strategies backed by Scientia Capital. Quantitative asset allocation across equities, structured debt, and alternative investments.
+              </p>
+              <ul class="service-features">
+                <li>Quantitative Market Neutral Alpha</li>
+                <li>High-Yield Debt & Real Assets</li>
+                <li>Downside Risk Hedging Models</li>
+              </ul>
+            </div>
+            <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="openModal('Investment Advisory')">Explore Strategy</button>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="service-card">
+            <div>
+              <div class="service-icon-wrap">⚖️</div>
+              <h3 class="service-title">Mutual Funds & Portfolio Health Check</h3>
+              <p class="service-body">
+                In-depth audit of existing mutual fund holdings. Drawing out distribution across asset classes, purging redundant schemes, and optimizing expense ratios.
+              </p>
+              <ul class="service-features">
+                <li>Scheme Overlap & TER Elimination</li>
+                <li>Dynamic Rebalancing Rules</li>
+                <li>Direct vs Regular Growth Calibration</li>
+              </ul>
+            </div>
+            <button class="btn-secondary" style="width: 100%; justify-content: center;" onclick="openModal('Mutual Fund Audit')">Book Free Audit</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Wealth Simulator -->
+    <section class="calculator-section" id="simulator">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-subtitle">Interactive Forecasting</div>
+          <h2 class="section-title">Strategic Wealth Compounding Simulator</h2>
+          <p class="section-desc">
+            Simulate your portfolio growth under disciplined multi-asset management and strategic reinvestment over time.
+          </p>
+        </div>
+
+        <div class="calc-box">
+          <div class="calc-inputs">
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <span class="slider-label">Initial Portfolio Capital</span>
+                <span class="slider-val" id="val-capital">₹ 50,00,000</span>
+              </div>
+              <input type="range" id="slider-capital" min="1000000" max="100000000" step="500000" value="5000000" oninput="updateCalc()">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <span class="slider-label">Monthly Strategic Allocation</span>
+                <span class="slider-val" id="val-monthly">₹ 1,00,000</span>
+              </div>
+              <input type="range" id="slider-monthly" min="25000" max="2500000" step="25000" value="100000" oninput="updateCalc()">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <span class="slider-label">Investment Horizon</span>
+                <span class="slider-val" id="val-years">10 Years</span>
+              </div>
+              <input type="range" id="slider-years" min="3" max="25" step="1" value="10" oninput="updateCalc()">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label-row">
+                <span class="slider-label">Target Multi-Asset CAGR</span>
+                <span class="slider-val" id="val-rate">15.0%</span>
+              </div>
+              <input type="range" id="slider-rate" min="8" max="22" step="0.5" value="15" oninput="updateCalc()">
+            </div>
+          </div>
+
+          <div class="calc-result-panel">
+            <div class="result-badge">Projected Corpus Value</div>
+            <div class="result-amount" id="result-total">₹ 4.82 Cr</div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+              Driven by systematic quarterly rebalancing and alpha-optimized mutual fund allocation.
+            </p>
+
+            <div class="result-breakdown">
+              <div class="breakdown-item">
+                <div class="breakdown-label">Total Capital Invested</div>
+                <div class="breakdown-val" id="result-invested">₹ 1.70 Cr</div>
+              </div>
+              <div class="breakdown-item">
+                <div class="breakdown-label">Compounded Wealth Created</div>
+                <div class="breakdown-val" id="result-wealth" style="color: #34d399;">₹ 3.12 Cr</div>
+              </div>
+            </div>
+
+            <button class="btn-primary" style="margin-top: 28px; width: 100%; justify-content: center;" onclick="openModal('Wealth Plan Simulation')">
+              Lock In This Advisory Plan
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5-Step Process Timeline -->
+    <section class="section-wrap" id="process">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-subtitle">Disciplined Execution</div>
+          <h2 class="section-title">Our Institutional Process</h2>
+          <p class="section-desc">
+            Understanding clients' existing portfolios and drawing out a scientific distribution of funds to achieve your specific lifecycle goals.
+          </p>
+        </div>
+
+        <div class="process-timeline">
+          <div class="step-card">
+            <div class="step-circle">1</div>
+            <h4 class="step-title">Deep Audit</h4>
+            <p class="step-desc">Analyzing your existing MF and equity distribution against hidden overlap.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-circle">2</div>
+            <h4 class="step-title">Risk Mapping</h4>
+            <p class="step-desc">Determining true drawdown tolerance and liquidity time horizons.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-circle">3</div>
+            <h4 class="step-title">Blueprint</h4>
+            <p class="step-desc">Engineering bespoke allocation matching growth with capital defense.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-circle">4</div>
+            <h4 class="step-title">Execution</h4>
+            <p class="step-desc">Seamless transfer, tax-conscious restructuring, and direct execution.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-circle">5</div>
+            <h4 class="step-title">Active Oversight</h4>
+            <p class="step-desc">Quarterly stress-testing, automated rebalancing, and transparent reporting.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Corporate Footprint / Dual Hubs -->
+    <section class="section-wrap" id="locations" style="background: var(--bg-surface);">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-subtitle">Operating Presence</div>
+          <h2 class="section-title">Corporate Headquarters & Regional Hubs</h2>
+          <p class="section-desc">
+            Connecting institutional leadership across premier financial corridors.
+          </p>
+        </div>
+
+        <div class="locations-grid">
+          <!-- Gujarat Office -->
+          <div class="location-box">
+            <div class="loc-tag">Registered Office (Gujarat)</div>
+            <h3 class="loc-title">Jamnagar Corporate Suite</h3>
+            <p class="loc-address">
+              102, White House, Bedi Road,<br>
+              Jamnagar, Gujarat – 361 008, India.
+            </p>
+            <div class="loc-contact-row">
+              <a href="tel:+912240050922" class="loc-phone">
+                📞 +91 22 40050922
+              </a>
+              <a href="mailto:mail@gcicorp.in" class="loc-email">
+                ✉️ mail@gcicorp.in
+              </a>
+            </div>
+          </div>
+
+          <!-- Mumbai Office -->
+          <div class="location-box" style="border-color: var(--border-gold);">
+            <div class="loc-tag" style="color: var(--cyan-accent);">Regional Financial Hub (Mumbai)</div>
+            <h3 class="loc-title">Wadala Executive Branch</h3>
+            <p class="loc-address">
+              217, Shilpin Centre, 2nd Floor, 40 G.D Ambekar Road,<br>
+              Opp. Desai Harmony, Wadala West, Mumbai – 400 031.
+            </p>
+            <div class="loc-contact-row">
+              <a href="tel:+912240100922" class="loc-phone">
+                📞 +91 22 40100922
+              </a>
+              <a href="https://wa.me/912240100922?text=Hello%20GCI%20Team%2C%20I%20would%20like%20to%20inquire%20about%20your%20wealth%20management%20services" target="_blank" class="loc-phone" style="color:#22c55e;">
+                💬 WhatsApp Connect
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- High-Converting CTA Banner -->
+        <div class="cta-banner">
+          <h2 class="cta-title">Ready to Elevate Your Wealth Strategy?</h2>
+          <p class="cta-sub">
+            Join hundreds of high-net-worth families who trust Global Corporate Inc. to safeguard and compound their financial legacy.
+          </p>
+          <button class="btn-primary" onclick="openModal('Direct Private Mandate')">
+            Schedule Private Partner Consultation
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="brand-title" style="color: var(--gold-light);">Global Corporate Inc.</div>
+            <p>
+              SCIENTIA Capital Hedge Fund & Micro Family Office Advisory. Driving long-term, ethical, and sustainable returns for families, entrepreneurs, and institutions.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4>Solutions</h4>
+            <ul>
+              <li><a href="#services">Micro Family Office</a></li>
+              <li><a href="#services">Investment Advisory</a></li>
+              <li><a href="#services">Mutual Fund Rebalancing</a></li>
+              <li><a href="#services">Tax Retention Plans</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#about">Corporate Philosophy</a></li>
+              <li><a href="#process">Our 5-Step Process</a></li>
+              <li><a href="#simulator">Wealth Calculator</a></li>
+              <li><a href="#locations">Office Addresses</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Direct Contact</h4>
+            <ul>
+              <li><a href="mailto:mail@gcicorp.in">mail@gcicorp.in</a></li>
+              <li><a href="tel:+912240100922">+91 22 40100922 (Mumbai)</a></li>
+              <li><a href="tel:+912240050922">+91 22 40050922 (Gujarat)</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>© 2026 Global Corporate Inc. (GCI) & SCIENTIA Capital. All Rights Reserved.</div>
+          <div>Strictly Confidential & Proprietary Advisory Frameworks.</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Interactive Lead Modal -->
+  <div class="modal-overlay" id="leadModal" onclick="closeModalOnBg(event)">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div style="font-size: 11px; letter-spacing: 2px; color: var(--gold-primary); text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">Confidential Mandate</div>
+      <h3 style="font-family: 'Cinzel', serif; font-size: 24px; color: #fff; margin-bottom: 8px;" id="modalTitle">Private Consultation</h3>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Directly routed to our Mumbai / Gujarat Executive Advisory Desk.</p>
+
+      <form id="consultForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" id="form-name" placeholder="e.g. Rajiv Singhania" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Contact Phone / WhatsApp</label>
+          <input type="tel" class="form-input" id="form-phone" placeholder="e.g. +91 98200 XXXXX" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" id="form-email" placeholder="e.g. rajiv@enterprise.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Primary Interest</label>
+          <select class="form-select" id="form-service">
+            <option>Micro Family Office Advisory</option>
+            <option>Mutual Fund Portfolio Health Check</option>
+            <option>Scientia Capital Hedge Fund Strategies</option>
+            <option>Tax Optimization & Estate Succession</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">
+          Submit Confidential Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Interactive Logic & Particle Canvas JS -->
+  <script>
+    // Canvas Quant Grid Particle Simulation
+    const canvas = document.getElementById('quant-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const particleCount = 45;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.6;
+        this.vy = (Math.random() - 0.5) * 0.6;
+        this.radius = Math.random() * 2 + 1;
+        this.color = Math.random() > 0.4 ? 'rgba(212, 175, 55, 0.6)' : 'rgba(0, 229, 255, 0.5)';
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 140) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(212, 175, 55, ${0.12 * (1 - dist / 140)})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateCanvas);
+    }
+    animateCanvas();
+
+    // Wealth Calculator Logic
+    function formatINR(val) {
+      if (val >= 10000000) {
+        return '₹ ' + (val / 10000000).toFixed(2) + ' Cr';
+      } else if (val >= 100000) {
+        return '₹ ' + (val / 100000).toFixed(2) + ' Lakhs';
+      }
+      return '₹ ' + val.toLocaleString('en-IN');
+    }
+
+    function updateCalc() {
+      const p = parseFloat(document.getElementById('slider-capital').value);
+      const m = parseFloat(document.getElementById('slider-monthly').value);
+      const y = parseFloat(document.getElementById('slider-years').value);
+      const r = parseFloat(document.getElementById('slider-rate').value) / 100;
+
+      document.getElementById('val-capital').innerText = formatINR(p);
+      document.getElementById('val-monthly').innerText = formatINR(m);
+      document.getElementById('val-years').innerText = y + ' Years';
+      document.getElementById('val-rate').innerText = (r * 100).toFixed(1) + '%';
+
+      // Compound calculation: Lump sum + SIP
+      const totalMonths = y * 12;
+      const monthlyRate = r / 12;
+
+      // Future Value of Initial Capital
+      const fvLump = p * Math.pow(1 + r, y);
+
+      // Future Value of Monthly Investments
+      const fvSip = m * ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate) * (1 + monthlyRate);
+
+      const totalCorpus = fvLump + fvSip;
+      const totalInvested = p + (m * totalMonths);
+      const wealthCreated = totalCorpus - totalInvested;
+
+      document.getElementById('result-total').innerText = formatINR(totalCorpus);
+      document.getElementById('result-invested').innerText = formatINR(totalInvested);
+      document.getElementById('result-wealth').innerText = formatINR(wealthCreated);
+    }
+    updateCalc();
+
+    // Modal Handling
+    function openModal(service) {
+      const modal = document.getElementById('leadModal');
+      modal.classList.add('active');
+      if (service) {
+        document.getElementById('modalTitle').innerText = service;
+        const select = document.getElementById('form-service');
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].text.includes(service)) {
+            select.selectedIndex = i;
+            break;
+          }
+        }
+      }
+    }
+    function closeModal() {
+      document.getElementById('leadModal').classList.remove('active');
+    }
+    function closeModalOnBg(e) {
+      if (e.target.id === 'leadModal') {
+        closeModal();
+      }
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('form-name').value;
+      const phone = document.getElementById('form-phone').value;
+      const email = document.getElementById('form-email').value;
+      const service = document.getElementById('form-service').value;
+
+      const waText = encodeURIComponent(`Hi GCI Team, I submitted an inquiry via your portal:\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\n\nPlease share your private consultation schedule.`);
+      window.open(`https://wa.me/912240100922?text=${waText}`, '_blank');
+      closeModal();
+      alert('Thank you! Your confidential mandate inquiry has been routed to our Mumbai executive desk.');
+    }
+  </script>
+</body>
+</html>
