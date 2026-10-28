@@ -11,17 +11,17 @@
 
   <style>
     :root {
-      --bg-light: #f4f4f6;
-      --bg-white: #ffffff;
+      --bg-light: #eef0fb;
+      --bg-white: #f7f8ff;
       --bg-dark: #0e0e11;
       --bg-dark-card: #16161b;
-      --accent-indigo: #6e7bf2;
+      --accent-indigo: #5b67ea;
       --accent-periwinkle: #a5b0ff;
-      --accent-soft: #dfe3ff;
-      --text-dark: #0e0e11;
-      --text-muted: #6c6e77;
+      --accent-soft: #d9dfff;
+      --text-dark: #111322;
+      --text-muted: #535872;
       --text-faded: #c6c8d0;
-      --border-light: rgba(14, 14, 17, 0.08);
+      --border-light: rgba(91, 103, 234, 0.14);
       --border-dark: rgba(255, 255, 255, 0.12);
     }
 
@@ -47,16 +47,32 @@
     }
 
     /* ==========================================================================
-       1. HERO SECTION: GIANT KINETIC DISPLAY + FLOATING WIREFRAME TOKENS + TILTED SCREENS
+       1. HERO SECTION: SOFT PERIWINKLE-LAVENDER MESH + FLOATING TOKENS + TILTED SCREENS
        ========================================================================== */
     .hero-section {
-      background-color: var(--bg-white);
+      background:
+        radial-gradient(circle at 16% 24%, rgba(153, 166, 255, 0.42) 0%, transparent 46%),
+        radial-gradient(circle at 84% 20%, rgba(196, 165, 255, 0.34) 0%, transparent 44%),
+        radial-gradient(circle at 50% 82%, rgba(251, 211, 141, 0.25) 0%, transparent 50%),
+        linear-gradient(180deg, #e3e7ff 0%, #eef0ff 54%, #e5e9ff 100%);
       position: relative;
       overflow: hidden;
       padding-top: 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(91, 103, 234, 0.16) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.1));
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.1));
     }
 
     .nav-bar {
@@ -79,14 +95,15 @@
     .brand-mark-center {
       width: 34px;
       height: 34px;
-      background: var(--text-dark);
-      color: var(--bg-white);
+      background: linear-gradient(135deg, #111322 0%, #434ce0 100%);
+      color: #ffffff;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
       font-size: 16px;
+      box-shadow: 0 6px 16px rgba(67, 76, 224, 0.25);
     }
 
     .nav-right-links {
@@ -110,18 +127,19 @@
     /* Floating Outlined Graphic Tokens (Scroll Parallax) */
     .floating-token {
       position: absolute;
-      width: 64px;
-      height: 64px;
+      width: 66px;
+      height: 66px;
       border-radius: 50%;
-      border: 1px solid rgba(14, 14, 17, 0.14);
+      border: 1.5px solid rgba(91, 103, 234, 0.28);
       display: flex;
       align-items: center;
       justify-content: center;
       pointer-events: none;
       z-index: 1;
       transition: transform 0.15s ease-out;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(4px);
+      background: rgba(255, 255, 255, 0.65);
+      box-shadow: 0 10px 28px rgba(91, 103, 234, 0.12);
+      backdrop-filter: blur(6px);
     }
 
     .floating-token::after {
@@ -129,21 +147,24 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      border: 1px dashed rgba(14, 14, 17, 0.16);
+      border: 1px dashed rgba(91, 103, 234, 0.35);
       position: absolute;
     }
 
     .token-glyph {
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.08em;
-      color: var(--text-muted);
+      color: var(--accent-indigo);
     }
 
-    .tok-1 { top: 20%; left: 5%; transform: rotate(-12deg); }
-    .tok-2 { top: 60%; left: 10%; width: 52px; height: 52px; transform: rotate(16deg); }
-    .tok-3 { top: 24%; right: 5%; transform: rotate(12deg); }
-    .tok-4 { top: 62%; right: 10%; width: 56px; height: 56px; transform: rotate(-14deg); }
+    .tok-1 { top: 20%; left: 5%; transform: rotate(-12deg); background: rgba(235, 238, 255, 0.85); }
+    .tok-2 { top: 60%; left: 10%; width: 54px; height: 54px; transform: rotate(16deg); background: rgba(254, 243, 199, 0.82); border-color: rgba(245, 158, 11, 0.35); }
+    .tok-2 .token-glyph { color: #d97706; }
+    .tok-3 { top: 24%; right: 5%; transform: rotate(12deg); background: rgba(243, 232, 255, 0.85); border-color: rgba(168, 85, 247, 0.32); }
+    .tok-3 .token-glyph { color: #7e22ce; }
+    .tok-4 { top: 62%; right: 10%; width: 58px; height: 58px; transform: rotate(-14deg); background: rgba(220, 252, 231, 0.82); border-color: rgba(16, 185, 129, 0.32); }
+    .tok-4 .token-glyph { color: #059669; }
 
     /* Center Hero Content — Refined Institutional Spacing & Typography */
     .hero-center {
@@ -156,33 +177,42 @@
     }
 
     .hero-eyebrow {
-      font-size: 12px;
+      display: inline-block;
+      font-size: 11.5px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.22em;
-      color: var(--accent-indigo);
-      margin-bottom: 24px;
+      color: #3b46c4;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(91, 103, 234, 0.26);
+      padding: 8px 20px;
+      border-radius: 40px;
+      margin-bottom: 26px;
+      box-shadow: 0 6px 20px rgba(91, 103, 234, 0.08);
     }
 
     .giant-kinetic-title {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: clamp(42px, 6.2vw, 84px);
-      font-weight: 600;
+      font-weight: 700;
       line-height: 1.08;
       letter-spacing: 0.16em;
       padding-left: 0.16em; /* optical center compensation for letter-spacing */
       text-transform: uppercase;
+      background: linear-gradient(135deg, #0e1024 15%, #2b3595 60%, #4f5bd5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       color: var(--text-dark);
       margin-bottom: 22px;
     }
 
     .hero-subheadline {
-      font-size: clamp(16px, 1.8vw, 20px);
-      font-weight: 400;
+      font-size: clamp(16px, 1.8vw, 19.5px);
+      font-weight: 500;
       line-height: 1.65;
       letter-spacing: 0.01em;
-      color: var(--text-muted);
-      max-width: 640px;
+      color: #454a66;
+      max-width: 650px;
       margin: 0 auto 38px;
     }
 
@@ -414,7 +444,9 @@
        3. STICKY SCROLL-DOWN ISOMETRIC GRAPHICS SECTION (Frame 00:04 - 00:09)
        ========================================================================== */
     .sticky-isometric-section {
-      background-color: var(--bg-light);
+      background:
+        radial-gradient(circle at 12% 35%, rgba(165, 176, 255, 0.25) 0%, transparent 50%),
+        linear-gradient(180deg, #eaedff 0%, #f3f5ff 100%);
       padding: 120px 0;
       position: relative;
     }
@@ -430,14 +462,14 @@
     .iso-sticky-box {
       position: sticky;
       top: 120px;
-      background: var(--bg-white);
+      background: linear-gradient(145deg, #ffffff 0%, #f2f4ff 100%);
       border-radius: 28px;
       height: 470px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 24px 60px rgba(14, 14, 17, 0.05);
-      border: 1px solid var(--border-light);
+      box-shadow: 0 24px 60px rgba(67, 76, 224, 0.09);
+      border: 1px solid rgba(91, 103, 234, 0.2);
       overflow: hidden;
     }
 
@@ -545,7 +577,9 @@
        4. STICKY DEVICE SHOWCASE + SCROLLING NARRATIVES (Frame 00:10 - 00:18)
        ========================================================================== */
     .device-scroll-section {
-      background-color: var(--bg-white);
+      background:
+        radial-gradient(circle at 85% 40%, rgba(196, 165, 255, 0.22) 0%, transparent 50%),
+        linear-gradient(180deg, #f3f5ff 0%, #e8ecff 100%);
       padding: 130px 0;
       position: relative;
       border-top: 1px solid var(--border-light);
@@ -685,7 +719,7 @@
        5. INTERACTIVE ACCORDION SERVICES & FAQ SECTION (Frame 00:19 - 00:21)
        ========================================================================== */
     .accordion-section {
-      background-color: var(--bg-light);
+      background: linear-gradient(180deg, #e5e9ff 0%, #eef1ff 100%);
       padding: 110px 0;
       border-top: 1px solid var(--border-light);
     }
@@ -713,8 +747,9 @@
     }
 
     .acc-item:hover, .acc-item.open {
-      background: rgba(14, 14, 17, 0.05);
+      background: rgba(255, 255, 255, 0.78);
       border-bottom-color: transparent;
+      box-shadow: 0 8px 24px rgba(91, 103, 234, 0.08);
     }
 
     .acc-header {
