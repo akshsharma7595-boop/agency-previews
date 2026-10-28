@@ -3,27 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Global Corporate Inc. (GCI) | Secure Your Financial Future</title>
-  <meta name="description" content="Global Corporate Inc. (GCI) — Micro Family Office, Investment Advisory, Mutual Fund Portfolio Restructuring, and Tax Strategy.">
+  <title>Global Corporate Inc. (GCI) | Micro Family Office & Wealth Advisory</title>
+  <meta name="description" content="Global Corporate Inc. (GCI) — Micro Family Office, Investment Advisory, Mutual Fund Portfolio Restructuring, Financial Planning, and Tax Strategy.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --black: #070707;
-      --black-card: #111111;
-      --white: #ffffff;
-      --off-white: #f4f4f2;
-      --orange: #e83a14;
-      --orange-hover: #ff471f;
-      --orange-dark: #b82909;
-      --text-dark: #0a0a0a;
-      --text-muted-dark: #666666;
-      --text-light: #ffffff;
-      --text-muted-light: #999999;
+      --bg-light: #f4f4f6;
+      --bg-white: #ffffff;
+      --bg-dark: #0e0e11;
+      --bg-dark-card: #16161b;
+      --accent-indigo: #6e7bf2;
+      --accent-periwinkle: #a5b0ff;
+      --accent-soft: #dfe3ff;
+      --text-dark: #0e0e11;
+      --text-muted: #6c6e77;
+      --text-faded: #c6c8d0;
+      --border-light: rgba(14, 14, 17, 0.08);
       --border-dark: rgba(255, 255, 255, 0.12);
-      --border-light: rgba(0, 0, 0, 0.1);
     }
 
     * {
@@ -34,1145 +33,803 @@
     }
 
     body {
-      background-color: var(--black);
-      color: var(--text-light);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
     .container {
-      max-width: 1280px;
+      max-width: 1220px;
       margin: 0 auto;
-      padding: 0 36px;
+      padding: 0 32px;
     }
 
     /* ==========================================================================
-       1. PITCH BLACK HERO SECTION WITH 3D FANNING GRAPHICAL CARDS
+       1. HERO SECTION: GIANT KINETIC DISPLAY + FLOATING WIREFRAME TOKENS + TILTED SCREENS
        ========================================================================== */
-    .hero-wrapper {
-      background-color: var(--black);
-      color: var(--white);
+    .hero-section {
+      background-color: var(--bg-white);
       position: relative;
       overflow: hidden;
-      padding-bottom: 90px;
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    /* Navbar */
-    .navbar {
+    .nav-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 88px;
+      height: 64px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .brand-name {
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: -0.3px;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+
+    .brand-mark-center {
+      width: 34px;
+      height: 34px;
+      background: var(--text-dark);
+      color: var(--bg-white);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 16px;
+    }
+
+    .nav-right-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-right-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 13px;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+
+    .nav-right-links a:hover {
+      opacity: 0.6;
+    }
+
+    /* Floating Outlined Graphic Tokens (Scroll Parallax) */
+    .floating-token {
+      position: absolute;
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(14, 14, 17, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 1;
+      transition: transform 0.15s ease-out;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(4px);
+    }
+
+    .floating-token::after {
+      content: '';
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px dashed rgba(14, 14, 17, 0.25);
+      position: absolute;
+    }
+
+    .token-glyph {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .tok-1 { top: 22%; left: 6%; transform: rotate(-18deg); }
+    .tok-2 { top: 58%; left: 14%; width: 58px; height: 58px; transform: rotate(24deg); }
+    .tok-3 { top: 28%; right: 6%; transform: rotate(15deg); }
+    .tok-4 { top: 64%; right: 12%; width: 64px; height: 64px; transform: rotate(-22deg); }
+
+    /* Center Hero Content */
+    .hero-center {
+      text-align: center;
+      padding: 46px 0 0;
+      position: relative;
+      z-index: 5;
+    }
+
+    .hero-eyebrow {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .giant-kinetic-title {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(72px, 15.5vw, 210px);
+      line-height: 0.88;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+
+    .kinetic-char {
+      display: inline-block;
+      animation: riseChar 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes riseChar {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .btn-dark-pill {
+      background-color: var(--bg-dark);
+      color: var(--bg-white);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 12px 28px rgba(14, 14, 17, 0.16);
+    }
+
+    .btn-dark-pill:hover {
+      transform: translateY(-2px);
+      background-color: var(--accent-indigo);
+    }
+
+    /* Two Tilted Dark Interactive Screens in Hero Bottom */
+    .hero-devices-stage {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 24px;
+      margin-top: 36px;
+      height: 360px;
+      position: relative;
+      z-index: 4;
+      perspective: 1200px;
+    }
+
+    .hero-device {
+      width: 310px;
+      height: 390px;
+      background: var(--bg-dark);
+      border-radius: 34px 34px 0 0;
+      border: 6px solid #232329;
+      border-bottom: none;
+      padding: 24px 20px;
+      color: var(--bg-white);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.28);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .device-left {
+      transform: translateY(25px) rotate(-6deg);
+      z-index: 2;
+    }
+
+    .device-right {
+      transform: translateY(10px) rotate(5deg) translateX(-18px);
+      z-index: 3;
+    }
+
+    .hero-devices-stage:hover .device-left {
+      transform: translateY(10px) rotate(-8deg) translateX(-8px);
+    }
+
+    .hero-devices-stage:hover .device-right {
+      transform: translateY(0px) rotate(7deg) translateX(-10px);
+    }
+
+    .dev-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 14px;
+    }
+
+    .dev-pill-tag {
+      background: rgba(110, 123, 242, 0.18);
+      color: var(--accent-periwinkle);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .dev-asset-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     }
 
-    .brand-logo {
+    .dev-asset-left {
       display: flex;
       align-items: center;
       gap: 10px;
-      text-decoration: none;
-      color: var(--white);
-      font-weight: 800;
-      font-size: 22px;
-      letter-spacing: -0.8px;
     }
 
-    .shield-icon {
-      width: 24px;
+    .dev-dot {
+      width: 26px;
       height: 26px;
-      background: var(--white);
-      clip-path: polygon(50% 0%, 100% 15%, 100% 65%, 50% 100%, 0% 65%, 0% 15%);
-      display: inline-block;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
     }
 
-    .nav-links {
-      display: flex;
+    /* Periwinkle Marquee Ribbon Bar */
+    .marquee-ribbon {
+      background: var(--accent-soft);
+      border-top: 1px solid rgba(110, 123, 242, 0.25);
+      border-bottom: 1px solid rgba(110, 123, 242, 0.25);
+      padding: 11px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      z-index: 8;
+    }
+
+    .marquee-track {
+      display: inline-flex;
       gap: 36px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-muted-light);
-      text-decoration: none;
-      font-size: 13.5px;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--white);
-    }
-
-    .nav-Action {
-      color: var(--white);
-      text-decoration: none;
-      font-size: 13.5px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      font-family: inherit;
-    }
-
-    .nav-Action:hover {
-      color: var(--orange);
-    }
-
-    /* Hero Content */
-    .hero-top {
-      padding-top: 64px;
-      position: relative;
-    }
-
-    .hero-headline {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(54px, 8vw, 108px);
-      font-weight: 900;
-      line-height: 0.94;
-      letter-spacing: -0.045em;
-      text-transform: uppercase;
-      color: #f2f2f2;
-      max-width: 1120px;
-      margin-bottom: 40px;
-    }
-
-    /* Floating 4-Point Orange Stars */
-    .star-cluster {
-      position: absolute;
-      right: 4%;
-      top: 90px;
-      width: 120px;
-      height: 120px;
-      pointer-events: none;
-    }
-
-    .four-star {
-      position: absolute;
-      fill: var(--orange);
-      filter: drop-shadow(0 0 20px rgba(232, 58, 20, 0.4));
-      animation: floatStar 5s ease-in-out infinite alternate;
-    }
-
-    .star-lg {
-      width: 68px;
-      height: 68px;
-      right: 0;
-      top: 20px;
-    }
-
-    .star-sm {
-      width: 44px;
-      height: 44px;
-      left: 0;
-      top: 0;
-      opacity: 0.85;
-      animation-delay: -2.5s;
-    }
-
-    @keyframes floatStar {
-      0% { transform: translateY(0) rotate(0deg) scale(1); }
-      100% { transform: translateY(-12px) rotate(12deg) scale(1.06); }
-    }
-
-    /* Hero 3-Column Interactive Stage */
-    .hero-stage {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr 0.9fr;
-      gap: 24px;
-      align-items: center;
-      margin-top: 10px;
-      min-height: 430px;
-    }
-
-    .hero-left-col {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 100%;
-      min-height: 360px;
-    }
-
-    .hero-subtext {
-      font-size: 16px;
-      line-height: 1.55;
-      color: #b5b5b5;
-      max-width: 290px;
-      margin-bottom: 32px;
-      font-weight: 400;
-    }
-
-    /* Orange Pill CTA + Separate Circle Arrow Button */
-    .cta-pair {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .pill-btn-orange {
-      background-color: var(--orange);
-      color: var(--white);
-      font-size: 12.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      padding: 16px 30px;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.25s ease, background-color 0.25s ease;
-    }
-
-    .circle-arrow-orange {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background-color: rgba(232, 58, 20, 0.65);
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      transition: transform 0.25s ease, background-color 0.25s ease;
-    }
-
-    .cta-pair:hover .pill-btn-orange {
-      background-color: var(--orange-hover);
-      transform: translateY(-2px);
-    }
-
-    .cta-pair:hover .circle-arrow-orange {
-      background-color: var(--orange);
-      transform: translate(3px, -3px);
-    }
-
-    /* Bottom Left Trust Indicator */
-    .hero-trust-box {
-      margin-top: auto;
-      padding-top: 40px;
-    }
-
-    .trust-dot-label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: #888888;
-      margin-bottom: 12px;
-      font-weight: 500;
-    }
-
-    .orange-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: var(--orange);
-      display: inline-block;
-    }
-
-    .trust-stat-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .trust-big-label {
-      font-size: 34px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      color: var(--white);
-    }
-
-    .avatar-stack {
-      display: flex;
-      align-items: center;
-    }
-
-    .avatar-pill {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 2px solid var(--black);
-      margin-left: -10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      animation: scrollMarquee 24s linear infinite;
       font-size: 11px;
       font-weight: 800;
-      color: var(--white);
-    }
-
-    .avatar-pill:first-child { margin-left: 0; }
-    .av-1 { background: #e83a14; }
-    .av-2 { background: #2b2b2b; }
-    .av-3 { background: #525252; }
-    .av-4 { background: #737373; }
-
-    /* Center 3D Fanning Graphical Cards Stack */
-    .cards-fan-stage {
-      position: relative;
-      height: 420px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      perspective: 1400px;
-    }
-
-    .fan-card {
-      position: absolute;
-      width: 390px;
-      height: 235px;
-      border-radius: 18px;
-      padding: 28px 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.75);
-      transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-      user-select: none;
-    }
-
-    /* Card 1: Top Vibrant Orange Card */
-    .fan-card-1 {
-      background: linear-gradient(135deg, #f0431c 0%, #c82b09 100%);
-      color: var(--white);
-      z-index: 3;
-      transform: translate3d(-15px, -65px, 40px) rotateZ(-22deg) rotateX(14deg) rotateY(-12deg);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-    }
-
-    /* Card 2: Middle Brushed Silver/Titanium Card */
-    .fan-card-2 {
-      background: linear-gradient(135deg, #b8b8b8 0%, #707070 100%);
-      color: var(--white);
-      z-index: 2;
-      transform: translate3d(25px, 15px, 10px) rotateZ(-10deg) rotateX(14deg) rotateY(-10deg);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    /* Card 3: Bottom Matte Carbon Card */
-    .fan-card-3 {
-      background: linear-gradient(135deg, #222222 0%, #0d0d0d 100%);
-      color: var(--white);
-      z-index: 1;
-      transform: translate3d(45px, 95px, -20px) rotateZ(4deg) rotateX(12deg) rotateY(-6deg);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .cards-fan-stage:hover .fan-card-1 {
-      transform: translate3d(-25px, -85px, 60px) rotateZ(-26deg) rotateX(10deg) rotateY(-8deg);
-    }
-
-    .cards-fan-stage:hover .fan-card-2 {
-      transform: translate3d(30px, 10px, 25px) rotateZ(-8deg) rotateX(10deg) rotateY(-8deg);
-    }
-
-    .cards-fan-stage:hover .fan-card-3 {
-      transform: translate3d(55px, 110px, 0px) rotateZ(8deg) rotateX(10deg) rotateY(-4deg);
-    }
-
-    .card-brand-Word {
-      font-size: 46px;
-      font-weight: 900;
-      letter-spacing: -2px;
-      line-height: 1;
-    }
-
-    .card-chip-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-
-    .card-meta-title {
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: -0.2px;
-    }
-
-    .card-meta-sub {
-      font-size: 11px;
+      letter-spacing: 1.4px;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      opacity: 0.8;
-      margin-top: 3px;
+      color: var(--text-dark);
     }
 
-    .card-chip {
-      width: 38px;
-      height: 28px;
-      border-radius: 5px;
-      background: rgba(255, 255, 255, 0.28);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-    }
-
-    /* Right Hero Column: Interactive Action List */
-    .hero-right-col {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .hero-step-item {
-      padding-bottom: 24px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      text-decoration: none;
-      color: var(--white);
-      transition: all 0.25s;
-    }
-
-    .hero-step-item:last-child {
-      border-bottom: none;
-    }
-
-    .hero-step-item span {
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 1.35;
-      color: #d4d4d4;
-      max-width: 190px;
-      transition: color 0.2s;
-    }
-
-    .hero-step-arrow {
-      font-size: 18px;
-      color: #888;
-      transition: transform 0.25s, color 0.25s;
-    }
-
-    .hero-step-item:hover span {
-      color: var(--white);
-    }
-
-    .hero-step-item:hover .hero-step-arrow {
-      color: var(--orange);
-      transform: translate(3px, -3px);
+    @keyframes scrollMarquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
 
     /* ==========================================================================
-       2. WHITE SECTION: "GETTING TO KNOW GCI CORP" + 3 GRAPHICAL BENTO BLOCKS
+       2. DARK ORBITING PILLS SECTION (DEPTH-OF-FIELD BLUR + PARALLAX)
        ========================================================================== */
-    .section-white {
-      background-color: var(--white);
-      color: var(--text-dark);
-      padding: 110px 0;
+    .orbit-dark-section {
+      background-color: var(--bg-dark);
+      color: var(--bg-white);
+      padding: 160px 0;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
     }
 
-    .split-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: flex-end;
-      margin-bottom: 56px;
+    .orbit-headline {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(38px, 6.2vw, 76px);
+      line-height: 1.02;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      max-width: 880px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 4;
     }
 
-    .eyebrow-tag {
+    .orbit-pill {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 10px 20px;
+      border-radius: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       font-size: 12px;
       font-weight: 700;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
+      color: var(--bg-white);
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s ease-out, filter 0.3s;
+      cursor: pointer;
+    }
+
+    .orbit-pill:hover {
+      filter: blur(0px) !important;
+      opacity: 1 !important;
+      border-color: var(--accent-periwinkle);
+      transform: scale(1.08) !important;
+      z-index: 6;
+    }
+
+    .pill-icon-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* Foreground sharp pills */
+    .op-1 { top: 16%; left: 18%; z-index: 5; }
+    .op-2 { top: 20%; right: 14%; z-index: 5; }
+    .op-3 { bottom: 16%; left: 14%; z-index: 5; }
+    .op-4 { bottom: 14%; right: 24%; z-index: 5; }
+
+    /* Background depth-of-field blurred pills */
+    .op-5 { top: 48%; left: 5%; filter: blur(2.5px); opacity: 0.55; transform: scale(0.88); }
+    .op-6 { top: 32%; left: 54%; filter: blur(2px); opacity: 0.6; transform: scale(0.85); }
+    .op-7 { bottom: 32%; right: 6%; filter: blur(3px); opacity: 0.5; transform: scale(0.85); }
+
+    /* ==========================================================================
+       3. STICKY SCROLL-DOWN ISOMETRIC GRAPHICS SECTION (Frame 00:04 - 00:09)
+       ========================================================================== */
+    .sticky-isometric-section {
+      background-color: var(--bg-light);
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .sticky-iso-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    /* Left Sticky Card Containing Morphing Isometric SVGs */
+    .iso-sticky-box {
+      position: sticky;
+      top: 120px;
+      background: var(--bg-white);
+      border-radius: 28px;
+      height: 470px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 24px 60px rgba(14, 14, 17, 0.05);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+
+    .iso-graphic-layer {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.82) translateY(30px);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .iso-graphic-layer.active {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Animated SVG Keyframes inside Isometric Illustrations */
+    .spin-slow {
+      transform-origin: center;
+      animation: rotateIso 14s linear infinite;
+    }
+
+    .tilt-balance {
+      transform-origin: 150px 130px;
+      animation: balanceSwing 4s ease-in-out infinite alternate;
+    }
+
+    .pulse-shield {
+      transform-origin: center;
+      animation: shieldFloat 3.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes rotateIso {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes balanceSwing {
+      0% { transform: rotate(-6deg); }
+      100% { transform: rotate(6deg); }
+    }
+
+    @keyframes shieldFloat {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-10px); }
+    }
+
+    /* Right Scrolling Text Blocks that Light Up on Scroll */
+    .iso-scroll-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 140px;
+      padding: 40px 0 80px;
+    }
+
+    .iso-step-block {
+      opacity: 0.22;
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      cursor: pointer;
+    }
+
+    .iso-step-block.active {
+      opacity: 1;
+    }
+
+    .iso-step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1.5px solid var(--text-dark);
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+
+    .iso-big-stat {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(54px, 6.5vw, 84px);
+      line-height: 0.95;
+      color: var(--text-dark);
+      letter-spacing: -0.01em;
+    }
+
+    .iso-stat-tag {
+      font-size: 11px;
+      font-weight: 800;
       letter-spacing: 1.2px;
-      color: var(--text-muted-dark);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .iso-step-desc {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 480px;
+    }
+
+    /* ==========================================================================
+       4. STICKY DEVICE SHOWCASE + SCROLLING NARRATIVES (Frame 00:10 - 00:18)
+       ========================================================================== */
+    .device-scroll-section {
+      background-color: var(--bg-white);
+      padding: 130px 0;
+      position: relative;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .device-showcase-grid {
+      display: grid;
+      grid-template-columns: 40px 1fr 1.1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* Far Left Vertical Progress Indicator */
+    .scroll-progress-rail {
+      position: sticky;
+      top: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .rail-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #ccc;
+      transition: all 0.35s ease;
+    }
+
+    .rail-dot.active {
+      height: 24px;
+      border-radius: 4px;
+      background: var(--text-dark);
+    }
+
+    /* Center Sticky Dark Interactive Phone/Terminal Frame */
+    .sticky-phone-wrap {
+      position: sticky;
+      top: 110px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .phone-frame {
+      width: 330px;
+      height: 540px;
+      background: var(--bg-dark);
+      border-radius: 42px;
+      border: 8px solid #222228;
+      box-shadow: 0 35px 80px rgba(14, 14, 17, 0.18);
+      padding: 28px 22px;
+      color: var(--bg-white);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-screen-slide {
+      position: absolute;
+      inset: 28px 22px;
+      opacity: 0;
+      transform: translateY(35px);
+      transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .phone-screen-slide.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Right Scrolling Feature Narratives */
+    .device-narrative-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 220px;
+      padding: 90px 0 120px;
+    }
+
+    .narrative-block {
+      opacity: 0.25;
+      transition: opacity 0.45s ease;
+    }
+
+    .narrative-block.active {
+      opacity: 1;
+    }
+
+    .narrative-tag {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
       margin-bottom: 12px;
       display: block;
     }
 
-    .section-display-title {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.035em;
-      text-transform: uppercase;
-      color: var(--text-dark);
-    }
-
-    .header-right-desc {
-      font-size: 15.5px;
-      line-height: 1.65;
-      color: var(--text-muted-dark);
-      max-width: 460px;
-      justify-self: end;
-    }
-
-    /* 3-Card Bento Grid (Orange Wide + Black Square + Grey Square) */
-    .bento-stats-grid {
-      display: grid;
-      grid-template-columns: 1.85fr 1fr 1fr;
-      gap: 20px;
-    }
-
-    .bento-stat-card {
-      border-radius: 22px;
-      padding: 38px 34px;
-      min-height: 310px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.35s ease;
-    }
-
-    .bento-stat-card:hover {
-      transform: translateY(-6px);
-    }
-
-    .card-orange {
-      background-color: var(--orange);
-      color: var(--white);
-    }
-
-    .card-black {
-      background-color: var(--black);
-      color: var(--white);
-    }
-
-    .card-grey {
-      background-color: var(--off-white);
-      color: var(--text-dark);
-    }
-
-    .bento-top-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-    }
-
-    .bento-mini-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
+    .narrative-title {
+      font-size: clamp(28px, 3.4vw, 40px);
       font-weight: 800;
-      flex-shrink: 0;
-    }
-
-    .icon-on-orange {
-      background: rgba(255, 255, 255, 0.22);
-      color: var(--white);
-    }
-
-    .icon-on-black {
-      background: var(--orange);
-      color: var(--white);
-    }
-
-    .bento-giant-text {
-      font-size: clamp(44px, 5vw, 68px);
-      font-weight: 900;
-      line-height: 0.95;
-      letter-spacing: -0.04em;
-    }
-
-    .bento-giant-text small {
-      font-size: 0.42em;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-left: 6px;
-      opacity: 0.92;
-    }
-
-    .bento-bottom-desc {
-      font-size: 13.5px;
-      line-height: 1.55;
-      opacity: 0.88;
-      max-width: 380px;
-    }
-
-    /* ==========================================================================
-       3. INTERACTIVE ACCORDION ROWS + FLOATING GRAPHICAL UI PREVIEW CARD
-       ========================================================================== */
-    .section-services-interactive {
-      background-color: var(--white);
-      color: var(--text-dark);
-      padding: 40px 0 120px;
-    }
-
-    .interactive-rows-wrap {
-      position: relative;
-      background-color: var(--off-white);
-      border-radius: 24px;
-      overflow: visible;
-    }
-
-    .service-row-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 34px 42px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .service-row-item:first-child {
-      border-radius: 24px 24px 0 0;
-    }
-
-    .service-row-item:last-child {
-      border-bottom: none;
-      border-radius: 0 0 24px 24px;
-    }
-
-    .service-row-left {
-      display: flex;
-      align-items: center;
-      gap: 48px;
-    }
-
-    .row-index {
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--text-muted-dark);
-      transition: color 0.3s;
-    }
-
-    .row-title {
-      font-size: 21px;
-      font-weight: 800;
-      letter-spacing: -0.4px;
-      text-transform: uppercase;
-      color: var(--text-dark);
-      max-width: 280px;
-      line-height: 1.2;
-      transition: color 0.3s;
-    }
-
-    .row-arrow-circle {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.06);
-      color: var(--text-dark);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      transition: all 0.3s ease;
-    }
-
-    /* Active / Hover State Matches Finguard Video Frame 00:06 */
-    .service-row-item.active,
-    .service-row-item:hover {
-      background-color: var(--black);
-      color: var(--white);
-    }
-
-    .service-row-item.active .row-index,
-    .service-row-item:hover .row-index {
-      color: #888;
-    }
-
-    .service-row-item.active .row-title,
-    .service-row-item:hover .row-title {
-      color: var(--white);
-    }
-
-    .service-row-item.active .row-arrow-circle,
-    .service-row-item:hover .row-arrow-circle {
-      background-color: var(--orange);
-      color: var(--white);
-      transform: rotate(-45deg);
-    }
-
-    /* Floating Graphical UI Card Over the Rows (Frame 00:06 - 00:07) */
-    .floating-ui-widget {
-      position: absolute;
-      right: 120px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 440px;
-      background: var(--white);
-      border-radius: 20px;
-      padding: 28px 30px;
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.06);
-      z-index: 10;
-      transition: all 0.35s ease;
-    }
-
-    .widget-window-dots {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 18px;
-    }
-
-    .w-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #e0e0e0;
-    }
-
-    .widget-header-title {
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--text-dark);
-      margin-bottom: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    /* Segmented Progress Bar (Orange / Black / Grey) */
-    .segmented-bar {
-      display: flex;
-      height: 10px;
-      border-radius: 10px;
-      overflow: hidden;
-      gap: 4px;
-      margin-bottom: 20px;
-    }
-
-    .seg-orange { background: var(--orange); width: 65%; border-radius: 10px; transition: width 0.4s ease; }
-    .seg-black { background: var(--black); width: 20%; border-radius: 10px; transition: width 0.4s ease; }
-    .seg-grey { background: #dcdcdc; width: 15%; border-radius: 10px; transition: width 0.4s ease; }
-
-    .widget-metrics-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      margin-bottom: 16px;
-    }
-
-    .w-metric-val {
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--text-dark);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .w-metric-sub {
-      font-size: 11px;
-      color: var(--text-muted-dark);
-      margin-top: 2px;
-    }
-
-    .widget-list-rows {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .w-list-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .w-item-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .w-avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: var(--off-white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--text-dark);
-    }
-
-    .w-item-name {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-dark);
-      line-height: 1.2;
-    }
-
-    .w-item-sub {
-      font-size: 11px;
-      color: var(--text-muted-dark);
-    }
-
-    .w-badge-pill {
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 6px;
-      letter-spacing: 0.5px;
-    }
-
-    .badge-orange {
-      background: rgba(232, 58, 20, 0.14);
-      color: var(--orange);
-    }
-
-    .badge-dark {
-      background: var(--black);
-      color: var(--white);
-    }
-
-    /* ==========================================================================
-       4. OUR PROCESS: VERTICAL DUAL CARDS + ICON BULLET LIST (Frame 00:08)
-       ========================================================================== */
-    .section-process-cards {
-      background-color: var(--white);
-      color: var(--text-dark);
-      padding: 60px 0 130px;
-    }
-
-    .process-split-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 70px;
-      align-items: center;
-    }
-
-    .vertical-cards-stage {
-      position: relative;
-      height: 440px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Left Vertical Orange Card */
-    .v-card-front {
-      width: 245px;
-      height: 365px;
-      background: linear-gradient(155deg, #ff5126 0%, #d82c06 100%);
-      border-radius: 20px;
-      padding: 28px 24px;
-      color: var(--white);
-      position: relative;
-      z-index: 2;
-      box-shadow: 0 28px 60px rgba(232, 58, 20, 0.32);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transform: translateX(-40px);
-      transition: transform 0.4s ease;
-    }
-
-    /* Right Tilted Dark/Orange Card */
-    .v-card-back {
-      width: 240px;
-      height: 350px;
-      background: var(--black);
-      border-radius: 20px;
-      padding: 28px 24px;
-      color: var(--white);
-      position: absolute;
-      z-index: 1;
-      transform: translateX(75px) translateY(10px) rotate(11deg);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border-right: 18px solid var(--orange);
-      transition: transform 0.4s ease;
-    }
-
-    .vertical-cards-stage:hover .v-card-front {
-      transform: translateX(-50px) translateY(-6px);
-    }
-
-    .vertical-cards-stage:hover .v-card-back {
-      transform: translateX(88px) translateY(4px) rotate(15deg);
-    }
-
-    .v-card-vertical-title {
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-      font-size: 56px;
-      font-weight: 900;
-      letter-spacing: -2px;
-      line-height: 0.9;
-      margin-top: auto;
-    }
-
-    .process-list-items {
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      margin: 34px 0 40px;
-    }
-
-    .process-bullet-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .process-circle-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: var(--off-white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--text-dark);
-      flex-shrink: 0;
-    }
-
-    .process-bullet-text {
-      font-size: 15px;
-      color: var(--text-muted-dark);
-      line-height: 1.5;
-      font-weight: 500;
-    }
-
-    /* ==========================================================================
-       5. PITCH BLACK SECTION: 2x2 VIBRANT ORANGE GRAPHICAL SQUARES (Frame 00:09)
-       ========================================================================== */
-    .section-dark-pillars {
-      background-color: var(--black);
-      color: var(--white);
-      padding: 110px 0;
-    }
-
-    .pillars-layout {
-      display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 50px;
-      align-items: end;
-      margin-top: 20px;
-    }
-
-    .orange-squares-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .orange-pillar-tile {
-      background-color: var(--orange);
-      border-radius: 22px;
-      padding: 40px 32px;
-      min-height: 230px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      color: var(--white);
-      transition: transform 0.3s ease, background-color 0.3s ease;
-    }
-
-    .orange-pillar-tile:hover {
-      transform: translateY(-6px);
-      background-color: var(--orange-hover);
-    }
-
-    .pillar-tile-icon {
-      font-size: 34px;
-      font-weight: 900;
-      line-height: 1;
-    }
-
-    .pillar-tile-title {
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 6px;
-      letter-spacing: -0.3px;
-    }
-
-    .pillar-tile-desc {
-      font-size: 13.5px;
-      line-height: 1.5;
-      opacity: 0.9;
-    }
-
-    .pillars-side-cta {
-      padding-bottom: 16px;
-    }
-
-    .pillars-side-cta h3 {
-      font-size: 24px;
-      font-weight: 900;
-      text-transform: uppercase;
-      line-height: 1.2;
-      margin-bottom: 24px;
-      max-width: 320px;
-    }
-
-    .pill-btn-white {
-      background-color: var(--white);
-      color: var(--black);
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      padding: 15px 28px;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.25s;
-    }
-
-    .pill-btn-white:hover {
-      background-color: var(--orange);
-      color: var(--white);
-    }
-
-    /* ==========================================================================
-       6. EDITORIAL QUOTE + GIANT 3D EXTRUDED WORDMARK + ORANGE FOOTER (Frame 00:11-00:12)
-       ========================================================================== */
-    .section-quote-bridge {
-      background-color: var(--off-white);
-      color: var(--text-dark);
-      padding: 100px 0 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .quote-large-text {
-      font-size: clamp(26px, 3.6vw, 44px);
-      font-weight: 600;
-      line-height: 1.22;
+      line-height: 1.15;
       letter-spacing: -0.03em;
       color: var(--text-dark);
-      max-width: 1080px;
-      margin-bottom: 42px;
+      margin-bottom: 18px;
+      max-width: 460px;
     }
 
-    .quote-author-row {
+    .narrative-desc {
+      font-size: 15.5px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 26px;
+      max-width: 450px;
+    }
+
+    /* Floating White Callout Card inside Narrative */
+    .narrative-float-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      box-shadow: 0 16px 40px rgba(14, 14, 17, 0.06);
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 290px;
+    }
+
+    /* ==========================================================================
+       5. INTERACTIVE ACCORDION SERVICES & FAQ SECTION (Frame 00:19 - 00:21)
+       ========================================================================== */
+    .accordion-section {
+      background-color: var(--bg-light);
+      padding: 110px 0;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .accordion-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .acc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .acc-item {
+      background: transparent;
+      border-bottom: 1px solid rgba(14, 14, 17, 0.1);
+      border-radius: 14px;
+      padding: 20px 24px;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+    }
+
+    .acc-item:hover, .acc-item.open {
+      background: rgba(14, 14, 17, 0.05);
+      border-bottom-color: transparent;
+    }
+
+    .acc-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 50px;
-    }
-
-    .quote-author-badge {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .author-circle {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: #dce5e7;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 14px;
+      font-size: 16px;
+      font-weight: 700;
       color: var(--text-dark);
     }
 
-    /* Giant 3D Embossed Wordmark Sculpture Rising into Footer */
-    .giant-3d-wordmark-wrap {
-      width: 100%;
-      text-align: center;
-      line-height: 0.78;
-      padding-top: 20px;
-      user-select: none;
+    .acc-chevron {
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: transform 0.3s ease;
+    }
+
+    .acc-item.open .acc-chevron {
+      transform: rotate(180deg);
+    }
+
+    .acc-body {
+      max-height: 0;
       overflow: hidden;
-    }
-
-    .giant-3d-wordmark {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(90px, 19.5vw, 275px);
-      font-weight: 900;
-      letter-spacing: -0.055em;
-      color: var(--orange);
-      display: inline-block;
-      text-shadow: 
-        0 4px 0 #d4320f,
-        0 8px 0 #c22c0c,
-        0 12px 0 #b02609,
-        0 16px 0 #9e2006,
-        0 22px 30px rgba(0, 0, 0, 0.28);
-      transform: perspective(600px) rotateX(8deg);
-    }
-
-    /* Vibrant Orange Footer */
-    .footer-orange {
-      background-color: var(--orange);
-      color: var(--white);
-      padding: 70px 0 36px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .footer-main-grid {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr 1fr 1fr;
-      gap: 40px;
-      padding-bottom: 50px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
-    }
-
-    .footer-cta-heading {
-      font-size: 28px;
-      font-weight: 900;
-      line-height: 1.1;
-      text-transform: uppercase;
-      letter-spacing: -0.5px;
-      margin-bottom: 24px;
-      max-width: 320px;
-    }
-
-    .footer-col-title {
-      font-size: 13px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 14px;
-      color: var(--white);
-    }
-
-    .footer-col-text {
-      font-size: 13.5px;
+      transition: max-height 0.35s ease, margin-top 0.3s ease;
+      font-size: 14.5px;
+      color: var(--text-muted);
       line-height: 1.65;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 10px;
     }
 
-    .footer-col-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    .acc-item.open .acc-body {
+      max-height: 180px;
+      margin-top: 12px;
     }
 
-    .footer-col-links a {
-      color: rgba(255, 255, 255, 0.88);
+    /* ==========================================================================
+       6. DARK FOOTER WITH GRADIENT HOVER PILL BUTTONS & COMPACT ADDRESSES (Frame 00:23)
+       ========================================================================== */
+    .dark-footer {
+      background-color: var(--bg-dark);
+      color: var(--bg-white);
+      padding: 90px 0 45px;
+      text-align: center;
+    }
+
+    .footer-contact-tag {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 12px;
+    }
+
+    .footer-giant-email {
+      font-size: clamp(28px, 4.5vw, 52px);
+      font-weight: 800;
+      color: var(--bg-white);
       text-decoration: none;
-      font-size: 13.5px;
+      letter-spacing: -0.03em;
+      display: inline-block;
+      margin-bottom: 36px;
       transition: color 0.2s;
     }
 
-    .footer-col-links a:hover {
-      color: var(--white);
-      text-decoration: underline;
+    .footer-giant-email:hover {
+      color: var(--accent-periwinkle);
     }
 
-    .footer-bottom-bar {
-      padding-top: 26px;
+    /* Compact Dual Office Strip */
+    .footer-offices-compact {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12.5px;
-      color: rgba(255, 255, 255, 0.85);
+      justify-content: center;
+      gap: 60px;
       flex-wrap: wrap;
-      gap: 14px;
+      margin-bottom: 48px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: left;
+    }
+
+    .office-mini-col {
+      max-width: 340px;
+    }
+
+    .office-mini-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--accent-periwinkle);
+      margin-bottom: 6px;
+    }
+
+    .office-mini-text {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.55;
+    }
+
+    /* 4 Outlined Pill Buttons with Gradient Hover (Exact Match to Frame 00:23) */
+    .footer-pills-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 920px;
+      margin: 0 auto 44px;
+    }
+
+    .footer-pill-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: var(--bg-white);
+      padding: 16px 20px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-pill-btn:hover {
+      background: linear-gradient(135deg, #6e7bf2 0%, #c084fc 50%, #f59e0b 100%);
+      border-color: transparent;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(110, 123, 242, 0.35);
     }
 
     /* Modal Form */
@@ -1182,7 +839,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.82);
+      background: rgba(14, 14, 17, 0.8);
       backdrop-filter: blur(10px);
       z-index: 300;
       display: none;
@@ -1196,24 +853,23 @@
     }
 
     .modal-card {
-      background: var(--black-card);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 22px;
+      background: var(--bg-white);
+      border-radius: 24px;
       max-width: 460px;
       width: 100%;
       padding: 40px;
       position: relative;
-      color: var(--white);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+      color: var(--text-dark);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
     }
 
     .modal-close {
       position: absolute;
       top: 20px;
       right: 20px;
-      background: rgba(255, 255, 255, 0.08);
+      background: var(--bg-light);
       border: none;
-      color: var(--white);
+      color: var(--text-dark);
       width: 34px;
       height: 34px;
       border-radius: 50%;
@@ -1223,62 +879,74 @@
 
     .form-group {
       margin-bottom: 16px;
+      text-align: left;
     }
 
     .form-label {
       display: block;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #999;
+      color: var(--text-muted);
       margin-bottom: 6px;
     }
 
     .form-input, .form-select {
       width: 100%;
-      background: #070707;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
+      background: var(--bg-light);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
       padding: 13px 15px;
-      color: var(--white);
+      color: var(--text-dark);
       font-size: 14px;
       font-family: inherit;
       outline: none;
     }
 
     .form-input:focus, .form-select:focus {
-      border-color: var(--orange);
+      border-color: var(--accent-indigo);
+      background: var(--bg-white);
     }
 
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .hero-stage {
-        grid-template-columns: 1fr;
-        gap: 48px;
+    @media (max-width: 980px) {
+      .hero-devices-stage {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
       }
-      .hero-left-col {
-        min-height: auto;
-      }
-      .bento-stats-grid {
-        grid-template-columns: 1fr;
-      }
-      .floating-ui-widget {
-        position: static;
-        transform: none;
+      .device-left, .device-right {
+        transform: none !important;
         width: 100%;
-        margin-top: 24px;
+        max-width: 340px;
       }
-      .process-split-grid,
-      .pillars-layout,
-      .split-header,
-      .footer-main-grid {
+      .sticky-iso-grid,
+      .device-showcase-grid,
+      .accordion-grid {
         grid-template-columns: 1fr;
       }
-      .header-right-desc {
-        justify-self: start;
+      .scroll-progress-rail {
+        display: none;
       }
-      .nav-links {
+      .iso-sticky-box,
+      .sticky-phone-wrap {
+        position: relative;
+        top: 0;
+        margin-bottom: 32px;
+      }
+      .iso-scroll-steps,
+      .device-narrative-steps {
+        gap: 60px;
+        padding: 20px 0;
+      }
+      .iso-step-block,
+      .narrative-block {
+        opacity: 1;
+      }
+      .footer-pills-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      .orbit-pill {
         display: none;
       }
     }
@@ -1287,525 +955,573 @@
 <body>
 
   <!-- ========================================================================
-       1. PITCH BLACK HERO WITH 3D FANNING GRAPHICAL CARDS
+       1. HERO SECTION: GIANT KINETIC DISPLAY + FLOATING TOKENS + TILTED SCREENS
        ======================================================================== -->
-  <div class="hero-wrapper">
+  <section class="hero-section">
+    <!-- Floating Outlined Tokens (Scroll Parallax) -->
+    <div class="floating-token tok-1" data-speed="0.18"><span class="token-glyph">GCI</span></div>
+    <div class="floating-token tok-2" data-speed="-0.14"><span class="token-glyph">MF</span></div>
+    <div class="floating-token tok-3" data-speed="0.22"><span class="token-glyph">FO</span></div>
+    <div class="floating-token tok-4" data-speed="-0.18"><span class="token-glyph">IA</span></div>
+
     <div class="container">
-      <nav class="navbar">
-        <a href="#" class="brand-logo">
-          <span class="shield-icon"></span>
-          <span>gcicorp</span>
-        </a>
-
-        <ul class="nav-links">
-          <li><a href="#about">Philosophy</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#principles">Why Choose Us</a></li>
-          <li><a href="#contact">Offices</a></li>
-        </ul>
-
-        <button class="nav-Action" onclick="openConsultation('Private Consultation')">
-          <span>Inquire Mandate</span>
-          <span>↗</span>
-        </button>
+      <nav class="nav-bar">
+        <a href="#" class="brand-name">Global Corporate Inc.</a>
+        <div class="brand-mark-center">G</div>
+        <div class="nav-right-links">
+          <a href="#philosophy">Philosophy</a>
+          <a href="#process">Our Process</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Offices</a>
+        </div>
       </nav>
 
-      <div class="hero-top">
-        <!-- Floating 4-Point Orange Stars -->
-        <div class="star-cluster">
-          <svg class="four-star star-sm" viewBox="0 0 100 100">
-            <path d="M50 0 C55 38 62 45 100 50 C62 55 55 62 50 100 C45 62 38 55 0 50 C38 45 45 38 50 0 Z"/>
-          </svg>
-          <svg class="four-star star-lg" viewBox="0 0 100 100">
-            <path d="M50 0 C55 38 62 45 100 50 C62 55 55 62 50 100 C45 62 38 55 0 50 C38 45 45 38 50 0 Z"/>
-          </svg>
-        </div>
+      <div class="hero-center">
+        <p class="hero-eyebrow">We Are a Management Firm, Driving Long Term Sustainable Returns</p>
+        <h1 class="giant-kinetic-title">GCI CORP</h1>
+        <button class="btn-dark-pill" onclick="openConsultation('Private Mandate')">
+          Get Started
+        </button>
 
-        <h1 class="hero-headline">
-          INVEST IN YOUR<br>
-          FINANCIAL FUTURE
-        </h1>
-
-        <div class="hero-stage">
-          <!-- Left Column -->
-          <div class="hero-left-col">
+        <!-- Two Tilted Dark Portfolio Screens -->
+        <div class="hero-devices-stage">
+          <!-- Left Screen: Asset Class Breakdown -->
+          <div class="hero-device device-left">
             <div>
-              <p class="hero-subtext">
-                We Are a Management Firm, Driving Long Term Sustainable Returns for Individuals, Families &amp; Entrepreneurs.
-              </p>
-              <div class="cta-pair" onclick="openConsultation('Portfolio Strategy')">
-                <button class="pill-btn-orange">Get Started</button>
-                <span class="circle-arrow-orange">↗</span>
+              <div class="dev-top-bar">
+                <span>GCI Family Office</span>
+                <span class="dev-pill-tag">Active Mandate</span>
               </div>
-            </div>
+              <div style="font-size:15px; font-weight:800; margin-bottom:4px;">Portfolio Architecture</div>
+              <div style="font-size:11.5px; color:#888; margin-bottom:18px;">Risk-Matched Fund Distribution</div>
 
-            <div class="hero-trust-box">
-              <div class="trust-dot-label">
-                <span class="orange-dot"></span>
-                <span>Fiduciary Wealth Stewardship</span>
-              </div>
-              <div class="trust-stat-row">
-                <span class="trust-big-label">GCI Corp</span>
-                <div class="avatar-stack">
-                  <div class="avatar-pill av-1">MF</div>
-                  <div class="avatar-pill av-2">FO</div>
-                  <div class="avatar-pill av-3">IA</div>
-                  <div class="avatar-pill av-4">TX</div>
+              <div class="dev-asset-row">
+                <div class="dev-asset-left">
+                  <div class="dev-dot" style="background:#f59e0b; color:#000;">MF</div>
+                  <div>
+                    <div style="font-size:12.5px; font-weight:700;">Mutual Fund Audit</div>
+                    <div style="font-size:10px; color:#888;">Inherent Asset Class</div>
+                  </div>
                 </div>
+                <span style="font-size:11px; color:#4ade80; font-weight:700;">Aligned</span>
+              </div>
+
+              <div class="dev-asset-row">
+                <div class="dev-asset-left">
+                  <div class="dev-dot" style="background:#6e7bf2; color:#fff;">FO</div>
+                  <div>
+                    <div style="font-size:12.5px; font-weight:700;">Micro Family Office</div>
+                    <div style="font-size:10px; color:#888;">Legacy Governance</div>
+                  </div>
+                </div>
+                <span style="font-size:11px; color:#4ade80; font-weight:700;">Structured</span>
+              </div>
+
+              <div class="dev-asset-row" style="border-bottom:none;">
+                <div class="dev-asset-left">
+                  <div class="dev-dot" style="background:#10b981; color:#000;">TX</div>
+                  <div>
+                    <div style="font-size:12.5px; font-weight:700;">Tax &amp; Debt Strategy</div>
+                    <div style="font-size:10px; color:#888;">Wealth Retention</div>
+                  </div>
+                </div>
+                <span style="font-size:11px; color:#a5b0ff; font-weight:700;">Shielded</span>
               </div>
             </div>
           </div>
 
-          <!-- Center 3D Fanning Cards -->
-          <div class="cards-fan-stage">
-            <!-- Card 1: Orange -->
-            <div class="fan-card fan-card-1" onclick="openConsultation('Micro Family Office')">
-              <div class="card-brand-Word">gcicorp</div>
-              <div class="card-chip-row">
-                <div>
-                  <div class="card-meta-title">Micro Family Office</div>
-                  <div class="card-meta-sub">Legacy &amp; Governance</div>
-                </div>
-                <div class="card-chip"></div>
+          <!-- Right Screen: Wealth Trajectory Curve -->
+          <div class="hero-device device-right">
+            <div>
+              <div class="dev-top-bar">
+                <span>Long-Term Horizon</span>
+                <span style="color:#4ade80; font-weight:700;">● Sustainable</span>
+              </div>
+              <div style="font-size:22px; font-weight:800; letter-spacing:-0.5px;">Disciplined Growth</div>
+              <div style="font-size:11.5px; color:#4ade80; margin-bottom:16px;">▲ Client-First Allocation</div>
+
+              <!-- Animated SVG Curve -->
+              <svg viewBox="0 0 260 110" style="width:100%; height:115px; overflow:visible;">
+                <defs>
+                  <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#6e7bf2" stop-opacity="0.45"/>
+                    <stop offset="100%" stop-color="#6e7bf2" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,95 C40,88 65,65 100,72 C135,79 160,38 195,44 C225,48 240,18 260,12 L260,110 L0,110 Z" fill="url(#curveGrad)"/>
+                <path d="M0,95 C40,88 65,65 100,72 C135,79 160,38 195,44 C225,48 240,18 260,12" fill="none" stroke="#6e7bf2" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="260" cy="12" r="4.5" fill="#a5b0ff"/>
+              </svg>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:18px;">
+                <div style="background:#fff; color:#000; text-align:center; padding:9px; border-radius:20px; font-size:11.5px; font-weight:800; cursor:pointer;" onclick="openConsultation('Portfolio Audit')">Audit</div>
+                <div style="border:1px solid rgba(255,255,255,0.2); text-align:center; padding:9px; border-radius:20px; font-size:11.5px; font-weight:700; cursor:pointer;" onclick="openConsultation('Advisory Mandate')">Consult</div>
               </div>
             </div>
-
-            <!-- Card 2: Silver Metallic -->
-            <div class="fan-card fan-card-2" onclick="openConsultation('Investment Advisory')">
-              <div style="font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;">Global Corporate Inc.</div>
-              <div class="card-chip-row">
-                <div>
-                  <div class="card-meta-title">Investment Advisory</div>
-                  <div class="card-meta-sub">Risk-Aware Growth</div>
-                </div>
-                <div class="card-chip"></div>
-              </div>
-            </div>
-
-            <!-- Card 3: Carbon Black -->
-            <div class="fan-card fan-card-3" onclick="openConsultation('Mutual Fund Restructuring')">
-              <div style="display:flex; justify-content:space-between; font-size:12px; color:#888; font-family:monospace;">
-                <span>ASSET CLASS CALIBRATION</span>
-                <span>DIRECT MANDATE</span>
-              </div>
-              <div class="card-chip-row">
-                <div>
-                  <div class="card-meta-title">MF Restructuring</div>
-                  <div class="card-meta-sub">Mumbai • Gujarat</div>
-                </div>
-                <div style="font-size:12px; font-weight:800; color:var(--orange);">GCI</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Column: Quick Step Links -->
-          <div class="hero-right-col">
-            <a href="#process" class="hero-step-item">
-              <span>Understanding Existing MF Portfolios</span>
-              <span class="hero-step-arrow">↗</span>
-            </a>
-            <a href="#services" class="hero-step-item">
-              <span>Risk-Matched Fund Distribution</span>
-              <span class="hero-step-arrow">→</span>
-            </a>
-            <a href="#principles" class="hero-step-item">
-              <span>Long-Term Sustainable Wealth</span>
-              <span class="hero-step-arrow">↘</span>
-            </a>
           </div>
         </div>
       </div>
     </div>
-  </div>
+
+    <!-- Scrolling Periwinkle Marquee Ribbon -->
+    <div class="marquee-ribbon">
+      <div class="marquee-track">
+        <span>✦ MICRO FAMILY OFFICE SUPPORT</span>
+        <span>✦ INVESTMENT ADVISORY SERVICES</span>
+        <span>✦ MUTUAL FUND RESTRUCTURING</span>
+        <span>✦ HOLISTIC FINANCIAL PLANNING</span>
+        <span>✦ TAX STRATEGY &amp; WEALTH RETENTION</span>
+        <span>✦ DEBT INVESTMENT &amp; CASH FLOW MANAGEMENT</span>
+        <span>✦ MICRO FAMILY OFFICE SUPPORT</span>
+        <span>✦ INVESTMENT ADVISORY SERVICES</span>
+        <span>✦ MUTUAL FUND RESTRUCTURING</span>
+        <span>✦ HOLISTIC FINANCIAL PLANNING</span>
+      </div>
+    </div>
+  </section>
 
   <!-- ========================================================================
-       2. WHITE SECTION: "GETTING TO KNOW GCI CORP" + 3 GRAPHICAL BENTO BLOCKS
+       2. DARK ORBITING PILLS SECTION (DEPTH-OF-FIELD BLUR + PARALLAX)
        ======================================================================== -->
-  <section class="section-white" id="about">
-    <div class="container">
-      <div class="split-header">
-        <div>
-          <span class="eyebrow-tag">About Us</span>
-          <h2 class="section-display-title">
-            GETTING TO<br>
-            KNOW GCI CORP
-          </h2>
-        </div>
-        <p class="header-right-desc">
-          At Global Corporate Inc, we believe that true wealth isn't just measured by assets—it's defined by the clarity of vision, the strength of planning, and the legacy you leave behind.
-        </p>
-      </div>
+  <section class="orbit-dark-section">
+    <!-- Floating Capability Pills with Depth-of-Field -->
+    <div class="orbit-pill op-1" onclick="openConsultation('Micro Family Office')">
+      <span class="pill-icon-circle" style="background:#6e7bf2;">🏛</span>
+      <span>Micro Family Office</span>
+    </div>
+    <div class="orbit-pill op-2" onclick="openConsultation('Mutual Fund Restructuring')">
+      <span class="pill-icon-circle" style="background:#f59e0b; color:#000;">⚖</span>
+      <span>MF Restructuring</span>
+    </div>
+    <div class="orbit-pill op-3" onclick="openConsultation('Tax Strategy')">
+      <span class="pill-icon-circle" style="background:#10b981; color:#000;">🛡</span>
+      <span>Tax Strategy</span>
+    </div>
+    <div class="orbit-pill op-4" onclick="openConsultation('Investment Advisory')">
+      <span class="pill-icon-circle" style="background:#a855f7;">📈</span>
+      <span>Investment Advisory</span>
+    </div>
+    <div class="orbit-pill op-5">
+      <span class="pill-icon-circle" style="background:#38bdf8; color:#000;">💼</span>
+      <span>Financial Planning</span>
+    </div>
+    <div class="orbit-pill op-6">
+      <span class="pill-icon-circle" style="background:#ec4899;">❖</span>
+      <span>Legacy Governance</span>
+    </div>
+    <div class="orbit-pill op-7">
+      <span class="pill-icon-circle" style="background:#eab308; color:#000;">🏦</span>
+      <span>Cash Flow Advisory</span>
+    </div>
 
-      <!-- 3 Bold Graphical Bento Cards (Orange + Black + Grey) -->
-      <div class="bento-stats-grid">
-        <div class="bento-stat-card card-orange">
-          <div class="bento-top-row">
-            <div class="bento-mini-icon icon-on-orange">✦</div>
-            <div class="bento-giant-text">100%<small>client-first</small></div>
+    <div class="container">
+      <h2 class="orbit-headline">
+        EXPERIENCE SEAMLESS<br>
+        INVESTING AND DIVERSIFY<br>
+        YOUR PORTFOLIO WITH<br>
+        FULL CLARITY
+      </h2>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       3. STICKY SCROLL-DOWN ISOMETRIC GRAPHICS SECTION (Frame 00:04 - 00:09)
+       ======================================================================== -->
+  <section class="sticky-isometric-section" id="philosophy">
+    <div class="container">
+      <div class="sticky-iso-grid">
+        <!-- Left Sticky Box Containing 3 Morphing Isometric Vector Illustrations -->
+        <div class="iso-sticky-box">
+          <!-- Graphic 1: Isometric Asset Rotation & Cycle Emblem (Frame 00:04) -->
+          <div class="iso-graphic-layer active" id="iso-layer-0">
+            <svg viewBox="0 0 300 300" width="290" height="290">
+              <!-- Dotted Isometric Floor Shadow -->
+              <ellipse cx="150" cy="245" rx="70" ry="22" fill="rgba(110, 123, 242, 0.12)"/>
+              <!-- Central Isometric Coin/Disc -->
+              <g transform="translate(150, 150)">
+                <ellipse cx="0" cy="0" rx="58" ry="68" transform="rotate(-18)" fill="#ffffff" stroke="#0e0e11" stroke-width="3"/>
+                <ellipse cx="-8" cy="-4" rx="46" ry="56" transform="rotate(-18)" fill="#f4f4f6" stroke="#0e0e11" stroke-width="2.5"/>
+                <text x="-22" y="10" font-family="Anton, sans-serif" font-size="34" fill="#0e0e11" transform="rotate(-15)">GCI</text>
+              </g>
+              <!-- Orbiting 3D Periwinkle Ribbon Arrow -->
+              <g class="spin-slow">
+                <path d="M 75,110 A 85,85 0 1,1 225,185" fill="none" stroke="#6e7bf2" stroke-width="18" stroke-linecap="round"/>
+                <path d="M 75,110 A 85,85 0 1,1 225,185" fill="none" stroke="#0e0e11" stroke-width="2.5" stroke-linecap="round"/>
+                <polygon points="225,210 250,175 205,175" fill="#6e7bf2" stroke="#0e0e11" stroke-width="2.5"/>
+              </g>
+            </svg>
           </div>
-          <p class="bento-bottom-desc">
-            At the heart of our philosophy is a commitment to transparency, ethical practices, and client-first thinking in every investment decision.
+
+          <!-- Graphic 2: Isometric Precision Risk/Asset Balance Scale (Frame 00:05-00:06) -->
+          <div class="iso-graphic-layer" id="iso-layer-1">
+            <svg viewBox="0 0 300 300" width="290" height="290">
+              <!-- Base Pedestal -->
+              <ellipse cx="150" cy="248" rx="54" ry="20" fill="#ffffff" stroke="#0e0e11" stroke-width="2.5"/>
+              <ellipse cx="150" cy="242" rx="44" ry="15" fill="#dfe3ff" stroke="#0e0e11" stroke-width="2"/>
+              <!-- Center Pillar -->
+              <rect x="144" y="85" width="12" height="158" rx="4" fill="#ffffff" stroke="#0e0e11" stroke-width="2.5"/>
+              <rect x="138" y="110" width="24" height="24" rx="4" fill="#ffffff" stroke="#0e0e11" stroke-width="2.5"/>
+              <!-- Tilting Beam & Pans -->
+              <g class="tilt-balance">
+                <line x1="65" y1="122" x2="235" y2="122" stroke="#0e0e11" stroke-width="5" stroke-linecap="round"/>
+                <!-- Left Pan -->
+                <line x1="70" y1="122" x2="48" y2="180" stroke="#0e0e11" stroke-width="2"/>
+                <line x1="70" y1="122" x2="92" y2="180" stroke="#0e0e11" stroke-width="2"/>
+                <path d="M 38,180 A 32,16 0 0,0 102,180 Z" fill="#6e7bf2" stroke="#0e0e11" stroke-width="2.5"/>
+                <ellipse cx="70" cy="180" rx="32" ry="10" fill="#a5b0ff" stroke="#0e0e11" stroke-width="2"/>
+                <!-- Right Pan -->
+                <line x1="230" y1="122" x2="208" y2="180" stroke="#0e0e11" stroke-width="2"/>
+                <line x1="230" y1="122" x2="252" y2="180" stroke="#0e0e11" stroke-width="2"/>
+                <path d="M 198,180 A 32,16 0 0,0 262,180 Z" fill="#6e7bf2" stroke="#0e0e11" stroke-width="2.5"/>
+                <ellipse cx="230" cy="180" rx="32" ry="10" fill="#a5b0ff" stroke="#0e0e11" stroke-width="2"/>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Graphic 3: Isometric Capital Stack & Fiduciary Shield (Frame 00:08-00:09) -->
+          <div class="iso-graphic-layer" id="iso-layer-2">
+            <svg viewBox="0 0 300 300" width="290" height="290">
+              <ellipse cx="150" cy="245" rx="75" ry="24" fill="rgba(110, 123, 242, 0.14)"/>
+              <!-- Isometric Capital Layers -->
+              <g transform="translate(55, 135)">
+                <polygon points="0,45 75,10 135,40 60,75" fill="#ffffff" stroke="#0e0e11" stroke-width="2.5"/>
+                <polygon points="0,30 75,-5 135,25 60,60" fill="#dfe3ff" stroke="#0e0e11" stroke-width="2.5"/>
+                <polygon points="0,15 75,-20 135,10 60,45" fill="#ffffff" stroke="#0e0e11" stroke-width="2.5"/>
+                <polygon points="45,-6 65,-16 95,-1 75,9" fill="#6e7bf2" stroke="#0e0e11" stroke-width="2"/>
+              </g>
+              <!-- Floating Isometric Keyhole Shield -->
+              <g class="pulse-shield">
+                <path d="M 155,75 L 235,102 C 235,165 205,205 185,225 C 165,205 145,155 155,75 Z" fill="#0e0e11"/>
+                <path d="M 148,70 L 228,97 C 228,160 198,200 178,220 C 158,200 138,150 148,70 Z" fill="#6e7bf2" stroke="#0e0e11" stroke-width="3"/>
+                <circle cx="186" cy="134" r="9" fill="#0e0e11"/>
+                <polygon points="182,138 190,138 193,162 179,162" fill="#0e0e11"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Right Scrolling Steps -->
+        <div class="iso-scroll-steps">
+          <!-- Step 1 -->
+          <div class="iso-step-block active" data-iso="0" onclick="activateIsoStep(0)">
+            <div class="iso-step-header">
+              <span class="iso-big-stat">100%</span>
+              <span class="iso-stat-tag">CLIENT-FIRST THINKING</span>
+            </div>
+            <p class="iso-step-desc">
+              At the heart of our philosophy is a commitment to transparency, ethical practices, and client-first thinking. We ensure that every investment decision is made with clarity, purpose, and your best interest in mind.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="iso-step-block" data-iso="1" onclick="activateIsoStep(1)">
+            <div class="iso-step-header">
+              <span class="iso-big-stat">0%</span>
+              <span class="iso-stat-tag">PRODUCT PROVIDER BIAS</span>
+            </div>
+            <p class="iso-step-desc">
+              We are not tied to any financial product providers, ensuring our guidance is always objective and aligned with your goals. Understanding clients' existing MF portfolio and matching fund asset classes directly with your risk profile.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="iso-step-block" data-iso="2" onclick="activateIsoStep(2)">
+            <div class="iso-step-header">
+              <span class="iso-big-stat">360°</span>
+              <span class="iso-stat-tag">CONFIDENTIAL FAMILY OFFICE</span>
+            </div>
+            <p class="iso-step-desc">
+              Your privacy is sacred. Our focus goes beyond returns — we aim to build long-term wealth through disciplined strategies, Micro Family Office governance, and sharing the prosperity we build with those who place their trust in us.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       4. STICKY DEVICE SHOWCASE + SCROLLING NARRATIVES (Frame 00:10 - 00:18)
+       ======================================================================== -->
+  <section class="device-scroll-section" id="process">
+    <div class="container">
+      <div class="device-showcase-grid">
+        <!-- Far Left Vertical Progress Dots -->
+        <div class="scroll-progress-rail">
+          <div class="rail-dot active" id="rail-0"></div>
+          <div class="rail-dot" id="rail-1"></div>
+          <div class="rail-dot" id="rail-2"></div>
+        </div>
+
+        <!-- Center Sticky Dark Phone Frame with Sliding Screens -->
+        <div class="sticky-phone-wrap">
+          <div class="phone-frame">
+            <!-- Slide 0: MF Portfolio Distribution Curve -->
+            <div class="phone-screen-slide active" id="phone-slide-0">
+              <div>
+                <div class="dev-top-bar">
+                  <span>OUR PROCESS</span>
+                  <span class="dev-pill-tag">Phase 01</span>
+                </div>
+                <div style="font-size:20px; font-weight:800; margin-bottom:4px;">MF Portfolio Audit</div>
+                <div style="font-size:12px; color:#4ade80; margin-bottom:22px;">● Asset Class Distribution</div>
+
+                <svg viewBox="0 0 260 120" style="width:100%; height:130px;">
+                  <path d="M0,100 Q45,65 85,75 T165,40 T260,15" fill="none" stroke="#6e7bf2" stroke-width="3"/>
+                  <line x1="0" y1="115" x2="260" y2="115" stroke="rgba(255,255,255,0.1)"/>
+                </svg>
+
+                <div style="display:flex; justify-content:space-between; font-size:10px; color:#777; margin-top:8px;">
+                  <span>EQUITY</span><span>HYBRID</span><span>DEBT</span><span>LIQUID</span>
+                </div>
+              </div>
+
+              <div style="background:#1e1e26; border-radius:18px; padding:16px;">
+                <div style="font-size:11px; color:#888; margin-bottom:6px;">RISK PROFILE MATCH</div>
+                <div style="font-size:13px; font-weight:700; line-height:1.4;">
+                  Calibrated to inherent fund asset class &amp; lifecycle horizon.
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 1: Micro Family Office Allocation Dial -->
+            <div class="phone-screen-slide" id="phone-slide-1">
+              <div>
+                <div class="dev-top-bar">
+                  <span>FAMILY OFFICE</span>
+                  <span class="dev-pill-tag">Phase 02</span>
+                </div>
+                <div style="text-align:center; padding:18px 0;">
+                  <div style="font-size:11px; color:#888; text-transform:uppercase; letter-spacing:1px;">Consolidated Umbrella</div>
+                  <div style="font-size:32px; font-weight:900; margin:6px 0;">Multi-Asset</div>
+                  <div style="font-size:11px; color:var(--accent-periwinkle);">Legacy &amp; Estate Governance</div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; text-align:center; margin-top:14px;">
+                  <div style="background:#1e1e26; padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Advisory</div>
+                  <div style="background:#1e1e26; padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Tax Plan</div>
+                  <div style="background:#1e1e26; padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Succession</div>
+                  <div style="background:#1e1e26; padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Debt</div>
+                  <div style="background:#1e1e26; padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Cash Flow</div>
+                  <div style="background:#1e1e26; padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Oversight</div>
+                </div>
+              </div>
+
+              <button class="btn-dark-pill" style="background:#fff; color:#000; width:100%; justify-content:center;" onclick="openConsultation('Micro Family Office')">
+                Structure Mandate
+              </button>
+            </div>
+
+            <!-- Slide 2: Proactive Reviews & Tax Shield Alerts -->
+            <div class="phone-screen-slide" id="phone-slide-2">
+              <div>
+                <div class="dev-top-bar">
+                  <span>ACTIVE OVERSIGHT</span>
+                  <span class="dev-pill-tag">Phase 03</span>
+                </div>
+                <div style="font-size:18px; font-weight:800; margin-bottom:18px;">Fiduciary Milestones</div>
+
+                <div style="background:#1e1e26; border-radius:16px; padding:16px; margin-bottom:12px; border-left:3px solid #4ade80;">
+                  <div style="font-size:12.5px; font-weight:800; margin-bottom:4px;">Portfolio Rebalanced</div>
+                  <div style="font-size:11px; color:#999;">Fund distribution aligned with updated risk parameters.</div>
+                </div>
+
+                <div style="background:#1e1e26; border-radius:16px; padding:16px; margin-bottom:12px; border-left:3px solid #6e7bf2;">
+                  <div style="font-size:12.5px; font-weight:800; margin-bottom:4px;">Tax Retention Executed</div>
+                  <div style="font-size:11px; color:#999;">Compliant capital gains optimization completed.</div>
+                </div>
+
+                <div style="background:#1e1e26; border-radius:16px; padding:16px; border-left:3px solid #f59e0b;">
+                  <div style="font-size:12.5px; font-weight:800; margin-bottom:4px;">Cash Flow &amp; Debt Review</div>
+                  <div style="font-size:11px; color:#999;">Quarterly liquidity buffer verified.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Scrolling Narrative Blocks -->
+        <div class="device-narrative-steps">
+          <!-- Narrative 0 -->
+          <div class="narrative-block active" data-slide="0" onclick="activatePhoneSlide(0)">
+            <span class="narrative-tag">OUR PROCESS</span>
+            <h3 class="narrative-title">Scientific distribution of funds matched to your risk profile.</h3>
+            <p class="narrative-desc">
+              Understanding clients' existing MF portfolio and drawing out a distribution of funds, basis the inherent fund asset class and simultaneously match it with client risk profile.
+            </p>
+            <button class="btn-dark-pill" onclick="openConsultation('MF Portfolio Audit')">Request Portfolio Audit</button>
+          </div>
+
+          <!-- Narrative 1 -->
+          <div class="narrative-block" data-slide="1" onclick="activatePhoneSlide(1)">
+            <span class="narrative-tag">MICRO FAMILY OFFICE</span>
+            <h3 class="narrative-title">Empowering legacies under a single dedicated umbrella.</h3>
+            <p class="narrative-desc">
+              Tailored support for individuals, families, and entrepreneurs seeking structured wealth oversight, legacy planning, and governance with clarity and precision.
+            </p>
+            <div class="narrative-float-card">
+              <div style="width:36px; height:36px; border-radius:50%; background:var(--accent-soft); display:flex; align-items:center; justify-content:center; font-weight:800;">🏛</div>
+              <div>
+                <div style="font-size:13.5px; font-weight:800;">Bespoke Family Governance</div>
+                <div style="font-size:11.5px; color:var(--text-muted);">Mumbai &amp; Gujarat Executive Desks</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Narrative 2 -->
+          <div class="narrative-block" data-slide="2" onclick="activatePhoneSlide(2)">
+            <span class="narrative-tag">PROACTIVE &amp; TRANSPARENT</span>
+            <h3 class="narrative-title">Clear communication and frequent reviews at every step.</h3>
+            <p class="narrative-desc">
+              From Tax Strategy and Financial Planning to Debt Investment Advisory and Cash Flow Management, we keep you informed and protected across market cycles.
+            </p>
+            <div class="narrative-float-card">
+              <div style="width:36px; height:36px; border-radius:50%; background:#dcfce7; color:#166534; display:flex; align-items:center; justify-content:center; font-weight:800;">✓</div>
+              <div>
+                <div style="font-size:13.5px; font-weight:800;">100% Fiduciary Confidentiality</div>
+                <div style="font-size:11.5px; color:var(--text-muted);">Independent &amp; Unbiased Guidance</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       5. INTERACTIVE ACCORDION SERVICES COVERED SECTION (Frame 00:19 - 00:21)
+       ======================================================================== -->
+  <section class="accordion-section" id="services">
+    <div class="container">
+      <div class="accordion-grid">
+        <div>
+          <h2 class="narrative-title" style="margin-bottom:20px;">
+            Services Covered.<br>
+            Tailored Solutions!
+          </h2>
+          <p style="font-size:15px; color:var(--text-muted); line-height:1.7; margin-bottom:28px; max-width:360px;">
+            Our wealth management services encompass a comprehensive suite of solutions aligned with your unique financial goals.
           </p>
-        </div>
-
-        <div class="bento-stat-card card-black">
-          <div class="bento-top-row">
-            <div class="bento-mini-icon icon-on-black">❖</div>
-            <div class="bento-giant-text">360°</div>
-          </div>
-          <p class="bento-bottom-desc">
-            Holistic Micro Family Office oversight, legacy planning, and governance under a single umbrella.
-          </p>
-        </div>
-
-        <div class="bento-stat-card card-grey">
-          <div class="bento-top-row">
-            <div class="bento-giant-text">Pure</div>
-          </div>
-          <p class="bento-bottom-desc">
-            Independent &amp; unbiased advisory—not tied to any product providers, ensuring objective guidance.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       3. SERVICES COVERED: INTERACTIVE ROWS + FLOATING GRAPHICAL UI WIDGET
-       ======================================================================== -->
-  <section class="section-services-interactive" id="services">
-    <div class="container">
-      <div class="split-header">
-        <div>
-          <span class="eyebrow-tag">Services Covered</span>
-          <h2 class="section-display-title">
-            ALL-IN-ONE PLATFORM<br>
-            FOR WEALTH MANAGEMENT
-          </h2>
-        </div>
-        <p class="header-right-desc">
-          Experience seamless investing and diversify your portfolio with our comprehensive Mutual Funds, Investment, and Advisory services tailored to your financial goals.
-        </p>
-      </div>
-
-      <div class="interactive-rows-wrap">
-        <!-- Row 01 -->
-        <div class="service-row-item" onmouseenter="activateService(0, this)" onclick="openConsultation('Micro Family Office Support')">
-          <div class="service-row-left">
-            <span class="row-index">01</span>
-            <h3 class="row-title">Micro Family Office Support</h3>
-          </div>
-          <div class="row-arrow-circle">→</div>
-        </div>
-
-        <!-- Row 02 -->
-        <div class="service-row-item" onmouseenter="activateService(1, this)" onclick="openConsultation('Investment Advisory')">
-          <div class="service-row-left">
-            <span class="row-index">02</span>
-            <h3 class="row-title">Investment Advisory &amp; MF Restructuring</h3>
-          </div>
-          <div class="row-arrow-circle">→</div>
-        </div>
-
-        <!-- Row 03 (Default Active like Video Frame 00:06) -->
-        <div class="service-row-item active" onmouseenter="activateService(2, this)" onclick="openConsultation('Financial & Tax Planning')">
-          <div class="service-row-left">
-            <span class="row-index">03</span>
-            <h3 class="row-title">Financial Planning &amp; Tax Strategy</h3>
-          </div>
-          <div class="row-arrow-circle">→</div>
-        </div>
-
-        <!-- Row 04 -->
-        <div class="service-row-item" onmouseenter="activateService(3, this)" onclick="openConsultation('Debt & Cash Flow Management')">
-          <div class="service-row-left">
-            <span class="row-index">04</span>
-            <h3 class="row-title">Debt Investment &amp; Cash Flow Management</h3>
-          </div>
-          <div class="row-arrow-circle">→</div>
-        </div>
-
-        <!-- Floating Graphical Portfolio Allocation Widget -->
-        <div class="floating-ui-widget">
-          <div class="widget-window-dots">
-            <span class="w-dot"></span>
-            <span class="w-dot"></span>
-            <span class="w-dot"></span>
-          </div>
-          <div class="widget-header-title">
-            <span id="w-title">Portfolio Asset Distribution</span>
-            <span style="font-size:11px; color:var(--orange); font-weight:800;">RISK-MATCHED</span>
-          </div>
-
-          <div class="segmented-bar">
-            <div class="seg-orange" id="bar-1"></div>
-            <div class="seg-black" id="bar-2"></div>
-            <div class="seg-grey" id="bar-3"></div>
-          </div>
-
-          <div class="widget-metrics-row">
-            <div>
-              <div class="w-metric-val"><span class="orange-dot"></span> <span id="stat-1">Core Equity</span></div>
-              <div class="w-metric-sub">Growth Mandate</div>
-            </div>
-            <div>
-              <div class="w-metric-val"><span class="orange-dot" style="background:#000;"></span> <span id="stat-2">Debt &amp; Yield</span></div>
-              <div class="w-metric-sub">Capital Defense</div>
-            </div>
-            <div>
-              <div class="w-metric-val"><span id="stat-3">Tax Alpha</span></div>
-              <div class="w-metric-sub">Retention</div>
-            </div>
-          </div>
-
-          <div class="widget-list-rows">
-            <div class="w-list-item">
-              <div class="w-item-left">
-                <div class="w-avatar">MF</div>
-                <div>
-                  <div class="w-item-name">Mutual Fund Portfolio Audit</div>
-                  <div class="w-item-sub">Inherent Asset Class Matching</div>
-                </div>
-              </div>
-              <span class="w-badge-pill badge-orange">OPTIMIZED</span>
-            </div>
-
-            <div class="w-list-item">
-              <div class="w-item-left">
-                <div class="w-avatar">FO</div>
-                <div>
-                  <div class="w-item-name">Family Office Governance</div>
-                  <div class="w-item-sub">Intergenerational Legacy</div>
-                </div>
-              </div>
-              <span class="w-badge-pill badge-orange">ACTIVE</span>
-            </div>
-
-            <div class="w-list-item">
-              <div class="w-item-left">
-                <div class="w-avatar">TX</div>
-                <div>
-                  <div class="w-item-name">Tax &amp; Cash Flow Structuring</div>
-                  <div class="w-item-sub">Compliant Wealth Retention</div>
-                </div>
-              </div>
-              <span class="w-badge-pill badge-dark">VERIFIED</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       4. OUR PROCESS: VERTICAL DUAL CARDS + ICON BULLET LIST (Frame 00:08)
-       ======================================================================== -->
-  <section class="section-process-cards" id="process">
-    <div class="container">
-      <div class="process-split-grid">
-        <!-- Left Dual Vertical Cards -->
-        <div class="vertical-cards-stage">
-          <div class="v-card-front">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase;">GCI Mandate</span>
-              <div class="card-chip"></div>
-            </div>
-            <div class="v-card-vertical-title">gcicorp</div>
-          </div>
-
-          <div class="v-card-back">
-            <div style="font-size:12px; font-family:monospace; color:#aaa; line-height:1.5;">
-              PORTFOLIO<br>RESTRUCTURING<br>FRAMEWORK
-            </div>
-            <div>
-              <div style="font-size:18px; font-weight:800;">Risk-Calibrated</div>
-              <div style="font-size:12px; color:#999; margin-top:4px;">Global Corporate Inc.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Process Details -->
-        <div>
-          <span class="eyebrow-tag">Our Process</span>
-          <h2 class="section-display-title">
-            SCIENTIFIC PORTFOLIO<br>
-            DISTRIBUTION
-          </h2>
-
-          <div class="process-list-items">
-            <div class="process-bullet-row">
-              <div class="process-circle-icon">⊕</div>
-              <p class="process-bullet-text">
-                Understanding clients' existing Mutual Fund portfolio and evaluating inherent fund asset classes.
-              </p>
-            </div>
-
-            <div class="process-bullet-row">
-              <div class="process-circle-icon">⇄</div>
-              <p class="process-bullet-text">
-                Drawing out a structured distribution of funds simultaneously matched with your exact risk profile.
-              </p>
-            </div>
-
-            <div class="process-bullet-row">
-              <div class="process-circle-icon">🛡</div>
-              <p class="process-bullet-text">
-                Disciplined execution across Micro Family Office, Tax Strategy, Debt Advisory, and Cash Flow Management.
-              </p>
-            </div>
-          </div>
-
-          <div class="cta-pair" onclick="openConsultation('Portfolio Audit')">
-            <button class="pill-btn-orange">Learn More</button>
-            <span class="circle-arrow-orange" style="background:var(--orange);">↗</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       5. PITCH BLACK SECTION: 2x2 VIBRANT ORANGE GRAPHICAL SQUARES (Frame 00:09)
-       ======================================================================== -->
-  <section class="section-dark-pillars" id="principles">
-    <div class="container">
-      <div class="split-header">
-        <div>
-          <span class="eyebrow-tag" style="color:#888;">Why Choose Us</span>
-          <h2 class="section-display-title" style="color:var(--white);">
-            COMMITTED TO<br>
-            RESPONSIBLE INVESTMENT
-          </h2>
-        </div>
-        <p class="header-right-desc" style="color:#aaa;">
-          Our focus goes beyond returns — we aim to build long-term wealth through disciplined strategies, ethical practices, and informed decision-making.
-        </p>
-      </div>
-
-      <div class="pillars-layout">
-        <div class="orange-squares-grid">
-          <div class="orange-pillar-tile">
-            <div class="pillar-tile-icon">01 ↗</div>
-            <div>
-              <div class="pillar-tile-title">Client-Centric Philosophy</div>
-              <p class="pillar-tile-desc">Your priorities come first. Every recommendation is made with your long-term interest at heart.</p>
-            </div>
-          </div>
-
-          <div class="orange-pillar-tile">
-            <div class="pillar-tile-icon">02 ✦</div>
-            <div>
-              <div class="pillar-tile-title">Independent &amp; Unbiased</div>
-              <p class="pillar-tile-desc">Not tied to any financial product providers, ensuring objective guidance aligned with your goals.</p>
-            </div>
-          </div>
-
-          <div class="orange-pillar-tile">
-            <div class="pillar-tile-icon">03 🛡</div>
-            <div>
-              <div class="pillar-tile-title">Confidential &amp; Discreet</div>
-              <p class="pillar-tile-desc">Your privacy is sacred. We maintain strict fiduciary confidentiality in all our dealings.</p>
-            </div>
-          </div>
-
-          <div class="orange-pillar-tile">
-            <div class="pillar-tile-icon">04 ❖</div>
-            <div>
-              <div class="pillar-tile-title">Proactive &amp; Transparent</div>
-              <p class="pillar-tile-desc">Clear communication, frequent portfolio reviews, and keeping you informed at every step.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="pillars-side-cta">
-          <h3>CREATING IMPACTFUL SOLUTIONS AND LASTING PARTNERSHIPS</h3>
-          <button class="pill-btn-white" onclick="openConsultation('Partnership Mandate')">
-            Let's Work Together
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       6. EDITORIAL QUOTE + GIANT 3D EXTRUDED WORDMARK + ORANGE FOOTER
-       ======================================================================== -->
-  <div class="section-quote-bridge">
-    <div class="container">
-      <p class="quote-large-text">
-        "For us, success isn't just about growing assets; it's about growing together. We believe in creating real value and sharing the prosperity we build with those who place their trust in us."
-      </p>
-
-      <div class="quote-author-row">
-        <div class="quote-author-badge">
-          <div class="author-circle">GCI</div>
-          <div>
-            <div style="font-weight:800; font-size:15px;">Global Corporate Inc.</div>
-            <div style="font-size:12.5px; color:var(--text-muted-dark);">Micro Family Office &amp; Wealth Advisory</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Giant 3D Embossed Orange Wordmark Rising into Footer -->
-    <div class="giant-3d-wordmark-wrap">
-      <div class="giant-3d-wordmark">gcicorp</div>
-    </div>
-  </div>
-
-  <!-- Vibrant Orange Footer with Compact Addresses -->
-  <footer class="footer-orange" id="contact">
-    <div class="container">
-      <div class="footer-main-grid">
-        <div>
-          <h3 class="footer-cta-heading">
-            READY TO TAKE CONTROL OF YOUR FINANCIAL FUTURE
-          </h3>
-          <button class="pill-btn-white" onclick="openConsultation('Private Consultation')">
-            Get Started
+          <button class="btn-dark-pill" onclick="openConsultation('General Mandate Inquiry')">
+            Inquire Mandate
           </button>
         </div>
 
-        <div>
-          <div class="footer-col-title">Services Covered</div>
-          <ul class="footer-col-links">
-            <li><a href="#services">Micro Family Office</a></li>
-            <li><a href="#services">Investment Advisory</a></li>
-            <li><a href="#services">MF Restructuring</a></li>
-            <li><a href="#services">Financial &amp; Tax Planning</a></li>
-            <li><a href="#services">Debt &amp; Cash Flow</a></li>
-          </ul>
+        <div class="acc-list">
+          <div class="acc-item open" onclick="toggleAccordion(this)">
+            <div class="acc-header">
+              <span>Micro Family Office Support</span>
+              <span class="acc-chevron">⌄</span>
+            </div>
+            <div class="acc-body">
+              Tailored support for families seeking structured wealth oversight, inter-generational legacy planning, and governance under a single umbrella.
+            </div>
+          </div>
+
+          <div class="acc-item" onclick="toggleAccordion(this)">
+            <div class="acc-header">
+              <span>Investment Advisory Services</span>
+              <span class="acc-chevron">⌄</span>
+            </div>
+            <div class="acc-body">
+              Data-driven, risk-aware strategies designed to optimize portfolios, diversify across asset classes, and unlock long-term sustainable growth opportunities.
+            </div>
+          </div>
+
+          <div class="acc-item" onclick="toggleAccordion(this)">
+            <div class="acc-header">
+              <span>Mutual Fund Portfolio Audit &amp; Restructuring</span>
+              <span class="acc-chevron">⌄</span>
+            </div>
+            <div class="acc-body">
+              Understanding clients' existing MF portfolio and drawing out a distribution of funds, basis the inherent fund asset class and simultaneously matching it with client risk profile.
+            </div>
+          </div>
+
+          <div class="acc-item" onclick="toggleAccordion(this)">
+            <div class="acc-header">
+              <span>Financial Planning Services</span>
+              <span class="acc-chevron">⌄</span>
+            </div>
+            <div class="acc-body">
+              Holistic and goal-based financial roadmaps that adapt seamlessly to life's evolving priorities and family milestones.
+            </div>
+          </div>
+
+          <div class="acc-item" onclick="toggleAccordion(this)">
+            <div class="acc-header">
+              <span>Tax Strategy &amp; Wealth Retention</span>
+              <span class="acc-chevron">⌄</span>
+            </div>
+            <div class="acc-body">
+              Smart, compliant strategies engineered to help minimize tax liabilities and enhance long-term post-tax wealth retention.
+            </div>
+          </div>
+
+          <div class="acc-item" onclick="toggleAccordion(this)">
+            <div class="acc-header">
+              <span>Debt Investment Advisory &amp; Cash Flow Management</span>
+              <span class="acc-chevron">⌄</span>
+            </div>
+            <div class="acc-body">
+              Structured fixed-income guidance and disciplined liquidity management to protect principal and maintain steady cash flow.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       6. MARQUEE RIBBON + DARK FOOTER WITH COMPACT ADDRESSES (Frame 00:22 - 00:24)
+       ======================================================================== -->
+  <div class="marquee-ribbon">
+    <div class="marquee-track">
+      <span>✦ COMMITTED TO RESPONSIBLE INVESTMENT</span>
+      <span>✦ TRANSPARENCY &amp; ETHICAL PRACTICES</span>
+      <span>✦ CLIENT-FIRST THINKING</span>
+      <span>✦ GLOBAL CORPORATE INC.</span>
+      <span>✦ COMMITTED TO RESPONSIBLE INVESTMENT</span>
+      <span>✦ TRANSPARENCY &amp; ETHICAL PRACTICES</span>
+      <span>✦ CLIENT-FIRST THINKING</span>
+      <span>✦ GLOBAL CORPORATE INC.</span>
+    </div>
+  </div>
+
+  <footer class="dark-footer" id="contact">
+    <div class="container">
+      <div class="footer-contact-tag">Contact Us</div>
+      <a href="mailto:mail@gcicorp.in" class="footer-giant-email">mail@gcicorp.in</a>
+
+      <!-- Compact Dual Office Row -->
+      <div class="footer-offices-compact">
+        <div class="office-mini-col">
+          <div class="office-mini-label">Gujarat (Regd Off)</div>
+          <div class="office-mini-text">
+            102, White House, Bedi Road, Jamnagar 361 008<br>
+            Tel: +91 22 40050922
+          </div>
         </div>
 
-        <div>
-          <div class="footer-col-title">Gujarat (Regd Off)</div>
-          <p class="footer-col-text">
-            102, White House, Bedi Road,<br>
-            Jamnagar 361 008, Gujarat.
-          </p>
-          <p class="footer-col-text">
-            <a href="tel:+912240050922" style="color:#fff; font-weight:700; text-decoration:none;">+91 22 40050922</a>
-          </p>
-        </div>
-
-        <div>
-          <div class="footer-col-title">Mumbai Branch</div>
-          <p class="footer-col-text">
-            217, Shilpin Centre, 2nd Floor,<br>
-            40 G.D Ambekar Road, Opp. Desai Harmony,<br>
-            Wadala West, Mumbai 400 031.
-          </p>
-          <p class="footer-col-text">
-            <a href="tel:+912240100922" style="color:#fff; font-weight:700; text-decoration:none;">+91 22 40100922</a><br>
-            <a href="mailto:mail@gcicorp.in" style="color:#fff; text-decoration:underline;">mail@gcicorp.in</a>
-          </p>
+        <div class="office-mini-col">
+          <div class="office-mini-label">Mumbai Branch</div>
+          <div class="office-mini-text">
+            217, Shilpin Centre, 2nd Floor, 40 G.D Ambekar Road,<br>
+            Opp Desai Harmony, Wadala West, Mumbai 400 031<br>
+            Tel: +91 22 40100922
+          </div>
         </div>
       </div>
 
-      <div class="footer-bottom-bar">
-        <div>© 2026 Global Corporate Inc. (GCI). All Rights Reserved.</div>
-        <div>Confidential Fiduciary Wealth Management</div>
+      <!-- 4 Outlined Pill Buttons with Gradient Glow on Hover -->
+      <div class="footer-pills-row">
+        <a href="tel:+912240100922" class="footer-pill-btn">📞 Mumbai Desk</a>
+        <a href="tel:+912240050922" class="footer-pill-btn">📞 Gujarat Desk</a>
+        <a href="mailto:mail@gcicorp.in" class="footer-pill-btn">✉️ Email Mandate</a>
+        <a href="https://wa.me/912240100922?text=Hello%20GCI%20Team%2C%20I%20would%20like%20to%20inquire%20about%20your%20wealth%20management%20services" target="_blank" class="footer-pill-btn">💬 WhatsApp</a>
+      </div>
+
+      <div style="font-size:12px; color:#666;">
+        © 2026 Global Corporate Inc. All Rights Reserved.
       </div>
     </div>
   </footer>
@@ -1814,13 +1530,13 @@
   <div class="modal-backdrop" id="consultModal" onclick="closeModalOnBackdrop(event)">
     <div class="modal-card">
       <button class="modal-close" onclick="closeConsultation()">✕</button>
-      <div style="font-size:11px; font-weight:800; color:var(--orange); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px;">
+      <div style="font-size:11px; font-weight:800; color:var(--accent-indigo); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px;">
         Confidential Mandate
       </div>
-      <h3 style="font-size:24px; font-weight:900; margin-bottom:8px;" id="modalHeading">
+      <h3 style="font-size:24px; font-weight:800; margin-bottom:8px;" id="modalHeading">
         Private Consultation
       </h3>
-      <p style="font-size:13.5px; color:#999; margin-bottom:24px;">
+      <p style="font-size:13.5px; color:var(--text-muted); margin-bottom:24px;">
         Directly routed to our Mumbai &amp; Gujarat executive advisory desk.
       </p>
 
@@ -1838,10 +1554,10 @@
           <input type="email" class="form-input" id="client-email" placeholder="name@company.com" required>
         </div>
         <div class="form-group">
-          <label class="form-label">Advisory Mandate</label>
+          <label class="form-label">Service of Interest</label>
           <select class="form-select" id="client-interest">
             <option>Micro Family Office Support</option>
-            <option>Investment Advisory</option>
+            <option>Investment Advisory Services</option>
             <option>Mutual Fund Portfolio Restructuring</option>
             <option>Financial Planning</option>
             <option>Tax Strategy &amp; Wealth Retention</option>
@@ -1849,37 +1565,74 @@
           </select>
         </div>
 
-        <button type="submit" class="pill-btn-orange" style="width:100%; margin-top:10px; padding:16px;">
-          Submit Request
+        <button type="submit" class="btn-dark-pill" style="width:100%; justify-content:center; margin-top:10px; padding:15px;">
+          Submit Confidential Request
         </button>
       </form>
     </div>
   </div>
 
+  <!-- Scroll-Driven Choreography & Interactive Scripts -->
   <script>
-    // Interactive Service Row Switcher for Floating Graphical Card
-    const serviceData = [
-      { title: 'Micro Family Office Governance', w1: '70%', w2: '20%', w3: '10%', s1: 'Family Trust', s2: 'Succession', s3: 'Oversight' },
-      { title: 'MF Portfolio Distribution', w1: '55%', w2: '30%', w3: '15%', s1: 'Asset Match', s2: 'Risk Calibrated', s3: 'Direct Alpha' },
-      { title: 'Portfolio Asset Distribution', w1: '65%', w2: '20%', w3: '15%', s1: 'Core Equity', s2: 'Debt & Yield', s3: 'Tax Alpha' },
-      { title: 'Treasury & Debt Cash Flow', w1: '45%', w2: '40%', w3: '15%', s1: 'Fixed Yield', s2: 'Liquidity', s3: 'Protection' }
-    ];
-
-    function activateService(idx, rowEl) {
-      document.querySelectorAll('.service-row-item').forEach(r => r.classList.remove('active'));
-      rowEl.classList.add('active');
-      const d = serviceData[idx];
-      if (d) {
-        document.getElementById('w-title').innerText = d.title;
-        document.getElementById('bar-1').style.width = d.w1;
-        document.getElementById('bar-2').style.width = d.w2;
-        document.getElementById('bar-3').style.width = d.w3;
-        document.getElementById('stat-1').innerText = d.s1;
-        document.getElementById('stat-2').innerText = d.s2;
-        document.getElementById('stat-3').innerText = d.s3;
-      }
+    // 1. Scroll Listener for Isometric Sticky Graphics & Sticky Phone Slides & Parallax Tokens
+    function activateIsoStep(index) {
+      document.querySelectorAll('.iso-step-block').forEach((el, i) => {
+        el.classList.toggle('active', i === index);
+      });
+      document.querySelectorAll('.iso-graphic-layer').forEach((el, i) => {
+        el.classList.toggle('active', i === index);
+      });
     }
 
+    function activatePhoneSlide(index) {
+      document.querySelectorAll('.narrative-block').forEach((el, i) => {
+        el.classList.toggle('active', i === index);
+      });
+      document.querySelectorAll('.phone-screen-slide').forEach((el, i) => {
+        el.classList.toggle('active', i === index);
+      });
+      document.querySelectorAll('.rail-dot').forEach((el, i) => {
+        el.classList.toggle('active', i === index);
+      });
+    }
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const vh = window.innerHeight;
+
+      // Parallax floating tokens in hero
+      document.querySelectorAll('.floating-token').forEach(tok => {
+        const speed = parseFloat(tok.getAttribute('data-speed') || 0.15);
+        tok.style.transform = `translateY(${scrollY * speed}px) rotate(${scrollY * 0.04}deg)`;
+      });
+
+      // Trigger Isometric SVG transitions based on scroll position
+      const isoBlocks = document.querySelectorAll('.iso-step-block');
+      isoBlocks.forEach((block, idx) => {
+        const rect = block.getBoundingClientRect();
+        if (rect.top < vh * 0.62 && rect.bottom > vh * 0.25) {
+          activateIsoStep(idx);
+        }
+      });
+
+      // Trigger Sticky Phone Screen slides based on scroll position
+      const narrativeBlocks = document.querySelectorAll('.narrative-block');
+      narrativeBlocks.forEach((block, idx) => {
+        const rect = block.getBoundingClientRect();
+        if (rect.top < vh * 0.62 && rect.bottom > vh * 0.25) {
+          activatePhoneSlide(idx);
+        }
+      });
+    });
+
+    // 2. Accordion Toggle
+    function toggleAccordion(item) {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.acc-item').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // 3. Modal Operations
     function openConsultation(mandate) {
       document.getElementById('consultModal').classList.add('active');
       if (mandate) document.getElementById('modalHeading').innerText = mandate;
