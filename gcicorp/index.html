@@ -65,22 +65,14 @@
     }
 
     .hero-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(5, 29, 77, 0.14) 1px, transparent 1px);
-      background-size: 28px 28px;
-      pointer-events: none;
-      z-index: 0;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.1));
-      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.1));
+      display: none;
     }
 
     .nav-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 96px;
+      height: 76px;
       position: relative;
       z-index: 10;
     }
@@ -88,14 +80,19 @@
     .brand-name {
       display: inline-flex;
       align-items: center;
+      font-weight: 800;
+      font-size: 16.5px;
+      letter-spacing: -0.3px;
+      color: var(--accent-navy);
       text-decoration: none;
     }
 
-    .nav-logo-img {
-      height: 82px;
+    .hero-main-logo {
+      height: 118px;
       width: auto;
-      display: block;
-      filter: drop-shadow(0 6px 14px rgba(5, 29, 77, 0.1));
+      display: inline-block;
+      margin: 4px auto 24px;
+      filter: drop-shadow(0 10px 24px rgba(5, 29, 77, 0.08));
     }
 
     .nav-right-links {
@@ -1050,20 +1047,12 @@
 <body>
 
   <!-- ========================================================================
-       1. HERO SECTION: GIANT KINETIC DISPLAY + FLOATING TOKENS + TILTED SCREENS
+       1. HERO SECTION: CLEAN & NEAT GCI LOGO CENTERPIECE + TILTED SCREENS
        ======================================================================== -->
   <section class="hero-section">
-    <!-- Floating Outlined Tokens (Scroll Parallax) -->
-    <div class="floating-token tok-1" data-speed="0.18"><span class="token-glyph">GCI</span></div>
-    <div class="floating-token tok-2" data-speed="-0.14"><span class="token-glyph">MF</span></div>
-    <div class="floating-token tok-3" data-speed="0.22"><span class="token-glyph">FO</span></div>
-    <div class="floating-token tok-4" data-speed="-0.18"><span class="token-glyph">IA</span></div>
-
     <div class="container">
       <nav class="nav-bar">
-        <a href="#" class="brand-name">
-          <img src="gci-logo.png" alt="GCI - Growth • Clarity • Insight" class="nav-logo-img">
-        </a>
+        <a href="#" class="brand-name">Global Corporate Inc.</a>
         <div class="nav-right-links">
           <a href="#philosophy">Philosophy</a>
           <a href="#process">Our Process</a>
@@ -1086,7 +1075,9 @@
 
       <div class="hero-center">
         <p class="hero-eyebrow">Micro Family Office &amp; Wealth Advisory</p>
-        <h1 class="giant-kinetic-title">GCI CORP</h1>
+        <div>
+          <img src="gci-logo.png" alt="GCI — Growth • Clarity • Insight" class="hero-main-logo">
+        </div>
         <p class="hero-subheadline">
           We are a management firm driving long-term sustainable returns through unbiased investment advisory, Mutual Fund restructuring, and confidential family office stewardship.
         </p>
@@ -1248,11 +1239,11 @@
             <svg viewBox="0 0 300 300" width="290" height="290">
               <!-- Dotted Isometric Floor Shadow -->
               <ellipse cx="150" cy="245" rx="70" ry="22" fill="rgba(0, 143, 76, 0.14)"/>
-              <!-- Central Isometric Coin/Disc -->
+              <!-- Central Isometric Coin/Disc with Official GCI Logo -->
               <g transform="translate(150, 150)">
                 <ellipse cx="0" cy="0" rx="58" ry="68" transform="rotate(-18)" fill="#ffffff" stroke="#051d4d" stroke-width="3"/>
-                <ellipse cx="-8" cy="-4" rx="46" ry="56" transform="rotate(-18)" fill="#eaf3ef" stroke="#051d4d" stroke-width="2.5"/>
-                <text x="-26" y="10" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="30" fill="#051d4d" transform="rotate(-15)">GCI</text>
+                <ellipse cx="-8" cy="-4" rx="46" ry="56" transform="rotate(-18)" fill="#f7fbf9" stroke="#051d4d" stroke-width="2.5"/>
+                <image href="gci-logo.png" x="-42" y="-27" width="72" height="44" transform="rotate(-12)" />
               </g>
               <!-- Orbiting 3D Emerald Growth Ribbon Arrow -->
               <g class="spin-slow">
