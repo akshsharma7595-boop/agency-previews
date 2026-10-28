@@ -11,18 +11,19 @@
 
   <style>
     :root {
-      --bg-light: #eef0fb;
-      --bg-white: #f7f8ff;
-      --bg-dark: #0e0e11;
-      --bg-dark-card: #16161b;
-      --accent-indigo: #5b67ea;
-      --accent-periwinkle: #a5b0ff;
-      --accent-soft: #d9dfff;
-      --text-dark: #111322;
-      --text-muted: #535872;
-      --text-faded: #c6c8d0;
-      --border-light: rgba(91, 103, 234, 0.14);
-      --border-dark: rgba(255, 255, 255, 0.12);
+      --bg-light: #eaf3ef;
+      --bg-white: #f7fbf9;
+      --bg-dark: #04132d;
+      --bg-dark-card: #081e45;
+      --accent-indigo: #008f4c;
+      --accent-navy: #051d4d;
+      --accent-periwinkle: #34d399;
+      --accent-soft: #d5f2e3;
+      --text-dark: #051d4d;
+      --text-muted: #3d526d;
+      --text-faded: #b8c7d9;
+      --border-light: rgba(5, 29, 77, 0.12);
+      --border-dark: rgba(255, 255, 255, 0.14);
     }
 
     * {
@@ -47,14 +48,14 @@
     }
 
     /* ==========================================================================
-       1. HERO SECTION: SOFT PERIWINKLE-LAVENDER MESH + FLOATING TOKENS + TILTED SCREENS
+       1. HERO SECTION: GCI NAVY & EMERALD GROWTH GRADIENT MESH + LOGO + TILTED SCREENS
        ========================================================================== */
     .hero-section {
       background:
-        radial-gradient(circle at 16% 24%, rgba(153, 166, 255, 0.42) 0%, transparent 46%),
-        radial-gradient(circle at 84% 20%, rgba(196, 165, 255, 0.34) 0%, transparent 44%),
-        radial-gradient(circle at 50% 82%, rgba(251, 211, 141, 0.25) 0%, transparent 50%),
-        linear-gradient(180deg, #e3e7ff 0%, #eef0ff 54%, #e5e9ff 100%);
+        radial-gradient(circle at 16% 24%, rgba(5, 29, 77, 0.14) 0%, transparent 46%),
+        radial-gradient(circle at 84% 20%, rgba(0, 143, 76, 0.18) 0%, transparent 46%),
+        radial-gradient(circle at 50% 82%, rgba(16, 185, 129, 0.15) 0%, transparent 52%),
+        linear-gradient(180deg, #e1ecf7 0%, #edf6f1 52%, #dff0e8 100%);
       position: relative;
       overflow: hidden;
       padding-top: 24px;
@@ -67,7 +68,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(rgba(91, 103, 234, 0.16) 1px, transparent 1px);
+      background-image: radial-gradient(rgba(5, 29, 77, 0.14) 1px, transparent 1px);
       background-size: 28px 28px;
       pointer-events: none;
       z-index: 0;
@@ -79,31 +80,45 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 64px;
+      height: 76px;
       position: relative;
       z-index: 10;
     }
 
     .brand-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
       font-weight: 800;
       font-size: 16px;
-      letter-spacing: -0.3px;
-      color: var(--text-dark);
+      letter-spacing: -0.2px;
+      color: var(--accent-navy);
       text-decoration: none;
     }
 
-    .brand-mark-center {
-      width: 34px;
-      height: 34px;
-      background: linear-gradient(135deg, #111322 0%, #434ce0 100%);
-      color: #ffffff;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 16px;
-      box-shadow: 0 6px 16px rgba(67, 76, 224, 0.25);
+    .nav-logo-img {
+      height: 46px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 4px 10px rgba(5, 29, 77, 0.08));
+    }
+
+    .brand-tagline-pill {
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-navy);
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(0, 143, 76, 0.28);
+      padding: 7px 16px;
+      border-radius: 30px;
+      box-shadow: 0 4px 14px rgba(5, 29, 77, 0.06);
+    }
+
+    .brand-tagline-pill span {
+      color: var(--accent-indigo);
+      margin: 0 4px;
     }
 
     .nav-right-links {
@@ -130,29 +145,29 @@
       gap: 8px;
       margin-left: 6px;
       padding-left: 16px;
-      border-left: 1px solid rgba(91, 103, 234, 0.22);
+      border-left: 1px solid rgba(5, 29, 77, 0.18);
     }
 
     .nav-social-icon {
       width: 34px;
       height: 34px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(91, 103, 234, 0.25);
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(5, 29, 77, 0.2);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: var(--text-dark);
+      color: var(--accent-navy);
       transition: all 0.25s ease;
     }
 
     .nav-social-icon:hover {
-      background: var(--accent-indigo);
+      background: linear-gradient(135deg, #051d4d 0%, #008f4c 100%);
       color: #ffffff !important;
-      border-color: var(--accent-indigo);
+      border-color: transparent;
       opacity: 1 !important;
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(91, 103, 234, 0.28);
+      box-shadow: 0 6px 16px rgba(0, 143, 76, 0.28);
     }
 
     /* Floating Outlined Graphic Tokens (Scroll Parallax) */
@@ -161,15 +176,15 @@
       width: 66px;
       height: 66px;
       border-radius: 50%;
-      border: 1.5px solid rgba(91, 103, 234, 0.28);
+      border: 1.5px solid rgba(5, 29, 77, 0.22);
       display: flex;
       align-items: center;
       justify-content: center;
       pointer-events: none;
       z-index: 1;
       transition: transform 0.15s ease-out;
-      background: rgba(255, 255, 255, 0.65);
-      box-shadow: 0 10px 28px rgba(91, 103, 234, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 10px 28px rgba(5, 29, 77, 0.08);
       backdrop-filter: blur(6px);
     }
 
@@ -178,7 +193,7 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      border: 1px dashed rgba(91, 103, 234, 0.35);
+      border: 1px dashed rgba(0, 143, 76, 0.35);
       position: absolute;
     }
 
@@ -186,55 +201,68 @@
       font-size: 13px;
       font-weight: 800;
       letter-spacing: 0.08em;
-      color: var(--accent-indigo);
+      color: var(--accent-navy);
     }
 
-    .tok-1 { top: 20%; left: 5%; transform: rotate(-12deg); background: rgba(235, 238, 255, 0.85); }
-    .tok-2 { top: 60%; left: 10%; width: 54px; height: 54px; transform: rotate(16deg); background: rgba(254, 243, 199, 0.82); border-color: rgba(245, 158, 11, 0.35); }
-    .tok-2 .token-glyph { color: #d97706; }
-    .tok-3 { top: 24%; right: 5%; transform: rotate(12deg); background: rgba(243, 232, 255, 0.85); border-color: rgba(168, 85, 247, 0.32); }
-    .tok-3 .token-glyph { color: #7e22ce; }
-    .tok-4 { top: 62%; right: 10%; width: 58px; height: 58px; transform: rotate(-14deg); background: rgba(220, 252, 231, 0.82); border-color: rgba(16, 185, 129, 0.32); }
-    .tok-4 .token-glyph { color: #059669; }
+    .tok-1 { top: 20%; left: 5%; transform: rotate(-12deg); background: rgba(225, 236, 247, 0.88); }
+    .tok-2 { top: 60%; left: 10%; width: 54px; height: 54px; transform: rotate(16deg); background: rgba(213, 242, 227, 0.88); border-color: rgba(0, 143, 76, 0.35); }
+    .tok-2 .token-glyph { color: #008f4c; }
+    .tok-3 { top: 24%; right: 5%; transform: rotate(12deg); background: rgba(213, 242, 227, 0.88); border-color: rgba(0, 143, 76, 0.35); }
+    .tok-3 .token-glyph { color: #008f4c; }
+    .tok-4 { top: 62%; right: 10%; width: 58px; height: 58px; transform: rotate(-14deg); background: rgba(225, 236, 247, 0.88); border-color: rgba(5, 29, 77, 0.28); }
+    .tok-4 .token-glyph { color: #051d4d; }
 
-    /* Center Hero Content — Refined Institutional Spacing & Typography */
+    /* Center Hero Content — GCI Brand Emblem + Refined Institutional Spacing */
     .hero-center {
       text-align: center;
-      padding: 76px 0 12px;
+      padding: 54px 0 12px;
       position: relative;
       z-index: 5;
       max-width: 900px;
       margin: 0 auto;
     }
 
+    .hero-logo-showcase {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(5, 29, 77, 0.12);
+      padding: 16px 34px;
+      border-radius: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 14px 36px rgba(5, 29, 77, 0.08);
+    }
+
+    .hero-logo-showcase img {
+      height: 76px;
+      width: auto;
+      display: block;
+    }
+
     .hero-eyebrow {
-      display: inline-block;
+      display: block;
       font-size: 11.5px;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.22em;
-      color: #3b46c4;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(91, 103, 234, 0.26);
-      padding: 8px 20px;
-      border-radius: 40px;
-      margin-bottom: 26px;
-      box-shadow: 0 6px 20px rgba(91, 103, 234, 0.08);
+      color: #007a40;
+      margin-bottom: 16px;
     }
 
     .giant-kinetic-title {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: clamp(42px, 6.2vw, 84px);
+      font-size: clamp(38px, 5.4vw, 72px);
       font-weight: 700;
       line-height: 1.08;
-      letter-spacing: 0.16em;
-      padding-left: 0.16em; /* optical center compensation for letter-spacing */
+      letter-spacing: 0.14em;
+      padding-left: 0.14em;
       text-transform: uppercase;
-      background: linear-gradient(135deg, #0e1024 15%, #2b3595 60%, #4f5bd5 100%);
+      background: linear-gradient(135deg, #051d4d 10%, #0b3c6d 55%, #008f4c 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      color: var(--text-dark);
-      margin-bottom: 22px;
+      color: var(--accent-navy);
+      margin-bottom: 20px;
     }
 
     .hero-subheadline {
@@ -242,9 +270,9 @@
       font-weight: 500;
       line-height: 1.65;
       letter-spacing: 0.01em;
-      color: #454a66;
+      color: #2c425e;
       max-width: 650px;
-      margin: 0 auto 38px;
+      margin: 0 auto 34px;
     }
 
     .kinetic-char {
@@ -258,11 +286,11 @@
     }
 
     .btn-dark-pill {
-      background-color: var(--bg-dark);
-      color: var(--bg-white);
+      background: linear-gradient(135deg, #051d4d 0%, #0a3566 52%, #008f4c 100%);
+      color: #ffffff;
       font-size: 13px;
       font-weight: 700;
-      padding: 14px 32px;
+      padding: 14px 34px;
       border-radius: 12px;
       border: none;
       cursor: pointer;
@@ -270,12 +298,13 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 12px 28px rgba(14, 14, 17, 0.16);
+      box-shadow: 0 12px 28px rgba(5, 29, 77, 0.22);
     }
 
     .btn-dark-pill:hover {
       transform: translateY(-2px);
-      background-color: var(--accent-indigo);
+      background: linear-gradient(135deg, #008f4c 0%, #051d4d 100%);
+      box-shadow: 0 16px 32px rgba(0, 143, 76, 0.28);
     }
 
     /* Two Tilted Dark Interactive Screens in Hero Bottom */
@@ -294,13 +323,13 @@
     .hero-device {
       width: 310px;
       height: 390px;
-      background: var(--bg-dark);
+      background: linear-gradient(160deg, #04132d 0%, #07224f 65%, #052c26 100%);
       border-radius: 34px 34px 0 0;
-      border: 6px solid #232329;
+      border: 6px solid #102a56;
       border-bottom: none;
       padding: 24px 20px;
       color: var(--bg-white);
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.28);
+      box-shadow: 0 30px 70px rgba(4, 19, 45, 0.32);
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       text-align: left;
       display: flex;
@@ -336,8 +365,8 @@
     }
 
     .dev-pill-tag {
-      background: rgba(110, 123, 242, 0.18);
-      color: var(--accent-periwinkle);
+      background: rgba(0, 143, 76, 0.24);
+      color: #6ee7b7;
       padding: 3px 10px;
       border-radius: 20px;
       font-size: 10px;
@@ -369,12 +398,12 @@
       font-weight: 800;
     }
 
-    /* Periwinkle Marquee Ribbon Bar */
+    /* GCI Navy & Emerald Marquee Ribbon Bar */
     .marquee-ribbon {
-      background: var(--accent-soft);
-      border-top: 1px solid rgba(110, 123, 242, 0.25);
-      border-bottom: 1px solid rgba(110, 123, 242, 0.25);
-      padding: 11px 0;
+      background: linear-gradient(90deg, #dbeafe 0%, #d1fae5 50%, #dbeafe 100%);
+      border-top: 1px solid rgba(0, 143, 76, 0.28);
+      border-bottom: 1px solid rgba(0, 143, 76, 0.28);
+      padding: 12px 0;
       overflow: hidden;
       white-space: nowrap;
       position: relative;
@@ -389,7 +418,7 @@
       font-weight: 800;
       letter-spacing: 1.4px;
       text-transform: uppercase;
-      color: var(--text-dark);
+      color: var(--accent-navy);
     }
 
     @keyframes scrollMarquee {
@@ -398,10 +427,13 @@
     }
 
     /* ==========================================================================
-       2. DARK ORBITING PILLS SECTION (DEPTH-OF-FIELD BLUR + PARALLAX)
+       2. DARK ORBITING PILLS SECTION (GCI NAVY-TO-EMERALD DEPTH-OF-FIELD)
        ========================================================================== */
     .orbit-dark-section {
-      background-color: var(--bg-dark);
+      background:
+        radial-gradient(circle at 20% 30%, rgba(0, 143, 76, 0.22) 0%, transparent 48%),
+        radial-gradient(circle at 80% 70%, rgba(14, 65, 148, 0.32) 0%, transparent 50%),
+        linear-gradient(145deg, #030d22 0%, #051d4d 55%, #042b22 100%);
       color: var(--bg-white);
       padding: 160px 0;
       position: relative;
@@ -476,8 +508,8 @@
        ========================================================================== */
     .sticky-isometric-section {
       background:
-        radial-gradient(circle at 12% 35%, rgba(165, 176, 255, 0.25) 0%, transparent 50%),
-        linear-gradient(180deg, #eaedff 0%, #f3f5ff 100%);
+        radial-gradient(circle at 12% 35%, rgba(0, 143, 76, 0.12) 0%, transparent 50%),
+        linear-gradient(180deg, #e5f0f8 0%, #eef7f2 100%);
       padding: 120px 0;
       position: relative;
     }
@@ -493,14 +525,14 @@
     .iso-sticky-box {
       position: sticky;
       top: 120px;
-      background: linear-gradient(145deg, #ffffff 0%, #f2f4ff 100%);
+      background: linear-gradient(145deg, #ffffff 0%, #eef7f3 100%);
       border-radius: 28px;
       height: 470px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 24px 60px rgba(67, 76, 224, 0.09);
-      border: 1px solid rgba(91, 103, 234, 0.2);
+      box-shadow: 0 24px 60px rgba(5, 29, 77, 0.08);
+      border: 1px solid rgba(0, 143, 76, 0.22);
       overflow: hidden;
     }
 
@@ -609,8 +641,8 @@
        ========================================================================== */
     .device-scroll-section {
       background:
-        radial-gradient(circle at 85% 40%, rgba(196, 165, 255, 0.22) 0%, transparent 50%),
-        linear-gradient(180deg, #f3f5ff 0%, #e8ecff 100%);
+        radial-gradient(circle at 85% 40%, rgba(5, 29, 77, 0.1) 0%, transparent 50%),
+        linear-gradient(180deg, #eef7f2 0%, #e3eef7 100%);
       padding: 130px 0;
       position: relative;
       border-top: 1px solid var(--border-light);
@@ -658,10 +690,10 @@
     .phone-frame {
       width: 330px;
       height: 540px;
-      background: var(--bg-dark);
+      background: linear-gradient(165deg, #04132d 0%, #06214d 60%, #042d23 100%);
       border-radius: 42px;
-      border: 8px solid #222228;
-      box-shadow: 0 35px 80px rgba(14, 14, 17, 0.18);
+      border: 8px solid #102a56;
+      box-shadow: 0 35px 80px rgba(5, 29, 77, 0.24);
       padding: 28px 22px;
       color: var(--bg-white);
       position: relative;
@@ -750,7 +782,7 @@
        5. INTERACTIVE ACCORDION SERVICES & FAQ SECTION (Frame 00:19 - 00:21)
        ========================================================================== */
     .accordion-section {
-      background: linear-gradient(180deg, #e5e9ff 0%, #eef1ff 100%);
+      background: linear-gradient(180deg, #e3eef7 0%, #eaf5ef 100%);
       padding: 110px 0;
       border-top: 1px solid var(--border-light);
     }
@@ -820,7 +852,9 @@
        6. DARK FOOTER WITH GRADIENT HOVER PILL BUTTONS & COMPACT ADDRESSES (Frame 00:23)
        ========================================================================== */
     .dark-footer {
-      background-color: var(--bg-dark);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(0, 143, 76, 0.18) 0%, transparent 55%),
+        linear-gradient(160deg, #030d22 0%, #051d4d 60%, #03221c 100%);
       color: var(--bg-white);
       padding: 90px 0 45px;
       text-align: center;
@@ -910,10 +944,10 @@
     }
 
     .footer-pill-btn:hover {
-      background: linear-gradient(135deg, #6e7bf2 0%, #c084fc 50%, #f59e0b 100%);
-      border-color: transparent;
+      background: linear-gradient(135deg, #051d4d 0%, #0d4a80 45%, #008f4c 100%);
+      border-color: #34d399;
       transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(110, 123, 242, 0.35);
+      box-shadow: 0 12px 28px rgba(0, 143, 76, 0.35);
     }
 
     /* Modal Form */
@@ -1050,8 +1084,11 @@
 
     <div class="container">
       <nav class="nav-bar">
-        <a href="#" class="brand-name">Global Corporate Inc.</a>
-        <div class="brand-mark-center">G</div>
+        <a href="#" class="brand-name">
+          <img src="gci-logo.png" alt="GCI - Growth • Clarity • Insight" class="nav-logo-img">
+          <span>Global Corporate Inc.</span>
+        </a>
+        <div class="brand-tagline-pill">GROWTH <span>•</span> CLARITY <span>•</span> INSIGHT</div>
         <div class="nav-right-links">
           <a href="#philosophy">Philosophy</a>
           <a href="#process">Our Process</a>
@@ -1073,6 +1110,9 @@
       </nav>
 
       <div class="hero-center">
+        <div class="hero-logo-showcase">
+          <img src="gci-logo.png" alt="GCI Logo — Growth, Clarity, Insight">
+        </div>
         <p class="hero-eyebrow">Micro Family Office &amp; Wealth Advisory</p>
         <h1 class="giant-kinetic-title">GCI CORP</h1>
         <p class="hero-subheadline">
@@ -1107,10 +1147,10 @@
 
               <div class="dev-asset-row">
                 <div class="dev-asset-left">
-                  <div class="dev-dot" style="background:#6e7bf2; color:#fff;">FO</div>
+                  <div class="dev-dot" style="background:#008f4c; color:#fff;">FO</div>
                   <div>
                     <div style="font-size:12.5px; font-weight:700;">Micro Family Office</div>
-                    <div style="font-size:10px; color:#888;">Legacy Governance</div>
+                    <div style="font-size:10px; color:#94a3b8;">Legacy Governance</div>
                   </div>
                 </div>
                 <span style="font-size:11px; color:#4ade80; font-weight:700;">Structured</span>
@@ -1118,13 +1158,13 @@
 
               <div class="dev-asset-row" style="border-bottom:none;">
                 <div class="dev-asset-left">
-                  <div class="dev-dot" style="background:#10b981; color:#000;">TX</div>
+                  <div class="dev-dot" style="background:#38bdf8; color:#04132d;">TX</div>
                   <div>
                     <div style="font-size:12.5px; font-weight:700;">Tax &amp; Debt Strategy</div>
-                    <div style="font-size:10px; color:#888;">Wealth Retention</div>
+                    <div style="font-size:10px; color:#94a3b8;">Wealth Retention</div>
                   </div>
                 </div>
-                <span style="font-size:11px; color:#a5b0ff; font-weight:700;">Shielded</span>
+                <span style="font-size:11px; color:#6ee7b7; font-weight:700;">Shielded</span>
               </div>
             </div>
           </div>
@@ -1143,13 +1183,13 @@
               <svg viewBox="0 0 260 110" style="width:100%; height:115px; overflow:visible;">
                 <defs>
                   <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#6e7bf2" stop-opacity="0.45"/>
-                    <stop offset="100%" stop-color="#6e7bf2" stop-opacity="0"/>
+                    <stop offset="0%" stop-color="#008f4c" stop-opacity="0.5"/>
+                    <stop offset="100%" stop-color="#008f4c" stop-opacity="0"/>
                   </linearGradient>
                 </defs>
                 <path d="M0,95 C40,88 65,65 100,72 C135,79 160,38 195,44 C225,48 240,18 260,12 L260,110 L0,110 Z" fill="url(#curveGrad)"/>
-                <path d="M0,95 C40,88 65,65 100,72 C135,79 160,38 195,44 C225,48 240,18 260,12" fill="none" stroke="#6e7bf2" stroke-width="3" stroke-linecap="round"/>
-                <circle cx="260" cy="12" r="4.5" fill="#a5b0ff"/>
+                <path d="M0,95 C40,88 65,65 100,72 C135,79 160,38 195,44 C225,48 240,18 260,12" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="260" cy="12" r="4.5" fill="#6ee7b7"/>
               </svg>
 
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:18px;">
@@ -1185,19 +1225,19 @@
   <section class="orbit-dark-section">
     <!-- Floating Capability Pills with Depth-of-Field -->
     <div class="orbit-pill op-1" onclick="openConsultation('Micro Family Office')">
-      <span class="pill-icon-circle" style="background:#6e7bf2;">🏛</span>
+      <span class="pill-icon-circle" style="background:#008f4c;">🏛</span>
       <span>Micro Family Office</span>
     </div>
     <div class="orbit-pill op-2" onclick="openConsultation('Mutual Fund Restructuring')">
-      <span class="pill-icon-circle" style="background:#f59e0b; color:#000;">⚖</span>
+      <span class="pill-icon-circle" style="background:#38bdf8; color:#04132d;">⚖</span>
       <span>MF Restructuring</span>
     </div>
     <div class="orbit-pill op-3" onclick="openConsultation('Tax Strategy')">
-      <span class="pill-icon-circle" style="background:#10b981; color:#000;">🛡</span>
+      <span class="pill-icon-circle" style="background:#10b981; color:#04132d;">🛡</span>
       <span>Tax Strategy</span>
     </div>
     <div class="orbit-pill op-4" onclick="openConsultation('Investment Advisory')">
-      <span class="pill-icon-circle" style="background:#a855f7;">📈</span>
+      <span class="pill-icon-circle" style="background:#0ea5e9; color:#04132d;">📈</span>
       <span>Investment Advisory</span>
     </div>
     <div class="orbit-pill op-5">
@@ -1229,24 +1269,24 @@
   <section class="sticky-isometric-section" id="philosophy">
     <div class="container">
       <div class="sticky-iso-grid">
-        <!-- Left Sticky Box Containing 3 Morphing Isometric Vector Illustrations -->
+        <!-- Left Sticky Box Containing 3 Morphing Isometric Vector Illustrations (GCI Navy & Emerald) -->
         <div class="iso-sticky-box">
           <!-- Graphic 1: Isometric Asset Rotation & Cycle Emblem (Frame 00:04) -->
           <div class="iso-graphic-layer active" id="iso-layer-0">
             <svg viewBox="0 0 300 300" width="290" height="290">
               <!-- Dotted Isometric Floor Shadow -->
-              <ellipse cx="150" cy="245" rx="70" ry="22" fill="rgba(110, 123, 242, 0.12)"/>
+              <ellipse cx="150" cy="245" rx="70" ry="22" fill="rgba(0, 143, 76, 0.14)"/>
               <!-- Central Isometric Coin/Disc -->
               <g transform="translate(150, 150)">
-                <ellipse cx="0" cy="0" rx="58" ry="68" transform="rotate(-18)" fill="#ffffff" stroke="#0e0e11" stroke-width="3"/>
-                <ellipse cx="-8" cy="-4" rx="46" ry="56" transform="rotate(-18)" fill="#f4f4f6" stroke="#0e0e11" stroke-width="2.5"/>
-                <text x="-22" y="10" font-family="Anton, sans-serif" font-size="34" fill="#0e0e11" transform="rotate(-15)">GCI</text>
+                <ellipse cx="0" cy="0" rx="58" ry="68" transform="rotate(-18)" fill="#ffffff" stroke="#051d4d" stroke-width="3"/>
+                <ellipse cx="-8" cy="-4" rx="46" ry="56" transform="rotate(-18)" fill="#eaf3ef" stroke="#051d4d" stroke-width="2.5"/>
+                <text x="-26" y="10" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="30" fill="#051d4d" transform="rotate(-15)">GCI</text>
               </g>
-              <!-- Orbiting 3D Periwinkle Ribbon Arrow -->
+              <!-- Orbiting 3D Emerald Growth Ribbon Arrow -->
               <g class="spin-slow">
-                <path d="M 75,110 A 85,85 0 1,1 225,185" fill="none" stroke="#6e7bf2" stroke-width="18" stroke-linecap="round"/>
-                <path d="M 75,110 A 85,85 0 1,1 225,185" fill="none" stroke="#0e0e11" stroke-width="2.5" stroke-linecap="round"/>
-                <polygon points="225,210 250,175 205,175" fill="#6e7bf2" stroke="#0e0e11" stroke-width="2.5"/>
+                <path d="M 75,110 A 85,85 0 1,1 225,185" fill="none" stroke="#008f4c" stroke-width="18" stroke-linecap="round"/>
+                <path d="M 75,110 A 85,85 0 1,1 225,185" fill="none" stroke="#051d4d" stroke-width="2.5" stroke-linecap="round"/>
+                <polygon points="225,210 250,175 205,175" fill="#008f4c" stroke="#051d4d" stroke-width="2.5"/>
               </g>
             </svg>
           </div>
@@ -1255,24 +1295,24 @@
           <div class="iso-graphic-layer" id="iso-layer-1">
             <svg viewBox="0 0 300 300" width="290" height="290">
               <!-- Base Pedestal -->
-              <ellipse cx="150" cy="248" rx="54" ry="20" fill="#ffffff" stroke="#0e0e11" stroke-width="2.5"/>
-              <ellipse cx="150" cy="242" rx="44" ry="15" fill="#dfe3ff" stroke="#0e0e11" stroke-width="2"/>
+              <ellipse cx="150" cy="248" rx="54" ry="20" fill="#ffffff" stroke="#051d4d" stroke-width="2.5"/>
+              <ellipse cx="150" cy="242" rx="44" ry="15" fill="#d5f2e3" stroke="#051d4d" stroke-width="2"/>
               <!-- Center Pillar -->
-              <rect x="144" y="85" width="12" height="158" rx="4" fill="#ffffff" stroke="#0e0e11" stroke-width="2.5"/>
-              <rect x="138" y="110" width="24" height="24" rx="4" fill="#ffffff" stroke="#0e0e11" stroke-width="2.5"/>
+              <rect x="144" y="85" width="12" height="158" rx="4" fill="#ffffff" stroke="#051d4d" stroke-width="2.5"/>
+              <rect x="138" y="110" width="24" height="24" rx="4" fill="#ffffff" stroke="#051d4d" stroke-width="2.5"/>
               <!-- Tilting Beam & Pans -->
               <g class="tilt-balance">
-                <line x1="65" y1="122" x2="235" y2="122" stroke="#0e0e11" stroke-width="5" stroke-linecap="round"/>
+                <line x1="65" y1="122" x2="235" y2="122" stroke="#051d4d" stroke-width="5" stroke-linecap="round"/>
                 <!-- Left Pan -->
-                <line x1="70" y1="122" x2="48" y2="180" stroke="#0e0e11" stroke-width="2"/>
-                <line x1="70" y1="122" x2="92" y2="180" stroke="#0e0e11" stroke-width="2"/>
-                <path d="M 38,180 A 32,16 0 0,0 102,180 Z" fill="#6e7bf2" stroke="#0e0e11" stroke-width="2.5"/>
-                <ellipse cx="70" cy="180" rx="32" ry="10" fill="#a5b0ff" stroke="#0e0e11" stroke-width="2"/>
+                <line x1="70" y1="122" x2="48" y2="180" stroke="#051d4d" stroke-width="2"/>
+                <line x1="70" y1="122" x2="92" y2="180" stroke="#051d4d" stroke-width="2"/>
+                <path d="M 38,180 A 32,16 0 0,0 102,180 Z" fill="#008f4c" stroke="#051d4d" stroke-width="2.5"/>
+                <ellipse cx="70" cy="180" rx="32" ry="10" fill="#6ee7b7" stroke="#051d4d" stroke-width="2"/>
                 <!-- Right Pan -->
-                <line x1="230" y1="122" x2="208" y2="180" stroke="#0e0e11" stroke-width="2"/>
-                <line x1="230" y1="122" x2="252" y2="180" stroke="#0e0e11" stroke-width="2"/>
-                <path d="M 198,180 A 32,16 0 0,0 262,180 Z" fill="#6e7bf2" stroke="#0e0e11" stroke-width="2.5"/>
-                <ellipse cx="230" cy="180" rx="32" ry="10" fill="#a5b0ff" stroke="#0e0e11" stroke-width="2"/>
+                <line x1="230" y1="122" x2="208" y2="180" stroke="#051d4d" stroke-width="2"/>
+                <line x1="230" y1="122" x2="252" y2="180" stroke="#051d4d" stroke-width="2"/>
+                <path d="M 198,180 A 32,16 0 0,0 262,180 Z" fill="#051d4d" stroke="#051d4d" stroke-width="2.5"/>
+                <ellipse cx="230" cy="180" rx="32" ry="10" fill="#93c5fd" stroke="#051d4d" stroke-width="2"/>
               </g>
             </svg>
           </div>
@@ -1280,20 +1320,20 @@
           <!-- Graphic 3: Isometric Capital Stack & Fiduciary Shield (Frame 00:08-00:09) -->
           <div class="iso-graphic-layer" id="iso-layer-2">
             <svg viewBox="0 0 300 300" width="290" height="290">
-              <ellipse cx="150" cy="245" rx="75" ry="24" fill="rgba(110, 123, 242, 0.14)"/>
+              <ellipse cx="150" cy="245" rx="75" ry="24" fill="rgba(0, 143, 76, 0.14)"/>
               <!-- Isometric Capital Layers -->
               <g transform="translate(55, 135)">
-                <polygon points="0,45 75,10 135,40 60,75" fill="#ffffff" stroke="#0e0e11" stroke-width="2.5"/>
-                <polygon points="0,30 75,-5 135,25 60,60" fill="#dfe3ff" stroke="#0e0e11" stroke-width="2.5"/>
-                <polygon points="0,15 75,-20 135,10 60,45" fill="#ffffff" stroke="#0e0e11" stroke-width="2.5"/>
-                <polygon points="45,-6 65,-16 95,-1 75,9" fill="#6e7bf2" stroke="#0e0e11" stroke-width="2"/>
+                <polygon points="0,45 75,10 135,40 60,75" fill="#ffffff" stroke="#051d4d" stroke-width="2.5"/>
+                <polygon points="0,30 75,-5 135,25 60,60" fill="#d5f2e3" stroke="#051d4d" stroke-width="2.5"/>
+                <polygon points="0,15 75,-20 135,10 60,45" fill="#ffffff" stroke="#051d4d" stroke-width="2.5"/>
+                <polygon points="45,-6 65,-16 95,-1 75,9" fill="#008f4c" stroke="#051d4d" stroke-width="2"/>
               </g>
               <!-- Floating Isometric Keyhole Shield -->
               <g class="pulse-shield">
-                <path d="M 155,75 L 235,102 C 235,165 205,205 185,225 C 165,205 145,155 155,75 Z" fill="#0e0e11"/>
-                <path d="M 148,70 L 228,97 C 228,160 198,200 178,220 C 158,200 138,150 148,70 Z" fill="#6e7bf2" stroke="#0e0e11" stroke-width="3"/>
-                <circle cx="186" cy="134" r="9" fill="#0e0e11"/>
-                <polygon points="182,138 190,138 193,162 179,162" fill="#0e0e11"/>
+                <path d="M 155,75 L 235,102 C 235,165 205,205 185,225 C 165,205 145,155 155,75 Z" fill="#051d4d"/>
+                <path d="M 148,70 L 228,97 C 228,160 198,200 178,220 C 158,200 138,150 148,70 Z" fill="#008f4c" stroke="#051d4d" stroke-width="3"/>
+                <circle cx="186" cy="134" r="9" fill="#ffffff"/>
+                <polygon points="182,138 190,138 193,162 179,162" fill="#ffffff"/>
               </g>
             </svg>
           </div>
@@ -1365,17 +1405,17 @@
                 <div style="font-size:12px; color:#4ade80; margin-bottom:22px;">● Asset Class Distribution</div>
 
                 <svg viewBox="0 0 260 120" style="width:100%; height:130px;">
-                  <path d="M0,100 Q45,65 85,75 T165,40 T260,15" fill="none" stroke="#6e7bf2" stroke-width="3"/>
+                  <path d="M0,100 Q45,65 85,75 T165,40 T260,15" fill="none" stroke="#10b981" stroke-width="3"/>
                   <line x1="0" y1="115" x2="260" y2="115" stroke="rgba(255,255,255,0.1)"/>
                 </svg>
 
-                <div style="display:flex; justify-content:space-between; font-size:10px; color:#777; margin-top:8px;">
+                <div style="display:flex; justify-content:space-between; font-size:10px; color:#94a3b8; margin-top:8px;">
                   <span>EQUITY</span><span>HYBRID</span><span>DEBT</span><span>LIQUID</span>
                 </div>
               </div>
 
-              <div style="background:#1e1e26; border-radius:18px; padding:16px;">
-                <div style="font-size:11px; color:#888; margin-bottom:6px;">RISK PROFILE MATCH</div>
+              <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:16px;">
+                <div style="font-size:11px; color:#6ee7b7; margin-bottom:6px; font-weight:700;">RISK PROFILE MATCH</div>
                 <div style="font-size:13px; font-weight:700; line-height:1.4;">
                   Calibrated to inherent fund asset class &amp; lifecycle horizon.
                 </div>
@@ -1390,22 +1430,22 @@
                   <span class="dev-pill-tag">Phase 02</span>
                 </div>
                 <div style="text-align:center; padding:18px 0;">
-                  <div style="font-size:11px; color:#888; text-transform:uppercase; letter-spacing:1px;">Consolidated Umbrella</div>
+                  <div style="font-size:11px; color:#94a3b8; text-transform:uppercase; letter-spacing:1px;">Consolidated Umbrella</div>
                   <div style="font-size:32px; font-weight:900; margin:6px 0;">Multi-Asset</div>
                   <div style="font-size:11px; color:var(--accent-periwinkle);">Legacy &amp; Estate Governance</div>
                 </div>
 
                 <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; text-align:center; margin-top:14px;">
-                  <div style="background:#1e1e26; padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Advisory</div>
-                  <div style="background:#1e1e26; padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Tax Plan</div>
-                  <div style="background:#1e1e26; padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Succession</div>
-                  <div style="background:#1e1e26; padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Debt</div>
-                  <div style="background:#1e1e26; padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Cash Flow</div>
-                  <div style="background:#1e1e26; padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Oversight</div>
+                  <div style="background:rgba(255,255,255,0.08); padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Advisory</div>
+                  <div style="background:rgba(255,255,255,0.08); padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Tax Plan</div>
+                  <div style="background:rgba(255,255,255,0.08); padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Succession</div>
+                  <div style="background:rgba(255,255,255,0.08); padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Debt</div>
+                  <div style="background:rgba(255,255,255,0.08); padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Cash Flow</div>
+                  <div style="background:rgba(255,255,255,0.08); padding:12px 6px; border-radius:12px; font-size:11px; font-weight:700;">Oversight</div>
                 </div>
               </div>
 
-              <button class="btn-dark-pill" style="background:#fff; color:#000; width:100%; justify-content:center;" onclick="openConsultation('Micro Family Office')">
+              <button class="btn-dark-pill" style="background:#10b981; color:#04132d; width:100%; justify-content:center;" onclick="openConsultation('Micro Family Office')">
                 Structure Mandate
               </button>
             </div>
@@ -1419,19 +1459,19 @@
                 </div>
                 <div style="font-size:18px; font-weight:800; margin-bottom:18px;">Fiduciary Milestones</div>
 
-                <div style="background:#1e1e26; border-radius:16px; padding:16px; margin-bottom:12px; border-left:3px solid #4ade80;">
+                <div style="background:rgba(255,255,255,0.07); border-radius:16px; padding:16px; margin-bottom:12px; border-left:3px solid #10b981;">
                   <div style="font-size:12.5px; font-weight:800; margin-bottom:4px;">Portfolio Rebalanced</div>
-                  <div style="font-size:11px; color:#999;">Fund distribution aligned with updated risk parameters.</div>
+                  <div style="font-size:11px; color:#cbd5e1;">Fund distribution aligned with updated risk parameters.</div>
                 </div>
 
-                <div style="background:#1e1e26; border-radius:16px; padding:16px; margin-bottom:12px; border-left:3px solid #6e7bf2;">
+                <div style="background:rgba(255,255,255,0.07); border-radius:16px; padding:16px; margin-bottom:12px; border-left:3px solid #38bdf8;">
                   <div style="font-size:12.5px; font-weight:800; margin-bottom:4px;">Tax Retention Executed</div>
-                  <div style="font-size:11px; color:#999;">Compliant capital gains optimization completed.</div>
+                  <div style="font-size:11px; color:#cbd5e1;">Compliant capital gains optimization completed.</div>
                 </div>
 
-                <div style="background:#1e1e26; border-radius:16px; padding:16px; border-left:3px solid #f59e0b;">
+                <div style="background:rgba(255,255,255,0.07); border-radius:16px; padding:16px; border-left:3px solid #f59e0b;">
                   <div style="font-size:12.5px; font-weight:800; margin-bottom:4px;">Cash Flow &amp; Debt Review</div>
-                  <div style="font-size:11px; color:#999;">Quarterly liquidity buffer verified.</div>
+                  <div style="font-size:11px; color:#cbd5e1;">Quarterly liquidity buffer verified.</div>
                 </div>
               </div>
             </div>
@@ -1570,15 +1610,15 @@
     </div>
   </section>
 
-  <!-- ========================================================================
-       6. MARQUEE RIBBON + DARK FOOTER WITH COMPACT ADDRESSES (Frame 00:22 - 00:24)
-       ======================================================================== -->
+      <!-- 6. MARQUEE RIBBON + DARK FOOTER WITH COMPACT ADDRESSES (Frame 00:22 - 00:24) -->
   <div class="marquee-ribbon">
     <div class="marquee-track">
+      <span>✦ GROWTH • CLARITY • INSIGHT</span>
       <span>✦ COMMITTED TO RESPONSIBLE INVESTMENT</span>
       <span>✦ TRANSPARENCY &amp; ETHICAL PRACTICES</span>
       <span>✦ CLIENT-FIRST THINKING</span>
       <span>✦ GLOBAL CORPORATE INC.</span>
+      <span>✦ GROWTH • CLARITY • INSIGHT</span>
       <span>✦ COMMITTED TO RESPONSIBLE INVESTMENT</span>
       <span>✦ TRANSPARENCY &amp; ETHICAL PRACTICES</span>
       <span>✦ CLIENT-FIRST THINKING</span>
@@ -1588,6 +1628,9 @@
 
   <footer class="dark-footer" id="contact">
     <div class="container">
+      <div style="margin-bottom: 22px;">
+        <img src="gci-logo-dark.png" alt="GCI Logo — Growth • Clarity • Insight" style="height: 62px; width: auto; display: inline-block;">
+      </div>
       <div class="footer-contact-tag">Contact Us</div>
       <a href="mailto:mail@gcicorp.in" class="footer-giant-email">mail@gcicorp.in</a>
 
