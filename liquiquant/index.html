@@ -651,34 +651,34 @@
   </section>
 
   <!-- VIP INQUIRY & ORDER MODAL -->
-  <div id="orderModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
-      <div class="max-w-lg w-full bg-dark-950 border border-dark-border rounded-3xl p-6 sm:p-8 glow-cyan relative font-mono">
+  <div id="orderModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+      <div class="max-w-xl w-full bg-dark-950 border border-dark-border rounded-3xl p-6 sm:p-8 glow-cyan relative font-mono text-slate-200">
         
         <button type="button" onclick="closeOrderModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl cursor-pointer">✕</button>
         
-        <!-- Order Form Body -->
-        <div id="orderFormContainer">
-          <div class="text-xs text-brand-emerald font-bold uppercase tracking-widest mb-1">Instant Terminal Activation</div>
-          <h3 id="modalTierTitle" class="text-2xl font-bold text-white mb-2">Complete Institutional Suite</h3>
-          <p class="text-xs font-sans text-slate-400 mb-6">Enter your credentials below. Your Notion workspace transfer link, MT5 execution bridge, and strategy playbook will be dispatched directly to your inbox.</p>
+        <!-- STEP 1: USER DETAILS -->
+        <div id="orderStep1">
+          <div class="text-[11px] text-brand-emerald font-bold uppercase tracking-widest mb-1 font-mono">Step 01 / 02 • Activation Details</div>
+          <h3 id="modalTierTitle" class="text-2xl font-bold text-white mb-2 font-mono">Complete Institutional Suite ($99)</h3>
+          <p class="text-xs font-sans text-slate-400 mb-6">Enter your details below to register your license and proceed to instant activation.</p>
 
-          <form id="orderForm" onsubmit="handleOrderSubmit(event)" class="space-y-4">
+          <form id="orderForm" onsubmit="handleStep1Submit(event)" class="space-y-4">
             <div>
               <label class="block text-[11px] uppercase text-slate-300 font-bold mb-1">Full Name *</label>
               <input type="text" id="orderName" required placeholder="e.g. Aryan Malhotra" class="w-full px-4 py-3 rounded-xl bg-dark-900 border border-dark-border text-white text-xs focus:border-brand-emerald focus:outline-none" />
             </div>
             <div>
-              <label class="block text-[11px] uppercase text-slate-300 font-bold mb-1">Email Address (For Workspace Transfer) *</label>
+              <label class="block text-[11px] uppercase text-slate-300 font-bold mb-1">Email (For Workspace & License Delivery) *</label>
               <input type="email" id="orderEmail" required placeholder="trader@gmail.com" class="w-full px-4 py-3 rounded-xl bg-dark-900 border border-dark-border text-white text-xs focus:border-brand-emerald focus:outline-none" />
             </div>
             <div>
-              <label class="block text-[11px] uppercase text-slate-300 font-bold mb-1">WhatsApp / Telegram (For Direct VIP Support) *</label>
+              <label class="block text-[11px] uppercase text-slate-300 font-bold mb-1">WhatsApp / Telegram (For Direct VIP Desk Support) *</label>
               <input type="tel" id="orderPhone" required placeholder="+91 98765 43210" class="w-full px-4 py-3 rounded-xl bg-dark-900 border border-dark-border text-white text-xs focus:border-brand-emerald focus:outline-none" />
             </div>
 
-            <button type="submit" id="orderSubmitBtn" class="w-full py-4 rounded-xl text-center text-xs font-bold uppercase tracking-wider text-dark-950 bg-gradient-to-r from-brand-emerald to-brand-cyan hover:from-emerald-400 hover:to-cyan-400 shadow-lg shadow-brand-emerald/30 transition flex items-center justify-center gap-2 mt-4 cursor-pointer">
-              <span id="orderSubmitBtnText">Confirm Order & Launch Instant Activation</span>
-              <svg id="orderSubmitSpinner" class="hidden w-4 h-4 animate-spin text-dark-950" fill="none" viewBox="0 0 24 24">
+            <button type="submit" id="step1Btn" class="w-full py-4 rounded-xl text-center text-xs font-bold uppercase tracking-wider text-dark-950 bg-gradient-to-r from-brand-emerald to-brand-cyan hover:from-emerald-400 hover:to-cyan-400 shadow-lg shadow-brand-emerald/30 transition flex items-center justify-center gap-2 mt-4 cursor-pointer font-mono">
+              <span id="step1BtnText">Proceed to Payment & Instant Activation →</span>
+              <svg id="step1Spinner" class="hidden w-4 h-4 animate-spin text-dark-950" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
               </svg>
@@ -686,35 +686,79 @@
           </form>
 
           <div class="mt-4 text-[10px] text-center text-slate-500 font-sans">
-            🔒 256-bit encrypted transmission. Silent digital dispatch. Zero app switching.
+            🔒 256-bit encrypted transmission. Instant automated digital fulfillment.
           </div>
         </div>
 
-        <!-- Order Success State Inside Modal -->
-        <div id="orderSuccessContainer" class="hidden text-center py-4">
-          <div class="w-14 h-14 mx-auto rounded-full bg-brand-emerald/10 border border-brand-emerald/40 flex items-center justify-center text-brand-emerald text-2xl font-bold mb-3">
-            ✓
-          </div>
-          <div class="text-[10px] text-brand-cyan font-bold uppercase tracking-widest mb-1">Order Logged • Instant Dispatch</div>
-          <h3 class="text-xl font-bold text-white mb-2">Activation Initialized!</h3>
-          <p class="text-xs font-sans text-slate-300 max-w-sm mx-auto mb-5 leading-relaxed">
-            Thank you, <span id="liquiSuccessName" class="text-white font-semibold"></span>. Your workspace transfer link and MT5 bridge bundle for <strong id="liquiSuccessTier" class="text-brand-emerald"></strong> are being routed to <strong id="liquiSuccessEmail" class="text-white"></strong>.
-          </p>
+        <!-- STEP 2: DUAL PAYMENT GATEWAY (RAZORPAY UPI + GUMROAD) -->
+        <div id="orderStep2" class="hidden">
+          <div class="text-[11px] text-brand-cyan font-bold uppercase tracking-widest mb-1 font-mono">Step 02 / 02 • Select Payment Gateway</div>
+          <h3 class="text-xl font-bold text-white mb-2 font-mono">Choose Payment Option</h3>
+          <p class="text-xs font-sans text-slate-400 mb-5">Pay via Razorpay UPI / Cards (India & Global) or Gumroad (Instant Global USD Checkout).</p>
 
-          <div class="p-3.5 rounded-xl bg-dark-900 border border-dark-border text-left text-[11px] text-slate-300 space-y-1 mb-5">
-            <div><span class="text-slate-500">Order Ref:</span> <span id="liquiSuccessRef" class="text-brand-cyan font-bold"></span></div>
-            <div><span class="text-slate-500">Tier Price:</span> <span id="liquiSuccessPrice" class="text-brand-emerald font-bold"></span></div>
-            <div><span class="text-slate-500">Support Desk:</span> <span class="text-slate-300">akshsharma.web@gmail.com</span></div>
-          </div>
-
-          <div class="flex flex-col gap-2.5">
-            <a id="liquiSuccessWhatsappLink" href="#" target="_blank" class="w-full py-3 rounded-xl bg-brand-emerald hover:bg-emerald-400 text-dark-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition">
-              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.551 4.095 1.517 5.82l-1.611 5.88 6.044-1.586c1.701.928 3.649 1.458 5.727 1.458 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
-              <span>Instant VIP Desk on WhatsApp (Optional)</span>
-            </a>
-            <button type="button" onclick="closeOrderModal()" class="w-full py-2.5 rounded-xl bg-dark-900 hover:bg-dark-850 text-slate-400 hover:text-white text-xs border border-dark-border transition">
-              Close Window
+          <!-- TABS -->
+          <div class="flex border-b border-dark-border mb-5">
+            <button type="button" id="tabBtnRzp" onclick="switchPayTab('rzp')" class="flex-1 pb-3 text-xs font-bold border-b-2 border-brand-emerald text-brand-emerald uppercase tracking-wider font-mono cursor-pointer">
+              🇮🇳 Razorpay / UPI (₹<span id="inrPriceText">8,499</span>)
             </button>
+            <button type="button" id="tabBtnGum" onclick="switchPayTab('gum')" class="flex-1 pb-3 text-xs font-bold border-b-2 border-transparent text-slate-400 hover:text-white uppercase tracking-wider font-mono cursor-pointer">
+              🌐 Gumroad ($<span id="usdPriceText">99</span> USD)
+            </button>
+          </div>
+
+          <!-- TAB CONTENT: RAZORPAY & UPI QR -->
+          <div id="tabContentRzp" class="space-y-4">
+            <div class="p-4 rounded-2xl bg-dark-900 border border-brand-emerald/30 flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+              <div class="bg-white p-2 rounded-xl shrink-0">
+                <img id="dynamicUpiQr" src="" alt="UPI QR Code" class="w-32 h-32 block" />
+              </div>
+              <div class="space-y-1.5 flex-1">
+                <div class="text-xs font-bold text-white uppercase">Scan & Pay with Any UPI App</div>
+                <div class="text-[11px] text-slate-400">GPay • PhonePe • Paytm • BHIM • Cred</div>
+                <div class="text-xs font-mono text-brand-emerald font-bold pt-1">UPI ID: 9953582388@paytm</div>
+                <button type="button" onclick="copyUpiId()" class="text-[10px] px-2.5 py-1 rounded bg-dark-800 hover:bg-dark-750 text-slate-300 border border-dark-border inline-block transition mt-1 cursor-pointer">
+                  📋 Copy UPI ID
+                </button>
+              </div>
+            </div>
+
+            <div class="space-y-2.5 pt-1">
+              <a id="rzpCheckoutLink" href="https://rzp.io/rzp/W86ICvV4" target="_blank" class="w-full py-3.5 rounded-xl text-center text-xs font-bold uppercase tracking-wider text-dark-950 bg-gradient-to-r from-brand-emerald to-emerald-400 hover:from-emerald-400 hover:to-emerald-300 shadow-lg shadow-brand-emerald/25 transition block font-mono">
+                Pay via Razorpay Link / Credit & Debit Cards ↗
+              </a>
+
+              <a id="manualUnlockBtn" href="./terminal-access.html" class="w-full py-3 rounded-xl text-center text-xs font-bold uppercase tracking-wider text-white bg-dark-900 hover:bg-dark-850 border border-brand-cyan/40 hover:border-brand-cyan transition block font-mono">
+                ✓ I Have Paid — Unlock My Terminal Access ⚡
+              </a>
+            </div>
+          </div>
+
+          <!-- TAB CONTENT: GUMROAD GLOBAL -->
+          <div id="tabContentGum" class="hidden space-y-4 text-center">
+            <div class="p-5 rounded-2xl bg-dark-900 border border-dark-border text-left space-y-2">
+              <div class="text-xs font-bold text-white">Instant Global Checkout via Gumroad</div>
+              <p class="text-xs text-slate-400">
+                Ideal for international traders outside India. Instant payment in USD with automated delivery to your inbox.
+              </p>
+              <ul class="text-[11px] text-slate-300 space-y-1 font-mono pt-1">
+                <li class="flex items-center gap-2"><span class="text-brand-emerald">✓</span> All International Visa / Mastercard / Amex</li>
+                <li class="flex items-center gap-2"><span class="text-brand-emerald">✓</span> Apple Pay & PayPal Supported</li>
+                <li class="flex items-center gap-2"><span class="text-brand-emerald">✓</span> Immediate Digital Download + License Key</li>
+              </ul>
+            </div>
+
+            <a id="gumroadCheckoutLink" href="https://liquiquant.gumroad.com/l/rxulg" target="_blank" class="w-full py-4 rounded-xl text-center text-xs font-bold uppercase tracking-wider text-dark-950 bg-gradient-to-r from-brand-cyan to-teal-400 hover:from-cyan-300 hover:to-teal-300 shadow-lg shadow-brand-cyan/25 transition block font-mono">
+              Proceed to Gumroad Checkout ($<span id="gumPriceText">99</span>) ↗
+            </a>
+
+            <a href="./terminal-access.html" class="text-xs text-brand-emerald hover:underline font-mono inline-block pt-2">
+              Already completed Gumroad checkout? Access terminal here →
+            </a>
+          </div>
+
+          <div class="pt-4 border-t border-dark-border flex items-center justify-between text-[11px] text-slate-500 font-sans">
+            <button type="button" onclick="backToStep1()" class="text-slate-400 hover:text-white transition cursor-pointer">← Back to Details</button>
+            <span>Direct Desk: +91 99535 82388</span>
           </div>
         </div>
 
@@ -838,21 +882,47 @@
 
     let selectedTier = 'Complete Institutional Suite';
     let selectedPrice = 99;
+    let selectedInrPrice = 8499;
+    let orderRefId = 'LQ-' + Math.floor(100000 + Math.random() * 900000);
+    let customerDetails = { name: '', email: '', phone: '' };
+
+    const RZP_LINKS = {
+      39: 'https://rzp.io/rzp/1t1nAo2',
+      99: 'https://rzp.io/rzp/W86ICvV4'
+    };
+
+    const GUM_LINKS = {
+      39: 'https://liquiquant.gumroad.com/l/rxulg',
+      99: 'https://liquiquant.gumroad.com/l/rxulg'
+    };
 
     function openOrderModal(tier, price) {
-        selectedTier = tier;
-        selectedPrice = price;
-        document.getElementById('modalTierTitle').innerText = `${tier} ($${price})`;
-        
-        // Reset view states
-        const formC = document.getElementById('orderFormContainer');
-        const succC = document.getElementById('orderSuccessContainer');
-        if (formC) formC.classList.remove('hidden');
-        if (succC) succC.classList.add('hidden');
-        const f = document.getElementById('orderForm');
-        if (f) f.reset();
+      selectedTier = tier;
+      selectedPrice = price;
+      selectedInrPrice = price === 39 ? 3299 : 8499;
+      orderRefId = 'LQ-' + Math.floor(100000 + Math.random() * 900000);
 
-        const m = document.getElementById('orderModal');
+      document.getElementById('modalTierTitle').innerText = `${tier} ($${price})`;
+      document.getElementById('usdPriceText').innerText = price;
+      document.getElementById('gumPriceText').innerText = price;
+      document.getElementById('inrPriceText').innerText = selectedInrPrice.toLocaleString('en-IN');
+
+      // Configure links
+      const rzpUrl = RZP_LINKS[price] || RZP_LINKS[99];
+      const gumUrl = GUM_LINKS[price] || GUM_LINKS[99];
+      document.getElementById('rzpCheckoutLink').href = rzpUrl;
+      document.getElementById('gumroadCheckoutLink').href = gumUrl;
+
+      // Configure QR Code
+      const upiStr = encodeURIComponent(`upi://pay?pa=9953582388@paytm&pn=LiquiQuant%20OS&am=${selectedInrPrice}&cu=INR&tn=${encodeURIComponent(orderRefId)}`);
+      document.getElementById('dynamicUpiQr').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${upiStr}`;
+
+      // Reset views
+      document.getElementById('orderStep1').classList.remove('hidden');
+      document.getElementById('orderStep2').classList.add('hidden');
+      switchPayTab('rzp');
+
+      const m = document.getElementById('orderModal');
       m.classList.remove('hidden');
       m.classList.add('flex');
     }
@@ -863,76 +933,93 @@
       m.classList.remove('flex');
     }
 
-    async function handleOrderSubmit(e) {
-        e.preventDefault();
-        const name = document.getElementById('orderName').value.trim();
-        const email = document.getElementById('orderEmail').value.trim();
-        const phone = document.getElementById('orderPhone').value.trim();
-        const refId = 'LQ-' + Math.floor(100000 + Math.random() * 900000);
+    async function handleStep1Submit(e) {
+      e.preventDefault();
+      const name = document.getElementById('orderName').value.trim();
+      const email = document.getElementById('orderEmail').value.trim();
+      const phone = document.getElementById('orderPhone').value.trim();
+      customerDetails = { name, email, phone };
 
-        const btn = document.getElementById('orderSubmitBtn');
-        const btnText = document.getElementById('orderSubmitBtnText');
-        const spinner = document.getElementById('orderSubmitSpinner');
+      const btn = document.getElementById('step1Btn');
+      const btnText = document.getElementById('step1BtnText');
+      const spinner = document.getElementById('step1Spinner');
 
-        btn.disabled = true;
-        btn.classList.add('opacity-80', 'cursor-not-allowed');
-        btnText.innerText = 'Processing Activation...';
-        spinner.classList.remove('hidden');
+      btn.disabled = true;
+      btnText.innerText = 'Registering License...';
+      spinner.classList.remove('hidden');
 
-        const payload = {
-          tier: selectedTier,
-          price_usd: '$' + selectedPrice,
-          trader_name: name,
-          email: email,
-          whatsapp_telegram: phone,
-          order_reference: refId,
-          _subject: `LiquiQuant OS Access Order: ${selectedTier} ($${selectedPrice}) - ${name}`,
-          _template: 'table',
-          _captcha: 'false'
-        };
+      // Update unlock button link
+      document.getElementById('manualUnlockBtn').href = `./terminal-access.html?ref=${orderRefId}&tier=${encodeURIComponent(selectedTier)}&email=${encodeURIComponent(email)}`;
 
-        try {
-          await fetch('https://formsubmit.co/ajax/akshsharma.web@gmail.com', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify(payload)
-          });
-        } catch (err) {
-          console.warn('LiquiQuant order dispatch logged:', err);
-        } finally {
-          btn.disabled = false;
-          btn.classList.remove('opacity-80', 'cursor-not-allowed');
-          btnText.innerText = 'Confirm Order & Launch Instant Activation';
-          spinner.classList.add('hidden');
+      // Dispatch background registration to akshsharma.web@gmail.com
+      const payload = {
+        tier: selectedTier,
+        price_usd: '$' + selectedPrice,
+        price_inr: '₹' + selectedInrPrice,
+        trader_name: name,
+        email: email,
+        phone: phone,
+        order_reference: orderRefId,
+        _subject: `New LiquiQuant Order [${orderRefId}]: ${selectedTier} ($${selectedPrice}) - ${name}`,
+        _template: 'table',
+        _captcha: 'false'
+      };
 
-          // Switch to on-modal success view
-          document.getElementById('orderFormContainer').classList.add('hidden');
-          const succ = document.getElementById('orderSuccessContainer');
-          succ.classList.remove('hidden');
+      try {
+        await fetch('https://formsubmit.co/ajax/akshsharma.web@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.warn('Lead logged:', err);
+      } finally {
+        btn.disabled = false;
+        btnText.innerText = 'Proceed to Payment & Instant Activation →';
+        spinner.classList.add('hidden');
 
-          document.getElementById('liquiSuccessName').innerText = name;
-          document.getElementById('liquiSuccessTier').innerText = selectedTier;
-          document.getElementById('liquiSuccessEmail').innerText = email;
-          document.getElementById('liquiSuccessRef').innerText = refId;
-          document.getElementById('liquiSuccessPrice').innerText = '$' + selectedPrice;
-
-          const waMsg = encodeURIComponent(
-            `Hi LiquiQuant Support, I just ordered ${selectedTier} ($${selectedPrice}) on the terminal (Ref: ${refId}).
-` +
-            `Trader: ${name}
-` +
-            `Email: ${email}`
-          );
-          document.getElementById('liquiSuccessWhatsappLink').href = `https://wa.me/919953582388?text=${waMsg}`;
-        }
+        // Switch to Step 2
+        document.getElementById('orderStep1').classList.add('hidden');
+        document.getElementById('orderStep2').classList.remove('hidden');
       }
+    }
+
+    function switchPayTab(tab) {
+      const btnRzp = document.getElementById('tabBtnRzp');
+      const btnGum = document.getElementById('tabBtnGum');
+      const contentRzp = document.getElementById('tabContentRzp');
+      const contentGum = document.getElementById('tabContentGum');
+
+      if (tab === 'rzp') {
+        btnRzp.classList.add('border-brand-emerald', 'text-brand-emerald');
+        btnRzp.classList.remove('border-transparent', 'text-slate-400');
+        btnGum.classList.remove('border-brand-emerald', 'text-brand-emerald');
+        btnGum.classList.add('border-transparent', 'text-slate-400');
+        contentRzp.classList.remove('hidden');
+        contentGum.classList.add('hidden');
+      } else {
+        btnGum.classList.add('border-brand-emerald', 'text-brand-emerald');
+        btnGum.classList.remove('border-transparent', 'text-slate-400');
+        btnRzp.classList.remove('border-brand-emerald', 'text-brand-emerald');
+        btnRzp.classList.add('border-transparent', 'text-slate-400');
+        contentGum.classList.remove('hidden');
+        contentRzp.classList.add('hidden');
+      }
+    }
+
+    function copyUpiId() {
+      navigator.clipboard.writeText('9953582388@paytm');
+      alert('UPI ID copied to clipboard: 9953582388@paytm');
+    }
+
+    function backToStep1() {
+      document.getElementById('orderStep2').classList.add('hidden');
+      document.getElementById('orderStep1').classList.remove('hidden');
+    }
 
     // Initialize on load
     window.addEventListener('DOMContentLoaded', () => {
-      calculatePosition();
+      if (typeof calculatePosition === 'function') calculatePosition();
     });
   </script>
 
