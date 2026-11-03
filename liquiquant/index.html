@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LiquiQuant OS | #1 Institutional Trading Workspace & Broker Data Sync Engine</title>
+  <meta name="description" content="The institutional operating system for funded prop traders and quantitative discretionary capital. 0-lag MT5 broker bridge, TradingView webhook triggers, dynamic position sizing, and a 7-point SMC pre-trade gatekeeper." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              emerald: '#10b981',
+              cyan: '#06b6d4',
+              sky: '#38bdf8',
+              amber: '#f59e0b',
+              purple: '#8b5cf6',
+              rose: '#f43f5e',
+            },
+            dark: {
+              950: '#030712',
+              900: '#080d1a',
+              850: '#0e1626',
+              800: '#141e33',
+              750: '#1a2742',
+              border: 'rgba(255, 255, 255, 0.08)',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #030712;
+      color: #f8fafc;
+      overflow-x: hidden;
+    }
+    .grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    .glow-emerald {
+      box-shadow: 0 0 50px -10px rgba(16, 185, 129, 0.25);
+    }
+    .glow-cyan {
+      box-shadow: 0 0 50px -10px rgba(6, 182, 212, 0.25);
+    }
+    .glow-card:hover {
+      box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.2);
+      border-color: rgba(6, 182, 212, 0.4);
+      transform: translateY(-3px);
+    }
+    .text-gradient-emerald {
+      background: linear-gradient(135deg, #ffffff 10%, #10b981 70%, #059669 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-gradient-cyan {
+      background: linear-gradient(135deg, #ffffff 10%, #38bdf8 60%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-track {
+      display: flex;
+      width: 200%;
+      animation: ticker 35s linear infinite;
+    }
+    .ticker-track:hover {
+      animation-play-state: paused;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-brand-emerald selection:text-white">
+
+  <!-- BACKGROUND AMBIENCE -->
+  <div class="fixed inset-0 grid-pattern pointer-events-none -z-10"></div>
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-brand-cyan/10 via-brand-emerald/5 to-transparent blur-3xl pointer-events-none -z-10"></div>
+
+  <!-- LIVE MARKET & SMT TICKER BAR -->
+  <div class="w-full bg-dark-950/90 border-b border-dark-border overflow-hidden py-2 text-xs font-mono tracking-tight text-slate-400 select-none">
+    <div class="ticker-track">
+      <div class="flex items-center gap-8 shrink-0 whitespace-nowrap px-4">
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> <strong class="text-white">EURUSD:</strong> 1.08420 <span class="text-emerald-400 font-bold">▲ +0.34%</span></span>
+        <span class="flex items-center gap-1.5"><strong class="text-white">XAUUSD:</strong> 2734.50 <span class="text-emerald-400 font-bold">▲ +1.12%</span></span>
+        <span class="flex items-center gap-1.5"><strong class="text-white">NAS100:</strong> 20450.25 <span class="text-emerald-400 font-bold">▲ +0.85%</span></span>
+        <span class="flex items-center gap-1.5"><strong class="text-white">NIFTY 50:</strong> 24180.80 <span class="text-rose-400 font-bold">▼ -0.22%</span></span>
+        <span class="flex items-center gap-1.5"><strong class="text-white">BTCUSD:</strong> 68420.00 <span class="text-emerald-400 font-bold">▲ +2.45%</span></span>
+        <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold">SMT DIVERGENCE: ACTIVE (LONDON)</span>
+        <span class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold">DAILY BIAS: EXPANSION READY</span>
+        <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold">PRE-TRADE GATE: 7/7 PASSED</span>
+      </div>
+      <div class="flex items-center gap-8 shrink-0 whitespace-nowrap px-4">
+        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> <strong class="text-white">EURUSD:</strong> 1.08420 <span class="text-emerald-400 font-bold">▲ +0.34%</span></span>
+        <span class="flex items-center gap-1.5"><strong class="text-white">XAUUSD:</strong> 2734.50 <span class="text-emerald-400 font-bold">▲ +1.12%</span></span>
+        <span class="flex items-center gap-1.5"><strong class="text-white">NAS100:</strong> 20450.25 <span class="text-emerald-400 font-bold">▲ +0.85%</span></span>
+        <span class="flex items-center gap-1.5"><strong class="text-white">NIFTY 50:</strong> 24180.80 <span class="text-rose-400 font-bold">▼ -0.22%</span></span>
+        <span class="flex items-center gap-1.5"><strong class="text-white">BTCUSD:</strong> 68420.00 <span class="text-emerald-400 font-bold">▲ +2.45%</span></span>
+        <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold">SMT DIVERGENCE: ACTIVE (LONDON)</span>
+        <span class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold">DAILY BIAS: EXPANSION READY</span>
+        <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold">PRE-TRADE GATE: 7/7 PASSED</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 backdrop-blur-xl bg-dark-950/80 border-b border-dark-border transition">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-emerald via-brand-cyan to-indigo-500 p-0.5 shadow-lg shadow-brand-emerald/20 group-hover:shadow-brand-emerald/40 transition">
+          <div class="w-full h-full bg-dark-900 rounded-[10px] flex items-center justify-center">
+            <span class="font-mono font-black text-brand-emerald text-lg tracking-tighter">LQ</span>
+          </div>
+        </div>
+        <div>
+          <span class="font-extrabold text-lg tracking-tight text-white block leading-none font-mono">LIQUI<span class="text-brand-emerald">QUANT</span><span class="text-xs text-brand-cyan font-bold ml-1">OS</span></span>
+          <span class="text-[10px] uppercase tracking-widest text-slate-400 font-mono block mt-1">Institutional Prop Terminal</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#calculator" class="hover:text-brand-emerald transition">Live Lot Calculator</a>
+        <a href="#engines" class="hover:text-brand-emerald transition">The 3 Engines</a>
+        <a href="#gatekeeper" class="hover:text-brand-emerald transition">7-Point Gatekeeper</a>
+        <a href="#case-studies" class="hover:text-brand-emerald transition">Execution Proof</a>
+        <a href="#backtest" class="hover:text-brand-emerald transition">Backtest Curve</a>
+        <a href="#pricing" class="hover:text-brand-emerald transition">Pricing</a>
+      </div>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-4">
+        <a href="#pricing" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider text-dark-950 bg-gradient-to-r from-brand-emerald to-brand-cyan hover:from-emerald-400 hover:to-cyan-400 shadow-md shadow-brand-emerald/25 transition">
+          <span>Get Instant Access</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="relative pt-20 pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+    
+    <!-- Version Tag -->
+    <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-brand-emerald/10 border border-brand-emerald/30 text-brand-emerald text-xs font-mono font-bold tracking-wide uppercase mb-8 shadow-sm">
+      <span class="w-2 h-2 rounded-full bg-brand-emerald animate-ping"></span>
+      <span>LiquiQuant OS v4.2 • Built For Funded Traders</span>
+    </div>
+
+    <!-- Main Headline -->
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-8 max-w-5xl mx-auto font-sans">
+      The Institutional Operating System for <br class="hidden sm:block"/>
+      <span class="text-gradient-emerald">Prop Traders</span> & Quant Capital.
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-12 font-normal">
+      Connect your <strong class="text-white">Notion workspace</strong> directly to your broker. Zero-lag MT5 execution bridge, TradingView webhook triggers, dynamic position sizing, and a <strong class="text-brand-emerald font-semibold">7-Point SMC Pre-Trade Gatekeeper</strong> that mathematically eliminates emotional account blowups.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+      <a href="#pricing" class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-mono font-bold uppercase tracking-wider text-dark-950 bg-gradient-to-r from-brand-emerald via-emerald-400 to-brand-cyan hover:from-emerald-300 hover:to-cyan-300 glow-emerald shadow-xl transition flex items-center justify-center gap-3">
+        <span>Equip Your Terminal Today ($99)</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+      
+      <a href="#calculator" class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-semibold text-slate-300 bg-dark-850 hover:bg-dark-800 border border-dark-border hover:border-slate-600 transition flex items-center justify-center gap-2 font-mono">
+        <span>Launch Interactive Lot Calculator ↓</span>
+      </a>
+    </div>
+
+    <!-- Institutional Key Metric Pills -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-8 border-t border-dark-border text-left font-mono">
+      <div class="p-4 rounded-xl bg-dark-900/60 border border-dark-border/60">
+        <div class="text-xs text-slate-400 uppercase tracking-wider">FTMO / FundedNext</div>
+        <div class="text-xl sm:text-2xl font-bold text-white mt-1">1-Click CSV Sync</div>
+        <div class="text-[11px] text-emerald-400 mt-0.5">Automated R:R & Fees</div>
+      </div>
+      <div class="p-4 rounded-xl bg-dark-900/60 border border-dark-border/60">
+        <div class="text-xs text-slate-400 uppercase tracking-wider">Execution Latency</div>
+        <div class="text-xl sm:text-2xl font-bold text-brand-cyan mt-1">&lt; 150ms</div>
+        <div class="text-[11px] text-slate-400 mt-0.5">Localhost Webhook Bridge</div>
+      </div>
+      <div class="p-4 rounded-xl bg-dark-900/60 border border-dark-border/60">
+        <div class="text-xs text-slate-400 uppercase tracking-wider">Backtest Win Rate</div>
+        <div class="text-xl sm:text-2xl font-bold text-brand-emerald mt-1">64.2%</div>
+        <div class="text-[11px] text-emerald-400 mt-0.5">2.84 Profit Factor</div>
+      </div>
+      <div class="p-4 rounded-xl bg-dark-900/60 border border-dark-border/60">
+        <div class="text-xs text-slate-400 uppercase tracking-wider">Max Drawdown</div>
+        <div class="text-xl sm:text-2xl font-bold text-brand-amber mt-1">&lt; 4.1%</div>
+        <div class="text-[11px] text-slate-400 mt-0.5">Hard Daily Lockout</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- INTERACTIVE MULTI-ASSET LOT CALCULATOR & DRAWDOWN SHIELD -->
+  <section id="calculator" class="py-24 bg-dark-900/80 border-y border-dark-border px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-xs font-mono font-bold text-brand-emerald uppercase tracking-widest mb-3">Live Interactive Tool</div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">Multi-Asset Lot Calculator & Drawdown Shield</h2>
+        <p class="text-slate-400 text-base mt-4 font-normal">Test the mathematical engine that protects 6-figure funded prop accounts from trailing drawdown violations in real time.</p>
+      </div>
+
+      <div class="rounded-3xl bg-dark-950 border border-dark-border glow-cyan p-6 sm:p-10">
+        
+        <div class="grid lg:grid-cols-12 gap-8 items-start font-mono">
+          
+          <!-- Input Controls (7 cols) -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <!-- Account Size Selector -->
+            <div>
+              <label class="block text-xs uppercase tracking-wider text-slate-300 font-bold mb-2">Funded Account Capital ($)</label>
+              <div class="grid grid-cols-4 gap-2 mb-2">
+                <button type="button" onclick="setAccountCapital(10000)" class="cap-btn py-2 text-xs font-bold rounded-lg border border-dark-border bg-dark-900 hover:bg-dark-800 text-slate-300">$10,000</button>
+                <button type="button" onclick="setAccountCapital(50000)" class="cap-btn py-2 text-xs font-bold rounded-lg border border-dark-border bg-dark-900 hover:bg-dark-800 text-slate-300">$50,000</button>
+                <button type="button" onclick="setAccountCapital(100000)" class="cap-btn py-2 text-xs font-bold rounded-lg border border-brand-emerald bg-brand-emerald/10 text-brand-emerald">$100,000</button>
+                <button type="button" onclick="setAccountCapital(200000)" class="cap-btn py-2 text-xs font-bold rounded-lg border border-dark-border bg-dark-900 hover:bg-dark-800 text-slate-300">$200,000</button>
+              </div>
+              <input type="number" id="capitalInput" value="100000" oninput="calculatePosition()" class="w-full px-4 py-3 rounded-xl bg-dark-900 border border-dark-border text-white text-sm focus:border-brand-emerald focus:outline-none" />
+            </div>
+
+            <!-- Prop Firm Framework & Asset Pair -->
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-slate-300 font-bold mb-2">Prop Firm Rulebook</label>
+                <select id="propFirmRule" onchange="calculatePosition()" class="w-full px-4 py-3 rounded-xl bg-dark-900 border border-dark-border text-white text-xs focus:border-brand-emerald focus:outline-none">
+                  <option value="FTMO">FTMO (5% Daily / 10% Max)</option>
+                  <option value="FundedNext">FundedNext (5% Daily / 10% Max)</option>
+                  <option value="Topstep">Topstep (Trailing Drawdown)</option>
+                  <option value="Personal">Personal Capital (Custom)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-slate-300 font-bold mb-2">Instrument / Asset</label>
+                <select id="assetPair" onchange="calculatePosition()" class="w-full px-4 py-3 rounded-xl bg-dark-900 border border-dark-border text-white text-xs focus:border-brand-emerald focus:outline-none">
+                  <option value="EURUSD">EURUSD (FX 100k Lot)</option>
+                  <option value="GBPUSD">GBPUSD (FX 100k Lot)</option>
+                  <option value="XAUUSD">XAUUSD / Gold (100 oz)</option>
+                  <option value="NAS100">NAS100 / US30 (Indices)</option>
+                  <option value="BTCUSD">BTCUSD (Crypto)</option>
+                  <option value="NIFTY">NIFTY 50 Futures</option>
+                  <option value="BANKNIFTY">BANKNIFTY Futures</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Risk % and Stop Loss -->
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <label class="text-xs uppercase tracking-wider text-slate-300 font-bold">Risk Per Trade (%)</label>
+                  <span id="riskPctDisplay" class="text-xs font-bold text-brand-emerald">0.50%</span>
+                </div>
+                <input type="range" id="riskRange" min="0.10" max="2.00" step="0.05" value="0.50" oninput="updateRiskPct(this.value)" class="w-full accent-emerald-500 cursor-pointer" />
+              </div>
+
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-slate-300 font-bold mb-2">Stop Loss (Pips / Points)</label>
+                <input type="number" id="stopLossInput" value="12.5" step="0.5" oninput="calculatePosition()" class="w-full px-4 py-2.5 rounded-xl bg-dark-900 border border-dark-border text-white text-sm focus:border-brand-emerald focus:outline-none" />
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Output Display Card (5 cols) -->
+          <div class="lg:col-span-5 p-6 rounded-2xl bg-gradient-to-br from-dark-900 to-dark-850 border border-brand-emerald/40 glow-emerald flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-4 border-b border-dark-border mb-6">
+                <span class="text-xs text-slate-400 uppercase tracking-widest font-bold">Execution Output</span>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">MATH VALIDATED</span>
+              </div>
+
+              <!-- Main Lot Size -->
+              <div class="mb-6">
+                <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">Recommended Order Size</div>
+                <div class="flex items-baseline gap-2">
+                  <span id="calculatedLots" class="text-4xl sm:text-5xl font-black text-brand-emerald tracking-tight">4.00</span>
+                  <span id="lotUnit" class="text-sm text-slate-300 font-bold">Lots</span>
+                </div>
+              </div>
+
+              <!-- Metrics Matrix -->
+              <div class="space-y-3 text-xs">
+                <div class="flex justify-between py-2 border-b border-dark-border/60">
+                  <span class="text-slate-400">Cash At Risk:</span>
+                  <span id="cashRiskDisplay" class="font-bold text-white">$500.00</span>
+                </div>
+                <div class="flex justify-between py-2 border-b border-dark-border/60">
+                  <span class="text-slate-400">Daily Max Loss Limit:</span>
+                  <span id="dailyLossLimitDisplay" class="font-bold text-rose-400">$5,000.00</span>
+                </div>
+                <div class="flex justify-between py-2 border-b border-dark-border/60">
+                  <span class="text-slate-400">Permitted Losses Today:</span>
+                  <span id="allowedLossesDisplay" class="font-bold text-brand-amber">10 trades</span>
+                </div>
+                <div class="flex justify-between py-2">
+                  <span class="text-slate-400">Trailing Drawdown Buffer:</span>
+                  <span id="trailingBufferDisplay" class="font-bold text-brand-cyan">$10,000.00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Terminal Notice -->
+            <div class="mt-6 pt-4 border-t border-dark-border/80 text-[11px] text-slate-400 leading-relaxed">
+              ⚡ <em>LiquiQuant MT5 Bridge auto-inputs this exact lot calculation directly into your order ticket in 100 milliseconds.</em>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- THE 3 INSTITUTIONAL ENGINES -->
+  <section id="engines" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="text-center max-w-3xl mx-auto mb-20">
+      <div class="text-xs font-mono font-bold text-brand-cyan uppercase tracking-widest mb-3">Architectural Breakdown</div>
+      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">The 3 Pillars of LiquiQuant OS</h2>
+      <p class="text-slate-400 text-base mt-4 font-normal">Engineered to transform Notion from a passive text notebook into a real-time quantitative trading terminal.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      
+      <!-- Engine 1 -->
+      <div class="p-8 rounded-2xl bg-dark-900 border border-dark-border glow-card transition flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan flex items-center justify-center font-mono font-bold text-lg mb-6">01</div>
+          <h3 class="text-xl font-bold text-white mb-3">0-Lag Broker & Webhook Bridge</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            Python-powered local execution bridge connects MetaTrader 5 (MT5) and TradingView alerts directly to Notion. Automatically records entry price, lot size, commissions, and exit timestamps the millisecond a trade closes.
+          </p>
+        </div>
+        <div class="text-xs font-mono text-brand-cyan font-semibold uppercase tracking-wider">MT5 • TradingView • Prop CSV Sync</div>
+      </div>
+
+      <!-- Engine 2 -->
+      <div class="p-8 rounded-2xl bg-dark-900 border border-dark-border glow-card transition flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-brand-emerald/10 border border-brand-emerald/20 text-brand-emerald flex items-center justify-center font-mono font-bold text-lg mb-6">02</div>
+          <h3 class="text-xl font-bold text-white mb-3">7-Point SMC Pre-Trade Gatekeeper</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            "No Sweep. No SMT. No Displacement. No Entry." An algorithmic pre-trade checklist embedded in your daily execution ticket. If any institutional rule is violated, order confirmation is locked out.
+          </p>
+        </div>
+        <div class="text-xs font-mono text-brand-emerald font-semibold uppercase tracking-wider">Zero FOMO • Strict Rule Discipline</div>
+      </div>
+
+      <!-- Engine 3 -->
+      <div class="p-8 rounded-2xl bg-dark-900 border border-dark-border glow-card transition flex flex-col justify-between">
+        <div>
+          <div class="w-12 h-12 rounded-xl bg-brand-amber/10 border border-brand-amber/20 text-brand-amber flex items-center justify-center font-mono font-bold text-lg mb-6">03</div>
+          <h3 class="text-xl font-bold text-white mb-3">Institutional Notion Workspace Suite</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            12 interconnected databases: Execution Journal, Daily Bias Matrix, Session Killzone Breakdowns (Asian/London/NY), High-Impact News Matrix, Strategy Replay Vault, and Asset Heatmaps.
+          </p>
+        </div>
+        <div class="text-xs font-mono text-brand-amber font-semibold uppercase tracking-wider">12 Relational DBs • Bloomberg Dark Mode</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- THE 7-POINT PRE-TRADE GATEKEEPER BREAKDOWN -->
+  <section id="gatekeeper" class="py-24 bg-dark-900/60 border-y border-dark-border px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-xs font-mono font-bold text-brand-emerald uppercase tracking-widest mb-3">Institutional Risk Protocol</div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">The 7-Point SMC Gatekeeper</h2>
+        <p class="text-slate-400 text-base mt-4 font-normal">Why funded accounts blow up is never strategy—it is taking B-tier and C-tier discretionary setups. LiquiQuant OS enforces an uncompromising institutional checklist:</p>
+      </div>
+
+      <div class="space-y-4 font-mono">
+        
+        <div class="p-5 rounded-xl bg-dark-950 border border-dark-border flex items-start gap-4">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold flex items-center justify-center shrink-0">1</div>
+          <div>
+            <h4 class="text-base font-bold text-white">Higher Timeframe (HTF) Narrative & Daily Bias</h4>
+            <p class="text-xs text-slate-400 mt-1 font-sans">Is price drawing on sell-side or buy-side liquidity on the 4H/Daily chart? Trade ONLY in the direction of the macro draw on liquidity.</p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-xl bg-dark-950 border border-dark-border flex items-start gap-4">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold flex items-center justify-center shrink-0">2</div>
+          <div>
+            <h4 class="text-base font-bold text-white">Session Liquidity Purge (Sweep of Asian / Prev Day High/Low)</h4>
+            <p class="text-xs text-slate-400 mt-1 font-sans">No entry in the middle of a consolidation. Has clean buy-side or sell-side retail liquidity been aggressively swept?</p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-xl bg-dark-950 border border-dark-border flex items-start gap-4">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold flex items-center justify-center shrink-0">3</div>
+          <div>
+            <h4 class="text-base font-bold text-white">SMT Divergence Confirmation (Correlated Asset Decoupling)</h4>
+            <p class="text-xs text-slate-400 mt-1 font-sans">EURUSD vs GBPUSD or NAS100 vs ES: Did one make a new swing high/low while the other failed? Institutional divergence must be confirmed.</p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-xl bg-dark-950 border border-dark-border flex items-start gap-4">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold flex items-center justify-center shrink-0">4</div>
+          <div>
+            <h4 class="text-base font-bold text-white">Market Structure Shift (MSS) with Energetic Displacement</h4>
+            <p class="text-xs text-slate-400 mt-1 font-sans">Body close through the swing point leaving a clean Fair Value Gap (FVG). Slow wicks do NOT qualify as an institutional displacement.</p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-xl bg-dark-950 border border-dark-border flex items-start gap-4">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold flex items-center justify-center shrink-0">5</div>
+          <div>
+            <h4 class="text-base font-bold text-white">Optimal Trade Entry (OTE / FVG Tap) within Killzone Timing</h4>
+            <p class="text-xs text-slate-400 mt-1 font-sans">Execution restricted strictly to London Killzone (2:00 AM - 5:00 AM EST) or New York AM Killzone (8:00 AM - 11:00 AM EST). No trades outside algorithmic windows.</p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-xl bg-dark-950 border border-dark-border flex items-start gap-4">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold flex items-center justify-center shrink-0">6</div>
+          <div>
+            <h4 class="text-base font-bold text-white">Mathematical Risk Validation (&le; 0.5% Account Equity)</h4>
+            <p class="text-xs text-slate-400 mt-1 font-sans">Lot size must be calculated strictly off stop-loss pips using the Drawdown Shield. Sizing up after a loss is programmatically locked.</p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-xl bg-dark-950 border border-dark-border flex items-start gap-4">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold flex items-center justify-center shrink-0">7</div>
+          <div>
+            <h4 class="text-base font-bold text-white">Minimum 1:2.5 Asymmetrical Risk-to-Reward Ratio</h4>
+            <p class="text-xs text-slate-400 mt-1 font-sans">Targeting opposing resting liquidity pools. If target is less than 2.5R, the order ticket is cancelled.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- REAL EXECUTION CHART CASE STUDIES -->
+  <section id="case-studies" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="text-xs font-mono font-bold text-brand-emerald uppercase tracking-widest mb-3">Live Terminal Proof</div>
+      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">Real Institutional Execution Proof</h2>
+      <p class="text-slate-400 text-base mt-4 font-normal">Real chart case studies taken directly from our proprietary Notion execution journal and MetaTrader 5 terminals.</p>
+    </div>
+
+    <!-- Interactive Chart Carousel / Tabs -->
+    <div class="rounded-3xl bg-dark-950 border border-dark-border p-6 sm:p-10 glow-cyan">
+      
+      <!-- Chart Tab Buttons -->
+      <div class="flex flex-wrap gap-2 mb-8 border-b border-dark-border pb-4 font-mono text-xs">
+        <button type="button" onclick="showChart(1)" id="chartBtn1" class="chart-tab px-4 py-2.5 rounded-xl font-bold bg-brand-emerald text-dark-950 transition">Case 01: GBPUSD SMT London Drop</button>
+        <button type="button" onclick="showChart(2)" id="chartBtn2" class="chart-tab px-4 py-2.5 rounded-xl font-bold bg-dark-900 hover:bg-dark-850 text-slate-300 transition">Case 02: EURUSD EQH Sweep</button>
+        <button type="button" onclick="showChart(3)" id="chartBtn3" class="chart-tab px-4 py-2.5 rounded-xl font-bold bg-dark-900 hover:bg-dark-850 text-slate-300 transition">Case 03: 1M Double SMT Scale-In</button>
+        <button type="button" onclick="showChart(4)" id="chartBtn4" class="chart-tab px-4 py-2.5 rounded-xl font-bold bg-dark-900 hover:bg-dark-850 text-slate-300 transition">Case 04: BANKNIFTY Expansion</button>
+        <button type="button" onclick="showChart(5)" id="chartBtn5" class="chart-tab px-4 py-2.5 rounded-xl font-bold bg-dark-900 hover:bg-dark-850 text-slate-300 transition">Case 05: MT5 Multi-Timeframe Monitor</button>
+      </div>
+
+      <!-- Chart Images Display -->
+      <div class="relative rounded-2xl overflow-hidden border border-dark-border bg-dark-900">
+        
+        <div id="chartContainer1" class="chart-panel">
+          <img src="charts/Chart1_GBPUSD_3M_SMT_London_to_Asian_Lows.png" alt="GBPUSD SMT Divergence Execution" class="w-full h-auto object-cover" />
+          <div class="p-6 bg-dark-900/90 border-t border-dark-border font-mono text-xs text-slate-300">
+            <strong class="text-white">Chart Breakdown:</strong> GBPUSD 3-Minute Bearish SMT Divergence during London Open. EURUSD swept Asian high while GBPUSD failed, signaling massive smart-money distribution. Target: Asian session liquidity pool (+3.8R).
+          </div>
+        </div>
+
+        <div id="chartContainer2" class="chart-panel hidden">
+          <img src="charts/Chart2_EURUSD_15M_EQH_London_NY_Continuation.png" alt="EURUSD Equal Highs Sweep" class="w-full h-auto object-cover" />
+          <div class="p-6 bg-dark-900/90 border-t border-dark-border font-mono text-xs text-slate-300">
+            <strong class="text-white">Chart Breakdown:</strong> EURUSD 15-Minute Equal Highs (EQH) sweep followed by London-to-NY continuation orderblock tap. Clean 1:3.2 risk-to-reward delivery into daily FVG.
+          </div>
+        </div>
+
+        <div id="chartContainer3" class="chart-panel hidden">
+          <img src="charts/Chart3_GBPUSD_1M_Double_SMT_ScaleIn.png" alt="GBPUSD 1M Double SMT Scale In" class="w-full h-auto object-cover" />
+          <div class="p-6 bg-dark-900/90 border-t border-dark-border font-mono text-xs text-slate-300">
+            <strong class="text-white">Chart Breakdown:</strong> Micro-timeframe 1-minute execution with double SMT divergence confirmation. Scaled in 2 tranches with strict lot limits calculated by the Drawdown Shield.
+          </div>
+        </div>
+
+        <div id="chartContainer4" class="chart-panel hidden">
+          <img src="charts/Chart5_BANKNIFTY_15M_OrderBlock_Expansion.png" alt="BANKNIFTY 15M Order Block Expansion" class="w-full h-auto object-cover" />
+          <div class="p-6 bg-dark-900/90 border-t border-dark-border font-mono text-xs text-slate-300">
+            <strong class="text-white">Chart Breakdown:</strong> Indian Indices execution: BANKNIFTY 15M institutional orderblock tap following morning opening volatility shakeout. Clean +450 point expansion.
+          </div>
+        </div>
+
+        <div id="chartContainer5" class="chart-panel hidden">
+          <img src="charts/Chart6_MT5_Live_Execution_4H_15M_Monitor.png" alt="MT5 Live Execution 4H 15M Monitor" class="w-full h-auto object-cover" />
+          <div class="p-6 bg-dark-900/90 border-t border-dark-border font-mono text-xs text-slate-300">
+            <strong class="text-white">Chart Breakdown:</strong> Multi-terminal MT5 live execution bridge monitor synced with Notion cloud journal. Zero-lag websocket connectivity with live drawdown alert telemetry.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AUDITED 2025 BACKTEST PERFORMANCE CURVE -->
+  <section id="backtest" class="py-24 bg-dark-900/60 border-y border-dark-border px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-xs font-mono font-bold text-brand-emerald uppercase tracking-widest mb-3">Audited Mathematical Model</div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">The 2025 Algorithmic Equity Curve</h2>
+        <p class="text-slate-400 text-base mt-4 font-normal">Backtested across 1,200+ institutional setups across FX majors, Gold, and US Index Futures under strict prop firm drawdown rules.</p>
+      </div>
+
+      <div class="rounded-3xl bg-dark-950 border border-dark-border p-6 sm:p-10 glow-emerald">
+        
+        <!-- Equity Curve Image -->
+        <div class="rounded-2xl overflow-hidden border border-dark-border mb-8 bg-dark-900">
+          <img src="assets/liquiquant_2025_backtest_curve.png" alt="LiquiQuant 2025 Backtest Equity Curve" class="w-full h-auto object-cover" />
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 font-mono text-center">
+          <div class="p-4 rounded-xl bg-dark-900 border border-dark-border">
+            <div class="text-xs text-slate-400 uppercase">Total Net Return</div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-brand-emerald mt-1">+248.6%</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Compounded Model</div>
+          </div>
+          <div class="p-4 rounded-xl bg-dark-900 border border-dark-border">
+            <div class="text-xs text-slate-400 uppercase">Profit Factor</div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-brand-cyan mt-1">2.84</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Gross Win / Gross Loss</div>
+          </div>
+          <div class="p-4 rounded-xl bg-dark-900 border border-dark-border">
+            <div class="text-xs text-slate-400 uppercase">Max Peak Drawdown</div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-brand-amber mt-1">4.1%</div>
+            <div class="text-[10px] text-emerald-400 mt-0.5">Complies with FTMO / MFF</div>
+          </div>
+          <div class="p-4 rounded-xl bg-dark-900 border border-dark-border">
+            <div class="text-xs text-slate-400 uppercase">Avg Risk-to-Reward</div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-white mt-1">1:2.82</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Targeting Resting Liquidity</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRICING TIERS -->
+  <section id="pricing" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="text-center max-w-3xl mx-auto mb-20">
+      <div class="text-xs font-mono font-bold text-brand-emerald uppercase tracking-widest mb-3">Terminal Access Tiers</div>
+      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">Equip Your Notion Terminal Today</h2>
+      <p class="text-slate-400 text-base mt-4 font-normal">Choose the edition that fits your funding journey. Instant delivery with video setup walkthrough.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8 items-stretch font-mono">
+      
+      <!-- Tier 1 -->
+      <div class="p-8 rounded-3xl bg-dark-900 border border-dark-border flex flex-col justify-between">
+        <div>
+          <div class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">Tier 01</div>
+          <h3 class="text-2xl font-bold text-white mb-4">Notion Trader OS</h3>
+          <p class="text-slate-400 text-xs font-sans leading-relaxed mb-6">The essential Notion workspace for manual prop trading journal, pre-trade rules, and daily bias review.</p>
+          <div class="flex items-baseline gap-2 mb-8 pb-6 border-b border-dark-border">
+            <span class="text-4xl font-extrabold text-white">$49</span>
+            <span class="text-xs text-slate-400">/ one-time lifetime</span>
+          </div>
+          <ul class="space-y-3 text-xs text-slate-300 font-sans mb-8">
+            <li class="flex items-center gap-2.5"><span class="text-brand-emerald font-bold">✓</span> Complete 12-Database Notion Workspace</li>
+            <li class="flex items-center gap-2.5"><span class="text-brand-emerald font-bold">✓</span> 7-Point SMC Pre-Trade Gatekeeper</li>
+            <li class="flex items-center gap-2.5"><span class="text-brand-emerald font-bold">✓</span> Manual Trade Journal & Metrics Dashboard</li>
+            <li class="flex items-center gap-2.5"><span class="text-brand-emerald font-bold">✓</span> Video Installation & Setup Walkthrough</li>
+          </ul>
+        </div>
+        <a href="#inquiryModal" onclick="openOrderModal('Notion Trader OS', 49)" class="w-full py-3.5 rounded-xl text-center text-xs font-bold uppercase tracking-wider text-white bg-dark-800 hover:bg-dark-750 border border-dark-border transition block">
+          Get Notion Edition ($49)
+        </a>
+      </div>
+
+      <!-- Tier 2: FEATURED -->
+      <div class="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-dark-850 to-dark-900 border-2 border-brand-emerald glow-emerald flex flex-col justify-between relative">
+        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-brand-emerald text-dark-950 text-[10px] font-black uppercase tracking-widest">
+          MOST POPULAR AMONG FUNDED TRADERS
+        </div>
+        <div>
+          <div class="text-xs text-brand-emerald uppercase tracking-widest font-bold mb-2">Tier 02</div>
+          <h3 class="text-2xl font-bold text-white mb-4">Complete Institutional Suite</h3>
+          <p class="text-slate-300 text-xs font-sans leading-relaxed mb-6">The complete automated engine. Notion Workspace + MT5 Auto-Execution Bridge + TradingView Webhooks + Strategy Playbook.</p>
+          <div class="flex items-baseline gap-2 mb-8 pb-6 border-b border-dark-border">
+            <span class="text-5xl font-black text-brand-emerald">$99</span>
+            <span class="text-xs text-slate-400">/ one-time lifetime</span>
+          </div>
+          <ul class="space-y-3.5 text-xs text-slate-200 font-sans mb-8">
+            <li class="flex items-center gap-2.5"><span class="text-brand-emerald font-bold">✓</span> <strong>Everything in Notion Trader OS</strong></li>
+            <li class="flex items-center gap-2.5"><span class="text-brand-emerald font-bold">✓</span> <strong>Python MT5 Real-Time Auto-Execution Bridge</strong></li>
+            <li class="flex items-center gap-2.5"><span class="text-brand-emerald font-bold">✓</span> <strong>TradingView Webhook Alert Listener</strong></li>
+            <li class="flex items-center gap-2.5"><span class="text-brand-emerald font-bold">✓</span> <strong>1-Click Prop Firm CSV Auto-Sync Engine</strong></li>
+            <li class="flex items-center gap-2.5"><span class="text-brand-emerald font-bold">✓</span> <strong>Institutional Manifesto & Strategy Playbook (PDF)</strong></li>
+            <li class="flex items-center gap-2.5"><span class="text-brand-emerald font-bold">✓</span> <strong>Lifetime Discord VIP Group & Strategy Updates</strong></li>
+          </ul>
+        </div>
+        <a href="#inquiryModal" onclick="openOrderModal('Complete Institutional Suite', 99)" class="w-full py-4 rounded-xl text-center text-xs font-bold uppercase tracking-wider text-dark-950 bg-gradient-to-r from-brand-emerald via-emerald-400 to-brand-cyan hover:from-emerald-300 hover:to-cyan-300 shadow-lg shadow-brand-emerald/30 transition block">
+          Get Complete Suite ($99)
+        </a>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="p-8 rounded-3xl bg-dark-900 border border-dark-border flex flex-col justify-between">
+        <div>
+          <div class="text-xs text-brand-amber uppercase tracking-widest font-bold mb-2">Tier 03</div>
+          <h3 class="text-2xl font-bold text-white mb-4">Prop Desk & Fund Lifetime</h3>
+          <p class="text-slate-400 text-xs font-sans leading-relaxed mb-6">Designed for multi-account prop desk syndicates and proprietary trading firms managing multiple trader terminals.</p>
+          <div class="flex items-baseline gap-2 mb-8 pb-6 border-b border-dark-border">
+            <span class="text-4xl font-extrabold text-white">$199</span>
+            <span class="text-xs text-slate-400">/ one-time lifetime</span>
+          </div>
+          <ul class="space-y-3 text-xs text-slate-300 font-sans mb-8">
+            <li class="flex items-center gap-2.5"><span class="text-brand-amber font-bold">✓</span> Everything in Institutional Suite</li>
+            <li class="flex items-center gap-2.5"><span class="text-brand-amber font-bold">✓</span> Multi-Account Cloud Investor Bridge</li>
+            <li class="flex items-center gap-2.5"><span class="text-brand-amber font-bold">✓</span> Multi-Broker Synchronization (Up to 10 MT5 accounts)</li>
+            <li class="flex items-center gap-2.5"><span class="text-brand-amber font-bold">✓</span> 1-on-1 Dedicated Technical Architecture Setup Call</li>
+          </ul>
+        </div>
+        <a href="#inquiryModal" onclick="openOrderModal('Prop Desk & Fund Lifetime', 199)" class="w-full py-3.5 rounded-xl text-center text-xs font-bold uppercase tracking-wider text-white bg-dark-800 hover:bg-dark-750 border border-dark-border transition block">
+          Get Desk Lifetime ($199)
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VIP INQUIRY & ORDER MODAL -->
+  <div id="orderModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="max-w-lg w-full bg-dark-950 border border-dark-border rounded-3xl p-6 sm:p-8 glow-cyan relative font-mono">
+      
+      <button type="button" onclick="closeOrderModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl">✕</button>
+      
+      <div class="text-xs text-brand-emerald font-bold uppercase tracking-widest mb-1">Instant Activation</div>
+      <h3 id="modalTierTitle" class="text-2xl font-bold text-white mb-2">Complete Institutional Suite</h3>
+      <p class="text-xs font-sans text-slate-400 mb-6">Enter your details to receive your Notion workspace link, Python MT5 connectors, and strategy manuals directly.</p>
+
+      <form onsubmit="handleOrderSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-[11px] uppercase text-slate-300 font-bold mb-1">Full Name *</label>
+          <input type="text" id="orderName" required placeholder="Trader Name" class="w-full px-4 py-3 rounded-xl bg-dark-900 border border-dark-border text-white text-xs focus:border-brand-emerald focus:outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] uppercase text-slate-300 font-bold mb-1">Email (For Workspace Transfer) *</label>
+          <input type="email" id="orderEmail" required placeholder="trader@gmail.com" class="w-full px-4 py-3 rounded-xl bg-dark-900 border border-dark-border text-white text-xs focus:border-brand-emerald focus:outline-none" />
+        </div>
+        <div>
+          <label class="block text-[11px] uppercase text-slate-300 font-bold mb-1">WhatsApp / Telegram (For Direct VIP Support) *</label>
+          <input type="tel" id="orderPhone" required placeholder="+91 98765 43210 / @username" class="w-full px-4 py-3 rounded-xl bg-dark-900 border border-dark-border text-white text-xs focus:border-brand-emerald focus:outline-none" />
+        </div>
+
+        <button type="submit" class="w-full py-4 rounded-xl text-center text-xs font-bold uppercase tracking-wider text-dark-950 bg-gradient-to-r from-brand-emerald to-brand-cyan hover:from-emerald-400 hover:to-cyan-400 shadow-lg shadow-brand-emerald/30 transition block mt-4">
+          Confirm Order & Launch Instant Activation
+        </button>
+      </form>
+
+      <div class="mt-4 text-[10px] text-center text-slate-500 font-sans">
+        🔒 256-bit encrypted. Instant digital delivery after verification.
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="py-12 border-t border-dark-border px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500 font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-white">LIQUIQUANT OS</span>
+        <span>• Quantitative Trading Architecture</span>
+      </div>
+      <div>
+        <span>Desk Contact: </span>
+        <a href="mailto:akshsharma.web@gmail.com" class="text-brand-emerald hover:underline">akshsharma.web@gmail.com</a>
+        <span class="mx-2">|</span>
+        <span>Instagram: @liquiquant.os</span>
+      </div>
+      <div>
+        © 2026 LiquiQuant OS. Built for Discretionary & Quant Capital.
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT CALCULATOR & MODAL ENGINE -->
+  <script>
+    let currentCapital = 100000;
+    let currentRiskPct = 0.50;
+
+    function setAccountCapital(val) {
+      currentCapital = val;
+      document.getElementById('capitalInput').value = val;
+      const btns = document.querySelectorAll('.cap-btn');
+      btns.forEach(b => {
+        if (b.innerText.includes(val.toLocaleString())) {
+          b.classList.remove('bg-dark-900', 'text-slate-300', 'border-dark-border');
+          b.classList.add('bg-brand-emerald/10', 'text-brand-emerald', 'border-brand-emerald');
+        } else {
+          b.classList.add('bg-dark-900', 'text-slate-300', 'border-dark-border');
+          b.classList.remove('bg-brand-emerald/10', 'text-brand-emerald', 'border-brand-emerald');
+        }
+      });
+      calculatePosition();
+    }
+
+    function updateRiskPct(val) {
+      currentRiskPct = parseFloat(val);
+      document.getElementById('riskPctDisplay').innerText = currentRiskPct.toFixed(2) + '%';
+      calculatePosition();
+    }
+
+    function calculatePosition() {
+      const cap = parseFloat(document.getElementById('capitalInput').value) || 100000;
+      const sl = parseFloat(document.getElementById('stopLossInput').value) || 10;
+      const asset = document.getElementById('assetPair').value;
+      const propRule = document.getElementById('propFirmRule').value;
+
+      const cashRisk = (cap * (currentRiskPct / 100));
+
+      // Calculate lot size based on asset pip value
+      let pipValuePerLot = 10; // Standard 100k FX lot = $10/pip
+      let unit = "Lots";
+
+      if (asset === 'XAUUSD') {
+        pipValuePerLot = 10; // 1 pip ($0.10) on 100oz = $10, or 100 pips = $1/oz
+      } else if (asset === 'NAS100') {
+        pipValuePerLot = 20; // 1 point on Nasdaq
+        unit = "Contracts";
+      } else if (asset === 'BTCUSD') {
+        pipValuePerLot = 1; // 1 USD move on 1 BTC = $1
+        unit = "BTC";
+      } else if (asset === 'NIFTY') {
+        pipValuePerLot = 25; // NIFTY lot size 25
+        unit = "Lots";
+      } else if (asset === 'BANKNIFTY') {
+        pipValuePerLot = 15; // BANKNIFTY lot size 15
+        unit = "Lots";
+      }
+
+      let lots = cashRisk / (sl * pipValuePerLot);
+      lots = Math.max(0.01, Math.round(lots * 100) / 100);
+
+      document.getElementById('calculatedLots').innerText = lots.toFixed(2);
+      document.getElementById('lotUnit').innerText = unit;
+      document.getElementById('cashRiskDisplay').innerText = '$' + cashRisk.toFixed(2);
+
+      // Prop firm daily loss & allowed trades calculation
+      let dailyLossPct = 0.05; // 5% FTMO
+      let maxDrawdownPct = 0.10; // 10% FTMO
+
+      if (propRule === 'Topstep') {
+        dailyLossPct = 0.03;
+        maxDrawdownPct = 0.06;
+      }
+
+      const dailyLimit = cap * dailyLossPct;
+      const maxDrawdown = cap * maxDrawdownPct;
+      const allowedLosses = Math.floor(dailyLimit / cashRisk);
+
+      document.getElementById('dailyLossLimitDisplay').innerText = '$' + dailyLimit.toLocaleString('en-US', {minimumFractionDigits: 2});
+      document.getElementById('allowedLossesDisplay').innerText = allowedLosses + ' trades';
+      document.getElementById('trailingBufferDisplay').innerText = '$' + maxDrawdown.toLocaleString('en-US', {minimumFractionDigits: 2});
+    }
+
+    function showChart(idx) {
+      for (let i = 1; i <= 5; i++) {
+        const p = document.getElementById('chartContainer' + i);
+        const b = document.getElementById('chartBtn' + i);
+        if (i === idx) {
+          p.classList.remove('hidden');
+          b.classList.remove('bg-dark-900', 'text-slate-300');
+          b.classList.add('bg-brand-emerald', 'text-dark-950');
+        } else {
+          p.classList.add('hidden');
+          b.classList.add('bg-dark-900', 'text-slate-300');
+          b.classList.remove('bg-brand-emerald', 'text-dark-950');
+        }
+      }
+    }
+
+    let selectedTier = 'Complete Institutional Suite';
+    let selectedPrice = 99;
+
+    function openOrderModal(tier, price) {
+      selectedTier = tier;
+      selectedPrice = price;
+      document.getElementById('modalTierTitle').innerText = `${tier} ($${price})`;
+      const m = document.getElementById('orderModal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function closeOrderModal() {
+      const m = document.getElementById('orderModal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+
+    function handleOrderSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('orderName').value.trim();
+      const email = document.getElementById('orderEmail').value.trim();
+      const phone = document.getElementById('orderPhone').value.trim();
+
+      const msg = `*LiquiQuant OS Access Order*\n` +
+                  `------------------------------\n` +
+                  `*Tier:* ${selectedTier} ($${selectedPrice})\n` +
+                  `*Trader Name:* ${name}\n` +
+                  `*Email:* ${email}\n` +
+                  `*WhatsApp/Telegram:* ${phone}\n` +
+                  `*Status:* Ready for Instant Activation`;
+
+      const encoded = encodeURIComponent(msg);
+      window.open(`https://wa.me/919999999999?text=${encoded}`, '_blank');
+      closeOrderModal();
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      calculatePosition();
+    });
+  </script>
+
+</body>
+</html>
