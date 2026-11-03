@@ -715,7 +715,7 @@
               <div class="space-y-1.5 flex-1">
                 <div class="text-xs font-bold text-white uppercase">Scan & Pay with Any UPI App</div>
                 <div class="text-[11px] text-slate-400">GPay • PhonePe • Paytm • BHIM • Cred</div>
-                <div class="text-xs font-mono text-brand-emerald font-bold pt-1">UPI ID: 9953582388@paytm</div>
+                <div class="text-xs font-mono text-brand-emerald font-bold pt-1">UPI ID: akshsharma7595@okhdfcbank</div>
                 <button type="button" onclick="copyUpiId()" class="text-[10px] px-2.5 py-1 rounded bg-dark-800 hover:bg-dark-750 text-slate-300 border border-dark-border inline-block transition mt-1 cursor-pointer">
                   📋 Copy UPI ID
                 </button>
@@ -914,7 +914,7 @@
       document.getElementById('gumroadCheckoutLink').href = gumUrl;
 
       // Configure QR Code
-      const upiStr = encodeURIComponent(`upi://pay?pa=9953582388@paytm&pn=LiquiQuant%20OS&am=${selectedInrPrice}&cu=INR&tn=${encodeURIComponent(orderRefId)}`);
+      const upiStr = encodeURIComponent(`upi://pay?pa=akshsharma7595@okhdfcbank&pn=LiquiQuant%20OS&am=${selectedInrPrice}&cu=INR&tn=${encodeURIComponent(orderRefId)}`);
       document.getElementById('dynamicUpiQr').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${upiStr}`;
 
       // Reset views
@@ -1008,8 +1008,8 @@
     }
 
     function copyUpiId() {
-      navigator.clipboard.writeText('9953582388@paytm');
-      alert('UPI ID copied to clipboard: 9953582388@paytm');
+      navigator.clipboard.writeText('akshsharma7595@okhdfcbank');
+      alert('UPI ID copied to clipboard: akshsharma7595@okhdfcbank');
     }
 
     function backToStep1() {
