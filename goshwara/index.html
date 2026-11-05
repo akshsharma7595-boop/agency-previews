@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GOSHWARA | New York High Jewelry & Rare Colored Gemstones</title>
+  <title>GOSHWARA | Haute Joaillerie New York & Rare Colored Gemstones</title>
   <meta name="description" content="The embodiment of perfect proportions. Exceptional colored gemstones crafted in 18K yellow gold, worn on global red carpets, and curated for private collectors.">
   
-  <!-- Fonts -->
+  <!-- Google Fonts: Cormorant Garamond, Italian Oldstyle / Cinzel, Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,23 +23,27 @@
             sans: ['"Montserrat"', 'sans-serif'],
           },
           colors: {
-            noir: '#07090D',
-            obsidian: '#0E1117',
-            charcoal: '#161B22',
-            champagne: {
-              300: '#F5E8D0',
-              400: '#E5D0A1',
-              500: '#D4AF37',
-              600: '#B89225',
-              700: '#8C6C14',
+            silk: '#FAF8F5',
+            pearl: '#F4EFEA',
+            cream: '#EDE6DC',
+            noir: '#121316',
+            charcoal: '#23252B',
+            gold: {
+              100: '#FBF5E8',
+              200: '#F4E5C4',
+              300: '#E5C98E',
+              400: '#D4AF37',
+              500: '#B88D27',
+              600: '#946E19',
+              700: '#684B0B',
             },
-            gem: {
-              emerald: '#059669',
-              topaz: '#0284C7',
-              amethyst: '#7C3AED',
-              rubellite: '#E11D48',
-              citrine: '#D97706',
-              tourmaline: '#DB2777'
+            gemstone: {
+              emerald: '#0B6846',
+              topaz: '#1A6796',
+              amethyst: '#6B317E',
+              rubellite: '#BA2655',
+              citrine: '#C97712',
+              turquoise: '#189BA3'
             }
           }
         }
@@ -48,105 +52,165 @@
   </script>
 
   <style>
+    /* Luminous Haute Joaillerie Light Luxury Styling */
     body {
-      background-color: #07090D;
-      color: #F8F6F0;
+      background-color: #FAF8F5;
+      color: #1A1C20;
       overflow-x: hidden;
       font-family: 'Montserrat', sans-serif;
     }
-    .gold-gradient-text {
-      background: linear-gradient(135deg, #FFF6E5 0%, #E5D0A1 40%, #D4AF37 70%, #997517 100%);
+
+    /* Shimmering Gold Foil Gradient */
+    .gold-foil-text {
+      background: linear-gradient(135deg, #7A5610 0%, #B88D27 35%, #D4AF37 60%, #855E14 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .gold-border-glow {
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      box-shadow: 0 0 30px -10px rgba(212, 175, 55, 0.15);
+    .gold-foil-subtle {
+      background: linear-gradient(135deg, #1C1D21 0%, #544421 50%, #946E19 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .gold-border-glow:hover {
-      border-color: rgba(212, 175, 55, 0.6);
-      box-shadow: 0 0 40px -5px rgba(212, 175, 55, 0.3);
+
+    /* Ambient Silk Caustics */
+    .silk-pattern {
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(27, 103, 150, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(244, 239, 234, 0.8) 0%, transparent 80%);
     }
-    .gem-card {
+
+    /* Hairline Gold Border */
+    .gold-hairline {
+      border: 1px solid rgba(184, 141, 39, 0.22);
       transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .gem-card:hover {
-      transform: translateY(-6px);
+    .gold-hairline:hover {
+      border-color: rgba(184, 141, 39, 0.6);
+      box-shadow: 0 15px 35px -10px rgba(184, 141, 39, 0.15);
     }
-    .gem-card:hover .gem-img {
-      transform: scale(1.05);
+
+    /* Scroll Reveal Animation Framework */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
     }
-    .subtle-grid {
-      background-size: 60px 60px;
-      background-image: 
-        linear-gradient(to right, rgba(212, 175, 55, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+    .reveal-up.active {
+      opacity: 1;
+      transform: translateY(0);
     }
-    /* Custom Scrollbar */
+
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-stagger.active > *:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+    .reveal-stagger.active > *:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+    .reveal-stagger.active > *:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+    .reveal-stagger.active > *:nth-child(4) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+    .reveal-stagger.active > *:nth-child(5) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
+    .reveal-stagger.active > *:nth-child(6) { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+
+    /* Floating Gem Sparkle Keyframes */
+    @keyframes floatSparkle {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+      50% { transform: translateY(-12px) rotate(180deg); opacity: 0.8; }
+    }
+    .floating-sparkle {
+      animation: floatSparkle 6s ease-in-out infinite;
+    }
+
+    /* 3D Tilt Card */
+    .tilt-card {
+      transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+      transform-style: preserve-3d;
+    }
+
+    /* Macro Loupe Zoom */
+    .loupe-container {
+      position: relative;
+      overflow: hidden;
+    }
+    .loupe-container img {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .loupe-container:hover img {
+      transform: scale(1.12);
+    }
+
+    /* Smooth luxury scrollbar */
     ::-webkit-scrollbar {
-      width: 6px;
+      width: 7px;
     }
     ::-webkit-scrollbar-track {
-      background: #07090D;
+      background: #FAF8F5;
     }
     ::-webkit-scrollbar-thumb {
-      background: #2A2517;
-      border-radius: 3px;
+      background: #E5C98E;
+      border-radius: 4px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #D4AF37;
+      background: #B88D27;
     }
   </style>
 </head>
-<body class="selection:bg-champagne-500 selection:text-noir">
+<body class="selection:bg-gold-400 selection:text-white silk-pattern">
 
-  <!-- TOP STRIP: CLIENTELE & CONCIERGE -->
-  <div class="bg-noir border-b border-champagne-500/15 py-2.5 px-4 text-center text-[11px] uppercase tracking-[0.25em] text-champagne-400 font-medium flex items-center justify-between max-w-7xl mx-auto">
-    <div class="hidden sm:flex items-center gap-2">
-      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-      <span>NYC Fifth Avenue Salon • Private Suite Mumbai & Delhi</span>
+  <!-- TOP TICKER: LUXURY CLIENTELE BAR -->
+  <div class="bg-noir text-gold-200 border-b border-gold-400/20 py-2.5 px-4 text-center text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-medium flex items-center justify-between">
+    <div class="hidden md:flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
+      <span class="tracking-[0.2em] text-white">NYC Fifth Avenue Salon • Private Suite Mumbai & Delhi</span>
     </div>
-    <div class="mx-auto sm:mx-0">
-      Complimentary Insured Worldwide White-Glove Delivery • Saks & Neiman Marcus Partner
+    <div class="mx-auto md:mx-0 text-gold-300">
+      ✦ Saks Fifth Avenue & Neiman Marcus Fine Jewelry Partner • Insured Worldwide White-Glove Courier ✦
     </div>
-    <div class="hidden sm:flex items-center gap-4">
-      <a href="#salon-booking" class="hover:text-white transition">Private Viewing</a>
-      <span class="text-champagne-500/30">|</span>
-      <a href="#concierge" class="hover:text-white transition">VIP Concierge</a>
+    <div class="hidden md:flex items-center gap-4 text-white">
+      <a href="#bespoke-atelier" class="hover:text-gold-300 transition">Bespoke Atelier</a>
+      <span class="text-gold-400/40">|</span>
+      <a href="#salon-modal" onclick="openSalonModal()" class="hover:text-gold-300 transition">Private Viewing</a>
     </div>
   </div>
 
-  <!-- NAVIGATION -->
-  <header class="sticky top-0 z-40 backdrop-blur-xl bg-noir/90 border-b border-white/5 transition-all">
+  <!-- FLOATING EDITORIAL HEADER -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-silk/90 border-b border-stone-200/60 shadow-sm transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
       
-      <!-- Left Menu Links -->
-      <nav class="hidden lg:flex items-center gap-8 text-[12px] uppercase tracking-[0.2em] font-medium text-stone-300">
-        <a href="#vault" class="hover:text-champagne-400 transition">High Jewelry</a>
-        <a href="#collections" class="hover:text-champagne-400 transition">Collections</a>
-        <a href="#chroma-matrix" class="hover:text-champagne-400 transition">The Gem Matrix</a>
-        <a href="#red-carpet" class="hover:text-champagne-400 transition">Red Carpet</a>
-        <a href="#story" class="hover:text-champagne-400 transition">The Maison</a>
+      <!-- Left Navigation -->
+      <nav class="hidden lg:flex items-center gap-8 text-[11px] uppercase tracking-[0.22em] font-medium text-stone-700">
+        <a href="#vault" class="hover:text-gold-600 transition">The Vault</a>
+        <a href="#chroma-matrix" class="hover:text-gold-600 transition">Gem Spectrum</a>
+        <a href="#bespoke-atelier" class="hover:text-gold-600 transition">Bespoke Atelier</a>
+        <a href="#red-carpet" class="hover:text-gold-600 transition">Red Carpet</a>
+        <a href="#heritage" class="hover:text-gold-600 transition">Maison Heritage</a>
       </nav>
 
-      <!-- Center Brand Logo -->
-      <a href="#" class="text-center group">
-        <h1 class="font-cinzel text-2xl sm:text-3xl tracking-[0.35em] uppercase text-white font-semibold transition group-hover:text-champagne-400">
+      <!-- Center Logo Crest -->
+      <a href="#" class="text-center group py-2">
+        <div class="flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 text-gold-500 transition group-hover:rotate-45 duration-700" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+          </svg>
+        </div>
+        <h1 class="font-cinzel text-2xl sm:text-3xl tracking-[0.38em] uppercase text-stone-900 font-semibold group-hover:text-gold-600 transition">
           GOSHWARA
         </h1>
-        <p class="text-[9px] uppercase tracking-[0.4em] text-champagne-400/80 font-sans mt-0.5">
-          New York • Fine Jewelry
+        <p class="text-[8.5px] uppercase tracking-[0.45em] text-stone-500 font-sans mt-0.5">
+          New York • Haute Joaillerie
         </p>
       </a>
 
-      <!-- Right CTAs -->
+      <!-- Right Action Suite -->
       <div class="flex items-center gap-4 sm:gap-6">
-        <button onclick="openSalonModal()" class="hidden md:inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium text-champagne-300 border border-champagne-500/40 hover:border-champagne-400 hover:bg-champagne-500/10 transition">
-          <svg class="w-3.5 h-3.5 text-champagne-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          <span>Book Private Salon</span>
+        <button onclick="openSalonModal()" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium text-stone-800 border border-stone-300 hover:border-gold-500 hover:bg-gold-50 transition shadow-sm">
+          <svg class="w-3.5 h-3.5 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span>Private Salon</span>
         </button>
 
-        <a href="https://wa.me/919920000000?text=Hello%20Goshwara%20Concierge,%20I%20would%20like%20to%20inquire%20about%20a%20private%20colored%20gemstone%20viewing." target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-[11px] uppercase tracking-[0.18em] font-semibold text-noir bg-gradient-to-r from-champagne-300 via-champagne-400 to-champagne-500 hover:from-white hover:to-champagne-400 shadow-lg shadow-champagne-500/20 transition">
+        <a href="https://wa.me/919920000000?text=Hello%20Goshwara%20Concierge,%20I%20would%20like%20to%20inquire%20about%20a%20private%20colored%20gemstone%20viewing." target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-semibold text-white bg-stone-900 hover:bg-gold-600 shadow-md hover:shadow-gold-500/20 transition duration-300">
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
           <span class="hidden sm:inline">VIP Concierge</span>
         </a>
@@ -155,250 +219,315 @@
     </div>
   </header>
 
-  <!-- PITCH BANNER: STRATEGIC ELEVATION -->
-  <div class="bg-gradient-to-r from-stone-900 via-charcoal to-stone-900 border-b border-champagne-500/20 py-2.5 px-4">
+  <!-- STRATEGIC LEADERSHIP BRIEF STRIP -->
+  <div class="bg-pearl border-b border-gold-300/30 py-2.5 px-6">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between text-xs gap-3">
-      <div class="flex items-center gap-2 text-stone-300">
-        <span class="px-2 py-0.5 rounded bg-champagne-500/20 text-champagne-400 font-mono text-[10px] uppercase font-bold tracking-wider">Maison Elevation Proposal</span>
-        <span class="hidden md:inline text-stone-400">Specially crafted for the India Leadership & Global Brand Direction.</span>
+      <div class="flex items-center gap-2.5 text-stone-700">
+        <span class="px-2.5 py-0.5 rounded-full bg-gold-500/20 text-gold-700 font-mono text-[10px] uppercase font-bold tracking-wider">India Leadership Presentation</span>
+        <span class="text-stone-500 text-[11px] hidden sm:inline">Interactive High-Jewelry Digital Evolution Prototype.</span>
       </div>
-      <div class="flex items-center gap-4 text-[11px] font-mono text-champagne-400">
-        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> 0 Dev Redirects</span>
-        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> High-Ticket Salon Booking</span>
-        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Red-Carpet Clienteling</span>
+      <div class="flex items-center gap-6 text-[11px] font-mono text-gold-700">
+        <span>✓ Zero Staging Leaks</span>
+        <span>✓ 3D Gemstone Visualizer</span>
+        <span>✓ Private Salon Lead Capture</span>
       </div>
     </div>
   </div>
 
-  <!-- HERO SECTION: THE MAJESTY OF COLOR -->
-  <section class="relative min-h-[90vh] flex items-center justify-center text-center px-6 overflow-hidden">
-    <!-- Atmospheric Ambient Background -->
-    <div class="absolute inset-0 subtle-grid opacity-30 pointer-events-none"></div>
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-b from-champagne-500/10 via-gem-emerald/5 to-transparent blur-[120px] pointer-events-none"></div>
-    
-    <div class="relative z-10 max-w-5xl mx-auto pt-16 pb-20">
+  <!-- HERO SECTION: THE RADIANCE OF COLOR (LUMINOUS SILK & EDITORIAL) -->
+  <section class="relative min-h-[92vh] flex items-center justify-center px-6 py-20 overflow-hidden">
+    <!-- Ambient Sparkles -->
+    <div class="absolute top-12 left-10 text-gold-400 floating-sparkle text-lg">✦</div>
+    <div class="absolute top-1/3 right-12 text-gold-500 floating-sparkle text-xl" style="animation-delay: 2s;">✦</div>
+    <div class="absolute bottom-20 left-1/4 text-gold-300 floating-sparkle text-sm" style="animation-delay: 4s;">✦</div>
+
+    <div class="max-w-6xl mx-auto text-center relative z-10">
       
-      <!-- Sub-crest -->
-      <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-champagne-500/30 bg-noir/80 mb-8 backdrop-blur-md">
-        <span class="text-champagne-400 text-xs">✦</span>
-        <span class="text-[11px] uppercase tracking-[0.3em] text-champagne-300 font-medium">Derived from the Persian "Silhouette of Perfect Proportions"</span>
-        <span class="text-champagne-400 text-xs">✦</span>
+      <!-- Maison Badge -->
+      <div class="reveal-up inline-flex items-center gap-3 px-6 py-2 rounded-full border border-gold-300 bg-white/90 shadow-sm mb-8">
+        <span class="text-gold-500 text-xs">✦</span>
+        <span class="text-[11px] uppercase tracking-[0.32em] text-stone-700 font-medium">The Persian Silhouette of Perfect Proportions</span>
+        <span class="text-gold-500 text-xs">✦</span>
       </div>
 
-      <!-- Main Headline -->
-      <h2 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-[1.08] tracking-tight mb-8">
-        Timeless Architecture. <br>
-        <span class="italic font-light text-stone-300">Sensual Curves.</span> <br>
-        <span class="gold-gradient-text font-serif font-semibold">Rare Gemstones.</span>
+      <!-- Main Editorial Headline -->
+      <h2 class="reveal-up font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-stone-900 leading-[1.03] tracking-tight mb-8">
+        Sensual Curves. <br>
+        <span class="italic font-normal gold-foil-text font-serif">Living Color.</span> <br>
+        <span class="font-normal text-stone-900">Enduring 18K Gold.</span>
       </h2>
 
       <!-- Description -->
-      <p class="max-w-2xl mx-auto text-stone-300 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-12">
-        Founded in New York by Sweta Jain. Every one-of-a-kind creation begins with the singular natural soul of hand-curated Colombian emeralds, Brazilian tourmalines, and royal sapphires—mounted in rich 18-karat gold.
+      <p class="reveal-up max-w-2xl mx-auto text-stone-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-12">
+        Curated in New York by Sweta Jain. We celebrate the individual soul of untreated Colombian emeralds, oceanic London blue topaz, and royal amethyst—sculpted into architectural modern heirlooms.
       </p>
 
-      <!-- Action Buttons -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
-        <a href="#vault" class="w-full sm:w-auto px-8 py-4 rounded-full text-xs uppercase tracking-[0.25em] font-semibold text-noir bg-gradient-to-r from-champagne-300 via-champagne-400 to-champagne-500 hover:from-white hover:to-champagne-400 shadow-xl shadow-champagne-500/25 transition">
-          Explore The High Jewelry Vault
+      <!-- Action Suite -->
+      <div class="reveal-up flex flex-col sm:flex-row items-center justify-center gap-5 mb-20">
+        <a href="#vault" class="w-full sm:w-auto px-9 py-4 rounded-full text-xs uppercase tracking-[0.25em] font-semibold text-white bg-stone-900 hover:bg-gold-600 shadow-xl shadow-stone-900/10 transition duration-300">
+          Enter The High Jewelry Vault
         </a>
-        <button onclick="openSalonModal()" class="w-full sm:w-auto px-8 py-4 rounded-full text-xs uppercase tracking-[0.25em] font-medium text-white border border-white/20 hover:border-champagne-400 hover:bg-white/5 transition flex items-center justify-center gap-2">
-          <span>Book A Private Viewing</span>
-          <svg class="w-3.5 h-3.5 text-champagne-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        <button onclick="openSalonModal()" class="w-full sm:w-auto px-9 py-4 rounded-full text-xs uppercase tracking-[0.25em] font-medium text-stone-800 bg-white border border-stone-300 hover:border-gold-500 hover:bg-gold-50/50 shadow-sm transition duration-300 flex items-center justify-center gap-2">
+          <span>Book Private Suite Viewing</span>
+          <svg class="w-3.5 h-3.5 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </button>
       </div>
 
-      <!-- Red Carpet Proof Strip -->
-      <div class="mt-20 pt-10 border-t border-white/10 flex flex-wrap items-center justify-center gap-8 sm:gap-14 text-stone-400 text-[11px] uppercase tracking-[0.25em]">
-        <div class="flex items-center gap-2">
-          <span class="text-champagne-400">✦</span>
-          <span>Saks Fifth Avenue Flagship</span>
+      <!-- Editorial Lookbook Carousel Preview Strip -->
+      <div class="reveal-up grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-12 border-t border-stone-200">
+        
+        <div class="group relative rounded-2xl overflow-hidden shadow-sm bg-white p-3 gold-hairline cursor-pointer" onclick="scrollToSection('vault')">
+          <div class="aspect-[4/5] rounded-xl overflow-hidden bg-pearl mb-3">
+            <img src="https://goshwara.com/cdn/shop/files/Shop_the_look_grid_1_1000x.jpg?v=1748196711" alt="High Jewelry Editorial" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          </div>
+          <span class="text-[9px] uppercase tracking-[0.25em] text-gold-600 font-mono block">Couture Edit</span>
+          <h4 class="font-serif text-lg text-stone-900 font-medium">Luxe Layers</h4>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="text-champagne-400">✦</span>
-          <span>Neiman Marcus Curated</span>
+
+        <div class="group relative rounded-2xl overflow-hidden shadow-sm bg-white p-3 gold-hairline cursor-pointer" onclick="scrollToSection('vault')">
+          <div class="aspect-[4/5] rounded-xl overflow-hidden bg-pearl mb-3">
+            <img src="https://goshwara.com/cdn/shop/files/Shop_the_look_grid_2_1000x.jpg?v=1748196923" alt="Cocktail Rings" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          </div>
+          <span class="text-[9px] uppercase tracking-[0.25em] text-gold-600 font-mono block">Statement Vault</span>
+          <h4 class="font-serif text-lg text-stone-900 font-medium">Cocktail Rings</h4>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="text-champagne-400">✦</span>
-          <span>Worn by Priyanka Chopra at Academy Gala</span>
+
+        <div class="group relative rounded-2xl overflow-hidden shadow-sm bg-white p-3 gold-hairline cursor-pointer" onclick="scrollToSection('vault')">
+          <div class="aspect-[4/5] rounded-xl overflow-hidden bg-pearl mb-3">
+            <img src="https://goshwara.com/cdn/shop/files/Shop_the_look_grid_4_1000x.jpg?v=1748196974" alt="Architectural Pendants" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          </div>
+          <span class="text-[9px] uppercase tracking-[0.25em] text-gold-600 font-mono block">Manhattan Line</span>
+          <h4 class="font-serif text-lg text-stone-900 font-medium">Asscher Pendants</h4>
         </div>
+
+        <div class="group relative rounded-2xl overflow-hidden shadow-sm bg-white p-3 gold-hairline cursor-pointer" onclick="scrollToSection('red-carpet')">
+          <div class="aspect-[4/5] rounded-xl overflow-hidden bg-pearl mb-3">
+            <img src="https://goshwara.com/cdn/shop/files/Untitled_design_8.png?v=1792788650&width=1080" alt="Priyanka Chopra" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          </div>
+          <span class="text-[9px] uppercase tracking-[0.25em] text-rose-600 font-mono block">Academy Gala</span>
+          <h4 class="font-serif text-lg text-stone-900 font-medium">Priyanka Chopra</h4>
+        </div>
+
       </div>
 
     </div>
   </section>
 
-  <!-- INTERACTIVE SECTION 1: THE GEMSTONE CHROMA MATRIX -->
-  <section id="chroma-matrix" class="py-24 px-6 bg-obsidian/60 border-t border-b border-white/5 relative">
+  <!-- INTERACTIVE SECTION 1: DYNAMIC CHROMA MATRIX WITH 3D TILT CARDS -->
+  <section id="chroma-matrix" class="py-28 px-6 bg-white border-t border-b border-stone-200 relative">
     <div class="max-w-7xl mx-auto">
       
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[11px] uppercase tracking-[0.3em] text-champagne-400 font-mono">The Curator's Palette</span>
-        <h3 class="font-serif text-3xl sm:text-5xl font-normal mt-3 mb-5">
+      <div class="reveal-up text-center max-w-3xl mx-auto mb-16">
+        <span class="text-[11px] uppercase tracking-[0.3em] text-gold-600 font-mono">The Curator's Gemological Palette</span>
+        <h3 class="font-serif text-4xl sm:text-6xl font-normal text-stone-900 mt-2 mb-4">
           Curate By Natural Gemstone
         </h3>
-        <p class="text-stone-400 text-sm font-light leading-relaxed">
-          Unlike ordinary diamonds, rare colored gems possess emotional vibration and individuality. Select your stone to reveal bespoke creations in the vault.
+        <p class="text-stone-600 text-sm sm:text-base font-light leading-relaxed">
+          Rare colored gemstones radiate emotional resonance. Select your stone to reveal bespoke masterworks from Sweta Jain's private reserve.
         </p>
       </div>
 
-      <!-- Gemstone Filter Pills -->
-      <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-16" id="gemFilters">
-        <button onclick="filterGem('all')" class="gem-filter active px-5 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition border border-champagne-400 bg-champagne-400 text-noir" data-gem="all">
-          All Gems
+      <!-- Gem Filter Pills (Luminous & Elevated) -->
+      <div class="reveal-up flex flex-wrap items-center justify-center gap-3 mb-16" id="gemFilters">
+        <button onclick="filterGem('all')" class="gem-filter active px-6 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition duration-300 border border-stone-900 bg-stone-900 text-white shadow-md" data-gem="all">
+          All Gemstones
         </button>
-        <button onclick="filterGem('emerald')" class="gem-filter px-5 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition border border-white/10 bg-noir/60 text-stone-300 hover:border-emerald-500/60" data-gem="emerald">
-          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-2"></span>Colombian Emerald
+        <button onclick="filterGem('emerald')" class="gem-filter px-6 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition duration-300 border border-stone-200 bg-silk text-stone-700 hover:border-emerald-600 hover:bg-emerald-50" data-gem="emerald">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-600 mr-2 shadow-sm"></span>Colombian Emerald
         </button>
-        <button onclick="filterGem('topaz')" class="gem-filter px-5 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition border border-white/10 bg-noir/60 text-stone-300 hover:border-sky-500/60" data-gem="topaz">
-          <span class="inline-block w-2 h-2 rounded-full bg-sky-400 mr-2"></span>London Blue Topaz
+        <button onclick="filterGem('topaz')" class="gem-filter px-6 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition duration-300 border border-stone-200 bg-silk text-stone-700 hover:border-sky-600 hover:bg-sky-50" data-gem="topaz">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-sky-600 mr-2 shadow-sm"></span>London Blue Topaz
         </button>
-        <button onclick="filterGem('amethyst')" class="gem-filter px-5 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition border border-white/10 bg-noir/60 text-stone-300 hover:border-purple-500/60" data-gem="amethyst">
-          <span class="inline-block w-2 h-2 rounded-full bg-purple-500 mr-2"></span>Royal Amethyst
+        <button onclick="filterGem('amethyst')" class="gem-filter px-6 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition duration-300 border border-stone-200 bg-silk text-stone-700 hover:border-purple-600 hover:bg-purple-50" data-gem="amethyst">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-purple-600 mr-2 shadow-sm"></span>Royal Amethyst
         </button>
-        <button onclick="filterGem('rubellite')" class="gem-filter px-5 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition border border-white/10 bg-noir/60 text-stone-300 hover:border-rose-500/60" data-gem="rubellite">
-          <span class="inline-block w-2 h-2 rounded-full bg-rose-500 mr-2"></span>Rubellite & Tourmaline
+        <button onclick="filterGem('rubellite')" class="gem-filter px-6 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition duration-300 border border-stone-200 bg-silk text-stone-700 hover:border-rose-600 hover:bg-rose-50" data-gem="rubellite">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-rose-600 mr-2 shadow-sm"></span>Rubellite & Tourmaline
         </button>
-        <button onclick="filterGem('citrine')" class="gem-filter px-5 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition border border-white/10 bg-noir/60 text-stone-300 hover:border-amber-500/60" data-gem="citrine">
-          <span class="inline-block w-2 h-2 rounded-full bg-amber-500 mr-2"></span>Madeira Citrine
+        <button onclick="filterGem('citrine')" class="gem-filter px-6 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition duration-300 border border-stone-200 bg-silk text-stone-700 hover:border-amber-600 hover:bg-amber-50" data-gem="citrine">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-600 mr-2 shadow-sm"></span>Madeira Citrine
         </button>
       </div>
 
-      <!-- GEM VAULT CARDS -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="vaultGrid">
+      <!-- GEM VAULT CARDS GRID WITH 3D HOVER AND MACRO ZOOM -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="vaultGrid">
         
         <!-- Product 1: Cushion Cut Pendant -->
-        <div class="gem-card bg-noir border border-white/10 rounded-2xl p-6 relative group overflow-hidden" data-category="amethyst">
-          <div class="aspect-square bg-charcoal/40 rounded-xl overflow-hidden mb-6 relative flex items-center justify-center p-4">
-            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-purple-950/80 text-purple-300 border border-purple-500/40">Royal Amethyst • 18K Gold</span>
-            <img src="https://goshwara.com/cdn/shop/files/JP0190-PSYSM1_1a2c456e-d0c6-4e90-a8ee-06760ad4c761.jpg?v=1765754619" alt="Cushion Cut Pendant" class="gem-img w-full h-full object-contain transition duration-700">
-            <button onclick="openProductQuickView('Cushion Cut Manhattan Pendant', '$9,950', 'Amethyst', '18K Yellow Gold', 'https://goshwara.com/cdn/shop/files/JP0190-PSYSM1_1a2c456e-d0c6-4e90-a8ee-06760ad4c761.jpg?v=1765754619')" class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-noir/90 backdrop-blur-md text-champagne-300 border border-champagne-500/40 text-[11px] uppercase tracking-[0.2em] font-medium opacity-0 group-hover:opacity-100 transition">
-              Inspect Facets & Carats
-            </button>
-          </div>
-          <span class="text-[10px] uppercase tracking-[0.25em] text-champagne-400 font-mono block mb-1">Manhattan Collection</span>
-          <h4 class="font-serif text-2xl text-white font-normal mb-2">Cushion Cut Manhattan Pendant</h4>
-          <p class="text-xs text-stone-400 font-light mb-4 line-clamp-2">Bezel-set royal amethyst suspended from bold hand-crafted 18K yellow gold links.</p>
-          <div class="flex items-center justify-between pt-4 border-t border-white/5">
-            <div>
-              <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-mono">Acquisition Value</span>
-              <span class="font-cinzel text-lg text-champagne-300 font-semibold">$9,950</span>
+        <div class="reveal-up gem-card bg-silk rounded-3xl p-6 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-500 group" data-category="amethyst">
+          <div class="aspect-square bg-white rounded-2xl overflow-hidden mb-6 relative flex items-center justify-center p-6 loupe-container border border-stone-100">
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-purple-100 text-purple-900 font-mono font-medium border border-purple-200">
+              Royal Amethyst • 18K Gold
+            </span>
+            <img src="https://goshwara.com/cdn/shop/files/JP0190-PSYSM1_1a2c456e-d0c6-4e90-a8ee-06760ad4c761.jpg?v=1765754619" alt="Cushion Cut Manhattan Pendant" class="max-h-64 object-contain">
+            <!-- Macro Magnifier Badge -->
+            <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-white/95 backdrop-blur-md border border-gold-300 text-stone-900 text-[10px] uppercase tracking-[0.25em] font-medium text-center opacity-0 group-hover:opacity-100 transition duration-300 shadow-md">
+              🔍 Inspect Facet Angles & Carats
             </div>
-            <button onclick="openSalonModal('Cushion Cut Manhattan Pendant')" class="px-4 py-2 rounded-full text-[10px] uppercase tracking-[0.18em] border border-champagne-500/30 text-champagne-300 hover:bg-champagne-500 hover:text-noir transition">
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono">Manhattan Collection</span>
+            <span class="text-[10px] uppercase tracking-wider text-stone-500 font-mono">Stock ID: #GW-0190</span>
+          </div>
+          <h4 class="font-serif text-2xl text-stone-900 font-normal mb-2">Cushion Cut Manhattan Pendant</h4>
+          <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
+            Hand-faceted royal amethyst bezel-set in heavy 18K solid yellow gold, suspended from architectural links.
+          </p>
+          <div class="flex items-center justify-between pt-4 border-t border-stone-200">
+            <div>
+              <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Acquisition Value</span>
+              <span class="font-cinzel text-xl text-stone-900 font-semibold">$9,950</span>
+            </div>
+            <button onclick="openSalonModal('Cushion Cut Manhattan Pendant ($9,950)')" class="px-5 py-2.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-medium text-stone-900 border border-stone-300 hover:border-gold-500 hover:bg-gold-50 transition">
               Private Viewing
             </button>
           </div>
         </div>
 
         <!-- Product 2: Three Stone Cocktail Ring -->
-        <div class="gem-card bg-noir border border-white/10 rounded-2xl p-6 relative group overflow-hidden" data-category="topaz">
-          <div class="aspect-square bg-charcoal/40 rounded-xl overflow-hidden mb-6 relative flex items-center justify-center p-4">
-            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-sky-950/80 text-sky-300 border border-sky-500/40">London Blue Topaz • Pavé Diamonds</span>
-            <img src="https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689" alt="Three Stone Cocktail Ring" class="gem-img w-full h-full object-contain transition duration-700">
-            <button onclick="openProductQuickView('Three-Stone Architectural Cocktail Ring', '$6,800', 'London Blue Topaz', '18K Gold + Diamonds', 'https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689')" class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-noir/90 backdrop-blur-md text-champagne-300 border border-champagne-500/40 text-[11px] uppercase tracking-[0.2em] font-medium opacity-0 group-hover:opacity-100 transition">
-              Inspect Facets & Carats
-            </button>
-          </div>
-          <span class="text-[10px] uppercase tracking-[0.25em] text-champagne-400 font-mono block mb-1">Rock 'N Roll Series</span>
-          <h4 class="font-serif text-2xl text-white font-normal mb-2">Three-Stone Cocktail Ring</h4>
-          <p class="text-xs text-stone-400 font-light mb-4 line-clamp-2">Deep oceanic London blue topaz with micro-pavé brilliant cut diamonds in solid 18K gold.</p>
-          <div class="flex items-center justify-between pt-4 border-t border-white/5">
-            <div>
-              <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-mono">Acquisition Value</span>
-              <span class="font-cinzel text-lg text-champagne-300 font-semibold">$6,800</span>
+        <div class="reveal-up gem-card bg-silk rounded-3xl p-6 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-500 group" data-category="topaz">
+          <div class="aspect-square bg-white rounded-2xl overflow-hidden mb-6 relative flex items-center justify-center p-6 loupe-container border border-stone-100">
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-sky-100 text-sky-900 font-mono font-medium border border-sky-200">
+              London Blue Topaz • Pavé Diamonds
+            </span>
+            <img src="https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689" alt="Three Stone Cocktail Ring" class="max-h-64 object-contain">
+            <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-white/95 backdrop-blur-md border border-gold-300 text-stone-900 text-[10px] uppercase tracking-[0.25em] font-medium text-center opacity-0 group-hover:opacity-100 transition duration-300 shadow-md">
+              🔍 Inspect Facet Angles & Carats
             </div>
-            <button onclick="openSalonModal('Three-Stone Cocktail Ring')" class="px-4 py-2 rounded-full text-[10px] uppercase tracking-[0.18em] border border-champagne-500/30 text-champagne-300 hover:bg-champagne-500 hover:text-noir transition">
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono">Rock 'N Roll Series</span>
+            <span class="text-[10px] uppercase tracking-wider text-stone-500 font-mono">Stock ID: #GW-4421</span>
+          </div>
+          <h4 class="font-serif text-2xl text-stone-900 font-normal mb-2">Three-Stone Architectural Ring</h4>
+          <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
+            Intense oceanic London blue topaz accented with micro-pavé round brilliant diamonds in warm 18K gold.
+          </p>
+          <div class="flex items-center justify-between pt-4 border-t border-stone-200">
+            <div>
+              <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Acquisition Value</span>
+              <span class="font-cinzel text-xl text-stone-900 font-semibold">$6,800</span>
+            </div>
+            <button onclick="openSalonModal('Three-Stone Architectural Ring ($6,800)')" class="px-5 py-2.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-medium text-stone-900 border border-stone-300 hover:border-gold-500 hover:bg-gold-50 transition">
               Private Viewing
             </button>
           </div>
         </div>
 
-        <!-- Product 3: Colombian Emerald & Tourmaline Choker -->
-        <div class="gem-card bg-noir border border-white/10 rounded-2xl p-6 relative group overflow-hidden" data-category="emerald">
-          <div class="aspect-square bg-charcoal/40 rounded-xl overflow-hidden mb-6 relative flex items-center justify-center p-4">
-            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-emerald-950/80 text-emerald-300 border border-emerald-500/40">Rainforest • Muzo Emeralds</span>
-            <img src="https://goshwara.com/cdn/shop/files/Rain_forest_collection_500x.jpg?v=1748553985" alt="Rainforest Emerald Choker" class="gem-img w-full h-full object-contain transition duration-700">
-            <button onclick="openProductQuickView('Queen Rainforest Emerald Choker', 'Price Upon Request', 'Colombian Emerald', '18K Yellow Gold & Baguette Diamonds', 'https://goshwara.com/cdn/shop/files/Rain_forest_collection_500x.jpg?v=1748553985')" class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-noir/90 backdrop-blur-md text-champagne-300 border border-champagne-500/40 text-[11px] uppercase tracking-[0.2em] font-medium opacity-0 group-hover:opacity-100 transition">
-              Inspect Facets & Carats
-            </button>
-          </div>
-          <span class="text-[10px] uppercase tracking-[0.25em] text-champagne-400 font-mono block mb-1">Queen High Jewelry</span>
-          <h4 class="font-serif text-2xl text-white font-normal mb-2">Rainforest Emerald Statement Suite</h4>
-          <p class="text-xs text-stone-400 font-light mb-4 line-clamp-2">Rare unheated natural Colombian emeralds paired with organic sculptural gold work.</p>
-          <div class="flex items-center justify-between pt-4 border-t border-white/5">
-            <div>
-              <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-mono">Vault Status</span>
-              <span class="font-cinzel text-lg text-champagne-300 font-semibold">Price Upon Request</span>
+        <!-- Product 3: Rainforest Emerald Suite -->
+        <div class="reveal-up gem-card bg-silk rounded-3xl p-6 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-500 group" data-category="emerald">
+          <div class="aspect-square bg-white rounded-2xl overflow-hidden mb-6 relative flex items-center justify-center p-6 loupe-container border border-stone-100">
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-emerald-100 text-emerald-900 font-mono font-medium border border-emerald-200">
+              Colombian Muzo Emerald • Baguettes
+            </span>
+            <img src="https://goshwara.com/cdn/shop/files/Rain_forest_collection_500x.jpg?v=1748553985" alt="Rainforest Emerald Choker" class="max-h-64 object-contain">
+            <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-white/95 backdrop-blur-md border border-gold-300 text-stone-900 text-[10px] uppercase tracking-[0.25em] font-medium text-center opacity-0 group-hover:opacity-100 transition duration-300 shadow-md">
+              🔍 Inspect Facet Angles & Carats
             </div>
-            <button onclick="openSalonModal('Rainforest Emerald Statement Suite')" class="px-4 py-2 rounded-full text-[10px] uppercase tracking-[0.18em] border border-champagne-500/30 text-champagne-300 hover:bg-champagne-500 hover:text-noir transition">
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono">Queen High Jewelry</span>
+            <span class="text-[10px] uppercase tracking-wider text-stone-500 font-mono">Masterpiece #Q-001</span>
+          </div>
+          <h4 class="font-serif text-2xl text-stone-900 font-normal mb-2">Rainforest Emerald Choker Suite</h4>
+          <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
+            A breathtaking cascade of natural unheated Colombian emeralds celebrating the lush organic curves of the Rainforest.
+          </p>
+          <div class="flex items-center justify-between pt-4 border-t border-stone-200">
+            <div>
+              <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Vault Status</span>
+              <span class="font-cinzel text-lg text-gold-700 font-semibold">Price Upon Request</span>
+            </div>
+            <button onclick="openSalonModal('Rainforest Emerald Choker Suite (Price Upon Request)')" class="px-5 py-2.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-medium text-white bg-stone-900 hover:bg-gold-600 transition">
               Inquire Privately
             </button>
           </div>
         </div>
 
-        <!-- Product 4: Double Drop Inlay Earrings -->
-        <div class="gem-card bg-noir border border-white/10 rounded-2xl p-6 relative group overflow-hidden" data-category="rubellite">
-          <div class="aspect-square bg-charcoal/40 rounded-xl overflow-hidden mb-6 relative flex items-center justify-center p-4">
-            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-rose-950/80 text-rose-300 border border-rose-500/40">Rubellite Tourmaline • 18K Gold</span>
-            <img src="https://goshwara.com/cdn/shop/files/Earring_menu_500x.jpg?v=1769014999" alt="Double Drop Earrings" class="gem-img w-full h-full object-contain transition duration-700">
-            <button onclick="openProductQuickView('Double Drop Rubellite Inlay Earrings', '$5,500', 'Rubellite', '18K Yellow Gold', 'https://goshwara.com/cdn/shop/files/Earring_menu_500x.jpg?v=1769014999')" class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-noir/90 backdrop-blur-md text-champagne-300 border border-champagne-500/40 text-[11px] uppercase tracking-[0.2em] font-medium opacity-0 group-hover:opacity-100 transition">
-              Inspect Facets & Carats
-            </button>
-          </div>
-          <span class="text-[10px] uppercase tracking-[0.25em] text-champagne-400 font-mono block mb-1">Mélange Line</span>
-          <h4 class="font-serif text-2xl text-white font-normal mb-2">Double Drop Inlay Earrings</h4>
-          <p class="text-xs text-stone-400 font-light mb-4 line-clamp-2">Sculptural cabochon drop with calibrated gemstone inlays designed for fluid evening movement.</p>
-          <div class="flex items-center justify-between pt-4 border-t border-white/5">
-            <div>
-              <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-mono">Acquisition Value</span>
-              <span class="font-cinzel text-lg text-champagne-300 font-semibold">$5,500</span>
+        <!-- Product 4: Double Drop Rubellite Inlay Earrings -->
+        <div class="reveal-up gem-card bg-silk rounded-3xl p-6 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-500 group" data-category="rubellite">
+          <div class="aspect-square bg-white rounded-2xl overflow-hidden mb-6 relative flex items-center justify-center p-6 loupe-container border border-stone-100">
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-rose-100 text-rose-900 font-mono font-medium border border-rose-200">
+              Rubellite Tourmaline • 18K Inlay
+            </span>
+            <img src="https://goshwara.com/cdn/shop/files/Earring_menu_500x.jpg?v=1769014999" alt="Double Drop Inlay Earrings" class="max-h-64 object-contain">
+            <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-white/95 backdrop-blur-md border border-gold-300 text-stone-900 text-[10px] uppercase tracking-[0.25em] font-medium text-center opacity-0 group-hover:opacity-100 transition duration-300 shadow-md">
+              🔍 Inspect Facet Angles & Carats
             </div>
-            <button onclick="openSalonModal('Double Drop Inlay Earrings')" class="px-4 py-2 rounded-full text-[10px] uppercase tracking-[0.18em] border border-champagne-500/30 text-champagne-300 hover:bg-champagne-500 hover:text-noir transition">
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono">Mélange Collection</span>
+            <span class="text-[10px] uppercase tracking-wider text-stone-500 font-mono">Stock ID: #GW-7731</span>
+          </div>
+          <h4 class="font-serif text-2xl text-stone-900 font-normal mb-2">Double Drop Rubellite Earrings</h4>
+          <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
+            Dual cabochon articulated drop earrings featuring vivid raspberry rubellite with micro diamond borders.
+          </p>
+          <div class="flex items-center justify-between pt-4 border-t border-stone-200">
+            <div>
+              <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Acquisition Value</span>
+              <span class="font-cinzel text-xl text-stone-900 font-semibold">$5,500</span>
+            </div>
+            <button onclick="openSalonModal('Double Drop Rubellite Earrings ($5,500)')" class="px-5 py-2.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-medium text-stone-900 border border-stone-300 hover:border-gold-500 hover:bg-gold-50 transition">
               Private Viewing
             </button>
           </div>
         </div>
 
-        <!-- Product 5: Asscher Pendant with Diamond Halo -->
-        <div class="gem-card bg-noir border border-white/10 rounded-2xl p-6 relative group overflow-hidden" data-category="citrine">
-          <div class="aspect-square bg-charcoal/40 rounded-xl overflow-hidden mb-6 relative flex items-center justify-center p-4">
-            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-amber-950/80 text-amber-300 border border-amber-500/40">Madeira Citrine • Diamond Halo</span>
-            <img src="https://goshwara.com/cdn/shop/files/Pendant_menu_500x.jpg?v=1769015032" alt="Asscher Pendant" class="gem-img w-full h-full object-contain transition duration-700">
-            <button onclick="openProductQuickView('Asscher Cut Pendant with Diamond Halo', '$8,400', 'Madeira Citrine', '18K Yellow Gold', 'https://goshwara.com/cdn/shop/files/Pendant_menu_500x.jpg?v=1769015032')" class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-noir/90 backdrop-blur-md text-champagne-300 border border-champagne-500/40 text-[11px] uppercase tracking-[0.2em] font-medium opacity-0 group-hover:opacity-100 transition">
-              Inspect Facets & Carats
-            </button>
-          </div>
-          <span class="text-[10px] uppercase tracking-[0.25em] text-champagne-400 font-mono block mb-1">Goshwara Classics</span>
-          <h4 class="font-serif text-2xl text-white font-normal mb-2">Asscher Citrine Halo Pendant</h4>
-          <p class="text-xs text-stone-400 font-light mb-4 line-clamp-2">Crisp geometric step facets reflecting fiery cognac tones inside micro-prong diamond halo.</p>
-          <div class="flex items-center justify-between pt-4 border-t border-white/5">
-            <div>
-              <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-mono">Acquisition Value</span>
-              <span class="font-cinzel text-lg text-champagne-300 font-semibold">$8,400</span>
+        <!-- Product 5: Asscher Citrine Halo Pendant -->
+        <div class="reveal-up gem-card bg-silk rounded-3xl p-6 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-500 group" data-category="citrine">
+          <div class="aspect-square bg-white rounded-2xl overflow-hidden mb-6 relative flex items-center justify-center p-6 loupe-container border border-stone-100">
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-amber-100 text-amber-900 font-mono font-medium border border-amber-200">
+              Madeira Citrine • Asscher Cut
+            </span>
+            <img src="https://goshwara.com/cdn/shop/files/Pendant_menu_500x.jpg?v=1769015032" alt="Asscher Citrine Pendant" class="max-h-64 object-contain">
+            <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-white/95 backdrop-blur-md border border-gold-300 text-stone-900 text-[10px] uppercase tracking-[0.25em] font-medium text-center opacity-0 group-hover:opacity-100 transition duration-300 shadow-md">
+              🔍 Inspect Facet Angles & Carats
             </div>
-            <button onclick="openSalonModal('Asscher Citrine Halo Pendant')" class="px-4 py-2 rounded-full text-[10px] uppercase tracking-[0.18em] border border-champagne-500/30 text-champagne-300 hover:bg-champagne-500 hover:text-noir transition">
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono">Goshwara Classics</span>
+            <span class="text-[10px] uppercase tracking-wider text-stone-500 font-mono">Stock ID: #GW-2290</span>
+          </div>
+          <h4 class="font-serif text-2xl text-stone-900 font-normal mb-2">Asscher Citrine Halo Pendant</h4>
+          <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
+            Hypnotic windmill step facets reflecting rich amber honey hues, encapsulated by micro-pavé diamonds.
+          </p>
+          <div class="flex items-center justify-between pt-4 border-t border-stone-200">
+            <div>
+              <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Acquisition Value</span>
+              <span class="font-cinzel text-xl text-stone-900 font-semibold">$8,400</span>
+            </div>
+            <button onclick="openSalonModal('Asscher Citrine Halo Pendant ($8,400)')" class="px-5 py-2.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-medium text-stone-900 border border-stone-300 hover:border-gold-500 hover:bg-gold-50 transition">
               Private Viewing
             </button>
           </div>
         </div>
 
-        <!-- Product 6: Gossip Everyday Gold Bangle -->
-        <div class="gem-card bg-noir border border-white/10 rounded-2xl p-6 relative group overflow-hidden" data-category="topaz">
-          <div class="aspect-square bg-charcoal/40 rounded-xl overflow-hidden mb-6 relative flex items-center justify-center p-4">
-            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-sky-950/80 text-sky-300 border border-sky-500/40">Multi-Cut Topaz • 18K Solid Gold</span>
-            <img src="https://goshwara.com/cdn/shop/files/Bracelet_menu_500x.jpg?v=1769015072" alt="Gossip Bangle" class="gem-img w-full h-full object-contain transition duration-700">
-            <button onclick="openProductQuickView('Gossip Multi-Gem Link Bracelet', '$11,200', 'Topaz & Diamonds', '18K Yellow Gold', 'https://goshwara.com/cdn/shop/files/Bracelet_menu_500x.jpg?v=1769015072')" class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-noir/90 backdrop-blur-md text-champagne-300 border border-champagne-500/40 text-[11px] uppercase tracking-[0.2em] font-medium opacity-0 group-hover:opacity-100 transition">
-              Inspect Facets & Carats
-            </button>
-          </div>
-          <span class="text-[10px] uppercase tracking-[0.25em] text-champagne-400 font-mono block mb-1">Gossip Fine Collection</span>
-          <h4 class="font-serif text-2xl text-white font-normal mb-2">Gossip Multi-Gem Bracelet</h4>
-          <p class="text-xs text-stone-400 font-light mb-4 line-clamp-2">Interlocking substantial gold links studded with cushion and round bezel-set natural stones.</p>
-          <div class="flex items-center justify-between pt-4 border-t border-white/5">
-            <div>
-              <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-mono">Acquisition Value</span>
-              <span class="font-cinzel text-lg text-champagne-300 font-semibold">$11,200</span>
+        <!-- Product 6: Gossip Multi-Gem Bangle -->
+        <div class="reveal-up gem-card bg-silk rounded-3xl p-6 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-500 group" data-category="topaz">
+          <div class="aspect-square bg-white rounded-2xl overflow-hidden mb-6 relative flex items-center justify-center p-6 loupe-container border border-stone-100">
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-sky-100 text-sky-900 font-mono font-medium border border-sky-200">
+              Multi-Cut Topaz • 18K Solid Gold
+            </span>
+            <img src="https://goshwara.com/cdn/shop/files/Bracelet_menu_500x.jpg?v=1769015072" alt="Gossip Multi-Gem Bracelet" class="max-h-64 object-contain">
+            <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-white/95 backdrop-blur-md border border-gold-300 text-stone-900 text-[10px] uppercase tracking-[0.25em] font-medium text-center opacity-0 group-hover:opacity-100 transition duration-300 shadow-md">
+              🔍 Inspect Facet Angles & Carats
             </div>
-            <button onclick="openSalonModal('Gossip Multi-Gem Bracelet')" class="px-4 py-2 rounded-full text-[10px] uppercase tracking-[0.18em] border border-champagne-500/30 text-champagne-300 hover:bg-champagne-500 hover:text-noir transition">
+          </div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono">Gossip Fine Collection</span>
+            <span class="text-[10px] uppercase tracking-wider text-stone-500 font-mono">Stock ID: #GW-9912</span>
+          </div>
+          <h4 class="font-serif text-2xl text-stone-900 font-normal mb-2">Gossip Multi-Gem Link Bracelet</h4>
+          <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
+            Interlocking solid gold links studded with alternate cushion and round bezel-set natural stones.
+          </p>
+          <div class="flex items-center justify-between pt-4 border-t border-stone-200">
+            <div>
+              <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Acquisition Value</span>
+              <span class="font-cinzel text-xl text-stone-900 font-semibold">$11,200</span>
+            </div>
+            <button onclick="openSalonModal('Gossip Multi-Gem Link Bracelet ($11,200)')" class="px-5 py-2.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-medium text-stone-900 border border-stone-300 hover:border-gold-500 hover:bg-gold-50 transition">
               Private Viewing
             </button>
           </div>
@@ -409,156 +538,207 @@
     </div>
   </section>
 
-  <!-- INTERACTIVE SECTION 2: THE AMBIENT GEMSTONE LIGHTING SIMULATOR -->
-  <section class="py-24 px-6 bg-noir relative border-b border-white/5">
+  <!-- INTERACTIVE SECTION 2: THE BESPOKE VAULT CUSTOMIZER (GRAPHIC REAL-TIME BUILDER) -->
+  <section id="bespoke-atelier" class="py-28 px-6 bg-pearl relative overflow-hidden border-b border-stone-200">
     <div class="max-w-6xl mx-auto">
       
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        
-        <div class="lg:col-span-5">
-          <span class="text-[11px] uppercase tracking-[0.3em] text-champagne-400 font-mono">High-Jewelry Visualizer</span>
-          <h3 class="font-serif text-3xl sm:text-5xl font-normal mt-3 mb-6">
-            The Facet Light Inspector
-          </h3>
-          <p class="text-stone-300 text-sm font-light leading-relaxed mb-6">
-            Fine colored gemstones transform under different atmospheres. A true connoisseur inspects how natural light reveals color saturation, clarity, and inner brilliance.
-          </p>
-
-          <!-- Light Toggle Controls -->
-          <div class="space-y-3">
-            <button onclick="changeLighting('daylight')" class="light-btn active w-full p-4 rounded-xl border border-champagne-400 bg-charcoal/80 flex items-center justify-between text-left transition" data-mode="daylight">
-              <div>
-                <span class="text-xs font-semibold uppercase tracking-wider text-white block">☀️ Fifth Avenue Natural Sunlight</span>
-                <span class="text-[11px] text-stone-400">Crisp 5500K spectrum revealing vivid gemstone saturation.</span>
-              </div>
-              <span class="text-champagne-400 font-mono text-xs">Active</span>
-            </button>
-            <button onclick="changeLighting('gala')" class="light-btn w-full p-4 rounded-xl border border-white/10 bg-noir hover:border-champagne-500/40 flex items-center justify-between text-left transition" data-mode="gala">
-              <div>
-                <span class="text-xs font-semibold uppercase tracking-wider text-white block">🕯️ Evening Gala & Candlelight</span>
-                <span class="text-[11px] text-stone-400">Warm 2700K amber glow maximizing 18K gold luster.</span>
-              </div>
-              <span class="text-stone-400 font-mono text-xs">Select</span>
-            </button>
-            <button onclick="changeLighting('gallery')" class="light-btn w-full p-4 rounded-xl border border-white/10 bg-noir hover:border-champagne-500/40 flex items-center justify-between text-left transition" data-mode="gallery">
-              <div>
-                <span class="text-xs font-semibold uppercase tracking-wider text-white block">💡 Madison Ave Salon Gallery Spotlight</span>
-                <span class="text-[11px] text-stone-400">Focused diamond pin-spotting for maximum facet scintillation.</span>
-              </div>
-              <span class="text-stone-400 font-mono text-xs">Select</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="lg:col-span-7">
-          <div id="inspectorCanvas" class="aspect-[4/3] rounded-3xl border border-champagne-500/30 p-8 flex flex-col justify-between relative overflow-hidden transition-all duration-700 bg-gradient-to-tr from-stone-950 via-charcoal to-stone-900 shadow-2xl">
-            <div class="flex items-center justify-between z-10">
-              <span class="px-3 py-1 rounded-full text-[10px] uppercase font-mono tracking-wider bg-noir/80 text-champagne-300 border border-champagne-500/30" id="lightModeLabel">
-                Current Atmosphere: Fifth Avenue Sunlight (5500K)
-              </span>
-              <span class="text-xs font-mono text-stone-400">GIA Color Grade: Vivid Oceanic Blue</span>
-            </div>
-
-            <!-- Jewel Showcase in center -->
-            <div class="relative z-10 my-auto text-center">
-              <img id="inspectorImg" src="https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689" alt="Goshwara Ring in Light" class="max-h-64 mx-auto object-contain transition-all duration-700 drop-shadow-[0_20px_35px_rgba(212,175,55,0.25)]">
-            </div>
-
-            <div class="flex items-center justify-between z-10 pt-4 border-t border-white/10 text-xs">
-              <div class="text-left">
-                <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-mono">Center Gemstone</span>
-                <span class="font-serif text-white text-base">Cushion Cut London Blue Topaz (14.20 cts)</span>
-              </div>
-              <div class="text-right">
-                <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-mono">Mounting</span>
-                <span class="font-serif text-champagne-300 text-base">Solid 18K Yellow Gold Hand-Bezel</span>
-              </div>
-            </div>
-
-            <!-- Dynamic glow backdrop -->
-            <div id="inspectorGlow" class="absolute inset-0 bg-sky-500/10 blur-[80px] pointer-events-none transition-all duration-700"></div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SECTION 3: RED CARPET & HIGH-JEWELRY CELEBRITY MOMENTS -->
-  <section id="red-carpet" class="py-24 px-6 bg-obsidian border-b border-white/5 relative">
-    <div class="max-w-7xl mx-auto">
-      
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-        <div>
-          <span class="text-[11px] uppercase tracking-[0.3em] text-champagne-400 font-mono">Red Carpet Archives</span>
-          <h3 class="font-serif text-3xl sm:text-5xl font-normal mt-3">
-            Worn By Icons of Culture
-          </h3>
-        </div>
-        <p class="text-stone-400 text-sm font-light max-w-md">
-          From the Academy Museum Gala in Los Angeles to international film festivals, Goshwara is chosen by discerning women who celebrate bold color.
+      <div class="reveal-up text-center max-w-3xl mx-auto mb-16">
+        <span class="text-[11px] uppercase tracking-[0.3em] text-gold-600 font-mono">Private Commission Atelier</span>
+        <h3 class="font-serif text-4xl sm:text-6xl font-normal text-stone-900 mt-2 mb-4">
+          The Bespoke Jewel Configurator
+        </h3>
+        <p class="text-stone-600 text-sm sm:text-base font-light">
+          Experience our atelier process. Choose your natural rough cut, select your certified gemstone, and pair with hand-burnished 18K gold.
         </p>
       </div>
 
-      <!-- Red Carpet Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Controls Column -->
+        <div class="reveal-up lg:col-span-6 space-y-8">
+          
+          <!-- Step 1: Shape -->
+          <div>
+            <label class="block text-xs uppercase tracking-[0.2em] text-stone-500 font-mono mb-3">01. Select Facet Architecture</label>
+            <div class="grid grid-cols-3 gap-3">
+              <button onclick="setBespokeShape('Cushion', 'https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689')" class="shape-btn active p-3 rounded-2xl bg-white border border-stone-900 text-center transition shadow-sm" data-shape="Cushion">
+                <span class="font-serif text-base block text-stone-900">Cushion Cut</span>
+                <span class="text-[9px] uppercase tracking-wider text-stone-500 font-mono">Sensual Curves</span>
+              </button>
+              <button onclick="setBespokeShape('Asscher', 'https://goshwara.com/cdn/shop/files/Pendant_menu_500x.jpg?v=1769015032')" class="shape-btn p-3 rounded-2xl bg-white border border-stone-200 text-center hover:border-gold-400 transition" data-shape="Asscher">
+                <span class="font-serif text-base block text-stone-900">Asscher Cut</span>
+                <span class="text-[9px] uppercase tracking-wider text-stone-500 font-mono">Step Geometry</span>
+              </button>
+              <button onclick="setBespokeShape('Emerald Cut', 'https://goshwara.com/cdn/shop/files/Rain_forest_collection_500x.jpg?v=1748553985')" class="shape-btn p-3 rounded-2xl bg-white border border-stone-200 text-center hover:border-gold-400 transition" data-shape="Emerald Cut">
+                <span class="font-serif text-base block text-stone-900">Emerald Cut</span>
+                <span class="text-[9px] uppercase tracking-wider text-stone-500 font-mono">Pure Hall of Mirrors</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Gemstone Type -->
+          <div>
+            <label class="block text-xs uppercase tracking-[0.2em] text-stone-500 font-mono mb-3">02. Select Rare Center Stone</label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <button onclick="setBespokeGem('Colombian Emerald', '#0B6846', '$16,500', 'Muzo Mines, Colombia')" class="gem-choice active p-3 rounded-xl bg-white border border-stone-900 text-left transition shadow-sm" data-gem="emerald">
+                <span class="w-3 h-3 rounded-full bg-emerald-600 block mb-1"></span>
+                <span class="text-xs font-serif block text-stone-900">Emerald</span>
+                <span class="text-[9px] text-stone-500 font-mono">From $16.5k</span>
+              </button>
+              <button onclick="setBespokeGem('London Blue Topaz', '#1A6796', '$7,800', 'Minas Gerais, Brazil')" class="gem-choice p-3 rounded-xl bg-white border border-stone-200 text-left hover:border-gold-400 transition" data-gem="topaz">
+                <span class="w-3 h-3 rounded-full bg-sky-600 block mb-1"></span>
+                <span class="text-xs font-serif block text-stone-900">Blue Topaz</span>
+                <span class="text-[9px] text-stone-500 font-mono">From $7.8k</span>
+              </button>
+              <button onclick="setBespokeGem('Royal Amethyst', '#6B317E', '$6,900', 'Zambia')" class="gem-choice p-3 rounded-xl bg-white border border-stone-200 text-left hover:border-gold-400 transition" data-gem="amethyst">
+                <span class="w-3 h-3 rounded-full bg-purple-600 block mb-1"></span>
+                <span class="text-xs font-serif block text-stone-900">Amethyst</span>
+                <span class="text-[9px] text-stone-500 font-mono">From $6.9k</span>
+              </button>
+              <button onclick="setBespokeGem('Rubellite Tourmaline', '#BA2655', '$12,400', 'Nigeria')" class="gem-choice p-3 rounded-xl bg-white border border-stone-200 text-left hover:border-gold-400 transition" data-gem="rubellite">
+                <span class="w-3 h-3 rounded-full bg-rose-600 block mb-1"></span>
+                <span class="text-xs font-serif block text-stone-900">Rubellite</span>
+                <span class="text-[9px] text-stone-500 font-mono">From $12.4k</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Precious Metal -->
+          <div>
+            <label class="block text-xs uppercase tracking-[0.2em] text-stone-500 font-mono mb-3">03. 18-Karat Gold Alloy</label>
+            <div class="flex items-center gap-3">
+              <button onclick="setBespokeMetal('18K Honey Yellow Gold')" class="metal-btn active flex-1 py-3 px-4 rounded-xl bg-white border border-stone-900 text-xs font-medium text-stone-900 shadow-sm" data-metal="yellow">
+                ✦ 18K Honey Yellow Gold
+              </button>
+              <button onclick="setBespokeMetal('18K Blush Rose Gold')" class="metal-btn flex-1 py-3 px-4 rounded-xl bg-white border border-stone-200 text-xs font-medium text-stone-700 hover:border-gold-400" data-metal="rose">
+                ✦ 18K Blush Rose Gold
+              </button>
+            </div>
+          </div>
+
+          <!-- Direct CTA -->
+          <button onclick="openSalonModal('Bespoke Atelier Custom Configuration')" class="w-full py-4 rounded-full text-xs uppercase tracking-[0.25em] font-semibold text-white bg-stone-900 hover:bg-gold-600 shadow-lg shadow-stone-900/10 transition duration-300">
+            Submit Custom Design To Sweta Jain's Atelier
+          </button>
+
+        </div>
+
+        <!-- Visual Live Rendering Stage -->
+        <div class="reveal-up lg:col-span-6">
+          <div class="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200/80 shadow-xl relative overflow-hidden text-center">
+            
+            <div class="flex items-center justify-between text-xs text-stone-500 font-mono mb-6">
+              <span id="bespokeStoneTag" class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-900 border border-emerald-200 font-medium">
+                Certified Natural Muzo Emerald
+              </span>
+              <span>18K Hallmarked NYC</span>
+            </div>
+
+            <!-- Gem Graphic Visual Canvas -->
+            <div class="aspect-square max-h-80 mx-auto relative flex items-center justify-center my-6">
+              <div id="glowBackdrop" class="absolute inset-0 bg-emerald-500/10 rounded-full blur-3xl transition-all duration-700"></div>
+              <img id="bespokeRenderImg" src="https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689" alt="Bespoke Jewel" class="max-h-72 object-contain relative z-10 transition-all duration-700 drop-shadow-2xl">
+            </div>
+
+            <!-- Spec Sheet Breakdown -->
+            <div class="pt-6 border-t border-stone-200 flex items-center justify-between text-left">
+              <div>
+                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono" id="bespokeMeta">Cushion Cut • 18K Honey Yellow Gold</span>
+                <h5 class="font-serif text-2xl text-stone-900" id="bespokeName">Bespoke Colombian Emerald Solitaire</h5>
+              </div>
+              <div class="text-right">
+                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Atelier Estimate</span>
+                <span class="font-cinzel text-2xl text-gold-700 font-semibold" id="bespokePrice">$16,500</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INTERACTIVE SECTION 3: RED CARPET EDITORIAL GALLERY (MAGAZINE STYLE) -->
+  <section id="red-carpet" class="py-28 px-6 bg-white border-b border-stone-200">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="reveal-up flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div>
+          <span class="text-[11px] uppercase tracking-[0.3em] text-rose-600 font-mono font-medium">Global Red Carpet Moments</span>
+          <h3 class="font-serif text-4xl sm:text-6xl font-normal text-stone-900 mt-2">
+            The Choice of World Icons
+          </h3>
+        </div>
+        <p class="text-stone-600 text-sm font-light max-w-md leading-relaxed">
+          From the Academy Museum Gala in Hollywood to world film premieres, international tastemakers turn to Goshwara to anchor their red-carpet presence with natural gemstone drama.
+        </p>
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
-        <!-- Look 1: Priyanka Chopra -->
-        <div class="bg-noir rounded-2xl overflow-hidden border border-white/10 group">
+        <!-- Celebrity 1: Priyanka Chopra -->
+        <div class="reveal-up group bg-silk rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition duration-500">
           <div class="aspect-[3/4] overflow-hidden relative">
-            <img src="https://goshwara.com/cdn/shop/files/Untitled_design_8.png?v=1792788650&width=1080" alt="Priyanka Chopra in Goshwara" class="w-full h-full object-cover object-top transition duration-700 group-hover:scale-105">
-            <div class="absolute inset-0 bg-gradient-to-t from-noir via-transparent to-transparent opacity-80"></div>
-            <div class="absolute bottom-6 inset-x-6">
-              <span class="px-2.5 py-1 rounded bg-champagne-500 text-noir text-[9px] uppercase tracking-[0.2em] font-bold mb-2 inline-block">Academy Gala</span>
-              <h4 class="font-serif text-2xl text-white">Priyanka Chopra</h4>
-              <p class="text-xs text-stone-300 font-light mt-1">Academy Museum Gala • Los Angeles</p>
+            <img src="https://goshwara.com/cdn/shop/files/Untitled_design_8.png?v=1792788650&width=1080" alt="Priyanka Chopra wearing Goshwara" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-stone-900/90 via-transparent to-transparent"></div>
+            <div class="absolute bottom-6 inset-x-6 text-white">
+              <span class="px-3 py-1 rounded-full bg-gold-500 text-stone-900 text-[9px] uppercase tracking-[0.2em] font-bold font-mono mb-2 inline-block">Academy Museum Gala</span>
+              <h4 class="font-serif text-3xl font-normal">Priyanka Chopra</h4>
+              <p class="text-xs text-stone-300 font-light mt-1">Los Angeles, California</p>
             </div>
           </div>
-          <div class="p-6 border-t border-white/5">
-            <span class="text-[10px] uppercase tracking-wider text-champagne-400 font-mono block mb-1">Featured Suite</span>
-            <p class="text-xs text-stone-300 font-light mb-4">Goshwara One-of-a-Kind Emerald Drop Earrings & Sculptural 18K Gold Cuffs.</p>
-            <button onclick="openSalonModal('Priyanka Chopra Red Carpet Suite')" class="w-full py-2.5 rounded-full border border-champagne-500/30 text-champagne-300 text-[10px] uppercase tracking-[0.2em] hover:bg-champagne-500 hover:text-noir transition font-medium">
+          <div class="p-6 bg-white">
+            <span class="text-[10px] uppercase tracking-wider text-gold-600 font-mono block mb-1">Archival Suite</span>
+            <p class="text-xs text-stone-600 font-light mb-4">
+              Goshwara Colombian Emerald Drop Earrings paired with 18K Yellow Gold Statement Cocktail Cuff.
+            </p>
+            <button onclick="openSalonModal('Priyanka Chopra Academy Gala Archive Suite')" class="w-full py-3 rounded-full border border-stone-300 hover:border-gold-500 text-stone-900 text-[10px] uppercase tracking-[0.2em] font-medium transition hover:bg-gold-50">
               Request Red Carpet Archive Piece
             </button>
           </div>
         </div>
 
-        <!-- Look 2: Linda Perry -->
-        <div class="bg-noir rounded-2xl overflow-hidden border border-white/10 group">
+        <!-- Celebrity 2: Linda Perry -->
+        <div class="reveal-up group bg-silk rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition duration-500">
           <div class="aspect-[3/4] overflow-hidden relative">
-            <img src="https://goshwara.com/cdn/shop/files/Linda.jpg?v=1792441065&width=1080" alt="Linda Perry in Goshwara" class="w-full h-full object-cover object-top transition duration-700 group-hover:scale-105">
-            <div class="absolute inset-0 bg-gradient-to-t from-noir via-transparent to-transparent opacity-80"></div>
-            <div class="absolute bottom-6 inset-x-6">
-              <span class="px-2.5 py-1 rounded bg-champagne-500 text-noir text-[9px] uppercase tracking-[0.2em] font-bold mb-2 inline-block">Film Festival</span>
-              <h4 class="font-serif text-2xl text-white">Linda Perry</h4>
-              <p class="text-xs text-stone-300 font-light mt-1">Mill Valley Film Festival Premiere</p>
+            <img src="https://goshwara.com/cdn/shop/files/Linda.jpg?v=1792441065&width=1080" alt="Linda Perry wearing Goshwara" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-stone-900/90 via-transparent to-transparent"></div>
+            <div class="absolute bottom-6 inset-x-6 text-white">
+              <span class="px-3 py-1 rounded-full bg-gold-500 text-stone-900 text-[9px] uppercase tracking-[0.2em] font-bold font-mono mb-2 inline-block">Film Festival Premiere</span>
+              <h4 class="font-serif text-3xl font-normal">Linda Perry</h4>
+              <p class="text-xs text-stone-300 font-light mt-1">Mill Valley Film Festival</p>
             </div>
           </div>
-          <div class="p-6 border-t border-white/5">
-            <span class="text-[10px] uppercase tracking-wider text-champagne-400 font-mono block mb-1">Featured Suite</span>
-            <p class="text-xs text-stone-300 font-light mb-4">Goshwara Rock 'N Roll Cabochon Ring & Layered Topaz Chains.</p>
-            <button onclick="openSalonModal('Linda Perry Film Festival Suite')" class="w-full py-2.5 rounded-full border border-champagne-500/30 text-champagne-300 text-[10px] uppercase tracking-[0.2em] hover:bg-champagne-500 hover:text-noir transition font-medium">
+          <div class="p-6 bg-white">
+            <span class="text-[10px] uppercase tracking-wider text-gold-600 font-mono block mb-1">Archival Suite</span>
+            <p class="text-xs text-stone-600 font-light mb-4">
+              Goshwara Rock 'N Roll Cabochon Ring in intense London Blue Topaz with tiered gold chains.
+            </p>
+            <button onclick="openSalonModal('Linda Perry Film Festival Suite')" class="w-full py-3 rounded-full border border-stone-300 hover:border-gold-500 text-stone-900 text-[10px] uppercase tracking-[0.2em] font-medium transition hover:bg-gold-50">
               Request Red Carpet Archive Piece
             </button>
           </div>
         </div>
 
-        <!-- Look 3: Ji-Young Yoo -->
-        <div class="bg-noir rounded-2xl overflow-hidden border border-white/10 group">
+        <!-- Celebrity 3: Ji-Young Yoo -->
+        <div class="reveal-up group bg-silk rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition duration-500">
           <div class="aspect-[3/4] overflow-hidden relative">
-            <img src="https://goshwara.com/cdn/shop/files/JI_YOUNG_b97d6c0d-1858-431f-9eb1-e9c08b73c5d5.jpg?v=1792440512&width=1080" alt="Ji-Young Yoo in Goshwara" class="w-full h-full object-cover object-top transition duration-700 group-hover:scale-105">
-            <div class="absolute inset-0 bg-gradient-to-t from-noir via-transparent to-transparent opacity-80"></div>
-            <div class="absolute bottom-6 inset-x-6">
-              <span class="px-2.5 py-1 rounded bg-champagne-500 text-noir text-[9px] uppercase tracking-[0.2em] font-bold mb-2 inline-block">Cape Gala</span>
-              <h4 class="font-serif text-2xl text-white">Ji-Young Yoo</h4>
-              <p class="text-xs text-stone-300 font-light mt-1">35th Annual Cape Gala Honors</p>
+            <img src="https://goshwara.com/cdn/shop/files/JI_YOUNG_b97d6c0d-1858-431f-9eb1-e9c08b73c5d5.jpg?v=1792440512&width=1080" alt="Ji-Young Yoo wearing Goshwara" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-stone-900/90 via-transparent to-transparent"></div>
+            <div class="absolute bottom-6 inset-x-6 text-white">
+              <span class="px-3 py-1 rounded-full bg-gold-500 text-stone-900 text-[9px] uppercase tracking-[0.2em] font-bold font-mono mb-2 inline-block">Cape Gala Honors</span>
+              <h4 class="font-serif text-3xl font-normal">Ji-Young Yoo</h4>
+              <p class="text-xs text-stone-300 font-light mt-1">35th Annual Cape Gala</p>
             </div>
           </div>
-          <div class="p-6 border-t border-white/5">
-            <span class="text-[10px] uppercase tracking-wider text-champagne-400 font-mono block mb-1">Featured Suite</span>
-            <p class="text-xs text-stone-300 font-light mb-4">Manhattan Collection Asscher Cut Mandarin Garnet Ear Drops.</p>
-            <button onclick="openSalonModal('Ji-Young Yoo Gala Suite')" class="w-full py-2.5 rounded-full border border-champagne-500/30 text-champagne-300 text-[10px] uppercase tracking-[0.2em] hover:bg-champagne-500 hover:text-noir transition font-medium">
+          <div class="p-6 bg-white">
+            <span class="text-[10px] uppercase tracking-wider text-gold-600 font-mono block mb-1">Archival Suite</span>
+            <p class="text-xs text-stone-600 font-light mb-4">
+              Manhattan Asscher Cut Mandarin Garnet Geometric Ear Drops in 18K solid gold.
+            </p>
+            <button onclick="openSalonModal('Ji-Young Yoo Cape Gala Suite')" class="w-full py-3 rounded-full border border-stone-300 hover:border-gold-500 text-stone-900 text-[10px] uppercase tracking-[0.2em] font-medium transition hover:bg-gold-50">
               Request Red Carpet Archive Piece
             </button>
           </div>
@@ -569,192 +749,148 @@
     </div>
   </section>
 
-  <!-- SECTION 4: THE ATELIER BESPOKE COMMISSION WORKFLOW -->
-  <section class="py-24 px-6 bg-noir relative border-b border-white/5">
-    <div class="max-w-5xl mx-auto text-center">
-      
-      <span class="text-[11px] uppercase tracking-[0.3em] text-champagne-400 font-mono">Bespoke Vault Commission</span>
-      <h3 class="font-serif text-3xl sm:text-5xl font-normal mt-3 mb-6">
-        Create Your One-of-a-Kind Heirloom
-      </h3>
-      <p class="text-stone-300 text-sm sm:text-base font-light leading-relaxed max-w-2xl mx-auto mb-16">
-        Sweta Jain regularly travels to the mines of Colombia, Africa, and Brazil to secure exceptional rough and cut crystals. Commission a custom 18K jewel crafted exclusively for your legacy.
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-14">
-        
-        <div class="p-8 rounded-2xl bg-charcoal/50 border border-white/5 relative">
-          <span class="font-cinzel text-3xl text-champagne-500/40 font-bold block mb-4">01</span>
-          <h4 class="font-serif text-xl text-white mb-2">Vault Stone Selection</h4>
-          <p class="text-xs text-stone-400 font-light leading-relaxed">
-            Select from our private unheated reserve: Colombian emeralds, Paraíba tourmalines, and mandarin garnets with certified provenance.
-          </p>
-        </div>
-
-        <div class="p-8 rounded-2xl bg-charcoal/50 border border-white/5 relative">
-          <span class="font-cinzel text-3xl text-champagne-500/40 font-bold block mb-4">02</span>
-          <h4 class="font-serif text-xl text-white mb-2">Architectural Proportion</h4>
-          <p class="text-xs text-stone-400 font-light leading-relaxed">
-            Our master jewelers hand-carve custom 18K yellow, rose, or white gold bezels calibrated to the stone's exact optical refraction.
-          </p>
-        </div>
-
-        <div class="p-8 rounded-2xl bg-charcoal/50 border border-white/5 relative">
-          <span class="font-cinzel text-3xl text-champagne-500/40 font-bold block mb-4">03</span>
-          <h4 class="font-serif text-xl text-white mb-2">Private Hand Delivery</h4>
-          <p class="text-xs text-stone-400 font-light leading-relaxed">
-            Presented in a hand-crafted leather jewel case with full GIA / Gübelin gemological dossier and archival certificate.
-          </p>
-        </div>
-
-      </div>
-
-      <button onclick="openSalonModal('Bespoke Commission Inquiry')" class="px-10 py-4 rounded-full text-xs uppercase tracking-[0.25em] font-semibold text-noir bg-gradient-to-r from-champagne-300 via-champagne-400 to-champagne-500 hover:from-white hover:to-champagne-400 shadow-xl shadow-champagne-500/25 transition">
-        Begin A Bespoke Commission
-      </button>
-
-    </div>
-  </section>
-
-  <!-- SECTION 5: WHY THIS TRANSFORMS GOSHWARA (PITCH SECTION FOR INDIA HEAD) -->
-  <section class="py-20 px-6 bg-gradient-to-b from-charcoal via-noir to-noir border-b border-champagne-500/20">
+  <!-- STRATEGIC VALUE AUDIT: THE PITCH TO GOSHWARA INDIA HEAD -->
+  <section class="py-24 px-6 bg-pearl border-b border-stone-200">
     <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-12">
-        <span class="text-[11px] uppercase tracking-[0.3em] text-champagne-400 font-mono">Executive Brief for India Leadership</span>
-        <h3 class="font-serif text-3xl sm:text-4xl font-normal mt-2">
-          The 4 Pillars of Digital Expansion
+      
+      <div class="reveal-up text-center max-w-2xl mx-auto mb-16">
+        <span class="text-[11px] uppercase tracking-[0.3em] text-gold-700 font-mono font-medium">Strategic Expansion Advisory</span>
+        <h3 class="font-serif text-3xl sm:text-5xl font-normal text-stone-900 mt-2">
+          Bridging Global Luxury With India High-Net-Worth Footfall
         </h3>
+        <p class="text-stone-600 text-xs sm:text-sm font-light mt-3">
+          Why Goshwara's current digital presence leaves millions on the table—and how this architecture captures high-ticket clientele.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm font-light">
-        <div class="p-6 rounded-xl bg-noir/80 border border-white/10">
-          <div class="flex items-center gap-3 text-champagne-400 font-mono text-xs uppercase mb-2">
-            <span class="w-2 h-2 rounded-full bg-champagne-400"></span>
-            <span>1. Zero Domain Leaks & Trust</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <div class="reveal-up p-8 rounded-3xl bg-white border border-stone-200/80 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xs">✕</span>
+            <h4 class="font-serif text-xl text-stone-900">Current Goshwara.com Bottleneck</h4>
           </div>
-          <p class="text-stone-300 text-xs leading-relaxed">
-            Permanently eliminates all redirects to staging subdomains (<code class="text-champagne-400">goshwara-tan.myshopify.com</code>). High-net-worth clients remain 100% inside the verified, pristine Goshwara maison ecosystem.
-          </p>
+          <ul class="space-y-3 text-xs text-stone-600 font-light leading-relaxed">
+            <li>• <strong>Generic Shopify Starter Theme:</strong> Running on the free Shopify "Dawn" theme, visually indistinguishable from basic apparel shops.</li>
+            <li>• <strong>Staging Subdomain Leaks:</strong> Core story links throw users to <code class="text-rose-600">goshwara-tan.myshopify.com</code>, shattering luxury trust.</li>
+            <li>• <strong>No High-Touch Conversion:</strong> Wealthy Indian and US collectors do not add \$15,000 jewelry to a standard cart without a private viewing bridge.</li>
+          </ul>
         </div>
 
-        <div class="p-6 rounded-xl bg-noir/80 border border-white/10">
-          <div class="flex items-center gap-3 text-champagne-400 font-mono text-xs uppercase mb-2">
-            <span class="w-2 h-2 rounded-full bg-champagne-400"></span>
-            <span>2. Bridge Online Traffic with Private Salons</span>
+        <div class="reveal-up p-8 rounded-3xl bg-white border border-gold-300 shadow-md">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">✓</span>
+            <h4 class="font-serif text-xl text-stone-900">The Elevated Maison Architecture</h4>
           </div>
-          <p class="text-stone-300 text-xs leading-relaxed">
-            Instead of hoping clients purchase a $15,000 necklace via a cold cart, the site actively routes Indian and US buyers directly into private suite appointments in Mumbai, Delhi, or Fifth Avenue.
-          </p>
+          <ul class="space-y-3 text-xs text-stone-700 font-light leading-relaxed">
+            <li>• <strong>Luminous Silk Editorial Design:</strong> Haute Joaillerie typography, gold foil accents, and interactive gemstone facet lighting.</li>
+            <li>• <strong>Private Salon Suite Funnel:</strong> Direct appointment booking in Mumbai (Bandra/BKC), Delhi, and Fifth Avenue.</li>
+            <li>• <strong>WhatsApp Gemologist Concierge:</strong> Capturing over 70% of high-jewelry deals that close over direct high-touch dialogue.</li>
+          </ul>
         </div>
 
-        <div class="p-6 rounded-xl bg-noir/80 border border-white/10">
-          <div class="flex items-center gap-3 text-champagne-400 font-mono text-xs uppercase mb-2">
-            <span class="w-2 h-2 rounded-full bg-champagne-400"></span>
-            <span>3. Dynamic WhatsApp Gem Concierge</span>
-          </div>
-          <p class="text-stone-300 text-xs leading-relaxed">
-            In India and the Middle East, over 70% of high-jewelry transactions close over private WhatsApp consultations with photos, certificate inspection, and insured courier.
-          </p>
-        </div>
-
-        <div class="p-6 rounded-xl bg-noir/80 border border-white/10">
-          <div class="flex items-center gap-3 text-champagne-400 font-mono text-xs uppercase mb-2">
-            <span class="w-2 h-2 rounded-full bg-champagne-400"></span>
-            <span>4. Luxury Editorial Tone (Dawn Replacement)</span>
-          </div>
-          <p class="text-stone-300 text-xs leading-relaxed">
-            Transitions Goshwara from a generic Shopify starter grid to a bespoke, rich obsidian-gold aesthetic that matches Bergdorf Goodman, Saks Fifth Avenue, and Cartier standards.
-          </p>
-        </div>
       </div>
+
+      <div class="reveal-up mt-12 p-6 rounded-2xl bg-white border border-stone-200 text-center">
+        <p class="text-xs uppercase tracking-[0.25em] text-stone-500 font-mono mb-2">Presented by Flagship Systems</p>
+        <p class="font-serif text-lg text-stone-900">
+          Full Shopify 2.0 theme overhaul, custom salon booking engine, and bespoke lookbook architecture.
+        </p>
+      </div>
+
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-noir py-16 px-6 border-t border-white/10 text-stone-400 text-xs">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+  <!-- MAISON FOOTER -->
+  <footer class="bg-noir text-stone-400 py-20 px-6 border-t border-gold-400/20">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+      
       <div class="text-center md:text-left">
-        <h5 class="font-cinzel text-xl text-white tracking-[0.3em] uppercase mb-1">GOSHWARA</h5>
-        <p class="text-[10px] uppercase tracking-[0.25em] text-champagne-400 font-mono">The Silhouette of Perfect Proportions</p>
-        <p class="text-xs text-stone-500 mt-3">New York • Fifth Avenue & 47th St Salon | By Private Appointment</p>
+        <h5 class="font-cinzel text-2xl text-white tracking-[0.35em] uppercase mb-1">GOSHWARA</h5>
+        <p class="text-[9px] uppercase tracking-[0.35em] text-gold-300 font-mono">The Silhouette of Perfect Proportions</p>
+        <p class="text-xs text-stone-400 mt-4 max-w-sm">
+          New York Fifth Avenue Salon • Available at Saks Fifth Avenue, Neiman Marcus & Authorized Fine Jewelers Worldwide.
+        </p>
       </div>
 
-      <div class="flex items-center gap-8 text-[11px] uppercase tracking-[0.2em]">
-        <a href="#vault" class="hover:text-champagne-400 transition">Collections</a>
-        <a href="#chroma-matrix" class="hover:text-champagne-400 transition">Gemstones</a>
-        <a href="#red-carpet" class="hover:text-champagne-400 transition">Red Carpet</a>
-        <button onclick="openSalonModal()" class="hover:text-champagne-400 transition">Private Viewing</button>
+      <div class="flex flex-wrap items-center justify-center gap-8 text-[11px] uppercase tracking-[0.2em] text-stone-300">
+        <a href="#vault" class="hover:text-gold-300 transition">Collections</a>
+        <a href="#chroma-matrix" class="hover:text-gold-300 transition">Gem Spectrum</a>
+        <a href="#bespoke-atelier" class="hover:text-gold-300 transition">Bespoke</a>
+        <a href="#red-carpet" class="hover:text-gold-300 transition">Red Carpet</a>
+        <button onclick="openSalonModal()" class="hover:text-gold-300 transition">Private Suite</button>
       </div>
 
-      <div class="text-center md:text-right font-mono text-[10px] text-stone-500">
-        <p>© 2026 GOSHWARA Fine Jewelry. All rights reserved.</p>
-        <p class="text-champagne-500/60 mt-1">Digital Architecture by Flagship Systems</p>
+      <div class="text-center md:text-right font-mono text-[10px] text-stone-400">
+        <p>© 2026 GOSHWARA Fine Jewelry. All Rights Reserved.</p>
+        <p class="text-gold-400/80 mt-1">Digital Transformation Architecture by Flagship Systems</p>
       </div>
+
     </div>
   </footer>
 
-  <!-- MODAL: BOOK PRIVATE SALON VIEWING -->
-  <div id="salonModal" class="fixed inset-0 z-50 bg-noir/90 backdrop-blur-xl flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="bg-charcoal border border-champagne-500/40 rounded-3xl max-w-xl w-full p-8 relative shadow-2xl">
-      <button onclick="closeSalonModal()" class="absolute top-6 right-6 text-stone-400 hover:text-white transition text-lg">✕</button>
+  <!-- PRIVATE SALON VIEWING MODAL -->
+  <div id="salonModal" class="fixed inset-0 z-50 bg-stone-900/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-white border border-gold-300 rounded-3xl max-w-xl w-full p-8 sm:p-10 relative shadow-2xl">
+      <button onclick="closeSalonModal()" class="absolute top-6 right-6 text-stone-400 hover:text-stone-900 transition text-xl">✕</button>
       
       <div class="text-center mb-8">
-        <span class="text-[10px] uppercase tracking-[0.3em] text-champagne-400 font-mono">Exclusive Private Salon</span>
-        <h4 class="font-serif text-3xl text-white font-normal mt-2">Schedule A Private Viewing</h4>
-        <p class="text-xs text-stone-400 font-light mt-1" id="salonPieceNotice">Curated for prospective collectors and custom heirloom commissions.</p>
+        <span class="text-[10px] uppercase tracking-[0.3em] text-gold-700 font-mono font-medium">Private Haute Joaillerie Salon</span>
+        <h4 class="font-serif text-3xl sm:text-4xl text-stone-900 font-normal mt-2">Reserve A Private Viewing</h4>
+        <p class="text-xs text-stone-600 font-light mt-1.5" id="salonPieceNotice">Curated for prospective collectors and bespoke heirloom commissions.</p>
       </div>
 
       <form onsubmit="handleSalonBooking(event)" class="space-y-4">
         <div>
-          <label class="block text-[10px] uppercase font-mono tracking-wider text-stone-300 mb-1">Select Private Salon Location</label>
-          <select id="salonLoc" class="w-full bg-noir border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-champagne-400">
-            <option value="NYC Fifth Avenue Salon">New York • Fifth Avenue Flagship Salon</option>
-            <option value="Mumbai Private Suite">Mumbai • Luxury Private Viewing Suite (Bandra / BKC)</option>
-            <option value="Delhi Private Suite">New Delhi • The Oberoi / Golf Course Suite</option>
-            <option value="Saks Fifth Avenue VIP Room">Saks Fifth Avenue • Private VIP Consultation</option>
+          <label class="block text-[10px] uppercase font-mono tracking-wider text-stone-600 mb-1">Select Private Suite Location</label>
+          <select id="salonLoc" class="w-full bg-silk border border-stone-300 rounded-xl px-4 py-3 text-xs text-stone-900 focus:outline-none focus:border-gold-500">
+            <option value="Mumbai Private Suite (Bandra / BKC)">Mumbai • Luxury Private Viewing Suite (Bandra / BKC)</option>
+            <option value="New Delhi Private Suite (The Oberoi / Chanakyapuri)">New Delhi • Private Suite (The Oberoi / Chanakyapuri)</option>
+            <option value="New York Fifth Avenue Flagship Salon">New York • Fifth Avenue Flagship Salon</option>
+            <option value="Saks Fifth Avenue VIP Concierge">Saks Fifth Avenue • Private VIP Consultation</option>
           </select>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-[10px] uppercase font-mono tracking-wider text-stone-300 mb-1">Preferred Date</label>
-            <input type="date" id="salonDate" required class="w-full bg-noir border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-champagne-400">
+            <label class="block text-[10px] uppercase font-mono tracking-wider text-stone-600 mb-1">Preferred Date</label>
+            <input type="date" id="salonDate" required class="w-full bg-silk border border-stone-300 rounded-xl px-4 py-3 text-xs text-stone-900 focus:outline-none focus:border-gold-500">
           </div>
           <div>
-            <label class="block text-[10px] uppercase font-mono tracking-wider text-stone-300 mb-1">Preferred Time</label>
-            <select id="salonTime" class="w-full bg-noir border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-champagne-400">
-              <option value="11:00 AM">11:00 AM (Morning Session)</option>
-              <option value="02:30 PM">02:30 PM (Afternoon Session)</option>
-              <option value="05:30 PM">05:30 PM (Twilight Champagne Session)</option>
+            <label class="block text-[10px] uppercase font-mono tracking-wider text-stone-600 mb-1">Preferred Time</label>
+            <select id="salonTime" class="w-full bg-silk border border-stone-300 rounded-xl px-4 py-3 text-xs text-stone-900 focus:outline-none focus:border-gold-500">
+              <option value="11:30 AM">11:30 AM (Private Morning Salon)</option>
+              <option value="03:00 PM">03:00 PM (Afternoon Viewing)</option>
+              <option value="06:00 PM">06:00 PM (Twilight Champagne Viewing)</option>
             </select>
           </div>
         </div>
 
         <div>
-          <label class="block text-[10px] uppercase font-mono tracking-wider text-stone-300 mb-1">Collector's Full Name</label>
-          <input type="text" id="collectorName" placeholder="e.g. Ananya Singhania" required class="w-full bg-noir border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-champagne-400">
+          <label class="block text-[10px] uppercase font-mono tracking-wider text-stone-600 mb-1">Collector's Name</label>
+          <input type="text" id="collectorName" placeholder="e.g. Radhika Ambani" required class="w-full bg-silk border border-stone-300 rounded-xl px-4 py-3 text-xs text-stone-900 focus:outline-none focus:border-gold-500">
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-[10px] uppercase font-mono tracking-wider text-stone-300 mb-1">WhatsApp / Phone</label>
-            <input type="tel" id="collectorPhone" placeholder="+91 98200 00000" required class="w-full bg-noir border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-champagne-400">
+            <label class="block text-[10px] uppercase font-mono tracking-wider text-stone-600 mb-1">WhatsApp Contact</label>
+            <input type="tel" id="collectorPhone" placeholder="+91 98200 00000" required class="w-full bg-silk border border-stone-300 rounded-xl px-4 py-3 text-xs text-stone-900 focus:outline-none focus:border-gold-500">
           </div>
           <div>
-            <label class="block text-[10px] uppercase font-mono tracking-wider text-stone-300 mb-1">Email</label>
-            <input type="email" id="collectorEmail" placeholder="collector@domain.com" required class="w-full bg-noir border border-white/10 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-champagne-400">
+            <label class="block text-[10px] uppercase font-mono tracking-wider text-stone-600 mb-1">Private Email</label>
+            <input type="email" id="collectorEmail" placeholder="collector@domain.com" required class="w-full bg-silk border border-stone-300 rounded-xl px-4 py-3 text-xs text-stone-900 focus:outline-none focus:border-gold-500">
           </div>
         </div>
 
-        <button type="submit" class="w-full py-4 mt-2 rounded-full text-xs uppercase tracking-[0.25em] font-semibold text-noir bg-gradient-to-r from-champagne-300 via-champagne-400 to-champagne-500 hover:from-white hover:to-champagne-400 shadow-xl shadow-champagne-500/25 transition">
-          Confirm Private Salon Viewing
+        <button type="submit" class="w-full py-4 mt-2 rounded-full text-xs uppercase tracking-[0.25em] font-semibold text-white bg-stone-900 hover:bg-gold-600 shadow-xl shadow-stone-900/10 transition duration-300">
+          Confirm Private Salon Suite
         </button>
       </form>
 
       <div id="bookingSuccess" class="hidden text-center py-8">
-        <span class="text-3xl text-emerald-400 block mb-3">✓</span>
-        <h5 class="font-serif text-2xl text-white">Viewing Confirmed</h5>
-        <p class="text-xs text-stone-300 font-light mt-2 max-w-sm mx-auto" id="bookingSuccessMsg">
+        <span class="text-4xl text-emerald-600 block mb-3">✓</span>
+        <h5 class="font-serif text-3xl text-stone-900">Viewing Reserved</h5>
+        <p class="text-xs text-stone-600 font-light mt-2 max-w-sm mx-auto" id="bookingSuccessMsg">
           Our Senior Gemologist has reserved your private suite. An invitation has been dispatched to your WhatsApp.
         </p>
       </div>
@@ -762,71 +898,96 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT LOGIC -->
+  <!-- JAVASCRIPT: SCROLL REVEAL & INTERACTIVE CONTROLLERS -->
   <script>
+    // Scroll Reveal with Intersection Observer
+    document.addEventListener("DOMContentLoaded", function() {
+      const revealElements = document.querySelectorAll(".reveal-up");
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+      });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+    });
+
     // Gemstone Chroma Matrix Filter
     function filterGem(gem) {
-      // Update Buttons
       document.querySelectorAll('.gem-filter').forEach(btn => {
         if(btn.dataset.gem === gem) {
-          btn.className = "gem-filter active px-5 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition border border-champagne-400 bg-champagne-400 text-noir";
+          btn.className = "gem-filter active px-6 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition duration-300 border border-stone-900 bg-stone-900 text-white shadow-md";
         } else {
-          btn.className = "gem-filter px-5 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition border border-white/10 bg-noir/60 text-stone-300 hover:border-champagne-400/40";
+          btn.className = "gem-filter px-6 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition duration-300 border border-stone-200 bg-silk text-stone-700 hover:border-gold-400";
         }
       });
 
-      // Filter Cards
       document.querySelectorAll('#vaultGrid .gem-card').forEach(card => {
         if(gem === 'all' || card.dataset.category === gem) {
           card.style.display = 'block';
-          card.style.opacity = '1';
+          setTimeout(() => { card.style.opacity = '1'; }, 50);
         } else {
           card.style.display = 'none';
         }
       });
     }
 
-    // Light Inspector Simulator
-    const atmospheres = {
-      daylight: {
-        label: "Current Atmosphere: Fifth Avenue Sunlight (5500K)",
-        bg: "bg-gradient-to-tr from-stone-950 via-charcoal to-stone-900",
-        glow: "bg-sky-500/10",
-        filter: "brightness(1.05) contrast(1.05) saturate(1.15)"
-      },
-      gala: {
-        label: "Current Atmosphere: Evening Gala & Candlelight (2700K)",
-        bg: "bg-gradient-to-tr from-[#140D05] via-[#24170A] to-[#120B03]",
-        glow: "bg-amber-500/20",
-        filter: "brightness(1) contrast(1.1) saturate(1.3) sepia(0.2)"
-      },
-      gallery: {
-        label: "Current Atmosphere: Madison Ave Salon Pin-Spotlight",
-        bg: "bg-gradient-to-tr from-black via-[#0B0D12] to-black",
-        glow: "bg-champagne-500/15",
-        filter: "brightness(1.15) contrast(1.2) saturate(1.2)"
-      }
-    };
+    // Bespoke Atelier Configurator Logic
+    let currentShape = 'Cushion';
+    let currentGem = 'Colombian Emerald';
+    let currentMetal = '18K Honey Yellow Gold';
+    let currentPrice = '$16,500';
 
-    function changeLighting(mode) {
-      document.querySelectorAll('.light-btn').forEach(btn => {
-        if(btn.dataset.mode === mode) {
-          btn.classList.add('border-champagne-400', 'bg-charcoal/80');
-          btn.classList.remove('border-white/10', 'bg-noir');
-          btn.querySelector('span:last-child').innerText = 'Active';
-          btn.querySelector('span:last-child').className = 'text-champagne-400 font-mono text-xs';
+    function setBespokeShape(shape, imgUrl) {
+      currentShape = shape;
+      document.querySelectorAll('.shape-btn').forEach(b => {
+        if(b.dataset.shape === shape) {
+          b.className = "shape-btn active p-3 rounded-2xl bg-white border border-stone-900 text-center transition shadow-sm";
         } else {
-          btn.classList.remove('border-champagne-400', 'bg-charcoal/80');
-          btn.classList.add('border-white/10', 'bg-noir');
-          btn.querySelector('span:last-child').innerText = 'Select';
-          btn.querySelector('span:last-child').className = 'text-stone-400 font-mono text-xs';
+          b.className = "shape-btn p-3 rounded-2xl bg-white border border-stone-200 text-center hover:border-gold-400 transition";
         }
       });
+      document.getElementById('bespokeRenderImg').src = imgUrl;
+      updateBespokeSpecs();
+    }
 
-      const config = atmospheres[mode];
-      document.getElementById('lightModeLabel').innerText = config.label;
-      document.getElementById('inspectorImg').style.filter = config.filter;
-      document.getElementById('inspectorGlow').className = `absolute inset-0 ${config.glow} blur-[80px] pointer-events-none transition-all duration-700`;
+    function setBespokeGem(gem, colorHex, price, origin) {
+      currentGem = gem;
+      currentPrice = price;
+      document.querySelectorAll('.gem-choice').forEach(g => {
+        if(g.innerText.includes(gem.split(' ')[0])) {
+          g.className = "gem-choice active p-3 rounded-xl bg-white border border-stone-900 text-left transition shadow-sm";
+        } else {
+          g.className = "gem-choice p-3 rounded-xl bg-white border border-stone-200 text-left hover:border-gold-400 transition";
+        }
+      });
+      document.getElementById('glowBackdrop').style.backgroundColor = colorHex;
+      document.getElementById('bespokeStoneTag').innerText = `Certified Natural ${gem} (${origin})`;
+      updateBespokeSpecs();
+    }
+
+    function setBespokeMetal(metal) {
+      currentMetal = metal;
+      document.querySelectorAll('.metal-btn').forEach(m => {
+        if(m.innerText.includes(metal.split(' ')[1])) {
+          m.className = "metal-btn active flex-1 py-3 px-4 rounded-xl bg-white border border-stone-900 text-xs font-medium text-stone-900 shadow-sm";
+        } else {
+          m.className = "metal-btn flex-1 py-3 px-4 rounded-xl bg-white border border-stone-200 text-xs font-medium text-stone-700 hover:border-gold-400";
+        }
+      });
+      updateBespokeSpecs();
+    }
+
+    function updateBespokeSpecs() {
+      document.getElementById('bespokeMeta').innerText = `${currentShape} • ${currentMetal}`;
+      document.getElementById('bespokeName').innerText = `Bespoke ${currentGem} Solitaire`;
+      document.getElementById('bespokePrice').innerText = currentPrice;
     }
 
     // Modal Handlers
@@ -834,9 +995,9 @@
       const modal = document.getElementById('salonModal');
       modal.classList.remove('opacity-0', 'pointer-events-none');
       if(pieceName) {
-        document.getElementById('salonPieceNotice').innerText = `Private viewing curated for: ${pieceName}`;
+        document.getElementById('salonPieceNotice').innerText = `Private viewing requested for: ${pieceName}`;
       } else {
-        document.getElementById('salonPieceNotice').innerText = 'Curated for prospective collectors and custom heirloom commissions.';
+        document.getElementById('salonPieceNotice').innerText = 'Curated for prospective collectors and bespoke heirloom commissions.';
       }
     }
 
@@ -857,8 +1018,9 @@
       document.getElementById('bookingSuccessMsg').innerText = `A private viewing at ${loc} on ${date} (${time}) has been assigned to ${name}. Our Senior Gemologist has dispatched your private invitation.`;
     }
 
-    function openProductQuickView(title, price, gem, metal, imgUrl) {
-      openSalonModal(`${title} (${price})`);
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({ behavior: 'smooth' });
     }
   </script>
 
