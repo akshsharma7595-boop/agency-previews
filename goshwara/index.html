@@ -235,14 +235,14 @@
       ✦ Partner with Saks Fifth Avenue & Neiman Marcus ✦
     </div>
 
-    <!-- Currency & Sound Toggles -->
+    <!-- Private Client Services & Sound Toggles -->
     <div class="flex items-center gap-4 text-white">
-      <div class="flex items-center bg-black/40 border border-gold-400/30 rounded-full px-2 py-0.5 text-[10px]">
-        <button onclick="setCurrency('USD')" id="currUSD" class="px-2 py-0.5 rounded-full bg-gold-400 text-stone-950 font-bold font-mono transition">USD $</button>
-        <button onclick="setCurrency('INR')" id="currINR" class="px-2 py-0.5 rounded-full text-stone-300 hover:text-white font-mono transition">INR ₹</button>
+      <div class="hidden sm:flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/40 border border-gold-400/30 text-[10px] font-mono text-gold-300">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        <span>Private Client Services &bull; P.O.A.</span>
       </div>
 
-      <button onclick="toggleSound()" id="soundBtn" class="flex items-center gap-1.5 text-stone-300 hover:text-gold-300 text-[10.5px] transition">
+      <button onclick="toggleSound()" id="soundBtn" class="flex items-center gap-1.5 text-stone-300 hover:text-gold-300 text-[10.5px] transition cursor-pointer">
         <span id="soundIcon">♫</span>
         <span id="soundText">Sound: Off</span>
       </button>
@@ -369,7 +369,7 @@
             </div>
             <span class="text-[9px] uppercase tracking-[0.25em] text-gold-600 font-mono block">Manhattan Vault</span>
             <h4 class="font-serif text-lg text-stone-900 font-medium">Asscher Pendant</h4>
-            <span class="text-xs text-stone-700 font-cinzel font-semibold mt-1 block price-tag" data-usd="9950">$9,950</span>
+            <span class="text-[9.5px] uppercase tracking-[0.2em] text-stone-500 font-mono mt-1 block">Private Acquisition &bull; P.O.A.</span>
           </div>
         </div>
 
@@ -382,7 +382,7 @@
             </div>
             <span class="text-[9px] uppercase tracking-[0.25em] text-gold-600 font-mono block">Rock 'N Roll</span>
             <h4 class="font-serif text-lg text-stone-900 font-medium">Cocktail Ring</h4>
-            <span class="text-xs text-stone-700 font-cinzel font-semibold mt-1 block price-tag" data-usd="6800">$6,800</span>
+            <span class="text-[9.5px] uppercase tracking-[0.2em] text-stone-500 font-mono mt-1 block">Private Acquisition &bull; P.O.A.</span>
           </div>
         </div>
 
@@ -395,7 +395,7 @@
             </div>
             <span class="text-[9px] uppercase tracking-[0.25em] text-emerald-700 font-mono block">Queen High Jewelry</span>
             <h4 class="font-serif text-lg text-stone-900 font-medium">Emerald Choker</h4>
-            <span class="text-xs text-gold-700 font-cinzel font-semibold mt-1 block price-tag" data-usd="48500">$48,500</span>
+            <span class="text-[9.5px] uppercase tracking-[0.2em] text-emerald-700 font-mono font-semibold mt-1 block">Haute Joaillerie Suite &bull; P.O.A.</span>
           </div>
         </div>
 
@@ -408,7 +408,7 @@
             </div>
             <span class="text-[9px] uppercase tracking-[0.25em] text-gold-600 font-mono block">Gossip Collection</span>
             <h4 class="font-serif text-lg text-stone-900 font-medium">Link Bracelet</h4>
-            <span class="text-xs text-stone-700 font-cinzel font-semibold mt-1 block price-tag" data-usd="11200">$11,200</span>
+            <span class="text-[9.5px] uppercase tracking-[0.2em] text-stone-500 font-mono mt-1 block">Private Acquisition &bull; P.O.A.</span>
           </div>
         </div>
 
@@ -484,13 +484,13 @@
           <div>
             <label class="block text-xs uppercase tracking-[0.2em] text-stone-600 font-mono mb-3">03. High-Jewelry Statement Piece</label>
             <div class="flex items-center gap-2">
-              <button onclick="setStudioJewel('Queen Rainforest Choker Suite', '$48,500', 'https://goshwara.com/cdn/shop/files/Rain_forest_collection_500x.jpg?v=1748553985')" class="jewel-btn active flex-1 py-2.5 px-3 rounded-xl bg-white border border-stone-900 text-xs text-stone-900 font-medium text-center cursor-pointer">
+              <button onclick="setStudioJewel('Queen Rainforest Choker Suite', 'Private Acquisition • P.O.A.', 'https://goshwara.com/cdn/shop/files/Rain_forest_collection_500x.jpg?v=1748553985')" class="jewel-btn active flex-1 py-2.5 px-3 rounded-xl bg-white border border-stone-900 text-xs text-stone-900 font-medium text-center cursor-pointer">
                 Colombian Choker
               </button>
-              <button onclick="setStudioJewel('Manhattan Asscher Pendant', '$9,950', 'https://goshwara.com/cdn/shop/files/JP0190-PSYSM1_1a2c456e-d0c6-4e90-a8ee-06760ad4c761.jpg?v=1765754619')" class="jewel-btn flex-1 py-2.5 px-3 rounded-xl bg-white border border-stone-200 text-xs text-stone-700 hover:border-gold-400 text-center cursor-pointer">
+              <button onclick="setStudioJewel('Manhattan Asscher Pendant', 'Private Acquisition • P.O.A.', 'https://goshwara.com/cdn/shop/files/JP0190-PSYSM1_1a2c456e-d0c6-4e90-a8ee-06760ad4c761.jpg?v=1765754619')" class="jewel-btn flex-1 py-2.5 px-3 rounded-xl bg-white border border-stone-200 text-xs text-stone-700 hover:border-gold-400 text-center cursor-pointer">
                 Asscher Pendant
               </button>
-              <button onclick="setStudioJewel('Three-Stone Cocktail Ring', '$6,800', 'https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689')" class="jewel-btn flex-1 py-2.5 px-3 rounded-xl bg-white border border-stone-200 text-xs text-stone-700 hover:border-gold-400 text-center cursor-pointer">
+              <button onclick="setStudioJewel('Three-Stone Cocktail Ring', 'Private Acquisition • P.O.A.', 'https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689')" class="jewel-btn flex-1 py-2.5 px-3 rounded-xl bg-white border border-stone-200 text-xs text-stone-700 hover:border-gold-400 text-center cursor-pointer">
                 Topaz Ring
               </button>
             </div>
@@ -522,7 +522,7 @@
             <div class="pt-6 border-t border-white/10 flex items-center justify-between relative z-10">
               <div>
                 <h5 class="font-serif text-2xl text-white" id="fittingJewelTitle">Queen Rainforest Choker Suite</h5>
-                <span class="text-gold-300 font-cinzel text-lg" id="fittingJewelPrice">$48,500</span>
+                <span class="text-gold-300 font-mono text-xs uppercase tracking-widest" id="fittingJewelPrice">Haute Joaillerie &bull; Price Upon Application (P.O.A.)</span>
               </div>
               <button onclick="openSalonDrawer()" class="px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold text-stone-950 bg-gold-400 hover:bg-gold-300 transition shadow-lg cursor-pointer">
                 Book Private In-Person Try-On
@@ -638,7 +638,7 @@
         <img src="https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689" alt="Finished Goshwara 18K Ring" class="w-full h-full object-cover bg-silk">
         
         <div class="absolute bottom-6 right-6 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md border border-gold-400 text-stone-900 text-xs font-mono font-semibold uppercase tracking-wider shadow-md pointer-events-none">
-          Refined: 18K London Blue Topaz Ring (<span class="price-tag" data-usd="6800">$6,800</span>)
+          Refined: 18K London Blue Topaz Ring (Private Reserve &bull; P.O.A.)
         </div>
 
         <!-- Before Image (Raw Crystal in Matrix) -->
@@ -734,10 +734,10 @@
             </p>
             <div class="flex items-center justify-between pt-4 border-t border-stone-100">
               <div>
-                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Value</span>
-                <span class="font-cinzel text-xl text-stone-900 font-semibold price-tag" data-usd="9950">$9,950</span>
+                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Private Acquisition</span>
+                <span class="text-xs text-stone-500 font-serif italic">Price Upon Application (P.O.A.)</span>
               </div>
-              <span class="text-[10px] uppercase tracking-[0.2em] text-gold-700 font-semibold underline underline-offset-4">
+              <span class="text-[10px] uppercase tracking-[0.2em] text-stone-900 group-hover:text-gold-700 font-semibold underline underline-offset-4">
                 Inspect 3.5X Loupe →
               </span>
             </div>
@@ -763,10 +763,10 @@
             </p>
             <div class="flex items-center justify-between pt-4 border-t border-stone-100">
               <div>
-                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Value</span>
-                <span class="font-cinzel text-xl text-stone-900 font-semibold price-tag" data-usd="6800">$6,800</span>
+                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Private Acquisition</span>
+                <span class="text-xs text-stone-500 font-serif italic">Price Upon Application (P.O.A.)</span>
               </div>
-              <span class="text-[10px] uppercase tracking-[0.2em] text-gold-700 font-semibold underline underline-offset-4">
+              <span class="text-[10px] uppercase tracking-[0.2em] text-stone-900 group-hover:text-gold-700 font-semibold underline underline-offset-4">
                 Inspect 3.5X Loupe →
               </span>
             </div>
@@ -792,10 +792,10 @@
             </p>
             <div class="flex items-center justify-between pt-4 border-t border-stone-100">
               <div>
-                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Value</span>
-                <span class="font-cinzel text-xl text-gold-700 font-semibold price-tag" data-usd="48500">$48,500</span>
+                <span class="text-[9.5px] uppercase tracking-[0.25em] text-emerald-700 block font-mono font-semibold">Haute Joaillerie Reserve</span>
+                <span class="text-xs text-stone-500 font-serif italic">Price Upon Application (P.O.A.)</span>
               </div>
-              <span class="text-[10px] uppercase tracking-[0.2em] text-gold-700 font-semibold underline underline-offset-4">
+              <span class="text-[10px] uppercase tracking-[0.2em] text-stone-900 group-hover:text-gold-700 font-semibold underline underline-offset-4">
                 Inspect 3.5X Loupe →
               </span>
             </div>
@@ -821,10 +821,10 @@
             </p>
             <div class="flex items-center justify-between pt-4 border-t border-stone-100">
               <div>
-                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Value</span>
-                <span class="font-cinzel text-xl text-stone-900 font-semibold price-tag" data-usd="5500">$5,500</span>
+                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Private Acquisition</span>
+                <span class="text-xs text-stone-500 font-serif italic">Price Upon Application (P.O.A.)</span>
               </div>
-              <span class="text-[10px] uppercase tracking-[0.2em] text-gold-700 font-semibold underline underline-offset-4">
+              <span class="text-[10px] uppercase tracking-[0.2em] text-stone-900 group-hover:text-gold-700 font-semibold underline underline-offset-4">
                 Inspect 3.5X Loupe →
               </span>
             </div>
@@ -850,10 +850,10 @@
             </p>
             <div class="flex items-center justify-between pt-4 border-t border-stone-100">
               <div>
-                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Value</span>
-                <span class="font-cinzel text-xl text-stone-900 font-semibold price-tag" data-usd="8400">$8,400</span>
+                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Private Acquisition</span>
+                <span class="text-xs text-stone-500 font-serif italic">Price Upon Application (P.O.A.)</span>
               </div>
-              <span class="text-[10px] uppercase tracking-[0.2em] text-gold-700 font-semibold underline underline-offset-4">
+              <span class="text-[10px] uppercase tracking-[0.2em] text-stone-900 group-hover:text-gold-700 font-semibold underline underline-offset-4">
                 Inspect 3.5X Loupe →
               </span>
             </div>
@@ -879,10 +879,10 @@
             </p>
             <div class="flex items-center justify-between pt-4 border-t border-stone-100">
               <div>
-                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Value</span>
-                <span class="font-cinzel text-xl text-stone-900 font-semibold price-tag" data-usd="11200">$11,200</span>
+                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Private Acquisition</span>
+                <span class="text-xs text-stone-500 font-serif italic">Price Upon Application (P.O.A.)</span>
               </div>
-              <span class="text-[10px] uppercase tracking-[0.2em] text-gold-700 font-semibold underline underline-offset-4">
+              <span class="text-[10px] uppercase tracking-[0.2em] text-stone-900 group-hover:text-gold-700 font-semibold underline underline-offset-4">
                 Inspect 3.5X Loupe →
               </span>
             </div>
@@ -939,22 +939,22 @@
               <button onclick="setAtelierGem('Colombian Muzo Emerald', '#0B6846', 16500, 'Muzo Valley, Colombia')" class="atelier-gem active p-3 rounded-xl bg-white border border-stone-900 text-left transition shadow-sm cursor-pointer" data-gem="emerald">
                 <span class="w-3 h-3 rounded-full bg-emerald-600 block mb-1"></span>
                 <span class="text-xs font-serif block text-stone-900">Muzo Emerald</span>
-                <span class="text-[9px] text-stone-500 font-mono">From $16.5k</span>
+                <span class="text-[9px] text-stone-500 font-mono">Rare Muzo Valley</span>
               </button>
               <button onclick="setAtelierGem('London Blue Topaz', '#1A6796', 7800, 'Minas Gerais, Brazil')" class="atelier-gem p-3 rounded-xl bg-white border border-stone-300 text-left hover:border-gold-400 transition cursor-pointer" data-gem="topaz">
                 <span class="w-3 h-3 rounded-full bg-sky-600 block mb-1"></span>
                 <span class="text-xs font-serif block text-stone-900">Blue Topaz</span>
-                <span class="text-[9px] text-stone-500 font-mono">From $7.8k</span>
+                <span class="text-[9px] text-stone-500 font-mono">Minas Gerais</span>
               </button>
               <button onclick="setAtelierGem('Royal African Amethyst', '#6B317E', 6900, 'Zambia')" class="atelier-gem p-3 rounded-xl bg-white border border-stone-300 text-left hover:border-gold-400 transition cursor-pointer" data-gem="amethyst">
                 <span class="w-3 h-3 rounded-full bg-purple-600 block mb-1"></span>
                 <span class="text-xs font-serif block text-stone-900">Amethyst</span>
-                <span class="text-[9px] text-stone-500 font-mono">From $6.9k</span>
+                <span class="text-[9px] text-stone-500 font-mono">Zambian Royal</span>
               </button>
               <button onclick="setAtelierGem('Nigerian Rubellite', '#BA2655', 12400, 'Nigeria')" class="atelier-gem p-3 rounded-xl bg-white border border-stone-300 text-left hover:border-gold-400 transition cursor-pointer" data-gem="rubellite">
                 <span class="w-3 h-3 rounded-full bg-rose-600 block mb-1"></span>
                 <span class="text-xs font-serif block text-stone-900">Rubellite</span>
-                <span class="text-[9px] text-stone-500 font-mono">From $12.4k</span>
+                <span class="text-[9px] text-stone-500 font-mono">Nigerian Vivid</span>
               </button>
             </div>
           </div>
@@ -999,8 +999,9 @@
                 <h5 class="font-serif text-2xl text-stone-900" id="atelierTitle">Bespoke Muzo Emerald Solitaire</h5>
               </div>
               <div class="text-right">
-                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Atelier Estimate</span>
-                <span class="font-cinzel text-2xl text-gold-700 font-semibold" id="atelierPrice">$16,500</span>
+                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Commission Status</span>
+                <span class="font-cinzel text-xl text-stone-900 font-semibold" id="atelierPrice">Private Atelier</span>
+                <span class="text-[9px] uppercase tracking-wider text-gold-700 font-mono block">By Sweta Jain</span>
               </div>
             </div>
 
@@ -1040,10 +1041,10 @@
   <!-- ======================================================== -->
   <!-- POPUP 1: THE ROYAL VELVET JEWELRY BOX (3D LOUPE INSPECT) -->
   <!-- ======================================================== -->
-  <div id="velvetBoxModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 pointer-events-none opacity-0 transition-opacity duration-300">
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-md modal-overlay pointer-events-auto" onclick="closeVelvetTray()"></div>
+  <div id="velvetBoxModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 pointer-events-none opacity-0 invisible transition-all duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md modal-overlay" onclick="closeVelvetTray()"></div>
 
-    <div class="relative w-full max-w-4xl bg-silk rounded-3xl border border-gold-300/80 shadow-2xl overflow-hidden box-modal-content pointer-events-auto transform scale-95 transition-all duration-300 max-h-[92vh] flex flex-col">
+    <div class="relative w-full max-w-4xl bg-silk rounded-3xl border border-gold-300/80 shadow-2xl overflow-hidden box-modal-content transform scale-95 transition-all duration-300 max-h-[92vh] flex flex-col">
       
       <!-- Top Velvet Trim Header -->
       <div class="px-8 py-5 border-b border-stone-200 bg-white flex items-center justify-between">
@@ -1082,17 +1083,18 @@
           <div>
             <div class="p-5 rounded-2xl bg-white border border-gold-300/60 shadow-sm flex items-center justify-between mb-5">
               <div>
-                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Acquisition Valuation</span>
-                <span class="font-cinzel text-3xl text-stone-900 font-semibold" id="trayPrice">$9,950</span>
+                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Acquisition Status</span>
+                <span class="font-cinzel text-2xl text-stone-900 font-semibold" id="trayPrice">Price Upon Application</span>
+                <span class="text-[9.5px] uppercase tracking-wider text-gold-700 font-mono block mt-0.5">✦ Confidential Private Salon Valuation</span>
               </div>
               <div class="text-right">
-                <span class="text-[9px] uppercase tracking-wider text-emerald-800 block font-mono">Stock Location</span>
+                <span class="text-[9px] uppercase tracking-wider text-emerald-800 block font-mono">Private Salon Viewing</span>
                 <span class="text-xs uppercase tracking-wider text-emerald-700 font-bold">NYC 5th Ave / Mumbai Suite</span>
               </div>
             </div>
 
             <!-- Gemological Specification Grid -->
-            <h5 class="text-xs uppercase tracking-[0.2em] font-mono text-stone-500 mb-3">Gemological Dossier</h5>
+            <h5 class="text-xs uppercase tracking-[0.2em] font-mono text-stone-500 mb-3">Gemological Provenance Dossier</h5>
             <div class="grid grid-cols-2 gap-3 text-xs mb-6">
               <div class="p-3.5 rounded-xl bg-white border border-stone-200">
                 <span class="text-stone-400 block font-mono text-[9.5px] uppercase">Primary Gemstone</span>
@@ -1104,11 +1106,11 @@
               </div>
               <div class="p-3.5 rounded-xl bg-white border border-stone-200">
                 <span class="text-stone-400 block font-mono text-[9.5px] uppercase">Laboratory Registry</span>
-                <span class="font-serif text-base text-stone-900 font-medium">NY-8942-GIA</span>
+                <span class="font-serif text-base text-stone-900 font-medium">NY-8942-GIA / Gübelin</span>
               </div>
               <div class="p-3.5 rounded-xl bg-white border border-stone-200">
-                <span class="text-stone-400 block font-mono text-[9.5px] uppercase">Delivery Security</span>
-                <span class="font-serif text-base text-stone-900 font-medium">Armored Hand Delivery</span>
+                <span class="text-stone-400 block font-mono text-[9.5px] uppercase">Discreet Delivery</span>
+                <span class="font-serif text-base text-stone-900 font-medium">Armored White-Glove Courier</span>
               </div>
             </div>
           </div>
@@ -1134,10 +1136,10 @@
   <!-- ======================================================== -->
   <!-- POPUP 2: PRIVATE SALON SUITE RESERVATION & DIGITAL PASS   -->
   <!-- ======================================================== -->
-  <div id="salonSuiteDrawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none opacity-0 transition-opacity duration-300">
-    <div class="absolute inset-0 bg-black/75 backdrop-blur-md drawer-overlay pointer-events-auto" onclick="closeSalonDrawer()"></div>
+  <div id="salonSuiteDrawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none opacity-0 invisible transition-all duration-300">
+    <div class="absolute inset-0 bg-black/75 backdrop-blur-md drawer-overlay" onclick="closeSalonDrawer()"></div>
 
-    <div class="fixed inset-y-0 right-0 max-w-full flex pl-10 pointer-events-auto">
+    <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
       <div class="w-screen max-w-xl bg-white border-l border-gold-300 shadow-2xl flex flex-col justify-between drawer-panel transform translate-x-full">
         
         <!-- Header -->
@@ -1249,10 +1251,10 @@
   <!-- ======================================================== -->
   <!-- POPUP 3: CELEBRITY PRESS & EDITORIAL DOSSIER MODAL        -->
   <!-- ======================================================== -->
-  <div id="pressModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none opacity-0 transition-opacity duration-300">
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-md modal-overlay pointer-events-auto" onclick="closePressModal()"></div>
+  <div id="pressModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none opacity-0 invisible transition-all duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md modal-overlay" onclick="closePressModal()"></div>
 
-    <div class="relative w-full max-w-3xl bg-white rounded-3xl border border-gold-300 shadow-2xl p-8 pointer-events-auto transform scale-95 transition-all duration-300 max-h-[90vh] overflow-y-auto">
+    <div class="relative w-full max-w-3xl bg-white rounded-3xl border border-gold-300 shadow-2xl p-8 transform scale-95 transition-all duration-300 max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between border-b border-stone-200 pb-4 mb-6">
         <div>
           <span class="text-[9.5px] uppercase tracking-[0.3em] text-gold-700 font-mono block">Red Carpet & Editorial Dossier</span>
@@ -1288,10 +1290,10 @@
   <!-- ======================================================== -->
   <!-- POPUP 4: VIP GEMOLOGIST CONCIERGE DRAWER                 -->
   <!-- ======================================================== -->
-  <div id="conciergeModal" class="fixed inset-0 z-50 overflow-hidden pointer-events-none opacity-0 transition-opacity duration-300">
-    <div class="absolute inset-0 bg-black/75 backdrop-blur-sm drawer-overlay pointer-events-auto" onclick="closeConciergeModal()"></div>
+  <div id="conciergeModal" class="fixed inset-0 z-50 overflow-hidden pointer-events-none opacity-0 invisible transition-all duration-300">
+    <div class="absolute inset-0 bg-black/75 backdrop-blur-sm drawer-overlay" onclick="closeConciergeModal()"></div>
 
-    <div class="fixed inset-y-0 right-0 max-w-full flex pl-10 pointer-events-auto">
+    <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
       <div class="w-screen max-w-md bg-white border-l border-gold-300 shadow-2xl flex flex-col justify-between drawer-panel transform translate-x-full">
         
         <div class="px-8 py-6 border-b border-stone-200 flex items-center justify-between bg-silk">
@@ -1656,20 +1658,16 @@
 
       const priceEl = document.getElementById('trayPrice');
       if (priceEl) {
-        if (currentCurrency === 'INR') {
-          const inr = Math.round(usdPrice * INR_RATE / 1000) * 1000;
-          priceEl.innerText = '₹' + inr.toLocaleString('en-IN');
-        } else {
-          priceEl.innerText = '$' + usdPrice.toLocaleString('en-US');
-        }
+        priceEl.innerText = 'Price Upon Application';
       }
 
       const waLink = document.getElementById('trayWaLink');
-      if (waLink) waLink.href = `https://wa.me/919920000000?text=Hello%20Goshwara%20Concierge,%20I%20would%20like%20to%20inspect%20the%20${encodeURIComponent(title)}%20($${usdPrice}).`;
+      if (waLink) waLink.href = `https://wa.me/919920000000?text=Hello%20Goshwara%20Concierge,%20I%20would%20like%20to%20inquire%20about%20a%20private%20viewing%20for%20the%20${encodeURIComponent(title)}.`;
 
       const modal = document.getElementById('velvetBoxModal');
       if (modal) {
-        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
+        modal.classList.add('visible', 'opacity-100', 'pointer-events-auto');
         const box = modal.querySelector('.box-modal-content');
         if (box) box.classList.remove('scale-95');
       }
@@ -1681,7 +1679,9 @@
       if (modal) {
         const box = modal.querySelector('.box-modal-content');
         if (box) box.classList.add('scale-95');
-        setTimeout(() => modal.classList.add('opacity-0', 'pointer-events-none'), 250);
+        modal.classList.remove('visible', 'opacity-100', 'pointer-events-auto');
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => modal.classList.add('invisible'), 250);
       }
     }
 
@@ -1722,7 +1722,8 @@
     function openSalonDrawer(piece) {
       const drawer = document.getElementById('salonSuiteDrawer');
       if (drawer) {
-        drawer.classList.remove('opacity-0', 'pointer-events-none');
+        drawer.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
+        drawer.classList.add('visible', 'opacity-100', 'pointer-events-auto');
         const panel = drawer.querySelector('.drawer-panel');
         if (panel) panel.classList.remove('translate-x-full');
       }
@@ -1742,7 +1743,9 @@
       if (drawer) {
         const panel = drawer.querySelector('.drawer-panel');
         if (panel) panel.classList.add('translate-x-full');
-        setTimeout(() => drawer.classList.add('opacity-0', 'pointer-events-none'), 300);
+        drawer.classList.remove('visible', 'opacity-100', 'pointer-events-auto');
+        drawer.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => drawer.classList.add('invisible'), 300);
       }
     }
 
@@ -1776,7 +1779,8 @@
 
       const modal = document.getElementById('pressModal');
       if (modal) {
-        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
+        modal.classList.add('visible', 'opacity-100', 'pointer-events-auto');
         const content = modal.querySelector('div:nth-child(2)');
         if (content) content.classList.remove('scale-95');
       }
@@ -1788,17 +1792,20 @@
       if (modal) {
         const content = modal.querySelector('div:nth-child(2)');
         if (content) content.classList.add('scale-95');
-        setTimeout(() => modal.classList.add('opacity-0', 'pointer-events-none'), 250);
+        modal.classList.remove('visible', 'opacity-100', 'pointer-events-auto');
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => modal.classList.add('invisible'), 250);
       }
     }
 
     // ----------------------------------------------------
-    // 13. Concierge Desk Modal
+    // 13. VIP Gemologist Concierge Drawer
     // ----------------------------------------------------
     function openConciergeModal() {
       const drawer = document.getElementById('conciergeModal');
       if (drawer) {
-        drawer.classList.remove('opacity-0', 'pointer-events-none');
+        drawer.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
+        drawer.classList.add('visible', 'opacity-100', 'pointer-events-auto');
         const panel = drawer.querySelector('.drawer-panel');
         if (panel) panel.classList.remove('translate-x-full');
       }
@@ -1810,7 +1817,9 @@
       if (drawer) {
         const panel = drawer.querySelector('.drawer-panel');
         if (panel) panel.classList.add('translate-x-full');
-        setTimeout(() => drawer.classList.add('opacity-0', 'pointer-events-none'), 300);
+        drawer.classList.remove('visible', 'opacity-100', 'pointer-events-auto');
+        drawer.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => drawer.classList.add('invisible'), 300);
       }
     }
 
@@ -1873,12 +1882,7 @@
       
       const priceEl = document.getElementById('atelierPrice');
       if (priceEl) {
-        if (currentCurrency === 'INR') {
-          const inr = Math.round(atelierPriceUSD * INR_RATE / 1000) * 1000;
-          priceEl.innerText = '₹' + inr.toLocaleString('en-IN');
-        } else {
-          priceEl.innerText = '$' + atelierPriceUSD.toLocaleString('en-US');
-        }
+        priceEl.innerText = 'Private Atelier';
       }
       playChime(660);
     }
