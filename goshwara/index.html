@@ -53,9 +53,10 @@
       color: #1A1C21;
       overflow-x: hidden;
       font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background-color 0.8s ease;
     }
 
-    /* Ambient Silk Lighting Effect */
+    /* Ambient Silk Texture */
     .silk-ambient {
       background-image: 
         radial-gradient(circle at 10% 12%, rgba(212, 175, 55, 0.08) 0%, transparent 45%),
@@ -64,7 +65,18 @@
         radial-gradient(circle at 80% 90%, rgba(197, 155, 39, 0.05) 0%, transparent 45%);
     }
 
-    /* 1. Animated Gold Foil Shimmer (NO CLIPPING) */
+    /* Lighting Atmosphere Themes */
+    body.mode-daylight {
+      background-color: #FAF8F5;
+    }
+    body.mode-salon {
+      background-color: #F8F3EA;
+    }
+    body.mode-candlelight {
+      background-color: #F4ECE0;
+    }
+
+    /* 1. Animated Gold Foil Shimmer */
     @keyframes goldShimmer {
       0% { background-position: -200% center; }
       100% { background-position: 200% center; }
@@ -93,14 +105,14 @@
         transform: translateY(0px) rotate(0deg);
       }
       50% {
-        transform: translateY(-14px) rotate(1.2deg);
+        transform: translateY(-16px) rotate(1.2deg);
       }
     }
     .animate-jewel-float {
       animation: jewelFloat 6s ease-in-out infinite;
     }
 
-    /* Subtle Hairline Gold Borders */
+    /* Hairline Gold Borders */
     .gold-hairline {
       border: 1px solid rgba(197, 155, 39, 0.25);
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -231,9 +243,14 @@
         display: block;
       }
     }
+
+    /* Vault Dial Rotation Animation */
+    .vault-dial {
+      transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
   </style>
 </head>
-<body class="selection:bg-gold-400 selection:text-white silk-ambient">
+<body class="selection:bg-gold-400 selection:text-white silk-ambient mode-daylight">
 
   <!-- Interactive Luxury Cursor Elements -->
   <div id="goldCursor"></div>
@@ -276,11 +293,12 @@
       <nav class="hidden md:flex items-center gap-8 text-[11px] uppercase tracking-[0.24em] font-medium text-stone-700">
         <a href="#vault" class="hover:text-gold-600 transition">High Jewelry</a>
         <a href="#press" class="hover:text-gold-600 transition">Red Carpet</a>
+        <a href="#couture-studio" class="hover:text-gold-600 transition">Drape Studio</a>
         <a href="#alchemy" class="hover:text-gold-600 transition">The Craft</a>
         <a href="#bespoke" class="hover:text-gold-600 transition">Bespoke</a>
       </nav>
 
-      <!-- Absolute Center Logo (Mathematically Centered Across All Screens) -->
+      <!-- Absolute Center Logo -->
       <a href="#" class="absolute left-1/2 -translate-x-1/2 text-center group py-1">
         <div class="flex items-center justify-center gap-2 mb-0.5">
           <svg class="w-3.5 h-3.5 text-gold-500 transition-transform duration-700 group-hover:rotate-45" viewBox="0 0 24 24" fill="currentColor">
@@ -309,33 +327,47 @@
     </div>
   </header>
 
-  <!-- ========================================== -->
-  <!-- 3. HERO SECTION (NO CLIPPED LETTERS!)      -->
-  <!-- ========================================== -->
-  <section class="relative min-h-[92vh] flex items-center justify-center px-6 py-20 overflow-visible">
+  <!-- ======================================================== -->
+  <!-- 3. HERO SECTION WITH 3D LIGHTING ATMOSPHERE SIMULATOR   -->
+  <!-- ======================================================== -->
+  <section class="relative min-h-[92vh] flex items-center justify-center px-6 py-16 overflow-visible">
     <!-- Interactive Canvas Particle Dispersion -->
     <canvas id="causticsCanvas"></canvas>
 
     <div class="max-w-6xl mx-auto text-center relative z-10 overflow-visible">
       
       <!-- Sub-crest Pill -->
-      <div class="reveal-elem inline-flex items-center gap-3 px-6 py-2 rounded-full border border-gold-300/80 bg-white/90 shadow-sm mb-10 backdrop-blur-md">
+      <div class="reveal-elem inline-flex items-center gap-3 px-6 py-2 rounded-full border border-gold-300/80 bg-white/90 shadow-sm mb-8 backdrop-blur-md">
         <span class="text-gold-500 text-xs">✦</span>
         <span class="text-[11px] uppercase tracking-[0.32em] text-stone-700 font-medium">Ancient Persian Silhouette of Harmonious Symmetry</span>
         <span class="text-gold-500 text-xs">✦</span>
       </div>
 
-      <!-- Main Headline - Generous Line Height and Descender Room (NO CUT LETTERS) -->
-      <h2 class="reveal-elem font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-stone-900 headline-safe tracking-tight mb-8">
+      <!-- Main Headline - Generous Line Height and Descender Room -->
+      <h2 class="reveal-elem font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-stone-900 headline-safe tracking-tight mb-6">
         Architectural Boldness. <br class="hidden sm:inline">
         <span class="italic font-normal gold-foil-animated font-serif">Living Color.</span> <br class="hidden sm:inline">
         <span class="font-normal text-stone-900">Sculptural 18K Gold.</span>
       </h2>
 
       <!-- Description -->
-      <p class="reveal-elem max-w-2xl mx-auto text-stone-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-12">
+      <p class="reveal-elem max-w-2xl mx-auto text-stone-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-8">
         Founded in New York by Sweta Jain. Every one-of-a-kind creation begins with rare unheated natural gemstones personally sourced from Colombia, Brazil, and Africa—celebrating the voluptuous curves of modern high jewelry.
       </p>
+
+      <!-- [OUT-OF-THE-BOX FEATURE 1]: INTERACTIVE LIGHTING ATMOSPHERE SELECTOR -->
+      <div class="reveal-elem inline-flex items-center p-1.5 rounded-full bg-white border border-gold-300/80 shadow-md mb-10 gap-1 text-xs">
+        <span class="px-3 text-[10px] uppercase tracking-wider font-mono text-stone-500 hidden sm:inline">Atelier Atmosphere:</span>
+        <button onclick="setLightingMode('daylight')" id="btnDaylight" class="mode-btn px-4 py-1.5 rounded-full bg-stone-900 text-white font-medium transition shadow-sm">
+          ☀️ 5th Ave Daylight
+        </button>
+        <button onclick="setLightingMode('salon')" id="btnSalon" class="mode-btn px-4 py-1.5 rounded-full text-stone-700 hover:text-stone-900 transition">
+          🥂 Champagne Salon
+        </button>
+        <button onclick="setLightingMode('candlelight')" id="btnCandlelight" class="mode-btn px-4 py-1.5 rounded-full text-stone-700 hover:text-stone-900 transition">
+          🕯️ Gala Candlelight
+        </button>
+      </div>
 
       <!-- Action Suite -->
       <div class="reveal-elem flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
@@ -400,6 +432,126 @@
             <span class="text-[9px] uppercase tracking-[0.25em] text-gold-600 font-mono block">Gossip Collection</span>
             <h4 class="font-serif text-lg text-stone-900 font-medium">Link Bracelet</h4>
             <span class="text-xs text-stone-700 font-cinzel font-semibold mt-1 block price-tag" data-usd="11200">$11,200</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- [OUT-OF-THE-BOX FEATURE 2]: COUTURE DRAPE & SKIN STUDIO   -->
+  <!-- ======================================================== -->
+  <section id="couture-studio" class="py-24 px-6 bg-white border-t border-b border-stone-200 relative overflow-hidden">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="reveal-elem text-center max-w-3xl mx-auto mb-14">
+        <span class="text-[11px] uppercase tracking-[0.3em] text-gold-700 font-mono font-medium">High Jewelry Atelier Interactive Drape</span>
+        <h3 class="font-serif text-4xl sm:text-5xl font-normal text-stone-900 mt-2 mb-4">
+          The Couture & Skin Tone Fitting Studio
+        </h3>
+        <p class="text-stone-600 text-sm font-light leading-relaxed">
+          Experience how Goshwara's saturated Colombian emeralds and London blue topaz harmonize across diverse complexion undertones and luxury couture fabrics.
+        </p>
+      </div>
+
+      <div class="reveal-elem grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Controls -->
+        <div class="lg:col-span-5 space-y-7">
+          
+          <div>
+            <label class="block text-xs uppercase tracking-[0.2em] text-stone-600 font-mono mb-3">01. Select Complexion Undertone</label>
+            <div class="grid grid-cols-3 gap-2.5">
+              <button onclick="setSkinTone('Warm Golden', '#E8B98A')" class="skin-btn active p-3 rounded-xl bg-white border border-stone-900 text-left transition shadow-sm">
+                <span class="w-4 h-4 rounded-full block mb-1 border border-stone-300" style="background-color: #E8B98A;"></span>
+                <span class="text-xs font-serif block text-stone-900">Warm Golden</span>
+                <span class="text-[9px] text-stone-500 font-mono">Indian / Mediterranean</span>
+              </button>
+              <button onclick="setSkinTone('Deep Bronzed', '#A76F43')" class="skin-btn p-3 rounded-xl bg-white border border-stone-200 text-left hover:border-gold-400 transition">
+                <span class="w-4 h-4 rounded-full block mb-1 border border-stone-300" style="background-color: #A76F43;"></span>
+                <span class="text-xs font-serif block text-stone-900">Deep Bronze</span>
+                <span class="text-[9px] text-stone-500 font-mono">Rich Melanin</span>
+              </button>
+              <button onclick="setSkinTone('Alabaster Rose', '#F5D3C1')" class="skin-btn p-3 rounded-xl bg-white border border-stone-200 text-left hover:border-gold-400 transition">
+                <span class="w-4 h-4 rounded-full block mb-1 border border-stone-300" style="background-color: #F5D3C1;"></span>
+                <span class="text-xs font-serif block text-stone-900">Alabaster</span>
+                <span class="text-[9px] text-stone-500 font-mono">Cool Porcelain</span>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase tracking-[0.2em] text-stone-600 font-mono mb-3">02. Select Couture Fabric Drape</label>
+            <div class="grid grid-cols-2 gap-2.5">
+              <button onclick="setCoutureFabric('Midnight Velvet', '#101217', 'text-white')" class="couture-btn active p-3 rounded-xl bg-stone-900 text-white text-left transition shadow-sm">
+                <span class="w-3.5 h-3.5 rounded-full bg-stone-950 inline-block mr-2 border border-stone-700"></span>
+                <span class="text-xs font-medium">Midnight Velvet</span>
+              </button>
+              <button onclick="setCoutureFabric('Raw Silk Ivory', '#FDFBF7', 'text-stone-900')" class="couture-btn p-3 rounded-xl bg-white border border-stone-200 text-stone-800 text-left hover:border-gold-400 transition">
+                <span class="w-3.5 h-3.5 rounded-full bg-amber-50 inline-block mr-2 border border-stone-300"></span>
+                <span class="text-xs font-medium">Silk Ivory Sari</span>
+              </button>
+              <button onclick="setCoutureFabric('Royal Saffron Satin', '#B86518', 'text-white')" class="couture-btn p-3 rounded-xl bg-white border border-stone-200 text-stone-800 text-left hover:border-gold-400 transition">
+                <span class="w-3.5 h-3.5 rounded-full bg-amber-700 inline-block mr-2 border border-stone-300"></span>
+                <span class="text-xs font-medium">Saffron Satin</span>
+              </button>
+              <button onclick="setCoutureFabric('Emerald Georgette', '#07261B', 'text-white')" class="couture-btn p-3 rounded-xl bg-white border border-stone-200 text-stone-800 text-left hover:border-gold-400 transition">
+                <span class="w-3.5 h-3.5 rounded-full bg-emerald-950 inline-block mr-2 border border-stone-300"></span>
+                <span class="text-xs font-medium">Emerald Silk</span>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase tracking-[0.2em] text-stone-600 font-mono mb-3">03. High-Jewelry Statement Piece</label>
+            <div class="flex items-center gap-2">
+              <button onclick="setStudioJewel('Queen Rainforest Choker Suite', '$48,500', 'https://goshwara.com/cdn/shop/files/Rain_forest_collection_500x.jpg?v=1748553985')" class="jewel-btn active flex-1 py-2.5 px-3 rounded-xl bg-white border border-stone-900 text-xs text-stone-900 font-medium text-center">
+                Colombian Choker
+              </button>
+              <button onclick="setStudioJewel('Manhattan Asscher Pendant', '$9,950', 'https://goshwara.com/cdn/shop/files/JP0190-PSYSM1_1a2c456e-d0c6-4e90-a8ee-06760ad4c761.jpg?v=1765754619')" class="jewel-btn flex-1 py-2.5 px-3 rounded-xl bg-white border border-stone-200 text-xs text-stone-700 hover:border-gold-400 text-center">
+                Asscher Pendant
+              </button>
+              <button onclick="setStudioJewel('Three-Stone Cocktail Ring', '$6,800', 'https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689')" class="jewel-btn flex-1 py-2.5 px-3 rounded-xl bg-white border border-stone-200 text-xs text-stone-700 hover:border-gold-400 text-center">
+                Topaz Ring
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Live Fitting Stage Visualizer -->
+        <div class="lg:col-span-7">
+          <div id="fittingStage" class="rounded-3xl p-8 sm:p-12 border border-gold-300/60 shadow-2xl relative transition-all duration-700 overflow-hidden flex flex-col justify-between min-h-[460px]" style="background-color: #101217;">
+            
+            <!-- Fabric Drape Backdrop Indicator -->
+            <div class="flex items-center justify-between text-xs font-mono relative z-10">
+              <span id="fittingFabricTag" class="px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md text-gold-300 border border-gold-400/30">
+                Midnight Velvet Evening Gown
+              </span>
+              <span id="fittingSkinTag" class="text-stone-300">
+                Tone: Warm Golden
+              </span>
+            </div>
+
+            <!-- Floating Jewel Display with Glow -->
+            <div class="relative z-10 my-8 flex items-center justify-center">
+              <div id="skinToneAura" class="absolute w-64 h-64 rounded-full blur-3xl opacity-35 transition-all duration-700" style="background-color: #E8B98A;"></div>
+              <img id="fittingJewelImg" src="https://goshwara.com/cdn/shop/files/Rain_forest_collection_500x.jpg?v=1748553985" alt="Couture Jewel" class="max-h-64 object-contain drop-shadow-2xl animate-jewel-float transition-all duration-500">
+            </div>
+
+            <!-- Piece Meta & Action -->
+            <div class="pt-6 border-t border-white/10 flex items-center justify-between relative z-10">
+              <div>
+                <h5 class="font-serif text-2xl text-white" id="fittingJewelTitle">Queen Rainforest Choker Suite</h5>
+                <span class="text-gold-300 font-cinzel text-lg" id="fittingJewelPrice">$48,500</span>
+              </div>
+              <button onclick="openSalonDrawer()" class="px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold text-stone-950 bg-gold-400 hover:bg-gold-300 transition shadow-lg">
+                Book Private In-Person Try-On
+              </button>
+            </div>
+
           </div>
         </div>
 
@@ -532,14 +684,30 @@
     </div>
   </section>
 
-  <!-- ========================================== -->
-  <!-- 6. THE VELVET VAULT & GEM FILTER MATRIX    -->
-  <!-- ========================================== -->
+  <!-- ======================================================== -->
+  <!-- 6. THE VELVET VAULT & INTERACTIVE SAFE OPENING SEQUENCE   -->
+  <!-- ======================================================== -->
   <section id="vault" class="py-28 px-6 bg-silk relative">
     <div class="max-w-7xl mx-auto">
       
       <div class="reveal-elem text-center max-w-3xl mx-auto mb-16">
-        <span class="text-[11px] uppercase tracking-[0.3em] text-gold-600 font-mono font-medium">The Collector's Reserve</span>
+        
+        <!-- [OUT-OF-THE-BOX FEATURE 3]: INTERACTIVE GOLDEN VAULT DIAL -->
+        <div class="inline-flex flex-col items-center mb-6 cursor-pointer group" onclick="spinVaultDial()">
+          <div class="w-20 h-20 rounded-full bg-stoneGold border-2 border-gold-400 shadow-xl flex items-center justify-center relative vault-dial mb-2" id="vaultDialEl">
+            <span class="text-gold-300 font-cinzel text-xs font-bold">XII</span>
+            <div class="absolute top-1 w-1 h-3 bg-gold-400 rounded-full"></div>
+            <div class="w-8 h-8 rounded-full border border-gold-400/40 flex items-center justify-center">
+              <span class="text-gold-400 text-xs">✦</span>
+            </div>
+          </div>
+          <span class="text-[10px] uppercase font-mono tracking-[0.25em] text-gold-700 group-hover:text-stone-900 transition flex items-center gap-1.5">
+            <span>Spin Vault Combination Dial</span>
+            <span class="text-xs">↻</span>
+          </span>
+        </div>
+
+        <span class="text-[11px] uppercase tracking-[0.3em] text-gold-600 font-mono font-medium block">The Collector's Reserve</span>
         <h3 class="font-serif text-4xl sm:text-6xl font-normal text-stone-900 mt-2 mb-4">
           The Velvet Vault Experience
         </h3>
@@ -880,6 +1048,7 @@
       <div class="flex flex-wrap items-center gap-7 text-xs uppercase tracking-widest text-stone-300">
         <a href="#vault" class="hover:text-gold-300 transition">High Jewelry</a>
         <a href="#press" class="hover:text-gold-300 transition">Red Carpet</a>
+        <a href="#couture-studio" class="hover:text-gold-300 transition">Drape Studio</a>
         <a href="#alchemy" class="hover:text-gold-300 transition">The Craft</a>
         <a href="#bespoke" class="hover:text-gold-300 transition">Bespoke Atelier</a>
         <button onclick="openSalonDrawer()" class="hover:text-gold-300 transition">Private Suites</button>
@@ -917,11 +1086,8 @@
         <!-- Left: Interactive 3.5X Loupe Lens Stage -->
         <div class="lg:col-span-6 flex flex-col">
           <div class="loupe-container aspect-square rounded-2xl bg-pearl flex items-center justify-center p-6 border border-stone-200 relative overflow-hidden group shadow-inner" id="loupeContainer">
-            <!-- Main Image -->
             <img id="trayImg" src="" alt="Gemstone Inspection" class="max-h-72 object-contain drop-shadow-2xl">
-            <!-- Floating Loupe Lens (Magnifier) -->
             <div id="loupeLens" class="loupe-lens"></div>
-            <!-- Instruction Overlay -->
             <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[9px] font-mono text-stone-700 border border-stone-200">
               Hover To Move 3.5X Loupe Lens
             </span>
@@ -937,7 +1103,6 @@
         <div class="lg:col-span-6 space-y-6 flex flex-col justify-between">
           
           <div>
-            <!-- Value Bar with Instant Currency Switch -->
             <div class="p-5 rounded-2xl bg-white border border-gold-300/60 shadow-sm flex items-center justify-between mb-5">
               <div>
                 <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono">Acquisition Valuation</span>
@@ -1225,7 +1390,6 @@
     });
 
     function animateCursor() {
-      // Smooth linear interpolation for floating weightless luxury feel
       cursorX += (mouseX - cursorX) * 0.15;
       cursorY += (mouseY - cursorY) * 0.15;
       if (cursor) {
@@ -1236,7 +1400,6 @@
     }
     animateCursor();
 
-    // Enlarge cursor when hovering interactive jewelry cards or buttons
     document.querySelectorAll('button, a, .tilt-card, .gem-filter, .comparison-slider-container').forEach(el => {
       el.addEventListener('mouseenter', () => {
         if(cursor) {
@@ -1257,7 +1420,104 @@
     });
 
     // ----------------------------------------------------
-    // 2. Currency Management (USD & INR)
+    // [OUT-OF-THE-BOX 1]: Atelier Lighting Atmosphere Modes
+    // ----------------------------------------------------
+    function setLightingMode(mode) {
+      document.body.className = `selection:bg-gold-400 selection:text-white silk-ambient mode-${mode}`;
+      
+      const buttons = [
+        { id: 'btnDaylight', name: 'daylight' },
+        { id: 'btnSalon', name: 'salon' },
+        { id: 'btnCandlelight', name: 'candlelight' }
+      ];
+
+      buttons.forEach(b => {
+        const el = document.getElementById(b.id);
+        if (b.name === mode) {
+          el.className = "mode-btn px-4 py-1.5 rounded-full bg-stone-900 text-white font-medium transition shadow-sm";
+        } else {
+          el.className = "mode-btn px-4 py-1.5 rounded-full text-stone-700 hover:text-stone-900 transition";
+        }
+      });
+
+      // Shift particle caustics color & intensity
+      if (mode === 'candlelight') {
+        particleColor = 'rgba(224, 130, 45, ';
+        playChime(440);
+      } else if (mode === 'salon') {
+        particleColor = 'rgba(212, 175, 55, ';
+        playChime(587);
+      } else {
+        particleColor = 'rgba(180, 215, 230, ';
+        playChime(784);
+      }
+    }
+
+    // ----------------------------------------------------
+    // [OUT-OF-THE-BOX 2]: Couture Fitting Studio
+    // ----------------------------------------------------
+    let currentSkinTone = 'Warm Golden';
+    let currentCoutureFabric = 'Midnight Velvet';
+
+    function setSkinTone(name, hex) {
+      currentSkinTone = name;
+      document.querySelectorAll('.skin-btn').forEach(btn => {
+        if(btn.innerText.includes(name.split(' ')[0])) {
+          btn.className = "skin-btn active p-3 rounded-xl bg-white border border-stone-900 text-left transition shadow-sm";
+        } else {
+          btn.className = "skin-btn p-3 rounded-xl bg-white border border-stone-200 text-left hover:border-gold-400 transition";
+        }
+      });
+      document.getElementById('skinToneAura').style.backgroundColor = hex;
+      document.getElementById('fittingSkinTag').innerText = `Tone: ${name}`;
+      playChime(520);
+    }
+
+    function setCoutureFabric(name, bgHex, textClass) {
+      currentCoutureFabric = name;
+      document.querySelectorAll('.couture-btn').forEach(btn => {
+        if(btn.innerText.includes(name.split(' ')[0])) {
+          btn.className = "couture-btn active p-3 rounded-xl bg-stone-900 text-white text-left transition shadow-sm";
+        } else {
+          btn.className = "couture-btn p-3 rounded-xl bg-white border border-stone-200 text-stone-800 text-left hover:border-gold-400 transition";
+        }
+      });
+      document.getElementById('fittingStage').style.backgroundColor = bgHex;
+      document.getElementById('fittingFabricTag').innerText = `${name} Drape`;
+      playChime(660);
+    }
+
+    function setStudioJewel(title, price, img) {
+      document.querySelectorAll('.jewel-btn').forEach(btn => {
+        if(btn.innerText.includes(title.split(' ')[0])) {
+          btn.className = "jewel-btn active flex-1 py-2.5 px-3 rounded-xl bg-white border border-stone-900 text-xs text-stone-900 font-medium text-center";
+        } else {
+          btn.className = "jewel-btn flex-1 py-2.5 px-3 rounded-xl bg-white border border-stone-200 text-xs text-stone-700 hover:border-gold-400 text-center";
+        }
+      });
+      document.getElementById('fittingJewelTitle').innerText = title;
+      document.getElementById('fittingJewelPrice').innerText = price;
+      document.getElementById('fittingJewelImg').src = img;
+      playChime(880);
+    }
+
+    // ----------------------------------------------------
+    // [OUT-OF-THE-BOX 3]: Secret Vault Safe Dial Spinning
+    // ----------------------------------------------------
+    let dialAngle = 0;
+    function spinVaultDial() {
+      dialAngle += 120;
+      const dial = document.getElementById('vaultDialEl');
+      if (dial) {
+        dial.style.transform = `rotate(${dialAngle}deg)`;
+      }
+      playChime(660);
+      setTimeout(() => playChime(880), 300);
+      setTimeout(() => playChime(1100), 600);
+    }
+
+    // ----------------------------------------------------
+    // 4. Currency Management (USD & INR)
     // ----------------------------------------------------
     let currentCurrency = 'USD';
     const INR_RATE = 84.5;
@@ -1290,7 +1550,7 @@
     }
 
     // ----------------------------------------------------
-    // 3. Web Audio Synthesizer (Haute Joaillerie Chime)
+    // 5. Web Audio Synthesizer (Haute Joaillerie Chime)
     // ----------------------------------------------------
     let soundEnabled = false;
     let audioCtx = null;
@@ -1326,11 +1586,12 @@
     }
 
     // ----------------------------------------------------
-    // 4. Dynamic Gold Dust Caustic Canvas
+    // 6. Dynamic Gold Dust Caustic Canvas
     // ----------------------------------------------------
     const canvas = document.getElementById('causticsCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
+    let particleColor = 'rgba(212, 175, 55, ';
 
     function resizeCanvas() {
       canvas.width = canvas.parentElement.offsetWidth;
@@ -1362,7 +1623,7 @@
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(212, 175, 55, ${p.alpha})`;
+        ctx.fillStyle = `${particleColor}${p.alpha})`;
         ctx.fill();
       });
       requestAnimationFrame(animateParticles);
@@ -1370,7 +1631,7 @@
     animateParticles();
 
     // ----------------------------------------------------
-    // 5. 3D Card Tilt Interaction with Smooth Physics
+    // 7. 3D Card Tilt Interaction with Smooth Physics
     // ----------------------------------------------------
     document.querySelectorAll('.tilt-card-wrapper').forEach(wrapper => {
       const card = wrapper.querySelector('.tilt-card');
@@ -1394,7 +1655,7 @@
     });
 
     // ----------------------------------------------------
-    // 6. Scroll Reveal Observer with Unblur
+    // 8. Scroll Reveal Observer with Unblur
     // ----------------------------------------------------
     const reveals = document.querySelectorAll('.reveal-elem');
     const revealObserver = new IntersectionObserver((entries, obs) => {
@@ -1408,7 +1669,7 @@
     reveals.forEach(r => revealObserver.observe(r));
 
     // ----------------------------------------------------
-    // 7. Before/After Comparison Drag Slider
+    // 9. Before/After Comparison Drag Slider
     // ----------------------------------------------------
     const sliderContainer = document.querySelector('.comparison-slider-container');
     const beforeEl = document.getElementById('sliderBefore');
@@ -1439,7 +1700,7 @@
     }
 
     // ----------------------------------------------------
-    // 8. Velvet Box Modal with 3.5X Loupe Lens
+    // 10. Velvet Box Modal with 3.5X Loupe Lens
     // ----------------------------------------------------
     let activePieceUSD = 9950;
 
@@ -1505,7 +1766,7 @@
     }
 
     // ----------------------------------------------------
-    // 9. Salon Suite Reservation & Digital Pass
+    // 11. Salon Suite Reservation & Digital Pass
     // ----------------------------------------------------
     function openSalonDrawer(piece) {
       const drawer = document.getElementById('salonSuiteDrawer');
@@ -1544,7 +1805,7 @@
     }
 
     // ----------------------------------------------------
-    // 10. Celebrity Press Dossier Modal
+    // 12. Celebrity Press Dossier Modal
     // ----------------------------------------------------
     function openPressModal(celeb, event, piece, img) {
       document.getElementById('pressCelebrity').innerText = celeb;
@@ -1565,7 +1826,7 @@
     }
 
     // ----------------------------------------------------
-    // 11. Concierge Desk Modal
+    // 13. Concierge Desk Modal
     // ----------------------------------------------------
     function openConciergeModal() {
       const drawer = document.getElementById('conciergeModal');
@@ -1581,7 +1842,7 @@
     }
 
     // ----------------------------------------------------
-    // 12. Atelier Configurator
+    // 14. Atelier Configurator
     // ----------------------------------------------------
     let atelierShape = 'Cushion Solitaire';
     let atelierGem = 'Colombian Muzo Emerald';
@@ -1643,7 +1904,7 @@
     }
 
     // ----------------------------------------------------
-    // 13. Vault Collection Filter
+    // 15. Vault Collection Filter
     // ----------------------------------------------------
     function filterVault(filter) {
       document.querySelectorAll('#gemFilters button').forEach(b => {
