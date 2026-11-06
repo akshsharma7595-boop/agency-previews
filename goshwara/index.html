@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GOSHWARA | Haute Joaillerie New York • The Velvet Vault</title>
+  <title>GOSHWARA | Haute Joaillerie New York &bull; The Velvet Vault</title>
   <meta name="description" content="The embodiment of perfect proportions. Hand-faceted Colombian emeralds, oceanic topaz, and sculptural 18K gold. Worn by Priyanka Chopra and curated for private collectors.">
   
-  <!-- Premium Fonts -->
+  <!-- Premium Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
             silk: '#FAF8F5',
             pearl: '#F4EFEA',
             alabaster: '#FFFFFF',
-            stoneGold: '#24211D',
+            stoneGold: '#201D1A',
             gold: {
               50: '#FDFBF7',
               100: '#F9F4E8',
@@ -55,52 +55,83 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    /* Ambient Silk Texture Across ENTIRE Page - Seamless & Uniform */
+    /* Ambient Silk Lighting Effect */
     .silk-ambient {
       background-image: 
-        radial-gradient(circle at 10% 12%, rgba(212, 175, 55, 0.07) 0%, transparent 40%),
-        radial-gradient(circle at 90% 35%, rgba(197, 155, 39, 0.05) 0%, transparent 45%),
-        radial-gradient(circle at 50% 65%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
-        radial-gradient(circle at 80% 90%, rgba(197, 155, 39, 0.04) 0%, transparent 40%);
+        radial-gradient(circle at 10% 12%, rgba(212, 175, 55, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 90% 35%, rgba(197, 155, 39, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 65%, rgba(212, 175, 55, 0.07) 0%, transparent 50%),
+        radial-gradient(circle at 80% 90%, rgba(197, 155, 39, 0.05) 0%, transparent 45%);
     }
 
-    /* Shimmer Gold Gradient Text */
-    .gold-foil {
-      background: linear-gradient(135deg, #7E5F0E 0%, #C59B27 28%, #F7E7C4 50%, #C59B27 72%, #7E5F0E 100%);
+    /* 1. Animated Gold Foil Shimmer (NO CLIPPING) */
+    @keyframes goldShimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .gold-foil-animated {
+      background: linear-gradient(90deg, #7E5F0E 0%, #C59B27 25%, #FFF2D1 50%, #C59B27 75%, #7E5F0E 100%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: goldShimmer 6s linear infinite;
+      padding-bottom: 0.16em;
+      margin-bottom: -0.16em;
       display: inline-block;
+      overflow: visible !important;
+    }
+
+    /* 2. Headline Descender Safety */
+    .headline-safe {
+      line-height: 1.18 !important;
+      overflow: visible !important;
+    }
+
+    /* 3. Floating Jewel Levitation Animation */
+    @keyframes jewelFloat {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-14px) rotate(1.2deg);
+      }
+    }
+    .animate-jewel-float {
+      animation: jewelFloat 6s ease-in-out infinite;
     }
 
     /* Subtle Hairline Gold Borders */
     .gold-hairline {
       border: 1px solid rgba(197, 155, 39, 0.25);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .gold-hairline:hover {
-      border-color: rgba(197, 155, 39, 0.7);
-      box-shadow: 0 16px 36px -10px rgba(197, 155, 39, 0.16);
+      border-color: rgba(197, 155, 39, 0.85);
+      box-shadow: 0 20px 45px -12px rgba(197, 155, 39, 0.22);
+      transform: translateY(-4px);
     }
 
     /* 3D Interactive Card Tilt Container */
     .tilt-card-wrapper {
-      perspective: 1000px;
+      perspective: 1200px;
     }
     .tilt-card {
-      transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
       will-change: transform;
     }
 
-    /* Scroll Reveal Motion */
+    /* Silky Smooth Scroll Reveal with Unblur */
     .reveal-elem {
       opacity: 0;
-      transform: translateY(35px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
+      transform: translateY(40px);
+      filter: blur(5px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform, filter;
     }
     .reveal-elem.active {
       opacity: 1;
       transform: translateY(0);
+      filter: blur(0px);
     }
 
     /* Before/After Drag Slider */
@@ -119,7 +150,7 @@
       border-right: 2px solid #D4AF37;
     }
 
-    /* Velvet Jewelry Box Drawer & Modal Animations */
+    /* Velvet Jewelry Box Drawer & Modal Animations with Spring Physics */
     .modal-overlay {
       transition: opacity 0.35s ease-out;
     }
@@ -127,10 +158,10 @@
       transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .box-modal-content {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
     }
 
-    /* Custom Scrollbar */
+    /* Custom Luxury Scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
     }
@@ -170,17 +201,51 @@
       background-repeat: no-repeat;
       z-index: 50;
     }
+
+    /* Luxury Mouse Stardust Cursor Follower */
+    #goldCursor {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.7);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+      display: none;
+    }
+    #goldCursorDot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #D4AF37;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      display: none;
+    }
+    @media (pointer: fine) {
+      #goldCursor, #goldCursorDot {
+        display: block;
+      }
+    }
   </style>
 </head>
 <body class="selection:bg-gold-400 selection:text-white silk-ambient">
 
+  <!-- Interactive Luxury Cursor Elements -->
+  <div id="goldCursor"></div>
+  <div id="goldCursorDot"></div>
+
   <!-- ========================================== -->
-  <!-- 1. CLEAN TOP LUXURY BAR                    -->
+  <!-- 1. TOP LUXURY STRIP                        -->
   <!-- ========================================== -->
   <div class="bg-stoneGold text-gold-200 border-b border-gold-400/20 py-2 px-6 text-[11px] uppercase tracking-[0.22em] font-medium flex items-center justify-between z-30 relative">
     <div class="hidden md:flex items-center gap-2.5">
       <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-      <span class="text-white/90">Fifth Avenue Salon • Mumbai & New Delhi Private Suites</span>
+      <span class="text-white/90">Fifth Avenue Salon &bull; Mumbai & New Delhi Private Suites</span>
     </div>
 
     <div class="mx-auto md:mx-0 text-gold-300 text-[10.5px]">
@@ -202,36 +267,36 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- 2. MINIMALIST HAUTE JOAILLERIE NAVIGATION  -->
+  <!-- 2. MATHEMATICALLY CENTERED NAVIGATION      -->
   <!-- ========================================== -->
   <header class="sticky top-0 z-40 backdrop-blur-xl bg-silk/90 border-b border-stone-200/70 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-6 h-20 relative flex items-center justify-between">
       
-      <!-- Left Navigation -->
-      <nav class="hidden md:flex items-center gap-8 text-[11.5px] uppercase tracking-[0.24em] font-medium text-stone-700">
+      <!-- Left Links -->
+      <nav class="hidden md:flex items-center gap-8 text-[11px] uppercase tracking-[0.24em] font-medium text-stone-700">
         <a href="#vault" class="hover:text-gold-600 transition">High Jewelry</a>
         <a href="#press" class="hover:text-gold-600 transition">Red Carpet</a>
         <a href="#alchemy" class="hover:text-gold-600 transition">The Craft</a>
-        <a href="#bespoke" class="hover:text-gold-600 transition">Bespoke Atelier</a>
+        <a href="#bespoke" class="hover:text-gold-600 transition">Bespoke</a>
       </nav>
 
-      <!-- Center Logo & Crest -->
-      <a href="#" class="text-center group py-1">
+      <!-- Absolute Center Logo (Mathematically Centered Across All Screens) -->
+      <a href="#" class="absolute left-1/2 -translate-x-1/2 text-center group py-1">
         <div class="flex items-center justify-center gap-2 mb-0.5">
           <svg class="w-3.5 h-3.5 text-gold-500 transition-transform duration-700 group-hover:rotate-45" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
           </svg>
         </div>
-        <h1 class="font-cinzel text-2xl tracking-[0.35em] uppercase text-stone-900 font-semibold group-hover:text-gold-600 transition">
+        <h1 class="font-cinzel text-2xl tracking-[0.38em] uppercase text-stone-900 font-semibold group-hover:text-gold-600 transition">
           GOSHWARA
         </h1>
         <p class="text-[8px] uppercase tracking-[0.45em] text-stone-500 font-sans mt-0.5">
-          New York • Haute Joaillerie
+          New York &bull; Haute Joaillerie
         </p>
       </a>
 
-      <!-- Right CTAs -->
-      <div class="flex items-center gap-4">
+      <!-- Right Actions -->
+      <div class="flex items-center gap-3 ml-auto md:ml-0">
         <button onclick="openSalonDrawer()" class="px-5 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium text-stone-800 border border-stone-300 hover:border-gold-500 hover:bg-gold-50/60 transition shadow-sm">
           <span>Private Salon</span>
         </button>
@@ -245,30 +310,30 @@
   </header>
 
   <!-- ========================================== -->
-  <!-- 3. HERO SECTION: MAJESTY OF PROPORTIONS    -->
+  <!-- 3. HERO SECTION (NO CLIPPED LETTERS!)      -->
   <!-- ========================================== -->
-  <section class="relative min-h-[88vh] flex items-center justify-center px-6 py-16 overflow-hidden">
+  <section class="relative min-h-[92vh] flex items-center justify-center px-6 py-20 overflow-visible">
     <!-- Interactive Canvas Particle Dispersion -->
     <canvas id="causticsCanvas"></canvas>
 
-    <div class="max-w-6xl mx-auto text-center relative z-10">
+    <div class="max-w-6xl mx-auto text-center relative z-10 overflow-visible">
       
-      <!-- Sub-crest -->
-      <div class="reveal-elem inline-flex items-center gap-3 px-6 py-2 rounded-full border border-gold-300/80 bg-white/90 shadow-sm mb-8 backdrop-blur-md">
+      <!-- Sub-crest Pill -->
+      <div class="reveal-elem inline-flex items-center gap-3 px-6 py-2 rounded-full border border-gold-300/80 bg-white/90 shadow-sm mb-10 backdrop-blur-md">
         <span class="text-gold-500 text-xs">✦</span>
         <span class="text-[11px] uppercase tracking-[0.32em] text-stone-700 font-medium">Ancient Persian Silhouette of Harmonious Symmetry</span>
         <span class="text-gold-500 text-xs">✦</span>
       </div>
 
-      <!-- Main Headline -->
-      <h2 class="reveal-elem font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-stone-900 leading-[1.03] tracking-tight mb-8">
-        Architectural Boldness. <br>
-        <span class="italic font-normal gold-foil font-serif">Living Color.</span> <br>
+      <!-- Main Headline - Generous Line Height and Descender Room (NO CUT LETTERS) -->
+      <h2 class="reveal-elem font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-stone-900 headline-safe tracking-tight mb-8">
+        Architectural Boldness. <br class="hidden sm:inline">
+        <span class="italic font-normal gold-foil-animated font-serif">Living Color.</span> <br class="hidden sm:inline">
         <span class="font-normal text-stone-900">Sculptural 18K Gold.</span>
       </h2>
 
       <!-- Description -->
-      <p class="reveal-elem max-w-2xl mx-auto text-stone-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-10">
+      <p class="reveal-elem max-w-2xl mx-auto text-stone-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-12">
         Founded in New York by Sweta Jain. Every one-of-a-kind creation begins with rare unheated natural gemstones personally sourced from Colombia, Brazil, and Africa—celebrating the voluptuous curves of modern high jewelry.
       </p>
 
@@ -283,7 +348,7 @@
         </button>
       </div>
 
-      <!-- Hero Gallery Pill Grid (4 Distinct Pieces) -->
+      <!-- Hero Gallery Pill Grid (4 Distinct Pieces with 3D Tilt) -->
       <div class="reveal-elem grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-10 border-t border-stone-200">
         
         <!-- Piece 1: Asscher Pendant -->
@@ -359,7 +424,7 @@
         </p>
       </div>
 
-      <!-- 3 DISTINCT Celebrity / Editorial Cards (NO DUPLICATES!) -->
+      <!-- 3 DISTINCT Celebrity / Editorial Cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         <!-- Celebrity 1: Priyanka Chopra Jonas -->
@@ -398,7 +463,7 @@
           </span>
         </div>
 
-        <!-- Editorial 3: Harper's Bazaar & Vogue Cover Feature (REAL DISTINCT PHOTO) -->
+        <!-- Editorial 3: Harper's Bazaar & Vogue Cover Feature -->
         <div class="reveal-elem group relative rounded-3xl overflow-hidden border border-stone-200/90 bg-white p-5 hover:border-gold-500/70 shadow-sm hover:shadow-2xl transition duration-500 cursor-pointer" onclick="openPressModal('Elizabeth High Jewelry Feature', 'Harper\'s Bazaar Editorial', 'One-of-a-Kind Colombian Muzo Emeralds & Honey Yellow Gold Collar', 'https://goshwara.com/cdn/shop/files/Elizabeth_Press_menu_500x.jpg')">
           <div class="aspect-[3/4] rounded-2xl overflow-hidden relative mb-5 bg-pearl">
             <img src="https://goshwara.com/cdn/shop/files/Elizabeth_Press_menu_500x.jpg" alt="Harper's Bazaar Press" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
@@ -510,7 +575,7 @@
           <div class="tilt-card bg-white rounded-3xl p-6 border border-stone-200/90 shadow-sm hover:shadow-2xl transition duration-500 cursor-pointer" onclick="openVelvetTray('Cushion Cut Manhattan Pendant', 9950, 'Royal Amethyst', '18K Yellow Gold Bezel', 'https://goshwara.com/cdn/shop/files/JP0190-PSYSM1_1a2c456e-d0c6-4e90-a8ee-06760ad4c761.jpg?v=1765754619')">
             <div class="aspect-square bg-pearl rounded-2xl overflow-hidden mb-6 relative flex items-center justify-center p-6 border border-stone-100 group">
               <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-purple-100 text-purple-900 font-mono font-medium border border-purple-200">
-                Royal Amethyst • 18K Solid
+                Royal Amethyst &bull; 18K Solid
               </span>
               <img src="https://goshwara.com/cdn/shop/files/JP0190-PSYSM1_1a2c456e-d0c6-4e90-a8ee-06760ad4c761.jpg?v=1765754619" alt="Cushion Cut Pendant" class="max-h-64 object-contain group-hover:scale-105 transition duration-500">
               <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-stone-900 text-gold-300 border border-gold-400 text-[10.5px] uppercase tracking-[0.2em] font-medium text-center shadow-xl opacity-0 group-hover:opacity-100 transition duration-300">
@@ -539,7 +604,7 @@
           <div class="tilt-card bg-white rounded-3xl p-6 border border-stone-200/90 shadow-sm hover:shadow-2xl transition duration-500 cursor-pointer" onclick="openVelvetTray('Three-Stone Architectural Ring', 6800, 'London Blue Topaz', '18K Yellow Gold & Pavé Diamonds', 'https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689')">
             <div class="aspect-square bg-pearl rounded-2xl overflow-hidden mb-6 relative flex items-center justify-center p-6 border border-stone-100 group">
               <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-sky-100 text-sky-900 font-mono font-medium border border-sky-200">
-                London Blue Topaz • Pavé
+                London Blue Topaz &bull; Pavé
               </span>
               <img src="https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689" alt="Three Stone Ring" class="max-h-64 object-contain group-hover:scale-105 transition duration-500">
               <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-stone-900 text-gold-300 border border-gold-400 text-[10.5px] uppercase tracking-[0.2em] font-medium text-center shadow-xl opacity-0 group-hover:opacity-100 transition duration-300">
@@ -626,7 +691,7 @@
           <div class="tilt-card bg-white rounded-3xl p-6 border border-stone-200/90 shadow-sm hover:shadow-2xl transition duration-500 cursor-pointer" onclick="openVelvetTray('Asscher Citrine Halo Pendant', 8400, 'Madeira Citrine', '18K Yellow Gold & Diamond Halo', 'https://goshwara.com/cdn/shop/files/Pendant_menu_500x.jpg?v=1769015032')">
             <div class="aspect-square bg-pearl rounded-2xl overflow-hidden mb-6 relative flex items-center justify-center p-6 border border-stone-100 group">
               <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-amber-100 text-amber-900 font-mono font-medium border border-amber-200">
-                Madeira Citrine • Asscher
+                Madeira Citrine &bull; Asscher
               </span>
               <img src="https://goshwara.com/cdn/shop/files/Pendant_menu_500x.jpg?v=1769015032" alt="Asscher Citrine Pendant" class="max-h-64 object-contain group-hover:scale-105 transition duration-500">
               <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-stone-900 text-gold-300 border border-gold-400 text-[10.5px] uppercase tracking-[0.2em] font-medium text-center shadow-xl opacity-0 group-hover:opacity-100 transition duration-300">
@@ -655,7 +720,7 @@
           <div class="tilt-card bg-white rounded-3xl p-6 border border-stone-200/90 shadow-sm hover:shadow-2xl transition duration-500 cursor-pointer" onclick="openVelvetTray('Gossip Multi-Gem Link Bracelet', 11200, 'London Blue Topaz & Amethyst', '18K Solid Gold Links', 'https://goshwara.com/cdn/shop/files/Bracelet_menu_500x.jpg?v=1769015072')">
             <div class="aspect-square bg-pearl rounded-2xl overflow-hidden mb-6 relative flex items-center justify-center p-6 border border-stone-100 group">
               <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-sky-100 text-sky-900 font-mono font-medium border border-sky-200">
-                Multi-Gem Topaz • 18K Solid
+                Multi-Gem Topaz &bull; 18K Solid
               </span>
               <img src="https://goshwara.com/cdn/shop/files/Bracelet_menu_500x.jpg?v=1769015072" alt="Gossip Bracelet" class="max-h-64 object-contain group-hover:scale-105 transition duration-500">
               <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-stone-900 text-gold-300 border border-gold-400 text-[10.5px] uppercase tracking-[0.2em] font-medium text-center shadow-xl opacity-0 group-hover:opacity-100 transition duration-300">
@@ -767,7 +832,7 @@
 
         </div>
 
-        <!-- Real-Time Render Stage -->
+        <!-- Real-Time Render Stage with Ambient Glow -->
         <div class="reveal-elem lg:col-span-6">
           <div class="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200/90 shadow-2xl relative text-center">
             
@@ -785,7 +850,7 @@
 
             <div class="pt-6 border-t border-stone-200 flex items-center justify-between text-left">
               <div>
-                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono" id="atelierMeta">Cushion Solitaire • 18K Honey Yellow Gold</span>
+                <span class="text-[10px] uppercase tracking-wider text-stone-500 block font-mono" id="atelierMeta">Cushion Solitaire &bull; 18K Honey Yellow Gold</span>
                 <h5 class="font-serif text-2xl text-stone-900" id="atelierTitle">Bespoke Muzo Emerald Solitaire</h5>
               </div>
               <div class="text-right">
@@ -809,7 +874,7 @@
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
       <div>
         <h4 class="font-cinzel text-2xl tracking-[0.3em] uppercase text-white font-semibold">GOSHWARA</h4>
-        <p class="text-xs uppercase tracking-[0.25em] text-gold-400/90 mt-1">New York • Haute Joaillerie</p>
+        <p class="text-xs uppercase tracking-[0.25em] text-gold-400/90 mt-1">New York &bull; Haute Joaillerie</p>
       </div>
 
       <div class="flex flex-wrap items-center gap-7 text-xs uppercase tracking-widest text-stone-300">
@@ -821,7 +886,7 @@
       </div>
 
       <p class="text-[10px] text-stone-400 font-mono tracking-wider">
-        © 2026 Goshwara New York • Fifth Avenue Salon
+        © 2026 Goshwara New York &bull; Fifth Avenue Salon
       </p>
     </div>
   </footer>
@@ -1068,7 +1133,7 @@
           </p>
           <div class="p-4 rounded-xl bg-pearl border border-stone-200 text-xs">
             <span class="text-stone-400 block font-mono text-[9px] uppercase">Editorial Coverage</span>
-            <span class="text-stone-800 font-medium">Vogue International • Harper's Bazaar • W Magazine • Elle</span>
+            <span class="text-stone-800 font-medium">Vogue International &bull; Harper's Bazaar &bull; W Magazine &bull; Elle</span>
           </div>
           <button onclick="closePressModal(); openSalonDrawer();" class="w-full py-3.5 rounded-full text-xs uppercase tracking-[0.2em] font-semibold text-white bg-stone-900 hover:bg-gold-600 transition">
             Request Suite Viewing Appointment
@@ -1111,15 +1176,15 @@
             <h5 class="text-[10px] uppercase tracking-[0.2em] font-mono text-stone-500">Maison Salons & Partners</h5>
             <div class="p-4 rounded-xl border border-stone-200">
               <span class="font-serif text-base text-stone-900 block font-medium">New York Flagship Salon</span>
-              <span class="text-stone-500 text-[11px]">Fifth Avenue & 47th St, Manhattan • By Appointment</span>
+              <span class="text-stone-500 text-[11px]">Fifth Avenue & 47th St, Manhattan &bull; By Appointment</span>
             </div>
             <div class="p-4 rounded-xl border border-stone-200">
               <span class="font-serif text-base text-stone-900 block font-medium">Mumbai Private Suite</span>
-              <span class="text-stone-500 text-[11px]">Bandra Kurla Complex (BKC) • By Appointment</span>
+              <span class="text-stone-500 text-[11px]">Bandra Kurla Complex (BKC) &bull; By Appointment</span>
             </div>
             <div class="p-4 rounded-xl border border-stone-200">
               <span class="font-serif text-base text-stone-900 block font-medium">Department Store Partners</span>
-              <span class="text-stone-500 text-[11px]">Saks Fifth Avenue • Neiman Marcus • Bergdorf Goodman</span>
+              <span class="text-stone-500 text-[11px]">Saks Fifth Avenue &bull; Neiman Marcus &bull; Bergdorf Goodman</span>
             </div>
           </div>
         </div>
@@ -1137,11 +1202,62 @@
   </button>
 
   <!-- ========================================== -->
-  <!-- JAVASCRIPT: LOGIC, 3D TILT, LOUPE & SOUND  -->
+  <!-- JAVASCRIPT: LUXURY CURSOR, 3D TILT & AUDIO -->
   <!-- ========================================== -->
   <script>
     // ----------------------------------------------------
-    // 1. Currency Management (USD & INR)
+    // 1. Luxury Gold Cursor Stardust Follower (Lerp Physics)
+    // ----------------------------------------------------
+    const cursor = document.getElementById('goldCursor');
+    const cursorDot = document.getElementById('goldCursorDot');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let cursorX = mouseX;
+    let cursorY = mouseY;
+
+    window.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (cursorDot) {
+        cursorDot.style.left = mouseX + 'px';
+        cursorDot.style.top = mouseY + 'px';
+      }
+    });
+
+    function animateCursor() {
+      // Smooth linear interpolation for floating weightless luxury feel
+      cursorX += (mouseX - cursorX) * 0.15;
+      cursorY += (mouseY - cursorY) * 0.15;
+      if (cursor) {
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+      }
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Enlarge cursor when hovering interactive jewelry cards or buttons
+    document.querySelectorAll('button, a, .tilt-card, .gem-filter, .comparison-slider-container').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        if(cursor) {
+          cursor.style.width = '48px';
+          cursor.style.height = '48px';
+          cursor.style.borderColor = '#C59B27';
+          cursor.style.backgroundColor = 'rgba(212, 175, 55, 0.08)';
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        if(cursor) {
+          cursor.style.width = '32px';
+          cursor.style.height = '32px';
+          cursor.style.borderColor = 'rgba(212, 175, 55, 0.7)';
+          cursor.style.backgroundColor = 'transparent';
+        }
+      });
+    });
+
+    // ----------------------------------------------------
+    // 2. Currency Management (USD & INR)
     // ----------------------------------------------------
     let currentCurrency = 'USD';
     const INR_RATE = 84.5;
@@ -1174,7 +1290,7 @@
     }
 
     // ----------------------------------------------------
-    // 2. Web Audio Synthesizer (Haute Joaillerie Chime)
+    // 3. Web Audio Synthesizer (Haute Joaillerie Chime)
     // ----------------------------------------------------
     let soundEnabled = false;
     let audioCtx = null;
@@ -1210,7 +1326,7 @@
     }
 
     // ----------------------------------------------------
-    // 3. Canvas Light Caustics & Gold Particles
+    // 4. Dynamic Gold Dust Caustic Canvas
     // ----------------------------------------------------
     const canvas = document.getElementById('causticsCanvas');
     const ctx = canvas.getContext('2d');
@@ -1223,14 +1339,14 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    for (let i = 0; i < 35; i++) {
+    for (let i = 0; i < 45; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 2 + 1,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        alpha: Math.random() * 0.45 + 0.15
+        r: Math.random() * 2.2 + 0.8,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        alpha: Math.random() * 0.5 + 0.2
       });
     }
 
@@ -1254,7 +1370,7 @@
     animateParticles();
 
     // ----------------------------------------------------
-    // 4. 3D Card Tilt Interaction
+    // 5. 3D Card Tilt Interaction with Smooth Physics
     // ----------------------------------------------------
     document.querySelectorAll('.tilt-card-wrapper').forEach(wrapper => {
       const card = wrapper.querySelector('.tilt-card');
@@ -1266,19 +1382,19 @@
         const y = e.clientY - rect.top;
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -8;
-        const rotateY = ((x - centerX) / centerX) * 8;
+        const rotateX = ((y - centerY) / centerY) * -9;
+        const rotateY = ((x - centerX) / centerX) * 9;
 
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
       });
 
       wrapper.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
       });
     });
 
     // ----------------------------------------------------
-    // 5. Scroll Reveal Motion
+    // 6. Scroll Reveal Observer with Unblur
     // ----------------------------------------------------
     const reveals = document.querySelectorAll('.reveal-elem');
     const revealObserver = new IntersectionObserver((entries, obs) => {
@@ -1288,11 +1404,11 @@
           obs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
     reveals.forEach(r => revealObserver.observe(r));
 
     // ----------------------------------------------------
-    // 6. Before/After Comparison Drag Slider
+    // 7. Before/After Comparison Drag Slider
     // ----------------------------------------------------
     const sliderContainer = document.querySelector('.comparison-slider-container');
     const beforeEl = document.getElementById('sliderBefore');
@@ -1323,7 +1439,7 @@
     }
 
     // ----------------------------------------------------
-    // 7. Velvet Box Modal with 3.5X Loupe Lens
+    // 8. Velvet Box Modal with 3.5X Loupe Lens
     // ----------------------------------------------------
     let activePieceUSD = 9950;
 
@@ -1336,7 +1452,6 @@
       const imgEl = document.getElementById('trayImg');
       imgEl.src = img;
 
-      // Update formatted price
       const priceEl = document.getElementById('trayPrice');
       if (currentCurrency === 'INR') {
         const inr = Math.round(usdPrice * INR_RATE / 1000) * 1000;
@@ -1390,7 +1505,7 @@
     }
 
     // ----------------------------------------------------
-    // 8. Salon Suite Reservation & Digital Pass Generation
+    // 9. Salon Suite Reservation & Digital Pass
     // ----------------------------------------------------
     function openSalonDrawer(piece) {
       const drawer = document.getElementById('salonSuiteDrawer');
@@ -1429,7 +1544,7 @@
     }
 
     // ----------------------------------------------------
-    // 9. Celebrity Press Dossier Modal
+    // 10. Celebrity Press Dossier Modal
     // ----------------------------------------------------
     function openPressModal(celeb, event, piece, img) {
       document.getElementById('pressCelebrity').innerText = celeb;
@@ -1450,7 +1565,7 @@
     }
 
     // ----------------------------------------------------
-    // 10. Concierge Desk Modal
+    // 11. Concierge Desk Modal
     // ----------------------------------------------------
     function openConciergeModal() {
       const drawer = document.getElementById('conciergeModal');
@@ -1466,7 +1581,7 @@
     }
 
     // ----------------------------------------------------
-    // 11. Atelier Configurator
+    // 12. Atelier Configurator
     // ----------------------------------------------------
     let atelierShape = 'Cushion Solitaire';
     let atelierGem = 'Colombian Muzo Emerald';
@@ -1514,7 +1629,7 @@
     }
 
     function updateAtelier() {
-      document.getElementById('atelierMeta').innerText = `${atelierShape} • ${atelierMetal}`;
+      document.getElementById('atelierMeta').innerText = `${atelierShape} &bull; ${atelierMetal}`;
       document.getElementById('atelierTitle').innerText = `Bespoke ${atelierGem.split(' ')[0]} ${atelierShape.split(' ')[0]}`;
       
       const priceEl = document.getElementById('atelierPrice');
@@ -1528,7 +1643,7 @@
     }
 
     // ----------------------------------------------------
-    // 12. Vault Collection Filter
+    // 13. Vault Collection Filter
     // ----------------------------------------------------
     function filterVault(filter) {
       document.querySelectorAll('#gemFilters button').forEach(b => {
