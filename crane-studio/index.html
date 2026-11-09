@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Gantry Crane 3D Unboxing & 60/30/10 Color Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      user-select: none;
+    }
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-mono-tech { font-family: 'Space Grotesk', monospace; }
+
+    /* 3D Perspective Stage */
+    .viewport-3d {
+      perspective: 1200px;
+    }
+
+    /* Container 3D Box & Doors */
+    .container-box {
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .door-left {
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      transition: transform 0.7s cubic-bezier(0.34, 1.25, 0.64, 1);
+      backface-visibility: hidden;
+    }
+    .door-right {
+      transform-origin: right center;
+      transform-style: preserve-3d;
+      transition: transform 0.7s cubic-bezier(0.34, 1.25, 0.64, 1);
+      backface-visibility: hidden;
+    }
+    .doors-open .door-left {
+      transform: rotateY(-125deg);
+    }
+    .doors-open .door-right {
+      transform: rotateY(125deg);
+    }
+
+    /* Motorized Gantry Crane Rig */
+    #craneTrolley {
+      transition: left 0.75s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    #clawHoistCable {
+      transition: height 0.65s cubic-bezier(0.25, 1, 0.5, 1), transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    #clawJaws {
+      transition: transform 0.35s ease;
+    }
+    .claw-grabbing #clawJaws {
+      transform: scale(0.92);
+    }
+
+    /* Corrugated Shipping Container Texture */
+    .corrugated {
+      background-image: repeating-linear-gradient(90deg, rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 10px, rgba(255,255,255,0.08) 11px, rgba(255,255,255,0.08) 20px);
+    }
+    .corrugated-dark {
+      background-image: repeating-linear-gradient(90deg, rgba(0,0,0,0.4) 0px, rgba(0,0,0,0.4) 8px, rgba(255,255,255,0.05) 9px, rgba(255,255,255,0.05) 16px);
+    }
+
+    /* Ambient Spotlight */
+    .spotlight-glow {
+      background: radial-gradient(circle at 50% 40%, rgba(255,255,255,0.2) 0%, transparent 65%);
+    }
+
+    /* Big Hero Backdrop Typography */
+    .backdrop-watermark {
+      font-size: clamp(3.5rem, 12vw, 9.5rem);
+      line-height: 0.9;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+  </style>
+</head>
+<body id="pageBody" class="bg-[#1C4ED8] text-white min-h-screen flex flex-col justify-between transition-colors duration-700">
+
+  <!-- ========================================== -->
+  <!-- TOP CONTROL DECK: BUSINESS MODES & COLOR   -->
+  <!-- ========================================== -->
+  <header class="w-full max-w-6xl mx-auto px-4 pt-4 pb-2 z-40 relative flex flex-wrap items-center justify-between gap-4">
+    
+    <!-- Brand / Mode Title -->
+    <div class="flex items-center gap-3">
+      <div id="brandBadge" class="w-9 h-9 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center font-bold text-sm shadow-md">
+        🏗️
+      </div>
+      <div>
+        <h1 class="text-sm font-bold tracking-tight uppercase" id="brandTitle">Debbie Creative Lab</h1>
+        <p class="text-[11px] text-white/70 font-mono" id="brandSubtitle">Motorized Gantry Crane + 3D Container Physics</p>
+      </div>
+    </div>
+
+    <!-- Mode Selector Pills -->
+    <div class="flex items-center gap-1.5 p-1 rounded-full bg-black/30 border border-white/15 backdrop-blur-md text-xs font-mono">
+      <button onclick="setSystemMode('debbie')" id="mode-debbie" class="px-3.5 py-1.5 rounded-full bg-white text-blue-900 font-bold transition shadow-sm cursor-pointer">
+        🚢 Debbie Containers
+      </button>
+      <button onclick="setSystemMode('goshwara')" id="mode-goshwara" class="px-3.5 py-1.5 rounded-full text-white/80 hover:text-white transition cursor-pointer">
+        💎 Goshwara Vault
+      </button>
+      <button onclick="setSystemMode('horlogerie')" id="mode-horlogerie" class="px-3.5 py-1.5 rounded-full text-white/80 hover:text-white transition cursor-pointer">
+        ⌚ Watch Safes
+      </button>
+    </div>
+
+    <!-- Diego 60/30/10 Ratio Visualizer Pill -->
+    <div class="hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/40 border border-white/20 text-xs font-mono">
+      <span class="text-white/60">60/30/10 Rule:</span>
+      <div class="flex items-center h-3 w-28 rounded-full overflow-hidden border border-white/30">
+        <span id="bar60" class="h-full w-[60%] bg-[#1C4ED8]" title="60% Main Color"></span>
+        <span id="bar30" class="h-full w-[30%] bg-white" title="30% Secondary Card"></span>
+        <span id="bar10" class="h-full w-[10%] bg-[#FF3B30] animate-pulse" title="10% Unexpected Accent CTA"></span>
+      </div>
+      <span id="label10" class="text-[11px] font-bold text-[#FF3B30]">10% Accent</span>
+    </div>
+
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- MAIN INTERACTIVE STAGE: GANTRY TRACK + CLAW + CONTAINERS -->
+  <!-- ======================================================== -->
+  <main class="relative w-full max-w-6xl mx-auto flex-1 flex flex-col justify-between px-4 py-2 overflow-hidden viewport-3d">
+    
+    <!-- Big Bold Watermark Behind (like Debbie's "PORTFOLIO" in Reel 1) -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+      <span id="watermarkText" class="backdrop-watermark text-white/10 uppercase select-none font-mono-tech transition-all duration-700">
+        PORTFOLIO
+      </span>
+    </div>
+
+    <!-- Top Overhead Gantry Track Rail -->
+    <div class="relative w-full h-12 z-20 mt-1">
+      <!-- Metallic Rail Beam -->
+      <div class="w-full h-3 bg-white/25 rounded-full border-b border-white/30 shadow-inner flex items-center px-4">
+        <div class="w-full h-0.5 border-t border-dashed border-white/40"></div>
+      </div>
+
+      <!-- Motorized Trolley (slides on track) -->
+      <div id="craneTrolley" class="absolute top-1 -ml-12 w-24 flex flex-col items-center pointer-events-none z-30" style="left: 50%;">
+        <!-- Wheels & Motor Carriage -->
+        <div class="w-16 h-5 rounded-md bg-stone-900 border border-white/40 shadow-xl flex items-center justify-between px-2">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+          <span class="text-[9px] font-mono text-white/80 font-bold">GANTRY</span>
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        </div>
+
+        <!-- Telescoping Steel Cables -->
+        <div id="clawHoistCable" class="w-12 h-14 border-x-2 border-white/80 relative flex items-end justify-center transition-all duration-500">
+          <!-- Mechanical Claw Jaws -->
+          <div id="clawJaws" class="w-20 -mb-3 flex items-center justify-between">
+            <svg class="w-6 h-6 text-yellow-400 filter drop-shadow-md transform -scale-x-100" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l3.59-3.58L17 12l-5 5z"/>
+            </svg>
+            <div class="h-2 w-8 bg-stone-800 rounded-sm border border-white/30"></div>
+            <svg class="w-6 h-6 text-yellow-400 filter drop-shadow-md" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l3.59-3.58L17 12l-5 5z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center Stage: Hoisted 3D Physical Container Box with Swinging Doors -->
+    <div class="relative z-20 my-auto flex items-center justify-center py-4">
+      
+      <!-- The Center Hoisted 3D Box -->
+      <div id="hoistedBoxContainer" class="relative w-80 sm:w-[440px] h-72 sm:h-80 rounded-2xl shadow-2xl transition-all duration-700 doors-open flex items-center justify-center p-2">
+        
+        <!-- Interior Spotlight -->
+        <div class="absolute inset-0 rounded-2xl spotlight-glow pointer-events-none"></div>
+
+        <!-- Interior Content Screen (Revealed behind the open doors) -->
+        <div id="interiorCard" class="w-full h-full rounded-xl bg-stone-900 border border-white/20 p-5 sm:p-7 flex flex-col justify-between relative z-10 shadow-2xl overflow-hidden">
+          
+          <!-- Top Status Strip -->
+          <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
+            <div class="flex items-center gap-2">
+              <span id="interiorDot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="interiorCategory" class="text-xs uppercase font-mono tracking-widest text-white/80 font-bold">SECTION 01 // OVERVIEW</span>
+            </div>
+            <span id="interiorCode" class="text-[11px] font-mono text-white/50">CNTR-NY-842</span>
+          </div>
+
+          <!-- Main Interactive Body -->
+          <div class="py-2 space-y-2">
+            <h3 id="interiorTitle" class="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              Hi, I'm Debbie.
+            </h3>
+            <p id="interiorDesc" class="text-xs sm:text-sm text-stone-300 font-light leading-relaxed">
+              In this realm with a crane deck, every container at this port holds a piece of my digital experience. Click any container below to hoist and unpack.
+            </p>
+          </div>
+
+          <!-- Bottom Metric & 10% Unexpected Accent Action Button -->
+          <div class="flex items-center justify-between pt-3 border-t border-white/10">
+            <div>
+              <span class="text-[10px] uppercase font-mono text-stone-400 block" id="interiorMetaLabel">EXPERIENCE SPEC</span>
+              <span class="text-xs font-mono text-white font-semibold" id="interiorMetaVal">Awwwards SOTD Calibre</span>
+            </div>
+            
+            <!-- 10% Unexpected Accent Button (Diego's Rule: Only on the button you want pressed) -->
+            <button onclick="handlePrimaryAction()" id="primaryCta" class="px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider font-bold transition shadow-xl hover:scale-105 active:scale-95 cursor-pointer bg-[#FF3B30] text-white">
+              Explore Work →
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Left 3D Door (Swings open -125deg on Y axis) -->
+        <div id="doorLeft" class="door-left absolute inset-y-0 left-0 w-1/2 rounded-l-xl bg-red-600 border-2 border-white/30 z-30 flex flex-col justify-between p-3.5 shadow-2xl corrugated">
+          <div class="flex items-center justify-between text-[10px] font-mono text-white/80">
+            <span>CL-89</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+          </div>
+          <span class="text-lg sm:text-xl font-bold font-mono tracking-tighter text-white drop-shadow-md text-left" id="doorLeftText">WHAT</span>
+          <div class="w-6 h-1 rounded-full bg-white/50"></div>
+        </div>
+
+        <!-- Right 3D Door (Swings open 125deg on Y axis) -->
+        <div id="doorRight" class="door-right absolute inset-y-0 right-0 w-1/2 rounded-r-xl bg-red-600 border-2 border-white/30 z-30 flex flex-col justify-between p-3.5 shadow-2xl corrugated text-right">
+          <div class="flex items-center justify-between text-[10px] font-mono text-white/80">
+            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+            <span>CR-89</span>
+          </div>
+          <span class="text-lg sm:text-xl font-bold font-mono tracking-tighter text-white drop-shadow-md text-right" id="doorRightText">I DO</span>
+          <div class="w-6 h-1 rounded-full bg-white/50 ml-auto"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom Container Staging Deck (Clickable containers waiting on the dock) -->
+    <div class="relative z-20 pb-4 pt-2">
+      <div class="text-center mb-2">
+        <span class="text-[11px] font-mono uppercase tracking-widest text-white/70">
+          ✦ Click any container below — Watch the robotic crane slide, hoist & unbox in 3D ✦
+        </span>
+      </div>
+
+      <!-- Container Dock Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3" id="dockGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- FOOTER: LIVE 60/30/10 PALETTE INSPECTION   -->
+  <!-- ========================================== -->
+  <footer class="w-full max-w-6xl mx-auto px-4 py-3 border-t border-white/10 z-40 relative flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+    
+    <div class="flex items-center gap-3">
+      <span class="text-white/60">Active Palette Theory:</span>
+      <span id="paletteName" class="px-2.5 py-1 rounded bg-black/30 border border-white/20 font-bold text-white">
+        Diego Rule 2: Royal Blue & Cream + Unexpected Coral
+      </span>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <a href="https://flagshipsystems.github.io/goshwara/" target="_blank" class="px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/25 transition">
+        View Live Goshwara Digital Flagship ↗
+      </a>
+    </div>
+
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT: MOTORIZED CRANE & 3D HOIST     -->
+  <!-- ========================================== -->
+  <script>
+    // System Configurations across 3 Business Verticals
+    const systems = {
+      debbie: {
+        bodyBg: '#1C4ED8', // 60% Royal Blue
+        cardBg: '#0F172A', // 30% Dark Slate
+        accentColor: '#FF3B30', // 10% Unexpected Coral Red
+        watermark: 'PORTFOLIO',
+        brand: 'Debbie Creative Lab',
+        subtitle: 'Motorized Gantry Crane + 3D Container Physics',
+        icon: '🚢',
+        paletteLabel: 'Royal Blue (60%) + Dark Slate (30%) + Coral Red (10%)',
+        containers: [
+          { id: 'c1', label: 'WHAT I DO', color: '#EF4444', leftText: 'WHAT', rightText: 'I DO', title: 'Hi, I\'m Debbie.', cat: '01 // OVERVIEW', desc: 'In this realm with a crane deck, every container at this port holds a piece of my digital experience. Click any container below to hoist and unpack.', metaLabel: 'CREATIVE SPECIALTY', metaVal: 'AI Design & UI Engineering', cta: 'Explore Work →' },
+          { id: 'c2', label: 'THE WORK', color: '#F97316', leftText: 'THE', rightText: 'WORK', title: 'Selected Case Studies', cat: '02 // PORTFOLIO', desc: 'From viral vibe-coded web applications to high-conversion design systems built for Silicon Valley teams.', metaLabel: 'FEATURED PROJECTS', metaVal: '14 Live Applications', cta: 'View Showcase →' },
+          { id: 'c3', label: 'ABOUT ME', color: '#3B82F6', leftText: 'ABOUT', rightText: 'ME', title: 'Product & Design Engineer', cat: '03 // BIO', desc: 'Blending deep Figma craftsmanship with Claude Opus code generation to ship fluid interactive web spaces.', metaLabel: 'LOCATION', metaVal: 'Remote / Global', cta: 'Read Story →' },
+          { id: 'c4', label: 'PROCESS', color: '#EAB308', leftText: 'PRO', rightText: 'CESS', title: 'The 4-Step Velocity Loop', cat: '04 // METHOD', desc: 'Concept sprint to 3D spatial prototype within 48 hours. Zero fluff, maximum tactile user engagement.', metaLabel: 'SPRINT CADENCE', metaVal: 'Weekly Releases', cta: 'Inspect Process →' },
+          { id: 'c5', label: 'SAY HELLO', color: '#4F46E5', leftText: 'SAY', rightText: 'HELLO', title: 'Let\'s Build Something Bold', cat: '05 // CONTACT', desc: 'Open for high-impact creative commissions, founding designer advisory, and master prompt architecture.', metaLabel: 'AVAILABILITY', metaVal: 'Q4 Booking Open', cta: 'Send Transmission →' },
+          { id: 'c6', label: 'TOOL KIT', color: '#6B7280', leftText: 'TOOL', rightText: 'KIT', title: 'Tech Stack & Arsenal', cat: '06 // GEAR', desc: 'Three.js, WebGL, Tailwind, Claude 3.5 Sonnet, Spline 3D, and bespoke canvas caustics shaders.', metaLabel: 'STACK CORE', metaVal: 'TypeScript & WebGL', cta: 'Check Stack →' }
+        ]
+      },
+      goshwara: {
+        bodyBg: '#090A0D', // 60% Deep Imperial Onyx
+        cardBg: '#12141A', // 30% Dark Vault Slate
+        accentColor: '#05D585', // 10% Unexpected Electric Muzo Emerald
+        watermark: 'GOSHWARA',
+        brand: 'Goshwara Haute Joaillerie',
+        subtitle: 'Crown Vault Crane + 3D Casket Unboxing',
+        icon: '💎',
+        paletteLabel: 'Imperial Onyx (60%) + Warm Silk (30%) + Electric Emerald (10%)',
+        containers: [
+          { id: 'g1', label: 'MUZO EMERALD', color: '#047857', leftText: 'MUZO', rightText: 'CHOKER', title: 'Rainforest Emerald Suite', cat: 'VAULT 01 // HIGH JEWELRY', desc: 'Cascade of 100% natural unheated Colombian emeralds hand-mounted in sculptural 18K solid gold with baguette accents.', metaLabel: 'PROVENANCE', metaVal: 'Muzo Valley, Colombia (GIA)', cta: 'Reserve Viewing →' },
+          { id: 'g2', label: 'TOPAZ RING', color: '#0369A1', leftText: 'BLUE', rightText: 'TOPAZ', title: 'Three-Stone Architectural Ring', cat: 'VAULT 02 // ROCK \'N ROLL', desc: 'Vivid oceanic London blue topaz flanked by micropavé brilliant cut diamonds in warm 18K architectural yellow gold.', metaLabel: 'GEM CUT', metaVal: 'Octagonal Step Facets', cta: 'Inspect 3.5X Loupe →' },
+          { id: 'g3', label: 'AMETHYST DROP', color: '#7E22CE', leftText: 'MANHATTAN', rightText: 'PENDANT', title: 'Cushion Cut Manhattan Pendant', cat: 'VAULT 03 // CLASSICS', desc: 'Hand-faceted royal amethyst suspended from articulated solid gold links. Sweta Jain\'s tribute to New York geometry.', metaLabel: 'GOLD ALLOY', metaVal: '18K Honey Gold Bezel', cta: 'Reserve Private Suite →' },
+          { id: 'g4', label: 'RUBELLITE EARRINGS', color: '#BE123C', leftText: 'RUBELLITE', rightText: 'DROPS', title: 'Double Drop Rubellite Suite', cat: 'VAULT 04 // MÉLANGE', desc: 'Articulated dual cabochon drops featuring intense raspberry rubellites with diamond halos. Red carpet authority.', metaLabel: 'CELEBRITY PRESS', metaVal: 'Academy Museum Gala', cta: 'Request Dossier →' },
+          { id: 'g5', label: 'CITRINE HALO', color: '#D97706', leftText: 'MADEIRA', rightText: 'CITRINE', title: 'Asscher Citrine Halo Pendant', cat: 'VAULT 05 // CLASSICS', desc: 'Hypnotic windmill step facets reflecting rich amber honey hues, encapsulated by micro-pavé diamonds.', metaLabel: 'CERTIFICATION', metaVal: 'Gübelin Gem Lab', cta: 'Inquire P.O.A. →' },
+          { id: 'g6', label: 'BESPOKE ATELIER', color: '#44403C', leftText: 'BESPOKE', rightText: 'SALON', title: 'Private Atelier Commission', cat: 'VAULT 06 // PRIVATE SALON', desc: 'One-on-one custom commission with Sweta Jain. Private viewing suites at The Oberoi Delhi, BKC Mumbai, or 5th Ave.', metaLabel: 'APPOINTMENT', metaVal: 'Discreet Private Suite', cta: 'Book Private Salon →' }
+        ]
+      },
+      horlogerie: {
+        bodyBg: '#0A1118', // 60% Midnight Blue-Black
+        cardBg: '#131D27', // 30% Titanium Slate
+        accentColor: '#38BDF8', // 10% Unexpected Electric Glacial Cyan
+        watermark: 'CHRONO',
+        brand: 'Genève Haute Horlogerie',
+        subtitle: 'Titanium Vault Crane + Tourbillon Safes',
+        icon: '⌚',
+        paletteLabel: 'Midnight Slate (60%) + Titanium (30%) + Glacial Cyan (10%)',
+        containers: [
+          { id: 'w1', label: 'TOURBILLON', color: '#0284C7', leftText: 'FLYING', rightText: 'TOURBILLON', title: 'Chronographe Volant No. 01', cat: 'CALIBRE 01 // GRAND COMPLICATION', desc: 'Grade 5 titanium cage with 60-second flying tourbillon, column-wheel monopusher chronograph, 72h power reserve.', metaLabel: 'FREQUENCY', metaVal: '28,800 vph (4 Hz) COSC', cta: 'Request Allocation →' },
+          { id: 'w2', label: 'PERPETUAL', color: '#334155', leftText: 'QUANTIÈME', rightText: 'PERPÉTUEL', title: 'Perpetual Moonphase Calibre', cat: 'CALIBRE 02 // ASTRONOMY', desc: 'Requires no adjustment until 2100. Hand-finished Côtes de Genève with aventurine glass celestial night sky.', metaLabel: 'CASE ALLOY', metaVal: 'Platinum 950 Bezel', cta: 'Inspect Movement →' },
+          { id: 'w3', label: 'SKELETON', color: '#1E293B', leftText: 'OPEN', rightText: 'WORK', title: 'Skeletonized Royal Chrono', cat: 'CALIBRE 03 // AVANT-GARDE', desc: 'Entire movement open-worked with hand-beveled bridges. Sapphire crystal dial offering 360-degree escapement view.', metaLabel: 'FINISHING', metaVal: 'Black Polished Anglage', cta: 'Request Dossier →' },
+          { id: 'w4', label: 'DEEP DIVER', color: '#0F766E', leftText: 'ABYSS', rightText: '1000M', title: 'Abyss Deep Sea Titanium', cat: 'CALIBRE 04 // PROFESSIONAL', desc: 'Helium escape valve, luminous ceramic unidirectional bezel, ISO 6425 saturation diving certification.', metaLabel: 'WATERPROOF', metaVal: '1,000 Meters / 100 Bar', cta: 'Reserve Numbered Piece →' },
+          { id: 'w5', label: 'MINUTE REPEATER', color: '#854D0E', leftText: 'SONNERIE', rightText: 'CHIME', title: 'Cathedral Gong Minute Repeater', cat: 'CALIBRE 05 // ACOUSTICS', desc: 'Dual-hammer acoustic sonnerie striking hours, quarters, and minutes with hardened steel cathedral gongs.', metaLabel: 'SOUND RESONANCE', metaVal: 'Dual Tempered Steel', cta: 'Listen to Chime →' },
+          { id: 'w6', label: 'BESPOKE ORDER', color: '#3F3F46', leftText: 'PIÈCE', rightText: 'UNIQUE', title: 'Atelier Cabinotiers Unique', cat: 'CALIBRE 06 // COMMISSION', desc: 'Custom enamel dial miniature and bespoke movement complications commissioned by private collectors.', metaLabel: 'VALUATION', metaVal: 'Strictly P.O.A.', cta: 'Consult Horologist →' }
+        ]
+      }
+    };
+
+    let currentMode = 'debbie';
+    let activeContainerIndex = 0;
+    let isAnimating = false;
+
+    // Initialize System Mode
+    function setSystemMode(mode) {
+      currentMode = mode;
+      const sys = systems[mode];
+
+      // Update Top Nav
+      document.querySelectorAll('header button').forEach(b => {
+        b.className = 'px-3.5 py-1.5 rounded-full text-white/80 hover:text-white transition cursor-pointer';
+      });
+      const activeBtn = document.getElementById(`mode-${mode}`);
+      if (activeBtn) {
+        activeBtn.className = 'px-3.5 py-1.5 rounded-full bg-white text-stone-900 font-bold transition shadow-sm cursor-pointer';
+      }
+
+      // Update Body Colors & Watermark
+      document.getElementById('pageBody').style.backgroundColor = sys.bodyBg;
+      document.getElementById('watermarkText').innerText = sys.watermark;
+      document.getElementById('brandTitle').innerText = sys.brand;
+      document.getElementById('brandSubtitle').innerText = sys.subtitle;
+      document.getElementById('brandBadge').innerText = sys.icon;
+
+      // Update 60/30/10 Bars
+      document.getElementById('bar60').style.backgroundColor = sys.bodyBg;
+      document.getElementById('bar10').style.backgroundColor = sys.accentColor;
+      document.getElementById('label10').innerText = `10% Accent`;
+      document.getElementById('label10').style.color = sys.accentColor;
+      document.getElementById('primaryCta').style.backgroundColor = sys.accentColor;
+      document.getElementById('paletteName').innerText = sys.paletteLabel;
+
+      renderDock();
+      hoistContainer(0, true);
+    }
+
+    // Render Bottom Clickable Containers
+    function renderDock() {
+      const grid = document.getElementById('dockGrid');
+      grid.innerHTML = '';
+      const items = systems[currentMode].containers;
+
+      items.forEach((item, idx) => {
+        const btn = document.createElement('div');
+        btn.id = `dock-${idx}`;
+        btn.className = `p-3 rounded-xl border-2 transition-all duration-300 cursor-pointer shadow-lg hover:scale-105 active:scale-95 flex flex-col justify-between h-20 ${idx === activeContainerIndex ? 'border-white scale-105 ring-4 ring-white/30' : 'border-white/20 opacity-80 hover:opacity-100'} ${currentMode === 'debbie' ? 'corrugated' : 'corrugated-dark'}`;
+        btn.style.backgroundColor = item.color;
+        btn.onclick = () => hoistContainer(idx);
+
+        btn.innerHTML = `
+          <div class="flex items-center justify-between text-[9px] font-mono text-white/90">
+            <span>#0${idx + 1}</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-white/70"></span>
+          </div>
+          <span class="text-xs font-bold font-mono text-white drop-shadow tracking-tight truncate">${item.label}</span>
+        `;
+        grid.appendChild(btn);
+      });
+    }
+
+    // Motorized Crane Sliding & 3D Hoisting Animation
+    function hoistContainer(targetIndex, instant = false) {
+      if (isAnimating && !instant) return;
+      isAnimating = true;
+
+      const sys = systems[currentMode];
+      const item = sys.containers[targetIndex];
+      activeContainerIndex = targetIndex;
+
+      // Update Dock Highlight
+      document.querySelectorAll('#dockGrid > div').forEach((d, i) => {
+        if (i === targetIndex) {
+          d.className = `p-3 rounded-xl border-2 transition-all duration-300 cursor-pointer shadow-lg scale-105 ring-4 ring-white/30 border-white opacity-100 ${currentMode === 'debbie' ? 'corrugated' : 'corrugated-dark'}`;
+        } else {
+          d.className = `p-3 rounded-xl border-2 transition-all duration-300 cursor-pointer shadow-lg border-white/20 opacity-80 hover:opacity-100 ${currentMode === 'debbie' ? 'corrugated' : 'corrugated-dark'}`;
+        }
+      });
+
+      const boxContainer = document.getElementById('hoistedBoxContainer');
+      const trolley = document.getElementById('craneTrolley');
+      const cable = document.getElementById('clawHoistCable');
+
+      // Target X Coordinate for the Crane based on target dock position
+      const dockElem = document.getElementById(`dock-${targetIndex}`);
+      let targetPercent = 50;
+      if (dockElem) {
+        const rect = dockElem.getBoundingClientRect();
+        const stageRect = document.querySelector('main').getBoundingClientRect();
+        targetPercent = Math.max(10, Math.min(90, ((rect.left + rect.width / 2 - stageRect.left) / stageRect.width) * 100));
+      }
+
+      if (instant) {
+        applyItemData(item, sys);
+        trolley.style.left = `${targetPercent}%`;
+        boxContainer.classList.add('doors-open');
+        isAnimating = false;
+        return;
+      }
+
+      // Step 1: Close 3D Doors
+      boxContainer.classList.remove('doors-open');
+      playHaptic(300);
+
+      setTimeout(() => {
+        // Step 2: Cable lowers down to dock, Trolley slides over to target dock item
+        cable.style.height = '140px';
+        trolley.style.left = `${targetPercent}%`;
+        playHaptic(440);
+
+        setTimeout(() => {
+          // Step 3: Claw grabs container and cables hoist back up
+          trolley.classList.add('claw-grabbing');
+          playHaptic(580);
+
+          setTimeout(() => {
+            // Step 4: Trolley slides back to center (50%) with the hoisted container
+            trolley.style.left = '50%';
+            cable.style.height = '56px';
+            applyItemData(item, sys);
+
+            setTimeout(() => {
+              // Step 5: Swing Open 3D Doors in Center Stage!
+              trolley.classList.remove('claw-grabbing');
+              boxContainer.classList.add('doors-open');
+              playHaptic(880);
+              isAnimating = false;
+            }, 600);
+
+          }, 450);
+
+        }, 550);
+
+      }, 350);
+    }
+
+    // Apply Content into the Hoisted Box
+    function applyItemData(item, sys) {
+      // Update Doors
+      const doorL = document.getElementById('doorLeft');
+      const doorR = document.getElementById('doorRight');
+      doorL.style.backgroundColor = item.color;
+      doorR.style.backgroundColor = item.color;
+      document.getElementById('doorLeftText').innerText = item.leftText;
+      document.getElementById('doorRightText').innerText = item.rightText;
+
+      // Update Interior
+      document.getElementById('interiorCategory').innerText = item.cat;
+      document.getElementById('interiorTitle').innerText = item.title;
+      document.getElementById('interiorDesc').innerText = item.desc;
+      document.getElementById('interiorMetaLabel').innerText = item.metaLabel;
+      document.getElementById('interiorMetaVal').innerText = item.metaVal;
+
+      const cta = document.getElementById('primaryCta');
+      cta.innerText = item.cta;
+      cta.style.backgroundColor = sys.accentColor;
+      if (sys.accentColor === '#05D585') {
+        cta.style.color = '#090A0D';
+      } else {
+        cta.style.color = '#FFFFFF';
+      }
+
+      document.getElementById('interiorDot').style.backgroundColor = sys.accentColor;
+    }
+
+    // Audio Feedback
+    function playHaptic(freq) {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.05, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.25);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.25);
+      } catch(e) {}
+    }
+
+    function handlePrimaryAction() {
+      const sys = systems[currentMode];
+      const item = sys.containers[activeContainerIndex];
+      playHaptic(1046);
+      alert(`[${sys.brand}] Triggered 10% High-Conversion CTA:\n"${item.cta}" for ${item.title}`);
+    }
+
+    // Initial load
+    setSystemMode('debbie');
+  </script>
+
+</body>
+</html>
