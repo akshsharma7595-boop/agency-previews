@@ -3,508 +3,823 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Gantry Crane 3D Unboxing & 60/30/10 Color Studio</title>
+  <title>Awwwards-Calibre 3D Gantry Crane & Unboxing Engine</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Three.js + GSAP for Real 3D WebGL Physics & Kinematics -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      overflow-x: hidden;
+      margin: 0;
+      overflow: hidden;
       user-select: none;
+      background: #0d1b2a;
     }
     .font-cinzel { font-family: 'Cinzel', serif; }
-    .font-mono-tech { font-family: 'Space Grotesk', monospace; }
+    .font-tech { font-family: 'Space Grotesk', monospace; }
 
-    /* 3D Perspective Stage */
-    .viewport-3d {
-      perspective: 1200px;
-    }
-
-    /* Container 3D Box & Doors */
-    .container-box {
-      transform-style: preserve-3d;
-      transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .door-left {
-      transform-origin: left center;
-      transform-style: preserve-3d;
-      transition: transform 0.7s cubic-bezier(0.34, 1.25, 0.64, 1);
-      backface-visibility: hidden;
-    }
-    .door-right {
-      transform-origin: right center;
-      transform-style: preserve-3d;
-      transition: transform 0.7s cubic-bezier(0.34, 1.25, 0.64, 1);
-      backface-visibility: hidden;
-    }
-    .doors-open .door-left {
-      transform: rotateY(-125deg);
-    }
-    .doors-open .door-right {
-      transform: rotateY(125deg);
+    #webglCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      display: block;
     }
 
-    /* Motorized Gantry Crane Rig */
-    #craneTrolley {
-      transition: left 0.75s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    #clawHoistCable {
-      transition: height 0.65s cubic-bezier(0.25, 1, 0.5, 1), transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    #clawJaws {
-      transition: transform 0.35s ease;
-    }
-    .claw-grabbing #clawJaws {
-      transform: scale(0.92);
+    /* Cinematic Gradient Vignette */
+    .vignette-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.65) 100%);
+      z-index: 10;
     }
 
-    /* Corrugated Shipping Container Texture */
-    .corrugated {
-      background-image: repeating-linear-gradient(90deg, rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 10px, rgba(255,255,255,0.08) 11px, rgba(255,255,255,0.08) 20px);
-    }
-    .corrugated-dark {
-      background-image: repeating-linear-gradient(90deg, rgba(0,0,0,0.4) 0px, rgba(0,0,0,0.4) 8px, rgba(255,255,255,0.05) 9px, rgba(255,255,255,0.05) 16px);
-    }
-
-    /* Ambient Spotlight */
-    .spotlight-glow {
-      background: radial-gradient(circle at 50% 40%, rgba(255,255,255,0.2) 0%, transparent 65%);
+    /* Subdued Scanline & Noise */
+    .scanlines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 3px);
+      z-index: 11;
+      opacity: 0.7;
     }
 
-    /* Big Hero Backdrop Typography */
-    .backdrop-watermark {
-      font-size: clamp(3.5rem, 12vw, 9.5rem);
-      line-height: 0.9;
-      font-weight: 900;
-      letter-spacing: -0.04em;
+    /* Glow highlights */
+    .electric-glow {
+      box-shadow: 0 0 25px -4px currentColor;
     }
   </style>
 </head>
-<body id="pageBody" class="bg-[#1C4ED8] text-white min-h-screen flex flex-col justify-between transition-colors duration-700">
+<body class="w-screen h-screen relative select-none">
 
   <!-- ========================================== -->
-  <!-- TOP CONTROL DECK: BUSINESS MODES & COLOR   -->
+  <!-- 1. FULL-SCREEN 3D WEBGL CANVAS             -->
   <!-- ========================================== -->
-  <header class="w-full max-w-6xl mx-auto px-4 pt-4 pb-2 z-40 relative flex flex-wrap items-center justify-between gap-4">
+  <canvas id="webglCanvas"></canvas>
+  <div class="vignette-overlay"></div>
+  <div class="scanlines"></div>
+
+  <!-- ========================================== -->
+  <!-- 2. LUXURY HUD & INDUSTRY SWITCHER (TOP)    -->
+  <!-- ========================================== -->
+  <header class="absolute top-0 inset-x-0 z-30 px-6 py-5 flex items-center justify-between pointer-events-none">
     
-    <!-- Brand / Mode Title -->
-    <div class="flex items-center gap-3">
-      <div id="brandBadge" class="w-9 h-9 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center font-bold text-sm shadow-md">
+    <!-- Maison Branding -->
+    <div class="flex items-center gap-3.5 pointer-events-auto">
+      <div id="hudBadge" class="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-lg shadow-xl">
         🏗️
       </div>
       <div>
-        <h1 class="text-sm font-bold tracking-tight uppercase" id="brandTitle">Debbie Creative Lab</h1>
-        <p class="text-[11px] text-white/70 font-mono" id="brandSubtitle">Motorized Gantry Crane + 3D Container Physics</p>
+        <h1 class="font-tech text-base tracking-wider uppercase font-bold text-white flex items-center gap-2" id="hudTitle">
+          <span>PORTFOLIO CRANE ENGINE</span>
+          <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">3D WEBGL</span>
+        </h1>
+        <p class="text-[11px] font-mono text-white/60" id="hudSubtitle">True Three.js Kinematic Crane • PBR 3D Shaders</p>
       </div>
     </div>
 
-    <!-- Mode Selector Pills -->
-    <div class="flex items-center gap-1.5 p-1 rounded-full bg-black/30 border border-white/15 backdrop-blur-md text-xs font-mono">
-      <button onclick="setSystemMode('debbie')" id="mode-debbie" class="px-3.5 py-1.5 rounded-full bg-white text-blue-900 font-bold transition shadow-sm cursor-pointer">
-        🚢 Debbie Containers
+    <!-- Vertical Mode Switcher (Debbie / Goshwara / Horlogerie) -->
+    <div class="flex items-center gap-1.5 p-1 rounded-full bg-black/40 backdrop-blur-xl border border-white/20 pointer-events-auto shadow-2xl text-xs font-mono">
+      <button onclick="switchMode('debbie')" id="btn-debbie" class="px-4 py-2 rounded-full bg-white text-stone-950 font-bold transition shadow-sm cursor-pointer">
+        🚢 Debbie Port
       </button>
-      <button onclick="setSystemMode('goshwara')" id="mode-goshwara" class="px-3.5 py-1.5 rounded-full text-white/80 hover:text-white transition cursor-pointer">
+      <button onclick="switchMode('goshwara')" id="btn-goshwara" class="px-4 py-2 rounded-full text-white/70 hover:text-white transition cursor-pointer">
         💎 Goshwara Vault
       </button>
-      <button onclick="setSystemMode('horlogerie')" id="mode-horlogerie" class="px-3.5 py-1.5 rounded-full text-white/80 hover:text-white transition cursor-pointer">
+      <button onclick="switchMode('horlogerie')" id="btn-horlogerie" class="px-4 py-2 rounded-full text-white/70 hover:text-white transition cursor-pointer">
         ⌚ Watch Safes
       </button>
     </div>
 
-    <!-- Diego 60/30/10 Ratio Visualizer Pill -->
-    <div class="hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/40 border border-white/20 text-xs font-mono">
+    <!-- Diego 60/30/10 Ratio Indicator -->
+    <div class="hidden lg:flex items-center gap-3 px-4 py-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/20 pointer-events-auto text-xs font-mono">
       <span class="text-white/60">60/30/10 Rule:</span>
-      <div class="flex items-center h-3 w-28 rounded-full overflow-hidden border border-white/30">
-        <span id="bar60" class="h-full w-[60%] bg-[#1C4ED8]" title="60% Main Color"></span>
-        <span id="bar30" class="h-full w-[30%] bg-white" title="30% Secondary Card"></span>
-        <span id="bar10" class="h-full w-[10%] bg-[#FF3B30] animate-pulse" title="10% Unexpected Accent CTA"></span>
+      <div class="flex items-center h-2.5 w-24 rounded-full overflow-hidden border border-white/30">
+        <span id="ratio60" class="h-full w-[60%] bg-[#1E40AF]" title="60% Grounding Main"></span>
+        <span id="ratio30" class="h-full w-[30%] bg-white" title="30% Structural Secondary"></span>
+        <span id="ratio10" class="h-full w-[10%] bg-[#EF4444] animate-pulse" title="10% Unexpected High-Ticket Accent"></span>
       </div>
-      <span id="label10" class="text-[11px] font-bold text-[#FF3B30]">10% Accent</span>
+      <span id="ratio10Label" class="text-[11px] font-bold text-[#EF4444]">10% Accent</span>
     </div>
 
   </header>
 
-  <!-- ======================================================== -->
-  <!-- MAIN INTERACTIVE STAGE: GANTRY TRACK + CLAW + CONTAINERS -->
-  <!-- ======================================================== -->
-  <main class="relative w-full max-w-6xl mx-auto flex-1 flex flex-col justify-between px-4 py-2 overflow-hidden viewport-3d">
+  <!-- ========================================== -->
+  <!-- 3. HOISTED DETAIL OVERLAY (MIDDLE RIGHT)   -->
+  <!-- ========================================== -->
+  <aside id="detailModal" class="absolute top-1/2 right-8 -translate-y-1/2 z-30 w-80 sm:w-96 rounded-3xl bg-black/60 backdrop-blur-2xl border border-white/20 p-6 shadow-2xl pointer-events-auto transition-all duration-700 opacity-0 translate-x-12">
     
-    <!-- Big Bold Watermark Behind (like Debbie's "PORTFOLIO" in Reel 1) -->
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-      <span id="watermarkText" class="backdrop-watermark text-white/10 uppercase select-none font-mono-tech transition-all duration-700">
-        PORTFOLIO
+    <!-- Top Registry Strip -->
+    <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+      <div class="flex items-center gap-2">
+        <span id="detailDot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <span id="detailCategory" class="text-[11px] font-mono tracking-widest text-white/80 font-bold uppercase">SECTION 01 // OVERVIEW</span>
+      </div>
+      <span id="detailReg" class="text-[10px] font-mono text-white/40">3D-HOIST-ONLINE</span>
+    </div>
+
+    <!-- Dynamic Title & Narrative -->
+    <div class="space-y-2 mb-6">
+      <h2 id="detailTitle" class="text-2xl font-bold tracking-tight text-white font-tech">Hi, I'm Debbie</h2>
+      <p id="detailDesc" class="text-xs text-stone-300 font-light leading-relaxed">
+        Real 3D WebGL gantry crane hoists physical corrugated shipping containers with true depth, dynamic lighting, and swinging double doors.
+      </p>
+    </div>
+
+    <!-- Specs Grid -->
+    <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 mb-6 flex items-center justify-between text-xs font-mono">
+      <div>
+        <span class="text-[9.5px] uppercase text-white/40 block" id="detailMetaKey">SPECIFICATION</span>
+        <span class="text-white font-semibold" id="detailMetaVal">Three.js WebGL & PBR Shaders</span>
+      </div>
+      <span id="detailStatusBadge" class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white/10 text-white">
+        ACTIVE
       </span>
     </div>
 
-    <!-- Top Overhead Gantry Track Rail -->
-    <div class="relative w-full h-12 z-20 mt-1">
-      <!-- Metallic Rail Beam -->
-      <div class="w-full h-3 bg-white/25 rounded-full border-b border-white/30 shadow-inner flex items-center px-4">
-        <div class="w-full h-0.5 border-t border-dashed border-white/40"></div>
-      </div>
+    <!-- Diego 10% Unexpected Accent Action Button -->
+    <button onclick="handleCtaClick()" id="detailCta" class="w-full py-4 rounded-full text-xs font-mono uppercase tracking-widest font-bold text-white transition-all duration-300 shadow-xl hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center gap-2 bg-red-600">
+      <span id="detailCtaText">Launch Project Experience →</span>
+    </button>
 
-      <!-- Motorized Trolley (slides on track) -->
-      <div id="craneTrolley" class="absolute top-1 -ml-12 w-24 flex flex-col items-center pointer-events-none z-30" style="left: 50%;">
-        <!-- Wheels & Motor Carriage -->
-        <div class="w-16 h-5 rounded-md bg-stone-900 border border-white/40 shadow-xl flex items-center justify-between px-2">
-          <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-          <span class="text-[9px] font-mono text-white/80 font-bold">GANTRY</span>
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-        </div>
-
-        <!-- Telescoping Steel Cables -->
-        <div id="clawHoistCable" class="w-12 h-14 border-x-2 border-white/80 relative flex items-end justify-center transition-all duration-500">
-          <!-- Mechanical Claw Jaws -->
-          <div id="clawJaws" class="w-20 -mb-3 flex items-center justify-between">
-            <svg class="w-6 h-6 text-yellow-400 filter drop-shadow-md transform -scale-x-100" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l3.59-3.58L17 12l-5 5z"/>
-            </svg>
-            <div class="h-2 w-8 bg-stone-800 rounded-sm border border-white/30"></div>
-            <svg class="w-6 h-6 text-yellow-400 filter drop-shadow-md" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l3.59-3.58L17 12l-5 5z"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Center Stage: Hoisted 3D Physical Container Box with Swinging Doors -->
-    <div class="relative z-20 my-auto flex items-center justify-center py-4">
-      
-      <!-- The Center Hoisted 3D Box -->
-      <div id="hoistedBoxContainer" class="relative w-80 sm:w-[440px] h-72 sm:h-80 rounded-2xl shadow-2xl transition-all duration-700 doors-open flex items-center justify-center p-2">
-        
-        <!-- Interior Spotlight -->
-        <div class="absolute inset-0 rounded-2xl spotlight-glow pointer-events-none"></div>
-
-        <!-- Interior Content Screen (Revealed behind the open doors) -->
-        <div id="interiorCard" class="w-full h-full rounded-xl bg-stone-900 border border-white/20 p-5 sm:p-7 flex flex-col justify-between relative z-10 shadow-2xl overflow-hidden">
-          
-          <!-- Top Status Strip -->
-          <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
-            <div class="flex items-center gap-2">
-              <span id="interiorDot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span id="interiorCategory" class="text-xs uppercase font-mono tracking-widest text-white/80 font-bold">SECTION 01 // OVERVIEW</span>
-            </div>
-            <span id="interiorCode" class="text-[11px] font-mono text-white/50">CNTR-NY-842</span>
-          </div>
-
-          <!-- Main Interactive Body -->
-          <div class="py-2 space-y-2">
-            <h3 id="interiorTitle" class="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-              Hi, I'm Debbie.
-            </h3>
-            <p id="interiorDesc" class="text-xs sm:text-sm text-stone-300 font-light leading-relaxed">
-              In this realm with a crane deck, every container at this port holds a piece of my digital experience. Click any container below to hoist and unpack.
-            </p>
-          </div>
-
-          <!-- Bottom Metric & 10% Unexpected Accent Action Button -->
-          <div class="flex items-center justify-between pt-3 border-t border-white/10">
-            <div>
-              <span class="text-[10px] uppercase font-mono text-stone-400 block" id="interiorMetaLabel">EXPERIENCE SPEC</span>
-              <span class="text-xs font-mono text-white font-semibold" id="interiorMetaVal">Awwwards SOTD Calibre</span>
-            </div>
-            
-            <!-- 10% Unexpected Accent Button (Diego's Rule: Only on the button you want pressed) -->
-            <button onclick="handlePrimaryAction()" id="primaryCta" class="px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider font-bold transition shadow-xl hover:scale-105 active:scale-95 cursor-pointer bg-[#FF3B30] text-white">
-              Explore Work →
-            </button>
-          </div>
-
-        </div>
-
-        <!-- Left 3D Door (Swings open -125deg on Y axis) -->
-        <div id="doorLeft" class="door-left absolute inset-y-0 left-0 w-1/2 rounded-l-xl bg-red-600 border-2 border-white/30 z-30 flex flex-col justify-between p-3.5 shadow-2xl corrugated">
-          <div class="flex items-center justify-between text-[10px] font-mono text-white/80">
-            <span>CL-89</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
-          </div>
-          <span class="text-lg sm:text-xl font-bold font-mono tracking-tighter text-white drop-shadow-md text-left" id="doorLeftText">WHAT</span>
-          <div class="w-6 h-1 rounded-full bg-white/50"></div>
-        </div>
-
-        <!-- Right 3D Door (Swings open 125deg on Y axis) -->
-        <div id="doorRight" class="door-right absolute inset-y-0 right-0 w-1/2 rounded-r-xl bg-red-600 border-2 border-white/30 z-30 flex flex-col justify-between p-3.5 shadow-2xl corrugated text-right">
-          <div class="flex items-center justify-between text-[10px] font-mono text-white/80">
-            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
-            <span>CR-89</span>
-          </div>
-          <span class="text-lg sm:text-xl font-bold font-mono tracking-tighter text-white drop-shadow-md text-right" id="doorRightText">I DO</span>
-          <div class="w-6 h-1 rounded-full bg-white/50 ml-auto"></div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- Bottom Container Staging Deck (Clickable containers waiting on the dock) -->
-    <div class="relative z-20 pb-4 pt-2">
-      <div class="text-center mb-2">
-        <span class="text-[11px] font-mono uppercase tracking-widest text-white/70">
-          ✦ Click any container below — Watch the robotic crane slide, hoist & unbox in 3D ✦
-        </span>
-      </div>
-
-      <!-- Container Dock Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3" id="dockGrid">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-
-  </main>
+  </aside>
 
   <!-- ========================================== -->
-  <!-- FOOTER: LIVE 60/30/10 PALETTE INSPECTION   -->
+  <!-- 4. BOTTOM DOCK CONTROLS (QUICK SELECTION)  -->
   <!-- ========================================== -->
-  <footer class="w-full max-w-6xl mx-auto px-4 py-3 border-t border-white/10 z-40 relative flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+  <footer class="absolute bottom-6 inset-x-0 z-30 px-6 flex flex-col items-center pointer-events-none">
     
-    <div class="flex items-center gap-3">
-      <span class="text-white/60">Active Palette Theory:</span>
-      <span id="paletteName" class="px-2.5 py-1 rounded bg-black/30 border border-white/20 font-bold text-white">
-        Diego Rule 2: Royal Blue & Cream + Unexpected Coral
-      </span>
+    <div class="mb-3 px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/15 text-[11px] font-mono uppercase tracking-widest text-white/70">
+      ✦ Click any 3D container directly on the dock, or use buttons below to hoist ✦
     </div>
 
-    <div class="flex items-center gap-2">
-      <a href="https://flagshipsystems.github.io/goshwara/" target="_blank" class="px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/25 transition">
-        View Live Goshwara Digital Flagship ↗
-      </a>
+    <!-- Quick Pill Selector Row -->
+    <div class="flex flex-wrap items-center justify-center gap-2 pointer-events-auto" id="dockButtons">
+      <!-- Generated by JS -->
     </div>
 
   </footer>
 
   <!-- ========================================== -->
-  <!-- JAVASCRIPT: MOTORIZED CRANE & 3D HOIST     -->
+  <!-- 5. THREE.JS 3D KINEMATICS & CRANE SCRIPT   -->
   <!-- ========================================== -->
   <script>
-    // System Configurations across 3 Business Verticals
+    // System Definitions Across 3 Industry Verticals
     const systems = {
       debbie: {
-        bodyBg: '#1C4ED8', // 60% Royal Blue
-        cardBg: '#0F172A', // 30% Dark Slate
-        accentColor: '#FF3B30', // 10% Unexpected Coral Red
-        watermark: 'PORTFOLIO',
-        brand: 'Debbie Creative Lab',
-        subtitle: 'Motorized Gantry Crane + 3D Container Physics',
+        skyColor: 0x1E3A8A, // 60% Royal Deep Blue
+        groundColor: 0x0F172A,
+        accentHex: '#EF4444', // 10% Unexpected Coral Red
+        accentNum: 0xEF4444,
         icon: '🚢',
-        paletteLabel: 'Royal Blue (60%) + Dark Slate (30%) + Coral Red (10%)',
+        title: 'Debbie Creative Port',
+        sub: 'Real Three.js WebGL Kinematics • Physical 3D Unboxing',
+        watermark: 'PORTFOLIO',
+        ratio60: '#1E3A8A',
+        ratio10: '#EF4444',
         containers: [
-          { id: 'c1', label: 'WHAT I DO', color: '#EF4444', leftText: 'WHAT', rightText: 'I DO', title: 'Hi, I\'m Debbie.', cat: '01 // OVERVIEW', desc: 'In this realm with a crane deck, every container at this port holds a piece of my digital experience. Click any container below to hoist and unpack.', metaLabel: 'CREATIVE SPECIALTY', metaVal: 'AI Design & UI Engineering', cta: 'Explore Work →' },
-          { id: 'c2', label: 'THE WORK', color: '#F97316', leftText: 'THE', rightText: 'WORK', title: 'Selected Case Studies', cat: '02 // PORTFOLIO', desc: 'From viral vibe-coded web applications to high-conversion design systems built for Silicon Valley teams.', metaLabel: 'FEATURED PROJECTS', metaVal: '14 Live Applications', cta: 'View Showcase →' },
-          { id: 'c3', label: 'ABOUT ME', color: '#3B82F6', leftText: 'ABOUT', rightText: 'ME', title: 'Product & Design Engineer', cat: '03 // BIO', desc: 'Blending deep Figma craftsmanship with Claude Opus code generation to ship fluid interactive web spaces.', metaLabel: 'LOCATION', metaVal: 'Remote / Global', cta: 'Read Story →' },
-          { id: 'c4', label: 'PROCESS', color: '#EAB308', leftText: 'PRO', rightText: 'CESS', title: 'The 4-Step Velocity Loop', cat: '04 // METHOD', desc: 'Concept sprint to 3D spatial prototype within 48 hours. Zero fluff, maximum tactile user engagement.', metaLabel: 'SPRINT CADENCE', metaVal: 'Weekly Releases', cta: 'Inspect Process →' },
-          { id: 'c5', label: 'SAY HELLO', color: '#4F46E5', leftText: 'SAY', rightText: 'HELLO', title: 'Let\'s Build Something Bold', cat: '05 // CONTACT', desc: 'Open for high-impact creative commissions, founding designer advisory, and master prompt architecture.', metaLabel: 'AVAILABILITY', metaVal: 'Q4 Booking Open', cta: 'Send Transmission →' },
-          { id: 'c6', label: 'TOOL KIT', color: '#6B7280', leftText: 'TOOL', rightText: 'KIT', title: 'Tech Stack & Arsenal', cat: '06 // GEAR', desc: 'Three.js, WebGL, Tailwind, Claude 3.5 Sonnet, Spline 3D, and bespoke canvas caustics shaders.', metaLabel: 'STACK CORE', metaVal: 'TypeScript & WebGL', cta: 'Check Stack →' }
+          { label: 'WHAT I DO', color: 0xDC2626, hex: '#DC2626', code: 'WHAT', codeR: 'I DO', title: 'Hi, I\'m Debbie.', cat: '01 // OVERVIEW', desc: 'In this realm with a crane deck, every container at this port holds a piece of my digital experience. Click any container to hoist and unpack in true 3D.', metaKey: 'CORE CAPABILITY', metaVal: 'AI Creative Engineering & UI', cta: 'Explore Work →' },
+          { label: 'THE WORK', color: 0xEA580C, hex: '#EA580C', code: 'THE', codeR: 'WORK', title: 'Selected Case Studies', cat: '02 // PORTFOLIO', desc: 'From viral vibe-coded web applications to high-conversion digital experiences engineered with Claude Opus & Three.js.', metaKey: 'PRODUCTION COUNT', metaVal: '14 Live Projects', cta: 'View Showcase →' },
+          { label: 'ABOUT ME', color: 0x2563EB, hex: '#2563EB', code: 'ABOUT', codeR: 'ME', title: 'Product & Design Engineer', cat: '03 // BIO', desc: 'Merging ultra-clean typography, WebGL spatial physics, and master prompt architecture into fluid interactive spaces.', metaKey: 'DISCIPLINE', metaVal: 'Product Design & Tech', cta: 'Read Story →' },
+          { label: 'PROCESS', color: 0xCA8A04, hex: '#CA8A04', code: 'PRO', codeR: 'CESS', title: 'Rapid Prototyping Cadence', cat: '04 // METHOD', desc: '48-hour sprints from Figma conception to live 60fps WebGL shaders. Zero fluff, tactile interactive physics.', metaKey: 'SPRINT VELOCITY', metaVal: 'Weekly Releases', cta: 'Inspect Process →' },
+          { label: 'SAY HELLO', color: 0x4F46E5, hex: '#4F46E5', code: 'SAY', codeR: 'HELLO', title: 'Let\'s Build Something Bold', cat: '05 // CONTACT', desc: 'Open for high-impact creative commissions, founding designer advisory, and master prompt architecture.', metaKey: 'CALENDAR', metaVal: 'Q4 Booking Open', cta: 'Send Transmission →' },
+          { label: 'TOOL KIT', color: 0x4B5563, hex: '#4B5563', code: 'TOOL', codeR: 'KIT', title: 'Tech Stack & Arsenal', cat: '06 // GEAR', desc: 'Three.js, WebGL, Tailwind, Claude 3.5 Sonnet, Spline 3D, and bespoke canvas caustics shaders.', metaKey: 'RUNTIME', metaVal: 'TypeScript & WebGL', cta: 'Check Stack →' }
         ]
       },
       goshwara: {
-        bodyBg: '#090A0D', // 60% Deep Imperial Onyx
-        cardBg: '#12141A', // 30% Dark Vault Slate
-        accentColor: '#05D585', // 10% Unexpected Electric Muzo Emerald
-        watermark: 'GOSHWARA',
-        brand: 'Goshwara Haute Joaillerie',
-        subtitle: 'Crown Vault Crane + 3D Casket Unboxing',
+        skyColor: 0x08090C, // 60% Deep Imperial Onyx
+        groundColor: 0x050608,
+        accentHex: '#05D585', // 10% Unexpected Electric Muzo Emerald
+        accentNum: 0x05D585,
         icon: '💎',
-        paletteLabel: 'Imperial Onyx (60%) + Warm Silk (30%) + Electric Emerald (10%)',
+        title: 'Goshwara Crown Vault Crane',
+        sub: 'High Jewelry Vault Casket Hoist • 3.5X Loupe Inspector',
+        watermark: 'GOSHWARA',
+        ratio60: '#08090C',
+        ratio10: '#05D585',
         containers: [
-          { id: 'g1', label: 'MUZO EMERALD', color: '#047857', leftText: 'MUZO', rightText: 'CHOKER', title: 'Rainforest Emerald Suite', cat: 'VAULT 01 // HIGH JEWELRY', desc: 'Cascade of 100% natural unheated Colombian emeralds hand-mounted in sculptural 18K solid gold with baguette accents.', metaLabel: 'PROVENANCE', metaVal: 'Muzo Valley, Colombia (GIA)', cta: 'Reserve Viewing →' },
-          { id: 'g2', label: 'TOPAZ RING', color: '#0369A1', leftText: 'BLUE', rightText: 'TOPAZ', title: 'Three-Stone Architectural Ring', cat: 'VAULT 02 // ROCK \'N ROLL', desc: 'Vivid oceanic London blue topaz flanked by micropavé brilliant cut diamonds in warm 18K architectural yellow gold.', metaLabel: 'GEM CUT', metaVal: 'Octagonal Step Facets', cta: 'Inspect 3.5X Loupe →' },
-          { id: 'g3', label: 'AMETHYST DROP', color: '#7E22CE', leftText: 'MANHATTAN', rightText: 'PENDANT', title: 'Cushion Cut Manhattan Pendant', cat: 'VAULT 03 // CLASSICS', desc: 'Hand-faceted royal amethyst suspended from articulated solid gold links. Sweta Jain\'s tribute to New York geometry.', metaLabel: 'GOLD ALLOY', metaVal: '18K Honey Gold Bezel', cta: 'Reserve Private Suite →' },
-          { id: 'g4', label: 'RUBELLITE EARRINGS', color: '#BE123C', leftText: 'RUBELLITE', rightText: 'DROPS', title: 'Double Drop Rubellite Suite', cat: 'VAULT 04 // MÉLANGE', desc: 'Articulated dual cabochon drops featuring intense raspberry rubellites with diamond halos. Red carpet authority.', metaLabel: 'CELEBRITY PRESS', metaVal: 'Academy Museum Gala', cta: 'Request Dossier →' },
-          { id: 'g5', label: 'CITRINE HALO', color: '#D97706', leftText: 'MADEIRA', rightText: 'CITRINE', title: 'Asscher Citrine Halo Pendant', cat: 'VAULT 05 // CLASSICS', desc: 'Hypnotic windmill step facets reflecting rich amber honey hues, encapsulated by micro-pavé diamonds.', metaLabel: 'CERTIFICATION', metaVal: 'Gübelin Gem Lab', cta: 'Inquire P.O.A. →' },
-          { id: 'g6', label: 'BESPOKE ATELIER', color: '#44403C', leftText: 'BESPOKE', rightText: 'SALON', title: 'Private Atelier Commission', cat: 'VAULT 06 // PRIVATE SALON', desc: 'One-on-one custom commission with Sweta Jain. Private viewing suites at The Oberoi Delhi, BKC Mumbai, or 5th Ave.', metaLabel: 'APPOINTMENT', metaVal: 'Discreet Private Suite', cta: 'Book Private Salon →' }
+          { label: 'MUZO EMERALD', color: 0x064E3B, hex: '#064E3B', code: 'COLOMBIAN', codeR: 'EMERALD', title: 'Rainforest Emerald Choker', cat: 'VAULT 01 // HIGH JEWELRY', desc: 'Cascade of 100% natural unheated Colombian emeralds hand-mounted in sculptural 18K solid gold with baguette accents. Private reserve.', metaKey: 'PROVENANCE', metaVal: 'Muzo Valley, Colombia (GIA)', cta: 'Reserve Private Viewing →' },
+          { label: 'TOPAZ RING', color: 0x075985, hex: '#075985', code: 'LONDON', codeR: 'TOPAZ', title: 'Three-Stone Architectural Ring', cat: 'VAULT 02 // ROCK \'N ROLL', desc: 'Vivid oceanic London blue topaz flanked by micropavé brilliant cut diamonds in warm 18K architectural yellow gold.', metaKey: 'GEM CUT', metaVal: 'Octagonal Step Facets', cta: 'Inspect 3.5X Loupe →' },
+          { label: 'AMETHYST DROP', color: 0x581C87, hex: '#581C87', code: 'MANHATTAN', codeR: 'AMETHYST', title: 'Cushion Cut Manhattan Pendant', cat: 'VAULT 03 // CLASSICS', desc: 'Hand-faceted royal amethyst suspended from articulated solid gold links. Sweta Jain\'s tribute to New York geometry.', metaKey: 'GOLD ALLOY', metaVal: '18K Solid Honey Gold', cta: 'Reserve Private Suite →' },
+          { label: 'RUBELLITE', color: 0x881337, hex: '#881337', code: 'RUBELLITE', codeR: 'TOURMALINE', title: 'Double Drop Rubellite Suite', cat: 'VAULT 04 // MÉLANGE', desc: 'Articulated dual cabochon drops featuring intense raspberry rubellites with diamond halos. Worn by Priyanka Chopra at Academy Gala.', metaKey: 'CELEBRITY PRESS', metaVal: 'Academy Museum Gala', cta: 'Request Dossier →' },
+          { label: 'CITRINE HALO', color: 0x78350F, hex: '#78350F', code: 'MADEIRA', codeR: 'CITRINE', title: 'Asscher Citrine Halo Pendant', cat: 'VAULT 05 // CLASSICS', desc: 'Hypnotic windmill step facets reflecting rich amber honey hues, encapsulated by micro-pavé diamonds.', metaKey: 'CERTIFICATION', metaVal: 'Gübelin Gem Lab', cta: 'Inquire P.O.A. →' },
+          { label: 'BESPOKE ATELIER', color: 0x27272A, hex: '#27272A', code: 'SWETA JAIN', codeR: 'ATELIER', title: 'Private Atelier Commission', cat: 'VAULT 06 // PRIVATE SALON', desc: 'One-on-one custom commission with Sweta Jain. Private viewing suites at The Oberoi Delhi, BKC Mumbai, or 5th Avenue.', metaKey: 'APPOINTMENT', metaVal: 'Discreet Private Suite', cta: 'Book Private Salon →' }
         ]
       },
       horlogerie: {
-        bodyBg: '#0A1118', // 60% Midnight Blue-Black
-        cardBg: '#131D27', // 30% Titanium Slate
-        accentColor: '#38BDF8', // 10% Unexpected Electric Glacial Cyan
-        watermark: 'CHRONO',
-        brand: 'Genève Haute Horlogerie',
-        subtitle: 'Titanium Vault Crane + Tourbillon Safes',
+        skyColor: 0x09111E, // 60% Midnight Titanium
+        groundColor: 0x060B14,
+        accentHex: '#38BDF8', // 10% Unexpected Glacial Cyan
+        accentNum: 0x38BDF8,
         icon: '⌚',
-        paletteLabel: 'Midnight Slate (60%) + Titanium (30%) + Glacial Cyan (10%)',
+        title: 'Genève Haute Horlogerie Safe',
+        sub: 'Titanium Vault Crane • Mechanical Tourbillon Escapement',
+        watermark: 'CHRONO',
+        ratio60: '#09111E',
+        ratio10: '#38BDF8',
         containers: [
-          { id: 'w1', label: 'TOURBILLON', color: '#0284C7', leftText: 'FLYING', rightText: 'TOURBILLON', title: 'Chronographe Volant No. 01', cat: 'CALIBRE 01 // GRAND COMPLICATION', desc: 'Grade 5 titanium cage with 60-second flying tourbillon, column-wheel monopusher chronograph, 72h power reserve.', metaLabel: 'FREQUENCY', metaVal: '28,800 vph (4 Hz) COSC', cta: 'Request Allocation →' },
-          { id: 'w2', label: 'PERPETUAL', color: '#334155', leftText: 'QUANTIÈME', rightText: 'PERPÉTUEL', title: 'Perpetual Moonphase Calibre', cat: 'CALIBRE 02 // ASTRONOMY', desc: 'Requires no adjustment until 2100. Hand-finished Côtes de Genève with aventurine glass celestial night sky.', metaLabel: 'CASE ALLOY', metaVal: 'Platinum 950 Bezel', cta: 'Inspect Movement →' },
-          { id: 'w3', label: 'SKELETON', color: '#1E293B', leftText: 'OPEN', rightText: 'WORK', title: 'Skeletonized Royal Chrono', cat: 'CALIBRE 03 // AVANT-GARDE', desc: 'Entire movement open-worked with hand-beveled bridges. Sapphire crystal dial offering 360-degree escapement view.', metaLabel: 'FINISHING', metaVal: 'Black Polished Anglage', cta: 'Request Dossier →' },
-          { id: 'w4', label: 'DEEP DIVER', color: '#0F766E', leftText: 'ABYSS', rightText: '1000M', title: 'Abyss Deep Sea Titanium', cat: 'CALIBRE 04 // PROFESSIONAL', desc: 'Helium escape valve, luminous ceramic unidirectional bezel, ISO 6425 saturation diving certification.', metaLabel: 'WATERPROOF', metaVal: '1,000 Meters / 100 Bar', cta: 'Reserve Numbered Piece →' },
-          { id: 'w5', label: 'MINUTE REPEATER', color: '#854D0E', leftText: 'SONNERIE', rightText: 'CHIME', title: 'Cathedral Gong Minute Repeater', cat: 'CALIBRE 05 // ACOUSTICS', desc: 'Dual-hammer acoustic sonnerie striking hours, quarters, and minutes with hardened steel cathedral gongs.', metaLabel: 'SOUND RESONANCE', metaVal: 'Dual Tempered Steel', cta: 'Listen to Chime →' },
-          { id: 'w6', label: 'BESPOKE ORDER', color: '#3F3F46', leftText: 'PIÈCE', rightText: 'UNIQUE', title: 'Atelier Cabinotiers Unique', cat: 'CALIBRE 06 // COMMISSION', desc: 'Custom enamel dial miniature and bespoke movement complications commissioned by private collectors.', metaLabel: 'VALUATION', metaVal: 'Strictly P.O.A.', cta: 'Consult Horologist →' }
+          { label: 'TOURBILLON', color: 0x0369A1, hex: '#0369A1', code: 'FLYING', codeR: 'TOURBILLON', title: 'Chronographe Volant No. 01', cat: 'CALIBRE 01 // GRAND COMPLICATION', desc: 'Grade 5 titanium cage with 60-second flying tourbillon, column-wheel monopusher chronograph, 72h power reserve.', metaKey: 'FREQUENCY', metaVal: '28,800 vph (4 Hz) COSC', cta: 'Request Allocation →' },
+          { label: 'PERPETUAL', color: 0x1E293B, hex: '#1E293B', code: 'QUANTIÈME', codeR: 'PERPÉTUEL', title: 'Perpetual Moonphase Calibre', cat: 'CALIBRE 02 // ASTRONOMY', desc: 'Requires no adjustment until 2100. Hand-finished Côtes de Genève with aventurine glass celestial night sky.', metaKey: 'CASE ALLOY', metaVal: 'Platinum 950 Bezel', cta: 'Inspect Movement →' },
+          { label: 'SKELETON', color: 0x0F172A, hex: '#0F172A', code: 'OPEN', codeR: 'WORK', title: 'Skeletonized Royal Chrono', cat: 'CALIBRE 03 // AVANT-GARDE', desc: 'Entire movement open-worked with hand-beveled bridges. Sapphire crystal dial offering 360-degree escapement view.', metaKey: 'FINISHING', metaVal: 'Black Polished Anglage', cta: 'Request Dossier →' },
+          { label: 'DEEP DIVER', color: 0x115E59, hex: '#115E59', code: 'ABYSS', codeR: '1000M', title: 'Abyss Deep Sea Titanium', cat: 'CALIBRE 04 // PROFESSIONAL', desc: 'Helium escape valve, luminous ceramic unidirectional bezel, ISO 6425 saturation diving certification.', metaKey: 'WATERPROOF', metaVal: '1,000 Meters / 100 Bar', cta: 'Reserve Numbered Piece →' },
+          { label: 'MINUTE REPEATER', color: 0x713F12, hex: '#713F12', code: 'SONNERIE', codeR: 'CHIME', title: 'Cathedral Gong Minute Repeater', cat: 'CALIBRE 05 // ACOUSTICS', desc: 'Dual-hammer acoustic sonnerie striking hours, quarters, and minutes with hardened steel cathedral gongs.', metaKey: 'SOUND RESONANCE', metaVal: 'Dual Tempered Steel', cta: 'Listen to Chime →' },
+          { label: 'BESPOKE ORDER', color: 0x262626, hex: '#262626', code: 'PIÈCE', codeR: 'UNIQUE', title: 'Atelier Cabinotiers Unique', cat: 'CALIBRE 06 // COMMISSION', desc: 'Custom enamel dial miniature and bespoke movement complications commissioned by private collectors.', metaKey: 'VALUATION', metaVal: 'Strictly P.O.A.', cta: 'Consult Horologist →' }
         ]
       }
     };
 
-    let currentMode = 'debbie';
-    let activeContainerIndex = 0;
-    let isAnimating = false;
+    let activeSystemKey = 'debbie';
+    let currentContainerIdx = 0;
+    let isKinematicRunning = false;
 
-    // Initialize System Mode
-    function setSystemMode(mode) {
-      currentMode = mode;
-      const sys = systems[mode];
+    // ==========================================
+    // THREE.JS SETUP & RENDER PIPELINE
+    // ==========================================
+    const canvas = document.getElementById('webglCanvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
 
-      // Update Top Nav
-      document.querySelectorAll('header button').forEach(b => {
-        b.className = 'px-3.5 py-1.5 rounded-full text-white/80 hover:text-white transition cursor-pointer';
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(systems[activeSystemKey].skyColor);
+    scene.fog = new THREE.FogExp2(systems[activeSystemKey].skyColor, 0.028);
+
+    const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 1.8, 14.5);
+    camera.lookAt(0, 0.6, 0);
+
+    // Mouse Parallax
+    let mouseX = 0, mouseY = 0;
+    let targetCamX = 0, targetCamY = 1.8;
+
+    window.addEventListener('mousemove', e => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+      targetCamX = mouseX * 1.5;
+      targetCamY = 1.8 - mouseY * 0.8;
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // ==========================================
+    // LIGHTING RIG
+    // ==========================================
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
+    scene.add(ambientLight);
+
+    const sunLight = new THREE.DirectionalLight(0xfffaed, 1.4);
+    sunLight.position.set(12, 18, 10);
+    sunLight.castShadow = true;
+    sunLight.shadow.mapSize.width = 2048;
+    sunLight.shadow.mapSize.height = 2048;
+    sunLight.shadow.camera.near = 0.5;
+    sunLight.shadow.camera.far = 40;
+    sunLight.shadow.camera.left = -12;
+    sunLight.shadow.camera.right = 12;
+    sunLight.shadow.camera.top = 12;
+    sunLight.shadow.camera.bottom = -12;
+    sunLight.shadow.bias = -0.0003;
+    scene.add(sunLight);
+
+    // Overhead Industrial Crane Spotlight
+    const craneSpotlight = new THREE.SpotLight(0xffffff, 2.5, 25, Math.PI / 4, 0.45, 1);
+    craneSpotlight.position.set(0, 6.8, 0);
+    craneSpotlight.castShadow = true;
+    scene.add(craneSpotlight);
+    scene.add(craneSpotlight.target);
+
+    // Container Interior Warm Light
+    const interiorPointLight = new THREE.PointLight(0xffaa44, 0, 8);
+    scene.add(interiorPointLight);
+
+    // ==========================================
+    // PROCEDURAL TEXTURE GENERATORS
+    // ==========================================
+    // 1. Corrugated Bump Map
+    function createCorrugatedBumpMap() {
+      const c = document.createElement('canvas');
+      c.width = 256;
+      c.height = 256;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#808080';
+      ctx.fillRect(0, 0, 256, 256);
+      
+      const ridges = 16;
+      const w = 256 / ridges;
+      for (let i = 0; i < ridges; i++) {
+        const grad = ctx.createLinearGradient(i * w, 0, (i + 1) * w, 0);
+        grad.addColorStop(0, '#303030');
+        grad.addColorStop(0.3, '#ffffff');
+        grad.addColorStop(0.7, '#ffffff');
+        grad.addColorStop(1, '#303030');
+        ctx.fillStyle = grad;
+        ctx.fillRect(i * w + 1, 0, w - 2, 256);
+      }
+      const tex = new THREE.CanvasTexture(c);
+      tex.wrapS = THREE.RepeatWrapping;
+      tex.wrapT = THREE.RepeatWrapping;
+      tex.repeat.set(2, 1);
+      return tex;
+    }
+    const corrugatedBumpTex = createCorrugatedBumpMap();
+
+    // 2. Door Decal Texture Generator
+    function createDoorTextTexture(text, isLeft) {
+      const c = document.createElement('canvas');
+      c.width = 512;
+      c.height = 512;
+      const ctx = c.getContext('2d');
+      ctx.clearRect(0, 0, 512, 512);
+
+      // Warning Stencil
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.font = 'bold 20px "Space Grotesk", monospace';
+      ctx.fillText(isLeft ? 'CL-8902 // HAZARD' : 'CR-8902 // LATCH', 40, 60);
+
+      // Main Big Stencil Code
+      ctx.font = '900 68px "Space Grotesk", sans-serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = isLeft ? 'left' : 'right';
+      ctx.fillText(text, isLeft ? 40 : 472, 270);
+
+      // Bottom Barcode / Grid
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.fillRect(40, 440, 432, 4);
+
+      const tex = new THREE.CanvasTexture(c);
+      return tex;
+    }
+
+    // ==========================================
+    // 3D SCENE OBJECTS: GROUND & GANTRY CRANE
+    // ==========================================
+    // 1. Concrete Harbor Dock Floor
+    const groundGeo = new THREE.PlaneGeometry(60, 60);
+    const groundMat = new THREE.MeshStandardMaterial({
+      color: 0x0c131f,
+      roughness: 0.85,
+      metalness: 0.15
+    });
+    const ground = new THREE.Mesh(groundGeo, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -2.8;
+    ground.receiveShadow = true;
+    scene.add(ground);
+
+    // Dock Safety Line
+    const dockLineGeo = new THREE.PlaneGeometry(40, 0.2);
+    const dockLineMat = new THREE.MeshBasicMaterial({ color: 0xeab308, transparent: true, opacity: 0.5 });
+    const dockLine = new THREE.Mesh(dockLineGeo, dockLineMat);
+    dockLine.rotation.x = -Math.PI / 2;
+    dockLine.position.set(0, -2.78, 1.2);
+    scene.add(dockLine);
+
+    // 2. Heavy Steel I-Beam Overhead Crane Track
+    const trackGroup = new THREE.Group();
+    const beamGeo = new THREE.BoxGeometry(26, 0.45, 0.6);
+    const beamMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4, metalness: 0.8 });
+    const beamMesh = new THREE.Mesh(beamGeo, beamMat);
+    beamMesh.castShadow = true;
+    trackGroup.add(beamMesh);
+
+    // Beam Support Pillars
+    const pillarMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.6, metalness: 0.7 });
+    const pillarL = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 12), pillarMat);
+    pillarL.position.set(-12.5, -4, 0);
+    trackGroup.add(pillarL);
+    const pillarR = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 12), pillarMat);
+    pillarR.position.set(12.5, -4, 0);
+    trackGroup.add(pillarR);
+
+    trackGroup.position.set(0, 6.8, 0);
+    scene.add(trackGroup);
+
+    // 3. Motorized Crane Trolley & Claw Rig
+    const craneTrolleyGroup = new THREE.Group();
+    const trolleyMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(1.6, 0.6, 1.2),
+      new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.35, metalness: 0.7 })
+    );
+    trolleyMesh.castShadow = true;
+    craneTrolleyGroup.add(trolleyMesh);
+
+    // Red Warning Beacon on Trolley
+    const beaconGeo = new THREE.CylinderGeometry(0.12, 0.15, 0.25, 16);
+    const beaconMat = new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0xef4444, emissiveIntensity: 0.8 });
+    const beacon = new THREE.Mesh(beaconGeo, beaconMat);
+    beacon.position.set(0, 0.4, 0);
+    craneTrolleyGroup.add(beacon);
+
+    // 4 Steel Hoist Cables
+    const cables = [];
+    const cableMat = new THREE.MeshBasicMaterial({ color: 0x94a3b8 });
+    const cableOffsets = [
+      [-0.8, -0.6], [0.8, -0.6],
+      [-0.8, 0.6], [0.8, 0.6]
+    ];
+    for (let i = 0; i < 4; i++) {
+      const cMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 1), cableMat);
+      craneTrolleyGroup.add(cMesh);
+      cables.push(cMesh);
+    }
+
+    // Heavy Industrial Spreader Bar (Claw Frame)
+    const spreaderGroup = new THREE.Group();
+    const spreaderMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(2.4, 0.22, 1.3),
+      new THREE.MeshStandardMaterial({ color: 0xeab308, roughness: 0.4, metalness: 0.6 })
+    );
+    spreaderMesh.castShadow = true;
+    spreaderGroup.add(spreaderMesh);
+
+    // 4 Corner Twist-Lock Pins
+    for (const [cx, cz] of [[-1.1, -0.55], [1.1, -0.55], [-1.1, 0.55], [1.1, 0.55]]) {
+      const pin = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.07, 0.07, 0.3),
+        new THREE.MeshStandardMaterial({ color: 0x111827, metalness: 0.9 })
+      );
+      pin.position.set(cx, -0.15, cz);
+      spreaderGroup.add(pin);
+    }
+    craneTrolleyGroup.add(spreaderGroup);
+
+    craneTrolleyGroup.position.set(0, 6.8, 0);
+    scene.add(craneTrolleyGroup);
+
+    // ==========================================
+    // 3D CONTAINERS GENERATOR
+    // ==========================================
+    const DOCK_CONTAINERS = [];
+    const containerWidth = 2.4;
+    const containerHeight = 1.4;
+    const containerDepth = 1.3;
+
+    function build3DContainer(config, index) {
+      const group = new THREE.Group();
+      group.userData = { config, index };
+
+      // Main Outer Box Shell
+      const boxMat = new THREE.MeshStandardMaterial({
+        color: config.color,
+        roughness: 0.45,
+        metalness: 0.35,
+        bumpMap: corrugatedBumpTex,
+        bumpScale: 0.04
       });
-      const activeBtn = document.getElementById(`mode-${mode}`);
-      if (activeBtn) {
-        activeBtn.className = 'px-3.5 py-1.5 rounded-full bg-white text-stone-900 font-bold transition shadow-sm cursor-pointer';
+      const boxGeo = new THREE.BoxGeometry(containerWidth, containerHeight, containerDepth);
+      const boxMesh = new THREE.Mesh(boxGeo, boxMat);
+      boxMesh.castShadow = true;
+      boxMesh.receiveShadow = true;
+      group.add(boxMesh);
+
+      // Steel Corner Castings & Frame Trim
+      const trimMat = new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.5, metalness: 0.8 });
+      for (const [tx, ty, tz] of [
+        [-1, -1, -1], [1, -1, -1], [-1, 1, -1], [1, 1, -1],
+        [-1, -1, 1], [1, -1, 1], [-1, 1, 1], [1, 1, 1]
+      ]) {
+        const corner = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.16, 0.16), trimMat);
+        corner.position.set((tx * containerWidth) / 2, (ty * containerHeight) / 2, (tz * containerDepth) / 2);
+        group.add(corner);
       }
 
-      // Update Body Colors & Watermark
-      document.getElementById('pageBody').style.backgroundColor = sys.bodyBg;
-      document.getElementById('watermarkText').innerText = sys.watermark;
-      document.getElementById('brandTitle').innerText = sys.brand;
-      document.getElementById('brandSubtitle').innerText = sys.subtitle;
-      document.getElementById('brandBadge').innerText = sys.icon;
-
-      // Update 60/30/10 Bars
-      document.getElementById('bar60').style.backgroundColor = sys.bodyBg;
-      document.getElementById('bar10').style.backgroundColor = sys.accentColor;
-      document.getElementById('label10').innerText = `10% Accent`;
-      document.getElementById('label10').style.color = sys.accentColor;
-      document.getElementById('primaryCta').style.backgroundColor = sys.accentColor;
-      document.getElementById('paletteName').innerText = sys.paletteLabel;
-
-      renderDock();
-      hoistContainer(0, true);
-    }
-
-    // Render Bottom Clickable Containers
-    function renderDock() {
-      const grid = document.getElementById('dockGrid');
-      grid.innerHTML = '';
-      const items = systems[currentMode].containers;
-
-      items.forEach((item, idx) => {
-        const btn = document.createElement('div');
-        btn.id = `dock-${idx}`;
-        btn.className = `p-3 rounded-xl border-2 transition-all duration-300 cursor-pointer shadow-lg hover:scale-105 active:scale-95 flex flex-col justify-between h-20 ${idx === activeContainerIndex ? 'border-white scale-105 ring-4 ring-white/30' : 'border-white/20 opacity-80 hover:opacity-100'} ${currentMode === 'debbie' ? 'corrugated' : 'corrugated-dark'}`;
-        btn.style.backgroundColor = item.color;
-        btn.onclick = () => hoistContainer(idx);
-
-        btn.innerHTML = `
-          <div class="flex items-center justify-between text-[9px] font-mono text-white/90">
-            <span>#0${idx + 1}</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-white/70"></span>
-          </div>
-          <span class="text-xs font-bold font-mono text-white drop-shadow tracking-tight truncate">${item.label}</span>
-        `;
-        grid.appendChild(btn);
+      // Hollow Interior Cavity (Dark Velvet / Steel)
+      const interiorMat = new THREE.MeshStandardMaterial({
+        color: 0x07090e,
+        roughness: 0.9,
+        metalness: 0.1
       });
+      const interiorGeo = new THREE.BoxGeometry(containerWidth - 0.1, containerHeight - 0.1, containerDepth - 0.05);
+      const interiorMesh = new THREE.Mesh(interiorGeo, interiorMat);
+      interiorMesh.position.z = 0.03;
+      group.add(interiorMesh);
+
+      // High-End Interior Centerpiece (Gemstone / Hologram)
+      const jewelPivot = new THREE.Group();
+      jewelPivot.position.set(0, 0, 0.1);
+      
+      const gemGeo = new THREE.OctahedronGeometry(0.32, 2);
+      const gemMat = new THREE.MeshPhysicalMaterial({
+        color: config.color,
+        transmission: 0.7,
+        opacity: 1,
+        transparent: true,
+        roughness: 0.1,
+        metalness: 0.1,
+        ior: 1.8,
+        reflectivity: 0.9
+      });
+      const gemMesh = new THREE.Mesh(gemGeo, gemMat);
+      jewelPivot.add(gemMesh);
+      group.add(jewelPivot);
+      group.userData.jewel = jewelPivot;
+
+      // Double 3D Hinged Doors
+      const doorHalfW = (containerWidth - 0.06) / 2;
+      const doorH = containerHeight - 0.06;
+      const doorThickness = 0.04;
+
+      // Left Door Pivot Group
+      const leftPivot = new THREE.Group();
+      leftPivot.position.set(-containerWidth / 2 + 0.03, 0, containerDepth / 2);
+
+      const leftDecal = createDoorTextTexture(config.code, true);
+      const doorLeftMat = new THREE.MeshStandardMaterial({
+        color: config.color,
+        roughness: 0.45,
+        metalness: 0.35,
+        bumpMap: corrugatedBumpTex,
+        bumpScale: 0.04,
+        map: leftDecal
+      });
+      const doorLeftMesh = new THREE.Mesh(new THREE.BoxGeometry(doorHalfW, doorH, doorThickness), doorLeftMat);
+      doorLeftMesh.position.set(doorHalfW / 2, 0, 0);
+      doorLeftMesh.castShadow = true;
+      leftPivot.add(doorLeftMesh);
+      group.add(leftPivot);
+      group.userData.leftDoor = leftPivot;
+
+      // Right Door Pivot Group
+      const rightPivot = new THREE.Group();
+      rightPivot.position.set(containerWidth / 2 - 0.03, 0, containerDepth / 2);
+
+      const rightDecal = createDoorTextTexture(config.codeR, false);
+      const doorRightMat = new THREE.MeshStandardMaterial({
+        color: config.color,
+        roughness: 0.45,
+        metalness: 0.35,
+        bumpMap: corrugatedBumpTex,
+        bumpScale: 0.04,
+        map: rightDecal
+      });
+      const doorRightMesh = new THREE.Mesh(new THREE.BoxGeometry(doorHalfW, doorH, doorThickness), doorRightMat);
+      doorRightMesh.position.set(-doorHalfW / 2, 0, 0);
+      doorRightMesh.castShadow = true;
+      rightPivot.add(doorRightMesh);
+      group.add(rightPivot);
+      group.userData.rightDoor = rightPivot;
+
+      return group;
     }
 
-    // Motorized Crane Sliding & 3D Hoisting Animation
-    function hoistContainer(targetIndex, instant = false) {
-      if (isAnimating && !instant) return;
-      isAnimating = true;
+    // Populate the 6 Containers on the Dock
+    function initializeContainers() {
+      // Clear old containers
+      DOCK_CONTAINERS.forEach(c => scene.remove(c));
+      DOCK_CONTAINERS.length = 0;
 
-      const sys = systems[currentMode];
-      const item = sys.containers[targetIndex];
-      activeContainerIndex = targetIndex;
+      const items = systems[activeSystemKey].containers;
+      const spacing = 3.1;
+      const startX = -((items.length - 1) * spacing) / 2;
 
-      // Update Dock Highlight
-      document.querySelectorAll('#dockGrid > div').forEach((d, i) => {
-        if (i === targetIndex) {
-          d.className = `p-3 rounded-xl border-2 transition-all duration-300 cursor-pointer shadow-lg scale-105 ring-4 ring-white/30 border-white opacity-100 ${currentMode === 'debbie' ? 'corrugated' : 'corrugated-dark'}`;
-        } else {
-          d.className = `p-3 rounded-xl border-2 transition-all duration-300 cursor-pointer shadow-lg border-white/20 opacity-80 hover:opacity-100 ${currentMode === 'debbie' ? 'corrugated' : 'corrugated-dark'}`;
+      items.forEach((cfg, idx) => {
+        const container = build3DContainer(cfg, idx);
+        const restX = startX + idx * spacing;
+        const restY = -2.1;
+        const restZ = -0.5;
+
+        container.position.set(restX, restY, restZ);
+        container.userData.restPos = new THREE.Vector3(restX, restY, restZ);
+        scene.add(container);
+        DOCK_CONTAINERS.push(container);
+      });
+
+      renderDockButtons();
+    }
+
+    // ==========================================
+    // CRANE KINEMATICS & 3D UNBOXING SEQUENCER
+    // ==========================================
+    let hoistedContainer = null;
+
+    function hoist3DContainer(targetIdx, isInitial = false) {
+      if (isKinematicRunning && !isInitial) return;
+      isKinematicRunning = true;
+
+      const targetContainer = DOCK_CONTAINERS[targetIdx];
+      const cfg = targetContainer.userData.config;
+      currentContainerIdx = targetIdx;
+
+      updateButtonStates(targetIdx);
+
+      // Hide Detail Overlay during transport
+      const modal = document.getElementById('detailModal');
+      gsap.to(modal, { opacity: 0, x: 50, duration: 0.35 });
+
+      // Step 1: If already holding a container, close doors and lower it back to dock
+      const prev = hoistedContainer;
+      const seq = gsap.timeline({
+        onComplete: () => {
+          isKinematicRunning = false;
         }
       });
 
-      const boxContainer = document.getElementById('hoistedBoxContainer');
-      const trolley = document.getElementById('craneTrolley');
-      const cable = document.getElementById('clawHoistCable');
+      if (prev && prev !== targetContainer) {
+        // Close doors of previous container
+        seq.to(prev.userData.leftDoor.rotation, { y: 0, duration: 0.5, ease: 'power2.inOut' });
+        seq.to(prev.userData.rightDoor.rotation, { y: 0, duration: 0.5, ease: 'power2.inOut' }, '<');
+        seq.to(interiorPointLight, { intensity: 0, duration: 0.3 }, '<');
 
-      // Target X Coordinate for the Crane based on target dock position
-      const dockElem = document.getElementById(`dock-${targetIndex}`);
-      let targetPercent = 50;
-      if (dockElem) {
-        const rect = dockElem.getBoundingClientRect();
-        const stageRect = document.querySelector('main').getBoundingClientRect();
-        targetPercent = Math.max(10, Math.min(90, ((rect.left + rect.width / 2 - stageRect.left) / stageRect.width) * 100));
+        // Lower previous container back to dock
+        seq.to(prev.position, {
+          x: prev.userData.restPos.x,
+          y: prev.userData.restPos.y,
+          z: prev.userData.restPos.z,
+          duration: 0.8,
+          ease: 'power3.inOut'
+        });
+        seq.to(craneTrolleyGroup.position, { x: prev.userData.restPos.x, duration: 0.8, ease: 'power3.inOut' }, '<');
+        seq.to(spreaderGroup.position, { y: prev.userData.restPos.y + 0.85 - 6.8, duration: 0.8, ease: 'power3.inOut' }, '<');
+
+        // Unclamp claw
+        seq.add(() => playTone(320));
+        seq.to(spreaderGroup.position, { y: -2.5, duration: 0.4, ease: 'power2.out' });
       }
 
-      if (instant) {
-        applyItemData(item, sys);
-        trolley.style.left = `${targetPercent}%`;
-        boxContainer.classList.add('doors-open');
-        isAnimating = false;
-        return;
-      }
+      // Step 2: Slide Crane Trolley over to new target container on the dock
+      seq.to(craneTrolleyGroup.position, {
+        x: targetContainer.userData.restPos.x,
+        duration: 0.9,
+        ease: 'power3.inOut'
+      });
 
-      // Step 1: Close 3D Doors
-      boxContainer.classList.remove('doors-open');
-      playHaptic(300);
+      // Step 3: Lower Spreader & Cables to clamp onto container
+      seq.to(spreaderGroup.position, {
+        y: targetContainer.userData.restPos.y + 0.85 - 6.8,
+        duration: 0.7,
+        ease: 'power2.inOut'
+      });
+      seq.add(() => playTone(540));
 
-      setTimeout(() => {
-        // Step 2: Cable lowers down to dock, Trolley slides over to target dock item
-        cable.style.height = '140px';
-        trolley.style.left = `${targetPercent}%`;
-        playHaptic(440);
+      // Step 4: Hoist Container into Center Stage!
+      const centerStageY = 0.5;
+      const centerStageZ = 1.2;
 
-        setTimeout(() => {
-          // Step 3: Claw grabs container and cables hoist back up
-          trolley.classList.add('claw-grabbing');
-          playHaptic(580);
+      seq.to(targetContainer.position, {
+        x: 0,
+        y: centerStageY,
+        z: centerStageZ,
+        duration: 1.2,
+        ease: 'power3.out',
+        onStart: () => {
+          hoistedContainer = targetContainer;
+        }
+      });
+      seq.to(craneTrolleyGroup.position, { x: 0, duration: 1.2, ease: 'power3.out' }, '<');
+      seq.to(spreaderGroup.position, { y: centerStageY + 0.85 - 6.8, duration: 1.2, ease: 'power3.out' }, '<');
 
-          setTimeout(() => {
-            // Step 4: Trolley slides back to center (50%) with the hoisted container
-            trolley.style.left = '50%';
-            cable.style.height = '56px';
-            applyItemData(item, sys);
+      // Realistic Pendulum Momentum Sway
+      seq.to(targetContainer.rotation, {
+        z: 0.08,
+        duration: 0.4,
+        yoyo: true,
+        repeat: 3,
+        ease: 'sine.inOut'
+      }, '<');
 
-            setTimeout(() => {
-              // Step 5: Swing Open 3D Doors in Center Stage!
-              trolley.classList.remove('claw-grabbing');
-              boxContainer.classList.add('doors-open');
-              playHaptic(880);
-              isAnimating = false;
-            }, 600);
+      // Step 5: Swing Open 3D Double Doors in Perspective!
+      seq.add(() => playTone(880));
+      seq.to(targetContainer.userData.leftDoor.rotation, {
+        y: -Math.PI * 0.72,
+        duration: 0.85,
+        ease: 'back.out(1.4)'
+      });
+      seq.to(targetContainer.userData.rightDoor.rotation, {
+        y: Math.PI * 0.72,
+        duration: 0.85,
+        ease: 'back.out(1.4)'
+      }, '<');
 
-          }, 450);
+      // Turn on Interior Spotlight & Light Up Detail HUD
+      seq.to(interiorPointLight, {
+        intensity: 2.8,
+        duration: 0.5,
+        onStart: () => {
+          interiorPointLight.position.set(0, centerStageY, centerStageZ + 0.2);
+          interiorPointLight.color.setHex(cfg.color);
+        }
+      }, '<');
 
-        }, 550);
-
-      }, 350);
+      seq.add(() => {
+        applyDetailData(cfg);
+        gsap.to(modal, { opacity: 1, x: 0, duration: 0.5, ease: 'power3.out' });
+      });
     }
 
-    // Apply Content into the Hoisted Box
-    function applyItemData(item, sys) {
-      // Update Doors
-      const doorL = document.getElementById('doorLeft');
-      const doorR = document.getElementById('doorRight');
-      doorL.style.backgroundColor = item.color;
-      doorR.style.backgroundColor = item.color;
-      document.getElementById('doorLeftText').innerText = item.leftText;
-      document.getElementById('doorRightText').innerText = item.rightText;
+    // Dynamic Cable Length Updater in Render Loop
+    function updateCables() {
+      const spreaderY = spreaderGroup.position.y;
+      const cableLength = Math.abs(spreaderY);
 
-      // Update Interior
-      document.getElementById('interiorCategory').innerText = item.cat;
-      document.getElementById('interiorTitle').innerText = item.title;
-      document.getElementById('interiorDesc').innerText = item.desc;
-      document.getElementById('interiorMetaLabel').innerText = item.metaLabel;
-      document.getElementById('interiorMetaVal').innerText = item.metaVal;
+      cables.forEach((c, i) => {
+        const [cx, cz] = cableOffsets[i];
+        c.position.set(cx, spreaderY / 2, cz);
+        c.scale.set(1, cableLength, 1);
+      });
 
-      const cta = document.getElementById('primaryCta');
-      cta.innerText = item.cta;
-      cta.style.backgroundColor = sys.accentColor;
-      if (sys.accentColor === '#05D585') {
-        cta.style.color = '#090A0D';
+      // Update Spotlight Aim
+      craneSpotlight.position.x = craneTrolleyGroup.position.x;
+      craneSpotlight.target.position.x = craneTrolleyGroup.position.x;
+      craneSpotlight.target.position.y = spreaderGroup.position.y;
+    }
+
+    // ==========================================
+    // UI OVERLAY & INTERACTION LOGIC
+    // ==========================================
+    function applyDetailData(cfg) {
+      const sys = systems[activeSystemKey];
+      document.getElementById('detailCategory').innerText = cfg.cat;
+      document.getElementById('detailTitle').innerText = cfg.title;
+      document.getElementById('detailDesc').innerText = cfg.desc;
+      document.getElementById('detailMetaKey').innerText = cfg.metaKey;
+      document.getElementById('detailMetaVal').innerText = cfg.metaVal;
+      document.getElementById('detailCtaText').innerText = cfg.cta;
+
+      const ctaBtn = document.getElementById('detailCta');
+      ctaBtn.style.backgroundColor = sys.accentHex;
+      if (sys.accentHex === '#05D585') {
+        ctaBtn.style.color = '#050608';
       } else {
-        cta.style.color = '#FFFFFF';
+        ctaBtn.style.color = '#ffffff';
       }
 
-      document.getElementById('interiorDot').style.backgroundColor = sys.accentColor;
+      document.getElementById('detailDot').style.backgroundColor = sys.accentHex;
+      document.getElementById('detailStatusBadge').style.color = sys.accentHex;
+      document.getElementById('detailStatusBadge').style.borderColor = sys.accentHex;
+    }
+
+    function renderDockButtons() {
+      const container = document.getElementById('dockButtons');
+      container.innerHTML = '';
+      const items = systems[activeSystemKey].containers;
+
+      items.forEach((item, idx) => {
+        const btn = document.createElement('button');
+        btn.id = `dockBtn-${idx}`;
+        btn.className = `px-3.5 py-2 rounded-xl border text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-300 shadow-xl cursor-pointer ${idx === 0 ? 'scale-105 border-white bg-white/25 text-white' : 'border-white/15 bg-black/40 text-white/70 hover:text-white'}`;
+        btn.innerHTML = `<span class="inline-block w-2 h-2 rounded-full mr-1.5" style="background:${item.hex}"></span>${item.label}`;
+        btn.onclick = () => hoist3DContainer(idx);
+        container.appendChild(btn);
+      });
+    }
+
+    function updateButtonStates(activeIdx) {
+      document.querySelectorAll('#dockButtons button').forEach((b, i) => {
+        if (i === activeIdx) {
+          b.className = 'px-3.5 py-2 rounded-xl border text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-300 shadow-xl cursor-pointer scale-105 border-white bg-white/25 text-white ring-2 ring-white/40';
+        } else {
+          b.className = 'px-3.5 py-2 rounded-xl border text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-300 shadow-xl cursor-pointer border-white/15 bg-black/40 text-white/70 hover:text-white';
+        }
+      });
+    }
+
+    // Switch Industry System
+    function switchMode(mode) {
+      if (mode === activeSystemKey) return;
+      activeSystemKey = mode;
+      const sys = systems[mode];
+
+      // Update Nav Buttons
+      document.querySelectorAll('header button').forEach(b => {
+        b.className = 'px-4 py-2 rounded-full text-white/70 hover:text-white transition cursor-pointer';
+      });
+      document.getElementById(`btn-${mode}`).className = 'px-4 py-2 rounded-full bg-white text-stone-950 font-bold transition shadow-sm cursor-pointer';
+
+      // Update HUD
+      document.getElementById('hudBadge').innerText = sys.icon;
+      document.getElementById('hudTitle').querySelector('span').innerText = sys.title;
+      document.getElementById('hudSubtitle').innerText = sys.sub;
+
+      // Update 60/30/10 Ratio Visualizer
+      document.getElementById('ratio60').style.backgroundColor = sys.ratio60;
+      document.getElementById('ratio10').style.backgroundColor = sys.ratio10;
+      document.getElementById('ratio10Label').style.color = sys.ratio10;
+
+      // Update Three.js Background & Fog
+      scene.background.setHex(sys.skyColor);
+      scene.fog.color.setHex(sys.skyColor);
+
+      initializeContainers();
+      hoist3DContainer(0, true);
     }
 
     // Audio Feedback
-    function playHaptic(freq) {
+    function playTone(freq) {
       try {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
         if (!AudioCtx) return;
@@ -514,23 +829,74 @@
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.frequency.setValueAtTime(freq, ctx.currentTime);
-        gain.gain.setValueAtTime(0.05, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.25);
+        gain.gain.setValueAtTime(0.06, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.3);
         osc.start();
-        osc.stop(ctx.currentTime + 0.25);
+        osc.stop(ctx.currentTime + 0.3);
       } catch(e) {}
     }
 
-    function handlePrimaryAction() {
-      const sys = systems[currentMode];
-      const item = sys.containers[activeContainerIndex];
-      playHaptic(1046);
-      alert(`[${sys.brand}] Triggered 10% High-Conversion CTA:\n"${item.cta}" for ${item.title}`);
+    function handleCtaClick() {
+      const cfg = systems[activeSystemKey].containers[currentContainerIdx];
+      playTone(1080);
+      alert(`[${systems[activeSystemKey].title}]\nAction Triggered for: ${cfg.title}\n"${cfg.cta}"`);
     }
 
-    // Initial load
-    setSystemMode('debbie');
-  </script>
+    // Raycasting for direct 3D Container Clicks
+    const raycaster = new THREE.Raycaster();
+    const mouseCoord = new THREE.Vector2();
 
+    window.addEventListener('click', e => {
+      mouseCoord.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseCoord.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouseCoord, camera);
+
+      const intersects = raycaster.intersectObjects(DOCK_CONTAINERS, true);
+      if (intersects.length > 0) {
+        let root = intersects[0].object;
+        while (root.parent && !root.userData.config) {
+          root = root.parent;
+        }
+        if (root && root.userData.index !== undefined) {
+          hoist3DContainer(root.userData.index);
+        }
+      }
+    });
+
+    // ==========================================
+    // MAIN 60FPS ANIMATION LOOP
+    // ==========================================
+    let clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const delta = clock.getDelta();
+      const time = clock.getElapsedTime();
+
+      // Camera Smooth Parallax
+      camera.position.x += (targetCamX - camera.position.x) * 0.05;
+      camera.position.y += (targetCamY - camera.position.y) * 0.05;
+      camera.lookAt(0, 0.6, 0);
+
+      // Warning Beacon Pulse
+      beacon.rotation.y += delta * 5;
+
+      // Update Cable Ropes & Spotlight
+      updateCables();
+
+      // Gemstone Float & Rotation inside hoisted container
+      if (hoistedContainer && hoistedContainer.userData.jewel) {
+        hoistedContainer.userData.jewel.rotation.y += delta * 0.8;
+        hoistedContainer.userData.jewel.rotation.x = Math.sin(time * 2) * 0.15;
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    // Boot Sequence
+    initializeContainers();
+    hoist3DContainer(0, true);
+    animate();
+  </script>
 </body>
 </html>
