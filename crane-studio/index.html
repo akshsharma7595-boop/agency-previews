@@ -3,22 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Awwwards-Calibre 3D Gantry Crane & Unboxing Engine</title>
+  <title>Awwwards 3D Gantry Crane Studio & Dynamic 3D Unboxing</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Three.js + GSAP for Real 3D WebGL Physics & Kinematics -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       margin: 0;
       overflow: hidden;
       user-select: none;
-      background: #0d1b2a;
+      background: #1D61F2;
+      transition: background-color 0.8s ease;
     }
+    .font-syne { font-family: 'Syne', sans-serif; }
     .font-cinzel { font-family: 'Cinzel', serif; }
     .font-tech { font-family: 'Space Grotesk', monospace; }
 
@@ -28,209 +30,465 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: 0;
+      z-index: 10;
       display: block;
     }
 
-    /* Cinematic Gradient Vignette */
-    .vignette-overlay {
+    /* Giant Background Typographic Plate (Debbie Reel Watermark) */
+    #watermarkPlate {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .watermark-text {
+      font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+      font-weight: 900;
+      font-size: clamp(5.5rem, 16vw, 16rem);
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.92);
+      text-align: center;
+      white-space: nowrap;
+      user-select: none;
+      transform: translateY(6%);
+      transition: all 0.8s ease;
+    }
+
+    /* Subtle Atmospheric Studio Vignette */
+    .studio-vignette {
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: radial-gradient(circle at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.65) 100%);
-      z-index: 10;
-    }
-
-    /* Subdued Scanline & Noise */
-    .scanlines {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 3px);
-      z-index: 11;
-      opacity: 0.7;
-    }
-
-    /* Glow highlights */
-    .electric-glow {
-      box-shadow: 0 0 25px -4px currentColor;
+      background: radial-gradient(circle at 50% 40%, transparent 40%, rgba(0, 0, 0, 0.28) 100%);
+      z-index: 15;
     }
   </style>
 </head>
-<body class="w-screen h-screen relative select-none">
+<body class="w-screen h-screen relative select-none bg-[#1D61F2]">
 
   <!-- ========================================== -->
-  <!-- 1. FULL-SCREEN 3D WEBGL CANVAS             -->
+  <!-- 1. GIANT BACKGROUND TYPOGRAPHIC WATERMARK  -->
+  <!-- ========================================== -->
+  <div id="watermarkPlate">
+    <div class="watermark-text" id="watermarkText">PORTFOLIO</div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. FULL-SCREEN 3D WEBGL CANVAS             -->
   <!-- ========================================== -->
   <canvas id="webglCanvas"></canvas>
-  <div class="vignette-overlay"></div>
-  <div class="scanlines"></div>
+  <div class="studio-vignette"></div>
 
   <!-- ========================================== -->
-  <!-- 2. LUXURY HUD & INDUSTRY SWITCHER (TOP)    -->
+  <!-- 3. TOP NAVIGATION & CONTROLS HUD           -->
   <!-- ========================================== -->
   <header class="absolute top-0 inset-x-0 z-30 px-6 py-5 flex items-center justify-between pointer-events-none">
     
-    <!-- Maison Branding -->
+    <!-- Branding / Portfolio Label -->
     <div class="flex items-center gap-3.5 pointer-events-auto">
-      <div id="hudBadge" class="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-lg shadow-xl">
-        🏗️
+      <div id="hudBadge" class="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-xl text-white shadow-lg">
+        &#x1F3D7;&#xFE0F;
       </div>
       <div>
-        <h1 class="font-tech text-base tracking-wider uppercase font-bold text-white flex items-center gap-2" id="hudTitle">
-          <span>PORTFOLIO CRANE ENGINE</span>
-          <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">3D WEBGL</span>
+        <h1 class="font-syne text-lg tracking-tight uppercase font-extrabold text-white flex items-center gap-2" id="hudTitle">
+          <span>DEBBIE CRANE STUDIO</span>
+          <span class="text-[9px] px-2 py-0.5 rounded-full bg-white/20 text-white border border-white/40 font-tech font-bold">TRUE 3D WEBGL</span>
         </h1>
-        <p class="text-[11px] font-mono text-white/60" id="hudSubtitle">True Three.js Kinematic Crane • PBR 3D Shaders</p>
+        <p class="text-[11px] font-mono text-white/80" id="hudSubtitle">Kinematic Crane Unboxing &bull; Interior Display Frame</p>
       </div>
     </div>
 
-    <!-- Vertical Mode Switcher (Debbie / Goshwara / Horlogerie) -->
-    <div class="flex items-center gap-1.5 p-1 rounded-full bg-black/40 backdrop-blur-xl border border-white/20 pointer-events-auto shadow-2xl text-xs font-mono">
+    <!-- Mode Switcher (Debbie / Goshwara / Horlogerie) -->
+    <div class="flex items-center gap-1.5 p-1 rounded-full bg-black/40 backdrop-blur-xl border border-white/25 pointer-events-auto shadow-2xl text-xs font-mono">
       <button onclick="switchMode('debbie')" id="btn-debbie" class="px-4 py-2 rounded-full bg-white text-stone-950 font-bold transition shadow-sm cursor-pointer">
-        🚢 Debbie Port
+        &#x1F6A2; Debbie Port
       </button>
       <button onclick="switchMode('goshwara')" id="btn-goshwara" class="px-4 py-2 rounded-full text-white/70 hover:text-white transition cursor-pointer">
-        💎 Goshwara Vault
+        &#x1F48E; Goshwara Vault
       </button>
       <button onclick="switchMode('horlogerie')" id="btn-horlogerie" class="px-4 py-2 rounded-full text-white/70 hover:text-white transition cursor-pointer">
-        ⌚ Watch Safes
+        &#x231A; Watch Safes
       </button>
     </div>
 
-    <!-- Diego 60/30/10 Ratio Indicator -->
-    <div class="hidden lg:flex items-center gap-3 px-4 py-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/20 pointer-events-auto text-xs font-mono">
-      <span class="text-white/60">60/30/10 Rule:</span>
-      <div class="flex items-center h-2.5 w-24 rounded-full overflow-hidden border border-white/30">
-        <span id="ratio60" class="h-full w-[60%] bg-[#1E40AF]" title="60% Grounding Main"></span>
-        <span id="ratio30" class="h-full w-[30%] bg-white" title="30% Structural Secondary"></span>
-        <span id="ratio10" class="h-full w-[10%] bg-[#EF4444] animate-pulse" title="10% Unexpected High-Ticket Accent"></span>
+    <!-- Diego 60/30/10 Ratio Indicator & 3D Pipeline Explainer -->
+    <div class="flex items-center gap-3 pointer-events-auto">
+      
+      <!-- 60/30/10 Ratio Indicator -->
+      <div class="hidden lg:flex items-center gap-3 px-4 py-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/25 text-xs font-mono text-white">
+        <span class="text-white/70">60/30/10 Rule:</span>
+        <div class="flex items-center h-2.5 w-24 rounded-full overflow-hidden border border-white/30">
+          <span id="ratio60" class="h-full w-[60%] bg-[#1D61F2]" title="60% Dominant Base"></span>
+          <span id="ratio30" class="h-full w-[30%] bg-white" title="30% Surface Contrast"></span>
+          <span id="ratio10" class="h-full w-[10%] bg-[#EF4444] animate-pulse" title="10% Action Accent"></span>
+        </div>
+        <span id="ratio10Label" class="text-[11px] font-bold text-[#EF4444]">10% Accent</span>
       </div>
-      <span id="ratio10Label" class="text-[11px] font-bold text-[#EF4444]">10% Accent</span>
+
+      <!-- 3D Pipeline Info Button -->
+      <button onclick="togglePipelineModal()" class="px-3.5 py-2 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/30 text-white text-xs font-medium transition cursor-pointer flex items-center gap-1.5 shadow-md">
+        <span>&#x2699;&#xFE0F;</span>
+        <span class="hidden sm:inline">3D Engine Pipeline</span>
+      </button>
+
     </div>
 
   </header>
 
   <!-- ========================================== -->
-  <!-- 3. HOISTED DETAIL OVERLAY (MIDDLE RIGHT)   -->
-  <!-- ========================================== -->
-  <aside id="detailModal" class="absolute top-1/2 right-8 -translate-y-1/2 z-30 w-80 sm:w-96 rounded-3xl bg-black/60 backdrop-blur-2xl border border-white/20 p-6 shadow-2xl pointer-events-auto transition-all duration-700 opacity-0 translate-x-12">
-    
-    <!-- Top Registry Strip -->
-    <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
-      <div class="flex items-center gap-2">
-        <span id="detailDot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-        <span id="detailCategory" class="text-[11px] font-mono tracking-widest text-white/80 font-bold uppercase">SECTION 01 // OVERVIEW</span>
-      </div>
-      <span id="detailReg" class="text-[10px] font-mono text-white/40">3D-HOIST-ONLINE</span>
-    </div>
-
-    <!-- Dynamic Title & Narrative -->
-    <div class="space-y-2 mb-6">
-      <h2 id="detailTitle" class="text-2xl font-bold tracking-tight text-white font-tech">Hi, I'm Debbie</h2>
-      <p id="detailDesc" class="text-xs text-stone-300 font-light leading-relaxed">
-        Real 3D WebGL gantry crane hoists physical corrugated shipping containers with true depth, dynamic lighting, and swinging double doors.
-      </p>
-    </div>
-
-    <!-- Specs Grid -->
-    <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 mb-6 flex items-center justify-between text-xs font-mono">
-      <div>
-        <span class="text-[9.5px] uppercase text-white/40 block" id="detailMetaKey">SPECIFICATION</span>
-        <span class="text-white font-semibold" id="detailMetaVal">Three.js WebGL & PBR Shaders</span>
-      </div>
-      <span id="detailStatusBadge" class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white/10 text-white">
-        ACTIVE
-      </span>
-    </div>
-
-    <!-- Diego 10% Unexpected Accent Action Button -->
-    <button onclick="handleCtaClick()" id="detailCta" class="w-full py-4 rounded-full text-xs font-mono uppercase tracking-widest font-bold text-white transition-all duration-300 shadow-xl hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center gap-2 bg-red-600">
-      <span id="detailCtaText">Launch Project Experience →</span>
-    </button>
-
-  </aside>
-
-  <!-- ========================================== -->
-  <!-- 4. BOTTOM DOCK CONTROLS (QUICK SELECTION)  -->
+  <!-- 4. BOTTOM DOCK CONTROLS (DIRECT HOIST)     -->
   <!-- ========================================== -->
   <footer class="absolute bottom-6 inset-x-0 z-30 px-6 flex flex-col items-center pointer-events-none">
     
-    <div class="mb-3 px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/15 text-[11px] font-mono uppercase tracking-widest text-white/70">
-      ✦ Click any 3D container directly on the dock, or use buttons below to hoist ✦
+    <div class="mb-3 px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[11px] font-mono uppercase tracking-widest text-white shadow-lg">
+      &#x2726; Click any container directly on the dock, or select below to hoist &#x2726;
     </div>
 
     <!-- Quick Pill Selector Row -->
     <div class="flex flex-wrap items-center justify-center gap-2 pointer-events-auto" id="dockButtons">
-      <!-- Generated by JS -->
+      <!-- Generated Dynamically by JS -->
     </div>
 
   </footer>
 
+  <!-- ======================================================== -->
+  <!-- 5. 3D PIPELINE EXPLAINER MODAL (SPLINE / BLENDER / THREE)-->
+  <!-- ======================================================== -->
+  <div id="pipelineModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xl flex items-center justify-center p-6 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="max-w-xl w-full bg-stone-900 border border-white/20 rounded-3xl p-8 shadow-2xl text-white relative">
+      
+      <button onclick="togglePipelineModal()" class="absolute top-6 right-6 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition">
+        &#x2715;
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-2xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 text-lg">
+          &#x2699;&#xFE0F;
+        </div>
+        <div>
+          <h3 class="text-lg font-bold font-syne">How These 3D Graphics Are Built</h3>
+          <p class="text-xs text-stone-400 font-mono">Spline 3D vs Pure Three.js Architecture</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 text-xs text-stone-300 leading-relaxed font-sans">
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+          <p class="font-semibold text-white mb-1.5">1. Where did Debbie's Instagram Reel graphics come from?</p>
+          <p>Creators like Debbie (<span class="text-blue-400 font-mono">@ui.debbie</span>) typically model and animate their tactile 3D assets in <span class="text-white font-semibold">Spline 3D</span> (or Blender). Spline is a visual 3D design app built for web UI that exports interactive WebGL scenes with baked lighting, clay shaders, and spring physics.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+          <p class="font-semibold text-white mb-1.5">2. Do you NEED a 3rd party tool?</p>
+          <p><span class="text-white font-semibold">No.</span> This engine runs in <span class="text-blue-400 font-semibold">pure Three.js</span> right in the browser! Spline itself exports to Three.js/WebGL behind the scenes. By mounting the presentation screen <span class="text-emerald-400 font-semibold">directly inside the container</span> (rather than a floating side card) and matching Debbie's studio lighting and giant typographic backdrop, Three.js achieves the exact same viral result with 0 dependencies and lightning-fast load times.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+          <p class="font-semibold text-white mb-1.5">3. Can we connect Spline or custom 3D models anyway?</p>
+          <p><span class="text-emerald-400 font-semibold">Yes, 100%!</span> If your design team creates a scene in Spline, you can export a <span class="text-white font-mono">.splinecode</span> or <span class="text-white font-mono">.gltf</span> model and load it straight into this website with one line of code.</p>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-5 border-t border-white/10 flex justify-end">
+        <button onclick="togglePipelineModal()" class="px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs tracking-wider uppercase transition shadow-lg">
+          Got It, Resume 3D Crane
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- ========================================== -->
-  <!-- 5. THREE.JS 3D KINEMATICS & CRANE SCRIPT   -->
+  <!-- 6. THREE.JS 3D KINEMATICS & CRANE SCRIPT   -->
   <!-- ========================================== -->
   <script>
     // System Definitions Across 3 Industry Verticals
     const systems = {
       debbie: {
-        skyColor: 0x1E3A8A, // 60% Royal Deep Blue
-        groundColor: 0x0F172A,
-        accentHex: '#EF4444', // 10% Unexpected Coral Red
+        skyColor: 0x1D61F2, // Exact Debbie Royal Cobalt Blue
+        groundColor: 0x174EC4,
+        accentHex: '#EF4444', // 10% Unexpected High-Contrast Action Red
         accentNum: 0xEF4444,
-        icon: '🚢',
+        icon: '&#x1F6A2;',
         title: 'Debbie Creative Port',
-        sub: 'Real Three.js WebGL Kinematics • Physical 3D Unboxing',
+        sub: 'Kinematic Crane Unboxing &bull; Interior Display Frame',
         watermark: 'PORTFOLIO',
-        ratio60: '#1E3A8A',
+        watermarkFont: 'Syne',
+        watermarkColor: 'rgba(255, 255, 255, 0.95)',
+        ratio60: '#1D61F2',
         ratio10: '#EF4444',
         containers: [
-          { label: 'WHAT I DO', color: 0xDC2626, hex: '#DC2626', code: 'WHAT', codeR: 'I DO', title: 'Hi, I\'m Debbie.', cat: '01 // OVERVIEW', desc: 'In this realm with a crane deck, every container at this port holds a piece of my digital experience. Click any container to hoist and unpack in true 3D.', metaKey: 'CORE CAPABILITY', metaVal: 'AI Creative Engineering & UI', cta: 'Explore Work →' },
-          { label: 'THE WORK', color: 0xEA580C, hex: '#EA580C', code: 'THE', codeR: 'WORK', title: 'Selected Case Studies', cat: '02 // PORTFOLIO', desc: 'From viral vibe-coded web applications to high-conversion digital experiences engineered with Claude Opus & Three.js.', metaKey: 'PRODUCTION COUNT', metaVal: '14 Live Projects', cta: 'View Showcase →' },
-          { label: 'ABOUT ME', color: 0x2563EB, hex: '#2563EB', code: 'ABOUT', codeR: 'ME', title: 'Product & Design Engineer', cat: '03 // BIO', desc: 'Merging ultra-clean typography, WebGL spatial physics, and master prompt architecture into fluid interactive spaces.', metaKey: 'DISCIPLINE', metaVal: 'Product Design & Tech', cta: 'Read Story →' },
-          { label: 'PROCESS', color: 0xCA8A04, hex: '#CA8A04', code: 'PRO', codeR: 'CESS', title: 'Rapid Prototyping Cadence', cat: '04 // METHOD', desc: '48-hour sprints from Figma conception to live 60fps WebGL shaders. Zero fluff, tactile interactive physics.', metaKey: 'SPRINT VELOCITY', metaVal: 'Weekly Releases', cta: 'Inspect Process →' },
-          { label: 'SAY HELLO', color: 0x4F46E5, hex: '#4F46E5', code: 'SAY', codeR: 'HELLO', title: 'Let\'s Build Something Bold', cat: '05 // CONTACT', desc: 'Open for high-impact creative commissions, founding designer advisory, and master prompt architecture.', metaKey: 'CALENDAR', metaVal: 'Q4 Booking Open', cta: 'Send Transmission →' },
-          { label: 'TOOL KIT', color: 0x4B5563, hex: '#4B5563', code: 'TOOL', codeR: 'KIT', title: 'Tech Stack & Arsenal', cat: '06 // GEAR', desc: 'Three.js, WebGL, Tailwind, Claude 3.5 Sonnet, Spline 3D, and bespoke canvas caustics shaders.', metaKey: 'RUNTIME', metaVal: 'TypeScript & WebGL', cta: 'Check Stack →' }
+          {
+            label: 'WHAT I DO',
+            color: 0xE02424,
+            hex: '#E02424',
+            codeL: 'WHAT',
+            codeR: 'I DO',
+            title: 'Hi, I\'m Debbie',
+            cat: '01 // OVERVIEW',
+            desc: 'A digital product designer with a mission to craft viral, tactile interfaces. Every container holds a live interactive project.',
+            badge: 'CREATIVE DEV & UI/UX',
+            cta: 'EXPLORE WORK',
+            link: '#'
+          },
+          {
+            label: 'THE WORK',
+            color: 0xEA580C,
+            hex: '#EA580C',
+            codeL: 'THE',
+            codeR: 'WORK',
+            title: 'Selected Case Studies',
+            cat: '02 // PORTFOLIO',
+            desc: 'High-conversion digital experiences engineered with WebGL, tactile physics, and clean typographic architecture.',
+            badge: '14 LIVE PROJECTS',
+            cta: 'VIEW SHOWCASE',
+            link: '#'
+          },
+          {
+            label: 'ABOUT ME',
+            color: 0x2563EB,
+            hex: '#2563EB',
+            codeL: 'ABOUT',
+            codeR: 'ME',
+            title: 'Product & Design Engineer',
+            cat: '03 // BIO',
+            desc: 'Merging ultra-clean typography, WebGL spatial physics, and master prompt architecture into fluid interactive spaces.',
+            badge: 'FULL-STACK DESIGN',
+            cta: 'READ STORY',
+            link: '#'
+          },
+          {
+            label: 'PROCESS',
+            color: 0xCA8A04,
+            hex: '#CA8A04',
+            codeL: 'PRO',
+            codeR: 'CESS',
+            title: 'Rapid Prototyping Cadence',
+            cat: '04 // METHOD',
+            desc: '48-hour sprints from Figma conception to live 60fps WebGL shaders. Zero fluff, tactile interactive physics.',
+            badge: 'WEEKLY SPRINTS',
+            cta: 'INSPECT PROCESS',
+            link: '#'
+          },
+          {
+            label: 'SAY HELLO',
+            color: 0x4F46E5,
+            hex: '#4F46E5',
+            codeL: 'SAY',
+            codeR: 'HELLO',
+            title: 'Let\'s Build Something Bold',
+            cat: '05 // CONTACT',
+            desc: 'Open for high-impact creative commissions, founding designer advisory, and master prompt architecture.',
+            badge: 'Q4 BOOKING OPEN',
+            cta: 'SEND MESSAGE',
+            link: '#'
+          },
+          {
+            label: 'TOOL KIT',
+            color: 0x64748B,
+            hex: '#64748B',
+            codeL: 'TOOL',
+            codeR: 'KIT',
+            title: 'Tech Stack & Arsenal',
+            cat: '06 // GEAR',
+            desc: 'Three.js, WebGL, Tailwind, Claude 3.5 Sonnet, Spline 3D, and bespoke canvas caustics shaders.',
+            badge: 'TYPESCRIPT & WEBGL',
+            cta: 'CHECK STACK',
+            link: '#'
+          }
         ]
       },
       goshwara: {
-        skyColor: 0x08090C, // 60% Deep Imperial Onyx
-        groundColor: 0x050608,
+        skyColor: 0x0A0C10, // Deep Imperial Onyx
+        groundColor: 0x05070A,
         accentHex: '#05D585', // 10% Unexpected Electric Muzo Emerald
         accentNum: 0x05D585,
-        icon: '💎',
+        icon: '&#x1F48E;',
         title: 'Goshwara Crown Vault Crane',
-        sub: 'High Jewelry Vault Casket Hoist • 3.5X Loupe Inspector',
+        sub: 'High Jewelry Vault Casket Hoist &bull; Interior Gem Dossier',
         watermark: 'GOSHWARA',
-        ratio60: '#08090C',
+        watermarkFont: 'Cinzel',
+        watermarkColor: 'rgba(212, 175, 55, 0.45)',
+        ratio60: '#0A0C10',
         ratio10: '#05D585',
         containers: [
-          { label: 'MUZO EMERALD', color: 0x064E3B, hex: '#064E3B', code: 'COLOMBIAN', codeR: 'EMERALD', title: 'Rainforest Emerald Choker', cat: 'VAULT 01 // HIGH JEWELRY', desc: 'Cascade of 100% natural unheated Colombian emeralds hand-mounted in sculptural 18K solid gold with baguette accents. Private reserve.', metaKey: 'PROVENANCE', metaVal: 'Muzo Valley, Colombia (GIA)', cta: 'Reserve Private Viewing →' },
-          { label: 'TOPAZ RING', color: 0x075985, hex: '#075985', code: 'LONDON', codeR: 'TOPAZ', title: 'Three-Stone Architectural Ring', cat: 'VAULT 02 // ROCK \'N ROLL', desc: 'Vivid oceanic London blue topaz flanked by micropavé brilliant cut diamonds in warm 18K architectural yellow gold.', metaKey: 'GEM CUT', metaVal: 'Octagonal Step Facets', cta: 'Inspect 3.5X Loupe →' },
-          { label: 'AMETHYST DROP', color: 0x581C87, hex: '#581C87', code: 'MANHATTAN', codeR: 'AMETHYST', title: 'Cushion Cut Manhattan Pendant', cat: 'VAULT 03 // CLASSICS', desc: 'Hand-faceted royal amethyst suspended from articulated solid gold links. Sweta Jain\'s tribute to New York geometry.', metaKey: 'GOLD ALLOY', metaVal: '18K Solid Honey Gold', cta: 'Reserve Private Suite →' },
-          { label: 'RUBELLITE', color: 0x881337, hex: '#881337', code: 'RUBELLITE', codeR: 'TOURMALINE', title: 'Double Drop Rubellite Suite', cat: 'VAULT 04 // MÉLANGE', desc: 'Articulated dual cabochon drops featuring intense raspberry rubellites with diamond halos. Worn by Priyanka Chopra at Academy Gala.', metaKey: 'CELEBRITY PRESS', metaVal: 'Academy Museum Gala', cta: 'Request Dossier →' },
-          { label: 'CITRINE HALO', color: 0x78350F, hex: '#78350F', code: 'MADEIRA', codeR: 'CITRINE', title: 'Asscher Citrine Halo Pendant', cat: 'VAULT 05 // CLASSICS', desc: 'Hypnotic windmill step facets reflecting rich amber honey hues, encapsulated by micro-pavé diamonds.', metaKey: 'CERTIFICATION', metaVal: 'Gübelin Gem Lab', cta: 'Inquire P.O.A. →' },
-          { label: 'BESPOKE ATELIER', color: 0x27272A, hex: '#27272A', code: 'SWETA JAIN', codeR: 'ATELIER', title: 'Private Atelier Commission', cat: 'VAULT 06 // PRIVATE SALON', desc: 'One-on-one custom commission with Sweta Jain. Private viewing suites at The Oberoi Delhi, BKC Mumbai, or 5th Avenue.', metaKey: 'APPOINTMENT', metaVal: 'Discreet Private Suite', cta: 'Book Private Salon →' }
+          {
+            label: 'MUZO EMERALD',
+            color: 0x064E3B,
+            hex: '#064E3B',
+            codeL: 'COLOMBIAN',
+            codeR: 'EMERALD',
+            title: 'Rainforest Emerald Choker',
+            cat: 'VAULT 01 // HIGH JEWELRY',
+            desc: 'Cascade of 100% natural unheated Colombian emeralds hand-mounted in sculptural 18K solid gold with baguette accents. Private reserve.',
+            badge: 'MUZO VALLEY &bull; GIA',
+            cta: 'RESERVE PRIVATE VIEWING',
+            link: 'https://flagshipsystems.github.io/goshwara/'
+          },
+          {
+            label: 'TOPAZ RING',
+            color: 0x075985,
+            hex: '#075985',
+            codeL: 'LONDON',
+            codeR: 'TOPAZ',
+            title: 'Three-Stone Architectural Ring',
+            cat: 'VAULT 02 // ROCK \'N ROLL',
+            desc: 'Vivid oceanic London blue topaz flanked by micropave brilliant cut diamonds in warm 18K architectural yellow gold.',
+            badge: 'STEP FACET CUT',
+            cta: 'INSPECT 3.5X LOUPE',
+            link: 'https://flagshipsystems.github.io/goshwara/'
+          },
+          {
+            label: 'AMETHYST DROP',
+            color: 0x581C87,
+            hex: '#581C87',
+            codeL: 'MANHATTAN',
+            codeR: 'AMETHYST',
+            title: 'Cushion Cut Manhattan Pendant',
+            cat: 'VAULT 03 // CLASSICS',
+            desc: 'Hand-faceted royal amethyst suspended from articulated solid gold links. Sweta Jain\'s tribute to New York geometry.',
+            badge: '18K HONEY GOLD',
+            cta: 'RESERVE PRIVATE SUITE',
+            link: 'https://flagshipsystems.github.io/goshwara/'
+          },
+          {
+            label: 'RUBELLITE',
+            color: 0x881337,
+            hex: '#881337',
+            codeL: 'RUBELLITE',
+            codeR: 'TOURMALINE',
+            title: 'Double Drop Rubellite Suite',
+            cat: 'VAULT 04 // MELANGE',
+            desc: 'Articulated dual cabochon drops featuring intense raspberry rubellites with diamond halos. Worn by Priyanka Chopra at Academy Gala.',
+            badge: 'ACADEMY GALA PIECE',
+            cta: 'REQUEST DOSSIER',
+            link: 'https://flagshipsystems.github.io/goshwara/'
+          },
+          {
+            label: 'CITRINE HALO',
+            color: 0x78350F,
+            hex: '#78350F',
+            codeL: 'MADEIRA',
+            codeR: 'CITRINE',
+            title: 'Asscher Citrine Halo Pendant',
+            cat: 'VAULT 05 // CLASSICS',
+            desc: 'Hypnotic windmill step facets reflecting rich amber honey hues, encapsulated by micro-pave diamonds.',
+            badge: 'GUBELIN CERTIFIED',
+            cta: 'INQUIRE P.O.A.',
+            link: 'https://flagshipsystems.github.io/goshwara/'
+          },
+          {
+            label: 'BESPOKE ATELIER',
+            color: 0x27272A,
+            hex: '#27272A',
+            codeL: 'SWETA JAIN',
+            codeR: 'ATELIER',
+            title: 'Private Atelier Commission',
+            cat: 'VAULT 06 // PRIVATE SALON',
+            desc: 'One-on-one custom commission with Sweta Jain. Private viewing suites at The Oberoi Delhi, BKC Mumbai, or 5th Avenue.',
+            badge: 'DISCREET SUITE',
+            cta: 'BOOK PRIVATE SALON',
+            link: 'https://flagshipsystems.github.io/goshwara/'
+          }
         ]
       },
       horlogerie: {
-        skyColor: 0x09111E, // 60% Midnight Titanium
-        groundColor: 0x060B14,
+        skyColor: 0x0F172A, // Slate Midnight Titanium
+        groundColor: 0x090D16,
         accentHex: '#38BDF8', // 10% Unexpected Glacial Cyan
         accentNum: 0x38BDF8,
-        icon: '⌚',
-        title: 'Genève Haute Horlogerie Safe',
-        sub: 'Titanium Vault Crane • Mechanical Tourbillon Escapement',
-        watermark: 'CHRONO',
-        ratio60: '#09111E',
+        icon: '&#x231A;',
+        title: 'Geneve Haute Horlogerie Safe',
+        sub: 'Titanium Vault Crane &bull; Calibre Escapement Unboxing',
+        watermark: 'GENEVE',
+        watermarkFont: 'Cinzel',
+        watermarkColor: 'rgba(255, 255, 255, 0.4)',
+        ratio60: '#0F172A',
         ratio10: '#38BDF8',
         containers: [
-          { label: 'TOURBILLON', color: 0x0369A1, hex: '#0369A1', code: 'FLYING', codeR: 'TOURBILLON', title: 'Chronographe Volant No. 01', cat: 'CALIBRE 01 // GRAND COMPLICATION', desc: 'Grade 5 titanium cage with 60-second flying tourbillon, column-wheel monopusher chronograph, 72h power reserve.', metaKey: 'FREQUENCY', metaVal: '28,800 vph (4 Hz) COSC', cta: 'Request Allocation →' },
-          { label: 'PERPETUAL', color: 0x1E293B, hex: '#1E293B', code: 'QUANTIÈME', codeR: 'PERPÉTUEL', title: 'Perpetual Moonphase Calibre', cat: 'CALIBRE 02 // ASTRONOMY', desc: 'Requires no adjustment until 2100. Hand-finished Côtes de Genève with aventurine glass celestial night sky.', metaKey: 'CASE ALLOY', metaVal: 'Platinum 950 Bezel', cta: 'Inspect Movement →' },
-          { label: 'SKELETON', color: 0x0F172A, hex: '#0F172A', code: 'OPEN', codeR: 'WORK', title: 'Skeletonized Royal Chrono', cat: 'CALIBRE 03 // AVANT-GARDE', desc: 'Entire movement open-worked with hand-beveled bridges. Sapphire crystal dial offering 360-degree escapement view.', metaKey: 'FINISHING', metaVal: 'Black Polished Anglage', cta: 'Request Dossier →' },
-          { label: 'DEEP DIVER', color: 0x115E59, hex: '#115E59', code: 'ABYSS', codeR: '1000M', title: 'Abyss Deep Sea Titanium', cat: 'CALIBRE 04 // PROFESSIONAL', desc: 'Helium escape valve, luminous ceramic unidirectional bezel, ISO 6425 saturation diving certification.', metaKey: 'WATERPROOF', metaVal: '1,000 Meters / 100 Bar', cta: 'Reserve Numbered Piece →' },
-          { label: 'MINUTE REPEATER', color: 0x713F12, hex: '#713F12', code: 'SONNERIE', codeR: 'CHIME', title: 'Cathedral Gong Minute Repeater', cat: 'CALIBRE 05 // ACOUSTICS', desc: 'Dual-hammer acoustic sonnerie striking hours, quarters, and minutes with hardened steel cathedral gongs.', metaKey: 'SOUND RESONANCE', metaVal: 'Dual Tempered Steel', cta: 'Listen to Chime →' },
-          { label: 'BESPOKE ORDER', color: 0x262626, hex: '#262626', code: 'PIÈCE', codeR: 'UNIQUE', title: 'Atelier Cabinotiers Unique', cat: 'CALIBRE 06 // COMMISSION', desc: 'Custom enamel dial miniature and bespoke movement complications commissioned by private collectors.', metaKey: 'VALUATION', metaVal: 'Strictly P.O.A.', cta: 'Consult Horologist →' }
+          {
+            label: 'TOURBILLON',
+            color: 0x0369A1,
+            hex: '#0369A1',
+            codeL: 'FLYING',
+            codeR: 'TOURBILLON',
+            title: 'Chronographe Volant No. 01',
+            cat: 'CALIBRE 01 // COMPLICATION',
+            desc: 'Grade 5 titanium cage with 60-second flying tourbillon, column-wheel monopusher chronograph, 72h power reserve.',
+            badge: '28,800 VPH &bull; COSC',
+            cta: 'REQUEST ALLOCATION',
+            link: '#'
+          },
+          {
+            label: 'PERPETUAL',
+            color: 0x334155,
+            hex: '#334155',
+            codeL: 'QUANTIEME',
+            codeR: 'PERPETUEL',
+            title: 'Perpetual Moonphase Calibre',
+            cat: 'CALIBRE 02 // ASTRONOMY',
+            desc: 'Requires no adjustment until 2100. Hand-finished Cotes de Geneve with aventurine glass celestial night sky.',
+            badge: 'PLATINUM 950 BEZEL',
+            cta: 'INSPECT MOVEMENT',
+            link: '#'
+          },
+          {
+            label: 'SKELETON',
+            color: 0x1E293B,
+            hex: '#1E293B',
+            codeL: 'OPEN',
+            codeR: 'WORK',
+            title: 'Skeletonized Royal Chrono',
+            cat: 'CALIBRE 03 // AVANT-GARDE',
+            desc: 'Entire movement open-worked with hand-beveled bridges. Sapphire crystal dial offering 360-degree escapement view.',
+            badge: 'HAND POLISHED ANGLAGE',
+            cta: 'REQUEST DOSSIER',
+            link: '#'
+          },
+          {
+            label: 'DEEP DIVER',
+            color: 0x0F766E,
+            hex: '#0F766E',
+            codeL: 'ABYSS',
+            codeR: '1000M',
+            title: 'Abyss Deep Sea Titanium',
+            cat: 'CALIBRE 04 // PROFESSIONAL',
+            desc: 'Helium escape valve, luminous ceramic unidirectional bezel, ISO 6425 saturation diving certification.',
+            badge: '1,000 METERS / 100 BAR',
+            cta: 'RESERVE NUMBERED PIECE',
+            link: '#'
+          },
+          {
+            label: 'MINUTE REPEATER',
+            color: 0x78350F,
+            hex: '#78350F',
+            codeL: 'SONNERIE',
+            codeR: 'CHIME',
+            title: 'Cathedral Gong Minute Repeater',
+            cat: 'CALIBRE 05 // ACOUSTICS',
+            desc: 'Dual-hammer acoustic sonnerie striking hours, quarters, and minutes with hardened steel cathedral gongs.',
+            badge: 'TEMPERED STEEL GONGS',
+            cta: 'LISTEN TO CHIME',
+            link: '#'
+          },
+          {
+            label: 'BESPOKE ORDER',
+            color: 0x18181B,
+            hex: '#18181B',
+            codeL: 'PIECE',
+            codeR: 'UNIQUE',
+            title: 'Atelier Cabinotiers Unique',
+            cat: 'CALIBRE 06 // COMMISSION',
+            desc: 'Custom enamel dial miniature and bespoke movement complications commissioned by private collectors.',
+            badge: 'STRICTLY P.O.A.',
+            cta: 'CONSULT HOROLOGIST',
+            link: '#'
+          }
         ]
       }
     };
@@ -239,11 +497,41 @@
     let currentContainerIdx = 0;
     let isKinematicRunning = false;
 
+    // Web Audio Synthesizer for Tactile Mechanical Clicks
+    let audioCtx = null;
+    function playTone(freq, type = 'sine', duration = 0.08) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    // Toggle 3D Pipeline Info Modal
+    function togglePipelineModal() {
+      const modal = document.getElementById('pipelineModal');
+      const isVisible = !modal.classList.contains('pointer-events-none');
+      if (isVisible) {
+        modal.classList.add('pointer-events-none', 'opacity-0');
+      } else {
+        modal.classList.remove('pointer-events-none', 'opacity-0');
+      }
+    }
+
     // ==========================================
-    // THREE.JS SETUP & RENDER PIPELINE
+    // THREE.JS SETUP & SCENE LIGHTING
     // ==========================================
     const canvas = document.getElementById('webglCanvas');
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
@@ -252,63 +540,47 @@
     renderer.toneMappingExposure = 1.15;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(systems[activeSystemKey].skyColor);
-    scene.fog = new THREE.FogExp2(systems[activeSystemKey].skyColor, 0.028);
+    scene.background = null; // Transparent so giant CSS watermark shows through cleanly!
 
     const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(0, 1.8, 14.5);
-    camera.lookAt(0, 0.6, 0);
+    camera.position.set(0, 1.2, 11.2);
+    camera.lookAt(0, 0.2, 0);
 
-    // Mouse Parallax
-    let mouseX = 0, mouseY = 0;
-    let targetCamX = 0, targetCamY = 1.8;
-
-    window.addEventListener('mousemove', e => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-      targetCamX = mouseX * 1.5;
-      targetCamY = 1.8 - mouseY * 0.8;
-    });
-
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // ==========================================
-    // LIGHTING RIG
-    // ==========================================
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
+    // Studio Lighting Setup (Crisp, High-Key, Vibrant)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xfffaed, 1.4);
-    sunLight.position.set(12, 18, 10);
-    sunLight.castShadow = true;
-    sunLight.shadow.mapSize.width = 2048;
-    sunLight.shadow.mapSize.height = 2048;
-    sunLight.shadow.camera.near = 0.5;
-    sunLight.shadow.camera.far = 40;
-    sunLight.shadow.camera.left = -12;
-    sunLight.shadow.camera.right = 12;
-    sunLight.shadow.camera.top = 12;
-    sunLight.shadow.camera.bottom = -12;
-    sunLight.shadow.bias = -0.0003;
-    scene.add(sunLight);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.25);
+    dirLight.position.set(6, 14, 9);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.width = 2048;
+    dirLight.shadow.mapSize.height = 2048;
+    dirLight.shadow.camera.near = 0.5;
+    dirLight.shadow.camera.far = 30;
+    dirLight.shadow.camera.left = -14;
+    dirLight.shadow.camera.right = 14;
+    dirLight.shadow.camera.top = 10;
+    dirLight.shadow.camera.bottom = -10;
+    dirLight.shadow.bias = -0.0005;
+    scene.add(dirLight);
 
-    // Overhead Industrial Crane Spotlight
-    const craneSpotlight = new THREE.SpotLight(0xffffff, 2.5, 25, Math.PI / 4, 0.45, 1);
-    craneSpotlight.position.set(0, 6.8, 0);
-    craneSpotlight.castShadow = true;
+    // Soft Rim Light from Back Left
+    const rimLight = new THREE.DirectionalLight(0xffffff, 0.55);
+    rimLight.position.set(-8, 6, -6);
+    scene.add(rimLight);
+
+    // Crane Follow Spotlight
+    const craneSpotlight = new THREE.SpotLight(0xffffff, 0.8, 18, Math.PI / 4, 0.4, 1.2);
+    craneSpotlight.position.set(0, 7.5, 0);
     scene.add(craneSpotlight);
     scene.add(craneSpotlight.target);
 
-    // Container Interior Warm Light
-    const interiorPointLight = new THREE.PointLight(0xffaa44, 0, 8);
+    // Interior Warm Spotlight for Container Content Unboxing
+    const interiorPointLight = new THREE.PointLight(0xffffff, 0, 8);
     scene.add(interiorPointLight);
 
     // ==========================================
-    // PROCEDURAL TEXTURE GENERATORS
+    // TEXTURE GENERATORS
     // ==========================================
     // 1. Corrugated Bump Map
     function createCorrugatedBumpMap() {
@@ -319,26 +591,26 @@
       ctx.fillStyle = '#808080';
       ctx.fillRect(0, 0, 256, 256);
       
-      const ridges = 16;
+      const ridges = 18;
       const w = 256 / ridges;
       for (let i = 0; i < ridges; i++) {
         const grad = ctx.createLinearGradient(i * w, 0, (i + 1) * w, 0);
-        grad.addColorStop(0, '#303030');
+        grad.addColorStop(0, '#222222');
         grad.addColorStop(0.3, '#ffffff');
         grad.addColorStop(0.7, '#ffffff');
-        grad.addColorStop(1, '#303030');
+        grad.addColorStop(1, '#222222');
         ctx.fillStyle = grad;
         ctx.fillRect(i * w + 1, 0, w - 2, 256);
       }
       const tex = new THREE.CanvasTexture(c);
       tex.wrapS = THREE.RepeatWrapping;
       tex.wrapT = THREE.RepeatWrapping;
-      tex.repeat.set(2, 1);
+      tex.repeat.set(3, 1);
       return tex;
     }
     const corrugatedBumpTex = createCorrugatedBumpMap();
 
-    // 2. Door Decal Texture Generator
+    // 2. Door Decal Texture Generator (Clean, Stamped White Typography)
     function createDoorTextTexture(text, isLeft) {
       const c = document.createElement('canvas');
       c.width = 512;
@@ -346,140 +618,252 @@
       const ctx = c.getContext('2d');
       ctx.clearRect(0, 0, 512, 512);
 
-      // Warning Stencil
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-      ctx.font = 'bold 20px "Space Grotesk", monospace';
-      ctx.fillText(isLeft ? 'CL-8902 // HAZARD' : 'CR-8902 // LATCH', 40, 60);
+      // Top Corner Stencil
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.font = 'bold 22px "Space Grotesk", monospace';
+      ctx.fillText(isLeft ? 'PORT-01 // DECK' : 'LATCH // LOCK', 36, 64);
 
-      // Main Big Stencil Code
-      ctx.font = '900 68px "Space Grotesk", sans-serif';
+      // Main Bold Stamped Typography (As seen in Debbie Reel)
+      ctx.font = '900 78px "Syne", "Space Grotesk", sans-serif';
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = isLeft ? 'left' : 'right';
-      ctx.fillText(text, isLeft ? 40 : 472, 270);
+      ctx.fillText(text, isLeft ? 36 : 476, 275);
 
-      // Bottom Barcode / Grid
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-      ctx.fillRect(40, 440, 432, 4);
+      // Bottom Stencil Rules
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
+      ctx.fillRect(36, 440, 440, 5);
 
       const tex = new THREE.CanvasTexture(c);
       return tex;
     }
 
+    // 3. Container Interior Display Texture (Razor-Sharp Vector Screen)
+    function createInteriorScreenTexture(cfg, accentColorHex) {
+      const c = document.createElement('canvas');
+      c.width = 1024;
+      c.height = 640;
+      const ctx = c.getContext('2d');
+
+      // Sleek Dark Cockpit Background
+      ctx.fillStyle = '#0F131A';
+      ctx.fillRect(0, 0, 1024, 640);
+
+      // Inner Hairline Border
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(20, 20, 984, 600);
+
+      // Subtle Background Grid
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+      ctx.lineWidth = 1;
+      for (let x = 60; x < 980; x += 80) {
+        ctx.beginPath(); ctx.moveTo(x, 20); ctx.lineTo(x, 620); ctx.stroke();
+      }
+
+      // 1. Category Tag with Glow Dot
+      ctx.fillStyle = accentColorHex;
+      ctx.beginPath();
+      ctx.arc(60, 75, 7, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.font = 'bold 22px "Space Grotesk", monospace';
+      ctx.fillStyle = accentColorHex;
+      ctx.textAlign = 'left';
+      ctx.fillText(cfg.cat, 78, 83);
+
+      // Registry Serial Right
+      ctx.font = 'bold 18px "Space Grotesk", monospace';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.textAlign = 'right';
+      ctx.fillText('CRANE-UNBOX // 3D-OK', 960, 83);
+
+      // Divider Line
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+      ctx.fillRect(60, 108, 904, 2);
+
+      // 2. Main Title (Hi, I'm Debbie / Selected Case Studies)
+      ctx.font = '900 52px "Syne", "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'left';
+      ctx.fillText(cfg.title, 60, 185);
+
+      // 3. Body Description (Wrapped Elegantly)
+      ctx.font = '400 24px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      
+      const words = cfg.desc.split(' ');
+      let line = '';
+      let y = 245;
+      const maxWidth = 900;
+      for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > maxWidth && n > 0) {
+          ctx.fillText(line, 60, y);
+          line = words[n] + ' ';
+          y += 36;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, 60, y);
+
+      // 4. Key Metric / Badge Pill
+      const badgeY = 385;
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.roundRect ? ctx.roundRect(60, badgeY, 320, 48, 24) : ctx.fillRect(60, badgeY, 320, 48);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.stroke();
+
+      ctx.font = 'bold 18px "Space Grotesk", monospace';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'center';
+      ctx.fillText(cfg.badge, 220, badgeY + 31);
+
+      // 5. The 10% High-Contrast Action Button (Diego 60/30/10 Rule)
+      const btnY = 485;
+      const btnW = 380;
+      const btnH = 68;
+      
+      // Button Background with Accent Color
+      ctx.fillStyle = accentColorHex;
+      ctx.roundRect ? ctx.roundRect(60, btnY, btnW, btnH, 34) : ctx.fillRect(60, btnY, btnW, btnH);
+      ctx.fill();
+
+      // Button Text
+      ctx.font = '900 22px "Syne", "Space Grotesk", sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'center';
+      ctx.fillText(cfg.cta + '  →', 60 + btnW / 2, btnY + 43);
+
+      // Secondary Text / Tip
+      ctx.font = '400 17px "Space Grotesk", monospace';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+      ctx.textAlign = 'left';
+      ctx.fillText('Press Enter or click container to launch', 470, btnY + 42);
+
+      const tex = new THREE.CanvasTexture(c);
+      tex.minFilter = THREE.LinearFilter;
+      tex.magFilter = THREE.LinearFilter;
+      return tex;
+    }
+
     // ==========================================
-    // 3D SCENE OBJECTS: GROUND & GANTRY CRANE
+    // 3D SCENE OBJECTS: DOCK & OVERHEAD CRANE
     // ==========================================
-    // 1. Concrete Harbor Dock Floor
-    const groundGeo = new THREE.PlaneGeometry(60, 60);
+    // 1. Studio Dock Floor
+    const groundGeo = new THREE.PlaneGeometry(60, 40);
     const groundMat = new THREE.MeshStandardMaterial({
-      color: 0x0c131f,
-      roughness: 0.85,
+      color: 0x174EC4,
+      roughness: 0.65,
       metalness: 0.15
     });
     const ground = new THREE.Mesh(groundGeo, groundMat);
     ground.rotation.x = -Math.PI / 2;
-    ground.position.y = -2.8;
+    ground.position.y = -2.6;
     ground.receiveShadow = true;
     scene.add(ground);
 
-    // Dock Safety Line
-    const dockLineGeo = new THREE.PlaneGeometry(40, 0.2);
-    const dockLineMat = new THREE.MeshBasicMaterial({ color: 0xeab308, transparent: true, opacity: 0.5 });
+    // Sleek White Dock Edge Line
+    const dockLineGeo = new THREE.PlaneGeometry(40, 0.12);
+    const dockLineMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5 });
     const dockLine = new THREE.Mesh(dockLineGeo, dockLineMat);
     dockLine.rotation.x = -Math.PI / 2;
-    dockLine.position.set(0, -2.78, 1.2);
+    dockLine.position.set(0, -2.58, 2.2);
     scene.add(dockLine);
 
-    // 2. Heavy Steel I-Beam Overhead Crane Track
+    // 2. Minimalist White Overhead Gantry Rail (Debbie Style)
     const trackGroup = new THREE.Group();
-    const beamGeo = new THREE.BoxGeometry(26, 0.45, 0.6);
-    const beamMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4, metalness: 0.8 });
+    const beamGeo = new THREE.BoxGeometry(26, 0.35, 0.45);
+    const beamMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.3, metalness: 0.5 });
     const beamMesh = new THREE.Mesh(beamGeo, beamMat);
     beamMesh.castShadow = true;
     trackGroup.add(beamMesh);
 
-    // Beam Support Pillars
-    const pillarMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.6, metalness: 0.7 });
-    const pillarL = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 12), pillarMat);
-    pillarL.position.set(-12.5, -4, 0);
-    trackGroup.add(pillarL);
-    const pillarR = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 12), pillarMat);
-    pillarR.position.set(12.5, -4, 0);
-    trackGroup.add(pillarR);
+    // Support Bracket Rails
+    const bracketL = new THREE.Mesh(new THREE.BoxGeometry(0.3, 3, 0.45), beamMat);
+    bracketL.position.set(-12.5, 1.2, 0);
+    trackGroup.add(bracketL);
+    const bracketR = new THREE.Mesh(new THREE.BoxGeometry(0.3, 3, 0.45), beamMat);
+    bracketR.position.set(12.5, 1.2, 0);
+    trackGroup.add(bracketR);
 
-    trackGroup.position.set(0, 6.8, 0);
+    trackGroup.position.set(0, 5.8, 0);
     scene.add(trackGroup);
 
-    // 3. Motorized Crane Trolley & Claw Rig
+    // 3. Motorized Crane Carriage & Spreader Frame
     const craneTrolleyGroup = new THREE.Group();
     const trolleyMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(1.6, 0.6, 1.2),
-      new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.35, metalness: 0.7 })
+      new THREE.BoxGeometry(1.5, 0.45, 1.0),
+      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.25, metalness: 0.6 })
     );
     trolleyMesh.castShadow = true;
     craneTrolleyGroup.add(trolleyMesh);
 
-    // Red Warning Beacon on Trolley
-    const beaconGeo = new THREE.CylinderGeometry(0.12, 0.15, 0.25, 16);
-    const beaconMat = new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0xef4444, emissiveIntensity: 0.8 });
-    const beacon = new THREE.Mesh(beaconGeo, beaconMat);
-    beacon.position.set(0, 0.4, 0);
+    // Small Industrial Beacon
+    const beacon = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.08, 0.1, 0.2, 16),
+      new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0xef4444, emissiveIntensity: 0.9 })
+    );
+    beacon.position.set(0, 0.32, 0);
     craneTrolleyGroup.add(beacon);
 
     // 4 Steel Hoist Cables
     const cables = [];
-    const cableMat = new THREE.MeshBasicMaterial({ color: 0x94a3b8 });
+    const cableMat = new THREE.MeshBasicMaterial({ color: 0xcfd8dc });
     const cableOffsets = [
-      [-0.8, -0.6], [0.8, -0.6],
-      [-0.8, 0.6], [0.8, 0.6]
+      [-1.1, -0.6], [1.1, -0.6],
+      [-1.1, 0.6], [1.1, 0.6]
     ];
     for (let i = 0; i < 4; i++) {
-      const cMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 1), cableMat);
+      const cMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 1), cableMat);
       craneTrolleyGroup.add(cMesh);
       cables.push(cMesh);
     }
 
-    // Heavy Industrial Spreader Bar (Claw Frame)
+    // Industrial Spreader Bar (Claw Frame)
     const spreaderGroup = new THREE.Group();
     const spreaderMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(2.4, 0.22, 1.3),
-      new THREE.MeshStandardMaterial({ color: 0xeab308, roughness: 0.4, metalness: 0.6 })
+      new THREE.BoxGeometry(2.7, 0.18, 1.45),
+      new THREE.MeshStandardMaterial({ color: 0xfacc15, roughness: 0.35, metalness: 0.6 })
     );
     spreaderMesh.castShadow = true;
     spreaderGroup.add(spreaderMesh);
 
     // 4 Corner Twist-Lock Pins
-    for (const [cx, cz] of [[-1.1, -0.55], [1.1, -0.55], [-1.1, 0.55], [1.1, 0.55]]) {
+    for (const [cx, cz] of [[-1.25, -0.65], [1.25, -0.65], [-1.25, 0.65], [1.25, 0.65]]) {
       const pin = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.07, 0.07, 0.3),
-        new THREE.MeshStandardMaterial({ color: 0x111827, metalness: 0.9 })
+        new THREE.CylinderGeometry(0.06, 0.06, 0.25),
+        new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.9 })
       );
-      pin.position.set(cx, -0.15, cz);
+      pin.position.set(cx, -0.14, cz);
       spreaderGroup.add(pin);
     }
     craneTrolleyGroup.add(spreaderGroup);
 
-    craneTrolleyGroup.position.set(0, 6.8, 0);
+    craneTrolleyGroup.position.set(0, 5.8, 0);
     scene.add(craneTrolleyGroup);
 
     // ==========================================
-    // 3D CONTAINERS GENERATOR
+    // 3D CONTAINERS WITH INTEGRATED SCREENS
     // ==========================================
     const DOCK_CONTAINERS = [];
-    const containerWidth = 2.4;
-    const containerHeight = 1.4;
-    const containerDepth = 1.3;
+    const containerWidth = 2.8;
+    const containerHeight = 1.6;
+    const containerDepth = 1.4;
 
     function build3DContainer(config, index) {
       const group = new THREE.Group();
       group.userData = { config, index };
 
-      // Main Outer Box Shell
+      // Outer Container Box Shell
       const boxMat = new THREE.MeshStandardMaterial({
         color: config.color,
-        roughness: 0.45,
+        roughness: 0.38,
         metalness: 0.35,
         bumpMap: corrugatedBumpTex,
-        bumpScale: 0.04
+        bumpScale: 0.045
       });
       const boxGeo = new THREE.BoxGeometry(containerWidth, containerHeight, containerDepth);
       const boxMesh = new THREE.Mesh(boxGeo, boxMat);
@@ -487,64 +871,60 @@
       boxMesh.receiveShadow = true;
       group.add(boxMesh);
 
-      // Steel Corner Castings & Frame Trim
-      const trimMat = new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.5, metalness: 0.8 });
+      // Steel Corner Castings & Reinforced Frame
+      const trimMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.4, metalness: 0.8 });
       for (const [tx, ty, tz] of [
         [-1, -1, -1], [1, -1, -1], [-1, 1, -1], [1, 1, -1],
         [-1, -1, 1], [1, -1, 1], [-1, 1, 1], [1, 1, 1]
       ]) {
-        const corner = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.16, 0.16), trimMat);
+        const corner = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.18, 0.18), trimMat);
         corner.position.set((tx * containerWidth) / 2, (ty * containerHeight) / 2, (tz * containerDepth) / 2);
         group.add(corner);
       }
 
-      // Hollow Interior Cavity (Dark Velvet / Steel)
+      // Hollow Interior Cavity (Deep Graphite Studio Interior)
       const interiorMat = new THREE.MeshStandardMaterial({
-        color: 0x07090e,
+        color: 0x0a0d14,
         roughness: 0.9,
         metalness: 0.1
       });
-      const interiorGeo = new THREE.BoxGeometry(containerWidth - 0.1, containerHeight - 0.1, containerDepth - 0.05);
+      const interiorGeo = new THREE.BoxGeometry(containerWidth - 0.12, containerHeight - 0.12, containerDepth - 0.08);
       const interiorMesh = new THREE.Mesh(interiorGeo, interiorMat);
-      interiorMesh.position.z = 0.03;
+      interiorMesh.position.z = 0.04;
       group.add(interiorMesh);
 
-      // High-End Interior Centerpiece (Gemstone / Hologram)
-      const jewelPivot = new THREE.Group();
-      jewelPivot.position.set(0, 0, 0.1);
-      
-      const gemGeo = new THREE.OctahedronGeometry(0.32, 2);
-      const gemMat = new THREE.MeshPhysicalMaterial({
-        color: config.color,
-        transmission: 0.7,
-        opacity: 1,
-        transparent: true,
-        roughness: 0.1,
-        metalness: 0.1,
-        ior: 1.8,
-        reflectivity: 0.9
+      // ========================================================
+      // INNER PRESENTATION DISPLAY PLANE (REPLACES SIDE CARD!)
+      // ========================================================
+      const sys = systems[activeSystemKey];
+      const screenTex = createInteriorScreenTexture(config, sys.accentHex);
+      const screenMat = new THREE.MeshBasicMaterial({
+        map: screenTex,
+        transparent: false
       });
-      const gemMesh = new THREE.Mesh(gemGeo, gemMat);
-      jewelPivot.add(gemMesh);
-      group.add(jewelPivot);
-      group.userData.jewel = jewelPivot;
+      const screenGeo = new THREE.PlaneGeometry(containerWidth - 0.22, containerHeight - 0.22);
+      const screenMesh = new THREE.Mesh(screenGeo, screenMat);
+      screenMesh.position.set(0, 0, 0.08); // Placed directly on the back inside wall of container!
+      group.add(screenMesh);
+      group.userData.screenMesh = screenMesh;
+      group.userData.screenMat = screenMat;
 
-      // Double 3D Hinged Doors
-      const doorHalfW = (containerWidth - 0.06) / 2;
-      const doorH = containerHeight - 0.06;
-      const doorThickness = 0.04;
+      // Double 3D Hinged Doors (Swinging Open Outwards!)
+      const doorHalfW = (containerWidth - 0.08) / 2;
+      const doorH = containerHeight - 0.08;
+      const doorThickness = 0.045;
 
-      // Left Door Pivot Group
+      // Left Door Pivot
       const leftPivot = new THREE.Group();
-      leftPivot.position.set(-containerWidth / 2 + 0.03, 0, containerDepth / 2);
+      leftPivot.position.set(-containerWidth / 2 + 0.04, 0, containerDepth / 2);
 
-      const leftDecal = createDoorTextTexture(config.code, true);
+      const leftDecal = createDoorTextTexture(config.codeL, true);
       const doorLeftMat = new THREE.MeshStandardMaterial({
         color: config.color,
-        roughness: 0.45,
+        roughness: 0.38,
         metalness: 0.35,
         bumpMap: corrugatedBumpTex,
-        bumpScale: 0.04,
+        bumpScale: 0.045,
         map: leftDecal
       });
       const doorLeftMesh = new THREE.Mesh(new THREE.BoxGeometry(doorHalfW, doorH, doorThickness), doorLeftMat);
@@ -554,17 +934,17 @@
       group.add(leftPivot);
       group.userData.leftDoor = leftPivot;
 
-      // Right Door Pivot Group
+      // Right Door Pivot
       const rightPivot = new THREE.Group();
-      rightPivot.position.set(containerWidth / 2 - 0.03, 0, containerDepth / 2);
+      rightPivot.position.set(containerWidth / 2 - 0.04, 0, containerDepth / 2);
 
       const rightDecal = createDoorTextTexture(config.codeR, false);
       const doorRightMat = new THREE.MeshStandardMaterial({
         color: config.color,
-        roughness: 0.45,
+        roughness: 0.38,
         metalness: 0.35,
         bumpMap: corrugatedBumpTex,
-        bumpScale: 0.04,
+        bumpScale: 0.045,
         map: rightDecal
       });
       const doorRightMesh = new THREE.Mesh(new THREE.BoxGeometry(doorHalfW, doorH, doorThickness), doorRightMat);
@@ -577,24 +957,33 @@
       return group;
     }
 
-    // Populate the 6 Containers on the Dock
+    // Dynamic Isometric Staggered Dock Layout (Matching Debbie Reel!)
+    const dockCoordinates = [
+      { x: -5.6, y: -1.8, z: 0.7, rotY: -0.14 }, // Far Left (THE WORK)
+      { x: -3.4, y: -1.8, z: -0.1, rotY: 0.08 }, // Mid Left (WHAT I DO)
+      { x: -1.1, y: -1.8, z: 0.6, rotY: -0.05 }, // Center Left (ABOUT ME)
+      { x: 1.3, y: -1.8, z: 0.0, rotY: 0.09 },  // Center Right (PROCESS)
+      { x: 3.6, y: -1.8, z: 0.7, rotY: -0.08 }, // Mid Right (SAY HELLO)
+      { x: 5.8, y: -1.8, z: 0.1, rotY: 0.06 }   // Far Right (TOOL KIT)
+    ];
+
     function initializeContainers() {
       // Clear old containers
       DOCK_CONTAINERS.forEach(c => scene.remove(c));
       DOCK_CONTAINERS.length = 0;
 
       const items = systems[activeSystemKey].containers;
-      const spacing = 3.1;
-      const startX = -((items.length - 1) * spacing) / 2;
 
       items.forEach((cfg, idx) => {
         const container = build3DContainer(cfg, idx);
-        const restX = startX + idx * spacing;
-        const restY = -2.1;
-        const restZ = -0.5;
+        const coord = dockCoordinates[idx] || { x: (idx - 2.5) * 2.8, y: -1.8, z: 0, rotY: 0 };
 
-        container.position.set(restX, restY, restZ);
-        container.userData.restPos = new THREE.Vector3(restX, restY, restZ);
+        container.position.set(coord.x, coord.y, coord.z);
+        container.rotation.y = coord.rotY;
+
+        container.userData.restPos = new THREE.Vector3(coord.x, coord.y, coord.z);
+        container.userData.restRotY = coord.rotY;
+
         scene.add(container);
         DOCK_CONTAINERS.push(container);
       });
@@ -617,11 +1006,6 @@
 
       updateButtonStates(targetIdx);
 
-      // Hide Detail Overlay during transport
-      const modal = document.getElementById('detailModal');
-      gsap.to(modal, { opacity: 0, x: 50, duration: 0.35 });
-
-      // Step 1: If already holding a container, close doors and lower it back to dock
       const prev = hoistedContainer;
       const seq = gsap.timeline({
         onComplete: () => {
@@ -629,13 +1013,14 @@
         }
       });
 
+      // Step 1: If holding a container, close doors, lower back to dock
       if (prev && prev !== targetContainer) {
-        // Close doors of previous container
-        seq.to(prev.userData.leftDoor.rotation, { y: 0, duration: 0.5, ease: 'power2.inOut' });
-        seq.to(prev.userData.rightDoor.rotation, { y: 0, duration: 0.5, ease: 'power2.inOut' }, '<');
+        // Swing doors shut
+        seq.to(prev.userData.leftDoor.rotation, { y: 0, duration: 0.45, ease: 'power2.inOut' });
+        seq.to(prev.userData.rightDoor.rotation, { y: 0, duration: 0.45, ease: 'power2.inOut' }, '<');
         seq.to(interiorPointLight, { intensity: 0, duration: 0.3 }, '<');
 
-        // Lower previous container back to dock
+        // Lower back to original staggered dock spot
         seq.to(prev.position, {
           x: prev.userData.restPos.x,
           y: prev.userData.restPos.y,
@@ -643,82 +1028,89 @@
           duration: 0.8,
           ease: 'power3.inOut'
         });
-        seq.to(craneTrolleyGroup.position, { x: prev.userData.restPos.x, duration: 0.8, ease: 'power3.inOut' }, '<');
-        seq.to(spreaderGroup.position, { y: prev.userData.restPos.y + 0.85 - 6.8, duration: 0.8, ease: 'power3.inOut' }, '<');
+        seq.to(prev.rotation, {
+          y: prev.userData.restRotY,
+          duration: 0.8,
+          ease: 'power3.inOut'
+        }, '<');
 
-        // Unclamp claw
-        seq.add(() => playTone(320));
-        seq.to(spreaderGroup.position, { y: -2.5, duration: 0.4, ease: 'power2.out' });
+        seq.to(craneTrolleyGroup.position, { x: prev.userData.restPos.x, duration: 0.8, ease: 'power3.inOut' }, '<');
+        seq.to(spreaderGroup.position, { y: prev.userData.restPos.y + 0.95 - 5.8, duration: 0.8, ease: 'power3.inOut' }, '<');
+
+        // Unclamp claw sound
+        seq.add(() => playTone(340));
+        seq.to(spreaderGroup.position, { y: -2.1, duration: 0.35, ease: 'power2.out' });
       }
 
-      // Step 2: Slide Crane Trolley over to new target container on the dock
+      // Step 2: Slide Crane Carriage over to new target container on dock
       seq.to(craneTrolleyGroup.position, {
         x: targetContainer.userData.restPos.x,
-        duration: 0.9,
+        duration: 0.85,
         ease: 'power3.inOut'
       });
 
       // Step 3: Lower Spreader & Cables to clamp onto container
       seq.to(spreaderGroup.position, {
-        y: targetContainer.userData.restPos.y + 0.85 - 6.8,
-        duration: 0.7,
+        y: targetContainer.userData.restPos.y + 0.95 - 5.8,
+        duration: 0.65,
         ease: 'power2.inOut'
       });
       seq.add(() => playTone(540));
 
       // Step 4: Hoist Container into Center Stage!
-      const centerStageY = 0.5;
-      const centerStageZ = 1.2;
+      const centerStageY = 0.4;
+      const centerStageZ = 2.4;
 
       seq.to(targetContainer.position, {
         x: 0,
         y: centerStageY,
         z: centerStageZ,
-        duration: 1.2,
+        duration: 1.15,
         ease: 'power3.out',
         onStart: () => {
           hoistedContainer = targetContainer;
         }
       });
-      seq.to(craneTrolleyGroup.position, { x: 0, duration: 1.2, ease: 'power3.out' }, '<');
-      seq.to(spreaderGroup.position, { y: centerStageY + 0.85 - 6.8, duration: 1.2, ease: 'power3.out' }, '<');
+      seq.to(targetContainer.rotation, {
+        y: 0, // Face square to camera when unboxing
+        duration: 1.15,
+        ease: 'power3.out'
+      }, '<');
+
+      seq.to(craneTrolleyGroup.position, { x: 0, duration: 1.15, ease: 'power3.out' }, '<');
+      seq.to(spreaderGroup.position, { y: centerStageY + 0.95 - 5.8, duration: 1.15, ease: 'power3.out' }, '<');
 
       // Realistic Pendulum Momentum Sway
       seq.to(targetContainer.rotation, {
-        z: 0.08,
-        duration: 0.4,
+        z: 0.06,
+        duration: 0.35,
         yoyo: true,
         repeat: 3,
         ease: 'sine.inOut'
       }, '<');
 
-      // Step 5: Swing Open 3D Double Doors in Perspective!
+      // Step 5: Swing Open 3D Double Doors in Full Perspective!
       seq.add(() => playTone(880));
       seq.to(targetContainer.userData.leftDoor.rotation, {
-        y: -Math.PI * 0.72,
-        duration: 0.85,
+        y: -Math.PI * 0.72, // Swing open 130 degrees to frame the content
+        duration: 0.8,
         ease: 'back.out(1.4)'
       });
       seq.to(targetContainer.userData.rightDoor.rotation, {
         y: Math.PI * 0.72,
-        duration: 0.85,
+        duration: 0.8,
         ease: 'back.out(1.4)'
       }, '<');
 
-      // Turn on Interior Spotlight & Light Up Detail HUD
+      // Turn on Interior Spotlight - Illuminating the Integrated Screen!
       seq.to(interiorPointLight, {
-        intensity: 2.8,
-        duration: 0.5,
+        intensity: 2.2,
+        duration: 0.4,
         onStart: () => {
-          interiorPointLight.position.set(0, centerStageY, centerStageZ + 0.2);
-          interiorPointLight.color.setHex(cfg.color);
+          interiorPointLight.position.set(0, centerStageY, centerStageZ + 0.4);
+          interiorPointLight.color.setHex(0xffffff);
         }
       }, '<');
-
-      seq.add(() => {
-        applyDetailData(cfg);
-        gsap.to(modal, { opacity: 1, x: 0, duration: 0.5, ease: 'power3.out' });
-      });
     }
 
     // Dynamic Cable Length Updater in Render Loop
@@ -739,164 +1131,181 @@
     }
 
     // ==========================================
-    // UI OVERLAY & INTERACTION LOGIC
+    // UI CONTROLS & EVENT BINDINGS
     // ==========================================
-    function applyDetailData(cfg) {
-      const sys = systems[activeSystemKey];
-      document.getElementById('detailCategory').innerText = cfg.cat;
-      document.getElementById('detailTitle').innerText = cfg.title;
-      document.getElementById('detailDesc').innerText = cfg.desc;
-      document.getElementById('detailMetaKey').innerText = cfg.metaKey;
-      document.getElementById('detailMetaVal').innerText = cfg.metaVal;
-      document.getElementById('detailCtaText').innerText = cfg.cta;
-
-      const ctaBtn = document.getElementById('detailCta');
-      ctaBtn.style.backgroundColor = sys.accentHex;
-      if (sys.accentHex === '#05D585') {
-        ctaBtn.style.color = '#050608';
-      } else {
-        ctaBtn.style.color = '#ffffff';
-      }
-
-      document.getElementById('detailDot').style.backgroundColor = sys.accentHex;
-      document.getElementById('detailStatusBadge').style.color = sys.accentHex;
-      document.getElementById('detailStatusBadge').style.borderColor = sys.accentHex;
-    }
-
     function renderDockButtons() {
-      const container = document.getElementById('dockButtons');
-      container.innerHTML = '';
+      const row = document.getElementById('dockButtons');
+      row.innerHTML = '';
       const items = systems[activeSystemKey].containers;
 
-      items.forEach((item, idx) => {
+      items.forEach((c, idx) => {
         const btn = document.createElement('button');
-        btn.id = `dockBtn-${idx}`;
-        btn.className = `px-3.5 py-2 rounded-xl border text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-300 shadow-xl cursor-pointer ${idx === 0 ? 'scale-105 border-white bg-white/25 text-white' : 'border-white/15 bg-black/40 text-white/70 hover:text-white'}`;
-        btn.innerHTML = `<span class="inline-block w-2 h-2 rounded-full mr-1.5" style="background:${item.hex}"></span>${item.label}`;
-        btn.onclick = () => hoist3DContainer(idx);
-        container.appendChild(btn);
+        btn.className = `px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all duration-300 flex items-center gap-1.5 cursor-pointer shadow-md ${
+          idx === currentContainerIdx 
+            ? 'bg-white text-stone-950 scale-105 ring-2 ring-white/60' 
+            : 'bg-black/50 text-white/80 hover:text-white hover:bg-black/70 border border-white/20'
+        }`;
+        btn.innerHTML = `<span class="w-2 h-2 rounded-full" style="background-color: ${c.hex}"></span><span>${c.label}</span>`;
+        btn.onclick = () => {
+          playTone(480);
+          hoist3DContainer(idx);
+        };
+        row.appendChild(btn);
       });
     }
 
     function updateButtonStates(activeIdx) {
-      document.querySelectorAll('#dockButtons button').forEach((b, i) => {
+      const buttons = document.querySelectorAll('#dockButtons button');
+      buttons.forEach((btn, i) => {
         if (i === activeIdx) {
-          b.className = 'px-3.5 py-2 rounded-xl border text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-300 shadow-xl cursor-pointer scale-105 border-white bg-white/25 text-white ring-2 ring-white/40';
+          btn.className = 'px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all duration-300 flex items-center gap-1.5 cursor-pointer shadow-md bg-white text-stone-950 scale-105 ring-2 ring-white/60';
         } else {
-          b.className = 'px-3.5 py-2 rounded-xl border text-xs font-mono uppercase tracking-wider font-semibold transition-all duration-300 shadow-xl cursor-pointer border-white/15 bg-black/40 text-white/70 hover:text-white';
+          btn.className = 'px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all duration-300 flex items-center gap-1.5 cursor-pointer shadow-md bg-black/50 text-white/80 hover:text-white hover:bg-black/70 border border-white/20';
         }
       });
     }
 
-    // Switch Industry System
-    function switchMode(mode) {
-      if (mode === activeSystemKey) return;
-      activeSystemKey = mode;
-      const sys = systems[mode];
+    // Switch Vertical Mode
+    function switchMode(key) {
+      if (!systems[key] || isKinematicRunning) return;
+      activeSystemKey = key;
+      const sys = systems[key];
 
-      // Update Nav Buttons
-      document.querySelectorAll('header button').forEach(b => {
-        b.className = 'px-4 py-2 rounded-full text-white/70 hover:text-white transition cursor-pointer';
-      });
-      document.getElementById(`btn-${mode}`).className = 'px-4 py-2 rounded-full bg-white text-stone-950 font-bold transition shadow-sm cursor-pointer';
+      // Update Header & Controls
+      document.getElementById('hudBadge').innerHTML = sys.icon;
+      document.getElementById('hudTitle').firstElementChild.innerText = sys.title.toUpperCase();
+      document.getElementById('hudSubtitle').innerHTML = sys.sub;
 
-      // Update HUD
-      document.getElementById('hudBadge').innerText = sys.icon;
-      document.getElementById('hudTitle').querySelector('span').innerText = sys.title;
-      document.getElementById('hudSubtitle').innerText = sys.sub;
+      // Update Giant Background Watermark
+      const watermark = document.getElementById('watermarkText');
+      watermark.innerText = sys.watermark;
+      watermark.style.fontFamily = sys.watermarkFont === 'Cinzel' ? 'Cinzel, serif' : 'Syne, sans-serif';
+      watermark.style.color = sys.watermarkColor;
 
-      // Update 60/30/10 Ratio Visualizer
+      // Update Body Background Color
+      document.body.style.backgroundColor = '#' + sys.skyColor.toString(16).padStart(6, '0');
+      groundMat.color.setHex(sys.groundColor);
+
+      // Update 60/30/10 Ratio Colors
       document.getElementById('ratio60').style.backgroundColor = sys.ratio60;
       document.getElementById('ratio10').style.backgroundColor = sys.ratio10;
       document.getElementById('ratio10Label').style.color = sys.ratio10;
+      document.getElementById('ratio10Label').innerText = '10% ' + sys.accentHex;
 
-      // Update Three.js Background & Fog
-      scene.background.setHex(sys.skyColor);
-      scene.fog.color.setHex(sys.skyColor);
-
-      initializeContainers();
-      hoist3DContainer(0, true);
-    }
-
-    // Audio Feedback
-    function playTone(freq) {
-      try {
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        if (!AudioCtx) return;
-        const ctx = new AudioCtx();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.frequency.setValueAtTime(freq, ctx.currentTime);
-        gain.gain.setValueAtTime(0.06, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.3);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.3);
-      } catch(e) {}
-    }
-
-    function handleCtaClick() {
-      const cfg = systems[activeSystemKey].containers[currentContainerIdx];
-      playTone(1080);
-      alert(`[${systems[activeSystemKey].title}]\nAction Triggered for: ${cfg.title}\n"${cfg.cta}"`);
-    }
-
-    // Raycasting for direct 3D Container Clicks
-    const raycaster = new THREE.Raycaster();
-    const mouseCoord = new THREE.Vector2();
-
-    window.addEventListener('click', e => {
-      mouseCoord.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouseCoord.y = -(e.clientY / window.innerHeight) * 2 + 1;
-      raycaster.setFromCamera(mouseCoord, camera);
-
-      const intersects = raycaster.intersectObjects(DOCK_CONTAINERS, true);
-      if (intersects.length > 0) {
-        let root = intersects[0].object;
-        while (root.parent && !root.userData.config) {
-          root = root.parent;
+      // Button styles in header
+      ['debbie', 'goshwara', 'horlogerie'].forEach(k => {
+        const btn = document.getElementById('btn-' + k);
+        if (k === key) {
+          btn.className = 'px-4 py-2 rounded-full bg-white text-stone-950 font-bold transition shadow-sm cursor-pointer';
+        } else {
+          btn.className = 'px-4 py-2 rounded-full text-white/70 hover:text-white transition cursor-pointer';
         }
-        if (root && root.userData.index !== undefined) {
-          hoist3DContainer(root.userData.index);
+      });
+
+      // Reset Hoisted container
+      hoistedContainer = null;
+      craneTrolleyGroup.position.set(0, 5.8, 0);
+      spreaderGroup.position.set(0, -2.1, 0);
+
+      // Re-initialize Containers with new textures
+      initializeContainers();
+
+      // Automatically hoist first container
+      setTimeout(() => {
+        hoist3DContainer(0, true);
+      }, 350);
+    }
+
+    // Raycasting for Direct 3D Container Clicks
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    window.addEventListener('click', (e) => {
+      // Ignore clicks on HUD or controls
+      if (e.target.closest('header') || e.target.closest('footer') || e.target.closest('#pipelineModal')) return;
+
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+
+      // Check click on hoisted container (open CTA or re-trigger)
+      if (hoistedContainer) {
+        const hoistedHits = raycaster.intersectObjects(hoistedContainer.children, true);
+        if (hoistedHits.length > 0) {
+          const cfg = hoistedContainer.userData.config;
+          if (cfg.link && cfg.link !== '#') {
+            window.open(cfg.link, '_blank');
+          } else {
+            playTone(880, 'sine', 0.15);
+          }
+          return;
+        }
+      }
+
+      // Check clicks on dock containers
+      for (let i = 0; i < DOCK_CONTAINERS.length; i++) {
+        const c = DOCK_CONTAINERS[i];
+        if (c === hoistedContainer) continue;
+        const hits = raycaster.intersectObjects(c.children, true);
+        if (hits.length > 0) {
+          playTone(480);
+          hoist3DContainer(i);
+          break;
         }
       }
     });
 
+    // Keyboard navigation (Left / Right / Enter)
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        const next = (currentContainerIdx + 1) % DOCK_CONTAINERS.length;
+        hoist3DContainer(next);
+      } else if (e.key === 'ArrowLeft') {
+        const prev = (currentContainerIdx - 1 + DOCK_CONTAINERS.length) % DOCK_CONTAINERS.length;
+        hoist3DContainer(prev);
+      } else if (e.key === 'Enter' && hoistedContainer) {
+        const cfg = hoistedContainer.userData.config;
+        if (cfg.link && cfg.link !== '#') window.open(cfg.link, '_blank');
+      }
+    });
+
+    // Window Resize Handler
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
     // ==========================================
-    // MAIN 60FPS ANIMATION LOOP
+    // MAIN ANIMATION LOOP
     // ==========================================
     let clock = new THREE.Clock();
 
     function animate() {
       requestAnimationFrame(animate);
-      const delta = clock.getDelta();
-      const time = clock.getElapsedTime();
+      const elapsed = clock.getElapsedTime();
 
-      // Camera Smooth Parallax
-      camera.position.x += (targetCamX - camera.position.x) * 0.05;
-      camera.position.y += (targetCamY - camera.position.y) * 0.05;
-      camera.lookAt(0, 0.6, 0);
-
-      // Warning Beacon Pulse
-      beacon.rotation.y += delta * 5;
-
-      // Update Cable Ropes & Spotlight
+      // Dynamic Cable Rigging
       updateCables();
 
-      // Gemstone Float & Rotation inside hoisted container
-      if (hoistedContainer && hoistedContainer.userData.jewel) {
-        hoistedContainer.userData.jewel.rotation.y += delta * 0.8;
-        hoistedContainer.userData.jewel.rotation.x = Math.sin(time * 2) * 0.15;
+      // Idle Hoist Levitation & Gentle Sway
+      if (hoistedContainer && !isKinematicRunning) {
+        hoistedContainer.position.y = 0.4 + Math.sin(elapsed * 1.8) * 0.04;
+        spreaderGroup.position.y = hoistedContainer.position.y + 0.95 - 5.8;
       }
 
       renderer.render(scene, camera);
     }
 
-    // Boot Sequence
+    // Startup Initialization
     initializeContainers();
-    hoist3DContainer(0, true);
     animate();
+
+    // Automatically hoist Container 1 ('THE WORK') on launch
+    setTimeout(() => {
+      hoist3DContainer(1, true);
+    }, 600);
   </script>
+
 </body>
 </html>
