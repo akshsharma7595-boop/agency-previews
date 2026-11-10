@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Awwwards 3D Kinematic Crane Operating System & Unboxing Studio</title>
+  <title>Awwwards 3D Kinematic Crane Operating System</title>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -62,7 +62,7 @@
       text-align: center;
       white-space: nowrap;
       user-select: none;
-      transform: translateY(5%);
+      transform: translateY(12%);
       transition: all 0.8s ease;
     }
 
@@ -577,23 +577,32 @@
     const corrugatedBumpTex = createCorrugatedBumpMap();
 
     // 2. Door Decal Texture Generator (Clean, Stamped White Typography)
-    function createDoorTextTexture(text, isLeft) {
+    function createDoorTextTexture(text, isLeft, baseColorHex) {
       const c = document.createElement('canvas');
       c.width = 512;
       c.height = 512;
       const ctx = c.getContext('2d');
-      ctx.clearRect(0, 0, 512, 512);
+      
+      // Base container color
+      ctx.fillStyle = baseColorHex;
+      ctx.fillRect(0, 0, 512, 512);
+
+      // Subtle door corrugated ribbing
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';
+      for (let x = 0; x < 512; x += 32) {
+        ctx.fillRect(x, 0, 16, 512);
+      }
 
       // Top Corner Stencil
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
       ctx.font = 'bold 22px "Space Grotesk", monospace';
       ctx.fillText(isLeft ? 'PORT-01 // DECK' : 'LATCH // LOCK', 36, 64);
 
       // Main Bold Stamped Typography (As seen in Debbie Reel)
-      ctx.font = '900 78px "Syne", "Space Grotesk", sans-serif';
+      ctx.font = '900 84px "Syne", "Space Grotesk", sans-serif';
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = isLeft ? 'left' : 'right';
-      ctx.fillText(text, isLeft ? 36 : 476, 275);
+      ctx.fillText(text, isLeft ? 40 : 472, 280);
 
       // Bottom Stencil Rules
       ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
@@ -611,16 +620,16 @@
       const ctx = c.getContext('2d');
 
       // Sleek Dark Cockpit Background
-      ctx.fillStyle = '#0F131A';
+      ctx.fillStyle = '#0B0F19';
       ctx.fillRect(0, 0, 1024, 640);
 
       // Inner Hairline Border
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-      ctx.lineWidth = 3;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.lineWidth = 4;
       ctx.strokeRect(20, 20, 984, 600);
 
       // Subtle Background Grid
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
       ctx.lineWidth = 1;
       for (let x = 60; x < 980; x += 80) {
         ctx.beginPath(); ctx.moveTo(x, 20); ctx.lineTo(x, 620); ctx.stroke();
@@ -629,33 +638,33 @@
       // 1. Category Tag with Glow Dot
       ctx.fillStyle = accentColorHex;
       ctx.beginPath();
-      ctx.arc(60, 75, 7, 0, Math.PI * 2);
+      ctx.arc(60, 75, 8, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.font = 'bold 22px "Space Grotesk", monospace';
+      ctx.font = 'bold 24px "Space Grotesk", monospace';
       ctx.fillStyle = accentColorHex;
       ctx.textAlign = 'left';
-      ctx.fillText(cfg.cat, 78, 83);
+      ctx.fillText(cfg.cat, 82, 83);
 
       // Registry Serial Right
       ctx.font = 'bold 18px "Space Grotesk", monospace';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
       ctx.textAlign = 'right';
       ctx.fillText('CRANE-UNBOX // 3D-OK', 960, 83);
 
       // Divider Line
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
       ctx.fillRect(60, 108, 904, 2);
 
-      // 2. Main Title (Hi, I'm Debbie / Selected Case Studies)
-      ctx.font = '900 52px "Syne", "Plus Jakarta Sans", sans-serif';
+      // 2. Main Title (Hi, I'm Debbie / Selected Flagships)
+      ctx.font = '900 54px "Syne", "Plus Jakarta Sans", sans-serif';
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'left';
       ctx.fillText(cfg.title, 60, 185);
 
       // 3. Body Description (Wrapped Elegantly)
       ctx.font = '400 24px "Plus Jakarta Sans", sans-serif';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.88)';
       
       const words = cfg.desc.split(' ');
       let line = '';
@@ -676,11 +685,10 @@
 
       // 4. Key Metric / Badge Pill
       const badgeY = 385;
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
-      ctx.roundRect ? ctx.roundRect(60, badgeY, 360, 48, 24) : ctx.fillRect(60, badgeY, 360, 48);
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-      ctx.stroke();
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+      ctx.fillRect(60, badgeY, 360, 48);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+      ctx.strokeRect(60, badgeY, 360, 48);
 
       ctx.font = 'bold 18px "Space Grotesk", monospace';
       ctx.fillStyle = '#FFFFFF';
@@ -694,8 +702,7 @@
       
       // Button Background with Accent Color
       ctx.fillStyle = accentColorHex;
-      ctx.roundRect ? ctx.roundRect(60, btnY, btnW, btnH, 34) : ctx.fillRect(60, btnY, btnW, btnH);
-      ctx.fill();
+      ctx.fillRect(60, btnY, btnW, btnH);
 
       // Button Text
       ctx.font = '900 22px "Syne", "Space Grotesk", sans-serif';
@@ -705,9 +712,9 @@
 
       // Secondary Text / Tip
       ctx.font = '400 17px "Space Grotesk", monospace';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
       ctx.textAlign = 'left';
-      ctx.fillText('Click inside or press Enter to trigger action', 510, btnY + 42);
+      ctx.fillText('Click inside container or press Enter to launch', 510, btnY + 42);
 
       const tex = new THREE.CanvasTexture(c);
       tex.minFilter = THREE.LinearFilter;
@@ -812,83 +819,85 @@
     scene.add(craneTrolleyGroup);
 
     // ==========================================
-    // 3D CONTAINERS WITH INTEGRATED SCREENS
+    // 3D CONTAINERS (REAL HOLLOW 5-WALLED ROOM)
     // ==========================================
     const DOCK_CONTAINERS = [];
     const containerWidth = 2.8;
     const containerHeight = 1.6;
     const containerDepth = 1.4;
+    const wallThick = 0.04;
 
     function build3DContainer(config, index) {
       const group = new THREE.Group();
       group.userData = { config, index };
 
-      // Outer Container Box Shell
-      const boxMat = new THREE.MeshStandardMaterial({
+      // Outer Container Shell Material
+      const wallMat = new THREE.MeshStandardMaterial({
         color: config.color,
         roughness: 0.38,
-        metalness: 0.35,
+        metalness: 0.25,
         bumpMap: corrugatedBumpTex,
-        bumpScale: 0.045
+        bumpScale: 0.035
       });
-      const boxGeo = new THREE.BoxGeometry(containerWidth, containerHeight, containerDepth);
-      const boxMesh = new THREE.Mesh(boxGeo, boxMat);
-      boxMesh.castShadow = true;
-      boxMesh.receiveShadow = true;
-      group.add(boxMesh);
 
-      // Steel Corner Castings & Reinforced Frame
-      const trimMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.4, metalness: 0.8 });
-      for (const [tx, ty, tz] of [
-        [-1, -1, -1], [1, -1, -1], [-1, 1, -1], [1, 1, -1],
-        [-1, -1, 1], [1, -1, 1], [-1, 1, 1], [1, 1, 1]
-      ]) {
-        const corner = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.18, 0.18), trimMat);
-        corner.position.set((tx * containerWidth) / 2, (ty * containerHeight) / 2, (tz * containerDepth) / 2);
-        group.add(corner);
-      }
+      // 1. Back Wall
+      const backWall = new THREE.Mesh(new THREE.BoxGeometry(containerWidth, containerHeight, wallThick), wallMat);
+      backWall.position.set(0, 0, -containerDepth / 2 + wallThick / 2);
+      backWall.castShadow = true;
+      backWall.receiveShadow = true;
+      group.add(backWall);
 
-      // Hollow Interior Cavity (Deep Graphite Studio Interior)
-      const interiorMat = new THREE.MeshStandardMaterial({
-        color: 0x0a0d14,
-        roughness: 0.9,
-        metalness: 0.1
-      });
-      const interiorGeo = new THREE.BoxGeometry(containerWidth - 0.12, containerHeight - 0.12, containerDepth - 0.08);
-      const interiorMesh = new THREE.Mesh(interiorGeo, interiorMat);
-      interiorMesh.position.z = 0.04;
-      group.add(interiorMesh);
+      // 2. Top Wall
+      const topWall = new THREE.Mesh(new THREE.BoxGeometry(containerWidth, wallThick, containerDepth), wallMat);
+      topWall.position.set(0, containerHeight / 2 - wallThick / 2, 0);
+      topWall.castShadow = true;
+      group.add(topWall);
 
-      // Inner Presentation Screen Plane
+      // 3. Bottom Wall
+      const botWall = new THREE.Mesh(new THREE.BoxGeometry(containerWidth, wallThick, containerDepth), wallMat);
+      botWall.position.set(0, -containerHeight / 2 + wallThick / 2, 0);
+      botWall.receiveShadow = true;
+      group.add(botWall);
+
+      // 4. Left Wall
+      const leftWall = new THREE.Mesh(new THREE.BoxGeometry(wallThick, containerHeight, containerDepth), wallMat);
+      leftWall.position.set(-containerWidth / 2 + wallThick / 2, 0, 0);
+      leftWall.castShadow = true;
+      group.add(leftWall);
+
+      // 5. Right Wall
+      const rightWall = new THREE.Mesh(new THREE.BoxGeometry(wallThick, containerHeight, containerDepth), wallMat);
+      rightWall.position.set(containerWidth / 2 - wallThick / 2, 0, 0);
+      rightWall.castShadow = true;
+      group.add(rightWall);
+
+      // 6. Presentation Screen Plane (Directly mounted on the interior back wall, 100% UNBURIED & VISIBLE!)
       const sys = systems[activeSystemKey];
       const screenTex = createInteriorScreenTexture(config, sys.accentHex);
       const screenMat = new THREE.MeshBasicMaterial({
         map: screenTex,
         transparent: false
       });
-      const screenGeo = new THREE.PlaneGeometry(containerWidth - 0.22, containerHeight - 0.22);
+      const screenGeo = new THREE.PlaneGeometry(containerWidth - 0.2, containerHeight - 0.2);
       const screenMesh = new THREE.Mesh(screenGeo, screenMat);
-      screenMesh.position.set(0, 0, 0.08); // Directly on back wall
+      screenMesh.position.set(0, 0, -containerDepth / 2 + wallThick + 0.02); // Just in front of back wall!
       group.add(screenMesh);
       group.userData.screenMesh = screenMesh;
       group.userData.screenMat = screenMat;
 
       // Double 3D Hinged Doors (Swinging Open Outwards!)
-      const doorHalfW = (containerWidth - 0.08) / 2;
-      const doorH = containerHeight - 0.08;
-      const doorThickness = 0.045;
+      const doorHalfW = (containerWidth - 0.06) / 2;
+      const doorH = containerHeight - 0.06;
+      const doorThickness = 0.04;
 
       // Left Door Pivot
       const leftPivot = new THREE.Group();
-      leftPivot.position.set(-containerWidth / 2 + 0.04, 0, containerDepth / 2);
+      leftPivot.position.set(-containerWidth / 2 + 0.02, 0, containerDepth / 2);
 
-      const leftDecal = createDoorTextTexture(config.codeL, true);
+      const leftDecal = createDoorTextTexture(config.codeL, true, config.hex);
       const doorLeftMat = new THREE.MeshStandardMaterial({
-        color: config.color,
         roughness: 0.38,
-        metalness: 0.35,
-        bumpMap: corrugatedBumpTex,
-        bumpScale: 0.045,
+        metalness: 0.25,
         map: leftDecal
       });
       const doorLeftMesh = new THREE.Mesh(new THREE.BoxGeometry(doorHalfW, doorH, doorThickness), doorLeftMat);
@@ -900,15 +909,12 @@
 
       // Right Door Pivot
       const rightPivot = new THREE.Group();
-      rightPivot.position.set(containerWidth / 2 - 0.04, 0, containerDepth / 2);
+      rightPivot.position.set(containerWidth / 2 - 0.02, 0, containerDepth / 2);
 
-      const rightDecal = createDoorTextTexture(config.codeR, false);
+      const rightDecal = createDoorTextTexture(config.codeR, false, config.hex);
       const doorRightMat = new THREE.MeshStandardMaterial({
-        color: config.color,
         roughness: 0.38,
-        metalness: 0.35,
-        bumpMap: corrugatedBumpTex,
-        bumpScale: 0.045,
+        metalness: 0.25,
         map: rightDecal
       });
       const doorRightMesh = new THREE.Mesh(new THREE.BoxGeometry(doorHalfW, doorH, doorThickness), doorRightMat);
@@ -921,14 +927,14 @@
       return group;
     }
 
-    // Dynamic Isometric Staggered Dock Layout (Matching Debbie Reel!)
+    // Dynamic Isometric Staggered Dock Layout (Generously spaced!)
     const dockCoordinates = [
-      { x: -5.6, y: -1.8, z: 0.7, rotY: -0.14 }, // Far Left (THE WORK)
-      { x: -3.4, y: -1.8, z: -0.1, rotY: 0.08 }, // Mid Left (WHAT I DO)
-      { x: -1.1, y: -1.8, z: 0.6, rotY: -0.05 }, // Center Left (ABOUT ME)
-      { x: 1.3, y: -1.8, z: 0.0, rotY: 0.09 },  // Center Right (PROCESS)
-      { x: 3.6, y: -1.8, z: 0.7, rotY: -0.08 }, // Mid Right (SAY HELLO)
-      { x: 5.8, y: -1.8, z: 0.1, rotY: 0.06 }   // Far Right (TOOL KIT)
+      { x: -6.0, y: -1.8, z: 0.6, rotY: -0.12 }, // Far Left (THE WORK)
+      { x: -3.6, y: -1.8, z: -0.2, rotY: 0.08 }, // Mid Left (WHAT I DO)
+      { x: -1.2, y: -1.8, z: 0.5, rotY: -0.05 }, // Center Left (ABOUT ME)
+      { x: 1.2, y: -1.8, z: -0.1, rotY: 0.08 },  // Center Right (PROCESS)
+      { x: 3.6, y: -1.8, z: 0.6, rotY: -0.08 }, // Mid Right (SAY HELLO)
+      { x: 6.0, y: -1.8, z: 0.0, rotY: 0.06 }   // Far Right (TOOL KIT)
     ];
 
     function initializeContainers() {
@@ -940,7 +946,7 @@
 
       items.forEach((cfg, idx) => {
         const container = build3DContainer(cfg, idx);
-        const coord = dockCoordinates[idx] || { x: (idx - 2.5) * 2.8, y: -1.8, z: 0, rotY: 0 };
+        const coord = dockCoordinates[idx] || { x: (idx - 2.5) * 3.0, y: -1.8, z: 0, rotY: 0 };
 
         container.position.set(coord.x, coord.y, coord.z);
         container.rotation.y = coord.rotY;
