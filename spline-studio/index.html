@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flagship Spline 3D WebGL Studio & Runtime API Bridge</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Official Spline WebGL Viewer & Runtime -->
+  <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
+  <!-- GSAP for Smooth UI Transitions -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      overflow: hidden;
+      user-select: none;
+      background: #0B0E14;
+      color: #FFFFFF;
+      transition: background-color 0.8s ease;
+    }
+    .font-syne { font-family: 'Syne', sans-serif; }
+    .font-tech { font-family: 'Space Grotesk', monospace; }
+
+    #splineContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    spline-viewer {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Giant Editorial Watermark */
+    #watermarkPlate {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .watermark-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 900;
+      font-size: clamp(6rem, 18vw, 18rem);
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.04);
+      text-align: center;
+      white-space: nowrap;
+      user-select: none;
+      transform: translateY(8%);
+    }
+
+    /* Studio Atmospheric Glow */
+    .studio-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.12) 0%, transparent 65%);
+      z-index: 5;
+    }
+  </style>
+</head>
+<body class="w-screen h-screen relative select-none bg-[#0B0E14]">
+
+  <!-- ========================================== -->
+  <!-- 1. EDITORIAL BACKGROUND WATERMARK          -->
+  <!-- ========================================== -->
+  <div id="watermarkPlate">
+    <div class="watermark-text" id="watermarkText">SPLINE 3D</div>
+  </div>
+  <div class="studio-glow"></div>
+
+  <!-- ========================================== -->
+  <!-- 2. SPLINE 3D INTERACTIVE CANVAS VIEWPORT   -->
+  <!-- ========================================== -->
+  <div id="splineContainer">
+    <spline-viewer id="activeSplineViewer" url="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" loading-anim-type="spinner-small-dark"></spline-viewer>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. TOP NAVIGATION & CONTROLS HUD           -->
+  <!-- ========================================== -->
+  <header class="absolute top-0 inset-x-0 z-30 px-6 py-5 flex items-center justify-between pointer-events-none">
+    
+    <!-- Branding & Live Status -->
+    <div class="flex items-center gap-3.5 pointer-events-auto">
+      <div class="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-xl text-blue-400 shadow-xl">
+        &#x2728;
+      </div>
+      <div>
+        <h1 class="font-syne text-lg tracking-tight uppercase font-extrabold text-white flex items-center gap-2">
+          <span>SPLINE 3D RUNTIME ENGINE</span>
+          <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-tech font-bold flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>API ACTIVE</span>
+          </span>
+        </h1>
+        <p class="text-[11px] font-mono text-white/60">Hybrid Architecture &bull; Zero Monthly Hosting Fees</p>
+      </div>
+    </div>
+
+    <!-- Scene Switcher Presets -->
+    <div class="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-black/50 backdrop-blur-xl border border-white/20 pointer-events-auto shadow-2xl text-xs font-mono">
+      <button onclick="loadPresetScene('cube')" id="btn-scene-cube" class="px-4 py-2 rounded-full bg-white text-stone-950 font-bold transition shadow-sm cursor-pointer">
+        &#x1F9CA; Tactile Cube
+      </button>
+      <button onclick="loadPresetScene('geometry')" id="btn-scene-geometry" class="px-4 py-2 rounded-full text-white/70 hover:text-white transition cursor-pointer">
+        &#x1FA90; Kinetic Sphere
+      </button>
+      <a href="../crane-studio/" class="px-4 py-2 rounded-full text-white/70 hover:text-white transition cursor-pointer flex items-center gap-1">
+        <span>&#x1F6A2; Crane Unboxing</span>
+      </a>
+    </div>
+
+    <!-- Diego 60/30/10 Ratio & Custom Scene Loader -->
+    <div class="flex items-center gap-3 pointer-events-auto">
+      
+      <!-- 60/30/10 Visual Indicator -->
+      <div class="hidden lg:flex items-center gap-3 px-4 py-2 rounded-full bg-black/50 backdrop-blur-xl border border-white/20 text-xs font-mono">
+        <span class="text-white/60">60/30/10 Rule:</span>
+        <div class="flex items-center h-2.5 w-24 rounded-full overflow-hidden border border-white/30">
+          <span class="h-full w-[60%] bg-[#0B0E14]" title="60% Studio Base"></span>
+          <span class="h-full w-[30%] bg-white/20" title="30% Glass Deck"></span>
+          <span class="h-full w-[10%] bg-[#EF4444] animate-pulse" title="10% Action Accent"></span>
+        </div>
+        <span class="text-[11px] font-bold text-[#EF4444]">10% Accent</span>
+      </div>
+
+      <!-- Paste Custom Spline URL Button -->
+      <button onclick="openCustomUrlModal()" class="px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition shadow-lg flex items-center gap-1.5 cursor-pointer">
+        <span>&#x2795;</span>
+        <span>Load Your Spline URL</span>
+      </button>
+
+    </div>
+
+  </header>
+
+  <!-- ========================================== -->
+  <!-- 4. LIVE 3D INTERACTION DOSSIER (LEFT CARD) -->
+  <!-- ========================================== -->
+  <aside class="absolute left-8 top-1/2 -translate-y-1/2 z-30 w-80 sm:w-88 rounded-3xl bg-black/60 backdrop-blur-2xl border border-white/15 p-6 shadow-2xl pointer-events-auto hidden md:block">
+    
+    <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-ping"></span>
+        <span class="text-[11px] font-mono tracking-widest text-white/80 font-bold uppercase">SPLINE RUNTIME API</span>
+      </div>
+      <span class="text-[10px] font-mono text-emerald-400 font-semibold">60 FPS WEBGL</span>
+    </div>
+
+    <h2 class="font-syne text-2xl font-bold text-white mb-2" id="sceneTitle">
+      Tactile Cyber Cube
+    </h2>
+    <p class="text-xs text-stone-300 font-light leading-relaxed mb-5" id="sceneDescription">
+      Interact directly with the 3D model in mid-air using your mouse or touch. Notice the soft ambient occlusion, beveled edges, and tactile mouse physics rendered by the Spline WebGL engine.
+    </p>
+
+    <!-- Real-time API Event Monitor -->
+    <div class="rounded-2xl bg-white/5 border border-white/10 p-3.5 mb-5 font-mono text-[11px] space-y-1.5">
+      <div class="text-white/40 uppercase tracking-widest text-[9.5px]">Live API Telemetry</div>
+      <div class="text-emerald-400 flex items-center gap-1.5" id="telemetryStatus">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        <span>Spline WebGL Bridge Ready</span>
+      </div>
+      <div class="text-white/70 truncate text-[10px]" id="telemetryLastEvent">
+        Scene: 6Wq1Q7YGyM-iab9i
+      </div>
+    </div>
+
+    <!-- 10% High-Contrast Action Button -->
+    <button onclick="trigger3DAction()" class="w-full py-3.5 rounded-2xl bg-[#EF4444] hover:bg-[#DC2626] text-white font-bold text-xs font-mono uppercase tracking-widest shadow-xl transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
+      <span>Trigger 3D Interaction &rarr;</span>
+    </button>
+
+  </aside>
+
+  <!-- ========================================== -->
+  <!-- 5. BOTTOM API ACTION DECK                  -->
+  <!-- ========================================== -->
+  <footer class="absolute bottom-6 inset-x-0 z-30 px-6 flex flex-col items-center pointer-events-none">
+    
+    <div class="mb-3 px-4 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[11px] font-mono uppercase tracking-widest text-white shadow-lg">
+      &#x2726; Click and drag the 3D model to rotate &bull; Double click to inspect &bull; API active &#x2726;
+    </div>
+
+    <!-- Quick Action Deck -->
+    <div class="flex flex-wrap items-center justify-center gap-2 pointer-events-auto">
+      <button onclick="trigger3DAction()" class="px-4 py-2 rounded-full text-xs font-mono font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition shadow-md flex items-center gap-1.5 cursor-pointer">
+        <span>&#x1F504;</span>
+        <span>Simulate 3D Interaction</span>
+      </button>
+
+      <button onclick="openCustomUrlModal()" class="px-4 py-2 rounded-full text-xs font-mono font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition shadow-md flex items-center gap-1.5 cursor-pointer">
+        <span>&#x1F4BE;</span>
+        <span>Import Spline File</span>
+      </button>
+
+      <a href="../goshwara/" class="px-4 py-2 rounded-full text-xs font-mono font-bold bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 backdrop-blur-md transition shadow-md flex items-center gap-1.5">
+        <span>&#x1F48E;</span>
+        <span>Goshwara Haute Joaillerie</span>
+      </a>
+
+      <a href="../crane-studio/" class="px-4 py-2 rounded-full text-xs font-mono font-bold bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/40 backdrop-blur-md transition shadow-md flex items-center gap-1.5">
+        <span>&#x1F6A2;</span>
+        <span>Debbie Crane Studio</span>
+      </a>
+    </div>
+
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- 6. LOAD CUSTOM SPLINE URL MODAL                          -->
+  <!-- ======================================================== -->
+  <div id="customUrlModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-xl flex items-center justify-center p-6 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="max-w-lg w-full bg-stone-900 border border-white/20 rounded-3xl p-8 shadow-2xl text-white relative">
+      
+      <button onclick="closeCustomUrlModal()" class="absolute top-6 right-6 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition cursor-pointer">
+        &#x2715;
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-2xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 text-lg">
+          &#x1F3A8;
+        </div>
+        <div>
+          <h3 class="text-lg font-bold font-syne">Load Any Spline 3D Scene</h3>
+          <p class="text-xs text-stone-400 font-mono">Live WebGL API Injection</p>
+        </div>
+      </div>
+
+      <p class="text-xs text-stone-300 leading-relaxed font-sans mb-5">
+        Created a 3D scene in <a href="https://spline.design" target="_blank" class="text-blue-400 underline font-semibold">spline.design</a>? Click <strong>Export &rarr; Code &rarr; Public URL</strong>, copy the <code class="text-emerald-400 font-mono">.splinecode</code> link, and paste it below to render live in this website!
+      </p>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-[11px] font-mono uppercase tracking-wider text-stone-400 mb-1.5">Spline Scene Public URL (.splinecode)</label>
+          <input type="text" id="customSplineInput" placeholder="https://prod.spline.design/YOUR_SCENE_ID/scene.splinecode" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white font-mono text-xs focus:outline-none focus:border-blue-400 transition">
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <button onclick="closeCustomUrlModal()" class="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold font-mono transition cursor-pointer">
+            Cancel
+          </button>
+          <button onclick="applyCustomSplineUrl()" class="px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold font-mono uppercase tracking-wider transition shadow-lg cursor-pointer">
+            Inject & Render Live &rarr;
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 7. SPLINE RUNTIME & API CONTROL SCRIPT     -->
+  <!-- ========================================== -->
+  <script>
+    const PRESETS = {
+      cube: {
+        url: 'https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode',
+        title: 'Tactile Cyber Cube',
+        desc: 'Interact directly with the 3D model in mid-air using your mouse or touch. Notice the soft ambient occlusion, beveled edges, and tactile mouse physics rendered by the Spline WebGL engine.',
+        watermark: 'SPLINE 3D'
+      },
+      geometry: {
+        url: 'https://prod.spline.design/KFonZGtsoUXP-qx7/scene.splinecode',
+        title: 'Kinetic 3D Sphere & Geometry',
+        desc: 'Smooth spatial choreography with physics-driven spring mechanics. This scene demonstrates high-calibre tactile lighting and dynamic raycasting without writing a single line of shader code.',
+        watermark: 'KINETIC 3D'
+      }
+    };
+
+    let activePreset = 'cube';
+
+    // Audio Feedback
+    let audioCtx = null;
+    function playTone(freq, duration = 0.08) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    // Load Preset Scene
+    function loadPresetScene(key) {
+      if (!PRESETS[key]) return;
+      activePreset = key;
+      const preset = PRESETS[key];
+      playTone(540);
+
+      // Update UI
+      document.getElementById('sceneTitle').innerText = preset.title;
+      document.getElementById('sceneDescription').innerText = preset.desc;
+      document.getElementById('watermarkText').innerText = preset.watermark;
+      document.getElementById('telemetryLastEvent').innerText = 'Scene: ' + preset.url.split('/').slice(-2, -1)[0];
+
+      // Update Buttons
+      ['cube', 'geometry'].forEach(k => {
+        const btn = document.getElementById('btn-scene-' + k);
+        if (btn) {
+          if (k === key) {
+            btn.className = 'px-4 py-2 rounded-full bg-white text-stone-950 font-bold transition shadow-sm cursor-pointer';
+          } else {
+            btn.className = 'px-4 py-2 rounded-full text-white/70 hover:text-white transition cursor-pointer';
+          }
+        }
+      });
+
+      // Swap Viewer
+      const container = document.getElementById('splineContainer');
+      container.innerHTML = `<spline-viewer id="activeSplineViewer" url="${preset.url}" loading-anim-type="spinner-small-dark"></spline-viewer>`;
+      bindViewerEvents();
+    }
+
+    // Modal Handlers
+    function openCustomUrlModal() {
+      playTone(440);
+      const m = document.getElementById('customUrlModal');
+      m.classList.remove('pointer-events-none', 'opacity-0');
+    }
+
+    function closeCustomUrlModal() {
+      const m = document.getElementById('customUrlModal');
+      m.classList.add('pointer-events-none', 'opacity-0');
+    }
+
+    function applyCustomSplineUrl() {
+      const input = document.getElementById('customSplineInput');
+      const url = input.value.trim();
+      if (!url || !url.startsWith('http')) {
+        alert('Please enter a valid https://prod.spline.design/.../scene.splinecode URL');
+        return;
+      }
+
+      playTone(880);
+      closeCustomUrlModal();
+
+      document.getElementById('sceneTitle').innerText = 'Custom Spline Asset';
+      document.getElementById('sceneDescription').innerText = 'Live scene injected from: ' + url;
+      document.getElementById('watermarkText').innerText = 'CUSTOM 3D';
+      document.getElementById('telemetryLastEvent').innerText = 'Custom URL: ' + url.slice(0, 36) + '...';
+
+      const container = document.getElementById('splineContainer');
+      container.innerHTML = `<spline-viewer id="activeSplineViewer" url="${url}" loading-anim-type="spinner-small-dark"></spline-viewer>`;
+      bindViewerEvents();
+    }
+
+    // Trigger Programmatic 3D Interaction via API
+    function trigger3DAction() {
+      playTone(880, 0.15);
+      const viewer = document.getElementById('activeSplineViewer');
+      const status = document.getElementById('telemetryStatus');
+      status.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping"></span><span>API Trigger Dispatched</span>`;
+
+      // Try triggering Spline events on active viewer
+      if (viewer && typeof viewer.emitEvent === 'function') {
+        try {
+          viewer.emitEvent('mouseDown', 'Cube');
+          viewer.emitEvent('mouseUp', 'Cube');
+        } catch (e) {}
+      }
+
+      // Visual pulse on card
+      gsap.fromTo('#sceneTitle', { color: '#60A5FA' }, { color: '#FFFFFF', duration: 0.8 });
+
+      setTimeout(() => {
+        status.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span><span>Spline WebGL Bridge Ready</span>`;
+      }, 1500);
+    }
+
+    // Bind Viewer Lifecycle & Telemetry
+    function bindViewerEvents() {
+      const viewer = document.getElementById('activeSplineViewer');
+      if (!viewer) return;
+
+      viewer.addEventListener('load-complete', (e) => {
+        document.getElementById('telemetryStatus').innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span><span>Scene Mounted &bull; 60 FPS</span>`;
+      });
+
+      viewer.addEventListener('mousedown', (e) => {
+        playTone(320);
+        document.getElementById('telemetryLastEvent').innerText = 'User MouseDown in 3D Viewport';
+      });
+    }
+
+    // Initial Setup
+    window.addEventListener('DOMContentLoaded', () => {
+      bindViewerEvents();
+    });
+  </script>
+
+</body>
+</html>
