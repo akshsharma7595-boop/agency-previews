@@ -3,14 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Awwwards 3D Gantry Crane Studio & Dynamic 3D Unboxing</title>
+  <title>Awwwards 3D Kinematic Crane Operating System & Unboxing Studio</title>
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
   <!-- Three.js + GSAP for Real 3D WebGL Physics & Kinematics -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  
+  <!-- Premium Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -34,7 +40,7 @@
       display: block;
     }
 
-    /* Giant Background Typographic Plate (Debbie Reel Watermark) */
+    /* Giant Background Typographic Plate (Exact Debbie Reel Aesthetic) */
     #watermarkPlate {
       position: absolute;
       inset: 0;
@@ -48,25 +54,33 @@
     .watermark-text {
       font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
       font-weight: 900;
-      font-size: clamp(5.5rem, 16vw, 16rem);
-      line-height: 0.85;
+      font-size: clamp(6.5rem, 18vw, 19rem);
+      line-height: 0.82;
       letter-spacing: -0.04em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.92);
+      color: rgba(255, 255, 255, 0.94);
       text-align: center;
       white-space: nowrap;
       user-select: none;
-      transform: translateY(6%);
+      transform: translateY(5%);
       transition: all 0.8s ease;
     }
 
-    /* Subtle Atmospheric Studio Vignette */
+    /* Studio Atmospheric Lighting Vignette */
     .studio-vignette {
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: radial-gradient(circle at 50% 40%, transparent 40%, rgba(0, 0, 0, 0.28) 100%);
+      background: radial-gradient(circle at 50% 35%, transparent 45%, rgba(0, 0, 0, 0.22) 100%);
       z-index: 15;
+    }
+
+    /* Tactile Pill Buttons */
+    .pill-btn {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .pill-btn:hover {
+      transform: translateY(-2px);
     }
   </style>
 </head>
@@ -86,41 +100,33 @@
   <div class="studio-vignette"></div>
 
   <!-- ========================================== -->
-  <!-- 3. TOP NAVIGATION & CONTROLS HUD           -->
+  <!-- 3. TOP NAVIGATION & CRANE CONTROLLER HUD   -->
   <!-- ========================================== -->
   <header class="absolute top-0 inset-x-0 z-30 px-6 py-5 flex items-center justify-between pointer-events-none">
     
-    <!-- Branding / Portfolio Label -->
+    <!-- Branding / Logo Emblem -->
     <div class="flex items-center gap-3.5 pointer-events-auto">
       <div id="hudBadge" class="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-xl text-white shadow-lg">
-        &#x1F3D7;&#xFE0F;
+        &#x1F6A2;
       </div>
       <div>
         <h1 class="font-syne text-lg tracking-tight uppercase font-extrabold text-white flex items-center gap-2" id="hudTitle">
-          <span>DEBBIE CRANE STUDIO</span>
+          <span>FLAGSHIP CRANE OS</span>
           <span class="text-[9px] px-2 py-0.5 rounded-full bg-white/20 text-white border border-white/40 font-tech font-bold">TRUE 3D WEBGL</span>
         </h1>
-        <p class="text-[11px] font-mono text-white/80" id="hudSubtitle">Kinematic Crane Unboxing &bull; Interior Display Frame</p>
+        <p class="text-[11px] font-mono text-white/80" id="hudSubtitle">Inspired by @ui.debbie &bull; Physical 3D Unboxing</p>
       </div>
     </div>
 
-    <!-- Mode Switcher (Debbie / Goshwara / Horlogerie) -->
-    <div class="flex items-center gap-1.5 p-1 rounded-full bg-black/40 backdrop-blur-xl border border-white/25 pointer-events-auto shadow-2xl text-xs font-mono">
-      <button onclick="switchMode('debbie')" id="btn-debbie" class="px-4 py-2 rounded-full bg-white text-stone-950 font-bold transition shadow-sm cursor-pointer">
-        &#x1F6A2; Debbie Port
-      </button>
-      <button onclick="switchMode('goshwara')" id="btn-goshwara" class="px-4 py-2 rounded-full text-white/70 hover:text-white transition cursor-pointer">
-        &#x1F48E; Goshwara Vault
-      </button>
-      <button onclick="switchMode('horlogerie')" id="btn-horlogerie" class="px-4 py-2 rounded-full text-white/70 hover:text-white transition cursor-pointer">
-        &#x231A; Watch Safes
-      </button>
-    </div>
+    <!-- Center Navigation Tabs (Each Tab Drives the Crane Directly!) -->
+    <nav class="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-black/40 backdrop-blur-xl border border-white/25 pointer-events-auto shadow-2xl text-xs font-mono" id="topNavTabs">
+      <!-- Generated by JS -->
+    </nav>
 
-    <!-- Diego 60/30/10 Ratio Indicator & 3D Pipeline Explainer -->
+    <!-- Right Controls: 60/30/10 Ratio & Mode Switcher -->
     <div class="flex items-center gap-3 pointer-events-auto">
       
-      <!-- 60/30/10 Ratio Indicator -->
+      <!-- Diego's 60/30/10 Ratio Indicator -->
       <div class="hidden lg:flex items-center gap-3 px-4 py-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/25 text-xs font-mono text-white">
         <span class="text-white/70">60/30/10 Rule:</span>
         <div class="flex items-center h-2.5 w-24 rounded-full overflow-hidden border border-white/30">
@@ -131,29 +137,30 @@
         <span id="ratio10Label" class="text-[11px] font-bold text-[#EF4444]">10% Accent</span>
       </div>
 
-      <!-- Spline 3D Studio Bridge Link -->
-      <a href="../spline-studio/" class="px-3.5 py-2 rounded-full bg-blue-600 hover:bg-blue-500 backdrop-blur-md border border-white/30 text-white text-xs font-bold transition cursor-pointer flex items-center gap-1.5 shadow-md">
-        <span>&#x2728;</span>
-        <span class="hidden sm:inline">Spline 3D Studio</span>
-      </a>
-
-      <!-- 3D Pipeline Info Button -->
-      <button onclick="togglePipelineModal()" class="px-3.5 py-2 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/30 text-white text-xs font-medium transition cursor-pointer flex items-center gap-1.5 shadow-md">
-        <span>&#x2699;&#xFE0F;</span>
-        <span class="hidden sm:inline">3D Engine Pipeline</span>
-      </button>
+      <!-- Mode Switcher (Debbie / Goshwara / Horlogerie) -->
+      <div class="flex items-center gap-1 p-1 rounded-full bg-black/40 backdrop-blur-xl border border-white/25 text-xs font-mono">
+        <button onclick="switchMode('debbie')" id="btn-mode-debbie" class="px-3.5 py-1.5 rounded-full bg-white text-stone-950 font-bold transition cursor-pointer shadow-sm">
+          Debbie
+        </button>
+        <button onclick="switchMode('goshwara')" id="btn-mode-goshwara" class="px-3.5 py-1.5 rounded-full text-white/70 hover:text-white transition cursor-pointer">
+          Goshwara
+        </button>
+        <button onclick="switchMode('horlogerie')" id="btn-mode-horlogerie" class="px-3.5 py-1.5 rounded-full text-white/70 hover:text-white transition cursor-pointer">
+          Safes
+        </button>
+      </div>
 
     </div>
 
   </header>
 
   <!-- ========================================== -->
-  <!-- 4. BOTTOM DOCK CONTROLS (DIRECT HOIST)     -->
+  <!-- 4. BOTTOM DOCK CONTROLS & INSTRUCTIONS     -->
   <!-- ========================================== -->
   <footer class="absolute bottom-6 inset-x-0 z-30 px-6 flex flex-col items-center pointer-events-none">
     
-    <div class="mb-3 px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[11px] font-mono uppercase tracking-widest text-white shadow-lg">
-      &#x2726; Click any container directly on the dock, or select below to hoist &#x2726;
+    <div class="mb-3 px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[11px] font-mono uppercase tracking-widest text-white shadow-lg pointer-events-auto">
+      &#x2726; Click any container or tab to unbox &bull; Press Enter or click inside to launch &#x2726;
     </div>
 
     <!-- Quick Pill Selector Row -->
@@ -163,66 +170,20 @@
 
   </footer>
 
-  <!-- ======================================================== -->
-  <!-- 5. 3D PIPELINE EXPLAINER MODAL (SPLINE / BLENDER / THREE)-->
-  <!-- ======================================================== -->
-  <div id="pipelineModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xl flex items-center justify-center p-6 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="max-w-xl w-full bg-stone-900 border border-white/20 rounded-3xl p-8 shadow-2xl text-white relative">
-      
-      <button onclick="togglePipelineModal()" class="absolute top-6 right-6 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition">
-        &#x2715;
-      </button>
-
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-2xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-400 text-lg">
-          &#x2699;&#xFE0F;
-        </div>
-        <div>
-          <h3 class="text-lg font-bold font-syne">How These 3D Graphics Are Built</h3>
-          <p class="text-xs text-stone-400 font-mono">Spline 3D vs Pure Three.js Architecture</p>
-        </div>
-      </div>
-
-      <div class="space-y-4 text-xs text-stone-300 leading-relaxed font-sans">
-        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
-          <p class="font-semibold text-white mb-1.5">1. Where did Debbie's Instagram Reel graphics come from?</p>
-          <p>Creators like Debbie (<span class="text-blue-400 font-mono">@ui.debbie</span>) typically model and animate their tactile 3D assets in <span class="text-white font-semibold">Spline 3D</span> (or Blender). Spline is a visual 3D design app built for web UI that exports interactive WebGL scenes with baked lighting, clay shaders, and spring physics.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
-          <p class="font-semibold text-white mb-1.5">2. Do you NEED a 3rd party tool?</p>
-          <p><span class="text-white font-semibold">No.</span> This engine runs in <span class="text-blue-400 font-semibold">pure Three.js</span> right in the browser! Spline itself exports to Three.js/WebGL behind the scenes. By mounting the presentation screen <span class="text-emerald-400 font-semibold">directly inside the container</span> (rather than a floating side card) and matching Debbie's studio lighting and giant typographic backdrop, Three.js achieves the exact same viral result with 0 dependencies and lightning-fast load times.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
-          <p class="font-semibold text-white mb-1.5">3. Can we connect Spline or custom 3D models anyway?</p>
-          <p><span class="text-emerald-400 font-semibold">Yes, 100%!</span> If your design team creates a scene in Spline, you can export a <span class="text-white font-mono">.splinecode</span> or <span class="text-white font-mono">.gltf</span> model and load it straight into this website with one line of code.</p>
-        </div>
-      </div>
-
-      <div class="mt-6 pt-5 border-t border-white/10 flex justify-end">
-        <button onclick="togglePipelineModal()" class="px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs tracking-wider uppercase transition shadow-lg">
-          Got It, Resume 3D Crane
-        </button>
-      </div>
-
-    </div>
-  </div>
-
   <!-- ========================================== -->
-  <!-- 6. THREE.JS 3D KINEMATICS & CRANE SCRIPT   -->
+  <!-- 5. THREE.JS 3D KINEMATICS & CRANE SCRIPT   -->
   <!-- ========================================== -->
   <script>
     // System Definitions Across 3 Industry Verticals
     const systems = {
       debbie: {
-        skyColor: 0x1D61F2, // Exact Debbie Royal Cobalt Blue
+        skyColor: 0x1D61F2, // Exact Debbie Cobalt Blue
         groundColor: 0x174EC4,
-        accentHex: '#EF4444', // 10% Unexpected High-Contrast Action Red
+        accentHex: '#EF4444', // 10% High-Contrast Action Red
         accentNum: 0xEF4444,
         icon: '&#x1F6A2;',
         title: 'Debbie Creative Port',
-        sub: 'Kinematic Crane Unboxing &bull; Interior Display Frame',
+        sub: '3D Kinematic Crane OS &bull; Pure Three.js Unboxing',
         watermark: 'PORTFOLIO',
         watermarkFont: 'Syne',
         watermarkColor: 'rgba(255, 255, 255, 0.95)',
@@ -231,16 +192,18 @@
         containers: [
           {
             label: 'WHAT I DO',
-            color: 0xE02424,
-            hex: '#E02424',
+            color: 0xDC2626,
+            hex: '#DC2626',
             codeL: 'WHAT',
             codeR: 'I DO',
             title: 'Hi, I\'m Debbie',
             cat: '01 // OVERVIEW',
-            desc: 'A digital product designer with a mission to craft viral, tactile interfaces. Every container holds a live interactive project.',
-            badge: 'CREATIVE DEV & UI/UX',
-            cta: 'EXPLORE WORK',
-            link: '#'
+            desc: 'A digital product designer crafting tactile, viral web applications. Every container holds a live interactive flagship engineered with Three.js & WebGL.',
+            badge: 'CREATIVE DEV &bull; UI/UX',
+            cta: 'EXPLORE CASE STUDIES',
+            link: '#work',
+            actionType: 'navigate',
+            targetIdx: 1
           },
           {
             label: 'THE WORK',
@@ -248,12 +211,13 @@
             hex: '#EA580C',
             codeL: 'THE',
             codeR: 'WORK',
-            title: 'Selected Case Studies',
+            title: 'Selected Flagships',
             cat: '02 // PORTFOLIO',
-            desc: 'High-conversion digital experiences engineered with WebGL, tactile physics, and clean typographic architecture.',
-            badge: '14 LIVE PROJECTS',
-            cta: 'VIEW SHOWCASE',
-            link: '#'
+            desc: '14 Live productions launched. Goshwara Haute Joaillerie New York, PrimeCare Medical OS, and Apex Architectural Sales.',
+            badge: '14 LIVE FLAGSHIPS',
+            cta: 'LAUNCH GOSHWARA OS',
+            link: 'https://flagshipsystems.github.io/goshwara/',
+            actionType: 'external'
           },
           {
             label: 'ABOUT ME',
@@ -261,12 +225,14 @@
             hex: '#2563EB',
             codeL: 'ABOUT',
             codeR: 'ME',
-            title: 'Product & Design Engineer',
-            cat: '03 // BIO',
-            desc: 'Merging ultra-clean typography, WebGL spatial physics, and master prompt architecture into fluid interactive spaces.',
-            badge: 'FULL-STACK DESIGN',
-            cta: 'READ STORY',
-            link: '#'
+            title: 'The 60/30/10 Formula',
+            cat: '03 // PHILOSOPHY',
+            desc: 'Why generic $0 templates kill conversion. We architect with 60% grounding base, 30% structural surface, and 10% unexpected action triggers.',
+            badge: 'AWWWARDS CALIBRE',
+            cta: 'INSPECT BLUEPRINT',
+            link: '#about',
+            actionType: 'navigate',
+            targetIdx: 3
           },
           {
             label: 'PROCESS',
@@ -274,12 +240,14 @@
             hex: '#CA8A04',
             codeL: 'PRO',
             codeR: 'CESS',
-            title: 'Rapid Prototyping Cadence',
-            cat: '04 // METHOD',
-            desc: '48-hour sprints from Figma conception to live 60fps WebGL shaders. Zero fluff, tactile interactive physics.',
-            badge: 'WEEKLY SPRINTS',
-            cta: 'INSPECT PROCESS',
-            link: '#'
+            title: '48-Hour Rapid Sprints',
+            cat: '04 // METHODOLOGY',
+            desc: 'Hour 0-12: Spatial Figma wireframing. Hour 12-36: WebGL shaders & crane kinematics. Hour 36-48: Live DNS cutover with zero downtime.',
+            badge: '48-HOUR SPRINT CADENCE',
+            cta: 'COMMISSION SPRINT',
+            link: '#contact',
+            actionType: 'navigate',
+            targetIdx: 4
           },
           {
             label: 'SAY HELLO',
@@ -287,12 +255,13 @@
             hex: '#4F46E5',
             codeL: 'SAY',
             codeR: 'HELLO',
-            title: 'Let\'s Build Something Bold',
+            title: 'Initiate Inquiry',
             cat: '05 // CONTACT',
-            desc: 'Open for high-impact creative commissions, founding designer advisory, and master prompt architecture.',
+            desc: 'Open for high-impact creative commissions, founding designer advisory, and bespoke digital flagship builds.',
             badge: 'Q4 BOOKING OPEN',
-            cta: 'SEND MESSAGE',
-            link: '#'
+            cta: 'OPEN WHATSAPP DESK',
+            link: 'https://wa.me/',
+            actionType: 'external'
           },
           {
             label: 'TOOL KIT',
@@ -300,12 +269,14 @@
             hex: '#64748B',
             codeL: 'TOOL',
             codeR: 'KIT',
-            title: 'Tech Stack & Arsenal',
+            title: 'Engineering Arsenal',
             cat: '06 // GEAR',
-            desc: 'Three.js, WebGL, Tailwind, Claude 3.5 Sonnet, Spline 3D, and bespoke canvas caustics shaders.',
-            badge: 'TYPESCRIPT & WEBGL',
-            cta: 'CHECK STACK',
-            link: '#'
+            desc: 'Three.js, WebGL shaders, Spline 3D Runtime API, GSAP Timeline physics, Tailwind CSS, and Web Audio synthesis.',
+            badge: 'ZERO MONTHLY PLATFORM FEES',
+            cta: 'RESTART CRANE TOUR',
+            link: '#restart',
+            actionType: 'navigate',
+            targetIdx: 0
           }
         ]
       },
@@ -522,17 +493,6 @@
       } catch (e) {}
     }
 
-    // Toggle 3D Pipeline Info Modal
-    function togglePipelineModal() {
-      const modal = document.getElementById('pipelineModal');
-      const isVisible = !modal.classList.contains('pointer-events-none');
-      if (isVisible) {
-        modal.classList.add('pointer-events-none', 'opacity-0');
-      } else {
-        modal.classList.remove('pointer-events-none', 'opacity-0');
-      }
-    }
-
     // ==========================================
     // THREE.JS SETUP & SCENE LIGHTING
     // ==========================================
@@ -717,7 +677,7 @@
       // 4. Key Metric / Badge Pill
       const badgeY = 385;
       ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
-      ctx.roundRect ? ctx.roundRect(60, badgeY, 320, 48, 24) : ctx.fillRect(60, badgeY, 320, 48);
+      ctx.roundRect ? ctx.roundRect(60, badgeY, 360, 48, 24) : ctx.fillRect(60, badgeY, 360, 48);
       ctx.fill();
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
       ctx.stroke();
@@ -725,11 +685,11 @@
       ctx.font = 'bold 18px "Space Grotesk", monospace';
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'center';
-      ctx.fillText(cfg.badge, 220, badgeY + 31);
+      ctx.fillText(cfg.badge, 240, badgeY + 31);
 
       // 5. The 10% High-Contrast Action Button (Diego 60/30/10 Rule)
       const btnY = 485;
-      const btnW = 380;
+      const btnW = 420;
       const btnH = 68;
       
       // Button Background with Accent Color
@@ -747,7 +707,7 @@
       ctx.font = '400 17px "Space Grotesk", monospace';
       ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
       ctx.textAlign = 'left';
-      ctx.fillText('Press Enter or click container to launch', 470, btnY + 42);
+      ctx.fillText('Click inside or press Enter to trigger action', 510, btnY + 42);
 
       const tex = new THREE.CanvasTexture(c);
       tex.minFilter = THREE.LinearFilter;
@@ -899,9 +859,7 @@
       interiorMesh.position.z = 0.04;
       group.add(interiorMesh);
 
-      // ========================================================
-      // INNER PRESENTATION DISPLAY PLANE (REPLACES SIDE CARD!)
-      // ========================================================
+      // Inner Presentation Screen Plane
       const sys = systems[activeSystemKey];
       const screenTex = createInteriorScreenTexture(config, sys.accentHex);
       const screenMat = new THREE.MeshBasicMaterial({
@@ -910,7 +868,7 @@
       });
       const screenGeo = new THREE.PlaneGeometry(containerWidth - 0.22, containerHeight - 0.22);
       const screenMesh = new THREE.Mesh(screenGeo, screenMat);
-      screenMesh.position.set(0, 0, 0.08); // Placed directly on the back inside wall of container!
+      screenMesh.position.set(0, 0, 0.08); // Directly on back wall
       group.add(screenMesh);
       group.userData.screenMesh = screenMesh;
       group.userData.screenMat = screenMat;
@@ -994,7 +952,7 @@
         DOCK_CONTAINERS.push(container);
       });
 
-      renderDockButtons();
+      renderNavigationControls();
     }
 
     // ==========================================
@@ -1026,7 +984,7 @@
         seq.to(prev.userData.rightDoor.rotation, { y: 0, duration: 0.45, ease: 'power2.inOut' }, '<');
         seq.to(interiorPointLight, { intensity: 0, duration: 0.3 }, '<');
 
-        // Lower back to original staggered dock spot
+        // Lower back to original dock spot
         seq.to(prev.position, {
           x: prev.userData.restPos.x,
           y: prev.userData.restPos.y,
@@ -1098,7 +1056,7 @@
       // Step 5: Swing Open 3D Double Doors in Full Perspective!
       seq.add(() => playTone(880));
       seq.to(targetContainer.userData.leftDoor.rotation, {
-        y: -Math.PI * 0.72, // Swing open 130 degrees to frame the content
+        y: -Math.PI * 0.72, // Swing open 130 degrees to frame content
         duration: 0.8,
         ease: 'back.out(1.4)'
       });
@@ -1139,14 +1097,29 @@
     // ==========================================
     // UI CONTROLS & EVENT BINDINGS
     // ==========================================
-    function renderDockButtons() {
-      const row = document.getElementById('dockButtons');
-      row.innerHTML = '';
+    function renderNavigationControls() {
+      const nav = document.getElementById('topNavTabs');
+      const dock = document.getElementById('dockButtons');
+      nav.innerHTML = '';
+      dock.innerHTML = '';
       const items = systems[activeSystemKey].containers;
 
       items.forEach((c, idx) => {
+        // Top Nav Tab
+        const tab = document.createElement('button');
+        tab.className = `px-3.5 py-1.5 rounded-full text-xs font-mono font-medium transition cursor-pointer ${
+          idx === currentContainerIdx ? 'bg-white text-stone-950 font-bold shadow-sm' : 'text-white/70 hover:text-white'
+        }`;
+        tab.innerText = c.label;
+        tab.onclick = () => {
+          playTone(480);
+          hoist3DContainer(idx);
+        };
+        nav.appendChild(tab);
+
+        // Bottom Dock Pill
         const btn = document.createElement('button');
-        btn.className = `px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all duration-300 flex items-center gap-1.5 cursor-pointer shadow-md ${
+        btn.className = `pill-btn px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all duration-300 flex items-center gap-1.5 cursor-pointer shadow-md ${
           idx === currentContainerIdx 
             ? 'bg-white text-stone-950 scale-105 ring-2 ring-white/60' 
             : 'bg-black/50 text-white/80 hover:text-white hover:bg-black/70 border border-white/20'
@@ -1156,17 +1129,28 @@
           playTone(480);
           hoist3DContainer(idx);
         };
-        row.appendChild(btn);
+        dock.appendChild(btn);
       });
     }
 
     function updateButtonStates(activeIdx) {
+      // Top nav
+      const tabs = document.querySelectorAll('#topNavTabs button');
+      tabs.forEach((tab, i) => {
+        if (i === activeIdx) {
+          tab.className = 'px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition cursor-pointer bg-white text-stone-950 shadow-sm';
+        } else {
+          tab.className = 'px-3.5 py-1.5 rounded-full text-xs font-mono font-medium transition cursor-pointer text-white/70 hover:text-white';
+        }
+      });
+
+      // Bottom dock
       const buttons = document.querySelectorAll('#dockButtons button');
       buttons.forEach((btn, i) => {
         if (i === activeIdx) {
-          btn.className = 'px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all duration-300 flex items-center gap-1.5 cursor-pointer shadow-md bg-white text-stone-950 scale-105 ring-2 ring-white/60';
+          btn.className = 'pill-btn px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all duration-300 flex items-center gap-1.5 cursor-pointer shadow-md bg-white text-stone-950 scale-105 ring-2 ring-white/60';
         } else {
-          btn.className = 'px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all duration-300 flex items-center gap-1.5 cursor-pointer shadow-md bg-black/50 text-white/80 hover:text-white hover:bg-black/70 border border-white/20';
+          btn.className = 'pill-btn px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all duration-300 flex items-center gap-1.5 cursor-pointer shadow-md bg-black/50 text-white/80 hover:text-white hover:bg-black/70 border border-white/20';
         }
       });
     }
@@ -1177,7 +1161,7 @@
       activeSystemKey = key;
       const sys = systems[key];
 
-      // Update Header & Controls
+      // Update Header
       document.getElementById('hudBadge').innerHTML = sys.icon;
       document.getElementById('hudTitle').firstElementChild.innerText = sys.title.toUpperCase();
       document.getElementById('hudSubtitle').innerHTML = sys.sub;
@@ -1200,11 +1184,11 @@
 
       // Button styles in header
       ['debbie', 'goshwara', 'horlogerie'].forEach(k => {
-        const btn = document.getElementById('btn-' + k);
+        const btn = document.getElementById('btn-mode-' + k);
         if (k === key) {
-          btn.className = 'px-4 py-2 rounded-full bg-white text-stone-950 font-bold transition shadow-sm cursor-pointer';
+          btn.className = 'px-3.5 py-1.5 rounded-full bg-white text-stone-950 font-bold transition cursor-pointer shadow-sm';
         } else {
-          btn.className = 'px-4 py-2 rounded-full text-white/70 hover:text-white transition cursor-pointer';
+          btn.className = 'px-3.5 py-1.5 rounded-full text-white/70 hover:text-white transition cursor-pointer';
         }
       });
 
@@ -1222,28 +1206,38 @@
       }, 350);
     }
 
+    // Trigger action from inside hoisted container
+    function executeCurrentContainerAction() {
+      if (!hoistedContainer) return;
+      const cfg = hoistedContainer.userData.config;
+      playTone(880, 'sine', 0.15);
+
+      if (cfg.actionType === 'navigate' && typeof cfg.targetIdx === 'number') {
+        hoist3DContainer(cfg.targetIdx);
+      } else if (cfg.link && cfg.link.startsWith('http')) {
+        window.open(cfg.link, '_blank');
+      } else {
+        playTone(600);
+      }
+    }
+
     // Raycasting for Direct 3D Container Clicks
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
     window.addEventListener('click', (e) => {
       // Ignore clicks on HUD or controls
-      if (e.target.closest('header') || e.target.closest('footer') || e.target.closest('#pipelineModal')) return;
+      if (e.target.closest('header') || e.target.closest('footer')) return;
 
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
       raycaster.setFromCamera(mouse, camera);
 
-      // Check click on hoisted container (open CTA or re-trigger)
+      // Check click on hoisted container (triggers action button!)
       if (hoistedContainer) {
         const hoistedHits = raycaster.intersectObjects(hoistedContainer.children, true);
         if (hoistedHits.length > 0) {
-          const cfg = hoistedContainer.userData.config;
-          if (cfg.link && cfg.link !== '#') {
-            window.open(cfg.link, '_blank');
-          } else {
-            playTone(880, 'sine', 0.15);
-          }
+          executeCurrentContainerAction();
           return;
         }
       }
@@ -1269,9 +1263,8 @@
       } else if (e.key === 'ArrowLeft') {
         const prev = (currentContainerIdx - 1 + DOCK_CONTAINERS.length) % DOCK_CONTAINERS.length;
         hoist3DContainer(prev);
-      } else if (e.key === 'Enter' && hoistedContainer) {
-        const cfg = hoistedContainer.userData.config;
-        if (cfg.link && cfg.link !== '#') window.open(cfg.link, '_blank');
+      } else if (e.key === 'Enter') {
+        executeCurrentContainerAction();
       }
     });
 
