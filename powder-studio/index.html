@@ -9,15 +9,15 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Three.js + GSAP for Real 3D Kinematics & WebGL Particles -->
+  <!-- Three.js + GSAP + ScrollTrigger for Authentic High-Calibre Kinematics -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-  <!-- Premium Typography: Archivo Black, Outfit, Plus Jakarta Sans -->
+  <!-- Authentic Fonts: Archivo Black, Outfit, Syne -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -26,7 +26,7 @@
           fontFamily: {
             display: ['"Archivo Black"', 'sans-serif'],
             syne: ['"Syne"', 'sans-serif'],
-            sans: ['"Outfit"', '"Plus Jakarta Sans"', 'sans-serif'],
+            sans: ['"Outfit"', 'sans-serif'],
           },
           colors: {
             glacier: '#5A9FE2',
@@ -56,89 +56,93 @@
       transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* WebGL Casberry Particle Canvas (Background) */
+    /* WebGL Casberry Particle Canvas (Gentle Atmospheric Snow Layer) */
     #casberryCanvas {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
       z-index: 1;
-      pointer-events: auto;
+      pointer-events: none; /* Let user interact directly with UI underneath */
     }
 
-    /* Natural Curved Wave Divider separating Sky from Navy Mountain Base */
+    /* Exact Charles Liu White Mountain Wave Cutout (Seamless Curved Horizon) */
     .alpine-wave-curve {
       position: absolute;
-      bottom: 0;
+      bottom: -2px;
       right: 0;
-      width: 75vw;
-      max-width: 1100px;
+      width: 100%;
       height: auto;
+      min-height: 280px;
+      max-height: 480px;
       z-index: 4;
       pointer-events: none;
-      filter: drop-shadow(0 -15px 35px rgba(255,255,255,0.25));
     }
 
-    /* Split-Tone Hero Typography: Organic, Rounded, Geometric & Harmonious */
+    /* Split-Tone Monumental Hero Typography (Z-Index 5: Behind Gondola Cable) */
     .hero-split-type {
       font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(5.5rem, 18.5vw, 22rem);
-      line-height: 0.85;
-      letter-spacing: -0.015em;
+      font-size: clamp(6rem, 19vw, 23rem);
+      line-height: 0.84;
+      letter-spacing: -0.02em;
       text-transform: uppercase;
       user-select: none;
       display: flex;
       justify-content: center;
-      position: relative;
-      z-index: 6;
-      filter: drop-shadow(0 15px 30px rgba(12, 27, 72, 0.12));
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      z-index: 5;
+      pointer-events: none;
     }
 
     .split-lemon {
       color: #F2EA1E;
-      transition: color 0.5s ease;
+      transition: color 0.6s ease;
     }
     .split-navy {
       color: #0C1B48;
-      transition: color 0.5s ease;
+      transition: color 0.6s ease;
     }
 
-    /* Diagonal Steel Gondola Cable with realistic metallic sheen */
+    /* Diagonal Cable Cutting Cleanly Across the Hero Typography (Z-Index 7) */
     .ski-cable {
       position: absolute;
-      top: 14%;
+      top: 18%;
       left: -10%;
       width: 125%;
       height: 5px;
       background: linear-gradient(90deg, 
-        rgba(30, 41, 59, 0.8) 0%, 
-        rgba(255, 255, 255, 0.85) 35%, 
+        rgba(30, 41, 59, 0.85) 0%, 
+        rgba(255, 255, 255, 0.95) 30%, 
         rgba(30, 41, 59, 0.9) 70%, 
-        rgba(255, 255, 255, 0.7) 100%);
+        rgba(255, 255, 255, 0.8) 100%);
       transform: rotate(18.5deg);
       z-index: 7;
       pointer-events: none;
-      box-shadow: 0 4px 12px rgba(12, 27, 72, 0.25);
+      box-shadow: 0 4px 14px rgba(12, 27, 72, 0.28);
     }
 
-    /* 3D Kinetic Gondola with Parallax Tilt & Smooth Curves */
+    /* 3D Kinetic Floating Gondola Rig (Z-Index 8: Forefront In Front of POWDER) */
     .gondola-rig {
       position: absolute;
-      top: 42%;
+      top: 48%;
       left: 49%;
       transform: translate(-50%, -50%) rotate(18.5deg);
       z-index: 8;
       pointer-events: auto;
       cursor: grab;
-      filter: drop-shadow(0 30px 45px rgba(12, 27, 72, 0.38));
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: drop-shadow(0 32px 50px rgba(12, 27, 72, 0.42));
+      transition: transform 0.15s ease-out;
     }
     .gondola-rig:active {
       cursor: grabbing;
     }
 
-    /* Second Mini Gondola receding in depth */
+    /* Secondary Mini Gondola Far Away on Cable */
     .gondola-secondary {
       position: absolute;
       top: 36%;
@@ -146,11 +150,11 @@
       transform: translate(-50%, -50%) rotate(18.5deg);
       z-index: 6;
       pointer-events: none;
-      filter: drop-shadow(0 15px 25px rgba(12, 27, 72, 0.3));
+      filter: drop-shadow(0 15px 25px rgba(12, 27, 72, 0.28));
       opacity: 0.92;
     }
 
-    /* Soft Circular Lemon CTA Button (Exactly like Charles Liu) */
+    /* Authentic Charles Liu Circular Lemon Ski Passes CTA Button */
     .lemon-ski-cta {
       width: clamp(7.5rem, 11vw, 10.5rem);
       height: clamp(7.5rem, 11vw, 10.5rem);
@@ -165,14 +169,15 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      box-shadow: 0 20px 45px -10px rgba(242, 234, 30, 0.65), 0 0 0 8px rgba(255, 255, 255, 0.35);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 45px -10px rgba(242, 234, 30, 0.65), 0 0 0 8px rgba(255, 255, 255, 0.4);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
       user-select: none;
+      z-index: 10;
     }
     .lemon-ski-cta:hover {
       transform: scale(1.08) translateY(-4px);
-      box-shadow: 0 30px 60px -10px rgba(242, 234, 30, 0.8), 0 0 0 12px rgba(255, 255, 255, 0.5);
+      box-shadow: 0 30px 65px -10px rgba(242, 234, 30, 0.8), 0 0 0 12px rgba(255, 255, 255, 0.6);
     }
     .lemon-ski-cta:active {
       transform: scale(0.96);
@@ -180,36 +185,36 @@
 
     /* Origin UI Soft Pill Badges */
     .origin-pill-soft {
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: 0 10px 25px -8px rgba(12, 27, 72, 0.12);
       border-radius: 9999px;
-      padding: 0.55rem 1.25rem;
+      padding: 0.6rem 1.35rem;
       font-weight: 600;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .origin-pill-soft:hover {
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(255, 255, 255, 0.98);
       transform: translateY(-2px);
-      box-shadow: 0 15px 30px -8px rgba(12, 27, 72, 0.18);
+      box-shadow: 0 16px 32px -8px rgba(12, 27, 72, 0.18);
     }
 
-    /* Origin UI Premium Frosted Glass Cards (Smooth & Rounded) */
+    /* Origin UI Frosted Glass Cards (Smooth & Rounded) */
     .origin-card {
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.9);
       border: 1px solid rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-radius: 2rem;
-      box-shadow: 0 25px 60px -20px rgba(12, 27, 72, 0.18);
+      box-shadow: 0 25px 60px -20px rgba(12, 27, 72, 0.16);
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .origin-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 35px 75px -20px rgba(12, 27, 72, 0.24);
+      box-shadow: 0 35px 75px -20px rgba(12, 27, 72, 0.22);
     }
 
     /* Active Segmented Pill */
@@ -265,7 +270,7 @@
       <div class="flex items-center gap-3">
         
         <!-- Mountain Ambience Audio Button -->
-        <button onclick="toggleAudio()" id="audioBtn" class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/75 hover:bg-white text-navy text-xs font-bold transition shadow-sm border border-white/80 cursor-pointer">
+        <button onclick="toggleAudio()" id="audioBtn" class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 hover:bg-white text-navy text-xs font-bold transition shadow-sm border border-white/80 cursor-pointer">
           <span id="audioIcon">&#x1F50A;</span>
           <span id="audioText" class="hidden sm:inline">Alpine Sound</span>
         </button>
@@ -283,17 +288,17 @@
   <!-- ======================================================== -->
   <!-- 2. HERO: CHARLES LIU 60/30/10 POWDER COMPOSITION         -->
   <!-- ======================================================== -->
-  <section id="hero" class="relative w-full min-h-screen overflow-hidden flex flex-col justify-between pt-28 pb-12 px-6 sm:px-10">
+  <section id="hero" class="relative w-full min-h-screen overflow-hidden flex flex-col justify-between pt-28 pb-10 px-6 sm:px-10">
     
-    <!-- Casberry 18.5K Particle WebGL Canvas -->
+    <!-- Gentle Casberry 3D WebGL Particle Canvas -->
     <canvas id="casberryCanvas"></canvas>
 
-    <!-- Natural Curved White Wave (Exactly as in Charles Liu's Reel) -->
-    <svg class="alpine-wave-curve" viewBox="0 0 1000 480" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M1000 480H0V280C140 280 260 210 420 180C620 140 760 30 1000 0V480Z" fill="#FFFFFF" fill-opacity="0.95"/>
+    <!-- Natural Curved White Snow Mountain Wave Cutout -->
+    <svg class="alpine-wave-curve" viewBox="0 0 1440 480" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1440 480H0V280C220 280 380 230 620 190C880 150 1100 40 1440 0V480Z" fill="#FFFFFF"/>
     </svg>
 
-    <!-- Diagonal Steel Cable -->
+    <!-- Diagonal Steel Gondola Cable Cutting Behind Cabin, Over Typography -->
     <div class="ski-cable"></div>
 
     <!-- Secondary Mini Gondola Receding In Distance -->
@@ -302,39 +307,39 @@
         <rect x="55" y="5" width="10" height="20" rx="2" fill="#334155"/>
         <circle cx="60" cy="5" r="5" fill="#0C1B48" stroke="#FFFFFF" stroke-width="1.5"/>
         <line x1="60" y1="25" x2="60" y2="50" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
-        <!-- Mini Yellow Cabin -->
         <rect x="20" y="48" width="80" height="85" rx="24" fill="#F2EA1E" stroke="#0C1B48" stroke-width="3"/>
         <rect x="30" y="60" width="60" height="52" rx="14" fill="#0C1B48"/>
         <path d="M35 105 L50 80 L65 92 L80 75 L85 105 Z" fill="#5A9FE2" opacity="0.9"/>
       </svg>
     </div>
 
-    <!-- Main Photorealistic Kinetic Gondola Rig (Detailed Curved 3D Geometry) -->
+    <!-- Centerpiece Giant Split Typography ("POW" in Lemon, "DER" in Navy) -->
+    <div class="hero-split-type">
+      <span class="split-lemon">POW</span><span class="split-navy">DER</span>
+    </div>
+
+    <!-- Main Photorealistic Kinetic Gondola Rig (Z-Index 8: Intersecting POWDER Text) -->
     <div class="gondola-rig" id="gondola">
       <svg class="w-72 sm:w-88 md:w-[26rem] max-w-[90vw]" viewBox="0 0 380 460" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <!-- Gondola Body Gloss Gradient -->
           <linearGradient id="gondolaYellowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#FFF647"/>
             <stop offset="40%" stop-color="#F2EA1E"/>
             <stop offset="100%" stop-color="#D8CE0C"/>
           </linearGradient>
           
-          <!-- Deep Glass Reflection Gradient -->
           <linearGradient id="glassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="#081232"/>
             <stop offset="65%" stop-color="#0F245E"/>
             <stop offset="100%" stop-color="#183B8C"/>
           </linearGradient>
 
-          <!-- Mountain Peak Alpine Mirroring -->
           <linearGradient id="mountainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="#FFFFFF"/>
             <stop offset="40%" stop-color="#8CBDF0"/>
             <stop offset="100%" stop-color="#3A77BD"/>
           </linearGradient>
 
-          <!-- Steel Cable Pulley Texture -->
           <linearGradient id="steelGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="#475569"/>
             <stop offset="50%" stop-color="#CBD5E1"/>
@@ -342,22 +347,17 @@
           </linearGradient>
 
           <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0C1B48" flood-opacity="0.35"/>
+            <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#0C1B48" flood-opacity="0.38"/>
           </filter>
         </defs>
 
         <!-- Mechanical Cable Pulley Hanger -->
         <g id="hangerGroup">
-          <!-- Cable Clamp Wheels -->
           <circle cx="175" cy="22" r="16" fill="url(#steelGrad)" stroke="#1E293B" stroke-width="4"/>
           <circle cx="215" cy="22" r="16" fill="url(#steelGrad)" stroke="#1E293B" stroke-width="4"/>
           <circle cx="175" cy="22" r="6" fill="#0F172A"/>
           <circle cx="215" cy="22" r="6" fill="#0F172A"/>
-          
-          <!-- Overhead Pivot Bracket -->
           <rect x="165" y="18" width="60" height="20" rx="6" fill="#334155" stroke="#0F172A" stroke-width="3"/>
-          
-          <!-- Curved Heavy-Duty Suspension Arm -->
           <path d="M195 38 L195 120 C195 135 185 145 170 152" stroke="url(#steelGrad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M195 38 L195 120 C195 135 185 145 170 152" stroke="#1E293B" stroke-width="3" fill="none"/>
           <circle cx="170" cy="152" r="9" fill="#0C1B48" stroke="#E2E8F0" stroke-width="3"/>
@@ -365,39 +365,27 @@
 
         <!-- Gondola Main Spherical Aerodynamic Cabin Body -->
         <g id="cabinGroup" filter="url(#softGlow)">
-          <!-- Main Outer Shell with smooth curved corners -->
           <rect x="70" y="145" width="240" height="270" rx="80" fill="url(#gondolaYellowGrad)" stroke="#0C1B48" stroke-width="7"/>
-          
-          <!-- Aerodynamic Top Roof Snow Mound -->
           <path d="M95 175 C135 152 245 152 285 175 C275 160 230 150 190 150 C150 150 105 160 95 175 Z" fill="#FFFFFF" opacity="0.95"/>
-          
-          <!-- Heavy Rubber Protective Window Seal Trim -->
           <rect x="92" y="182" width="196" height="175" rx="48" fill="#0C1B48"/>
-          
-          <!-- Main Panoramic 360 Glass Window -->
           <rect x="98" y="188" width="184" height="163" rx="44" fill="url(#glassGrad)"/>
           
-          <!-- Photorealistic Alpine Snow Mountain Range Reflected in Glass -->
+          <!-- Alpine Reflection in Glass -->
           <path d="M105 345 L135 270 L165 305 L205 245 L245 315 L275 260 L280 345 Z" fill="url(#mountainGrad)"/>
-          <!-- Snow Caps on Reflected Peaks -->
           <polygon points="135,270 142,285 128,285" fill="#FFFFFF"/>
           <polygon points="205,245 215,265 195,265" fill="#FFFFFF"/>
           <polygon points="275,260 280,272 268,272" fill="#FFFFFF"/>
 
-          <!-- Frost & Snow Crystals on Bottom & Top Corners of Window -->
+          <!-- Frost on Windows -->
           <path d="M98 330 C120 338 150 335 170 348 C160 335 140 325 120 325 C105 325 98 330 98 330 Z" fill="#FFFFFF" opacity="0.9"/>
           <circle cx="112" cy="336" r="4" fill="#FFFFFF" opacity="0.85"/>
           <circle cx="124" cy="342" r="3" fill="#FFFFFF" opacity="0.85"/>
           <circle cx="260" cy="340" r="5" fill="#FFFFFF" opacity="0.8"/>
-
-          <!-- Curving Glass Specular Glare Arc -->
           <path d="M125 205 C160 198 220 205 255 235" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" opacity="0.55"/>
 
-          <!-- Lower Front Grille Vent Slots -->
+          <!-- Grille Slots & Bumpers -->
           <rect x="135" y="378" width="110" height="8" rx="4" fill="#0C1B48"/>
           <rect x="150" y="392" width="80" height="6" rx="3" fill="#0C1B48"/>
-
-          <!-- High-Contrast Rubber Corner Bumper Guards -->
           <rect x="63" y="270" width="12" height="45" rx="6" fill="#0C1B48"/>
           <rect x="305" y="270" width="12" height="45" rx="6" fill="#0C1B48"/>
         </g>
@@ -425,7 +413,7 @@
           <span class="w-2 h-2 rounded-full bg-amber-500"></span>
           <span><strong>64 PISTES:</strong> UP TO 3,200M</span>
         </div>
-        <div class="origin-pill-soft text-xs sm:text-sm text-navy bg-navy/90 text-white border-navy/90 flex items-center gap-2">
+        <div class="origin-pill-soft text-xs sm:text-sm text-navy bg-navy text-white border-navy flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-lemon animate-ping"></span>
           <span><strong>STATUS:</strong> 100% POWDER ACTIVE</span>
         </div>
@@ -433,18 +421,13 @@
 
     </div>
 
-    <!-- Centerpiece Monumental Split-Tone Typography -->
-    <div class="hero-split-type my-auto">
-      <span class="split-lemon">POW</span><span class="split-navy">DER</span>
-    </div>
-
     <!-- Bottom Action Bar & Famous Circular Lemon CTA -->
-    <div class="relative z-10 max-w-7xl mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-6">
+    <div class="relative z-10 max-w-7xl mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-6 pt-16">
       
       <!-- Atmospheric Left Caption -->
       <div class="text-navy font-medium text-xs sm:text-sm max-w-xs leading-snug">
-        <span class="font-bold block text-navy mb-0.5">18,500 WebGL Snow Crystals</span>
-        Real-time Casberry AI fluid physics. Hover cursor to sweep and repel flakes.
+        <span class="font-bold block text-navy mb-0.5">Gentle Ambient Snow</span>
+        Low-sensitivity atmospheric drift with smooth cursor deflection.
       </div>
 
       <!-- Charles Liu Circular Lemon Ski Passes Button -->
@@ -453,7 +436,7 @@
       </a>
 
       <!-- Casberry Simulation Mode Pills -->
-      <div class="flex items-center gap-1.5 p-1.5 rounded-full bg-white/85 backdrop-blur-md border border-white shadow-md text-xs font-semibold">
+      <div class="flex items-center gap-1.5 p-1.5 rounded-full bg-white/90 backdrop-blur-md border border-white shadow-md text-xs font-semibold">
         <button onclick="setParticleMode('blizzard')" id="btn-blizzard" class="px-4 py-2 rounded-full origin-segmented-active transition cursor-pointer">
           Blizzard
         </button>
@@ -486,7 +469,7 @@
           </h2>
         </div>
         <p class="text-stone-300 font-normal text-sm sm:text-base max-w-md leading-relaxed">
-          Inspired by <span class="text-lemon font-bold">particles.casberry.in</span>: high-density WebGL point clouds driven by mathematical velocity fields and cursor attractor gravity.
+          Inspired by <span class="text-lemon font-bold">particles.casberry.in</span>: high-density WebGL point clouds driven by gentle velocity fields and low-sensitivity cursor deflection.
         </p>
       </div>
 
@@ -507,11 +490,11 @@
               </div>
               <div class="flex justify-between border-b border-white/10 pb-3">
                 <span class="text-stone-400">Physics Field:</span>
-                <span class="text-lemon font-bold" id="metricField">Curl Noise / Vortex</span>
+                <span class="text-lemon font-bold" id="metricField">Gentle Alpine Drift</span>
               </div>
               <div class="flex justify-between border-b border-white/10 pb-3">
-                <span class="text-stone-400">Cursor Gravity:</span>
-                <span class="text-emerald-400 font-bold" id="metricAttract">Spring Attractor (240px)</span>
+                <span class="text-stone-400">Cursor Sensitivity:</span>
+                <span class="text-emerald-400 font-bold" id="metricAttract">Low (0.15 G Gentle Float)</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-stone-400">Shader Blend:</span>
@@ -533,28 +516,28 @@
               <!-- Slider 1: Wind Velocity -->
               <div>
                 <div class="flex justify-between text-xs font-semibold mb-2">
-                  <span class="text-stone-300">Alpine Wind Velocity</span>
-                  <span class="text-lemon font-bold" id="windVal">1.4x Gale</span>
+                  <span class="text-stone-300">Alpine Drift Velocity</span>
+                  <span class="text-lemon font-bold" id="windVal">0.65x Gentle Breeze</span>
                 </div>
-                <input type="range" min="0.2" max="3.5" step="0.1" value="1.4" oninput="updateWind(this.value)" class="w-full h-2.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#F2EA1E]">
+                <input type="range" min="0.1" max="2.5" step="0.05" value="0.65" oninput="updateWind(this.value)" class="w-full h-2.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#F2EA1E]">
               </div>
 
-              <!-- Slider 2: Particle Attraction Force -->
+              <!-- Slider 2: Particle Attraction Force (Low Sensitivity Default) -->
               <div>
                 <div class="flex justify-between text-xs font-semibold mb-2">
-                  <span class="text-stone-300">Cursor Attractor Gravity</span>
-                  <span class="text-lemon font-bold" id="attractVal">0.75 G</span>
+                  <span class="text-stone-300">Cursor Deflection Sensitivity</span>
+                  <span class="text-lemon font-bold" id="attractVal">0.15 G (Low)</span>
                 </div>
-                <input type="range" min="0" max="2.0" step="0.05" value="0.75" oninput="updateAttract(this.value)" class="w-full h-2.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#F2EA1E]">
+                <input type="range" min="0" max="1.0" step="0.02" value="0.15" oninput="updateAttract(this.value)" class="w-full h-2.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#F2EA1E]">
               </div>
 
               <!-- Slider 3: Particle Scale -->
               <div>
                 <div class="flex justify-between text-xs font-semibold mb-2">
                   <span class="text-stone-300">Crystal Flake Diameter</span>
-                  <span class="text-lemon font-bold" id="scaleVal">2.2 px</span>
+                  <span class="text-lemon font-bold" id="scaleVal">2.0 px</span>
                 </div>
-                <input type="range" min="1.0" max="6.0" step="0.2" value="2.2" oninput="updateScale(this.value)" class="w-full h-2.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#F2EA1E]">
+                <input type="range" min="0.8" max="4.0" step="0.1" value="2.0" oninput="updateScale(this.value)" class="w-full h-2.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#F2EA1E]">
               </div>
             </div>
           </div>
@@ -795,7 +778,7 @@
   </footer>
 
   <!-- ======================================================== -->
-  <!-- 7. CASBERRY 20K PARTICLE WEBGL ENGINE + PARALLAX TILT    -->
+  <!-- 7. CASBERRY GENTLE 3D SNOW + GSAP KINEMATICS              -->
   <!-- ======================================================== -->
   <script>
     // Audio Synthesizer (Alpine Wind & Tactile Clicks)
@@ -824,7 +807,7 @@
       if (audioCtx.state === 'suspended') audioCtx.resume();
 
       if (!isWindPlaying) {
-        // Synthesize Pink Noise / Wind
+        // Synthesize Gentle Alpine Breeze
         const bufferSize = audioCtx.sampleRate * 2;
         const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
         const output = noiseBuffer.getChannelData(0);
@@ -834,7 +817,7 @@
           b0 = 0.99886 * b0 + white * 0.0555179;
           b1 = 0.99332 * b1 + white * 0.0750759;
           b2 = 0.96900 * b2 + white * 0.1538520;
-          output[i] = (b0 + b1 + b2) * 0.08;
+          output[i] = (b0 + b1 + b2) * 0.06;
         }
 
         const whiteNoise = audioCtx.createBufferSource();
@@ -843,10 +826,10 @@
 
         const filter = audioCtx.createBiquadFilter();
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(420, audioCtx.currentTime);
+        filter.frequency.setValueAtTime(360, audioCtx.currentTime);
 
         windGain = audioCtx.createGain();
-        windGain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        windGain.gain.setValueAtTime(0.06, audioCtx.currentTime);
 
         whiteNoise.connect(filter);
         filter.connect(windGain);
@@ -856,7 +839,7 @@
         isWindPlaying = true;
         document.getElementById('audioBtn').classList.add('bg-white');
         document.getElementById('audioIcon').textContent = '🔊';
-        document.getElementById('audioText').textContent = 'Wind Sound (On)';
+        document.getElementById('audioText').textContent = 'Breeze Sound (On)';
       } else {
         if (windGain) windGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
         isWindPlaying = false;
@@ -921,28 +904,87 @@
       }, 3500);
     }
 
-    // Kinetic Gondola 3D Parallax Tilt
-    const gondolaEl = document.getElementById('gondola');
-    let mouseX = 0, mouseY = 0;
-    let targetRotX = 0, targetRotY = 0;
+    // ==========================================
+    // GSAP SCROLL & MOUSE ANIMATIONS THAT SPEAK
+    // ==========================================
+    gsap.registerPlugin(ScrollTrigger);
 
-    window.addEventListener('mousemove', (e) => {
-      const normX = (e.clientX / window.innerWidth) * 2 - 1;
-      const normY = (e.clientY / window.innerHeight) * 2 - 1;
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-
-      targetRotX = normY * 12;
-      targetRotY = normX * 18;
-
-      if (gondolaEl) {
-        gondolaEl.style.transform = `translate(-50%, -50%) rotate(${18.5 + targetRotY * 0.3}deg) perspective(800px) rotateY(${targetRotY}deg) rotateX(${-targetRotX}deg)`;
-      }
+    // Initial cinematic entrance
+    gsap.from('.hero-split-type', {
+      scale: 0.9,
+      opacity: 0,
+      y: 40,
+      duration: 1.4,
+      ease: 'power3.out'
     });
 
-    // ==========================================
-    // CASBERRY 18,500 WEBGL PARTICLE SIMULATOR
-    // ==========================================
+    gsap.from('.gondola-rig', {
+      x: -80,
+      y: -60,
+      opacity: 0,
+      duration: 1.6,
+      ease: 'power3.out',
+      delay: 0.2
+    });
+
+    gsap.from('.origin-pill-soft', {
+      y: -20,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 1,
+      ease: 'power2.out',
+      delay: 0.4
+    });
+
+    gsap.from('.lemon-ski-cta', {
+      scale: 0,
+      rotation: -30,
+      opacity: 0,
+      duration: 1.2,
+      ease: 'back.out(1.7)',
+      delay: 0.6
+    });
+
+    // Parallax on Scroll for Cable and Gondola
+    gsap.to('.gondola-rig', {
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1
+      },
+      x: 120,
+      y: 80,
+      ease: 'none'
+    });
+
+    gsap.to('.hero-split-type', {
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1.5
+      },
+      y: -60,
+      opacity: 0.35,
+      ease: 'none'
+    });
+
+    // Kinetic Gondola 3D Parallax Tilt with Smooth Lerp
+    const gondolaEl = document.getElementById('gondola');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let currentTiltX = 0;
+    let currentTiltY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    // ========================================================
+    // CASBERRY WEBGL PARTICLE SIMULATOR (LOW SENSITIVITY)
+    // ========================================================
     const canvas = document.getElementById('casberryCanvas');
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
@@ -956,38 +998,29 @@
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(PARTICLE_COUNT * 3);
     const velocities = new Float32Array(PARTICLE_COUNT * 3);
-    const originalPositions = new Float32Array(PARTICLE_COUNT * 3);
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const i3 = i * 3;
-      const x = (Math.random() - 0.5) * 1100;
-      const y = (Math.random() - 0.5) * 750;
-      const z = (Math.random() - 0.5) * 400;
+      positions[i3] = (Math.random() - 0.5) * 1200;
+      positions[i3 + 1] = (Math.random() - 0.5) * 800;
+      positions[i3 + 2] = (Math.random() - 0.5) * 400;
 
-      positions[i3] = x;
-      positions[i3 + 1] = y;
-      positions[i3 + 2] = z;
-
-      originalPositions[i3] = x;
-      originalPositions[i3 + 1] = y;
-      originalPositions[i3 + 2] = z;
-
-      velocities[i3] = (Math.random() - 0.5) * 0.6;
-      velocities[i3 + 1] = -(Math.random() * 0.9 + 0.3); // snow falling
-      velocities[i3 + 2] = (Math.random() - 0.5) * 0.4;
+      velocities[i3] = (Math.random() - 0.5) * 0.35;
+      velocities[i3 + 1] = -(Math.random() * 0.45 + 0.2); // Gentle snow drift down
+      velocities[i3 + 2] = (Math.random() - 0.5) * 0.2;
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-    // Circular Glow Particle Sprite
+    // Soft Circular Snow Flake Texture
     function createCircleTexture() {
       const pCanvas = document.createElement('canvas');
       pCanvas.width = 32;
       pCanvas.height = 32;
       const ctx = pCanvas.getContext('2d');
       const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
-      grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-      grad.addColorStop(0.35, 'rgba(240, 248, 255, 0.7)');
+      grad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+      grad.addColorStop(0.4, 'rgba(240, 248, 255, 0.6)');
       grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, 32, 32);
@@ -995,21 +1028,21 @@
     }
 
     const material = new THREE.PointsMaterial({
-      size: 2.4,
+      size: 2.0,
       map: createCircleTexture(),
       transparent: true,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
       color: 0xffffff,
-      opacity: 0.88,
+      opacity: 0.82,
     });
 
     const particleSystem = new THREE.Points(geometry, material);
     scene.add(particleSystem);
 
     let currentMode = 'blizzard';
-    let windMultiplier = 1.4;
-    let attractorGravity = 0.75;
+    let windMultiplier = 0.65; // Soft gentle breeze default
+    let attractorGravity = 0.15; // Low sensitivity default as requested
 
     function setParticleMode(mode) {
       currentMode = mode;
@@ -1029,12 +1062,12 @@
 
     function updateWind(v) {
       windMultiplier = parseFloat(v);
-      document.getElementById('windVal').textContent = `${windMultiplier.toFixed(1)}x Gale`;
+      document.getElementById('windVal').textContent = `${windMultiplier.toFixed(2)}x Velocity`;
     }
 
     function updateAttract(v) {
       attractorGravity = parseFloat(v);
-      document.getElementById('attractVal').textContent = `${attractorGravity.toFixed(2)} G`;
+      document.getElementById('attractVal').textContent = `${attractorGravity.toFixed(2)} G (Deflection)`;
     }
 
     function updateScale(v) {
@@ -1042,58 +1075,65 @@
       document.getElementById('scaleVal').textContent = `${parseFloat(v).toFixed(1)} px`;
     }
 
-    // Animation Loop
+    // Animation Render Loop
     let clock = new THREE.Clock();
 
     function animate() {
       requestAnimationFrame(animate);
-      const delta = clock.getDelta();
       const time = clock.getElapsedTime();
+
+      // Smooth gondola tilt interpolation (Lerp)
+      if (gondolaEl) {
+        const targetTiltX = ((mouseY / window.innerHeight) * 2 - 1) * 8;
+        const targetTiltY = ((mouseX / window.innerWidth) * 2 - 1) * 14;
+        currentTiltX += (targetTiltX - currentTiltX) * 0.08;
+        currentTiltY += (targetTiltY - currentTiltY) * 0.08;
+        gondolaEl.style.transform = `translate(-50%, -50%) rotate(${18.5 + currentTiltY * 0.25}deg) perspective(800px) rotateY(${currentTiltY}deg) rotateX(${-currentTiltX}deg)`;
+      }
 
       const pos = geometry.attributes.position.array;
 
-      // Mouse position projected into world coordinates
+      // Project mouse into world coordinates
       const mouseWorldX = (mouseX / window.innerWidth - 0.5) * 800;
       const mouseWorldY = -(mouseY / window.innerHeight - 0.5) * 550;
 
       for (let i = 0; i < PARTICLE_COUNT; i++) {
         const i3 = i * 3;
 
-        // Base falling velocity
+        // Base falling velocity - gentle and calm
         pos[i3 + 1] += velocities[i3 + 1] * windMultiplier;
-        pos[i3] += velocities[i3] * windMultiplier + Math.sin(time + pos[i3 + 1] * 0.01) * 0.4;
+        pos[i3] += velocities[i3] * windMultiplier + Math.sin(time * 0.8 + pos[i3 + 1] * 0.008) * 0.25;
 
         if (currentMode === 'vortex') {
-          // Circular spiral swirl
-          const angle = 0.015;
-          const cosA = Math.cos(angle);
-          const sinA = Math.sin(angle);
+          const angle = 0.008;
           const px = pos[i3];
           const pz = pos[i3 + 2];
-          pos[i3] = px * cosA - pz * sinA;
-          pos[i3 + 2] = px * sinA + pz * cosA;
+          pos[i3] = px * Math.cos(angle) - pz * Math.sin(angle);
+          pos[i3 + 2] = px * Math.sin(angle) + pz * Math.cos(angle);
         } else if (currentMode === 'wave') {
-          pos[i3 + 1] += Math.cos(time * 2 + pos[i3] * 0.01) * 0.8;
+          pos[i3 + 1] += Math.cos(time * 1.5 + pos[i3] * 0.008) * 0.4;
         }
 
-        // Cursor Spring Attractor
+        // Low-Sensitivity Smooth Particle Deflection / Repulsion
         const dx = mouseWorldX - pos[i3];
         const dy = mouseWorldY - pos[i3 + 1];
         const distSq = dx * dx + dy * dy;
 
-        if (distSq < 45000 && distSq > 100) {
-          const force = (attractorGravity * 1200) / distSq;
-          pos[i3] += dx * force;
-          pos[i3 + 1] += dy * force;
+        // Repel gently within 160px radius
+        if (distSq < 26000 && distSq > 150) {
+          const force = (attractorGravity * 320) / distSq;
+          // Smooth push-away rather than aggressive jerk
+          pos[i3] -= dx * force;
+          pos[i3 + 1] -= dy * force;
         }
 
-        // Wrap particles back when they fall out of bounds
-        if (pos[i3 + 1] < -380) {
-          pos[i3 + 1] = 380;
-          pos[i3] = (Math.random() - 0.5) * 1100;
+        // Natural continuous boundary wrapping
+        if (pos[i3 + 1] < -420) {
+          pos[i3 + 1] = 420;
+          pos[i3] = (Math.random() - 0.5) * 1200;
         }
-        if (pos[i3] < -550) pos[i3] = 550;
-        if (pos[i3] > 550) pos[i3] = -550;
+        if (pos[i3] < -600) pos[i3] = 600;
+        if (pos[i3] > 600) pos[i3] = -600;
       }
 
       geometry.attributes.position.needsUpdate = true;
@@ -1102,7 +1142,7 @@
 
     animate();
 
-    // Window Resize
+    // Responsive Canvas Resize
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
