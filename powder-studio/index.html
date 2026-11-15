@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALTAVAL | Powder Alpine OS & Casberry 3D Particle Engine</title>
-  <meta name="description" content="Awwwards-calibre alpine digital flagship engineered with Casberry 20K particle physics, Charles Liu color wheel theory, and Origin UI components.">
+  <title>ALTAVAL | 3,200M Alpine Resort & Powder Mountain OS</title>
+  <meta name="description" content="Awwwards-calibre alpine digital resort powered by Casberry 3D WebGL particle physics, Charles Liu 60/30/10 color harmony, and tactile Origin UI components.">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Three.js + GSAP + ScrollTrigger for Authentic High-Calibre Kinematics -->
+  <!-- Three.js + GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -302,12 +302,10 @@
       <!-- Clean Navigation Links -->
       <nav class="hidden md:flex items-center gap-8 text-[13px] font-semibold tracking-wide text-navy">
         <a href="#hero" class="hover:text-white transition">Lifts</a>
-        <a href="#particles" class="hover:text-white transition flex items-center gap-1.5">
-          <span>&#x2728; 3D Terrain Lab</span>
-        </a>
-        <a href="#origin-ui" class="hover:text-white transition">Live Mountain OS</a>
-        <a href="#passes" class="hover:text-white transition">Allocations</a>
-        <a href="#passes" class="hover:text-white transition">Ski School</a>
+        <a href="#terrain" class="hover:text-white transition">3D Topography</a>
+        <a href="#passes" class="hover:text-white transition">Pass Booking</a>
+        <a href="#chalets" class="hover:text-white transition">Luxury Suites</a>
+        <a href="#status" class="hover:text-white transition">Live Mountain Radar</a>
       </nav>
 
       <!-- Action Cluster -->
@@ -321,7 +319,7 @@
 
         <!-- Ski Passes CTA -->
         <a href="#passes" class="px-6 py-2.5 rounded-full bg-lemon hover:bg-[#E5DD18] text-navy font-display uppercase tracking-wide text-xs shadow-lg shadow-yellow-500/25 transform hover:scale-105 active:scale-95 transition cursor-pointer">
-          Ski Passes &rarr;
+          Book Passes &rarr;
         </a>
 
       </div>
@@ -330,11 +328,11 @@
   </header>
 
   <!-- ======================================================== -->
-  <!-- 2. HERO: EXACT REEL RECREATION                           -->
+  <!-- 2. HERO: EXACT REEL RECREATION (VORTEX LOCKED)           -->
   <!-- ======================================================== -->
   <section id="hero" class="relative w-full min-h-screen overflow-hidden flex flex-col justify-between pt-28 pb-10 px-6 sm:px-10">
     
-    <!-- Gentle Ambient WebGL Particles -->
+    <!-- Gentle Ambient WebGL Particles (Locked in Vortex Swirl) -->
     <canvas id="casberryCanvas"></canvas>
 
     <!-- Natural Curved White Snow Mountain Wave Cutout -->
@@ -465,13 +463,13 @@
 
     </div>
 
-    <!-- Bottom Action Bar & Famous Circular Lemon CTA -->
+    <!-- Bottom Action Bar & Famous Circular Lemon CTA (Zero Mode Buttons) -->
     <div class="relative z-10 max-w-7xl mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-6 pt-16">
       
       <!-- Atmospheric Left Caption -->
       <div class="text-navy font-medium text-xs sm:text-sm max-w-xs leading-snug">
-        <span class="font-bold block text-navy mb-0.5">Alpine Precision Engineering</span>
-        Low-sensitivity atmospheric drift with smooth cursor deflection.
+        <span class="font-bold block text-navy mb-0.5">Vortex Powder Swirl Active</span>
+        Gentle atmospheric snow field swirling in perpetual alpine vortex physics.
       </div>
 
       <!-- Charles Liu Circular Lemon Ski Passes Button -->
@@ -479,17 +477,10 @@
         <span>SKI<br>PASSES</span>
       </a>
 
-      <!-- Casberry Simulation Mode Pills -->
-      <div class="flex items-center gap-1.5 p-1.5 rounded-full bg-white/90 backdrop-blur-md border border-white shadow-md text-xs font-semibold">
-        <button onclick="setParticleMode('blizzard')" id="btn-blizzard" class="px-4 py-2 rounded-full origin-segmented-active transition cursor-pointer">
-          Blizzard
-        </button>
-        <button onclick="setParticleMode('vortex')" id="btn-vortex" class="px-4 py-2 rounded-full text-navy hover:text-black transition cursor-pointer">
-          Vortex
-        </button>
-        <button onclick="setParticleMode('wave')" id="btn-wave" class="px-4 py-2 rounded-full text-navy hover:text-black transition cursor-pointer">
-          Wave
-        </button>
+      <!-- Right Real-Time Elevation Ping -->
+      <div class="origin-pill-soft text-xs font-semibold text-navy flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Base Elevation: <strong>1,850m &rarr; 3,200m Summit</strong></span>
       </div>
 
     </div>
@@ -501,21 +492,21 @@
   <!-- ======================================================== -->
   <div class="relative z-20 bg-navy border-y border-white/10 py-3.5 overflow-hidden text-xs font-bold uppercase tracking-widest text-white/80">
     <div class="marquee-track flex gap-12 items-center">
-      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> SUMMIT SUMMIT 3,200M: -8°C &bull; BLUEBIRD SKY</span>
-      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-lemon"></span> CASBERRY PARTICLE ENGINE: 18,500 POINTS OK</span>
-      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-blue-400"></span> EXPRESS GONDOLA: RUNNING ON TIME &bull; 0 MIN WAIT</span>
-      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-purple-400"></span> ORIGIN UI TOKENS: TACTILE STEAM ACTIVE</span>
-      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> SUMMIT SUMMIT 3,200M: -8°C &bull; BLUEBIRD SKY</span>
-      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-lemon"></span> CASBERRY PARTICLE ENGINE: 18,500 POINTS OK</span>
-      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-blue-400"></span> EXPRESS GONDOLA: RUNNING ON TIME &bull; 0 MIN WAIT</span>
-      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-purple-400"></span> ORIGIN UI TOKENS: TACTILE STEAM ACTIVE</span>
+      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> SUMMIT 3,200M: -8°C &bull; BLUEBIRD SKY</span>
+      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-lemon"></span> FRESH POWDER: 42 CM OVERNIGHT ACCUMULATION</span>
+      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-blue-400"></span> EXPRESS GONDOLA: OPERATING ON SCHEDULE &bull; 0 MIN WAIT</span>
+      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> HELI-SKI VALLEYS: OPEN FOR PRIVATE SESSIONS</span>
+      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> SUMMIT 3,200M: -8°C &bull; BLUEBIRD SKY</span>
+      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-lemon"></span> FRESH POWDER: 42 CM OVERNIGHT ACCUMULATION</span>
+      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-blue-400"></span> EXPRESS GONDOLA: OPERATING ON SCHEDULE &bull; 0 MIN WAIT</span>
+      <span class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> HELI-SKI VALLEYS: OPEN FOR PRIVATE SESSIONS</span>
     </div>
   </div>
 
   <!-- ======================================================== -->
-  <!-- 3. SECTION: CASBERRY 3D INTERACTIVE TERRAIN SIMULATOR    -->
+  <!-- 3. SECTION: 3D INTERACTIVE TERRAIN TOPOGRAPHY            -->
   <!-- ======================================================== -->
-  <section id="particles" class="py-28 px-6 bg-navy text-white relative z-20">
+  <section id="terrain" class="py-28 px-6 bg-navy text-white relative z-20">
     <div class="max-w-7xl mx-auto">
       
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -529,11 +520,11 @@
           </h2>
         </div>
         <p class="text-stone-300 font-normal text-sm sm:text-base max-w-md leading-relaxed">
-          Inspired by <span class="text-lemon font-bold">particles.casberry.in</span>: an interactive wireframe mesh topography with live cursor ripple elevation and mathematical alpine flow vectors.
+          Interactive wireframe mesh topography with live cursor ripple elevation and mathematical alpine flow vectors across 64 pistes.
         </p>
       </div>
 
-      <!-- Interactive 3D Terrain Viewport + Origin UI Slider Controls -->
+      <!-- Interactive 3D Terrain Viewport -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
         <!-- Interactive 3D Terrain Canvas -->
@@ -550,55 +541,45 @@
 
           <div class="mt-4 flex flex-wrap items-center justify-between text-xs text-stone-400 gap-4">
             <span>Peak: <strong>Mont Altaval (3,200m)</strong></span>
-            <span>Surface: <strong>Hardpack Powder / Perlin Noise</strong></span>
+            <span>Surface: <strong>Hardpack Powder / Perlin Wave</strong></span>
             <span>Shader: <strong>Wireframe + Glow Nodes</strong></span>
           </div>
         </div>
 
-        <!-- Real-time Controls (Origin UI Tactile Design) -->
+        <!-- Real-time Mountain Elevation Telemetry -->
         <div class="lg:col-span-4 p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl space-y-6 flex flex-col justify-between">
           <div>
-            <h3 class="font-display text-xl uppercase tracking-wide text-white mb-6">Simulation Controls</h3>
+            <h3 class="font-display text-xl uppercase tracking-wide text-white mb-6">Summit Elevation Telemetry</h3>
             
-            <div class="space-y-6">
-              <!-- Slider 1: Wave Frequency -->
-              <div>
-                <div class="flex justify-between text-xs font-semibold mb-2">
-                  <span class="text-stone-300">Topography Crest Height</span>
-                  <span class="text-lemon font-bold" id="crestVal">24m Amplitude</span>
-                </div>
-                <input type="range" min="10" max="60" step="2" value="24" oninput="updateCrest(this.value)" class="w-full h-2.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#F2EA1E]">
+            <div class="space-y-6 text-xs">
+              <div class="flex justify-between border-b border-white/10 pb-3">
+                <span class="text-stone-400">Peak Elevation:</span>
+                <span class="text-lemon font-bold">3,200 Meters</span>
               </div>
-
-              <!-- Slider 2: Wireframe Resolution -->
-              <div>
-                <div class="flex justify-between text-xs font-semibold mb-2">
-                  <span class="text-stone-300">Alpine Drift Velocity</span>
-                  <span class="text-lemon font-bold" id="driftVal">0.65x Gentle</span>
-                </div>
-                <input type="range" min="0.1" max="2.0" step="0.05" value="0.65" oninput="updateWind(this.value)" class="w-full h-2.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#F2EA1E]">
+              <div class="flex justify-between border-b border-white/10 pb-3">
+                <span class="text-stone-400">Vertical Drop:</span>
+                <span class="text-white font-bold">1,350 Continuous Meters</span>
               </div>
-
-              <!-- Slider 3: Cursor Repulsion -->
-              <div>
-                <div class="flex justify-between text-xs font-semibold mb-2">
-                  <span class="text-stone-300">Cursor Deflection Force</span>
-                  <span class="text-lemon font-bold" id="attractVal">0.15 G (Low)</span>
-                </div>
-                <input type="range" min="0.02" max="0.8" step="0.02" value="0.15" oninput="updateAttract(this.value)" class="w-full h-2.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#F2EA1E]">
+              <div class="flex justify-between border-b border-white/10 pb-3">
+                <span class="text-stone-400">Piste Network:</span>
+                <span class="text-emerald-400 font-bold">64 Marked Runs (100% Open)</span>
+              </div>
+              <div class="flex justify-between border-b border-white/10 pb-3">
+                <span class="text-stone-400">Avalanche Safety Index:</span>
+                <span class="text-emerald-400 font-bold">Level 1 (Low / Controlled)</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-stone-400">Wind Direction:</span>
+                <span class="text-blue-300 font-bold">NNE @ 12 km/h</span>
               </div>
             </div>
           </div>
 
-          <div class="pt-6 border-t border-white/10 text-xs text-stone-300 space-y-2">
-            <div class="flex justify-between">
-              <span>Simulation Mode:</span>
-              <span class="text-lemon font-bold">Procedural Wireframe</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Framerate:</span>
-              <span class="text-emerald-400 font-bold">Stable 60 FPS</span>
-            </div>
+          <div class="pt-6 border-t border-white/10">
+            <a href="#passes" class="w-full py-3.5 rounded-2xl bg-lemon text-navy text-xs font-bold uppercase tracking-wider transition hover:bg-yellow-400 flex items-center justify-center gap-2 cursor-pointer">
+              <span>View Pass Options</span>
+              <span>&rarr;</span>
+            </a>
           </div>
         </div>
 
@@ -608,146 +589,117 @@
   </section>
 
   <!-- ======================================================== -->
-  <!-- 4. SECTION: ORIGIN UI INTERACTIVE COMPONENT SUITE        -->
+  <!-- 4. SECTION 3: COMMERCIAL PASS BOOKING SUITE (NO DEV)     -->
   <!-- ======================================================== -->
-  <section id="origin-ui" class="py-28 px-6 bg-snow text-navy relative z-20">
+  <section id="passes" class="py-28 px-6 bg-snow text-navy relative z-20">
     <div class="max-w-7xl mx-auto">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy/10 text-navy text-xs font-bold uppercase tracking-wider mb-4">
           <span>&#x25C7;</span>
-          <span>Origin UI &bull; originui.com Architecture</span>
+          <span>Online Mountain Reservations</span>
         </div>
         <h2 class="font-display text-4xl sm:text-6xl uppercase tracking-tight text-navy mb-4">
-          Tactile Mountain OS
+          Lift Tickets & Ski Passes
         </h2>
         <p class="text-stone-600 font-normal text-sm sm:text-base leading-relaxed">
-          Inspired by Origin UI: copy-paste micro-components featuring interactive steppers, tabbed sector viewports, and floating glass condition dispatchers.
+          Book RFID direct-to-lift passes online with live dynamic pricing and multi-day family discounts.
         </p>
       </div>
 
-      <!-- Component Showcase Grid -->
+      <!-- Commercial Pricing Cards Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
-        <!-- Component 1: Origin Lift Pass Stepper -->
+        <!-- Pass Card 1: 1-Day Lift Ticket -->
         <div class="origin-card p-8 flex flex-col justify-between">
           <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-glacier block mb-2">Component // 01</span>
-            <h3 class="font-display text-xl uppercase text-navy mb-3">Origin Lift Pass Stepper</h3>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-glacier">Single Day Pass</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-stone-100 text-stone-600 text-[10px] font-bold uppercase">RFID Card</span>
+            </div>
+            <h3 class="font-display text-2xl uppercase text-navy mb-2">Day Explorer</h3>
+            <div class="flex items-baseline gap-1 mb-4">
+              <span class="text-4xl font-display text-navy">$84</span>
+              <span class="text-xs text-stone-500 font-medium">/ person / day</span>
+            </div>
             <p class="text-xs text-stone-500 font-normal leading-relaxed mb-6">
-              Tactile guest counters with instant auditory feedback and live price recalculation.
+              Full access to all 64 trails, 18 lifts, and twilight night skiing runs.
             </p>
             
-            <div class="space-y-4">
-              <div class="flex items-center justify-between p-4 rounded-2xl bg-white border border-stone-200/80 shadow-sm">
-                <div>
-                  <div class="text-xs font-bold text-navy">Adult Pass (18+)</div>
-                  <div class="text-[11px] text-stone-400">$84 / Day</div>
-                </div>
-                <div class="flex items-center gap-3">
-                  <button onclick="updateQty('adult', -1)" class="w-9 h-9 rounded-full bg-stone-100 hover:bg-stone-200 font-bold text-navy flex items-center justify-center transition cursor-pointer text-base">-</button>
-                  <span id="qtyAdult" class="font-bold text-base text-navy w-5 text-center">2</span>
-                  <button onclick="updateQty('adult', 1)" class="w-9 h-9 rounded-full bg-navy hover:bg-black font-bold text-white flex items-center justify-center transition cursor-pointer text-base">+</button>
-                </div>
-              </div>
-
-              <div class="flex items-center justify-between p-4 rounded-2xl bg-white border border-stone-200/80 shadow-sm">
-                <div>
-                  <div class="text-xs font-bold text-navy">Junior Pass (&lt;18)</div>
-                  <div class="text-[11px] text-stone-400">$48 / Day</div>
-                </div>
-                <div class="flex items-center gap-3">
-                  <button onclick="updateQty('junior', -1)" class="w-9 h-9 rounded-full bg-stone-100 hover:bg-stone-200 font-bold text-navy flex items-center justify-center transition cursor-pointer text-base">-</button>
-                  <span id="qtyJunior" class="font-bold text-base text-navy w-5 text-center">1</span>
-                  <button onclick="updateQty('junior', 1)" class="w-9 h-9 rounded-full bg-navy hover:bg-black font-bold text-white flex items-center justify-center transition cursor-pointer text-base">+</button>
-                </div>
-              </div>
+            <div class="space-y-3.5 mb-8 text-xs text-stone-600">
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">&#x2713;</span> <span>Direct RFID gate turnstile scan</span></div>
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">&#x2713;</span> <span>Night skiing included (5PM - 9PM)</span></div>
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">&#x2713;</span> <span>Heated boot locker at valley station</span></div>
             </div>
           </div>
 
-          <div class="mt-8 pt-4 border-t border-stone-200 flex items-center justify-between">
-            <span class="text-xs text-stone-500 font-medium">Live Total:</span>
-            <span id="totalPassPrice" class="text-2xl font-display text-navy">$216 / Day</span>
+          <div>
+            <button onclick="alert('Day Explorer Pass added to your basket!')" class="w-full py-3.5 rounded-2xl bg-navy text-white text-xs font-bold uppercase tracking-wider transition hover:bg-black cursor-pointer shadow-md">
+              Select 1-Day Pass
+            </button>
           </div>
         </div>
 
-        <!-- Component 2: Charles Liu Color Wheel Swapper -->
-        <div class="origin-card p-8 flex flex-col justify-between">
+        <!-- Pass Card 2: 7-Day Flexi Pass (Featured) -->
+        <div class="origin-card p-8 flex flex-col justify-between border-2 border-lemon relative shadow-2xl">
+          <div class="absolute -top-3.5 right-6 px-4 py-1 rounded-full bg-lemon text-navy text-[11px] font-bold uppercase tracking-wider shadow-sm">
+            Most Popular
+          </div>
           <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-glacier block mb-2">Component // 02</span>
-            <h3 class="font-display text-xl uppercase text-navy mb-3">Color Wheel Transformer</h3>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-lemon">Week Package</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-lemon/20 text-navy text-[10px] font-bold uppercase">Save 30%</span>
+            </div>
+            <h3 class="font-display text-2xl uppercase text-navy mb-2">7-Day Alpine Flex</h3>
+            <div class="flex items-baseline gap-1 mb-4">
+              <span class="text-4xl font-display text-navy">$490</span>
+              <span class="text-xs text-stone-500 font-medium">/ 7 consecutive days</span>
+            </div>
             <p class="text-xs text-stone-500 font-normal leading-relaxed mb-6">
-              Live theme transformer demonstrating Charles Liu's 60/30/10 triadic color theory.
+              Consecutive 7-day mountain access with express priority gondola access lanes.
             </p>
-
-            <div class="space-y-3 text-xs">
-              <button onclick="applyPalette('powder')" class="w-full p-3.5 rounded-2xl border border-stone-200 hover:border-navy flex items-center justify-between transition cursor-pointer bg-white shadow-sm">
-                <span class="font-bold">Glacier &bull; Navy &bull; Lemon</span>
-                <div class="flex gap-1.5">
-                  <span class="w-4 h-4 rounded-full bg-[#5A9FE2]"></span>
-                  <span class="w-4 h-4 rounded-full bg-[#0C1B48]"></span>
-                  <span class="w-4 h-4 rounded-full bg-[#F2EA1E]"></span>
-                </div>
-              </button>
-
-              <button onclick="applyPalette('onyx')" class="w-full p-3.5 rounded-2xl border border-stone-200 hover:border-navy flex items-center justify-between transition cursor-pointer bg-white shadow-sm">
-                <span class="font-bold">Onyx &bull; Silk &bull; Emerald</span>
-                <div class="flex gap-1.5">
-                  <span class="w-4 h-4 rounded-full bg-[#0A0D14]"></span>
-                  <span class="w-4 h-4 rounded-full bg-[#FAF8F5]"></span>
-                  <span class="w-4 h-4 rounded-full bg-[#05D585]"></span>
-                </div>
-              </button>
-
-              <button onclick="applyPalette('cyber')" class="w-full p-3.5 rounded-2xl border border-stone-200 hover:border-navy flex items-center justify-between transition cursor-pointer bg-white shadow-sm">
-                <span class="font-bold">Deep Sky &bull; Indigo &bull; Coral</span>
-                <div class="flex gap-1.5">
-                  <span class="w-4 h-4 rounded-full bg-[#0F172A]"></span>
-                  <span class="w-4 h-4 rounded-full bg-[#38BDF8]"></span>
-                  <span class="w-4 h-4 rounded-full bg-[#EF4444]"></span>
-                </div>
-              </button>
+            
+            <div class="space-y-3.5 mb-8 text-xs text-stone-600">
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">&#x2713;</span> <span>Priority gondola express lanes</span></div>
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">&#x2713;</span> <span>Includes 1 complimentary ski tune-up</span></div>
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">&#x2713;</span> <span>15% off mountain dining & rentals</span></div>
             </div>
           </div>
 
-          <div class="mt-8 pt-4 border-t border-stone-200 text-xs text-stone-500 font-medium">
-            Ratio: 60% Atmosphere &bull; 30% Architecture &bull; 10% Action
+          <div>
+            <button onclick="alert('7-Day Alpine Flex Pass added to your basket!')" class="w-full py-3.5 rounded-2xl bg-lemon text-navy text-xs font-bold uppercase tracking-wider transition hover:bg-yellow-400 cursor-pointer shadow-lg shadow-yellow-500/30">
+              Select 7-Day Pass
+            </button>
           </div>
         </div>
 
-        <!-- Component 3: Origin UI Floating Glass Input -->
+        <!-- Pass Card 3: Season Unlimited -->
         <div class="origin-card p-8 flex flex-col justify-between">
           <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-glacier block mb-2">Component // 03</span>
-            <h3 class="font-display text-xl uppercase text-navy mb-3">Live Condition Dispatch</h3>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-glacier">Season Pass</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-stone-100 text-stone-600 text-[10px] font-bold uppercase">All-Access</span>
+            </div>
+            <h3 class="font-display text-2xl uppercase text-navy mb-2">Season Pass</h3>
+            <div class="flex items-baseline gap-1 mb-4">
+              <span class="text-4xl font-display text-navy">$1,450</span>
+              <span class="text-xs text-stone-500 font-medium">/ 140 days season</span>
+            </div>
             <p class="text-xs text-stone-500 font-normal leading-relaxed mb-6">
-              Powder snow SMS alert dispatcher with validated floating input fields.
+              Unlimited skiing from Dec 1 to Apr 20 with zero blackout dates or restrictions.
             </p>
-
-            <form onsubmit="handleAlertDispatch(event)" class="space-y-4">
-              <div>
-                <label class="block text-xs font-bold text-stone-600 mb-1.5">Mobile Phone (SMS)</label>
-                <input type="tel" required placeholder="+1 (555) 019-2834" class="w-full px-4 py-3 rounded-xl bg-white border border-stone-300 text-xs focus:outline-none focus:border-navy transition">
-              </div>
-
-              <div>
-                <label class="block text-xs font-bold text-stone-600 mb-1.5">Snow Threshold Trigger</label>
-                <select class="w-full px-4 py-3 rounded-xl bg-white border border-stone-300 text-xs focus:outline-none focus:border-navy transition font-medium">
-                  <option>&gt; 15 cm Fresh Powder</option>
-                  <option>&gt; 30 cm Blizzard Drop</option>
-                  <option>First Lift Bell Alarm</option>
-                </select>
-              </div>
-
-              <button type="submit" id="alertBtn" class="w-full py-3.5 rounded-xl bg-navy hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition cursor-pointer">
-                Subscribe Alerts &rarr;
-              </button>
-            </form>
+            
+            <div class="space-y-3.5 mb-8 text-xs text-stone-600">
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">&#x2713;</span> <span>Zero blackout dates all winter</span></div>
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">&#x2713;</span> <span>Free companion pass voucher</span></div>
+              <div class="flex items-center gap-2"><span class="text-emerald-600 font-bold">&#x2713;</span> <span>Year-round mountain resort perks</span></div>
+            </div>
           </div>
 
-          <div class="mt-4 pt-3 border-t border-stone-200 text-xs text-emerald-600 font-semibold flex items-center gap-1.5">
-            <span>&#x2713;</span>
-            <span>Origin UI Micro-Interaction Verified</span>
+          <div>
+            <button onclick="alert('Season Pass reserved for checkout!')" class="w-full py-3.5 rounded-2xl bg-navy text-white text-xs font-bold uppercase tracking-wider transition hover:bg-black cursor-pointer shadow-md">
+              Select Season Pass
+            </button>
           </div>
         </div>
 
@@ -757,9 +709,9 @@
   </section>
 
   <!-- ======================================================== -->
-  <!-- 4.5 LIVE ALPINE PISTE NETWORK & WEATHER RADAR (NEW PAGE) -->
+  <!-- 5. SECTION: PISTE NETWORK & WEATHER RADAR                -->
   <!-- ======================================================== -->
-  <section id="piste-radar" class="py-24 px-6 bg-white text-navy relative z-20 border-t border-stone-200">
+  <section id="status" class="py-24 px-6 bg-white text-navy relative z-20 border-t border-stone-200">
     <div class="max-w-7xl mx-auto">
       
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -770,7 +722,7 @@
           </h2>
         </div>
         <p class="text-stone-600 font-normal text-sm sm:text-base max-w-md leading-relaxed">
-          Real-time lift capacity, avalanche danger indices, and live web camera feeds across our 4 alpine sectors.
+          Real-time lift capacity, snow accumulations, and live sector operational status across our alpine terrain.
         </p>
       </div>
 
@@ -790,7 +742,6 @@
       <!-- Interactive Piste Cards Grid -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6" id="pisteGrid">
         
-        <!-- Piste 1 -->
         <div class="p-6 rounded-2xl border border-stone-200 bg-snow hover:border-navy transition">
           <div class="flex items-center justify-between mb-3">
             <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase">Open</span>
@@ -805,7 +756,6 @@
           </div>
         </div>
 
-        <!-- Piste 2 -->
         <div class="p-6 rounded-2xl border border-stone-200 bg-snow hover:border-navy transition">
           <div class="flex items-center justify-between mb-3">
             <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase">Open</span>
@@ -820,7 +770,6 @@
           </div>
         </div>
 
-        <!-- Piste 3 -->
         <div class="p-6 rounded-2xl border border-stone-200 bg-snow hover:border-navy transition">
           <div class="flex items-center justify-between mb-3">
             <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold uppercase">Standby</span>
@@ -835,7 +784,6 @@
           </div>
         </div>
 
-        <!-- Piste 4 -->
         <div class="p-6 rounded-2xl border border-stone-200 bg-snow hover:border-navy transition">
           <div class="flex items-center justify-between mb-3">
             <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase">Open</span>
@@ -856,111 +804,134 @@
   </section>
 
   <!-- ======================================================== -->
-  <!-- 5. SECTION: SKI PASSES & VIP CHALET INQUIRY              -->
+  <!-- 6. SECTION 4: LUXURY ALPINE CHALETS & SUITES (NO DEV)    -->
   <!-- ======================================================== -->
-  <section id="passes" class="py-28 px-6 bg-glacier border-t border-white/20 text-navy relative z-20">
-    <div class="max-w-4xl mx-auto origin-card p-8 sm:p-14 relative shadow-2xl">
+  <section id="chalets" class="py-28 px-6 bg-glacier border-t border-white/20 text-navy relative z-20">
+    <div class="max-w-7xl mx-auto">
       
-      <div class="text-center max-w-xl mx-auto mb-12">
+      <div class="text-center max-w-2xl mx-auto mb-16">
         <span class="text-xs font-bold uppercase tracking-widest text-navy block mb-2">
-          Private Alpine Salon
+          Ski-In &bull; Ski-Out Hospitality
         </span>
-        <h2 class="font-display text-3xl sm:text-5xl uppercase text-navy mb-3">
-          Season Allocations
+        <h2 class="font-display text-4xl sm:text-6xl uppercase text-navy mb-4">
+          Luxury Alpine Chalets
         </h2>
-        <p class="text-xs sm:text-sm text-stone-600 font-normal">
-          Priority access for private suites, heli-skiing drops, and seasonal mountain passes.
+        <p class="text-xs sm:text-base text-stone-700 font-normal">
+          Panoramic summit penthouses, private heated outdoor infinity pools, and ski-in / ski-out convenience.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
-        <div class="p-8 rounded-3xl bg-white/70 border border-white shadow-sm">
-          <div class="text-xs font-bold text-stone-500 uppercase mb-1">Standard Season</div>
-          <div class="text-xl font-display text-navy mb-2">UNLIMITED LIFT PASS</div>
-          <div class="text-4xl font-display text-navy mb-4">$1,450</div>
-          <p class="text-xs text-stone-600 mb-6 font-normal leading-relaxed">All 64 pistes, night skiing, priority express gondola lanes.</p>
-          <button onclick="alert('Unlimited Pass Reserved for checkout.')" class="w-full py-3.5 rounded-2xl bg-navy text-white text-xs font-bold uppercase tracking-wider transition hover:bg-black cursor-pointer">Select Pass</button>
-        </div>
-
-        <div class="p-8 rounded-3xl bg-navy text-white border-2 border-lemon relative shadow-2xl">
-          <div class="absolute -top-3 right-6 px-4 py-1 rounded-full bg-lemon text-navy text-[10px] font-bold uppercase tracking-wider">
-            VIP Heli-Club
+        <!-- Chalet 1 -->
+        <div class="origin-card p-8 flex flex-col justify-between">
+          <div>
+            <div class="h-44 rounded-2xl bg-gradient-to-br from-blue-900 to-indigo-950 p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner">
+              <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[10px] font-bold uppercase self-start">Ski-In / Out</span>
+              <div>
+                <h4 class="font-display text-xl uppercase mb-1">Matterhorn View Suite</h4>
+                <p class="text-[11px] text-stone-300">2 Bedrooms &bull; Private Sauna &bull; 110 m²</p>
+              </div>
+            </div>
+            <div class="flex items-baseline justify-between mb-4">
+              <span class="text-xs text-stone-500 font-bold uppercase">Winter Rate</span>
+              <div class="text-2xl font-display text-navy">$620 <span class="text-xs font-normal text-stone-500">/ night</span></div>
+            </div>
+            <p class="text-xs text-stone-600 mb-6 font-normal leading-relaxed">
+              Step directly onto the Altaval Express trail from your private heated ski locker and terrace hot tub.
+            </p>
           </div>
-          <div class="text-xs font-bold text-lemon uppercase mb-1">Ultra-Exclusive</div>
-          <div class="text-xl font-display text-white mb-2">ALPINE CHALET SUITE</div>
-          <div class="text-4xl font-display text-lemon mb-4">P.O.A.</div>
-          <p class="text-xs text-stone-300 mb-6 font-normal leading-relaxed">Private summit chalet, 3 helicopter powder drops, personal concierge.</p>
-          <button onclick="alert('Private VIP Salon requested. Concierge will reach out.')" class="w-full py-3.5 rounded-2xl bg-lemon text-navy text-xs font-bold uppercase tracking-wider transition hover:bg-yellow-400 cursor-pointer">Inquire P.O.A.</button>
+          <button onclick="alert('Inquiry received for Matterhorn View Suite! Our guest manager will email availability.')" class="w-full py-3.5 rounded-2xl bg-navy text-white text-xs font-bold uppercase tracking-wider transition hover:bg-black cursor-pointer shadow-md">
+            Reserve Suite
+          </button>
         </div>
 
-      </div>
+        <!-- Chalet 2: Featured Grand Chalet -->
+        <div class="origin-card p-8 flex flex-col justify-between border-2 border-lemon relative shadow-2xl">
+          <div class="absolute -top-3.5 right-6 px-4 py-1 rounded-full bg-lemon text-navy text-[11px] font-bold uppercase tracking-wider shadow-sm">
+            Private Residence
+          </div>
+          <div>
+            <div class="h-44 rounded-2xl bg-gradient-to-br from-amber-700 to-stone-900 p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner">
+              <span class="px-3 py-1 rounded-full bg-lemon text-navy text-[10px] font-bold uppercase self-start">Ultra-Exclusive</span>
+              <div>
+                <h4 class="font-display text-xl uppercase mb-1">The Mont Blanc Chalet</h4>
+                <p class="text-[11px] text-stone-200">5 Bedrooms &bull; Private Chef &bull; 340 m²</p>
+              </div>
+            </div>
+            <div class="flex items-baseline justify-between mb-4">
+              <span class="text-xs text-stone-500 font-bold uppercase">Full Chalet</span>
+              <div class="text-2xl font-display text-navy">$2,400 <span class="text-xs font-normal text-stone-500">/ night</span></div>
+            </div>
+            <p class="text-xs text-stone-600 mb-6 font-normal leading-relaxed">
+              Standalone timber chalet with full-time butler, private thermal plunge pool, cinema room, and wine cellar.
+            </p>
+          </div>
+          <button onclick="alert('Inquiry received for The Mont Blanc Chalet! Our VIP host will connect shortly.')" class="w-full py-3.5 rounded-2xl bg-lemon text-navy text-xs font-bold uppercase tracking-wider transition hover:bg-yellow-400 cursor-pointer shadow-lg shadow-yellow-500/30">
+            Inquire Full Chalet
+          </button>
+        </div>
 
-      <!-- Links Back to Other Flagship Studios -->
-      <div class="pt-6 border-t border-stone-200 flex flex-wrap items-center justify-between text-xs text-stone-600 gap-4 font-medium">
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>Flagship Systems Multiverse Active</span>
+        <!-- Chalet 3: Heli-Skiing Lodge -->
+        <div class="origin-card p-8 flex flex-col justify-between">
+          <div>
+            <div class="h-44 rounded-2xl bg-gradient-to-br from-slate-800 to-navy p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner">
+              <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[10px] font-bold uppercase self-start">Helipad Access</span>
+              <div>
+                <h4 class="font-display text-xl uppercase mb-1">Summit Heli-Lodge</h4>
+                <p class="text-[11px] text-stone-300">Private Helipad &bull; Mountain Guide &bull; 200 m²</p>
+              </div>
+            </div>
+            <div class="flex items-baseline justify-between mb-4">
+              <span class="text-xs text-stone-500 font-bold uppercase">Expedition Package</span>
+              <div class="text-2xl font-display text-navy">$1,850 <span class="text-xs font-normal text-stone-500">/ night</span></div>
+            </div>
+            <p class="text-xs text-stone-600 mb-6 font-normal leading-relaxed">
+              Located directly at the 2,900m helipad for immediate first-tracks access to untracked alpine bowls.
+            </p>
+          </div>
+          <button onclick="alert('Inquiry received for Summit Heli-Lodge! Our mountain guide will reach out.')" class="w-full py-3.5 rounded-2xl bg-navy text-white text-xs font-bold uppercase tracking-wider transition hover:bg-black cursor-pointer shadow-md">
+            Book Heli-Lodge
+          </button>
         </div>
-        <div class="flex items-center gap-4">
-          <a href="../crane-studio/" class="hover:text-navy underline">Crane Studio</a>
-          <a href="../goshwara/" class="hover:text-navy underline">Goshwara Haute Joaillerie</a>
-          <a href="../spline-studio/" class="hover:text-navy underline">Spline Engine</a>
-        </div>
+
       </div>
 
     </div>
   </section>
 
   <!-- ======================================================== -->
-  <!-- 6. FOOTER                                                -->
+  <!-- 7. EDITORIAL FOOTER                                      -->
   <!-- ======================================================== -->
-  <footer class="py-12 px-6 bg-navy text-stone-400 text-xs border-t border-white/10 relative z-20">
+  <footer class="py-14 px-6 bg-navy text-stone-400 text-xs border-t border-white/10 relative z-20">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
       
       <div class="flex items-center gap-3">
         <span class="font-display text-xl text-white">ALTAVAL</span>
-        <span class="text-lemon font-bold">&bull; POWDER ALPINE OS</span>
+        <span class="text-lemon font-bold">&bull; 3,200M ALPINE RESORT</span>
       </div>
 
       <div class="text-center md:text-right font-normal">
-        <span>Color Theory inspired by Charles Liu (@charles.unemployed) &bull; Casberry WebGL Engine</span>
+        <span>© 2026 ALTAVAL Alpine Lifts & Resorts &bull; All Rights Reserved</span>
       </div>
 
     </div>
   </footer>
 
   <!-- ======================================================== -->
-  <!-- 7. THREE.JS 3D TERRAIN + PARTICLES + GSAP TIMELINES      -->
+  <!-- 8. THREE.JS 3D TERRAIN + LOCKED VORTEX PARTICLES         -->
   <!-- ======================================================== -->
   <script>
-    // Audio Synthesizer (Alpine Wind & Tactile Clicks)
+    // Audio Synthesizer (Alpine Breeze)
     let audioCtx = null;
     let isWindPlaying = false;
     let windGain = null;
-
-    function playTone(freq, duration = 0.08) {
-      try {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
-      } catch (e) {}
-    }
 
     function toggleAudio() {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       if (audioCtx.state === 'suspended') audioCtx.resume();
 
       if (!isWindPlaying) {
-        // Synthesize Gentle Alpine Breeze
         const bufferSize = audioCtx.sampleRate * 2;
         const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
         const output = noiseBuffer.getChannelData(0);
@@ -1002,64 +973,8 @@
       }
     }
 
-    // Origin UI Pass Stepper Logic
-    let qtyAdult = 2;
-    let qtyJunior = 1;
-
-    function updateQty(type, delta) {
-      playTone(delta > 0 ? 560 : 380, 0.06);
-      if (type === 'adult') {
-        qtyAdult = Math.max(0, qtyAdult + delta);
-        document.getElementById('qtyAdult').textContent = qtyAdult;
-      } else {
-        qtyJunior = Math.max(0, qtyJunior + delta);
-        document.getElementById('qtyJunior').textContent = qtyJunior;
-      }
-      const total = (qtyAdult * 84) + (qtyJunior * 48);
-      document.getElementById('totalPassPrice').textContent = `$${total} / Day`;
-    }
-
-    // Color Wheel Transformer (Charles Liu 60/30/10 Rule)
-    function applyPalette(theme) {
-      playTone(680, 0.08);
-      const body = document.body;
-      const splitLemon = document.querySelector('.split-lemon');
-      const splitNavy = document.querySelector('.split-navy');
-
-      if (theme === 'powder') {
-        body.style.backgroundColor = '#5A9FE2';
-        body.style.color = '#0C1B48';
-        splitLemon.style.color = '#F2EA1E';
-        splitNavy.style.color = '#0C1B48';
-      } else if (theme === 'onyx') {
-        body.style.backgroundColor = '#0A0D14';
-        body.style.color = '#FAF8F5';
-        splitLemon.style.color = '#05D585';
-        splitNavy.style.color = '#FAF8F5';
-      } else if (theme === 'cyber') {
-        body.style.backgroundColor = '#0F172A';
-        body.style.color = '#38BDF8';
-        splitLemon.style.color = '#EF4444';
-        splitNavy.style.color = '#38BDF8';
-      }
-    }
-
-    // Origin UI Alert Dispatcher
-    function handleAlertDispatch(e) {
-      e.preventDefault();
-      playTone(880, 0.12);
-      const btn = document.getElementById('alertBtn');
-      btn.textContent = 'Subscribed to Alerts!';
-      btn.classList.add('bg-emerald-600');
-      setTimeout(() => {
-        btn.textContent = 'Subscribe Alerts →';
-        btn.classList.remove('bg-emerald-600');
-      }, 3500);
-    }
-
     // Piste Sector Switcher
     function switchSector(sec) {
-      playTone(600, 0.08);
       ['summit', 'glacier', 'valley'].forEach(s => {
         const btn = document.getElementById(`sec-${s}`);
         if (btn) {
@@ -1095,7 +1010,7 @@
     }
 
     // ==========================================
-    // GSAP SCROLL & MOUSE ANIMATIONS
+    // GSAP ENTRANCE & SCROLL KINEMATICS
     // ==========================================
     gsap.registerPlugin(ScrollTrigger);
 
@@ -1162,7 +1077,7 @@
     });
 
     // ========================================================
-    // 3D CASBERRY INTERACTIVE TERRAIN (SECTION 2 ENGINE)
+    // 3D CASBERRY INTERACTIVE TERRAIN
     // ========================================================
     const terrainCanvas = document.getElementById('terrainCanvas');
     const tScene = new THREE.Scene();
@@ -1174,11 +1089,9 @@
     tRenderer.setSize(terrainCanvas.clientWidth, terrainCanvas.clientHeight);
     tRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Plane Geometry with 40x40 segments (1600 vertices)
     const tGeo = new THREE.PlaneGeometry(240, 240, 40, 40);
     tGeo.rotateX(-Math.PI / 2);
 
-    // Wireframe Mesh Material with Cyan/Blue Neon Tint
     const tMat = new THREE.MeshBasicMaterial({
       color: 0x5A9FE2,
       wireframe: true,
@@ -1188,20 +1101,13 @@
     const terrainMesh = new THREE.Mesh(tGeo, tMat);
     tScene.add(terrainMesh);
 
-    // Golden Peak Node
     const peakGeo = new THREE.SphereGeometry(3.5, 16, 16);
     const peakMat = new THREE.MeshBasicMaterial({ color: 0xF2EA1E });
     const peakMesh = new THREE.Mesh(peakGeo, peakMat);
     tScene.add(peakMesh);
 
-    let crestAmplitude = 24;
-    function updateCrest(v) {
-      crestAmplitude = parseFloat(v);
-      document.getElementById('crestVal').textContent = `${crestAmplitude}m Amplitude`;
-    }
-
     // ========================================================
-    // CASBERRY WEBGL BACKGROUND PARTICLES
+    // CASBERRY WEBGL PARTICLES (LOCKED VORTEX SWIRL)
     // ========================================================
     const canvas = document.getElementById('casberryCanvas');
     const scene = new THREE.Scene();
@@ -1257,36 +1163,8 @@
     const particleSystem = new THREE.Points(geometry, material);
     scene.add(particleSystem);
 
-    let currentMode = 'blizzard';
-    let windMultiplier = 0.65;
-    let attractorGravity = 0.15;
-
-    function setParticleMode(mode) {
-      currentMode = mode;
-      playTone(520, 0.07);
-      ['blizzard', 'vortex', 'wave'].forEach(m => {
-        const btn = document.getElementById(`btn-${m}`);
-        if (btn) {
-          if (m === mode) {
-            btn.className = 'px-4 py-2 rounded-full origin-segmented-active transition cursor-pointer';
-          } else {
-            btn.className = 'px-4 py-2 rounded-full text-navy hover:text-black transition cursor-pointer';
-          }
-        }
-      });
-    }
-
-    function updateWind(v) {
-      windMultiplier = parseFloat(v);
-      const dw = document.getElementById('driftVal');
-      if (dw) dw.textContent = `${windMultiplier.toFixed(2)}x Velocity`;
-    }
-
-    function updateAttract(v) {
-      attractorGravity = parseFloat(v);
-      const da = document.getElementById('attractVal');
-      if (da) da.textContent = `${attractorGravity.toFixed(2)} G`;
-    }
+    const windMultiplier = 0.65;
+    const attractorGravity = 0.15;
 
     // Animation Loop
     let clock = new THREE.Clock();
@@ -1305,15 +1183,14 @@
         gondolaEl.style.transform = `translate(-50%, -50%) rotate(${18.5 + currentTiltY * 0.25}deg) perspective(800px) rotateY(${currentTiltY}deg) rotateX(${-currentTiltX}deg)`;
       }
 
-      // Animate 3D Topography Waves
+      // 3D Topography Elevation Waves
       const tPos = tGeo.attributes.position;
       let peakY = -999;
       for (let i = 0; i < tPos.count; i++) {
         const u = tPos.getX(i);
         const w = tPos.getZ(i);
-        // Harmonic elevation equation
-        const elevation = Math.sin(u * 0.04 + time * 0.8) * Math.cos(w * 0.04 + time * 0.6) * crestAmplitude
-                        + Math.sin(u * 0.08 - time * 0.4) * (crestAmplitude * 0.4);
+        const elevation = Math.sin(u * 0.04 + time * 0.8) * Math.cos(w * 0.04 + time * 0.6) * 24
+                        + Math.sin(u * 0.08 - time * 0.4) * 9.6;
         tPos.setY(i, elevation);
         if (elevation > peakY) {
           peakY = elevation;
@@ -1325,7 +1202,7 @@
       peakMesh.rotation.y = time * 0.05;
       tRenderer.render(tScene, tCamera);
 
-      // Particle Simulation Loop
+      // Particle Simulation Loop: LOCKED IN VORTEX SPIRAL
       const pos = geometry.attributes.position.array;
       const mouseWorldX = (mouseX / window.innerWidth - 0.5) * 800;
       const mouseWorldY = -(mouseY / window.innerHeight - 0.5) * 550;
@@ -1335,17 +1212,14 @@
         pos[i3 + 1] += velocities[i3 + 1] * windMultiplier;
         pos[i3] += velocities[i3] * windMultiplier + Math.sin(time * 0.8 + pos[i3 + 1] * 0.008) * 0.25;
 
-        if (currentMode === 'vortex') {
-          const angle = 0.008;
-          const px = pos[i3];
-          const pz = pos[i3 + 2];
-          pos[i3] = px * Math.cos(angle) - pz * Math.sin(angle);
-          pos[i3 + 2] = px * Math.sin(angle) + pz * Math.cos(angle);
-        } else if (currentMode === 'wave') {
-          pos[i3 + 1] += Math.cos(time * 1.5 + pos[i3] * 0.008) * 0.4;
-        }
+        // Elegant Perpetual Vortex Spiral
+        const angle = 0.008;
+        const px = pos[i3];
+        const pz = pos[i3 + 2];
+        pos[i3] = px * Math.cos(angle) - pz * Math.sin(angle);
+        pos[i3 + 2] = px * Math.sin(angle) + pz * Math.cos(angle);
 
-        // Low-Sensitivity Deflection
+        // Gentle cursor deflection
         const dx = mouseWorldX - pos[i3];
         const dy = mouseWorldY - pos[i3 + 1];
         const distSq = dx * dx + dy * dy;
