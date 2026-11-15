@@ -116,17 +116,6 @@
       animation-play-state: paused;
     }
 
-    /* Natural Curved Mountain Snow Wave */
-    .wave-curve {
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 100%;
-      height: 180px;
-      pointer-events: none;
-      z-index: 5;
-    }
-
     /* Selection Highlight */
     ::selection {
       background: #F2EA1E;
@@ -312,14 +301,13 @@
         </p>
       </div>
 
-      <!-- Production Grid -->
+      <!-- Production Grid (4 Curated Flagships) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         <!-- Flagship 01: ALTAVAL Powder Mountain OS -->
         <div class="card-3d-wrapper group">
           <div class="card-3d bg-white rounded-3xl p-8 border border-slate-200 shadow-xl flex flex-col justify-between h-full relative overflow-hidden transition">
             
-            <!-- Top Badge Bar -->
             <div class="flex items-center justify-between mb-6">
               <span class="px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 font-mono text-[11px] font-bold uppercase tracking-wider">
                 01 / Awwwards Experimental
@@ -330,7 +318,6 @@
               </span>
             </div>
 
-            <!-- Hero Image Preview Container -->
             <div class="h-64 rounded-2xl bg-gradient-to-br from-[#5A9FE2] to-[#0C1B48] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner group-hover:scale-[1.01] transition-transform">
               <div class="flex justify-between items-start">
                 <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/40 backdrop-blur-md">ALTAVAL &bull; 3,200M</span>
@@ -347,7 +334,6 @@
               </div>
             </div>
 
-            <!-- Description & Tech Tags -->
             <div>
               <h3 class="font-syne font-bold text-2xl uppercase text-navy mb-2 group-hover:text-blue-600 transition-colors">
                 ALTAVAL Alpine Resort OS
@@ -364,7 +350,6 @@
               </div>
             </div>
 
-            <!-- Launch Button -->
             <a href="./powder-studio/" target="_blank" class="w-full py-4 rounded-2xl btn-lemon text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
               <span>Launch ALTAVAL OS Experience</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
@@ -377,7 +362,6 @@
         <div class="card-3d-wrapper group">
           <div class="card-3d bg-white rounded-3xl p-8 border border-slate-200 shadow-xl flex flex-col justify-between h-full relative overflow-hidden transition">
             
-            <!-- Top Badge Bar -->
             <div class="flex items-center justify-between mb-6">
               <span class="px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 font-mono text-[11px] font-bold uppercase tracking-wider">
                 02 / 3D Kinematics & Unboxing
@@ -388,11 +372,10 @@
               </span>
             </div>
 
-            <!-- Hero Image Preview Container -->
             <div class="h-64 rounded-2xl bg-gradient-to-br from-[#1E40AF] to-[#0F172A] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner group-hover:scale-[1.01] transition-transform">
               <div class="flex justify-between items-start">
                 <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/40 backdrop-blur-md">CRANE OS &bull; PHYSICAL 3D</span>
-                <span class="font-archivo text-navy text-xs px-3 py-1 rounded-full bg-lemon">KINEMATICS</span>
+                <span class="font-archivo text-navy text-xs px-3 py-1 rounded-full bg-lemon">ZERO OVERLAP</span>
               </div>
               
               <div>
@@ -400,29 +383,27 @@
                   UNBOXING <span class="text-lemon">OS</span>
                 </div>
                 <p class="text-xs text-blue-200 font-space font-medium">
-                  Dual-Cable Mechanical Pulley &bull; Interactive 3D Containers
+                  Dual-Cable Mechanical Pulley &bull; Harmonious Spaced Containers
                 </p>
               </div>
             </div>
 
-            <!-- Description & Tech Tags -->
             <div>
               <h3 class="font-syne font-bold text-2xl uppercase text-navy mb-2 group-hover:text-blue-600 transition-colors">
                 FLAGSHIP CRANE OS
               </h3>
               <p class="font-space text-slate-600 text-xs sm:text-sm mb-6 leading-relaxed">
-                Inspired by @ui.debbie's physical unboxing design. Built with real-time Three.js spatial kinematics, interactive cargo containers that unbox into working project viewports, and custom studio lighting.
+                Built with real-time Three.js spatial kinematics, physical cargo containers that unbox into interactive project viewports, and custom studio lighting with zero container overlap.
               </p>
 
               <div class="flex flex-wrap gap-2 mb-8 font-mono text-[10px] text-slate-600">
                 <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Three.js Kinematics</span>
                 <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">3D Mechanical Pulley</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Container Unboxing Physics</span>
+                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Spaced Container Unboxing</span>
                 <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Studio Camera Orbit</span>
               </div>
             </div>
 
-            <!-- Launch Button -->
             <a href="./crane-studio/" target="_blank" class="w-full py-4 rounded-2xl bg-navy hover:bg-black text-white font-space font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md">
               <span>Launch CRANE OS Experience</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
@@ -431,13 +412,13 @@
           </div>
         </div>
 
-        <!-- Flagship 03: LIQUIQUANT OS -->
+        <!-- Flagship 03: KURA ARCHITECTURAL RESIDENCES -->
         <div class="card-3d-wrapper group">
           <div class="card-3d bg-white rounded-3xl p-8 border border-slate-200 shadow-xl flex flex-col justify-between h-full relative overflow-hidden transition">
             
             <div class="flex items-center justify-between mb-6">
-              <span class="px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 font-mono text-[11px] font-bold uppercase tracking-wider">
-                03 / High-Density Fintech
+              <span class="px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 font-mono text-[11px] font-bold uppercase tracking-wider">
+                03 / Spatial Architecture & Interiors
               </span>
               <span class="flex items-center gap-2 text-xs font-mono text-emerald-600 font-semibold">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -445,53 +426,53 @@
               </span>
             </div>
 
-            <div class="h-64 rounded-2xl bg-gradient-to-br from-[#064E3B] to-[#022C22] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner group-hover:scale-[1.01] transition-transform">
+            <div class="h-64 rounded-2xl bg-gradient-to-br from-[#2C1A14] to-[#120A07] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner group-hover:scale-[1.01] transition-transform">
               <div class="flex justify-between items-start">
-                <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/50">LIQUIQUANT &bull; ALGO TERMINAL</span>
-                <span class="font-mono text-emerald-300 text-xs px-3 py-1 rounded-full bg-black/60 border border-emerald-400/40">SUB-MS DATA</span>
+                <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/60">STUDIO ARCHITECTURE</span>
+                <span class="font-mono text-amber-300 text-xs px-3 py-1 rounded-full bg-black/50 border border-amber-300/40">SPATIAL</span>
               </div>
               
               <div>
-                <div class="font-mono font-bold text-3xl sm:text-4xl tracking-tight text-white mb-2">
-                  ORDER<span class="text-emerald-400">BOOK</span>.DAT
+                <div class="font-syne font-bold text-3xl sm:text-4xl tracking-wider text-amber-100 mb-2">
+                  FORM & SPACE
                 </div>
-                <p class="text-xs text-emerald-200 font-mono">
-                  Algorithmic Execution &bull; Real-Time Liquidity Heatmap
+                <p class="text-xs text-amber-200/90 font-space font-medium">
+                  Architectural Curation &bull; Minimalist Spatial Materiality
                 </p>
               </div>
             </div>
 
             <div>
               <h3 class="font-syne font-bold text-2xl uppercase text-navy mb-2 group-hover:text-blue-600 transition-colors">
-                LiquiQuant Institutional OS
+                Studio Form & Space
               </h3>
               <p class="font-space text-slate-600 text-xs sm:text-sm mb-6 leading-relaxed">
-                Ultra-dense institutional quantitative trading terminal engineered for algorithmic order routing, real-time depth heatmaps, and millisecond execution telemetry with Bloomberg terminal aesthetics.
+                Minimalist architectural and luxury interior design digital flagship featuring spatial materiality swatches, high-end residential case studies, and WhatsApp VIP consultation.
               </p>
 
               <div class="flex flex-wrap gap-2 mb-8 font-mono text-[10px] text-slate-600">
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Order Book Heatmaps</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Live Algo Telemetry</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Sub-100ms Feeds</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Dark Terminal UI</span>
+                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Spatial Materiality</span>
+                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Architectural Minimal</span>
+                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Residential Case Studies</span>
+                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">VIP Client Direct</span>
               </div>
             </div>
 
-            <a href="https://liquiquant-os.github.io/" target="_blank" class="w-full py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-space font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md">
-              <span>Launch LiquiQuant Terminal</span>
+            <a href="./interior/" target="_blank" class="w-full py-4 rounded-2xl bg-amber-800 hover:bg-amber-900 text-white font-space font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md">
+              <span>Launch Studio Experience</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
             </a>
 
           </div>
         </div>
 
-        <!-- Flagship 04: GOSHWARA NEW YORK -->
+        <!-- Flagship 04: AURA PRECISION AESTHETIC CLINIC -->
         <div class="card-3d-wrapper group">
           <div class="card-3d bg-white rounded-3xl p-8 border border-slate-200 shadow-xl flex flex-col justify-between h-full relative overflow-hidden transition">
             
             <div class="flex items-center justify-between mb-6">
-              <span class="px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-purple-700 font-mono text-[11px] font-bold uppercase tracking-wider">
-                04 / Haute Luxury & Horology
+              <span class="px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-mono text-[11px] font-bold uppercase tracking-wider">
+                04 / High-Trust Medical Aesthetics
               </span>
               <span class="flex items-center gap-2 text-xs font-mono text-emerald-600 font-semibold">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -499,40 +480,40 @@
               </span>
             </div>
 
-            <div class="h-64 rounded-2xl bg-gradient-to-br from-[#1E112A] to-[#0A050F] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner group-hover:scale-[1.01] transition-transform">
+            <div class="h-64 rounded-2xl bg-gradient-to-br from-[#0F2942] to-[#0A192F] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner group-hover:scale-[1.01] transition-transform">
               <div class="flex justify-between items-start">
-                <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/60">GOSHWARA &bull; NEW YORK</span>
-                <span class="font-mono text-amber-300 text-xs px-3 py-1 rounded-full bg-black/50 border border-amber-300/40">VELVET VAULT</span>
+                <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/60">PRECISION CLINICAL</span>
+                <span class="font-mono text-emerald-300 text-xs px-3 py-1 rounded-full bg-black/50 border border-emerald-300/40">30-SEC STEPPER</span>
               </div>
               
               <div>
-                <div class="font-syne font-bold text-3xl sm:text-4xl tracking-wider text-amber-200 mb-2">
-                  THE VELVET VAULT
+                <div class="font-syne font-bold text-3xl sm:text-4xl tracking-wider text-emerald-200 mb-2">
+                  AURA AESTHETICS
                 </div>
-                <p class="text-xs text-purple-200 font-space font-medium">
-                  Haute Joaillerie &bull; Colombian Emeralds & 18K Architectural Gold
+                <p class="text-xs text-emerald-100 font-space font-medium">
+                  High-Trust Clinical Flagship &bull; Surgical & Dermatological Care
                 </p>
               </div>
             </div>
 
             <div>
               <h3 class="font-syne font-bold text-2xl uppercase text-navy mb-2 group-hover:text-blue-600 transition-colors">
-                GOSHWARA Haute Joaillerie
+                Aura Precision Aesthetics
               </h3>
               <p class="font-space text-slate-600 text-xs sm:text-sm mb-6 leading-relaxed">
-                Old-money luxury serif typography, deep obsidian velvet textures, gemstone facet reflection shaders, and private collector viewing rooms designed for high-ticket acquisition.
+                High-trust medical aesthetics flagship featuring a 30-second patient appointment scheduling stepper, procedure comparison grids, and verified surgical credentials.
               </p>
 
               <div class="flex flex-wrap gap-2 mb-8 font-mono text-[10px] text-slate-600">
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Cinzel & Garamond Editorial</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Deep Velvet Obsidian</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Facet Light Shaders</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Private VIP Viewing</span>
+                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">30-Sec Patient Stepper</span>
+                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">High-Trust Architecture</span>
+                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Doctor Credentialing</span>
+                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Direct Conversion</span>
               </div>
             </div>
 
-            <a href="./goshwara/" target="_blank" class="w-full py-4 rounded-2xl bg-amber-500 hover:bg-amber-600 text-navy font-space font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md">
-              <span>Launch GOSHWARA Vault</span>
+            <a href="./clinic/" target="_blank" class="w-full py-4 rounded-2xl bg-emerald-700 hover:bg-emerald-800 text-white font-space font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md">
+              <span>Launch Clinic Experience</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
             </a>
 
@@ -725,14 +706,14 @@
             <button type="button" onclick="selectTier(this, 'Aesthetic Medicine & Surgical Clinics')" class="tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold border-navy bg-yellow-50 text-navy">
               Medical Clinic
             </button>
-            <button type="button" onclick="selectTier(this, 'Haute Joaillerie & High Luxury')" class="tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold text-slate-700">
+            <button type="button" onclick="selectTier(this, 'Haute Luxury & Bespoke Horology')" class="tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold text-slate-700">
               Haute Luxury
             </button>
             <button type="button" onclick="selectTier(this, 'High-Ticket Real Estate & Architecture')" class="tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold text-slate-700">
               Prime Estates
             </button>
-            <button type="button" onclick="selectTier(this, 'Fintech & Quantitative Terminals')" class="tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold text-slate-700">
-              Fintech / Quant
+            <button type="button" onclick="selectTier(this, 'Alpine Resorts & Adventure')" class="tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold text-slate-700">
+              Alpine Resorts
             </button>
             <button type="button" onclick="selectTier(this, 'Elite Athletics & Performance')" class="tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold text-slate-700">
               Elite Athletics
@@ -789,9 +770,6 @@
   <!-- 8. THREE.JS 3D SCENE & WEB AUDIO SYNTHESIZER SCRIPT      -->
   <!-- ======================================================== -->
   <script>
-    // ----------------------------------------------------
-    // THREE.JS ATMOSPHERIC PRISMATIC ARTIFACT
-    // ----------------------------------------------------
     let scene, camera, renderer, coreMesh, wireMesh, particleSystem;
     let clock = new THREE.Clock();
     let mouseX = 0, mouseY = 0;
@@ -869,7 +847,7 @@
       particleSystem = new THREE.Points(particleGeo, particleMat);
       scene.add(particleSystem);
 
-      // Ambient & Directional Lighting
+      // Lighting
       const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.85);
       scene.add(ambientLight);
 
@@ -881,7 +859,6 @@
       dirLight2.position.set(-15, -15, 10);
       scene.add(dirLight2);
 
-      // Mouse Listener
       window.addEventListener('mousemove', onMouseMove);
       window.addEventListener('resize', onWindowResize);
     }
@@ -907,7 +884,6 @@
       const delta = clock.getDelta();
       const elapsedTime = clock.getElapsedTime();
 
-      // FPS tracking
       frameCount++;
       const now = performance.now();
       if (now - lastFrameTime >= 500) {
@@ -916,14 +892,12 @@
         lastFrameTime = now;
       }
 
-      // Smooth camera parallax
       targetX = mouseX * 2.2;
       targetY = mouseY * 1.8;
       camera.position.x += (targetX - camera.position.x) * 0.05;
       camera.position.y += (targetY - camera.position.y) * 0.05;
       camera.lookAt(0, 0, 0);
 
-      // Rotate Geometry
       const rotSpeed = delta * currentSpeed;
       if (coreMesh) {
         coreMesh.rotation.x += rotSpeed * 0.25;
@@ -934,7 +908,6 @@
         wireMesh.rotation.y -= rotSpeed * 0.35;
       }
 
-      // Particle Vortex & Swirl
       if (particleSystem) {
         particleSystem.rotation.y = elapsedTime * 0.04 * currentSpeed;
         const positions = particleSystem.geometry.attributes.position.array;
@@ -950,9 +923,6 @@
     initThree();
     animateThree();
 
-    // ----------------------------------------------------
-    // MODE SWITCHER
-    // ----------------------------------------------------
     function setShaderMode(mode) {
       currentShaderMode = mode;
       const b0 = document.getElementById('modeBtn0');
@@ -984,9 +954,7 @@
       synthesizeTick();
     }
 
-    // ----------------------------------------------------
-    // WEB AUDIO SPATIAL SYNTHESIZER
-    // ----------------------------------------------------
+    // Web Audio Synthesizer
     let audioCtx = null;
     let isAudioPlaying = false;
     let osc1 = null, osc2 = null, masterGain = null;
@@ -1006,11 +974,11 @@
 
         osc1 = audioCtx.createOscillator();
         osc1.type = 'sine';
-        osc1.frequency.setValueAtTime(65.41, audioCtx.currentTime); // C2
+        osc1.frequency.setValueAtTime(65.41, audioCtx.currentTime);
 
         osc2 = audioCtx.createOscillator();
         osc2.type = 'triangle';
-        osc2.frequency.setValueAtTime(130.81, audioCtx.currentTime); // C3
+        osc2.frequency.setValueAtTime(130.81, audioCtx.currentTime);
 
         const filter = audioCtx.createBiquadFilter();
         filter.type = 'lowpass';
@@ -1062,9 +1030,6 @@
       } catch (e) {}
     }
 
-    // ----------------------------------------------------
-    // SPRINT TERMINAL TIER SELECTOR & WHATSAPP GENERATOR
-    // ----------------------------------------------------
     let selectedIndustry = 'Aesthetic Medicine & Surgical Clinics';
 
     function selectTier(btn, industry) {
@@ -1079,26 +1044,15 @@
     function launchWhatsAppSprint() {
       const brandInput = document.getElementById('brandInput').value.trim() || 'Visionary Client';
       const text = encodeURIComponent(
-        `Hello Flagship Systems,
-
-I want to claim a 72-Hour Digital Flagship Sprint.
-
-` +
-        `• Brand / Domain: ${brandInput}
-` +
-        `• Industry Standard: ${selectedIndustry}
-` +
-        `• Design Standard: Charles Liu 60/30/10 Harmony & 3D Kinematics
-
-` +
+        `Hello Flagship Systems,\n\nI want to claim a 72-Hour Digital Flagship Sprint.\n\n` +
+        `• Brand / Domain: ${brandInput}\n` +
+        `• Industry Standard: ${selectedIndustry}\n` +
+        `• Design Standard: Charles Liu 60/30/10 Harmony & 3D Kinematics\n\n` +
         `Please share the kickoff protocol and timeline.`
       );
       window.open(`https://wa.me/918882967595?text=${text}`, '_blank');
     }
 
-    // ----------------------------------------------------
-    // 3D PERSPECTIVE CARD TILT PHYSICS (ORIGIN UI STYLE)
-    // ----------------------------------------------------
     document.querySelectorAll('.card-3d-wrapper').forEach(wrapper => {
       const card = wrapper.querySelector('.card-3d');
       wrapper.addEventListener('mousemove', (e) => {
