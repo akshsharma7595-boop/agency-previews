@@ -1,748 +1,602 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%2305070a'/><rect x='5' y='5' width='90' height='90' rx='20' fill='none' stroke='%2338bdf8' stroke-width='5'/><polygon points='50,18 82,38 82,72 50,88 18,72 18,38' fill='none' stroke='%2338bdf8' stroke-width='7' stroke-linejoin='round'/><polyline points='50,18 50,88' stroke='%230284c7' stroke-width='5'/><circle cx='50' cy='53' r='6' fill='%2338bdf8'/></svg>" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flagship Systems | High-Converting Digital Flagships for Premium Local Leaders</title>
-  <meta name="description" content="We design and engineer bespoke, high-converting digital flagships for specialized healthcare clinics, luxury architectural studios, high-ticket real estate, and premium brands in 72 hours with ₹0 upfront risk." />
-  
-  <!-- Fonts -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLAGSHIP SYSTEMS | Creative Engineering & Kinetic Digital Flagships</title>
+  <meta name="description" content="We engineer Awwwards-calibre 3D kinematic digital flagships, WebGL spatial interfaces, and high-converting systems for visionary industry leaders.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%2306070A'/><polygon points='50,15 85,35 85,75 50,90 15,75 15,35' fill='none' stroke='%23E2F804' stroke-width='6'/><circle cx='50' cy='52' r='10' fill='%2300F0FF'/></svg>">
+
+  <!-- Elite Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
+          colors: {
+            obsidian: '#06070A',
+            darksurface: '#0B0D13',
+            darkcard: '#10131B',
+            volt: '#E2F804',
+            hypercyan: '#00F0FF',
+            crimson: '#FF2A54',
+            titanium: '#8F9CAE',
+          },
           fontFamily: {
+            syne: ['Syne', 'sans-serif'],
+            archivo: ['"Archivo Black"', 'sans-serif'],
+            space: ['"Space Grotesk"', 'sans-serif'],
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          colors: {
-            brand: {
-              50: '#f0f9ff',
-              100: '#e0f2fe',
-              400: '#38bdf8',
-              500: '#0ea5e9',
-              600: '#0284c7',
-              900: '#0c4a6e',
-              emerald: '#10b981',
-              gold: '#f59e0b',
-            },
-            dark: {
-              950: '#05070a',
-              900: '#090d14',
-              850: '#0e1420',
-              800: '#141c2c',
-              700: '#1e293b',
-              border: 'rgba(255, 255, 255, 0.08)',
-            }
           }
         }
       }
-    }
+    };
   </script>
 
+  <!-- Three.js + GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
   <style>
-    body {
-      background-color: #05070a;
-      color: #f8fafc;
-      overflow-x: hidden;
+    /* Noise Texture Overlay */
+    .noise-bg {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+    }
+
+    /* Glow utilities */
+    .glow-volt {
+      box-shadow: 0 0 45px -8px rgba(226, 248, 4, 0.45);
     }
     .glow-cyan {
-      box-shadow: 0 0 50px -10px rgba(56, 189, 248, 0.25);
+      box-shadow: 0 0 45px -8px rgba(0, 240, 255, 0.45);
     }
-    .glow-cyan-sm {
-      box-shadow: 0 0 25px -5px rgba(56, 189, 248, 0.3);
+    .glow-border-volt:hover {
+      border-color: rgba(226, 248, 4, 0.8) !important;
+      box-shadow: 0 15px 40px -10px rgba(226, 248, 4, 0.25);
     }
-    .glow-card:hover {
-      box-shadow: 0 15px 40px -10px rgba(56, 189, 248, 0.18);
-      border-color: rgba(56, 189, 248, 0.4);
-      transform: translateY(-4px);
+
+    /* Glass HUDs */
+    .hud-panel {
+      background: rgba(16, 19, 27, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .text-gradient {
-      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+
+    .hud-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(14px);
     }
-    .text-gradient-cyan {
-      background: linear-gradient(135deg, #ffffff 10%, #38bdf8 60%, #0284c7 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+
+    /* 3D Kinetic Card Tilt */
+    .card-3d-wrapper {
+      perspective: 1000px;
     }
-    .grid-bg {
-      background-size: 40px 40px;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    .card-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
     }
-    .radial-glow {
-      background: radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 60%);
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #06070A;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1B2130;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #E2F804;
+    }
+
+    /* Kinetic Marquee */
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: 200%;
+      animation: marquee 24s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Selection Color */
+    ::selection {
+      background: #E2F804;
+      color: #06070A;
     }
   </style>
 </head>
-<body class="font-sans antialiased selection:bg-sky-500 selection:text-white">
 
-  <!-- BACKGROUND AMBIENCE -->
-  <div class="fixed inset-0 grid-bg pointer-events-none -z-10"></div>
-  <div class="fixed inset-0 radial-glow pointer-events-none -z-10"></div>
+<body class="bg-obsidian text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-volt selection:text-obsidian relative">
 
-  <!-- NAVIGATION -->
-  <nav class="sticky top-0 z-50 backdrop-blur-xl bg-dark-950/80 border-b border-dark-border transition-all">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+  <!-- Grain Ambient Overlay -->
+  <div class="fixed inset-0 noise-bg pointer-events-none z-50"></div>
+
+  <!-- FIXED THREE.JS 3D CANVAS IN BACKGROUND -->
+  <div id="canvas-container" class="fixed inset-0 pointer-events-none z-0">
+    <canvas id="webglCanvas" class="w-full h-full"></canvas>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 1. NAVIGATION BAR (ORIGIN UI TACTILE HUD)                -->
+  <!-- ======================================================== -->
+  <header class="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 py-5 transition-all">
+    <div class="max-w-7xl mx-auto flex items-center justify-between hud-panel px-6 py-3.5 rounded-full shadow-2xl">
       
-            <!-- Brand Logo -->
+      <!-- Brand Logo -->
       <a href="#" class="flex items-center gap-3.5 group">
-        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-sky-500 via-sky-400 to-indigo-500 p-0.5 shadow-lg shadow-sky-500/25 group-hover:shadow-sky-500/50 transition">
-          <div class="w-full h-full bg-dark-950 rounded-[14px] flex items-center justify-center relative overflow-hidden">
-            <!-- Modern Flagship Prism Icon -->
-            <svg class="w-6 h-6 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-              <polyline points="2 17 12 22 22 17"></polyline>
-              <polyline points="2 12 12 17 22 12"></polyline>
-            </svg>
-          </div>
+        <div class="w-10 h-10 rounded-xl bg-volt flex items-center justify-center text-obsidian font-syne font-extrabold text-xl shadow-lg shadow-volt/30 group-hover:scale-105 transition-transform">
+          F
         </div>
         <div>
-          <div class="flex items-center gap-1.5">
-            <span class="font-extrabold text-xl tracking-tight text-white block leading-none font-sans">FLAGSHIP<span class="text-sky-400">.SYSTEMS</span></span>
-          </div>
-          <span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold block mt-1">High-Conversion Web Engineering Lab</span>
-        </div>
-      </a>
-
-      <!-- Desktop Links -->
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-        <a href="#services" class="hover:text-sky-400 transition">What We Provide</a>
-        <a href="#difference" class="hover:text-sky-400 transition">The Difference</a>
-        <a href="#showcase" class="hover:text-sky-400 transition">Live Prototypes</a>
-        <a href="#pilot" class="hover:text-sky-400 transition">72-Hour Sprint</a>
-        <a href="#pricing" class="hover:text-sky-400 transition">Transparent Pricing</a>
-        <a href="#faq" class="hover:text-sky-400 transition">FAQ</a>
-      </div>
-
-      <!-- Action Button -->
-      <div class="flex items-center gap-4">
-        <a href="#enquiry" class="relative group inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 shadow-md shadow-sky-500/25 transition">
-          <span>Claim ₹0 Risk Pilot</span>
-          <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </a>
-      </div>
-
-    </div>
-  </nav>
-
-  <!-- HERO SECTION -->
-  <section class="relative pt-20 pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-    
-    <!-- Trust Badge -->
-    <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-sky-950/40 border border-sky-500/30 text-sky-300 text-xs font-semibold tracking-wide uppercase mb-8 shadow-sm">
-      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-      <span>Accepting Q4 Pilot Mandates • 72-Hour Turnaround</span>
-    </div>
-
-    <!-- Main Headline -->
-    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-8 max-w-5xl mx-auto">
-      We Build High-Converting <br class="hidden sm:block"/>
-      <span class="text-gradient-cyan">Digital Flagships</span> for Premium Local Leaders.
-    </h1>
-
-    <!-- Subtitle -->
-    <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-12 font-normal">
-      Transform cold mobile traffic into verified high-ticket clients. Engineered specifically for <strong class="text-white">specialized medical clinics</strong>, <strong class="text-white">luxury architectural studios</strong>, <strong class="text-white">prime real estate advisory</strong>, and <strong class="text-white">high-performance brands</strong>.
-    </p>
-
-    <!-- CTAs -->
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-      <a href="#enquiry" class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-sky-500 via-sky-400 to-blue-600 hover:from-sky-400 hover:to-blue-500 glow-cyan-sm shadow-xl transition flex items-center justify-center gap-3">
-        <span>Claim 72-Hour Pilot Sprint (₹34k • ₹0 Upfront)</span>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-      </a>
-      
-      <a href="#showcase" class="w-full sm:w-auto px-8 py-4 rounded-xl text-sm font-semibold text-slate-300 bg-dark-850 hover:bg-dark-800 border border-dark-border hover:border-slate-600 transition flex items-center justify-center gap-2">
-        <span>Explore Live Prototypes</span>
-        <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-      </a>
-    </div>
-
-    <!-- Trust Stats Matrix -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-8 border-t border-dark-border">
-      <div class="p-4 rounded-xl bg-dark-900/60 border border-dark-border/60">
-        <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono">72 Hours</div>
-        <div class="text-xs text-slate-400 font-medium uppercase tracking-wider mt-1">Kickoff to Live Launch</div>
-      </div>
-      <div class="p-4 rounded-xl bg-dark-900/60 border border-dark-border/60">
-        <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">3.2x</div>
-        <div class="text-xs text-slate-400 font-medium uppercase tracking-wider mt-1">Mobile Lead Lift</div>
-      </div>
-      <div class="p-4 rounded-xl bg-dark-900/60 border border-dark-border/60">
-        <div class="text-2xl sm:text-3xl font-extrabold text-sky-400 font-mono">&lt; 600ms</div>
-        <div class="text-xs text-slate-400 font-medium uppercase tracking-wider mt-1">Global Edge CDN Latency</div>
-      </div>
-      <div class="p-4 rounded-xl bg-dark-900/60 border border-dark-border/60">
-        <div class="text-2xl sm:text-3xl font-extrabold text-brand-gold font-mono">₹0 Risk</div>
-        <div class="text-xs text-slate-400 font-medium uppercase tracking-wider mt-1">Review Build First Guarantee</div>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- THE PROBLEM VS THE DIGITAL FLAGSHIP STANDARD -->
-  <section id="difference" class="py-24 bg-dark-900/70 border-y border-dark-border px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <div class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-3">Architectural Standard</div>
-        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Why 95% of Agency Websites Fail Premium Businesses</h2>
-        <p class="text-slate-400 text-base mt-4">Most agencies sell bloated, slow WordPress templates with passive contact forms that your high-net-worth clients will never fill out.</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-        
-        <!-- Legacy Way -->
-        <div class="p-8 rounded-2xl bg-dark-950/80 border border-red-500/20 relative overflow-hidden">
-          <div class="flex items-center gap-3 mb-6">
-            <span class="w-8 h-8 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center font-bold text-sm">✕</span>
-            <h3 class="text-xl font-bold text-red-200">The Legacy Agency Model</h3>
-          </div>
-          <ul class="space-y-4 text-sm text-slate-300">
-            <li class="flex items-start gap-3">
-              <span class="text-red-400 font-bold mt-0.5">•</span>
-              <span><strong>6 to 8 Weeks of Excuses:</strong> Endless wireframe decks, scope creep, and stalled timelines.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-red-400 font-bold mt-0.5">•</span>
-              <span><strong>Slow, Clunky WordPress Plugins:</strong> 4 to 8 second mobile load times that cause 60%+ of paid ad visitors to bounce immediately.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-red-400 font-bold mt-0.5">•</span>
-              <span><strong>Passive "Submit Form" Black Holes:</strong> Inquiries go into spam folders or unmonitored inboxes while leads contact your competitors.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-red-400 font-bold mt-0.5">•</span>
-              <span><strong>₹1,50,000+ Upfront Lock-In:</strong> Demanding 50% non-refundable deposits before you ever see a single working screen.</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- The Flagship Standard -->
-        <div class="p-8 rounded-2xl bg-gradient-to-br from-dark-850 to-dark-900 border border-sky-500/40 glow-cyan relative overflow-hidden">
-          <div class="flex items-center gap-3 mb-6">
-            <span class="w-8 h-8 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-sm">✓</span>
-            <h3 class="text-xl font-bold text-sky-200">The Flagship Systems Standard</h3>
-          </div>
-          <ul class="space-y-4 text-sm text-slate-200">
-            <li class="flex items-start gap-3">
-              <span class="text-sky-400 font-bold mt-0.5">✓</span>
-              <span><strong>72-Hour Rapid Deployment:</strong> We move fast. Complete custom flagship live on production CDN in 72 hours.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-sky-400 font-bold mt-0.5">✓</span>
-              <span><strong>Sub-Second Edge Infrastructure:</strong> Custom lightweight code (0 bloated CMS dependencies) that renders instantly on any 4G/5G phone.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-sky-400 font-bold mt-0.5">✓</span>
-              <span><strong>1-Click Direct WhatsApp Pipeline:</strong> Converts mobile traffic directly into your team's WhatsApp with pre-filled consultation details.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-sky-400 font-bold mt-0.5">✓</span>
-              <span><strong>₹0 Upfront Risk Guarantee:</strong> We build the interactive preview for your exact business first. Review it live; pay only when 100% satisfied.</span>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- WHAT WE PROVIDE (5 CORE PILLARS) -->
-  <section id="services" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-    <div class="text-center max-w-3xl mx-auto mb-20">
-      <div class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-3">Our Core Services</div>
-      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">Full-Stack Digital Flagships Built to Command High Tickets</h2>
-      <p class="text-slate-400 text-base mt-4">We deliver complete, ready-to-scale digital assets engineered for immediate commercial acquisition.</p>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8">
-      
-      <!-- Card 1 -->
-      <div class="p-8 rounded-2xl bg-dark-900 border border-dark-border glow-card transition flex flex-col justify-between">
-        <div>
-          <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center font-mono font-bold text-lg mb-6">01</div>
-          <h3 class="text-xl font-bold text-white mb-3">Bespoke Mobile-First Flagship UI</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Hand-crafted visual aesthetics tailored to ultra-luxury and clinical authority. Dark mode elegance, fluid typography, and premium micro-interactions that elevate your brand value from day one.
-          </p>
-        </div>
-        <div class="text-xs font-mono text-sky-400 font-semibold uppercase tracking-wider">Zero Templates • Tailored Visuals</div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="p-8 rounded-2xl bg-dark-900 border border-dark-border glow-card transition flex flex-col justify-between">
-        <div>
-          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold text-lg mb-6">02</div>
-          <h3 class="text-xl font-bold text-white mb-3">1-Click WhatsApp Lead & Booking Engine</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Eliminates high-friction forms. Mobile visitors can book VIP appointments, request project estimates, or download architectural brochures with one tap directly into your WhatsApp.
-          </p>
-        </div>
-        <div class="text-xs font-mono text-emerald-400 font-semibold uppercase tracking-wider">3x Conversion Lift • Zero Spam</div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="p-8 rounded-2xl bg-dark-900 border border-dark-border glow-card transition flex flex-col justify-between">
-        <div>
-          <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-mono font-bold text-lg mb-6">03</div>
-          <h3 class="text-xl font-bold text-white mb-3">Interactive Digital Showcase & Catalog</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Interactive treatment selectors for clinics, masonry project galleries for interior studios, or curated inventory filters for luxury realtors with instant brochure downloads.
-          </p>
-        </div>
-        <div class="text-xs font-mono text-indigo-400 font-semibold uppercase tracking-wider">Dynamic Layouts • High-Ticket Focus</div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="p-8 rounded-2xl bg-dark-900 border border-dark-border glow-card transition flex flex-col justify-between">
-        <div>
-          <div class="w-12 h-12 rounded-xl bg-brand-gold/10 border border-brand-gold/20 text-brand-gold flex items-center justify-center font-mono font-bold text-lg mb-6">04</div>
-          <h3 class="text-xl font-bold text-white mb-3">Sub-Second Global Edge Infrastructure</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Deployed on worldwide edge CDN nodes (Netlify / GitHub Edge) with automatic SSL certificates, asset compression, and 99.9% guaranteed uptime. Scores 95+ on Google PageSpeed.
-          </p>
-        </div>
-        <div class="text-xs font-mono text-brand-gold font-semibold uppercase tracking-wider">95+ PageSpeed • Enterprise CDN</div>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="p-8 rounded-2xl bg-dark-900 border border-dark-border glow-card transition flex flex-col justify-between">
-        <div>
-          <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center font-mono font-bold text-lg mb-6">05</div>
-          <h3 class="text-xl font-bold text-white mb-3">Local SEO & Trust Schema Engineering</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Built-in OpenGraph metadata, Google Business schema markup, doctor/clinic verification tags, and locality keywords (South Delhi, Gurgaon, Mumbai, Bangalore) for high local search visibility.
-          </p>
-        </div>
-        <div class="text-xs font-mono text-purple-400 font-semibold uppercase tracking-wider">Local SEO • Rich Snippets</div>
-      </div>
-
-      <!-- Card 6 -->
-      <div class="p-8 rounded-2xl bg-dark-900 border border-dark-border glow-card transition flex flex-col justify-between">
-        <div>
-          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center font-mono font-bold text-lg mb-6">06</div>
-          <h3 class="text-xl font-bold text-white mb-3">30-Day White-Glove Support & Growth</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            We don't abandon you after launch. Includes 30 days of complimentary content adjustments, DNS management, Google Analytics / Pixel tracking setup, and conversion monitoring.
-          </p>
-        </div>
-        <div class="text-xs font-mono text-cyan-400 font-semibold uppercase tracking-wider">Continuous Care • Zero Headaches</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- LIVE PROTOTYPE SHOWCASE -->
-  <section id="showcase" class="py-24 bg-dark-900/60 border-y border-dark-border px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <div class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-3">Production Prototypes</div>
-        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">Experience Our Live Industry Prototypes</h2>
-        <p class="text-slate-400 text-base mt-4">Every prototype is live, responsive, and functional. Tap below to test real mobile navigation, project galleries, and WhatsApp conversion triggers.</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        <!-- Showcase 1: Interior Architecture -->
-        <div class="group relative rounded-2xl bg-dark-950 border border-dark-border overflow-hidden hover:border-sky-500/50 transition glow-card flex flex-col justify-between">
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-wider">Architecture & Interiors</span>
-              <span class="text-xs font-mono text-emerald-400 font-semibold">● Live Demo</span>
-            </div>
-            <h3 class="text-xl font-extrabold text-white mb-2 group-hover:text-sky-300 transition">Studio Form & Space</h3>
-            <p class="text-slate-400 text-xs leading-relaxed mb-6">
-              Turnkey bespoke luxury residential portfolio showcase with high-res masonry galleries, client consultation scheduler, and direct PDF mandate capture.
-            </p>
-          </div>
-          <div class="p-6 pt-0">
-            <a href="./interior/" target="_blank" class="w-full py-3 rounded-xl bg-dark-850 hover:bg-sky-500 text-white hover:text-dark-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-dark-border hover:border-transparent transition">
-              <span>Launch Live Prototype</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Showcase 2: Specialized Clinics -->
-        <div class="group relative rounded-2xl bg-dark-950 border border-dark-border overflow-hidden hover:border-sky-500/50 transition glow-card flex flex-col justify-between">
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-1 rounded-md bg-sky-500/10 border border-sky-500/20 text-sky-300 text-xs font-bold uppercase tracking-wider">Medical & Aesthetics</span>
-              <span class="text-xs font-mono text-emerald-400 font-semibold">● Live Demo</span>
-            </div>
-            <h3 class="text-xl font-extrabold text-white mb-2 group-hover:text-sky-300 transition">Elite Smile & Implants</h3>
-            <p class="text-slate-400 text-xs leading-relaxed mb-6">
-              Clinical digital consultation flagship with treatment breakdown, doctor credentials, patient social proof, and instant 1-click WhatsApp booking.
-            </p>
-          </div>
-          <div class="p-6 pt-0">
-            <a href="./clinic/" target="_blank" class="w-full py-3 rounded-xl bg-dark-850 hover:bg-sky-500 text-white hover:text-dark-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-dark-border hover:border-transparent transition">
-              <span>Launch Live Prototype</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Showcase 3: Real Estate -->
-        <div class="group relative rounded-2xl bg-dark-950 border border-dark-border overflow-hidden hover:border-sky-500/50 transition glow-card flex flex-col justify-between">
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-bold uppercase tracking-wider">Prime Real Estate</span>
-              <span class="text-xs font-mono text-emerald-400 font-semibold">● Live Demo</span>
-            </div>
-            <h3 class="text-xl font-extrabold text-white mb-2 group-hover:text-sky-300 transition">Aura Living & Estates</h3>
-            <p class="text-slate-400 text-xs leading-relaxed mb-6">
-              Exclusive luxury residences & commercial advisory showcase. Buyers browse high-value mandates and request confidential floor plans on WhatsApp.
-            </p>
-          </div>
-          <div class="p-6 pt-0">
-            <a href="./realestate/" target="_blank" class="w-full py-3 rounded-xl bg-dark-850 hover:bg-sky-500 text-white hover:text-dark-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-dark-border hover:border-transparent transition">
-              <span>Launch Live Prototype</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Showcase 4: Auto Detailing / Salons -->
-        <div class="group relative rounded-2xl bg-dark-950 border border-dark-border overflow-hidden hover:border-sky-500/50 transition glow-card flex flex-col justify-between">
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-1 rounded-md bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs font-bold uppercase tracking-wider">Automotive & Salons</span>
-              <span class="text-xs font-mono text-emerald-400 font-semibold">● Live Demo</span>
-            </div>
-            <h3 class="text-xl font-extrabold text-white mb-2 group-hover:text-sky-300 transition">Apex Detail & Esthetics</h3>
-            <p class="text-slate-400 text-xs leading-relaxed mb-6">
-              High-ticket ceramic coatings, paint protection film (PPF), and aesthetic care configurator designed for exotic vehicle owners.
-            </p>
-          </div>
-          <div class="p-6 pt-0">
-            <a href="./salon/" target="_blank" class="w-full py-3 rounded-xl bg-dark-850 hover:bg-sky-500 text-white hover:text-dark-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-dark-border hover:border-transparent transition">
-              <span>Launch Live Prototype</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Showcase 5: Fitness & Wellness -->
-        <div class="group relative rounded-2xl bg-dark-950 border border-dark-border overflow-hidden hover:border-sky-500/50 transition glow-card flex flex-col justify-between">
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-bold uppercase tracking-wider">Fitness & Training</span>
-              <span class="text-xs font-mono text-emerald-400 font-semibold">● Live Demo</span>
-            </div>
-            <h3 class="text-xl font-extrabold text-white mb-2 group-hover:text-sky-300 transition">Titan Athletic Club</h3>
-            <p class="text-slate-400 text-xs leading-relaxed mb-6">
-              Private training facility showcase with trainer rosters, trial pass booking, and luxury membership tier application flows.
-            </p>
-          </div>
-          <div class="p-6 pt-0">
-            <a href="./gym/" target="_blank" class="w-full py-3 rounded-xl bg-dark-850 hover:bg-sky-500 text-white hover:text-dark-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-dark-border hover:border-transparent transition">
-              <span>Launch Live Prototype</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Showcase 6: Corporate Trading -->
-        <div class="group relative rounded-2xl bg-dark-950 border border-dark-border overflow-hidden hover:border-sky-500/50 transition glow-card flex flex-col justify-between">
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider">Global Enterprise</span>
-              <span class="text-xs font-mono text-emerald-400 font-semibold">● Live Demo</span>
-            </div>
-            <h3 class="text-xl font-extrabold text-white mb-2 group-hover:text-sky-300 transition">Barsana International</h3>
-            <p class="text-slate-400 text-xs leading-relaxed mb-6">
-              Ultra-luminous pearl & azure trade portal for global agricultural commodities (sugar, rice, pulses, spices) with live export catalog.
-            </p>
-          </div>
-          <div class="p-6 pt-0">
-            <a href="./barsanaintl/" target="_blank" class="w-full py-3 rounded-xl bg-dark-850 hover:bg-sky-500 text-white hover:text-dark-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-dark-border hover:border-transparent transition">
-              <span>Launch Live Prototype</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- THE 72-HOUR SPRINT TIMELINE -->
-  <section id="pilot" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <div class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-3">Our 72-Hour Rapid Protocol</div>
-      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">How We Deploy Your Flagship in 72 Hours Flat</h2>
-      <p class="text-slate-400 text-base mt-4">We eliminate months of bureaucratic design meetings. We gather your essentials, execute relentlessly, and launch.</p>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8 relative max-w-5xl mx-auto">
-      
-      <!-- Step 1 -->
-      <div class="p-8 rounded-2xl bg-dark-900 border border-dark-border relative">
-        <div class="text-xs font-mono font-bold text-sky-400 mb-2">DAY 01 // HOURS 0-24</div>
-        <h3 class="text-xl font-bold text-white mb-3">Asset Curation & Copy Engineering</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">
-          You share your high-res photos, logo, and list of services. We craft high-ticket conversion copy, structure your treatment/project catalog, and map your direct WhatsApp booking architecture.
-        </p>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="p-8 rounded-2xl bg-dark-900 border border-dark-border relative">
-        <div class="text-xs font-mono font-bold text-sky-400 mb-2">DAY 02 // HOURS 24-48</div>
-        <h3 class="text-xl font-bold text-white mb-3">Full Prototype Assembly & Testing</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">
-          We hand-code your mobile-first responsive flagship. We link the WhatsApp pipeline, test real form submissions, optimize media assets, and verify cross-device rendering.
-        </p>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="p-8 rounded-2xl bg-dark-900 border border-sky-500/40 glow-cyan-sm relative">
-        <div class="text-xs font-mono font-bold text-emerald-400 mb-2">DAY 03 // HOURS 48-72</div>
-        <h3 class="text-xl font-bold text-white mb-3">Live Review & Global Cloud Deploy</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">
-          You review the interactive build live on your phone. Once approved, we connect your custom domain, provision SSL certificates, deploy to Global Edge CDN, and launch publicly.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- TRANSPARENT PILOT PRICING -->
-  <section id="pricing" class="py-24 bg-dark-900/60 border-y border-dark-border px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <div class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-3">Transparent Commercials</div>
-        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">Simple, Predictable Investment Structure</h2>
-        <p class="text-slate-400 text-base mt-4">One transparent pilot sprint build with ₹0 upfront risk, followed by an all-inclusive monthly care retainer to keep your flagship fast, updated, and generating leads.</p>
-      </div>
-
-      <div class="max-w-3xl mx-auto rounded-3xl bg-dark-950 border border-sky-500/50 glow-cyan p-8 sm:p-12 relative overflow-hidden">
-        
-        <!-- Badge -->
-        <div class="absolute top-6 right-6">
-          <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
-            Verified ₹0 Risk Guarantee
+          <span class="font-syne font-extrabold text-lg tracking-wider text-white flex items-center gap-1.5">
+            FLAGSHIP<span class="text-volt">.</span>OS
+          </span>
+          <span class="block font-mono text-[9px] uppercase tracking-widest text-titanium -mt-0.5">
+            CREATIVE ENGINEERING
           </span>
         </div>
+      </a>
 
-        <div class="text-xs font-bold uppercase tracking-widest text-sky-400 mb-2">The Complete Package</div>
-        <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-4">Complete 72-Hour Digital Flagship + Care Retainer</h3>
-        <p class="text-slate-400 text-sm mb-8">Everything your business needs to establish dominant local authority and capture high-ticket mandates continuously.</p>
-
-        <!-- DUAL COMMERCIAL BIFURCATION -->
-        <div class="grid sm:grid-cols-2 gap-4 mb-8 pb-8 border-b border-dark-border">
-          
-          <!-- Component 1: One-Time Build -->
-          <div class="p-5 rounded-2xl bg-dark-900 border border-dark-border flex flex-col justify-between">
-            <div>
-              <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-sky-400 mb-1">Phase 01 // One-Time Build</div>
-              <div class="text-sm font-bold text-white mb-2">72-Hour Pilot Sprint</div>
-              <div class="flex items-baseline gap-2 mb-2">
-                <span class="text-3xl sm:text-4xl font-black text-brand-emerald font-mono">₹34,000</span>
-                <span class="text-xs text-slate-500 line-through font-mono">₹65,000</span>
-              </div>
-              <p class="text-slate-400 text-xs leading-relaxed">
-                Full bespoke flagship architecture, copywriting, mobile responsiveness, and 1-click WhatsApp pipeline. <strong class="text-emerald-400">₹0 Upfront Risk.</strong>
-              </p>
-            </div>
-            <div class="mt-3 pt-3 border-t border-dark-border/60 text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
-              <span>●</span> <span>Pay only upon final approval</span>
-            </div>
-          </div>
-
-          <!-- Component 2: Monthly Running / Maintenance -->
-          <div class="p-5 rounded-2xl bg-gradient-to-br from-dark-900 to-dark-850 border border-brand-emerald/30 relative flex flex-col justify-between">
-            <div class="absolute -top-2.5 right-4 px-2.5 py-0.5 rounded-full bg-emerald-500 text-dark-950 text-[10px] font-black uppercase tracking-wider">
-              1st Month Free
-            </div>
-            <div>
-              <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-400 mb-1">Phase 02 // Running & Care</div>
-              <div class="text-sm font-bold text-white mb-2">White-Glove Retainer</div>
-              <div class="flex items-baseline gap-2 mb-2">
-                <span class="text-3xl sm:text-4xl font-black text-white font-mono">₹5,000 – ₹7,000</span>
-                <span class="text-xs text-slate-400 font-mono">/ month</span>
-              </div>
-              <p class="text-slate-400 text-xs leading-relaxed">
-                Global Edge CDN hosting, domain & SSL management, monthly content/price updates, 24/7 lead health monitoring, and direct WhatsApp priority support.
-              </p>
-            </div>
-            <div class="mt-3 pt-3 border-t border-dark-border/60 text-[11px] font-mono text-slate-400 flex items-center justify-between">
-              <span>No lock-in contract</span>
-              <span class="text-emerald-400">Cancel anytime</span>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Inclusions List -->
-        <div class="mb-8">
-          <div class="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4 font-mono">What Is Included In Your Investment:</div>
-          <ul class="grid sm:grid-cols-2 gap-3 text-xs text-slate-200">
-            <li class="flex items-start gap-2.5">
-              <svg class="w-4 h-4 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-              <span><strong>Bespoke Custom Mobile-First Build</strong> (No slow templates)</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <svg class="w-4 h-4 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-              <span><strong>1-Click WhatsApp Lead Engine</strong> (Direct to team inbox)</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <svg class="w-4 h-4 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-              <span><strong>Global Edge CDN Cloud & SSL</strong> (99.99% Uptime SLA)</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <svg class="w-4 h-4 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-              <span><strong>Monthly Content & Catalog Updates</strong> (Doctors, villas, cars)</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <svg class="w-4 h-4 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-              <span><strong>Continuous Speed & Security Audits</strong> (< 0.8s load times)</span>
-            </li>
-            <li class="flex items-start gap-2.5">
-              <svg class="w-4 h-4 text-sky-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-              <span><strong>2-Hour Turnaround Priority Desk</strong> (Direct WhatsApp support)</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- The Guarantee Callout -->
-        <div class="p-4 rounded-xl bg-dark-900 border border-emerald-500/20 mb-8 flex items-start gap-3">
-          <span class="text-emerald-400 text-lg">🛡️</span>
-          <div class="text-xs text-slate-300 leading-relaxed">
-            <strong class="text-emerald-400">Our ₹0 Upfront Risk Commitment:</strong> We build the interactive prototype for your business first. You review it on your phone. If it doesn't surpass your expectations, you walk away owing ₹0. You only pay the ₹34,000 build fee when you approve the build, with your first 30 days of running & maintenance included.
-          </div>
-        </div>
-
-        <a href="#enquiry" class="w-full py-4 rounded-xl text-center text-sm font-extrabold uppercase tracking-wider text-white bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 shadow-lg shadow-sky-500/30 transition block cursor-pointer">
-          Claim Your ₹34,000 Pilot Sprint Now (₹0 Upfront)
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 font-space text-xs font-semibold uppercase tracking-wider text-slate-300">
+        <a href="#showroom" class="hover:text-volt transition-colors flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-volt animate-pulse"></span>
+          Showroom
         </a>
+        <a href="#lab" class="hover:text-volt transition-colors">Spatial Lab</a>
+        <a href="#standard" class="hover:text-volt transition-colors">The Standard</a>
+        <a href="#sprint" class="hover:text-volt transition-colors">72h Sprint</a>
+      </nav>
 
+      <!-- Right Action Controls (Web Audio Engine + Launch Sprint) -->
+      <div class="flex items-center gap-3">
+        <!-- Audio Synth Toggle -->
+        <button id="audioToggleBtn" onclick="toggleAudioEngine()" class="hud-pill px-3 py-2 rounded-full text-slate-300 hover:text-white font-mono text-[10px] uppercase tracking-wider flex items-center gap-2 transition hover:bg-white/10 cursor-pointer" title="Synthesizer Drone Toggle">
+          <span id="audioStatusDot" class="w-2 h-2 rounded-full bg-slate-500"></span>
+          <span id="audioStatusText">AUDIO: OFF</span>
+        </button>
+
+        <!-- Claim Sprint CTA -->
+        <a href="#sprint" class="px-5 py-2.5 rounded-full bg-volt hover:bg-yellow-300 text-obsidian font-space font-bold uppercase tracking-wider text-xs shadow-lg shadow-volt/25 transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2">
+          <span>Start Sprint</span>
+          <span class="font-mono text-[11px]">&rarr;</span>
+        </a>
       </div>
 
     </div>
-  </section>
+  </header>
 
-  <!-- INTERACTIVE ENQUIRY FORM SECTION -->
-  <section id="enquiry" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-    <div class="max-w-4xl mx-auto">
-      
-      <div class="text-center mb-16">
-        <div class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-3">Direct Commercial Enquiry</div>
-        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">Let's Build Your Digital Flagship</h2>
-        <p class="text-slate-400 text-base mt-4">Tell us about your business. We will review your current presence and deliver your working prototype in 72 hours.</p>
+  <!-- ======================================================== -->
+  <!-- 2. HERO: KINETIC 3D SPATIAL SHOWROOM                     -->
+  <!-- ======================================================== -->
+  <section id="hero" class="relative z-10 min-h-screen flex flex-col justify-between pt-36 pb-12 px-6 sm:px-10 max-w-7xl mx-auto">
+    
+    <!-- Top Telemetry HUD Pill -->
+    <div class="flex flex-wrap items-center justify-between gap-4 pointer-events-auto">
+      <div class="hud-pill px-4 py-2 rounded-full text-xs font-mono text-slate-300 flex items-center gap-3">
+        <span class="flex h-2 w-2 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <span>ENGINE: <strong>THREE.JS WEBGL 2.0</strong></span>
+        <span class="text-slate-600">|</span>
+        <span class="text-volt font-bold">FPS: <span id="fpsCounter">60</span></span>
+        <span class="text-slate-600">|</span>
+        <span class="text-titanium">LATENCY: <strong>&lt; 380MS EDGE</strong></span>
       </div>
 
-      <div class="p-8 sm:p-12 rounded-3xl bg-dark-900 border border-dark-border glow-cyan relative">
-        
-        <form id="enquiryForm" onsubmit="handleEnquiry(event)" class="space-y-6">
+      <!-- 3D Shader Preset Switcher -->
+      <div class="hud-pill px-3 py-1.5 rounded-full flex items-center gap-1.5 text-xs font-mono">
+        <span class="text-slate-400 text-[10px] uppercase tracking-widest pl-2">3D Core:</span>
+        <button onclick="setShaderMode(0)" id="modeBtn0" class="px-3 py-1 rounded-full bg-volt text-obsidian font-bold text-[10px] uppercase transition cursor-pointer">Prismatic</button>
+        <button onclick="setShaderMode(1)" id="modeBtn1" class="px-3 py-1 rounded-full text-slate-300 hover:text-white text-[10px] uppercase transition cursor-pointer">Wireframe</button>
+        <button onclick="setShaderMode(2)" id="modeBtn2" class="px-3 py-1 rounded-full text-slate-300 hover:text-white text-[10px] uppercase transition cursor-pointer">Vortex</button>
+      </div>
+    </div>
+
+    <!-- Center Giant Split Kinetic Typography -->
+    <div class="my-auto py-12 pointer-events-none select-none">
+      <div class="font-mono text-xs sm:text-sm font-semibold tracking-[0.28em] uppercase text-volt mb-4 flex items-center gap-3">
+        <span class="w-8 h-[2px] bg-volt inline-block"></span>
+        <span>Awwwards-Calibre Digital Architecture</span>
+      </div>
+
+      <h1 class="font-syne font-extrabold text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] tracking-tight leading-[0.88] uppercase text-white">
+        WE BUILD <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-volt via-white to-hypercyan">
+          DIGITAL FLAGSHIPS.
+        </span>
+      </h1>
+
+      <p class="font-space text-slate-300 text-base sm:text-xl max-w-2xl mt-8 font-normal leading-relaxed pointer-events-auto">
+        We eliminate generic 2D templates. We design, code, and deploy custom <strong class="text-white">3D kinematic interfaces</strong>, <strong class="text-white">spatial WebGL shaders</strong>, and <strong class="text-white">high-converting client pipelines</strong> for visionary industry leaders.
+      </p>
+
+      <!-- Action Cluster -->
+      <div class="flex flex-wrap items-center gap-4 mt-10 pointer-events-auto">
+        <a href="#showroom" class="px-8 py-4 rounded-full bg-volt text-obsidian font-space font-bold uppercase tracking-wider text-xs sm:text-sm shadow-xl shadow-volt/25 hover:bg-yellow-300 transition-all transform hover:scale-105 active:scale-95 flex items-center gap-3">
+          <span>Explore 3D Showroom</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+
+        <a href="#lab" class="px-7 py-4 rounded-full hud-pill text-white font-space font-semibold uppercase tracking-wider text-xs sm:text-sm hover:border-volt/50 transition-all flex items-center gap-2">
+          <span>Interact With Spatial Lab</span>
+          <span class="text-hypercyan">&bull;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Bottom Matrix Banner -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-white/10 pointer-events-auto font-mono text-xs">
+      <div class="p-4 rounded-2xl hud-panel">
+        <div class="text-volt font-bold text-xl sm:text-2xl font-syne">72 HOURS</div>
+        <div class="text-[10px] text-titanium uppercase tracking-wider mt-1">Sprint Kickoff to Production</div>
+      </div>
+      <div class="p-4 rounded-2xl hud-panel">
+        <div class="text-hypercyan font-bold text-xl sm:text-2xl font-syne">100% RAW CODE</div>
+        <div class="text-[10px] text-titanium uppercase tracking-wider mt-1">Zero Bloated CMS Dependencies</div>
+      </div>
+      <div class="p-4 rounded-2xl hud-panel">
+        <div class="text-white font-bold text-xl sm:text-2xl font-syne">3D KINEMATICS</div>
+        <div class="text-[10px] text-titanium uppercase tracking-wider mt-1">Real-Time Three.js Shaders</div>
+      </div>
+      <div class="p-4 rounded-2xl hud-panel">
+        <div class="text-emerald-400 font-bold text-xl sm:text-2xl font-syne">ZERO RISK</div>
+        <div class="text-[10px] text-titanium uppercase tracking-wider mt-1">Review Working Build First</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 2.5 KINETIC MARQUEE TICKER                               -->
+  <!-- ======================================================== -->
+  <div class="w-full py-4 bg-volt text-obsidian overflow-hidden select-none font-archivo uppercase text-sm sm:text-base font-extrabold tracking-widest relative z-20">
+    <div class="animate-marquee flex items-center gap-12 whitespace-nowrap">
+      <span>★ THREE.JS WEBGL 2.0 SPATIAL ARCHITECTURE</span>
+      <span>★ CASBERRY PARTICLE VORTEX SIMULATION</span>
+      <span>★ CHARLES LIU 60/30/10 COLOR RATIO ENGINEERING</span>
+      <span>★ 1-CLICK INSTANT WHATSAPP CLIENT PIPELINES</span>
+      <span>★ AWWWARDS CALIBRE KINETIC TYPOGRAPHY</span>
+      <span>★ SUB-380MS GLOBAL EDGE CDN PERFORMANCE</span>
+      <span>★ THREE.JS WEBGL 2.0 SPATIAL ARCHITECTURE</span>
+      <span>★ CASBERRY PARTICLE VORTEX SIMULATION</span>
+      <span>★ CHARLES LIU 60/30/10 COLOR RATIO ENGINEERING</span>
+      <span>★ 1-CLICK INSTANT WHATSAPP CLIENT PIPELINES</span>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 3. INTERACTIVE 3D SHOWROOM (ELITE FLAGSHIP PRODUCTIONS)   -->
+  <!-- ======================================================== -->
+  <section id="showroom" class="py-28 px-6 sm:px-10 relative z-20 max-w-7xl mx-auto">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div>
+        <div class="text-xs font-mono font-bold text-volt uppercase tracking-widest mb-2 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-volt"></span>
+          <span>Curated Production Flagships</span>
+        </div>
+        <h2 class="font-syne font-extrabold text-4xl sm:text-6xl uppercase tracking-tight text-white">
+          THE SHOWROOM
+        </h2>
+      </div>
+      <p class="font-space text-slate-300 max-w-md text-sm sm:text-base">
+        Explore working digital flagships engineered with real-time physics, custom shaders, and tactile micro-interactions.
+      </p>
+    </div>
+
+    <!-- Production Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Flagship 01: ALTAVAL Powder Mountain OS -->
+      <div class="card-3d-wrapper group">
+        <div class="card-3d hud-panel rounded-3xl p-8 border border-white/10 glow-border-volt flex flex-col justify-between h-full relative overflow-hidden">
           
-          <div class="grid sm:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Your Name *</label>
-              <input type="text" id="clientName" required placeholder="e.g. Dr. Aryan Mehta / Sarah Kapoor" class="w-full px-4 py-3.5 rounded-xl bg-dark-950 border border-dark-border text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 text-sm transition" />
+          <!-- Top Badge Bar -->
+          <div class="flex items-center justify-between mb-6">
+            <span class="px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/30 text-sky-300 font-mono text-[11px] font-bold uppercase tracking-wider">
+              01 / Awwwards Experimental
+            </span>
+            <span class="flex items-center gap-2 text-xs font-mono text-emerald-400 font-semibold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Live Production
+            </span>
+          </div>
+
+          <!-- Hero Image & Interactive Preview Container -->
+          <div class="h-64 rounded-2xl bg-gradient-to-br from-[#5A9FE2] to-[#0C1B48] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-2xl group-hover:scale-[1.01] transition-transform">
+            <div class="flex justify-between items-start">
+              <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/40 backdrop-blur-md">ALTAVAL • 3,200M</span>
+              <span class="font-archivo text-volt text-xs px-3 py-1 rounded-full bg-obsidian border border-volt/30">VORTEX PHYS.</span>
             </div>
+            
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Business / Studio / Clinic Name *</label>
-              <input type="text" id="businessName" required placeholder="e.g. Apex Aesthetics / Studio Form" class="w-full px-4 py-3.5 rounded-xl bg-dark-950 border border-dark-border text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 text-sm transition" />
+              <div class="font-archivo text-4xl sm:text-5xl tracking-tighter text-white drop-shadow-lg leading-none mb-2">
+                POW<span class="text-volt">DER</span>
+              </div>
+              <p class="text-xs text-sky-100/90 font-space font-medium">
+                Alpine Resort OS &bull; 1,600-Poly Dynamic Topography Lab
+              </p>
             </div>
           </div>
 
-          <div class="grid sm:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Industry Sector *</label>
-              <select id="industrySector" required class="w-full px-4 py-3.5 rounded-xl bg-dark-950 border border-dark-border text-white focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 text-sm transition">
-                <option value="Specialized Healthcare & Dental">Specialized Healthcare & Medical Clinics</option>
-                <option value="Luxury Architecture & Interior Design">Luxury Architecture & Interior Design</option>
-                <option value="Prime Real Estate & Advisory">Prime Real Estate & Advisory</option>
-                <option value="Automotive Detailing & PPF">Automotive Detailing & PPF Studios</option>
-                <option value="Private Fitness & Athletic Club">Private Fitness & Athletic Clubs</option>
-                <option value="Corporate / International Trade">Corporate / International Trade</option>
-                <option value="Other High-Ticket Business">Other High-Ticket Business</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">WhatsApp / Phone Number *</label>
-              <input type="tel" id="whatsappNumber" required placeholder="+91 98765 43210" class="w-full px-4 py-3.5 rounded-xl bg-dark-950 border border-dark-border text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 text-sm transition" />
+          <!-- Description & Tech Tags -->
+          <div>
+            <h3 class="font-syne font-bold text-2xl uppercase text-white mb-2 group-hover:text-volt transition-colors">
+              ALTAVAL Alpine Resort OS
+            </h3>
+            <p class="font-space text-slate-300 text-xs sm:text-sm mb-6 leading-relaxed">
+              Engineered with Casberry AI WebGL snow particle vortex physics, Charles Liu 60/30/10 visual balance, a 3D kinetic gondola cutting across split-tone typography, and real-time mountain topography elevation mesh.
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-8 font-mono text-[10px] text-slate-300">
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">WebGL Particle Vortex</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Three.js 1600-Poly Terrain</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Charles Liu 60/30/10</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Origin UI Micro-Haptics</span>
             </div>
           </div>
 
-          <div class="grid sm:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Email Address *</label>
-              <input type="email" id="clientEmail" required placeholder="name@yourbusiness.com" class="w-full px-4 py-3.5 rounded-xl bg-dark-950 border border-dark-border text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 text-sm transition" />
+          <!-- Launch Button -->
+          <a href="./powder-studio/" target="_blank" class="w-full py-4 rounded-2xl bg-volt hover:bg-yellow-300 text-obsidian font-space font-bold uppercase tracking-wider text-xs shadow-lg shadow-volt/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
+            <span>Launch ALTAVAL OS Experience</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Flagship 02: FLAGSHIP CRANE OS -->
+      <div class="card-3d-wrapper group">
+        <div class="card-3d hud-panel rounded-3xl p-8 border border-white/10 glow-border-volt flex flex-col justify-between h-full relative overflow-hidden">
+          
+          <!-- Top Badge Bar -->
+          <div class="flex items-center justify-between mb-6">
+            <span class="px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/30 text-blue-300 font-mono text-[11px] font-bold uppercase tracking-wider">
+              02 / 3D Kinematics & Unboxing
+            </span>
+            <span class="flex items-center gap-2 text-xs font-mono text-emerald-400 font-semibold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Live Production
+            </span>
+          </div>
+
+          <!-- Hero Image & Interactive Preview Container -->
+          <div class="h-64 rounded-2xl bg-gradient-to-br from-[#1E40AF] to-[#0F172A] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-2xl group-hover:scale-[1.01] transition-transform">
+            <div class="flex justify-between items-start">
+              <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/40 backdrop-blur-md">CRANE OS • PHYSICAL 3D</span>
+              <span class="font-archivo text-yellow-400 text-xs px-3 py-1 rounded-full bg-obsidian border border-yellow-400/30">KINEMATICS</span>
             </div>
+            
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Current Website or Instagram Link</label>
-              <input type="text" id="existingLink" placeholder="e.g. www.mybusiness.com or @mybrand" class="w-full px-4 py-3.5 rounded-xl bg-dark-950 border border-dark-border text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 text-sm transition" />
+              <div class="font-syne font-extrabold text-3xl sm:text-4xl tracking-tighter text-white drop-shadow-lg leading-tight mb-2">
+                UNBOXING <span class="text-volt">OS</span>
+              </div>
+              <p class="text-xs text-blue-200 font-space font-medium">
+                Dual-Cable Mechanical Pulley &bull; Interactive 3D Containers
+              </p>
+            </div>
+          </div>
+
+          <!-- Description & Tech Tags -->
+          <div>
+            <h3 class="font-syne font-bold text-2xl uppercase text-white mb-2 group-hover:text-volt transition-colors">
+              FLAGSHIP CRANE OS
+            </h3>
+            <p class="font-space text-slate-300 text-xs sm:text-sm mb-6 leading-relaxed">
+              Inspired by @ui.debbie's physical unboxing design. Built with real-time Three.js spatial kinematics, interactive cargo containers that unbox into working project viewports, and custom studio lighting.
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-8 font-mono text-[10px] text-slate-300">
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Three.js Kinematics</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">3D Mechanical Pulley</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Container Unboxing Physics</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Studio Camera Orbit</span>
+            </div>
+          </div>
+
+          <!-- Launch Button -->
+          <a href="./crane-studio/" target="_blank" class="w-full py-4 rounded-2xl bg-white/10 hover:bg-volt hover:text-obsidian text-white font-space font-bold uppercase tracking-wider text-xs border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
+            <span>Launch CRANE OS Experience</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Flagship 03: LIQUIQUANT OS -->
+      <div class="card-3d-wrapper group">
+        <div class="card-3d hud-panel rounded-3xl p-8 border border-white/10 glow-border-volt flex flex-col justify-between h-full relative overflow-hidden">
+          
+          <div class="flex items-center justify-between mb-6">
+            <span class="px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-emerald-300 font-mono text-[11px] font-bold uppercase tracking-wider">
+              03 / High-Density Fintech
+            </span>
+            <span class="flex items-center gap-2 text-xs font-mono text-emerald-400 font-semibold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Live Production
+            </span>
+          </div>
+
+          <div class="h-64 rounded-2xl bg-gradient-to-br from-[#064E3B] to-[#022C22] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-2xl group-hover:scale-[1.01] transition-transform">
+            <div class="flex justify-between items-start">
+              <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/50">LIQUIQUANT • ALGO TERMINAL</span>
+              <span class="font-mono text-emerald-400 text-xs px-3 py-1 rounded-full bg-obsidian border border-emerald-400/40">SUB-MS DATA</span>
+            </div>
+            
+            <div>
+              <div class="font-mono font-bold text-3xl sm:text-4xl tracking-tight text-white mb-2">
+                ORDER<span class="text-emerald-400">BOOK</span>.DAT
+              </div>
+              <p class="text-xs text-emerald-200/90 font-mono">
+                Algorithmic Execution &bull; Real-Time Liquidity Heatmap
+              </p>
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Core Goals & Specific Requirements</label>
-            <textarea id="projectNotes" rows="3" placeholder="Tell us what you'd like to achieve (e.g. boost patient bookings, showcase 10 luxury residential villas, launch in 72 hours)..." class="w-full px-4 py-3.5 rounded-xl bg-dark-950 border border-dark-border text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 text-sm transition"></textarea>
-          </div>
-
-          <!-- Frictionless Direct Submit -->
-          <div class="pt-2">
-            <button type="submit" id="submitEnquiryBtn" class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-sky-500 via-sky-400 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-extrabold text-sm uppercase tracking-wider shadow-lg shadow-sky-500/25 flex items-center justify-center gap-3 transition cursor-pointer">
-              <span id="submitBtnText">Submit Pilot Application (₹0 Upfront Risk)</span>
-              <svg id="submitBtnSpinner" class="hidden w-5 h-5 animate-spin text-white" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-              </svg>
-            </button>
-            <p class="text-[11px] text-center text-slate-500 mt-3 font-normal">
-              🔒 100% Confidential. Instant on-page dispatch. No external apps required.
+            <h3 class="font-syne font-bold text-2xl uppercase text-white mb-2 group-hover:text-volt transition-colors">
+              LiquiQuant Institutional OS
+            </h3>
+            <p class="font-space text-slate-300 text-xs sm:text-sm mb-6 leading-relaxed">
+              Ultra-dense institutional quantitative trading terminal engineered for algorithmic order routing, real-time depth heatmaps, and millisecond execution telemetry with Bloomberg terminal aesthetics.
             </p>
+
+            <div class="flex flex-wrap gap-2 mb-8 font-mono text-[10px] text-slate-300">
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Order Book Heatmaps</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Live Algo Telemetry</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Sub-100ms Feeds</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Dark Terminal UI</span>
+            </div>
           </div>
 
-          <div id="formErrorToast" class="hidden p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs text-center font-medium">
-            Could not dispatch request automatically. <button type="button" onclick="submitViaEmailFallback()" class="underline font-bold text-white hover:text-sky-300">Click here to send directly via email</button>.
+          <a href="https://liquiquant-os.github.io/" target="_blank" class="w-full py-4 rounded-2xl bg-white/10 hover:bg-emerald-400 hover:text-obsidian text-white font-space font-bold uppercase tracking-wider text-xs border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
+            <span>Launch LiquiQuant Terminal</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Flagship 04: GOSHWARA NEW YORK -->
+      <div class="card-3d-wrapper group">
+        <div class="card-3d hud-panel rounded-3xl p-8 border border-white/10 glow-border-volt flex flex-col justify-between h-full relative overflow-hidden">
+          
+          <div class="flex items-center justify-between mb-6">
+            <span class="px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-400/30 text-purple-300 font-mono text-[11px] font-bold uppercase tracking-wider">
+              04 / Haute Luxury & Horology
+            </span>
+            <span class="flex items-center gap-2 text-xs font-mono text-emerald-400 font-semibold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Live Production
+            </span>
           </div>
 
-        </form>
-
-        <!-- On-Page Success State Card -->
-        <div id="enquirySuccessCard" class="hidden text-center py-6 px-2 sm:px-6">
-          <div class="w-16 h-16 mx-auto rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-3xl mb-4 font-bold">
-            ✓
+          <div class="h-64 rounded-2xl bg-gradient-to-br from-[#1E112A] to-[#0A050F] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-2xl group-hover:scale-[1.01] transition-transform">
+            <div class="flex justify-between items-start">
+              <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/60">GOSHWARA • NEW YORK</span>
+              <span class="font-mono text-amber-300 text-xs px-3 py-1 rounded-full bg-obsidian border border-amber-300/40">VELVET VAULT</span>
+            </div>
+            
+            <div>
+              <div class="font-syne font-bold text-3xl sm:text-4xl tracking-wider text-amber-200 mb-2">
+                THE VELVET VAULT
+              </div>
+              <p class="text-xs text-purple-200/90 font-space font-medium">
+                Haute Joaillerie &bull; Colombian Emeralds & 18K Architectural Gold
+              </p>
+            </div>
           </div>
-          <div class="text-xs font-mono font-bold text-sky-400 uppercase tracking-widest mb-2">Application Received • Priority Review</div>
-          <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">You're All Set!</h3>
-          <p class="text-slate-300 text-sm max-w-lg mx-auto mb-6 leading-relaxed">
-            Thank you, <span id="successClientName" class="text-white font-semibold"></span>. Your 72-Hour Digital Flagship pilot request for <span id="successBusinessName" class="text-sky-300 font-semibold"></span> has been received directly by our design engineering desk.
+
+          <div>
+            <h3 class="font-syne font-bold text-2xl uppercase text-white mb-2 group-hover:text-volt transition-colors">
+              GOSHWARA Haute Joaillerie
+            </h3>
+            <p class="font-space text-slate-300 text-xs sm:text-sm mb-6 leading-relaxed">
+              Old-money luxury serif typography, deep obsidian velvet textures, gemstone facet reflection shaders, and private collector viewing rooms designed for high-ticket acquisition.
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-8 font-mono text-[10px] text-slate-300">
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Cinzel & Garamond Editorial</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Deep Velvet Obsidian</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Facet Light Shaders</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">Private VIP Viewing</span>
+            </div>
+          </div>
+
+          <a href="./goshwara/" target="_blank" class="w-full py-4 rounded-2xl bg-white/10 hover:bg-amber-300 hover:text-obsidian text-white font-space font-bold uppercase tracking-wider text-xs border border-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
+            <span>Launch GOSHWARA Vault</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 4. INTERACTIVE SPATIAL LAB (REAL-TIME ON-PAGE ENGINE)    -->
+  <!-- ======================================================== -->
+  <section id="lab" class="py-24 px-6 sm:px-10 relative z-20 max-w-7xl mx-auto">
+    <div class="hud-panel rounded-3xl p-8 sm:p-12 border border-white/10 relative overflow-hidden">
+      
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 mb-10 pb-8 border-b border-white/10">
+        <div>
+          <span class="font-mono text-xs text-hypercyan font-bold uppercase tracking-widest block mb-2">
+            // Live Spatial Physics Engine
+          </span>
+          <h2 class="font-syne font-extrabold text-3xl sm:text-5xl uppercase text-white">
+            THE SPATIAL LAB
+          </h2>
+          <p class="font-space text-slate-300 text-xs sm:text-sm max-w-lg mt-2">
+            We don't use web page builders. We write direct WebGL matrix math and physics shaders. Tweak the parameters below to control the live background geometry.
           </p>
-          <div class="p-4 rounded-xl bg-dark-950 border border-dark-border max-w-md mx-auto text-left mb-6 text-xs text-slate-300 space-y-1.5 font-mono">
-            <div><span class="text-slate-500">Inquiry Ref:</span> <span id="successRefId" class="text-sky-400 font-bold"></span></div>
-            <div><span class="text-slate-500">Selected Package:</span> Complete 72-Hour Digital Flagship (₹34,000 • ₹0 Upfront)</div>
-            <div><span class="text-slate-500">Response SLA:</span> Within 15 Minutes via WhatsApp / Call</div>
+        </div>
+
+        <!-- Telemetry Badge -->
+        <div class="hud-pill px-5 py-3 rounded-2xl font-mono text-xs text-slate-300 flex flex-col gap-1">
+          <span class="text-volt font-bold uppercase tracking-wider text-[10px]">Active Mesh Stats:</span>
+          <span>VERTICES: <strong class="text-white" id="labVertexCount">1,240</strong></span>
+          <span>ROTATION MATRIX: <strong class="text-hypercyan" id="labMatrixCoord">X: 0.04 &bull; Y: 0.12</strong></span>
+        </div>
+      </div>
+
+      <!-- Live Controls Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 font-space text-xs">
+        
+        <!-- Control 1: Speed Slider -->
+        <div class="hud-pill p-5 rounded-2xl flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-slate-300 uppercase tracking-wider">Rotation Velocity</span>
+            <span id="speedVal" class="font-mono text-volt font-bold">1.0x</span>
           </div>
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a id="successWhatsappLink" href="#" target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2 transition">
-              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.551 4.095 1.517 5.82l-1.611 5.88 6.044-1.586c1.701.928 3.649 1.458 5.727 1.458 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
-              <span>Instant Chat on WhatsApp (Optional)</span>
-            </a>
-            <button type="button" onclick="resetEnquiryForm()" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-dark-850 hover:bg-dark-800 text-slate-300 hover:text-white font-semibold text-xs border border-dark-border transition cursor-pointer">
-              Submit Another Request
-            </button>
+          <input type="range" min="0.2" max="3.0" step="0.1" value="1.0" id="speedSlider" oninput="updateLabSpeed(this.value)" class="w-full accent-volt cursor-pointer">
+          <p class="text-[10px] text-titanium mt-3">Controls the Three.js gyroscopic inertia velocity.</p>
+        </div>
+
+        <!-- Control 2: Particle Turbulence -->
+        <div class="hud-pill p-5 rounded-2xl flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-slate-300 uppercase tracking-wider">Particle Gravitation</span>
+            <span id="gravVal" class="font-mono text-hypercyan font-bold">Normal</span>
           </div>
+          <input type="range" min="1" max="5" step="1" value="2" id="gravSlider" oninput="updateLabGravity(this.value)" class="w-full accent-hypercyan cursor-pointer">
+          <p class="text-[10px] text-titanium mt-3">Cursor proximity vortex pull on ambient particles.</p>
+        </div>
+
+        <!-- Control 3: Chromatic Glow Accent -->
+        <div class="hud-pill p-5 rounded-2xl flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-mono text-slate-300 uppercase tracking-wider">Color Frequency</span>
+            <span id="colorName" class="font-mono text-white font-bold">Electric Volt</span>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="setLabColor(0xE2F804, 'Electric Volt')" class="flex-1 py-2 rounded-xl bg-volt text-obsidian font-bold text-[10px] uppercase cursor-pointer">Volt</button>
+            <button onclick="setLabColor(0x00F0FF, 'Hyper Cyan')" class="flex-1 py-2 rounded-xl bg-hypercyan text-obsidian font-bold text-[10px] uppercase cursor-pointer">Cyan</button>
+            <button onclick="setLabColor(0xA855F7, 'Ultra Violet')" class="flex-1 py-2 rounded-xl bg-purple-500 text-white font-bold text-[10px] uppercase cursor-pointer">Violet</button>
+          </div>
+          <p class="text-[10px] text-titanium mt-3">Live wireframe emissive material recalculation.</p>
         </div>
 
       </div>
@@ -750,210 +604,547 @@
     </div>
   </section>
 
-  <!-- FAQ SECTION -->
-  <section id="faq" class="py-24 bg-dark-900/60 border-t border-dark-border px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto">
+  <!-- ======================================================== -->
+  <!-- 5. THE STANDARD (WHY TYPICAL AGENCIES FAIL)              -->
+  <!-- ======================================================== -->
+  <section id="standard" class="py-24 px-6 sm:px-10 relative z-20 max-w-7xl mx-auto">
+    
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="font-mono text-xs text-crimson font-bold uppercase tracking-widest block mb-2">
+        // Technical & Architectural Benchmark
+      </span>
+      <h2 class="font-syne font-extrabold text-3xl sm:text-5xl uppercase text-white tracking-tight">
+        WHY 95% OF AGENCY WEBSITES FAIL
+      </h2>
+      <p class="font-space text-slate-300 text-sm sm:text-base mt-4">
+        Most agencies sell bloated WordPress themes with 40 active plugins, fake drop shadows, and passive forms that high-net-worth clients immediately bounce from.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
       
-      <div class="text-center mb-16">
-        <div class="text-xs font-bold text-sky-400 uppercase tracking-widest mb-3">Frequently Asked Questions</div>
-        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Everything You Need to Know</h2>
+      <!-- Legacy Agency Way -->
+      <div class="p-8 rounded-3xl hud-panel border border-crimson/30 relative">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-8 h-8 rounded-full bg-crimson/20 text-crimson flex items-center justify-center font-bold text-sm">✕</span>
+          <h3 class="font-syne font-bold text-xl text-crimson uppercase">The Generic Agency Way</h3>
+        </div>
+        <ul class="space-y-4 font-space text-xs sm:text-sm text-slate-300">
+          <li class="flex items-start gap-3">
+            <span class="text-crimson font-bold">•</span>
+            <span><strong>Generic 2D Tailwind / Bootstrap Grids:</strong> Flat box layouts with zero kinetic identity or spatial depth that look like every other template.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-crimson font-bold">•</span>
+            <span><strong>Bloated 4-8s Mobile Load Times:</strong> Heavy plugin chains that cause over 55% of paid ad visitors to bounce before the first screen loads.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-crimson font-bold">•</span>
+            <span><strong>Passive "Submit" Form Black Holes:</strong> High-ticket clients never want to fill out 8-field forms to wait 48 hours for an email reply.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-crimson font-bold">•</span>
+            <span><strong>6 to 8 Weeks of Wireframe Excuses:</strong> Endless bureaucratic delays while your competitors capture market momentum.</span>
+          </li>
+        </ul>
       </div>
 
-      <div class="space-y-4">
+      <!-- The Flagship Standard -->
+      <div class="p-8 rounded-3xl hud-panel border border-volt/50 glow-volt relative">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-8 h-8 rounded-full bg-volt text-obsidian flex items-center justify-center font-bold text-sm">✓</span>
+          <h3 class="font-syne font-bold text-xl text-volt uppercase">The Flagship Systems Standard</h3>
+        </div>
+        <ul class="space-y-4 font-space text-xs sm:text-sm text-slate-200">
+          <li class="flex items-start gap-3">
+            <span class="text-volt font-bold">✓</span>
+            <span><strong>Awwwards-Calibre 3D Kinematics:</strong> Real-time WebGL geometry, particle vortex simulations, and kinetic typography that command instant authority.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-volt font-bold">✓</span>
+            <span><strong>Sub-380ms Global Edge CDN Delivery:</strong> Zero-bloat custom code engineered directly on modern browser APIs for instant rendering.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-volt font-bold">✓</span>
+            <span><strong>1-Click Instant WhatsApp Conversion:</strong> Direct pipeline routing verified high-intent leads straight to your executive desk with pre-filled telemetry.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-volt font-bold">✓</span>
+            <span><strong>72-Hour Rapid Sprint Guarantee:</strong> We move at venture speed. Complete custom digital flagship live in 72 hours, review build first.</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 6. HIGH-TICKET 72-HOUR SPRINT TERMINAL (CONVERSION)      -->
+  <!-- ======================================================== -->
+  <section id="sprint" class="py-24 px-6 sm:px-10 relative z-20 max-w-7xl mx-auto">
+    <div class="hud-panel rounded-3xl p-8 sm:p-14 border border-volt/40 glow-volt relative overflow-hidden">
+      
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-volt/10 border border-volt/30 text-volt font-mono text-[11px] font-bold uppercase tracking-wider mb-4">
+          ★ Limited Sprint Slots: 2 This Month
+        </div>
+        <h2 class="font-syne font-extrabold text-3xl sm:text-5xl uppercase text-white tracking-tight leading-tight">
+          CLAIM YOUR 72-HOUR DIGITAL FLAGSHIP SPRINT
+        </h2>
+        <p class="font-space text-slate-300 text-xs sm:text-base mt-4">
+          Tell us about your brand. We will engineer a custom working 3D digital flagship prototype in 72 hours with ₹0 upfront commitment. Review the live build before you invest.
+        </p>
+      </div>
+
+      <!-- Interactive Scope Configuration -->
+      <div class="max-w-2xl mx-auto space-y-6">
         
-        <details class="p-6 rounded-2xl bg-dark-950 border border-dark-border group cursor-pointer">
-          <summary class="font-bold text-base text-white flex justify-between items-center list-none">
-            <span>How can you deploy a custom bespoke flagship in 72 hours?</span>
-            <span class="text-sky-400 text-xl font-mono group-open:rotate-45 transition transform">+</span>
-          </summary>
-          <p class="text-sm text-slate-400 mt-4 leading-relaxed">
-            We don't waste 4 weeks on bloated CMS plugins, dragging committee meetings, or endless wireframes. We have pre-architected high-performance design design patterns for clinics, interior studios, and real estate. We write custom, lightweight HTML/CSS/JS tailored to your brand assets and launch directly on global edge servers in 72 hours.
-          </p>
-        </details>
+        <div>
+          <label class="font-mono text-xs text-slate-300 uppercase tracking-wider block mb-2">Select Your Industry Standard:</label>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 font-space text-xs">
+            <button type="button" onclick="selectTier(this, 'Aesthetic Medicine & Surgical Clinics')" class="tier-btn px-4 py-3 rounded-xl hud-pill text-left hover:border-volt transition cursor-pointer font-semibold border-volt text-volt">
+              Medical Clinic
+            </button>
+            <button type="button" onclick="selectTier(this, 'Haute Joaillerie & High Luxury')" class="tier-btn px-4 py-3 rounded-xl hud-pill text-left hover:border-volt transition cursor-pointer font-semibold">
+              Haute Luxury
+            </button>
+            <button type="button" onclick="selectTier(this, 'High-Ticket Real Estate & Architecture')" class="tier-btn px-4 py-3 rounded-xl hud-pill text-left hover:border-volt transition cursor-pointer font-semibold">
+              Prime Estates
+            </button>
+            <button type="button" onclick="selectTier(this, 'Fintech & Quantitative Terminals')" class="tier-btn px-4 py-3 rounded-xl hud-pill text-left hover:border-volt transition cursor-pointer font-semibold">
+              Fintech / Quant
+            </button>
+            <button type="button" onclick="selectTier(this, 'Elite Athletics & Performance')" class="tier-btn px-4 py-3 rounded-xl hud-pill text-left hover:border-volt transition cursor-pointer font-semibold">
+              Elite Athletics
+            </button>
+            <button type="button" onclick="selectTier(this, 'Bespoke Studio & Agency')" class="tier-btn px-4 py-3 rounded-xl hud-pill text-left hover:border-volt transition cursor-pointer font-semibold">
+              Bespoke Studio
+            </button>
+          </div>
+        </div>
 
-        <details class="p-6 rounded-2xl bg-dark-950 border border-dark-border group cursor-pointer">
-          <summary class="font-bold text-base text-white flex justify-between items-center list-none">
-            <span>Why 1-click WhatsApp booking instead of traditional forms?</span>
-            <span class="text-sky-400 text-xl font-mono group-open:rotate-45 transition transform">+</span>
-          </summary>
-          <p class="text-sm text-slate-400 mt-4 leading-relaxed">
-            In modern mobile commerce (especially in India and global high-ticket markets), 80%+ of high-net-worth clients browse on their phones. Traditional multi-field forms create friction and result in an average 2% conversion rate. 1-Click WhatsApp booking connects the prospect directly to you or your reception with zero friction, yielding an average 3.2x higher conversion rate.
-          </p>
-        </details>
+        <div>
+          <label class="font-mono text-xs text-slate-300 uppercase tracking-wider block mb-2">Your Business Name / Brand Domain:</label>
+          <input type="text" id="brandInput" placeholder="e.g., Aurum Medical Aesthetics / www.aurum.clinic" class="w-full px-5 py-3.5 rounded-xl hud-pill text-white placeholder-slate-500 font-space text-sm focus:outline-none focus:border-volt transition">
+        </div>
 
-        <details class="p-6 rounded-2xl bg-dark-950 border border-dark-border group cursor-pointer">
-          <summary class="font-bold text-base text-white flex justify-between items-center list-none">
-            <span>What is the ₹0 Upfront Risk Guarantee?</span>
-            <span class="text-sky-400 text-xl font-mono group-open:rotate-45 transition transform">+</span>
-          </summary>
-          <p class="text-sm text-slate-400 mt-4 leading-relaxed">
-            We build the complete interactive prototype for your business first. You review it live on your personal mobile device. If you don't love the speed, look, and conversion architecture, you walk away owing ₹0. You only pay the ₹34,000 pilot fee when you approve the build and we link your custom domain.
-          </p>
-        </details>
+        <!-- 1-Click WhatsApp Kickoff -->
+        <button onclick="launchWhatsAppSprint()" class="w-full py-4.5 rounded-2xl bg-volt hover:bg-yellow-300 text-obsidian font-space font-extrabold uppercase tracking-wider text-sm shadow-xl shadow-volt/30 transition-all transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3 cursor-pointer mt-4">
+          <svg class="w-5 h-5 text-obsidian" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/></svg>
+          <span>Kick Off 72-Hour Sprint On WhatsApp</span>
+          <span class="font-mono text-sm">&rarr;</span>
+        </button>
 
-        <details class="p-6 rounded-2xl bg-dark-950 border border-dark-border group cursor-pointer">
-          <summary class="font-bold text-base text-white flex justify-between items-center list-none">
-            <span>Do you help with domain names and ongoing maintenance?</span>
-            <span class="text-sky-400 text-xl font-mono group-open:rotate-45 transition transform">+</span>
-          </summary>
-          <p class="text-sm text-slate-400 mt-4 leading-relaxed">
-            Yes. We handle your DNS connection, SSL certificates, Global Edge CDN hosting, and ongoing maintenance (₹5,000 - ₹7,000/mo after your complimentary first 30 days). This covers unlimited content updates, seasonal promotions, price changes, and technical uptime monitoring so you never have to touch a line of code or deal with server downtime.
-          </p>
-        </details>
+        <div class="flex items-center justify-center gap-6 font-mono text-[11px] text-titanium pt-2">
+          <span>✓ ₹0 Upfront Commitment</span>
+          <span>✓ Review Working Build First</span>
+          <span>✓ 100% Confidential</span>
+        </div>
 
       </div>
 
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="py-12 border-t border-dark-border px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <span class="font-bold text-white">Flagship Systems</span> <span class="text-sky-400 font-semibold">• High-Converting Digital Web Engineering</span>
-        <span>• High-Converting Digital Web Engineering</span>
+  <!-- ======================================================== -->
+  <!-- 7. EDITORIAL FOOTER                                      -->
+  <!-- ======================================================== -->
+  <footer class="py-14 px-6 sm:px-10 border-t border-white/10 bg-darksurface relative z-20 text-slate-400 font-mono text-xs">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <span class="font-syne font-extrabold text-lg text-white">FLAGSHIP<span class="text-volt">.</span>OS</span>
+        <span class="text-titanium">&bull;</span>
+        <span class="text-slate-300">STUDIO FOR CREATIVE ENGINEERING</span>
       </div>
-      <div>
-        <span>Direct Contact: </span>
-        <a href="mailto:akshsharma.web@gmail.com" class="text-sky-400 hover:underline">akshsharma.web@gmail.com</a>
-        <span class="mx-2">|</span>
-        <span>Delhi NCR & Mumbai Hubs</span>
+
+      <div class="text-center md:text-right text-slate-500 font-space text-[11px]">
+        <span>© 2026 Flagship Systems &bull; High-Converting Spatial Architectures &bull; Edge CDN Enabled</span>
       </div>
-      <div>
-        © 2026 Flagship Systems. All rights reserved.
-      </div>
+
     </div>
   </footer>
 
-  <!-- FLOATING QUICK WHATSAPP BUTTON -->
-  <a href="https://wa.me/919953582388?text=Hi%20Flagship%20Systems,%20I%20would%20like%20to%20discuss%20a%2072-Hour%20Digital%20Flagship%20for%20my%20business." target="_blank" class="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs shadow-2xl shadow-emerald-500/50 transition hover:scale-105">
-    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.551 4.095 1.517 5.82l-1.611 5.88 6.044-1.586c1.701.928 3.649 1.458 5.727 1.458 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
-    <span class="hidden sm:inline">Quick WhatsApp Inquiry</span>
-  </a>
-
-  <!-- SCRIPT FOR FORM DISPATCH -->
+  <!-- ======================================================== -->
+  <!-- 8. THREE.JS 3D ENGINE & WEB AUDIO SYNTHESIZER SCRIPT     -->
+  <!-- ======================================================== -->
   <script>
-    let currentInquiryData = null;
+    // ----------------------------------------------------
+    // THREE.JS SPATIAL 3D SCENE
+    // ----------------------------------------------------
+    let scene, camera, renderer, coreMesh, wireMesh, particleSystem;
+    let clock = new THREE.Clock();
+    let mouseX = 0, mouseY = 0;
+    let targetX = 0, targetY = 0;
+    let currentSpeed = 1.0;
+    let currentGravity = 2;
+    let currentShaderMode = 0;
 
-    async function handleEnquiry(e) {
-      e.preventDefault();
-      
-      const btn = document.getElementById('submitEnquiryBtn');
-      const btnText = document.getElementById('submitBtnText');
-      const spinner = document.getElementById('submitBtnSpinner');
-      const errToast = document.getElementById('formErrorToast');
-      if (errToast) errToast.classList.add('hidden');
+    const canvas = document.getElementById('webglCanvas');
+    const container = document.getElementById('canvas-container');
 
-      const name = document.getElementById('clientName').value.trim();
-      const biz = document.getElementById('businessName').value.trim();
-      const sector = document.getElementById('industrySector').value;
-      const phone = document.getElementById('whatsappNumber').value.trim();
-      const email = document.getElementById('clientEmail').value.trim();
-      const link = document.getElementById('existingLink').value.trim();
-      const notes = document.getElementById('projectNotes').value.trim();
+    function initThree() {
+      scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x06070A, 0.035);
 
-      const refId = 'FS-' + Math.floor(100000 + Math.random() * 900000);
-      currentInquiryData = { name, biz, sector, phone, email, link, notes, refId };
+      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 24;
 
-      // Button UI: submitting
-      btn.disabled = true;
-      btn.classList.add('opacity-80', 'cursor-not-allowed');
-      btnText.innerText = 'Submitting Application...';
-      spinner.classList.remove('hidden');
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      const payload = {
-        name: name,
-        business: biz,
-        industry: sector,
-        phone: phone,
-        email: email,
-        existing_url: link || 'None provided',
-        goals_and_notes: notes || '72-Hour Pilot Sprint (₹34,000 • ₹0 Upfront)',
-        reference_id: refId,
-        package: 'Complete 72-Hour Digital Flagship (₹34,000)',
-        _subject: `New Digital Flagship Inquiry: ${biz} (${name})`,
-        _template: 'table',
-        _captcha: 'false'
-      };
+      // 1. Core Geometric Polyhedron (Prismatic Inner Core)
+      const coreGeo = new THREE.IcosahedronGeometry(5.2, 1);
+      const coreMat = new THREE.MeshStandardMaterial({
+        color: 0x0E1320,
+        roughness: 0.15,
+        metalness: 0.85,
+        wireframe: false,
+      });
+      coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      scene.add(coreMesh);
 
-      try {
-        const response = await fetch('https://formsubmit.co/ajax/akshsharma.web@gmail.com', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
+      // 2. Outer Wireframe Cage (Electric Volt Emissive)
+      const wireGeo = new THREE.IcosahedronGeometry(6.6, 2);
+      const wireMat = new THREE.MeshStandardMaterial({
+        color: 0xE2F804,
+        emissive: 0x556000,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.75,
+      });
+      wireMesh = new THREE.Mesh(wireGeo, wireMat);
+      scene.add(wireMesh);
 
-        // FormSubmit returns JSON
-        const data = await response.json().catch(() => ({}));
+      // 3. Ambient 3D Particle Cloud (1,400 Spatial Particles)
+      const particleCount = 1400;
+      const particleGeo = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
 
-        // Show on-page success seamlessly
-        showSuccessView(name, biz, refId, phone);
+      const color1 = new THREE.Color(0xE2F804); // Volt
+      const color2 = new THREE.Color(0x00F0FF); // Cyan
+      const color3 = new THREE.Color(0xFFFFFF); // White
 
-      } catch (err) {
-        console.warn('FormSubmit fetch completed or handled with fallback:', err);
-        // Even if network or CORS is tricky, we treat the client experience cleanly
-        showSuccessView(name, biz, refId, phone);
-      } finally {
-        btn.disabled = false;
-        btn.classList.remove('opacity-80', 'cursor-not-allowed');
-        btnText.innerText = 'Submit Pilot Application (₹0 Upfront Risk)';
-        spinner.classList.add('hidden');
+      for (let i = 0; i < particleCount * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 65;
+        positions[i + 1] = (Math.random() - 0.5) * 65;
+        positions[i + 2] = (Math.random() - 0.5) * 50;
+
+        const mixedColor = Math.random() > 0.5 ? color1 : (Math.random() > 0.5 ? color2 : color3);
+        colors[i] = mixedColor.r;
+        colors[i + 1] = mixedColor.g;
+        colors[i + 2] = mixedColor.b;
+      }
+
+      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      const particleMat = new THREE.PointsMaterial({
+        size: 0.16,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.85,
+        blending: THREE.AdditiveBlending
+      });
+
+      particleSystem = new THREE.Points(particleGeo, particleMat);
+      scene.add(particleSystem);
+
+      // Studio Lighting
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+      scene.add(ambientLight);
+
+      const dirLight1 = new THREE.DirectionalLight(0xE2F804, 1.8);
+      dirLight1.position.set(15, 20, 15);
+      scene.add(dirLight1);
+
+      const dirLight2 = new THREE.DirectionalLight(0x00F0FF, 1.4);
+      dirLight2.position.set(-15, -15, 10);
+      scene.add(dirLight2);
+
+      // Mouse Listener
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('resize', onWindowResize);
+    }
+
+    function onMouseMove(e) {
+      mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+    }
+
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    // FPS Meter
+    let lastFrameTime = performance.now();
+    let frameCount = 0;
+    const fpsCounter = document.getElementById('fpsCounter');
+
+    function animateThree() {
+      requestAnimationFrame(animateThree);
+      const delta = clock.getDelta();
+      const elapsedTime = clock.getElapsedTime();
+
+      // FPS tracking
+      frameCount++;
+      const now = performance.now();
+      if (now - lastFrameTime >= 500) {
+        if (fpsCounter) fpsCounter.textContent = Math.round((frameCount * 1000) / (now - lastFrameTime));
+        frameCount = 0;
+        lastFrameTime = now;
+      }
+
+      // Smooth camera parallax
+      targetX = mouseX * 2.5;
+      targetY = mouseY * 2.0;
+      camera.position.x += (targetX - camera.position.x) * 0.05;
+      camera.position.y += (targetY - camera.position.y) * 0.05;
+      camera.lookAt(0, 0, 0);
+
+      // Rotate Geometry with Speed Control
+      const rotSpeed = delta * currentSpeed;
+      if (coreMesh) {
+        coreMesh.rotation.x += rotSpeed * 0.35;
+        coreMesh.rotation.y += rotSpeed * 0.55;
+      }
+      if (wireMesh) {
+        wireMesh.rotation.x -= rotSpeed * 0.25;
+        wireMesh.rotation.y -= rotSpeed * 0.45;
+      }
+
+      // Particle Vortex & Mouse Drag
+      if (particleSystem) {
+        particleSystem.rotation.y = elapsedTime * 0.05 * currentSpeed;
+        const positions = particleSystem.geometry.attributes.position.array;
+        for (let i = 0; i < positions.length; i += 3) {
+          // slight floating pulse
+          positions[i + 1] += Math.sin(elapsedTime * 1.5 + positions[i]) * 0.015;
+        }
+        particleSystem.geometry.attributes.position.needsUpdate = true;
+      }
+
+      // Update Spatial Lab Telemetry
+      const labMatrix = document.getElementById('labMatrixCoord');
+      if (labMatrix && wireMesh) {
+        labMatrix.textContent = `X: ${wireMesh.rotation.x.toFixed(2)} • Y: ${wireMesh.rotation.y.toFixed(2)}`;
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    // Initialize 3D Engine
+    initThree();
+    animateThree();
+
+    // ----------------------------------------------------
+    // 3D LAB INTERACTION FUNCTIONS
+    // ----------------------------------------------------
+    function updateLabSpeed(val) {
+      currentSpeed = parseFloat(val);
+      const speedVal = document.getElementById('speedVal');
+      if (speedVal) speedVal.textContent = `${currentSpeed.toFixed(1)}x`;
+      synthesizeTick();
+    }
+
+    function updateLabGravity(val) {
+      currentGravity = parseInt(val);
+      const gravNames = ['Low', 'Normal', 'High', 'Vortex', 'Hyper'];
+      const gravVal = document.getElementById('gravVal');
+      if (gravVal) gravVal.textContent = gravNames[currentGravity - 1] || 'Vortex';
+      synthesizeTick();
+    }
+
+    function setLabColor(hexColor, name) {
+      if (wireMesh) {
+        wireMesh.material.color.setHex(hexColor);
+        wireMesh.material.emissive.setHex(hexColor);
+      }
+      const colorName = document.getElementById('colorName');
+      if (colorName) colorName.textContent = name;
+      synthesizeTick();
+    }
+
+    function setShaderMode(mode) {
+      currentShaderMode = mode;
+      const b0 = document.getElementById('modeBtn0');
+      const b1 = document.getElementById('modeBtn1');
+      const b2 = document.getElementById('modeBtn2');
+
+      [b0, b1, b2].forEach((b, idx) => {
+        if (!b) return;
+        if (idx === mode) {
+          b.className = 'px-3 py-1 rounded-full bg-volt text-obsidian font-bold text-[10px] uppercase transition cursor-pointer';
+        } else {
+          b.className = 'px-3 py-1 rounded-full text-slate-300 hover:text-white text-[10px] uppercase transition cursor-pointer';
+        }
+      });
+
+      if (mode === 0) {
+        // Prismatic Solid
+        if (coreMesh) coreMesh.visible = true;
+        if (wireMesh) wireMesh.visible = true;
+        if (particleSystem) particleSystem.material.size = 0.16;
+      } else if (mode === 1) {
+        // Wireframe Only
+        if (coreMesh) coreMesh.visible = false;
+        if (wireMesh) wireMesh.visible = true;
+        if (particleSystem) particleSystem.material.size = 0.12;
+      } else if (mode === 2) {
+        // Vortex Swarm
+        if (coreMesh) coreMesh.visible = false;
+        if (wireMesh) wireMesh.visible = true;
+        if (particleSystem) particleSystem.material.size = 0.28;
+      }
+      synthesizeTick();
+    }
+
+    // ----------------------------------------------------
+    // WEB AUDIO SPATIAL SYNTHESIZER
+    // ----------------------------------------------------
+    let audioCtx = null;
+    let isAudioPlaying = false;
+    let osc1 = null, osc2 = null, masterGain = null;
+
+    function toggleAudioEngine() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      const dot = document.getElementById('audioStatusDot');
+      const txt = document.getElementById('audioStatusText');
+
+      if (!isAudioPlaying) {
+        // Start warm ambient drone
+        masterGain = audioCtx.createGain();
+        masterGain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+        masterGain.gain.exponentialRampToValueAtTime(0.07, audioCtx.currentTime + 1.5);
+        masterGain.connect(audioCtx.destination);
+
+        // Sub oscillator (55Hz - A1)
+        osc1 = audioCtx.createOscillator();
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(55, audioCtx.currentTime);
+
+        // Harmonic oscillator (110Hz - A2)
+        osc2 = audioCtx.createOscillator();
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(110, audioCtx.currentTime);
+
+        // Lowpass filter for warm analog warmth
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(320, audioCtx.currentTime);
+
+        osc1.connect(filter);
+        osc2.connect(filter);
+        filter.connect(masterGain);
+
+        osc1.start();
+        osc2.start();
+
+        isAudioPlaying = true;
+        if (dot) dot.className = 'w-2 h-2 rounded-full bg-volt animate-ping';
+        if (txt) txt.textContent = 'AUDIO: ON';
+      } else {
+        if (masterGain) {
+          masterGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.6);
+          setTimeout(() => {
+            if (osc1) osc1.stop();
+            if (osc2) osc2.stop();
+          }, 600);
+        }
+        isAudioPlaying = false;
+        if (dot) dot.className = 'w-2 h-2 rounded-full bg-slate-500';
+        if (txt) txt.textContent = 'AUDIO: OFF';
       }
     }
 
-    function showSuccessView(name, biz, refId, phone) {
-      document.getElementById('enquiryForm').classList.add('hidden');
-      const card = document.getElementById('enquirySuccessCard');
-      card.classList.remove('hidden');
+    // Micro-synthesizer tactile tick on UI interaction
+    function synthesizeTick() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
 
-      document.getElementById('successClientName').innerText = name;
-      document.getElementById('successBusinessName').innerText = biz;
-      document.getElementById('successRefId').innerText = refId;
+      try {
+        const tickOsc = audioCtx.createOscillator();
+        const tickGain = audioCtx.createGain();
+        tickOsc.type = 'sine';
+        tickOsc.frequency.setValueAtTime(880, audioCtx.currentTime);
+        tickOsc.frequency.exponentialRampToValueAtTime(220, audioCtx.currentTime + 0.04);
 
-      const waMsg = encodeURIComponent(
-        `Hi Flagship Systems, I just submitted an inquiry on your site (Ref: ${refId}).
+        tickGain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        tickGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+
+        tickOsc.connect(tickGain);
+        tickGain.connect(audioCtx.destination);
+
+        tickOsc.start();
+        tickOsc.stop(audioCtx.currentTime + 0.05);
+      } catch (e) {}
+    }
+
+    // ----------------------------------------------------
+    // SPRINT TERMINAL TIER SELECTOR & WHATSAPP GENERATOR
+    // ----------------------------------------------------
+    let selectedIndustry = 'Aesthetic Medicine & Surgical Clinics';
+
+    function selectTier(btn, industry) {
+      selectedIndustry = industry;
+      document.querySelectorAll('.tier-btn').forEach(b => {
+        b.className = 'tier-btn px-4 py-3 rounded-xl hud-pill text-left hover:border-volt transition cursor-pointer font-semibold';
+      });
+      btn.className = 'tier-btn px-4 py-3 rounded-xl hud-pill text-left hover:border-volt transition cursor-pointer font-semibold border-volt text-volt';
+      synthesizeTick();
+    }
+
+    function launchWhatsAppSprint() {
+      const brandInput = document.getElementById('brandInput').value.trim() || 'Visionary Client';
+      const text = encodeURIComponent(
+        `Hello Flagship Systems,
+
+I want to claim a 72-Hour Digital Flagship Sprint.
+
 ` +
-        `Business: ${biz}
+        `• Brand / Domain: ${brandInput}
 ` +
-        `Name: ${name}`
+        `• Industry Standard: ${selectedIndustry}
+` +
+        `• Target: Awwwards-Calibre 3D Kinematic Digital Flagship
+
+` +
+        `Please share the kickoff protocol and timeline.`
       );
-      document.getElementById('successWhatsappLink').href = `https://wa.me/919953582388?text=${waMsg}`;
+      window.open(`https://wa.me/918882967595?text=${text}`, '_blank');
     }
 
-    function resetEnquiryForm() {
-      document.getElementById('enquiryForm').reset();
-      document.getElementById('enquiryForm').classList.remove('hidden');
-      document.getElementById('enquirySuccessCard').classList.add('hidden');
-    }
+    // ----------------------------------------------------
+    // 3D PERSPECTIVE CARD TILT PHYSICS (ORIGIN UI STYLE)
+    // ----------------------------------------------------
+    document.querySelectorAll('.card-3d-wrapper').forEach(wrapper => {
+      const card = wrapper.querySelector('.card-3d');
+      wrapper.addEventListener('mousemove', (e) => {
+        const rect = wrapper.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -7;
+        const rotateY = ((x - centerX) / centerX) * 7;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
 
-    function submitViaEmailFallback() {
-      if (!currentInquiryData) return;
-      const { name, biz, sector, phone, email, notes, refId } = currentInquiryData;
-      const subj = encodeURIComponent(`72-Hour Digital Flagship Inquiry [${refId}] - ${biz}`);
-      const body = encodeURIComponent(
-        `Hi Flagship Systems Team,
-
-` +
-        `Client Name: ${name}
-` +
-        `Business Name: ${biz}
-` +
-        `Sector: ${sector}
-` +
-        `Phone/WhatsApp: ${phone}
-` +
-        `Email: ${email}
-
-` +
-        `Project Notes:
-${notes}
-`
-      );
-      window.location.href = `mailto:akshsharma.web@gmail.com?subject=${subj}&body=${body}`;
-    }
+      wrapper.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      });
+    });
   </script>
 
 </body>
