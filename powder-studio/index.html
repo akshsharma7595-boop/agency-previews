@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALTAVAL | Powder Alpine OS & Casberry 3D Particle Engine</title>
+  <meta name="description" content="Awwwards-calibre alpine digital flagship engineered with Casberry 20K particle physics, Charles Liu color wheel theory, and Origin UI components.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Three.js + GSAP for Real 3D Kinematics & WebGL Particles -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&family=Syne:wght@700;800;900&family=Anton&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            anton: ['"Anton"', 'sans-serif'],
+            syne: ['"Syne"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"Space Grotesk"', 'monospace'],
+          },
+          colors: {
+            glacier: '#62A7EA',
+            navy: '#0C1B48',
+            lemon: '#F2EA1E',
+            snow: '#F8FAFC',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #62A7EA;
+      color: #0C1B48;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      transition: background-color 0.6s ease;
+    }
+
+    /* WebGL Casberry Particle Canvas (Background) */
+    #casberryCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: auto;
+    }
+
+    /* Giant Split-Tone Hero Typography (Reel Exact Aesthetic) */
+    .hero-split-type {
+      font-family: 'Anton', 'Syne', sans-serif;
+      font-size: clamp(6.5rem, 21vw, 24rem);
+      line-height: 0.82;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 5;
+    }
+    .split-lemon {
+      color: #F2EA1E;
+      text-shadow: 0 10px 40px rgba(242, 234, 30, 0.35);
+    }
+    .split-navy {
+      color: #0C1B48;
+      text-shadow: 0 10px 40px rgba(12, 27, 72, 0.25);
+    }
+
+    /* Diagonal Ski Cable Line Cutting Screen */
+    .ski-cable {
+      position: absolute;
+      top: 18%;
+      left: -5%;
+      width: 120%;
+      height: 4px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(12,27,72,0.6) 50%, rgba(255,255,255,0.6) 100%);
+      transform: rotate(18deg);
+      z-index: 6;
+      pointer-events: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    /* 3D Gondola Floating Rig with Momentum Tilt */
+    .gondola-container {
+      position: absolute;
+      top: 36%;
+      left: 48%;
+      transform: translate(-50%, -50%) rotate(18deg);
+      z-index: 8;
+      pointer-events: auto;
+      cursor: grab;
+      filter: drop-shadow(0 25px 35px rgba(12, 27, 72, 0.35));
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .gondola-container:active {
+      cursor: grabbing;
+    }
+
+    /* Origin UI Glass Panels */
+    .origin-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 20px 45px -15px rgba(12, 27, 72, 0.15);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .origin-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 50px -12px rgba(12, 27, 72, 0.22);
+    }
+
+    /* Origin UI Segmented Tab Active Pill */
+    .origin-pill-active {
+      background: #0C1B48;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(12, 27, 72, 0.25);
+    }
+
+    /* Custom Alpine Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #62A7EA;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #0C1B48;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #F2EA1E;
+    }
+  </style>
+</head>
+<body class="selection:bg-lemon selection:text-navy">
+
+  <!-- ========================================== -->
+  <!-- 1. EDITORIAL HEADER                        -->
+  <!-- ========================================== -->
+  <header class="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-glacier/80 border-b border-white/20 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      
+      <!-- Logo Branding -->
+      <a href="#hero" class="flex items-center gap-2 group">
+        <span class="font-anton text-2xl uppercase tracking-wider text-navy group-hover:text-white transition">
+          ALTAVAL
+        </span>
+        <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-lemon text-navy font-bold uppercase tracking-widest">
+          3200M OS
+        </span>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest font-semibold text-navy">
+        <a href="#hero" class="hover:text-white transition">Lifts</a>
+        <a href="#particles" class="hover:text-white transition flex items-center gap-1">
+          <span>&#x2728; Casberry Lab</span>
+        </a>
+        <a href="#origin-ui" class="hover:text-white transition">Origin UI</a>
+        <a href="#weather" class="hover:text-white transition">Snow Report</a>
+        <a href="#passes" class="hover:text-white transition">Ski School</a>
+      </nav>
+
+      <!-- Right CTAs -->
+      <div class="flex items-center gap-3">
+        
+        <!-- Audio Wind Toggle -->
+        <button onclick="toggleAudio()" id="audioBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/40 hover:bg-white/60 text-navy text-[11px] font-mono font-bold transition shadow-sm cursor-pointer">
+          <span id="audioIcon">&#x1F50A;</span>
+          <span id="audioText" class="hidden sm:inline">Alpine Sound</span>
+        </button>
+
+        <!-- The 10% Lemon Action Accent Button -->
+        <a href="#passes" class="px-5 py-2 rounded-full bg-lemon hover:bg-[#E2DA16] text-navy font-anton uppercase tracking-wider text-sm shadow-xl shadow-yellow-500/20 transform hover:scale-105 transition cursor-pointer">
+          Ski Passes &rarr;
+        </a>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- 2. HERO: EXACT REEL RECREATION (POWDER + GONDOLA + SNOW) -->
+  <!-- ======================================================== -->
+  <section id="hero" class="relative w-full h-screen overflow-hidden flex flex-col justify-between pt-24 pb-12 px-6">
+    
+    <!-- Casberry 20K WebGL Particle Swarm Canvas (Active Background) -->
+    <canvas id="casberryCanvas"></canvas>
+
+    <!-- Diagonal Ski Cable Cutting Across Screen -->
+    <div class="ski-cable"></div>
+
+    <!-- 3D Kinetic Gondola Centerpiece (Interactive SVG/3D Rig) -->
+    <div class="gondola-container" id="gondola">
+      <svg class="w-64 sm:w-80 md:w-96" viewBox="0 0 340 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Overhead Cable Clamp Rig -->
+        <rect x="160" y="20" width="20" height="45" rx="3" fill="#334155" />
+        <circle cx="170" cy="20" r="12" fill="#0C1B48" stroke="#F8FAFC" stroke-width="3"/>
+        <line x1="170" y1="65" x2="170" y2="135" stroke="#334155" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="170" cy="135" r="7" fill="#0C1B48"/>
+
+        <!-- Gondola Main Body (Vibrant Electric Lemon Yellow) -->
+        <rect x="70" y="130" width="200" height="220" rx="60" fill="#F2EA1E" stroke="#0C1B48" stroke-width="6"/>
+        
+        <!-- Metallic Roof Shading & Snow Layer -->
+        <path d="M90 145 C120 135 220 135 250 145" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+        
+        <!-- Large Panoramic Curved Window -->
+        <rect x="95" y="165" width="150" height="135" rx="35" fill="#0C1B48" />
+        
+        <!-- Alpine Mountain Reflection Inside Glass -->
+        <path d="M105 285 L145 220 L175 255 L210 210 L235 285 Z" fill="#62A7EA" opacity="0.85"/>
+        <path d="M145 220 L155 235 L135 235 Z" fill="#FFFFFF"/>
+        <path d="M210 210 L220 225 L200 225 Z" fill="#FFFFFF"/>
+
+        <!-- Glass Specular Glare -->
+        <path d="M120 180 C150 175 200 185 220 215" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+
+        <!-- Gondola Lower Vent & Bumper -->
+        <rect x="120" y="320" width="100" height="8" rx="4" fill="#0C1B48"/>
+        <rect x="135" y="333" width="70" height="5" rx="2.5" fill="#0C1B48"/>
+      </svg>
+    </div>
+
+    <!-- Top Corner Metadata (From Charles Reel) -->
+    <div class="relative z-10 max-w-7xl mx-auto w-full flex items-start justify-between pointer-events-none">
+      
+      <!-- Left Metadata -->
+      <div class="space-y-4 pointer-events-auto">
+        <div class="px-4 py-2 rounded-2xl bg-white/70 backdrop-blur-md border border-white/60 text-xs font-mono uppercase tracking-widest text-navy shadow-sm">
+          <strong>FRESH SNOW:</strong> 42 CM OVERNIGHT
+        </div>
+        <div class="px-4 py-2 rounded-2xl bg-white/70 backdrop-blur-md border border-white/60 text-xs font-mono uppercase tracking-widest text-navy shadow-sm">
+          <strong>SEASON:</strong> OPEN 1 DEC TO 20 APR
+        </div>
+      </div>
+
+      <!-- Right Metadata -->
+      <div class="space-y-4 text-right pointer-events-auto">
+        <div class="px-4 py-2 rounded-2xl bg-white/70 backdrop-blur-md border border-white/60 text-xs font-mono uppercase tracking-widest text-navy shadow-sm">
+          <strong>TERRAIN:</strong> 64 PISTES &bull; UP TO 3,200M
+        </div>
+        <div class="px-4 py-2 rounded-2xl bg-navy text-white text-xs font-mono uppercase tracking-widest shadow-sm">
+          <strong>CONDITION:</strong> 100% CHAMPAGNE POWDER
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Centerpiece Giant Split Typography ("POW" in Lemon, "DER" in Navy) -->
+    <div class="hero-split-type">
+      <span class="split-lemon">POW</span><span class="split-navy">DER</span>
+    </div>
+
+    <!-- Bottom Action Bar & Circular Lemon 10% CTA -->
+    <div class="relative z-10 max-w-7xl mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-6">
+      
+      <!-- Left Subhead -->
+      <div class="text-navy font-mono text-xs uppercase tracking-widest max-w-xs">
+        &bull; 20,000 Reactive WebGL Snow Particles in real time. Move your cursor to sweep the snow.
+      </div>
+
+      <!-- The Famous Circular Lemon CTA from the Video -->
+      <a href="#passes" class="w-32 h-32 rounded-full bg-lemon hover:bg-[#E8E016] text-navy font-anton uppercase tracking-tight text-xl flex items-center justify-center text-center shadow-2xl shadow-yellow-500/40 hover:scale-110 active:scale-95 transition-all duration-300 border-4 border-navy cursor-pointer">
+        <span>SKI<br>PASSES</span>
+      </a>
+
+      <!-- Right Interactive Particle Mode Switcher -->
+      <div class="flex items-center gap-1 p-1 rounded-full bg-white/80 backdrop-blur-md border border-white/90 shadow-sm text-xs font-mono">
+        <button onclick="setParticleMode('blizzard')" id="btn-blizzard" class="px-3.5 py-1.5 rounded-full origin-pill-active font-bold transition">
+          Blizzard
+        </button>
+        <button onclick="setParticleMode('vortex')" id="btn-vortex" class="px-3.5 py-1.5 rounded-full text-navy hover:text-black transition">
+          Vortex
+        </button>
+        <button onclick="setParticleMode('wave')" id="btn-wave" class="px-3.5 py-1.5 rounded-full text-navy hover:text-black transition">
+          Wave
+        </button>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 3. SECTION: CASBERRY PARTICLE SIMULATOR LAB              -->
+  <!-- ======================================================== -->
+  <section id="particles" class="py-24 px-6 bg-navy text-white relative z-20">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-lemon/20 text-lemon text-xs font-mono uppercase tracking-widest font-bold mb-3">
+            <span>&#x2728;</span>
+            <span>Casberry AI Simulator Tech</span>
+          </div>
+          <h2 class="font-syne text-4xl sm:text-6xl font-extrabold uppercase tracking-tight text-white">
+            20,000 Particle Physics
+          </h2>
+        </div>
+        <p class="text-stone-300 font-light text-sm max-w-md leading-relaxed font-sans">
+          Replicating <span class="text-lemon font-mono font-bold">particles.casberry.in</span> inside Three.js: high-density WebGL point clouds driven by mathematical velocity fields and cursor attractor gravity.
+        </p>
+      </div>
+
+      <!-- Interactive Particle Controls & Telemetry -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Live Telemetry Card -->
+        <div class="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl">
+          <div class="flex items-center justify-between mb-6">
+            <span class="text-xs font-mono uppercase tracking-widest text-lemon font-bold">Live GPU Metrics</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold">60 FPS OK</span>
+          </div>
+          <div class="space-y-4 font-mono text-xs">
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-stone-400">Total Particles:</span>
+              <span class="text-white font-bold" id="metricCount">18,500 Points</span>
+            </div>
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-stone-400">Physics Field:</span>
+              <span class="text-lemon font-bold" id="metricField">Curl Noise / Vortex</span>
+            </div>
+            <div class="flex justify-between border-b border-white/10 pb-2">
+              <span class="text-stone-400">Mouse Attraction:</span>
+              <span class="text-emerald-400 font-bold" id="metricAttract">Active (Radius 220px)</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-stone-400">Shader Render Pass:</span>
+              <span class="text-blue-400 font-bold">Additive Blending</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-time Sliders (Origin UI Style) -->
+        <div class="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl lg:col-span-2 space-y-6">
+          <h3 class="font-syne text-xl font-bold text-white mb-2">Adjust Fluid Simulation Dynamics</h3>
+          
+          <!-- Slider 1: Wind Velocity -->
+          <div>
+            <div class="flex justify-between text-xs font-mono mb-2">
+              <span class="text-stone-300">Alpine Wind Velocity</span>
+              <span class="text-lemon font-bold" id="windVal">1.4x Gale</span>
+            </div>
+            <input type="range" min="0.2" max="3.5" step="0.1" value="1.4" oninput="updateWind(this.value)" class="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#F2EA1E]">
+          </div>
+
+          <!-- Slider 2: Particle Attraction Force -->
+          <div>
+            <div class="flex justify-between text-xs font-mono mb-2">
+              <span class="text-stone-300">Cursor Attractor Gravity</span>
+              <span class="text-lemon font-bold" id="attractVal">0.75 G</span>
+            </div>
+            <input type="range" min="0" max="2.0" step="0.05" value="0.75" oninput="updateAttract(this.value)" class="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#F2EA1E]">
+          </div>
+
+          <!-- Slider 3: Particle Scale -->
+          <div>
+            <div class="flex justify-between text-xs font-mono mb-2">
+              <span class="text-stone-300">Crystal Flake Diameter</span>
+              <span class="text-lemon font-bold" id="scaleVal">2.2 px</span>
+            </div>
+            <input type="range" min="1.0" max="6.0" step="0.2" value="2.2" oninput="updateScale(this.value)" class="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#F2EA1E]">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 4. SECTION: ORIGIN UI INTERACTIVE COMPONENT SUITE        -->
+  <!-- ======================================================== -->
+  <section id="origin-ui" class="py-24 px-6 bg-snow text-navy relative z-20">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-navy/10 text-navy text-xs font-mono uppercase tracking-widest font-bold mb-3">
+          <span>&#x25C7;</span>
+          <span>Origin UI &bull; originui.com Architecture</span>
+        </div>
+        <h2 class="font-syne text-4xl sm:text-6xl font-extrabold uppercase text-navy mb-4">
+          Tactile Micro-Components
+        </h2>
+        <p class="text-stone-600 font-light text-sm sm:text-base leading-relaxed">
+          Inspired by Origin UI: copy-paste tactile components with magnetic hover, floating glass labels, and zero bloated frameworks.
+        </p>
+      </div>
+
+      <!-- Component Showcase Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Component 1: Origin UI Date & Pass Selector -->
+        <div class="origin-card p-8 rounded-3xl flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-mono uppercase tracking-widest text-glacier font-bold block mb-2">Component // 01</span>
+            <h3 class="font-syne text-2xl font-bold text-navy mb-3">Origin Lift Pass Stepper</h3>
+            <p class="text-xs text-stone-500 font-light leading-relaxed mb-6">
+              Interactive guest counters with tactile audio clicks and dynamic price calculation.
+            </p>
+            
+            <div class="space-y-4">
+              <div class="flex items-center justify-between p-3.5 rounded-2xl bg-white border border-stone-200">
+                <div>
+                  <div class="text-xs font-bold text-navy">Adult Pass (18+)</div>
+                  <div class="text-[10px] font-mono text-stone-400">$84 / Day</div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <button onclick="updateQty('adult', -1)" class="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 font-bold text-navy flex items-center justify-center transition cursor-pointer">-</button>
+                  <span id="qtyAdult" class="font-mono text-sm font-bold text-navy w-4 text-center">2</span>
+                  <button onclick="updateQty('adult', 1)" class="w-8 h-8 rounded-full bg-navy hover:bg-black font-bold text-white flex items-center justify-center transition cursor-pointer">+</button>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 rounded-2xl bg-white border border-stone-200">
+                <div>
+                  <div class="text-xs font-bold text-navy">Junior Pass (&lt;18)</div>
+                  <div class="text-[10px] font-mono text-stone-400">$48 / Day</div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <button onclick="updateQty('junior', -1)" class="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 font-bold text-navy flex items-center justify-center transition cursor-pointer">-</button>
+                  <span id="qtyJunior" class="font-mono text-sm font-bold text-navy w-4 text-center">1</span>
+                  <button onclick="updateQty('junior', 1)" class="w-8 h-8 rounded-full bg-navy hover:bg-black font-bold text-white flex items-center justify-center transition cursor-pointer">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-stone-200 flex items-center justify-between font-mono">
+            <span class="text-xs text-stone-500">Live Calculation:</span>
+            <span id="totalPassPrice" class="text-xl font-bold text-navy font-syne">$216 / Day</span>
+          </div>
+        </div>
+
+        <!-- Component 2: Charles Liu 60/30/10 Palette Swapper -->
+        <div class="origin-card p-8 rounded-3xl flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-mono uppercase tracking-widest text-glacier font-bold block mb-2">Component // 02</span>
+            <h3 class="font-syne text-2xl font-bold text-navy mb-3">Color Wheel Transformer</h3>
+            <p class="text-xs text-stone-500 font-light leading-relaxed mb-6">
+              Switch the entire website between triadic high-contrast palettes in 1 click.
+            </p>
+
+            <div class="space-y-3 font-mono text-xs">
+              <button onclick="applyPalette('powder')" class="w-full p-3 rounded-2xl border border-stone-200 hover:border-navy flex items-center justify-between transition cursor-pointer bg-white">
+                <span class="font-bold">Glacier / Navy / Lemon</span>
+                <div class="flex gap-1.5">
+                  <span class="w-4 h-4 rounded-full bg-[#62A7EA]"></span>
+                  <span class="w-4 h-4 rounded-full bg-[#0C1B48]"></span>
+                  <span class="w-4 h-4 rounded-full bg-[#F2EA1E]"></span>
+                </div>
+              </button>
+
+              <button onclick="applyPalette('onyx')" class="w-full p-3 rounded-2xl border border-stone-200 hover:border-navy flex items-center justify-between transition cursor-pointer bg-white">
+                <span class="font-bold">Onyx / Silk / Emerald</span>
+                <div class="flex gap-1.5">
+                  <span class="w-4 h-4 rounded-full bg-[#0A0D14]"></span>
+                  <span class="w-4 h-4 rounded-full bg-[#FAF8F5]"></span>
+                  <span class="w-4 h-4 rounded-full bg-[#05D585]"></span>
+                </div>
+              </button>
+
+              <button onclick="applyPalette('cyber')" class="w-full p-3 rounded-2xl border border-stone-200 hover:border-navy flex items-center justify-between transition cursor-pointer bg-white">
+                <span class="font-bold">Cyber / Navy / Coral</span>
+                <div class="flex gap-1.5">
+                  <span class="w-4 h-4 rounded-full bg-[#0F172A]"></span>
+                  <span class="w-4 h-4 rounded-full bg-[#38BDF8]"></span>
+                  <span class="w-4 h-4 rounded-full bg-[#EF4444]"></span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-stone-200 text-xs font-mono text-stone-500">
+            Rule: 60% Atmosphere &bull; 30% Surface &bull; 10% Pop
+          </div>
+        </div>
+
+        <!-- Component 3: Origin UI Floating Glass Telemetry Input -->
+        <div class="origin-card p-8 rounded-3xl flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-mono uppercase tracking-widest text-glacier font-bold block mb-2">Component // 03</span>
+            <h3 class="font-syne text-2xl font-bold text-navy mb-3">Live Condition Dispatch</h3>
+            <p class="text-xs text-stone-500 font-light leading-relaxed mb-6">
+              Instant Alpine SMS alert dispatcher with validated floating input fields.
+            </p>
+
+            <form onsubmit="handleAlertDispatch(event)" class="space-y-4">
+              <div>
+                <label class="block text-[11px] font-mono uppercase tracking-wider text-stone-500 mb-1.5">Mobile Phone (SMS)</label>
+                <input type="tel" required placeholder="+1 (555) 019-2834" class="w-full px-4 py-3 rounded-xl bg-white border border-stone-300 font-mono text-xs focus:outline-none focus:border-navy transition">
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-mono uppercase tracking-wider text-stone-500 mb-1.5">Snow Threshold Alert</label>
+                <select class="w-full px-4 py-3 rounded-xl bg-white border border-stone-300 font-mono text-xs focus:outline-none focus:border-navy transition">
+                  <option>&gt; 15 cm Fresh Powder</option>
+                  <option>&gt; 30 cm Blizzard Drop</option>
+                  <option>First Lift Bell Alarm</option>
+                </select>
+              </div>
+
+              <button type="submit" id="alertBtn" class="w-full py-3 rounded-xl bg-navy hover:bg-black text-white font-mono text-xs font-bold uppercase tracking-wider transition cursor-pointer">
+                Subscribe Alerts &rarr;
+              </button>
+            </form>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-stone-200 text-[11px] font-mono text-emerald-600 flex items-center gap-1">
+            <span>&#x2713;</span>
+            <span>Origin UI Micro-Interaction Verified</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 5. SECTION: SKI PASSES & VIP CHALET INQUIRY              -->
+  <!-- ======================================================== -->
+  <section id="passes" class="py-24 px-6 bg-glacier border-t border-white/20 text-navy relative z-20">
+    <div class="max-w-4xl mx-auto origin-card p-8 sm:p-12 rounded-3xl relative shadow-2xl">
+      
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <span class="text-xs font-mono uppercase tracking-[0.25em] text-navy font-bold block mb-2">
+          Private Alpine Salon
+        </span>
+        <h2 class="font-syne text-3xl sm:text-5xl font-extrabold uppercase text-navy mb-3">
+          Reserve Season Allocations
+        </h2>
+        <p class="text-xs sm:text-sm text-stone-600 font-light">
+          Priority access for private suites, heli-skiing drops, and seasonal mountain passes.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+        
+        <div class="p-6 rounded-2xl bg-white/70 border border-white">
+          <div class="text-xs font-mono text-stone-500 uppercase mb-1">Standard Season</div>
+          <div class="text-2xl font-anton text-navy mb-2">UNLIMITED LIFT PASS</div>
+          <div class="text-3xl font-syne font-bold text-navy mb-4">$1,450</div>
+          <p class="text-xs text-stone-600 mb-4 font-light">All 64 pistes, night skiing, priority express gondola lanes.</p>
+          <button onclick="alert('Unlimited Pass Reserved for checkout.')" class="w-full py-3 rounded-xl bg-navy text-white text-xs font-mono font-bold uppercase transition hover:bg-black cursor-pointer">Select Pass</button>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-navy text-white border-2 border-lemon relative shadow-xl">
+          <div class="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-lemon text-navy text-[10px] font-mono font-bold uppercase">
+            VIP Heli-Club
+          </div>
+          <div class="text-xs font-mono text-lemon uppercase mb-1">Ultra-Exclusive</div>
+          <div class="text-2xl font-anton text-white mb-2">ALPINE CHALET SUITE</div>
+          <div class="text-3xl font-syne font-bold text-lemon mb-4">P.O.A.</div>
+          <p class="text-xs text-stone-300 mb-4 font-light">Private summit chalet, 3 helicopter powder drops, personal concierge.</p>
+          <button onclick="alert('Private VIP Salon requested. Concierge will reach out.')" class="w-full py-3 rounded-xl bg-lemon text-navy text-xs font-mono font-bold uppercase transition hover:bg-yellow-400 cursor-pointer">Inquire P.O.A.</button>
+        </div>
+
+      </div>
+
+      <!-- Links Back to Other Live Studios -->
+      <div class="pt-6 border-t border-stone-200/80 flex flex-wrap items-center justify-between text-xs font-mono text-stone-600 gap-4">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Flagship Systems Multiverse Active</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="../crane-studio/" class="hover:text-navy underline">Crane Studio</a>
+          <a href="../goshwara/" class="hover:text-navy underline">Goshwara Haute Joaillerie</a>
+          <a href="../spline-studio/" class="hover:text-navy underline">Spline Engine</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 6. FOOTER                                  -->
+  <!-- ========================================== -->
+  <footer class="py-12 px-6 bg-navy text-stone-400 text-xs font-mono border-t border-white/10 relative z-20">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-2">
+        <span class="font-anton text-xl text-white">ALTAVAL</span>
+        <span class="text-lemon font-mono">&bull; POWDER OS</span>
+      </div>
+
+      <div class="text-center md:text-right">
+        <span>Color Theory inspired by Charles Liu (@charles.unemployed) &bull; Casberry WebGL Engine</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- 7. CASBERRY 20K PARTICLE WEBGL ENGINE      -->
+  <!-- ========================================== -->
+  <script>
+    // Audio Synthesizer (Alpine Wind & Tactile Clicks)
+    let audioCtx = null;
+    let isWindPlaying = false;
+    let windGain = null;
+
+    function playTone(freq, duration = 0.08) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function toggleAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      if (!isWindPlaying) {
+        // Synthesize Pink Noise / Wind
+        const bufferSize = audioCtx.sampleRate * 2;
+        const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        let b0 = 0, b1 = 0, b2 = 0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          b0 = 0.99765 * b0 + white * 0.0990460;
+          b1 = 0.96300 * b1 + white * 0.0886510;
+          b2 = 0.57000 * b2 + white * 0.5500000;
+          output[i] = (b0 + b1 + b2) * 0.04;
+        }
+
+        const whiteNoise = audioCtx.createBufferSource();
+        whiteNoise.buffer = noiseBuffer;
+        whiteNoise.loop = true;
+
+        windGain = audioCtx.createGain();
+        windGain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(380, audioCtx.currentTime);
+
+        whiteNoise.connect(filter);
+        filter.connect(windGain);
+        windGain.connect(audioCtx.destination);
+        whiteNoise.start();
+
+        isWindPlaying = true;
+        document.getElementById('audioText').innerText = 'Wind: Active';
+        document.getElementById('audioBtn').className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-lemon text-navy text-[11px] font-mono font-bold transition shadow-md cursor-pointer';
+      } else {
+        if (windGain) windGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.3);
+        isWindPlaying = false;
+        document.getElementById('audioText').innerText = 'Alpine Sound';
+        document.getElementById('audioBtn').className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/40 hover:bg-white/60 text-navy text-[11px] font-mono font-bold transition shadow-sm cursor-pointer';
+      }
+    }
+
+    // ==========================================
+    // THREE.JS CASBERRY 20K PARTICLE SIMULATOR
+    // ==========================================
+    const canvas = document.getElementById('casberryCanvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.z = 15;
+
+    // 20,000 Particle Buffers
+    const PARTICLE_COUNT = 18500;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(PARTICLE_COUNT * 3);
+    const velocities = new Float32Array(PARTICLE_COUNT * 3);
+    const initialPositions = new Float32Array(PARTICLE_COUNT * 3);
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const i3 = i * 3;
+      const x = (Math.random() - 0.5) * 35;
+      const y = (Math.random() - 0.5) * 22;
+      const z = (Math.random() - 0.5) * 16;
+
+      positions[i3] = x;
+      positions[i3 + 1] = y;
+      positions[i3 + 2] = z;
+
+      initialPositions[i3] = x;
+      initialPositions[i3 + 1] = y;
+      initialPositions[i3 + 2] = z;
+
+      velocities[i3] = (Math.random() - 0.5) * 0.02;
+      velocities[i3 + 1] = -Math.random() * 0.05 - 0.02; // Downward gravity
+      velocities[i3 + 2] = (Math.random() - 0.5) * 0.01;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    // Particle Texture Generator (Smooth Crystal Snowflake Dot)
+    function createFlakeTexture() {
+      const c = document.createElement('canvas');
+      c.width = 64;
+      c.height = 64;
+      const ctx = c.getContext('2d');
+      const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+      grad.addColorStop(0.3, 'rgba(242, 234, 30, 0.7)');
+      grad.addColorStop(0.8, 'rgba(255, 255, 255, 0.2)');
+      grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 64, 64);
+      return new THREE.CanvasTexture(c);
+    }
+
+    const material = new THREE.PointsMaterial({
+      size: 0.16,
+      map: createFlakeTexture(),
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      opacity: 0.85
+    });
+
+    const particleSystem = new THREE.Points(geometry, material);
+    scene.add(particleSystem);
+
+    // Simulation Parameters
+    let simMode = 'blizzard';
+    let windSpeed = 1.4;
+    let attractorStrength = 0.75;
+    const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    // Gondola 3D Tilt on Mouse Move
+    const gondolaEl = document.getElementById('gondola');
+    window.addEventListener('mousemove', (e) => {
+      const offsetX = (e.clientX / window.innerWidth - 0.5) * 15;
+      const offsetY = (e.clientY / window.innerHeight - 0.5) * 10;
+      gondolaEl.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px)) rotate(${18 + offsetX * 0.2}deg)`;
+    });
+
+    // Particle Control Functions
+    function setParticleMode(mode) {
+      simMode = mode;
+      playTone(520);
+      ['blizzard', 'vortex', 'wave'].forEach(m => {
+        const btn = document.getElementById('btn-' + m);
+        if (btn) {
+          if (m === mode) {
+            btn.className = 'px-3.5 py-1.5 rounded-full origin-pill-active font-bold transition';
+          } else {
+            btn.className = 'px-3.5 py-1.5 rounded-full text-navy hover:text-black transition';
+          }
+        }
+      });
+      document.getElementById('metricField').innerText = mode.toUpperCase() + ' PHYSICS';
+    }
+
+    function updateWind(v) {
+      windSpeed = parseFloat(v);
+      document.getElementById('windVal').innerText = v + 'x Gale';
+    }
+
+    function updateAttract(v) {
+      attractorStrength = parseFloat(v);
+      document.getElementById('attractVal').innerText = v + ' G';
+    }
+
+    function updateScale(v) {
+      material.size = parseFloat(v) * 0.07;
+      document.getElementById('scaleVal').innerText = v + ' px';
+    }
+
+    // Origin UI Pass Stepper Logic
+    let qtyAdult = 2;
+    let qtyJunior = 1;
+
+    function updateQty(type, delta) {
+      playTone(type === 'adult' ? 640 : 880);
+      if (type === 'adult') {
+        qtyAdult = Math.max(0, qtyAdult + delta);
+        document.getElementById('qtyAdult').innerText = qtyAdult;
+      } else {
+        qtyJunior = Math.max(0, qtyJunior + delta);
+        document.getElementById('qtyJunior').innerText = qtyJunior;
+      }
+      const total = qtyAdult * 84 + qtyJunior * 48;
+      document.getElementById('totalPassPrice').innerText = `$${total} / Day`;
+    }
+
+    // Color Wheel Transformer (Charles Liu 60/30/10)
+    function applyPalette(theme) {
+      playTone(720);
+      if (theme === 'powder') {
+        document.body.style.backgroundColor = '#62A7EA';
+        document.querySelector('.split-lemon').style.color = '#F2EA1E';
+        document.querySelector('.split-navy').style.color = '#0C1B48';
+      } else if (theme === 'onyx') {
+        document.body.style.backgroundColor = '#0A0D14';
+        document.querySelector('.split-lemon').style.color = '#05D585';
+        document.querySelector('.split-navy').style.color = '#FAF8F5';
+      } else if (theme === 'cyber') {
+        document.body.style.backgroundColor = '#0F172A';
+        document.querySelector('.split-lemon').style.color = '#EF4444';
+        document.querySelector('.split-navy').style.color = '#38BDF8';
+      }
+    }
+
+    function handleAlertDispatch(e) {
+      e.preventDefault();
+      playTone(920);
+      const btn = document.getElementById('alertBtn');
+      btn.innerText = 'SMS Alert Bridge Activated ✓';
+      btn.className = 'w-full py-3 rounded-xl bg-emerald-600 text-white font-mono text-xs font-bold uppercase tracking-wider transition';
+      alert('Confirmed. You will receive live SMS updates when snow exceeds your threshold.');
+    }
+
+    // Main Render Loop with Particle Physics
+    let clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const delta = clock.getDelta();
+      const elapsed = clock.getElapsedTime();
+
+      // Smooth mouse lerp
+      mouse.x += (mouse.targetX * 12 - mouse.x) * 0.08;
+      mouse.y += (mouse.targetY * 8 - mouse.y) * 0.08;
+
+      const pos = geometry.attributes.position.array;
+
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const i3 = i * 3;
+
+        // Base velocity
+        let vx = velocities[i3] * windSpeed;
+        let vy = velocities[i3 + 1] * windSpeed;
+        let vz = velocities[i3 + 2];
+
+        // Mode specific fields
+        if (simMode === 'blizzard') {
+          // Diagonal swirling blizzard wind
+          vx -= 0.03 * windSpeed;
+          vy -= 0.02 * windSpeed;
+        } else if (simMode === 'vortex') {
+          // Cyclonic rotation around center
+          const angle = Math.atan2(pos[i3 + 1], pos[i3]) + 0.02 * windSpeed;
+          const dist = Math.sqrt(pos[i3] * pos[i3] + pos[i3 + 1] * pos[i3 + 1]);
+          pos[i3] = Math.cos(angle) * dist;
+          pos[i3 + 1] = Math.sin(angle) * dist;
+        } else if (simMode === 'wave') {
+          // Harmonic wave
+          pos[i3 + 1] += Math.sin(pos[i3] * 0.3 + elapsed * 2.5) * 0.02;
+        }
+
+        // Mouse Attractor Physics
+        const dx = mouse.x - pos[i3];
+        const dy = mouse.y - pos[i3 + 1];
+        const distSq = dx * dx + dy * dy;
+
+        if (distSq < 16 && attractorStrength > 0) {
+          const force = (1 - distSq / 16) * attractorStrength * 0.05;
+          vx += dx * force;
+          vy += dy * force;
+        }
+
+        pos[i3] += vx;
+        pos[i3 + 1] += vy;
+        pos[i3 + 2] += vz;
+
+        // Reset boundaries (Seamless Infinite Loop)
+        if (pos[i3 + 1] < -12) pos[i3 + 1] = 12;
+        if (pos[i3] < -20) pos[i3] = 20;
+        if (pos[i3] > 20) pos[i3] = -20;
+      }
+
+      geometry.attributes.position.needsUpdate = true;
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Window Resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+
+</body>
+</html>
