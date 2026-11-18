@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA CHRONO OS | 3D Kinematic Horology & Exploded Calibre</title>
+  <meta name="description" content="Awwwards-calibre 3D interactive luxury chronometer with real-time exploded mechanical view, kinematic tourbillon gear train, and Charles Liu 60/30/10 spatial design.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230C1B48' stroke='%23F2EA1E' stroke-width='6'/><circle cx='50' cy='50' r='32' fill='none' stroke='%235A9FE2' stroke-width='4'/><line x1='50' y1='50' x2='50' y2='24' stroke='%23F2EA1E' stroke-width='4' stroke-linecap='round'/><line x1='50' y1='50' x2='68' y2='50' stroke='%23FFFFFF' stroke-width='5' stroke-linecap='round'/><circle cx='50' cy='50' r='6' fill='%23F2EA1E'/></svg>">
+
+  <!-- Elite Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            glacier: '#5A9FE2',
+            glacierlight: '#7FB4ED',
+            glacierdark: '#3D7CBD',
+            navy: '#0C1B48',
+            navylight: '#152968',
+            navydark: '#07102C',
+            lemon: '#F2EA1E',
+            lemonhover: '#E5DD18',
+            snow: '#FFFFFF',
+            snowtint: '#F4F8FC',
+            stonecard: '#EEF4FA',
+          },
+          fontFamily: {
+            syne: ['Syne', 'sans-serif'],
+            archivo: ['"Archivo Black"', 'sans-serif'],
+            space: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Three.js + OrbitControls + GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* Custom Scrollbar & High-End Micro-Interactions */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #07102C; }
+    ::-webkit-scrollbar-thumb { background: #5A9FE2; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #F2EA1E; }
+
+    .glow-lemon {
+      box-shadow: 0 0 25px rgba(242, 234, 30, 0.45), 0 0 60px rgba(242, 234, 30, 0.15);
+    }
+    .glow-glacier {
+      box-shadow: 0 0 30px rgba(90, 159, 226, 0.35);
+    }
+    .glass-navy {
+      background: rgba(12, 27, 72, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(90, 159, 226, 0.22);
+    }
+    .glass-light {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(90, 159, 226, 0.28);
+    }
+    .text-stroke-subtle {
+      -webkit-text-stroke: 1px rgba(90, 159, 226, 0.35);
+    }
+  </style>
+</head>
+<body class="bg-navy text-snow font-sans antialiased overflow-x-hidden selection:bg-lemon selection:text-navy">
+
+  <!-- TOP HUD NAVIGATION -->
+  <header class="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex items-center justify-between glass-navy rounded-2xl px-5 py-3 shadow-2xl">
+      <!-- Brand Anchor -->
+      <a href="../" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-lemon flex items-center justify-center font-archivo font-black text-navy text-lg shadow-lg group-hover:scale-105 transition-transform duration-300">
+          FS
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-archivo text-base md:text-lg tracking-wider text-snow">AURA CHRONO</span>
+            <span class="px-2 py-0.5 text-[10px] font-mono font-bold bg-lemon/20 text-lemon border border-lemon/40 rounded-full">CALIBRE 01</span>
+          </div>
+          <p class="text-[11px] font-mono text-glacier tracking-tight hidden sm:block">FLAGSHIP SYSTEMS // 3D KINEMATIC HOROLOGY</p>
+        </div>
+      </a>
+
+      <!-- Quick Telemetry HUD -->
+      <div class="hidden lg:flex items-center gap-6 font-mono text-xs">
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navylight/60 border border-glacier/20">
+          <span class="w-2 h-2 rounded-full bg-lemon animate-ping"></span>
+          <span class="text-snow/70">ESCAPEMENT:</span>
+          <span id="hudVph" class="text-lemon font-bold">28,800 VPH (4Hz)</span>
+        </div>
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navylight/60 border border-glacier/20">
+          <span class="text-snow/70">RESERVE:</span>
+          <span class="text-glacierlight font-bold">72 HRS</span>
+        </div>
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navylight/60 border border-glacier/20">
+          <span class="text-snow/70">FPS:</span>
+          <span id="hudFps" class="text-lemon font-bold">60</span>
+        </div>
+      </div>
+
+      <!-- Action Suite -->
+      <div class="flex items-center gap-3">
+        <!-- Mechanical Sound Toggle -->
+        <button id="soundBtn" onclick="toggleAudio()" class="px-3 py-2 rounded-xl bg-navylight hover:bg-glacierdark border border-glacier/30 text-snow text-xs font-mono font-semibold flex items-center gap-2 transition-all duration-200">
+          <span id="soundIcon">🔊</span>
+          <span id="soundText" class="hidden sm:inline">CHRONO AUDIO</span>
+        </button>
+
+        <!-- Hub Back Link -->
+        <a href="../" class="px-4 py-2 rounded-xl bg-lemon hover:bg-lemonhover text-navy font-archivo text-xs tracking-wider uppercase font-bold shadow-lg hover:shadow-lemon/40 transition-all duration-200 flex items-center gap-2">
+          <span>AGENCY HUB</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3D HERO STAGE & VIEWER -->
+  <section class="relative w-full h-screen min-h-[750px] flex items-center justify-center overflow-hidden bg-gradient-to-b from-navydark via-navy to-[#0F235E]">
+    
+    <!-- 3D Three.js WebGL Canvas Canvas -->
+    <div id="webglContainer" class="absolute inset-0 z-0 cursor-grab active:cursor-grabbing"></div>
+
+    <!-- Atmospheric Backdrop Typography -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-1 opacity-20">
+      <h1 class="text-[14vw] font-archivo font-black tracking-tighter text-glacier text-center leading-none text-stroke-subtle">
+        CHRONO 01
+      </h1>
+    </div>
+
+    <!-- Top Floating Tagline -->
+    <div class="absolute top-28 left-6 md:left-12 z-10 max-w-sm pointer-events-none">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-glacier/20 border border-glacier/40 text-snow text-xs font-mono font-medium mb-3">
+        <span class="w-2 h-2 rounded-full bg-lemon"></span>
+        <span>INTERACTIVE CALIBRE EXPLODED VIEW</span>
+      </div>
+      <h2 class="text-2xl md:text-4xl font-archivo font-black text-snow leading-tight mb-2">
+        DECONSTRUCT <br><span class="text-lemon">PRECISION.</span>
+      </h2>
+      <p class="text-sm font-sans text-glacierlight/90 leading-relaxed">
+        Click <strong class="text-lemon font-mono font-bold">EXPLODE CALIBRE</strong> below to separate the sapphire dome, tachymeter bezel, dial, and oscillating gear train along the Z-axis in real-time WebGL.
+      </p>
+    </div>
+
+    <!-- Floating Live Time Display -->
+    <div class="absolute top-28 right-6 md:right-12 z-10 text-right pointer-events-none hidden sm:block">
+      <div class="font-mono text-[11px] text-glacier tracking-widest uppercase">ZURICH MASTER CLOCK</div>
+      <div id="digitalClock" class="font-mono text-3xl md:text-4xl font-bold text-snow tracking-wider mt-1">
+        12:44:00
+      </div>
+      <div class="text-[11px] font-mono text-lemon mt-1">● KINEMATIC GEAR MESH ACTIVE</div>
+    </div>
+
+    <!-- BOTTOM INTERACTIVE FLOATING DOCK -->
+    <div class="absolute bottom-6 left-4 right-4 md:left-auto md:right-auto md:w-[720px] md:left-1/2 md:-translate-x-1/2 z-20">
+      <div class="glass-navy rounded-3xl p-4 md:p-5 shadow-2xl border border-glacier/30 flex flex-col gap-4">
+        
+        <!-- Controls Row -->
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          
+          <!-- PRIMARY ACTION: Explode / Assemble Calibre -->
+          <button id="explodeBtn" onclick="toggleExplodedView()" class="flex-1 min-w-[200px] py-3.5 px-6 rounded-2xl bg-lemon hover:bg-lemonhover text-navy font-archivo font-black text-sm tracking-wider uppercase transition-all duration-300 shadow-xl hover:shadow-lemon/50 flex items-center justify-center gap-3 group">
+            <span id="explodeIcon" class="text-lg transition-transform duration-300 group-hover:rotate-45">⚡</span>
+            <span id="explodeLabel">EXPLODE CALIBRE (Z-AXIS)</span>
+          </button>
+
+          <!-- 360 Auto-Rotate Toggle -->
+          <button id="autoRotateBtn" onclick="toggleAutoRotate()" class="py-3.5 px-5 rounded-2xl bg-navylight hover:bg-glacierdark border border-glacier/30 text-snow font-mono text-xs font-bold transition-all duration-200 flex items-center gap-2">
+            <span>🔄</span>
+            <span id="rotateLabel">ORBIT: AUTO</span>
+          </button>
+
+          <!-- Reset Camera View -->
+          <button onclick="resetCamera()" class="py-3.5 px-4 rounded-2xl bg-navylight hover:bg-glacierdark border border-glacier/30 text-glacierlight font-mono text-xs font-bold transition-all duration-200" title="Reset Camera">
+            🎯 FRONT
+          </button>
+        </div>
+
+        <!-- Material / Finish Switcher & Layer Selector -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-glacier/20 text-xs font-mono">
+          <div class="flex items-center gap-2 text-snow/70">
+            <span>FINISH:</span>
+            <div class="flex items-center gap-1.5">
+              <button onclick="setMaterialTheme('titanium')" id="btn-mat-titanium" class="px-2.5 py-1 rounded-lg bg-lemon text-navy font-bold border border-lemon transition-all">TITANIUM</button>
+              <button onclick="setMaterialTheme('gold')" id="btn-mat-gold" class="px-2.5 py-1 rounded-lg bg-navylight text-snow/80 hover:text-snow border border-glacier/20 transition-all">18K GOLD</button>
+              <button onclick="setMaterialTheme('onyx')" id="btn-mat-onyx" class="px-2.5 py-1 rounded-lg bg-navylight text-snow/80 hover:text-snow border border-glacier/20 transition-all">DLC ONYX</button>
+              <button onclick="setMaterialTheme('sapphire')" id="btn-mat-sapphire" class="px-2.5 py-1 rounded-lg bg-navylight text-snow/80 hover:text-snow border border-glacier/20 transition-all">CYBER BLUE</button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 text-glacier">
+            <span>POINTER:</span>
+            <span class="text-snow">DRAG TO ORBIT • SCROLL TO ZOOM</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ENGINEERING SPECIFICATIONS & EXPLODED ARCHITECTURE -->
+  <section class="py-24 px-6 md:px-12 bg-snowtint text-navy relative z-10 border-t-4 border-lemon">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Header with Charles Liu 60/30/10 Ratio -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-navy text-snow font-mono text-xs font-semibold mb-4">
+            <span class="w-2 h-2 rounded-full bg-lemon"></span>
+            <span>SECTION 01 // HOROLOGY BLUEPRINT</span>
+          </div>
+          <h2 class="text-3xl md:text-5xl font-archivo font-black tracking-tight text-navy">
+            DECONSTRUCTED <span class="text-glacierdark">ARCHITECTURE.</span>
+          </h2>
+        </div>
+        <p class="max-w-md text-sm md:text-base font-sans text-navylight/80 leading-relaxed">
+          Engineered for high-ticket brand presentations, custom e-commerce product visualizers, and interactive spatial flagships. Every component operates on accurate mechanical kinematic gearing.
+        </p>
+      </div>
+
+      <!-- 4 Architectural Pillars Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        
+        <!-- Pillar 1 -->
+        <div class="bg-snow rounded-3xl p-6 shadow-xl border border-glacier/20 hover:-translate-y-1 transition-all duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-glacier/20 text-glacierdark flex items-center justify-center font-archivo font-black text-xl mb-6">
+            01
+          </div>
+          <h3 class="font-archivo text-lg text-navy mb-2">CURVED SAPPHIRE DOME</h3>
+          <p class="text-xs font-sans text-navylight/80 leading-relaxed mb-4">
+            Synthetic corundum crystal with dual anti-reflective coating. Custom Three.js transmission shader delivering realistic optical caustics, index of refraction (1.77), and edge dispersion.
+          </p>
+          <div class="font-mono text-[11px] text-glacier font-bold">Z-DISPLACEMENT: +2.80 UNITS</div>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="bg-snow rounded-3xl p-6 shadow-xl border border-glacier/20 hover:-translate-y-1 transition-all duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-lemon/30 text-navy flex items-center justify-center font-archivo font-black text-xl mb-6">
+            02
+          </div>
+          <h3 class="font-archivo text-lg text-navy mb-2">TACHYMETER BEZEL</h3>
+          <p class="text-xs font-sans text-navylight/80 leading-relaxed mb-4">
+            Aerospace Grade 5 Titanium circular bezel with laser-etched 400 km/h speed scale. Chamfered outer perimeter with micro-fluted grip ridges for tactical ergonomics.
+          </p>
+          <div class="font-mono text-[11px] text-glacier font-bold">Z-DISPLACEMENT: +1.60 UNITS</div>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="bg-snow rounded-3xl p-6 shadow-xl border border-glacier/20 hover:-translate-y-1 transition-all duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-glacier/20 text-glacierdark flex items-center justify-center font-archivo font-black text-xl mb-6">
+            03
+          </div>
+          <h3 class="font-archivo text-lg text-navy mb-2">SKELETONIZED DIAL</h3>
+          <p class="text-xs font-sans text-navylight/80 leading-relaxed mb-4">
+            Multi-tier dial layout with floating rhodium indexes, Super-LumiNova luminescence markers, and three concentric chronograph sub-registers (60s, 30m, 12h).
+          </p>
+          <div class="font-mono text-[11px] text-glacier font-bold">Z-DISPLACEMENT: +0.60 UNITS</div>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="bg-snow rounded-3xl p-6 shadow-xl border border-lemon/40 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-16 h-16 bg-lemon/20 rounded-bl-3xl flex items-center justify-center font-mono text-[10px] font-bold text-navy">CORE</div>
+          <div class="w-12 h-12 rounded-2xl bg-navy text-lemon flex items-center justify-center font-archivo font-black text-xl mb-6">
+            04
+          </div>
+          <h3 class="font-archivo text-lg text-navy mb-2">TOURBILLON CALIBRE</h3>
+          <p class="text-xs font-sans text-navylight/80 leading-relaxed mb-4">
+            In-house Calibre 01 automatic mechanical movement. Oscillating titanium balance wheel operating at 28,800 beats per hour with 72-hour power reserve barrel.
+          </p>
+          <div class="font-mono text-[11px] text-glacier font-bold">Z-DISPLACEMENT: -1.20 UNITS</div>
+        </div>
+
+      </div>
+
+      <!-- LIVE KINEMATIC SPECS SHEET -->
+      <div class="bg-navy rounded-3xl p-8 md:p-12 text-snow shadow-2xl relative overflow-hidden">
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-glacier/10 filter blur-3xl pointer-events-none"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+          <div>
+            <div class="text-xs font-mono text-lemon tracking-widest uppercase mb-2">ENGINEERED BY FLAGSHIP SYSTEMS</div>
+            <h3 class="text-2xl md:text-3xl font-archivo font-black tracking-tight mb-4">
+              WHY 3D PRODUCT CONFIGURATORS CONVERT 340% HIGHER.
+            </h3>
+            <p class="text-xs font-sans text-glacierlight/80 leading-relaxed">
+              Standard flat 2D e-commerce pages leave consumers guessing materiality, volume, and mechanics. Our WebGL spatial configurators empower luxury buyers to inspect micro-details, deconstruct assemblies, and verify craftsmanship before purchase.
+            </p>
+          </div>
+
+          <!-- Live Metrics Table -->
+          <div class="lg:col-span-2 grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono text-xs">
+            <div class="p-4 rounded-2xl bg-navylight/60 border border-glacier/20">
+              <div class="text-snow/60 text-[11px]">GEOMETRY</div>
+              <div class="text-lemon font-archivo text-lg mt-1 font-bold">14,280</div>
+              <div class="text-[10px] text-glacierlight mt-1">Procedural Polys</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-navylight/60 border border-glacier/20">
+              <div class="text-snow/60 text-[11px]">DRAW CALLS</div>
+              <div class="text-snow font-archivo text-lg mt-1 font-bold">&lt; 18</div>
+              <div class="text-[10px] text-glacierlight mt-1">Mobile Optimized</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-navylight/60 border border-glacier/20">
+              <div class="text-snow/60 text-[11px]">RENDER LOOP</div>
+              <div class="text-lemon font-archivo text-lg mt-1 font-bold">60.0 FPS</div>
+              <div class="text-[10px] text-glacierlight mt-1">Damped Inertia</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-navylight/60 border border-glacier/20">
+              <div class="text-snow/60 text-[11px]">PALETTE</div>
+              <div class="text-glacierlight font-archivo text-lg mt-1 font-bold">60/30/10</div>
+              <div class="text-[10px] text-lemon mt-1">Charles Liu Rule</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CURATED OPEN-SOURCE 3D REPOSITORIES REVEAL -->
+  <section class="py-20 px-6 md:px-12 bg-navydark text-snow border-t border-glacier/20">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lemon/20 text-lemon border border-lemon/40 font-mono text-xs font-semibold mb-3">
+            <span>⚡ FREE OPEN-SOURCE 3D ECOSYSTEM</span>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-archivo font-black text-snow">
+            KICK-ASS 3D TEMPLATES & REPOSITORIES
+          </h2>
+        </div>
+        <p class="text-xs font-mono text-glacierlight max-w-sm">
+          Verified open-source repositories from GitHub with Awwwards-calibre WebGL, Three.js, and React Three Fiber mechanics.
+        </p>
+      </div>
+
+      <!-- Repo Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Repo 1: Bruno Simon -->
+        <a href="https://github.com/brunosimon/folio-2019" target="_blank" rel="noopener noreferrer" class="group glass-navy rounded-3xl p-6 border border-glacier/20 hover:border-lemon transition-all duration-300 hover:-translate-y-1">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-2.5 py-1 rounded-lg bg-lemon/20 text-lemon font-mono text-xs font-bold">Three.js + Cannon.js</span>
+            <span class="text-glacier group-hover:text-lemon transition-colors">↗</span>
+          </div>
+          <h3 class="font-archivo text-lg text-snow group-hover:text-lemon transition-colors mb-2">
+            brunosimon / folio-2019 &amp; 2025
+          </h3>
+          <p class="text-xs font-sans text-glacierlight/80 leading-relaxed mb-4">
+            The gold-standard interactive 3D physics playground. Drive a micro-vehicle through an interactive low-poly world with rigid-body collisions, custom shadow shaders, and spatial zones.
+          </p>
+          <div class="text-[11px] font-mono text-snow/60">★ 16.8k Stars • Physics Simulation</div>
+        </a>
+
+        <!-- Repo 2: Zentry / Adrian Hajdin -->
+        <a href="https://github.com/adrianhajdin/award-winning-website" target="_blank" rel="noopener noreferrer" class="group glass-navy rounded-3xl p-6 border border-glacier/20 hover:border-lemon transition-all duration-300 hover:-translate-y-1">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-2.5 py-1 rounded-lg bg-glacier/20 text-glacierlight font-mono text-xs font-bold">React + GSAP + R3F</span>
+            <span class="text-glacier group-hover:text-lemon transition-colors">↗</span>
+          </div>
+          <h3 class="font-archivo text-lg text-snow group-hover:text-lemon transition-colors mb-2">
+            Zentry Awwwards Clone
+          </h3>
+          <p class="text-xs font-sans text-glacierlight/80 leading-relaxed mb-4">
+            Awwwards Site of the Month clone featuring cinematic 3D Bento tilt cards, video masking transitions, polygon clip-path morphing, and interactive audio triggers.
+          </p>
+          <div class="text-[11px] font-mono text-snow/60">★ 3.4k Stars • Cinematic Bento</div>
+        </a>
+
+        <!-- Repo 3: Atmos Leeroy Replica -->
+        <a href="https://github.com/Madewill/R3F-AWWARDS-website" target="_blank" rel="noopener noreferrer" class="group glass-navy rounded-3xl p-6 border border-glacier/20 hover:border-lemon transition-all duration-300 hover:-translate-y-1">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-2.5 py-1 rounded-lg bg-lemon/20 text-lemon font-mono text-xs font-bold">R3F + Drei + Lamina</span>
+            <span class="text-glacier group-hover:text-lemon transition-colors">↗</span>
+          </div>
+          <h3 class="font-archivo text-lg text-snow group-hover:text-lemon transition-colors mb-2">
+            Atmos 3D Spline Flight
+          </h3>
+          <p class="text-xs font-sans text-glacierlight/80 leading-relaxed mb-4">
+            Scroll-driven 3D camera flight along Catmull-Rom spline curves. Volumetric depth fog, procedural sky gradient shaders, and floating geometric monoliths.
+          </p>
+          <div class="text-[11px] font-mono text-snow/60">★ 1.8k Stars • Spline Camera Rail</div>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-8 px-6 bg-navydark border-t border-glacier/20 text-center font-mono text-xs text-glacierlight/70">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-lemon"></span>
+        <span class="text-snow font-bold">FLAGSHIP SYSTEMS</span>
+        <span>// CREATIVE ENGINEERING LAB</span>
+      </div>
+      <div>
+        <span>PALETTE: 60% NAVY (#0C1B48) • 30% GLACIER (#5A9FE2) • 10% LEMON (#F2EA1E)</span>
+      </div>
+      <a href="../" class="text-lemon hover:underline font-bold">RETURN TO SHOWROOM →</a>
+    </div>
+  </footer>
+
+  <!-- THREE.JS 3D SCENE & EXPLODED VIEW CONTROLLER -->
+  <script>
+    // ----------------------------------------------------
+    // STATE & CONFIGURATION
+    // ----------------------------------------------------
+    let scene, camera, renderer, controls;
+    let watchGroup;
+    let parts = {
+      crystal: null,
+      bezel: null,
+      dial: null,
+      handsGroup: null,
+      movement: null,
+      caseMesh: null,
+      strapTop: null,
+      strapBottom: null,
+      crown: null,
+      rotor: null,
+      gear1: null,
+      gear2: null,
+      balanceWheel: null,
+      hourHand: null,
+      minHand: null,
+      secHand: null,
+    };
+
+    let isExploded = false;
+    let autoRotate = true;
+    let currentTheme = 'titanium';
+    let audioContext = null;
+    let audioInterval = null;
+    let isAudioPlaying = false;
+
+    // Performance & FPS tracking
+    let lastTime = performance.now();
+    let frameCount = 0;
+    let fps = 60;
+
+    // Materials Dictionary
+    const materials = {
+      sapphire: new THREE.MeshPhysicalMaterial({
+        color: 0x5A9FE2,
+        metalness: 0.1,
+        roughness: 0.05,
+        transmission: 0.92,
+        thickness: 1.2,
+        transparent: true,
+        opacity: 0.55,
+        reflectivity: 0.9,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.1,
+      }),
+      titanium: new THREE.MeshStandardMaterial({
+        color: 0x8C9AA8,
+        metalness: 0.85,
+        roughness: 0.28,
+      }),
+      titaniumDark: new THREE.MeshStandardMaterial({
+        color: 0x465362,
+        metalness: 0.9,
+        roughness: 0.35,
+      }),
+      gold: new THREE.MeshStandardMaterial({
+        color: 0xF5D061,
+        metalness: 0.92,
+        roughness: 0.22,
+      }),
+      onyx: new THREE.MeshStandardMaterial({
+        color: 0x1B1F2A,
+        metalness: 0.95,
+        roughness: 0.15,
+      }),
+      lemonAccent: new THREE.MeshStandardMaterial({
+        color: 0xF2EA1E,
+        metalness: 0.4,
+        roughness: 0.2,
+        emissive: 0x555000,
+      }),
+      glacierAccent: new THREE.MeshStandardMaterial({
+        color: 0x5A9FE2,
+        metalness: 0.7,
+        roughness: 0.25,
+      }),
+      brassGear: new THREE.MeshStandardMaterial({
+        color: 0xD4AF37,
+        metalness: 0.9,
+        roughness: 0.3,
+      }),
+      steelGear: new THREE.MeshStandardMaterial({
+        color: 0xC0C8D0,
+        metalness: 0.95,
+        roughness: 0.2,
+      }),
+      dialFace: new THREE.MeshStandardMaterial({
+        color: 0x0C1B48,
+        metalness: 0.4,
+        roughness: 0.6,
+      }),
+      strapMaterial: new THREE.MeshStandardMaterial({
+        color: 0x0A1435,
+        metalness: 0.1,
+        roughness: 0.8,
+      })
+    };
+
+    // ----------------------------------------------------
+    // INITIALIZATION
+    // ----------------------------------------------------
+    function init() {
+      const container = document.getElementById('webglContainer');
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      // 1. Scene
+      scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x0C1B48, 0.035);
+
+      // 2. Camera
+      camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
+      camera.position.set(0, 2.5, 9.5);
+
+      // 3. Renderer
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.25;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      container.appendChild(renderer.domElement);
+
+      // 4. OrbitControls
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.maxDistance = 18;
+      controls.minDistance = 3.5;
+      controls.enablePan = false;
+      controls.autoRotate = autoRotate;
+      controls.autoRotateSpeed = 1.2;
+
+      // 5. Studio Lighting Rig (3-Point Lighting)
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+      scene.add(ambientLight);
+
+      // Key Light (Electric Lemon hint)
+      const keyLight = new THREE.DirectionalLight(0xFDF8A2, 1.8);
+      keyLight.position.set(5, 8, 7);
+      keyLight.castShadow = true;
+      scene.add(keyLight);
+
+      // Fill Light (Glacier Blue)
+      const fillLight = new THREE.DirectionalLight(0x5A9FE2, 1.4);
+      fillLight.position.set(-6, -3, 5);
+      scene.add(fillLight);
+
+      // Rim Light (Sharp Specular Reflection)
+      const rimLight = new THREE.DirectionalLight(0xFFFFFF, 2.2);
+      rimLight.position.set(0, 10, -8);
+      scene.add(rimLight);
+
+      // Point Light at Core
+      const corePointLight = new THREE.PointLight(0xF2EA1E, 1.0, 5);
+      corePointLight.position.set(0, 0, 0.5);
+      scene.add(corePointLight);
+
+      // 6. Build the 3D Procedural Timepiece
+      buildTimepiece();
+
+      // 7. Event Listeners
+      window.addEventListener('resize', onWindowResize);
+      container.addEventListener('pointerdown', () => {
+        controls.autoRotate = false;
+        document.getElementById('rotateLabel').textContent = 'ORBIT: MANUAL';
+      });
+
+      // 8. Start Loop
+      animate();
+      updateDigitalClock();
+      setInterval(updateDigitalClock, 1000);
+    }
+
+    // ----------------------------------------------------
+    // PROCEDURAL 3D TIMEPIECE BUILDER
+    // ----------------------------------------------------
+    function buildTimepiece() {
+      watchGroup = new THREE.Group();
+      scene.add(watchGroup);
+
+      // Initial watch angle
+      watchGroup.rotation.x = 0.25;
+      watchGroup.rotation.y = -0.35;
+
+      // ==========================================
+      // LAYER 1: Curved Sapphire Dome (Z: 0.95 -> Exploded: +3.2)
+      // ==========================================
+      const crystalGeo = new THREE.CylinderGeometry(2.35, 2.38, 0.18, 48);
+      parts.crystal = new THREE.Mesh(crystalGeo, materials.sapphire);
+      parts.crystal.rotation.x = Math.PI / 2;
+      parts.crystal.position.z = 0.95;
+      parts.crystal.userData = { defaultZ: 0.95, explodedZ: 3.2 };
+      watchGroup.add(parts.crystal);
+
+      // ==========================================
+      // LAYER 2: Tachymeter Bezel Ring (Z: 0.8 -> Exploded: +2.1)
+      // ==========================================
+      const bezelGroup = new THREE.Group();
+      const bezelOuterGeo = new THREE.CylinderGeometry(2.6, 2.65, 0.22, 64);
+      const bezelMesh = new THREE.Mesh(bezelOuterGeo, materials.titanium);
+      bezelGroup.add(bezelMesh);
+
+      // Bezel Fluting notches (60 notches)
+      for (let i = 0; i < 60; i++) {
+        const angle = (i / 60) * Math.PI * 2;
+        const notchGeo = new THREE.BoxGeometry(0.04, 0.24, 0.08);
+        const notchMesh = new THREE.Mesh(notchGeo, materials.titaniumDark);
+        notchMesh.position.set(Math.cos(angle) * 2.58, 0, Math.sin(angle) * 2.58);
+        notchMesh.rotation.y = -angle;
+        bezelGroup.add(notchMesh);
+      }
+
+      // 12-Hour Luminous Marker pip at 12 o'clock
+      const pipGeo = new THREE.CylinderGeometry(0.09, 0.09, 0.25, 16);
+      const pipMesh = new THREE.Mesh(pipGeo, materials.lemonAccent);
+      pipMesh.position.set(0, 0, -2.48);
+      bezelGroup.add(pipMesh);
+
+      bezelGroup.rotation.x = Math.PI / 2;
+      bezelGroup.position.z = 0.8;
+      bezelGroup.userData = { defaultZ: 0.8, explodedZ: 2.1 };
+      parts.bezel = bezelGroup;
+      watchGroup.add(bezelGroup);
+
+      // ==========================================
+      // LAYER 3: Skeletonized Dial & Chapter Ring (Z: 0.45 -> Exploded: +1.1)
+      // ==========================================
+      const dialGroup = new THREE.Group();
+
+      // Main Dial Plate
+      const dialPlateGeo = new THREE.CylinderGeometry(2.28, 2.28, 0.08, 64);
+      const dialPlate = new THREE.Mesh(dialPlateGeo, materials.dialFace);
+      dialGroup.add(dialPlate);
+
+      // 12 Rhodium Hour Batons
+      for (let i = 0; i < 12; i++) {
+        const angle = (i / 12) * Math.PI * 2;
+        const isQuarter = (i % 3 === 0);
+        const batonGeo = new THREE.BoxGeometry(isQuarter ? 0.12 : 0.06, 0.12, isQuarter ? 0.35 : 0.22);
+        const batonMat = isQuarter ? materials.lemonAccent : materials.glacierAccent;
+        const baton = new THREE.Mesh(batonGeo, batonMat);
+        baton.position.set(Math.sin(angle) * 1.95, 0.06, Math.cos(angle) * 1.95);
+        baton.rotation.y = angle;
+        dialGroup.add(baton);
+      }
+
+      // Sub-Dials (Chronograph Seconds & Minutes)
+      const subDial1Geo = new THREE.RingGeometry(0.35, 0.55, 32);
+      const subDial1 = new THREE.Mesh(subDial1Geo, materials.glacierAccent);
+      subDial1.rotation.x = -Math.PI / 2;
+      subDial1.position.set(-0.9, 0.05, 0);
+      dialGroup.add(subDial1);
+
+      const subDial2Geo = new THREE.RingGeometry(0.35, 0.55, 32);
+      const subDial2 = new THREE.Mesh(subDial2Geo, materials.glacierAccent);
+      subDial2.rotation.x = -Math.PI / 2;
+      subDial2.position.set(0.9, 0.05, 0);
+      dialGroup.add(subDial2);
+
+      dialGroup.rotation.x = Math.PI / 2;
+      dialGroup.position.z = 0.45;
+      dialGroup.userData = { defaultZ: 0.45, explodedZ: 1.1 };
+      parts.dial = dialGroup;
+      watchGroup.add(dialGroup);
+
+      // ==========================================
+      // LAYER 3.5: Hands Assembly (Z: 0.58 -> Exploded: +1.4)
+      // ==========================================
+      const handsGroup = new THREE.Group();
+
+      // Hour Hand
+      const hourGeo = new THREE.BoxGeometry(0.12, 0.04, 1.1);
+      parts.hourHand = new THREE.Mesh(hourGeo, materials.glacierAccent);
+      parts.hourHand.position.z = 0.45;
+      const hourPivot = new THREE.Group();
+      hourPivot.add(parts.hourHand);
+      handsGroup.add(hourPivot);
+      parts.hourPivot = hourPivot;
+
+      // Minute Hand
+      const minGeo = new THREE.BoxGeometry(0.08, 0.04, 1.6);
+      parts.minHand = new THREE.Mesh(minGeo, materials.snow);
+      parts.minHand.position.z = 0.7;
+      const minPivot = new THREE.Group();
+      minPivot.add(parts.minHand);
+      handsGroup.add(minPivot);
+      parts.minPivot = minPivot;
+
+      // Sweeping Second Hand (Electric Lemon)
+      const secGeo = new THREE.BoxGeometry(0.03, 0.05, 2.0);
+      parts.secHand = new THREE.Mesh(secGeo, materials.lemonAccent);
+      parts.secHand.position.z = 0.7;
+      const secPivot = new THREE.Group();
+      secPivot.add(parts.secHand);
+      handsGroup.add(secPivot);
+      parts.secPivot = secPivot;
+
+      // Central Cap Pinion
+      const capGeo = new THREE.CylinderGeometry(0.16, 0.16, 0.1, 16);
+      const capMesh = new THREE.Mesh(capGeo, materials.lemonAccent);
+      handsGroup.add(capMesh);
+
+      handsGroup.rotation.x = Math.PI / 2;
+      handsGroup.position.z = 0.58;
+      handsGroup.userData = { defaultZ: 0.58, explodedZ: 1.4 };
+      parts.handsGroup = handsGroup;
+      watchGroup.add(handsGroup);
+
+      // ==========================================
+      // LAYER 4: Movement Calibre & Tourbillon (Z: 0.0 -> Exploded: -0.6)
+      // ==========================================
+      const movementGroup = new THREE.Group();
+
+      // Mainplate Bridge
+      const bridgeGeo = new THREE.CylinderGeometry(2.2, 2.2, 0.25, 48);
+      const bridgeMesh = new THREE.Mesh(bridgeGeo, materials.titaniumDark);
+      movementGroup.add(bridgeMesh);
+
+      // Brass Gear 1 (Escapement)
+      const gear1Geo = new THREE.CylinderGeometry(0.65, 0.65, 0.08, 24);
+      parts.gear1 = new THREE.Mesh(gear1Geo, materials.brassGear);
+      parts.gear1.position.set(-0.7, 0.16, 0.4);
+      movementGroup.add(parts.gear1);
+
+      // Steel Gear 2 (Interlocking)
+      const gear2Geo = new THREE.CylinderGeometry(0.95, 0.95, 0.08, 36);
+      parts.gear2 = new THREE.Mesh(gear2Geo, materials.steelGear);
+      parts.gear2.position.set(0.5, 0.16, -0.4);
+      movementGroup.add(parts.gear2);
+
+      // Tourbillon Balance Wheel & Hairspring
+      const balanceGroup = new THREE.Group();
+      const balanceRimGeo = new THREE.TorusGeometry(0.5, 0.04, 16, 32);
+      const balanceRim = new THREE.Mesh(balanceRimGeo, materials.lemonAccent);
+      balanceRim.rotation.x = Math.PI / 2;
+      balanceGroup.add(balanceRim);
+
+      const spokeGeo = new THREE.BoxGeometry(0.04, 0.02, 0.98);
+      const spoke = new THREE.Mesh(spokeGeo, materials.lemonAccent);
+      balanceGroup.add(spoke);
+
+      balanceGroup.position.set(0, 0.2, 0.9);
+      movementGroup.add(balanceGroup);
+      parts.balanceWheel = balanceGroup;
+
+      movementGroup.rotation.x = Math.PI / 2;
+      movementGroup.position.z = 0.0;
+      movementGroup.userData = { defaultZ: 0.0, explodedZ: -0.6 };
+      parts.movement = movementGroup;
+      watchGroup.add(movementGroup);
+
+      // ==========================================
+      // LAYER 5: Titanium Unibody Case & Integrated Lugs (Z: -0.2 -> Exploded: -1.7)
+      // ==========================================
+      const caseGroup = new THREE.Group();
+
+      // Middle Case Cylinder
+      const caseCylinderGeo = new THREE.CylinderGeometry(2.7, 2.65, 0.65, 64);
+      const caseMesh = new THREE.Mesh(caseCylinderGeo, materials.titanium);
+      caseGroup.add(caseMesh);
+      parts.caseMesh = caseMesh;
+
+      // 4 Precision Lugs
+      const lugPositions = [
+        [-1.6, 0, 2.6],
+        [1.6, 0, 2.6],
+        [-1.6, 0, -2.6],
+        [1.6, 0, -2.6]
+      ];
+      lugPositions.forEach(pos => {
+        const lugGeo = new THREE.BoxGeometry(0.42, 0.6, 1.2);
+        const lug = new THREE.Mesh(lugGeo, materials.titanium);
+        lug.position.set(pos[0], pos[1], pos[2]);
+        lug.rotation.x = pos[2] > 0 ? 0.2 : -0.2;
+        caseGroup.add(lug);
+      });
+
+      // Screw-down Crown at 3 o'clock
+      const crownGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.45, 24);
+      parts.crown = new THREE.Mesh(crownGeo, materials.lemonAccent);
+      parts.crown.rotation.z = Math.PI / 2;
+      parts.crown.position.set(2.85, 0, 0);
+      caseGroup.add(parts.crown);
+
+      // Chrono Pushers at 2 and 4 o'clock
+      const pusher1 = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.35, 16), materials.titanium);
+      pusher1.rotation.z = Math.PI / 2;
+      pusher1.position.set(2.75, 0, -1.2);
+      caseGroup.add(pusher1);
+
+      const pusher2 = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.35, 16), materials.titanium);
+      pusher2.rotation.z = Math.PI / 2;
+      pusher2.position.set(2.75, 0, 1.2);
+      caseGroup.add(pusher2);
+
+      caseGroup.rotation.x = Math.PI / 2;
+      caseGroup.position.z = -0.2;
+      caseGroup.userData = { defaultZ: -0.2, explodedZ: -1.7 };
+      parts.caseGroup = caseGroup;
+      watchGroup.add(caseGroup);
+
+      // ==========================================
+      // LAYER 6: Exhibition Rotor & Caseback (Z: -0.65 -> Exploded: -2.8)
+      // ==========================================
+      const rotorGroup = new THREE.Group();
+
+      // Exhibition Caseback Ring
+      const backRingGeo = new THREE.TorusGeometry(2.4, 0.2, 16, 48);
+      const backRing = new THREE.Mesh(backRingGeo, materials.titanium);
+      rotorGroup.add(backRing);
+
+      // Sapphire Back Glass
+      const backGlassGeo = new THREE.CylinderGeometry(2.2, 2.2, 0.05, 32);
+      const backGlass = new THREE.Mesh(backGlassGeo, materials.sapphire);
+      rotorGroup.add(backGlass);
+
+      // Oscillating Semi-Circular Automatic Rotor
+      const rotorGeo = new THREE.CylinderGeometry(1.9, 1.9, 0.08, 32, 1, false, 0, Math.PI);
+      parts.rotor = new THREE.Mesh(rotorGeo, materials.lemonAccent);
+      parts.rotor.position.y = 0.05;
+      rotorGroup.add(parts.rotor);
+
+      rotorGroup.rotation.x = Math.PI / 2;
+      rotorGroup.position.z = -0.65;
+      rotorGroup.userData = { defaultZ: -0.65, explodedZ: -2.8 };
+      parts.rotorGroup = rotorGroup;
+      watchGroup.add(rotorGroup);
+
+      // ==========================================
+      // STRAPS (Integrated Fluorocarbon Rubber / Leather)
+      // ==========================================
+      const strapTopGeo = new THREE.BoxGeometry(2.4, 0.35, 3.8);
+      parts.strapTop = new THREE.Mesh(strapTopGeo, materials.strapMaterial);
+      parts.strapTop.position.set(0, 3.8, -0.4);
+      parts.strapTop.rotation.x = -0.15;
+      watchGroup.add(parts.strapTop);
+
+      const strapBottomGeo = new THREE.BoxGeometry(2.4, 0.35, 3.8);
+      parts.strapBottom = new THREE.Mesh(strapBottomGeo, materials.strapMaterial);
+      parts.strapBottom.position.set(0, -3.8, -0.4);
+      parts.strapBottom.rotation.x = 0.15;
+      watchGroup.add(parts.strapBottom);
+    }
+
+    // ----------------------------------------------------
+    // KINEMATIC ANIMATION & RENDER LOOP
+    // ----------------------------------------------------
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const now = performance.now();
+      const delta = (now - lastTime) / 1000;
+      frameCount++;
+
+      // Update FPS Telemetry HUD
+      if (now - lastTime >= 1000) {
+        fps = Math.round((frameCount * 1000) / (now - lastTime));
+        document.getElementById('hudFps').textContent = fps;
+        frameCount = 0;
+        lastTime = now;
+      }
+
+      // Live mechanical clock gearing
+      const date = new Date();
+      const seconds = date.getSeconds() + date.getMilliseconds() / 1000;
+      const minutes = date.getMinutes() + seconds / 60;
+      const hours = (date.getHours() % 12) + minutes / 60;
+
+      if (parts.secPivot) parts.secPivot.rotation.y = -seconds * ((Math.PI * 2) / 60);
+      if (parts.minPivot) parts.minPivot.rotation.y = -minutes * ((Math.PI * 2) / 60);
+      if (parts.hourPivot) parts.hourPivot.rotation.y = -hours * ((Math.PI * 2) / 12);
+
+      // Continuous Gear Trains Rotation
+      if (parts.gear1) parts.gear1.rotation.y += 0.04;
+      if (parts.gear2) parts.gear2.rotation.y -= 0.027;
+
+      // Oscillating Tourbillon Balance Wheel (Rocking at 4Hz / 28,800 VPH)
+      if (parts.balanceWheel) {
+        parts.balanceWheel.rotation.y = Math.sin(now * 0.025) * 1.8;
+      }
+
+      // Winding Automatic Rotor inertia
+      if (parts.rotor) {
+        parts.rotor.rotation.y += 0.012;
+      }
+
+      // OrbitControls update
+      controls.update();
+
+      // Render
+      renderer.render(scene, camera);
+    }
+
+    // ----------------------------------------------------
+    // INTERACTIVE ACTIONS & EXPLODED VIEW ENGINE
+    // ----------------------------------------------------
+    function toggleExplodedView() {
+      isExploded = !isExploded;
+
+      const duration = 1.4;
+      const ease = "power3.inOut";
+
+      const targets = [
+        { obj: parts.crystal, name: "SAPPHIRE DOME" },
+        { obj: parts.bezel, name: "BEZEL" },
+        { obj: parts.handsGroup, name: "HANDS" },
+        { obj: parts.dial, name: "DIAL" },
+        { obj: parts.movement, name: "MOVEMENT" },
+        { obj: parts.caseGroup, name: "CASE" },
+        { obj: parts.rotorGroup, name: "ROTOR" },
+      ];
+
+      targets.forEach(item => {
+        if (!item.obj) return;
+        const targetZ = isExploded ? item.obj.userData.explodedZ : item.obj.userData.defaultZ;
+        gsap.to(item.obj.position, {
+          z: targetZ,
+          duration: duration,
+          ease: ease
+        });
+      });
+
+      // Straps displacement
+      gsap.to(parts.strapTop.position, {
+        y: isExploded ? 5.2 : 3.8,
+        duration: duration,
+        ease: ease
+      });
+      gsap.to(parts.strapBottom.position, {
+        y: isExploded ? -5.2 : -3.8,
+        duration: duration,
+        ease: ease
+      });
+
+      // Camera dynamic dolly during explosion
+      gsap.to(camera.position, {
+        z: isExploded ? 11.5 : 9.5,
+        y: isExploded ? 3.2 : 2.5,
+        duration: duration,
+        ease: ease
+      });
+
+      // Update Button HUD
+      const btnLabel = document.getElementById('explodeLabel');
+      const btnIcon = document.getElementById('explodeIcon');
+      if (isExploded) {
+        btnLabel.textContent = "ASSEMBLE CALIBRE (RESTORE)";
+        btnIcon.textContent = "🧲";
+      } else {
+        btnLabel.textContent = "EXPLODE CALIBRE (Z-AXIS)";
+        btnIcon.textContent = "⚡";
+      }
+    }
+
+    function toggleAutoRotate() {
+      autoRotate = !autoRotate;
+      controls.autoRotate = autoRotate;
+      const label = document.getElementById('rotateLabel');
+      label.textContent = autoRotate ? "ORBIT: AUTO" : "ORBIT: MANUAL";
+    }
+
+    function resetCamera() {
+      gsap.to(camera.position, {
+        x: 0,
+        y: 2.5,
+        z: isExploded ? 11.5 : 9.5,
+        duration: 1.0,
+        ease: "power2.out"
+      });
+      controls.target.set(0, 0, 0);
+      controls.autoRotate = autoRotate;
+    }
+
+    // ----------------------------------------------------
+    // MATERIAL THEME SWITCHER
+    // ----------------------------------------------------
+    function setMaterialTheme(theme) {
+      currentTheme = theme;
+
+      // Update button highlights
+      ['titanium', 'gold', 'onyx', 'sapphire'].forEach(t => {
+        const btn = document.getElementById(`btn-mat-${t}`);
+        if (t === theme) {
+          btn.className = "px-2.5 py-1 rounded-lg bg-lemon text-navy font-bold border border-lemon transition-all";
+        } else {
+          btn.className = "px-2.5 py-1 rounded-lg bg-navylight text-snow/80 hover:text-snow border border-glacier/20 transition-all";
+        }
+      });
+
+      if (theme === 'titanium') {
+        materials.titanium.color.setHex(0x8C9AA8);
+        materials.titanium.metalness = 0.85;
+        materials.titanium.roughness = 0.28;
+        materials.dialFace.color.setHex(0x0C1B48);
+        materials.strapMaterial.color.setHex(0x0A1435);
+      } else if (theme === 'gold') {
+        materials.titanium.color.setHex(0xF5D061);
+        materials.titanium.metalness = 0.92;
+        materials.titanium.roughness = 0.22;
+        materials.dialFace.color.setHex(0x07102C);
+        materials.strapMaterial.color.setHex(0x1C1508);
+      } else if (theme === 'onyx') {
+        materials.titanium.color.setHex(0x1B1F2A);
+        materials.titanium.metalness = 0.95;
+        materials.titanium.roughness = 0.15;
+        materials.dialFace.color.setHex(0x060912);
+        materials.strapMaterial.color.setHex(0x0F1116);
+      } else if (theme === 'sapphire') {
+        materials.titanium.color.setHex(0x5A9FE2);
+        materials.titanium.metalness = 0.6;
+        materials.titanium.roughness = 0.3;
+        materials.dialFace.color.setHex(0x152968);
+        materials.strapMaterial.color.setHex(0x0C1B48);
+      }
+    }
+
+    // ----------------------------------------------------
+    // MECHANICAL AUDIO SYNTHESIZER (WEB AUDIO API)
+    // ----------------------------------------------------
+    function toggleAudio() {
+      if (isAudioPlaying) {
+        clearInterval(audioInterval);
+        isAudioPlaying = false;
+        document.getElementById('soundIcon').textContent = "🔇";
+        document.getElementById('soundText').textContent = "AUDIO: OFF";
+      } else {
+        if (!audioContext) {
+          audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioContext.state === 'suspended') {
+          audioContext.resume();
+        }
+
+        // Ticking at 4Hz (every 250ms = 28,800 beats per hour)
+        audioInterval = setInterval(playTick, 250);
+        isAudioPlaying = true;
+        document.getElementById('soundIcon').textContent = "🔊";
+        document.getElementById('soundText').textContent = "28,800 VPH (ON)";
+      }
+    }
+
+    function playTick() {
+      if (!audioContext) return;
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(2400, audioContext.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.035);
+
+      gain.gain.setValueAtTime(0.045, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.035);
+
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+
+      osc.start();
+      osc.stop(audioContext.currentTime + 0.035);
+    }
+
+    // ----------------------------------------------------
+    // LIVE CLOCK HUD
+    // ----------------------------------------------------
+    function updateDigitalClock() {
+      const now = new Date();
+      const hrs = String(now.getHours()).padStart(2, '0');
+      const mins = String(now.getMinutes()).padStart(2, '0');
+      const secs = String(now.getSeconds()).padStart(2, '0');
+      const clockEl = document.getElementById('digitalClock');
+      if (clockEl) {
+        clockEl.textContent = `${hrs}:${mins}:${secs}`;
+      }
+    }
+
+    function onWindowResize() {
+      const container = document.getElementById('webglContainer');
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    }
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
