@@ -341,13 +341,14 @@
 
     <!-- Tier 2: Dedicated Navigation Menu (Every Link 100% Clickable with Generous Spacing) -->
     <div class="border-t border-stone-200/60 py-2.5 px-6 bg-white/70">
-      <nav class="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-[11px] sm:text-[11.5px] uppercase tracking-[0.22em] font-medium text-stone-700">
-        <a href="#vault" class="hover:text-gold-700 hover:scale-105 transition py-1 cursor-pointer">High Jewelry</a>
-        <a href="#couture-studio" class="hover:text-gold-700 hover:scale-105 transition py-1 text-gold-700 font-semibold flex items-center gap-1 cursor-pointer">
-          <span>✦ Drape Studio</span>
+      <nav class="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-5 sm:gap-8 text-[11px] sm:text-[11.5px] uppercase tracking-[0.22em] font-medium text-stone-700">
+        <a href="#vault" class="hover:text-gold-700 hover:scale-105 transition py-1 text-stone-900 font-semibold cursor-pointer">✦ Shop By Cut</a>
+        <a href="#optical-spec-studio" class="hover:text-gold-700 hover:scale-105 transition py-1 text-emerald-800 font-semibold flex items-center gap-1 cursor-pointer">
+          <span>✦ 9:16 Optical Spec Studio</span>
         </a>
+        <a href="#parures-suites" class="hover:text-gold-700 hover:scale-105 transition py-1 text-gold-700 font-semibold cursor-pointer">✦ Royal Parure Suites</a>
+        <a href="#couture-studio" class="hover:text-gold-700 hover:scale-105 transition py-1 cursor-pointer">Drape Studio</a>
         <a href="#press" class="hover:text-gold-700 hover:scale-105 transition py-1 cursor-pointer">Red Carpet</a>
-        <a href="#alchemy" class="hover:text-gold-700 hover:scale-105 transition py-1 cursor-pointer">The Craft</a>
         <a href="#bespoke" class="hover:text-gold-700 hover:scale-105 transition py-1 cursor-pointer">Bespoke Atelier</a>
       </nav>
     </div>
@@ -464,6 +465,303 @@
 
       </div>
 
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- [NEW]: 9:16 PORTRAIT OPTICAL LOUPE & SPECIFICATION STUDIO -->
+  <!-- ======================================================== -->
+  <section id="optical-spec-studio" class="py-24 px-6 bg-stone-950 text-white border-t border-b border-gold-400/30 relative overflow-hidden">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="reveal-elem text-center max-w-3xl mx-auto mb-14">
+        <span class="px-4 py-1 rounded-full bg-emerald-950/90 border border-emerald-400/40 text-emerald-300 text-[10px] uppercase tracking-[0.28em] font-mono inline-block mb-3">
+          ✦ Live 60FPS Vector Specification Engine
+        </span>
+        <h3 class="font-serif text-4xl sm:text-5xl font-normal text-white mt-1 mb-4">
+          The 9:16 Optical Loupe &amp; Specification Studio
+        </h3>
+        <p class="text-stone-300 text-xs sm:text-sm font-light leading-relaxed">
+          High-ticket collectors hesitate when they only see a flat white-background photo. This interactive 9:16 portrait module isolates the <strong>centerpiece stone in razor-sharp focus</strong>, blurs the periphery into optical bokeh, and renders <strong>sub-pixel vector caliper lines and exact gemological specifications</strong> ($L \times W \times D\text{ mm}$, 18K gram weight, diamond cut breakdown, and origin) in the same focal plane.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Left Column: Interactive Controls & Piece Selector -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <div class="p-6 rounded-3xl bg-stone-900/90 border border-white/10 space-y-5">
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-400 font-mono block">01. Select Architectural Hero Piece</span>
+            
+            <div class="space-y-2.5" id="specStudioButtons">
+              <button onclick="selectSpecReel(0)" class="spec-reel-btn active w-full p-3.5 rounded-2xl bg-stone-800 border border-gold-400 text-left flex items-center justify-between transition cursor-pointer">
+                <div>
+                  <span class="text-[9.5px] font-mono uppercase tracking-wider text-gold-300 block">Cushion Step-Cut &bull; On-Hand Daylight</span>
+                  <span class="font-serif text-lg text-white">Manhattan Architectural Cushion Ring</span>
+                </div>
+                <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-gold-400/20 text-gold-300">11.85 ct</span>
+              </button>
+
+              <button onclick="selectSpecReel(1)" class="spec-reel-btn w-full p-3.5 rounded-2xl bg-stone-950/60 border border-white/10 hover:border-gold-400/50 text-left flex items-center justify-between transition cursor-pointer">
+                <div>
+                  <span class="text-[9.5px] font-mono uppercase tracking-wider text-stone-400 block">Symmetric Asscher Ratio 1.00 &bull; On-Skin</span>
+                  <span class="font-serif text-lg text-white">Manhattan Asscher Diamond Pendant</span>
+                </div>
+                <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-white/10 text-stone-300">6.90 ct</span>
+              </button>
+
+              <button onclick="selectSpecReel(2)" class="spec-reel-btn w-full p-3.5 rounded-2xl bg-stone-950/60 border border-white/10 hover:border-gold-400/50 text-left flex items-center justify-between transition cursor-pointer">
+                <div>
+                  <span class="text-[9.5px] font-mono uppercase tracking-wider text-emerald-400 block">Unheated Colombian Muzo &bull; Baguette Suite</span>
+                  <span class="font-serif text-lg text-white">Queen Rainforest Emerald Choker</span>
+                </div>
+                <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-emerald-950 text-emerald-300">34.20 ctw</span>
+              </button>
+
+              <button onclick="selectSpecReel(3)" class="spec-reel-btn w-full p-3.5 rounded-2xl bg-stone-950/60 border border-white/10 hover:border-gold-400/50 text-left flex items-center justify-between transition cursor-pointer">
+                <div>
+                  <span class="text-[9.5px] font-mono uppercase tracking-wider text-sky-400 block">Three-Stone Step-Cut &bull; Micro-Pavé</span>
+                  <span class="font-serif text-lg text-white">Rock ’N’ Roll London Blue Ring</span>
+                </div>
+                <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-white/10 text-stone-300">8.40 ct</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Optical & Vector Toggles -->
+          <div class="p-6 rounded-3xl bg-stone-900/90 border border-white/10 space-y-4">
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-400 font-mono block">02. Optical &amp; Caliper Controls</span>
+            
+            <div class="grid grid-cols-2 gap-3">
+              <button onclick="toggleOpticalBlur()" id="btnToggleBlur" class="p-3 rounded-xl bg-emerald-950/80 border border-emerald-400/60 text-emerald-200 text-xs font-mono text-center transition cursor-pointer">
+                ✦ Radial Bokeh: ON
+              </button>
+              <button onclick="toggleVectorCalipers()" id="btnToggleCalipers" class="p-3 rounded-xl bg-stone-800 border border-gold-400/60 text-gold-300 text-xs font-mono text-center transition cursor-pointer">
+                ✦ SVG Calipers: ON
+              </button>
+            </div>
+
+            <div>
+              <span class="text-[10px] uppercase tracking-wider text-stone-400 font-mono block mb-2">Simulated Stone Lighting Spectrum:</span>
+              <div class="grid grid-cols-3 gap-2 text-[10.5px] font-mono">
+                <button onclick="setReelLight('5500K')" id="reelLight5500" class="py-2 px-2 rounded-lg bg-gold-400 text-stone-950 font-bold cursor-pointer">5500K Daylight</button>
+                <button onclick="setReelLight('4000K')" id="reelLight4000" class="py-2 px-2 rounded-lg bg-stone-800 text-stone-300 hover:text-white cursor-pointer">4000K Salon</button>
+                <button onclick="setReelLight('2700K')" id="reelLight2700" class="py-2 px-2 rounded-lg bg-stone-800 text-stone-300 hover:text-white cursor-pointer">2700K Gala</button>
+              </div>
+            </div>
+          </div>
+
+          <a id="specReelWaBtn" href="https://wa.me/12129379777?text=Hello%20Goshwara%20NYC%20Salon,%20I%20would%20like%20to%20request%20the%2010-second%20natural%20daylight%20video%20and%20exact%20specs%20for%20the%20Manhattan%20Architectural%20Cushion%20Ring." target="_blank" class="w-full py-4 rounded-full text-xs uppercase tracking-[0.22em] font-semibold text-stone-950 bg-gold-400 hover:bg-gold-300 shadow-xl transition flex items-center justify-center gap-2 cursor-pointer">
+            <span>Request 10-Sec Natural Window Light Clip on WhatsApp</span>
+            <span>→</span>
+          </a>
+
+        </div>
+
+        <!-- Right Column: Live 9:16 Portrait Optical Loupe Frame (100% Vector Sharp) -->
+        <div class="lg:col-span-7 flex justify-center">
+          <div class="relative w-[360px] sm:w-[390px] h-[690px] rounded-[42px] bg-stone-950 border-[6px] border-stone-800 shadow-[0_0_70px_rgba(212,175,55,0.2)] overflow-hidden select-none" id="portraitReelFrame">
+            
+            <!-- Layer 1: Blurred Peripheral Background Image -->
+            <img id="reelBgBlurImg" src="https://goshwara.com/cdn/shop/files/Ring_menu.jpg?v=1768837689" alt="Blurred Periphery" class="absolute inset-0 w-full h-full object-cover transition-all duration-700" style="filter: blur(22px) brightness(0.42) saturate(0.8); transform: scale(1.75); transform-origin: 46% 39%;">
+
+            <!-- Layer 2: Center Razor-Sharp Stone Aperture (Real CSS Radial Mask) -->
+            <div id="reelSharpStage" class="absolute inset-0 w-full h-full overflow-hidden transition-all duration-700" style="-webkit-mask-image: radial-gradient(circle 125px at 50% 38%, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%); mask-image: radial-gradient(circle 125px at 50% 38%, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%);">
+              <img id="reelSharpImg" src="https://goshwara.com/cdn/shop/files/Ring_menu.jpg?v=1768837689" alt="Sharp Center Stone" class="w-full h-full object-cover transition-transform duration-[4000ms] ease-out" style="transform: scale(1.75); transform-origin: 46% 39%; filter: contrast(1.08) saturate(1.1);">
+            </div>
+
+            <!-- Layer 3: Top & Bottom Dark Luxury Gradient Vignette -->
+            <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(180deg, rgba(10,10,9,0.82) 0%, rgba(10,10,9,0.05) 22%, rgba(10,10,9,0.08) 50%, rgba(10,10,9,0.92) 66%, rgba(10,10,9,0.98) 100%);"></div>
+
+            <!-- Layer 4: Top Minimalist Maison Stamp -->
+            <div class="absolute top-6 inset-x-0 text-center z-20 pointer-events-none">
+              <span class="text-[10px] uppercase tracking-[0.35em] text-gold-300 font-semibold block">G O S H W A R A &nbsp; N Y C</span>
+              <span class="text-[8px] uppercase tracking-[0.22em] text-stone-400 font-mono block mt-0.5">OPTICAL LOUPE &amp; SPECIFICATION VERIFICATION</span>
+              <div class="w-24 h-[1px] bg-gold-400/30 mx-auto mt-2"></div>
+            </div>
+
+            <!-- Layer 5: Sub-Pixel Vector SVG Reticle & Smooth Caliper Lines -->
+            <svg id="reelVectorSvg" class="absolute inset-0 w-full h-full z-20 pointer-events-none transition-opacity duration-500" viewBox="0 0 390 690" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Center Optical Reticle Circle at (195, 262) -->
+              <circle cx="195" cy="262" r="112" stroke="rgba(218,186,122,0.38)" stroke-width="1" stroke-dasharray="3 3"/>
+              <path d="M 195 142 A 120 120 0 0 1 298 202" stroke="#DABA7A" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M 195 382 A 120 120 0 0 1 92 322" stroke="#DABA7A" stroke-width="1.5" stroke-linecap="round"/>
+
+              <!-- Top-Right Vector Caliper Line & Spec Callout -->
+              <circle cx="268" cy="188" r="3" fill="#DABA7A"/>
+              <polyline points="268,188 288,162 372,162" stroke="#DABA7A" stroke-width="1.2" fill="none"/>
+              <text x="290" y="156" fill="#FFFFFF" font-family="monospace" font-size="9.5" font-weight="bold" id="svgCaliperTop">16.4 × 13.2 × 8.1 mm</text>
+              <text x="290" y="173" fill="#DABA7A" font-family="monospace" font-size="7.5" letter-spacing="0.08em" id="svgCaliperTopSub">FACE-UP L × W × D</text>
+
+              <!-- Bottom-Left Vector Caliper Line & Spec Callout -->
+              <circle cx="122" cy="336" r="3" fill="#DABA7A"/>
+              <polyline points="122,336 102,360 18,360" stroke="#DABA7A" stroke-width="1.2" fill="none"/>
+              <text x="20" y="354" fill="#FFFFFF" font-family="monospace" font-size="9.5" font-weight="bold" id="svgCaliperBot">18K GOLD • 13.6g</text>
+              <text x="20" y="371" fill="#DABA7A" font-family="monospace" font-size="7.5" letter-spacing="0.08em" id="svgCaliperBotSub">HAND-FORGED GALLERY</text>
+            </svg>
+
+            <!-- Layer 6: Razor-Sharp Small Specification Ledger in Lower Half (Same Focal Plane) -->
+            <div class="absolute bottom-5 inset-x-4 z-30">
+              <div class="text-center mb-2.5">
+                <h5 class="font-serif text-xl text-white font-normal tracking-wide leading-tight" id="reelTitle">Manhattan Architectural Cushion Ring</h5>
+                <span class="text-[8.5px] uppercase tracking-[0.22em] text-gold-400 font-mono block mt-0.5" id="reelSub">18K YELLOW GOLD &bull; NATURAL DAYLIGHT STUDY</span>
+              </div>
+
+              <!-- Crisp Glassmorphic Spec Box -->
+              <div class="rounded-2xl bg-stone-950/90 border border-gold-400/35 px-3.5 py-2.5 backdrop-blur-md space-y-1.5 text-[10px]">
+                <div class="flex items-center justify-between border-b border-white/10 pb-1">
+                  <span class="text-stone-400 font-mono text-[8.5px] uppercase tracking-wider">♦ Center Stone &amp; Cut</span>
+                  <span class="text-white font-mono font-medium" id="reelSpec1">11.85 ct Cushion Step-Cut</span>
+                </div>
+                <div class="flex items-center justify-between border-b border-white/10 pb-1">
+                  <span class="text-stone-400 font-mono text-[8.5px] uppercase tracking-wider">♦ Exact Dimensions</span>
+                  <span class="text-gold-300 font-mono font-semibold" id="reelSpec2">16.4 × 13.2 × 8.1 mm (L×W×D)</span>
+                </div>
+                <div class="flex items-center justify-between border-b border-white/10 pb-1">
+                  <span class="text-stone-400 font-mono text-[8.5px] uppercase tracking-wider">♦ Diamond Accents</span>
+                  <span class="text-white font-mono" id="reelSpec3">0.45 ctw Pavé &amp; Bezel (F-G / VS1)</span>
+                </div>
+                <div class="flex items-center justify-between border-b border-white/10 pb-1">
+                  <span class="text-stone-400 font-mono text-[8.5px] uppercase tracking-wider">♦ 18K Gold Weight</span>
+                  <span class="text-white font-mono" id="reelSpec4">13.6 Grams Solid 18K Yellow Gold</span>
+                </div>
+                <div class="flex items-center justify-between border-b border-white/10 pb-1">
+                  <span class="text-stone-400 font-mono text-[8.5px] uppercase tracking-wider">♦ Origin &amp; Treatment</span>
+                  <span class="text-emerald-300 font-mono" id="reelSpec5">Natural Brazilian &bull; Unheated</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-stone-400 font-mono text-[8.5px] uppercase tracking-wider">♦ Optical Proportion</span>
+                  <span class="text-white font-mono" id="reelSpec6">64.2% Depth &bull; Compass Prong</span>
+                </div>
+              </div>
+
+              <!-- Verified Lighting Status Pill -->
+              <div class="mt-2.5 py-1 px-3 rounded-full bg-emerald-950/90 border border-emerald-400/40 flex items-center justify-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-[8px] uppercase tracking-[0.18em] text-emerald-200 font-mono" id="reelLightBadge">5500K NATURAL DAYLIGHT &bull; ZERO RETOUCHING</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- [NEW]: MATCHED ROYAL PARURES & DEMI-PARURES (GCC/BRIDAL) -->
+  <!-- ======================================================== -->
+  <section id="parures-suites" class="py-24 px-6 bg-silk border-b border-stone-200 relative">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="reveal-elem text-center max-w-3xl mx-auto mb-16">
+        <span class="text-[11px] uppercase tracking-[0.3em] text-emerald-800 font-mono font-semibold">
+          ✦ GCC Shabka &amp; Global Bridal Collector Suites
+        </span>
+        <h3 class="font-serif text-4xl sm:text-5xl font-normal text-stone-900 mt-2 mb-4">
+          Matched Royal Parures &amp; Demi-Parures
+        </h3>
+        <p class="text-stone-600 text-xs sm:text-sm font-light leading-relaxed">
+          In Doha, Dubai, Riyadh, and Ultra-HNW South Asian bridal acquisitions, collectors acquire <strong>complete matched suites</strong> calibrated from a single rough gemstone parcel. Every Goshwara Parure is delivered in a bespoke velvet presentation trunk with full GIA/Gübelin provenance.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Suite 1: Queen Royal Emerald Parure -->
+        <div class="reveal-elem rounded-3xl bg-white p-7 border-2 border-emerald-600/40 shadow-lg hover:shadow-2xl transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 text-[9.5px] font-mono uppercase tracking-widest">
+                ✦ Full 3-Piece Royal Parure
+              </span>
+              <span class="text-xs font-mono text-stone-500">SKU: SUITE-QUEEN-EM01</span>
+            </div>
+            <h4 class="font-serif text-2xl sm:text-3xl text-stone-900 mb-2">The Queen Rainforest Colombian Emerald Parure</h4>
+            <p class="text-xs text-stone-600 font-light leading-relaxed mb-5">
+              Matched unheated Colombian Muzo emeralds paired with step-cut baguette and pavé white diamonds in 18K yellow gold: <strong>(1) Rainforest Emerald Choker Necklace + (2) Emerald-Cut Chandelier Ear Drops + (3) Manhattan Step-Cut Emerald Cocktail Ring</strong>.
+            </p>
+
+            <!-- Spec Table for Suite -->
+            <div class="grid grid-cols-2 gap-2.5 p-4 rounded-2xl bg-pearl border border-stone-200/80 text-[11px] mb-6">
+              <div>
+                <span class="text-[9px] font-mono uppercase text-stone-400 block">Combined Gemstone Weight</span>
+                <strong class="text-stone-900 font-mono">46.80 ctw Muzo Emeralds</strong>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono uppercase text-stone-400 block">Combined Diamond Cut</span>
+                <strong class="text-stone-900 font-mono">8.45 ctw Baguette &amp; Pavé (F-G/VS1)</strong>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono uppercase text-stone-400 block">Total 18K Gold Weight</span>
+                <strong class="text-stone-900 font-mono">94.2 Grams Solid 18K Gold</strong>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono uppercase text-stone-400 block">Calibration &amp; Origin</span>
+                <strong class="text-emerald-800 font-mono">Muzo Colombia &bull; Parcel-Matched</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-stone-200">
+            <div>
+              <span class="text-[9.5px] font-mono uppercase tracking-widest text-emerald-800 block font-semibold">Complete 3-Piece Suite Acquisition</span>
+              <span class="font-cinzel text-xl text-stone-900 font-semibold">$68,500 USD <span class="text-xs font-sans font-normal text-stone-500">(or Private Salon P.O.A.)</span></span>
+            </div>
+            <a href="https://wa.me/12129379777?text=Hello%20Goshwara%20NYC%20Salon,%20I%20would%20like%20to%20request%20the%20Private%20Parure%20Dossier%20and%20viewing%20for%20The%20Queen%20Rainforest%20Colombian%20Emerald%20Parure%20($68,500)." target="_blank" class="w-full sm:w-auto px-6 py-3 rounded-full bg-stone-900 hover:bg-emerald-800 text-white text-[10.5px] uppercase tracking-[0.2em] font-semibold text-center transition">
+              Request Suite Viewing →
+            </a>
+          </div>
+        </div>
+
+        <!-- Suite 2: Manhattan Asscher Demi-Parure -->
+        <div class="reveal-elem rounded-3xl bg-white p-7 border border-gold-400/50 shadow-md hover:shadow-2xl transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full bg-stone-900 text-gold-300 text-[9.5px] font-mono uppercase tracking-widest">
+                ✦ Architectural 3-Piece Demi-Parure
+              </span>
+              <span class="text-xs font-mono text-stone-500">SKU: SUITE-MAN-AS02</span>
+            </div>
+            <h4 class="font-serif text-2xl sm:text-3xl text-stone-900 mb-2">The Manhattan Asscher Step-Cut Demi-Parure</h4>
+            <p class="text-xs text-stone-600 font-light leading-relaxed mb-5">
+              Precision 1.00-ratio square Asscher step-cuts with hypnotic windmill facets framed in 18K yellow gold and micro-pavé white diamonds: <strong>(1) Manhattan Asscher Halo Pendant + (2) Asscher Drop Earrings + (3) East-West Bezel Cocktail Ring</strong>.
+            </p>
+
+            <div class="grid grid-cols-2 gap-2.5 p-4 rounded-2xl bg-pearl border border-stone-200/80 text-[11px] mb-6">
+              <div>
+                <span class="text-[9px] font-mono uppercase text-stone-400 block">Combined Gemstone Weight</span>
+                <strong class="text-stone-900 font-mono">24.60 ctw Asscher Step-Cuts</strong>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono uppercase text-stone-400 block">Face-Up Calibration</span>
+                <strong class="text-stone-900 font-mono">12.0×12.0 mm + 10.0×10.0 mm Pair</strong>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono uppercase text-stone-400 block">Total 18K Gold Weight</span>
+                <strong class="text-stone-900 font-mono">31.4 Grams Solid 18K Gold</strong>
+              </div>
+              <div>
+                <span class="text-[9px] font-mono uppercase text-stone-400 block">Partner Salon Availability</span>
+                <strong class="text-gold-700 font-mono">NYC &bull; Saks &bull; Neiman &bull; Dubai</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-stone-200">
+            <div>
+              <span class="text-[9.5px] font-mono uppercase tracking-widest text-gold-700 block font-semibold">Complete 3-Piece Demi-Parure</span>
+              <span class="font-cinzel text-xl text-stone-900 font-semibold">$21,800 USD <span class="text-xs font-sans font-normal text-stone-500">(Includes Presentation Box)</span></span>
+            </div>
+            <a href="https://wa.me/12129379777?text=Hello%20Goshwara%20NYC%20Salon,%20I%20would%20like%20to%20inquire%20about%20The%20Manhattan%20Asscher%20Step-Cut%20Demi-Parure%20($21,800)." target="_blank" class="w-full sm:w-auto px-6 py-3 rounded-full bg-stone-900 hover:bg-gold-600 text-white text-[10.5px] uppercase tracking-[0.2em] font-semibold text-center transition">
+              Request Suite Viewing →
+            </a>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -743,22 +1041,31 @@
         </p>
       </div>
 
-      <!-- Gem Filter Pills -->
-      <div class="reveal-elem flex flex-wrap items-center justify-center gap-3 mb-16" id="gemFilters">
-        <button onclick="filterVault('all')" class="gem-filter active px-6 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition duration-300 border border-stone-900 bg-stone-900 text-white shadow-md cursor-pointer" data-filter="all">
-          All High Jewelry
+      <!-- Cut-First & Gem Filter Pills -->
+      <div class="reveal-elem flex flex-wrap items-center justify-center gap-2.5 mb-16" id="gemFilters">
+        <button onclick="filterVault('all')" class="gem-filter active px-5 py-2.5 rounded-full text-[10.5px] uppercase tracking-[0.18em] font-medium transition duration-300 border border-stone-900 bg-stone-900 text-white shadow-md cursor-pointer" data-filter="all">
+          All Architectural Cuts
         </button>
-        <button onclick="filterVault('emerald')" class="gem-filter px-6 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition duration-300 border border-stone-200 bg-white text-stone-700 hover:border-emerald-600 hover:bg-emerald-50 cursor-pointer" data-filter="emerald">
-          <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-600 mr-2 shadow-sm"></span>Colombian Emerald
+        <button onclick="filterVault('step-cut')" class="gem-filter px-5 py-2.5 rounded-full text-[10.5px] uppercase tracking-[0.18em] font-medium transition duration-300 border border-gold-400/60 bg-white text-stone-800 hover:bg-gold-50 cursor-pointer" data-filter="step-cut">
+          ✦ Emerald Step-Cut
         </button>
-        <button onclick="filterVault('topaz')" class="gem-filter px-6 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition duration-300 border border-stone-200 bg-white text-stone-700 hover:border-sky-600 hover:bg-sky-50 cursor-pointer" data-filter="topaz">
-          <span class="inline-block w-2.5 h-2.5 rounded-full bg-sky-600 mr-2 shadow-sm"></span>London Blue Topaz
+        <button onclick="filterVault('asscher')" class="gem-filter px-5 py-2.5 rounded-full text-[10.5px] uppercase tracking-[0.18em] font-medium transition duration-300 border border-gold-400/60 bg-white text-stone-800 hover:bg-gold-50 cursor-pointer" data-filter="asscher">
+          ✦ Asscher Step-Cut
         </button>
-        <button onclick="filterVault('amethyst')" class="gem-filter px-6 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition duration-300 border border-stone-200 bg-white text-stone-700 hover:border-purple-600 hover:bg-purple-50 cursor-pointer" data-filter="amethyst">
-          <span class="inline-block w-2.5 h-2.5 rounded-full bg-purple-600 mr-2 shadow-sm"></span>Royal Amethyst
+        <button onclick="filterVault('cushion')" class="gem-filter px-5 py-2.5 rounded-full text-[10.5px] uppercase tracking-[0.18em] font-medium transition duration-300 border border-gold-400/60 bg-white text-stone-800 hover:bg-gold-50 cursor-pointer" data-filter="cushion">
+          ✦ Cushion Step-Cut
         </button>
-        <button onclick="filterVault('rubellite')" class="gem-filter px-6 py-2.5 rounded-full text-[11px] uppercase tracking-[0.2em] font-medium transition duration-300 border border-stone-200 bg-white text-stone-700 hover:border-rose-600 hover:bg-rose-50 cursor-pointer" data-filter="rubellite">
-          <span class="inline-block w-2.5 h-2.5 rounded-full bg-rose-600 mr-2 shadow-sm"></span>Rubellite Tourmaline
+        <button onclick="filterVault('emerald')" class="gem-filter px-5 py-2.5 rounded-full text-[10.5px] uppercase tracking-[0.18em] font-medium transition duration-300 border border-stone-200 bg-white text-stone-700 hover:border-emerald-600 hover:bg-emerald-50 cursor-pointer" data-filter="emerald">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-600 mr-1.5 shadow-sm"></span>Colombian Emerald
+        </button>
+        <button onclick="filterVault('topaz')" class="gem-filter px-5 py-2.5 rounded-full text-[10.5px] uppercase tracking-[0.18em] font-medium transition duration-300 border border-stone-200 bg-white text-stone-700 hover:border-sky-600 hover:bg-sky-50 cursor-pointer" data-filter="topaz">
+          <span class="inline-block w-2 h-2 rounded-full bg-sky-600 mr-1.5 shadow-sm"></span>London Blue Topaz
+        </button>
+        <button onclick="filterVault('amethyst')" class="gem-filter px-5 py-2.5 rounded-full text-[10.5px] uppercase tracking-[0.18em] font-medium transition duration-300 border border-stone-200 bg-white text-stone-700 hover:border-purple-600 hover:bg-purple-50 cursor-pointer" data-filter="amethyst">
+          <span class="inline-block w-2 h-2 rounded-full bg-purple-600 mr-1.5 shadow-sm"></span>Royal Amethyst
+        </button>
+        <button onclick="filterVault('rubellite')" class="gem-filter px-5 py-2.5 rounded-full text-[10.5px] uppercase tracking-[0.18em] font-medium transition duration-300 border border-stone-200 bg-white text-stone-700 hover:border-rose-600 hover:bg-rose-50 cursor-pointer" data-filter="rubellite">
+          <span class="inline-block w-2 h-2 rounded-full bg-rose-600 mr-1.5 shadow-sm"></span>Cabochon &amp; Rubellite
         </button>
       </div>
 
@@ -766,7 +1073,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="vaultGrid">
         
         <!-- Piece 1 -->
-        <div class="reveal-elem casket-scene" data-cat="amethyst">
+        <div class="reveal-elem casket-scene" data-cat="amethyst cushion">
           <div class="casket-box bg-white rounded-3xl p-6 border border-stone-200/90 shadow-sm hover:shadow-2xl transition duration-500 cursor-pointer" onclick="openVelvetTray('Cushion Cut Manhattan Pendant', 9950, 'Royal Amethyst', '18K Yellow Gold Bezel', 'https://goshwara.com/cdn/shop/files/JP0190-PSYSM1_1a2c456e-d0c6-4e90-a8ee-06760ad4c761.jpg?v=1765754619')">
             <div class="aspect-square bg-stone-950 rounded-2xl overflow-hidden mb-6 relative p-5 border border-white/10 group shadow-inner">
               
@@ -774,7 +1081,7 @@
               <div class="casket-lid absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-stone-850 to-stone-950 border-t border-x border-gold-400/40 rounded-t-2xl p-3 flex flex-col justify-between z-20 shadow-xl">
                 <div class="flex items-center justify-between text-[8.5px] font-mono tracking-widest text-gold-300">
                   <span>GOSHWARA ATELIER</span>
-                  <span class="text-emerald-400">✦ SELECTION</span>
+                  <span class="text-emerald-400">✦ CUSHION STEP-CUT</span>
                 </div>
                 <div class="w-10 h-0.5 rounded-full bg-gold-400/50 mx-auto"></div>
               </div>
@@ -783,7 +1090,7 @@
               <div class="casket-spotlight absolute inset-0 bg-radial from-purple-500/25 via-transparent to-transparent pointer-events-none transition-all duration-500"></div>
 
               <span class="absolute top-4 left-4 z-30 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-purple-950/80 text-purple-200 font-mono font-medium border border-purple-400/40 backdrop-blur-md">
-                Royal Amethyst &bull; 18K Solid
+                18.60 ct Cushion &bull; 14.2g 18K
               </span>
 
               <!-- Gemstone Inside Casket Stage -->
@@ -792,29 +1099,32 @@
               </div>
 
               <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-stone-900/95 text-gold-300 border border-gold-400 text-[10px] uppercase tracking-[0.2em] font-medium text-center shadow-xl opacity-0 group-hover:opacity-100 transition duration-300 z-30">
-                ✦ Unbox Casket & 3.5X Loupe ✦
+                ✦ Unbox 8-Point Spec Ledger &amp; 3.5X Loupe ✦
               </div>
             </div>
 
-            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono block mb-1">Manhattan Collection</span>
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono block mb-1">Manhattan Collection &bull; Cushion Cut</span>
             <h4 class="font-serif text-2xl text-stone-900 font-normal mb-2">Cushion Cut Manhattan Pendant</h4>
-            <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
+            <p class="text-[10.5px] font-mono text-stone-500 mb-3 bg-pearl px-3 py-1.5 rounded-lg border border-stone-200/80">
+              18.0 × 18.0 × 9.4 mm &bull; 0.48 ct Baguettes &bull; 14.2g 18K Gold
+            </p>
+            <p class="text-xs text-stone-600 font-light leading-relaxed mb-5">
               Hand-faceted royal amethyst bezel-set in heavy 18K solid yellow gold, suspended from architectural links.
             </p>
             <div class="flex items-center justify-between pt-4 border-t border-stone-100">
               <div>
-                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Private Acquisition</span>
-                <span class="text-xs text-stone-500 font-serif italic">Price Upon Application (P.O.A.)</span>
+                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Direct &amp; Salon Acquisition</span>
+                <span class="text-xs text-stone-800 font-cinzel font-semibold">$9,950 USD</span>
               </div>
               <span class="text-[10px] uppercase tracking-[0.2em] text-stone-900 group-hover:text-gold-700 font-semibold underline underline-offset-4">
-                Inspect 3.5X Loupe →
+                Inspect Specs &amp; Loupe →
               </span>
             </div>
           </div>
         </div>
 
         <!-- Piece 2 -->
-        <div class="reveal-elem casket-scene" data-cat="topaz">
+        <div class="reveal-elem casket-scene" data-cat="topaz step-cut">
           <div class="casket-box bg-white rounded-3xl p-6 border border-stone-200/90 shadow-sm hover:shadow-2xl transition duration-500 cursor-pointer" onclick="openVelvetTray('Three-Stone Architectural Ring', 6800, 'London Blue Topaz', '18K Yellow Gold & Pavé Diamonds', 'https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689')">
             <div class="aspect-square bg-stone-950 rounded-2xl overflow-hidden mb-6 relative p-5 border border-white/10 group shadow-inner">
               
@@ -822,7 +1132,7 @@
               <div class="casket-lid absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-stone-850 to-stone-950 border-t border-x border-gold-400/40 rounded-t-2xl p-3 flex flex-col justify-between z-20 shadow-xl">
                 <div class="flex items-center justify-between text-[8.5px] font-mono tracking-widest text-gold-300">
                   <span>GOSHWARA ATELIER</span>
-                  <span class="text-sky-400">✦ SELECTION</span>
+                  <span class="text-sky-400">✦ EMERALD STEP-CUT</span>
                 </div>
                 <div class="w-10 h-0.5 rounded-full bg-gold-400/50 mx-auto"></div>
               </div>
@@ -831,7 +1141,7 @@
               <div class="casket-spotlight absolute inset-0 bg-radial from-sky-500/25 via-transparent to-transparent pointer-events-none transition-all duration-500"></div>
 
               <span class="absolute top-4 left-4 z-30 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-sky-950/80 text-sky-200 font-mono font-medium border border-sky-400/40 backdrop-blur-md">
-                London Blue Topaz &bull; Pavé
+                14.85 ct Step-Cut &bull; 13.6g 18K
               </span>
 
               <!-- Gemstone Inside Casket Stage -->
@@ -840,29 +1150,32 @@
               </div>
 
               <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-stone-900/95 text-gold-300 border border-gold-400 text-[10px] uppercase tracking-[0.2em] font-medium text-center shadow-xl opacity-0 group-hover:opacity-100 transition duration-300 z-30">
-                ✦ Unbox Casket & 3.5X Loupe ✦
+                ✦ Unbox 8-Point Spec Ledger &amp; 3.5X Loupe ✦
               </div>
             </div>
 
-            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono block mb-1">Rock 'N Roll Series</span>
-            <h4 class="font-serif text-2xl text-stone-900 font-normal mb-2">Three-Stone Cocktail Ring</h4>
-            <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
-              Intense oceanic London blue topaz accented with micro-pavé round brilliant diamonds in warm 18K gold.
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono block mb-1">Rock 'N Roll Series &bull; Emerald Step-Cut</span>
+            <h4 class="font-serif text-2xl text-stone-900 font-normal mb-2">Three-Stone Architectural Ring</h4>
+            <p class="text-[10.5px] font-mono text-stone-500 mb-3 bg-pearl px-3 py-1.5 rounded-lg border border-stone-200/80">
+              16.4 × 13.2 × 8.1 mm &bull; 0.62 ct Baguette/Pavé &bull; 13.6g 18K
+            </p>
+            <p class="text-xs text-stone-600 font-light leading-relaxed mb-5">
+              Intense oceanic London blue topaz accented with tapered baguette and micro-pavé diamonds in warm 18K gold.
             </p>
             <div class="flex items-center justify-between pt-4 border-t border-stone-100">
               <div>
-                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Private Acquisition</span>
-                <span class="text-xs text-stone-500 font-serif italic">Price Upon Application (P.O.A.)</span>
+                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Direct &amp; Salon Acquisition</span>
+                <span class="text-xs text-stone-800 font-cinzel font-semibold">$6,800 USD</span>
               </div>
               <span class="text-[10px] uppercase tracking-[0.2em] text-stone-900 group-hover:text-gold-700 font-semibold underline underline-offset-4">
-                Inspect 3.5X Loupe →
+                Inspect Specs &amp; Loupe →
               </span>
             </div>
           </div>
         </div>
 
         <!-- Piece 3 (Unexpected Accent Color Showpiece) -->
-        <div class="reveal-elem casket-scene" data-cat="emerald">
+        <div class="reveal-elem casket-scene" data-cat="emerald step-cut">
           <div class="casket-box bg-white rounded-3xl p-6 border-2 border-emerald-500/50 shadow-lg hover:shadow-2xl transition duration-500 cursor-pointer electric-emerald-glow" onclick="openVelvetTray('Rainforest Emerald Choker Suite', 48500, 'Colombian Muzo Emerald', '18K Gold & Baguette Diamonds', 'https://goshwara.com/cdn/shop/files/Rain_forest_collection_500x.jpg?v=1748553985')">
             <div class="aspect-square bg-stone-950 rounded-2xl overflow-hidden mb-6 relative p-5 border border-emerald-500/30 group shadow-inner">
               
@@ -870,7 +1183,7 @@
               <div class="casket-lid absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-stone-850 to-stone-950 border-t border-x border-emerald-400/60 rounded-t-2xl p-3 flex flex-col justify-between z-20 shadow-xl">
                 <div class="flex items-center justify-between text-[8.5px] font-mono tracking-widest text-emerald-300">
                   <span>GOSHWARA ATELIER</span>
-                  <span class="text-emerald-400 font-bold">✦ MUZO RESERVE</span>
+                  <span class="text-emerald-400 font-bold">✦ MUZO STEP-CUT</span>
                 </div>
                 <div class="w-10 h-0.5 rounded-full bg-emerald-400/50 mx-auto"></div>
               </div>
@@ -880,7 +1193,7 @@
 
               <!-- Unexpected Accent Color Badge -->
               <span class="absolute top-4 left-4 z-30 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] electric-emerald-badge font-mono font-bold backdrop-blur-md">
-                ✦ 100% Unheated Colombian Muzo
+                ✦ 38.40 ctw Unheated Muzo &bull; 68.4g 18K
               </span>
 
               <!-- Gemstone Inside Casket Stage -->
@@ -889,22 +1202,25 @@
               </div>
 
               <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-stone-900/95 text-emerald-300 border border-emerald-400 text-[10px] uppercase tracking-[0.2em] font-medium text-center shadow-xl opacity-0 group-hover:opacity-100 transition duration-300 z-30">
-                ✦ Unbox Casket & 3.5X Loupe ✦
+                ✦ Unbox 8-Point Spec Ledger &amp; 3.5X Loupe ✦
               </div>
             </div>
 
-            <span class="text-[10px] uppercase tracking-[0.25em] text-emerald-700 font-mono block mb-1 font-semibold">Queen High Jewelry &bull; Master Suite</span>
+            <span class="text-[10px] uppercase tracking-[0.25em] text-emerald-700 font-mono block mb-1 font-semibold">Queen High Jewelry &bull; Step &amp; Baguette Suite</span>
             <h4 class="font-serif text-2xl text-stone-900 font-normal mb-2">Rainforest Emerald Choker Suite</h4>
-            <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
+            <p class="text-[10.5px] font-mono text-emerald-900 mb-3 bg-emerald-50/70 px-3 py-1.5 rounded-lg border border-emerald-200">
+              415 mm Collar &bull; 6.85 ctw Baguettes &bull; 68.4g 18K Gold
+            </p>
+            <p class="text-xs text-stone-600 font-light leading-relaxed mb-5">
               A breathtaking cascade of natural unheated Colombian emeralds celebrating the lush organic curves of the Rainforest.
             </p>
             <div class="flex items-center justify-between pt-4 border-t border-stone-100">
               <div>
                 <span class="text-[9.5px] uppercase tracking-[0.25em] text-emerald-700 block font-mono font-bold">Haute Joaillerie Reserve</span>
-                <span class="text-xs text-stone-500 font-serif italic">Price Upon Application (P.O.A.)</span>
+                <span class="text-xs text-stone-800 font-cinzel font-semibold">$48,500 USD</span>
               </div>
               <span class="text-[10px] uppercase tracking-[0.2em] text-emerald-700 font-bold underline underline-offset-4">
-                Inspect 3.5X Loupe →
+                Inspect Specs &amp; Loupe →
               </span>
             </div>
           </div>
@@ -919,7 +1235,7 @@
               <div class="casket-lid absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-stone-850 to-stone-950 border-t border-x border-rose-400/40 rounded-t-2xl p-3 flex flex-col justify-between z-20 shadow-xl">
                 <div class="flex items-center justify-between text-[8.5px] font-mono tracking-widest text-gold-300">
                   <span>GOSHWARA ATELIER</span>
-                  <span class="text-rose-400">✦ RUBELLITE</span>
+                  <span class="text-rose-400">✦ CABOCHON CUT</span>
                 </div>
                 <div class="w-10 h-0.5 rounded-full bg-rose-400/50 mx-auto"></div>
               </div>
@@ -928,7 +1244,7 @@
               <div class="casket-spotlight absolute inset-0 bg-radial from-rose-500/25 via-transparent to-transparent pointer-events-none transition-all duration-500"></div>
 
               <span class="absolute top-4 left-4 z-30 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-rose-950/80 text-rose-200 font-mono font-medium border border-rose-400/40 backdrop-blur-md">
-                Rubellite Tourmaline
+                16.20 ct Cabochon &bull; 15.8g 18K
               </span>
 
               <div class="casket-interior relative z-10 w-full h-full flex items-center justify-center">
@@ -936,29 +1252,32 @@
               </div>
 
               <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-stone-900/95 text-gold-300 border border-gold-400 text-[10px] uppercase tracking-[0.2em] font-medium text-center shadow-xl opacity-0 group-hover:opacity-100 transition duration-300 z-30">
-                ✦ Unbox Casket & 3.5X Loupe ✦
+                ✦ Unbox 8-Point Spec Ledger &amp; 3.5X Loupe ✦
               </div>
             </div>
 
-            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono block mb-1">Mélange Collection</span>
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono block mb-1">Mélange Collection &bull; Sculpted Cabochon</span>
             <h4 class="font-serif text-2xl text-stone-900 font-normal mb-2">Double Drop Rubellite Earrings</h4>
-            <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
+            <p class="text-[10.5px] font-mono text-stone-500 mb-3 bg-pearl px-3 py-1.5 rounded-lg border border-stone-200/80">
+              34.5 × 12.8 × 7.2 mm &bull; 0.74 ct Pavé &bull; 15.8g 18K Gold
+            </p>
+            <p class="text-xs text-stone-600 font-light leading-relaxed mb-5">
               Dual cabochon articulated drop earrings featuring vivid raspberry rubellite with micro diamond borders.
             </p>
             <div class="flex items-center justify-between pt-4 border-t border-stone-100">
               <div>
-                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Private Acquisition</span>
-                <span class="text-xs text-stone-500 font-serif italic">Price Upon Application (P.O.A.)</span>
+                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Direct &amp; Salon Acquisition</span>
+                <span class="text-xs text-stone-800 font-cinzel font-semibold">$5,500 USD</span>
               </div>
               <span class="text-[10px] uppercase tracking-[0.2em] text-stone-900 group-hover:text-gold-700 font-semibold underline underline-offset-4">
-                Inspect 3.5X Loupe →
+                Inspect Specs &amp; Loupe →
               </span>
             </div>
           </div>
         </div>
 
         <!-- Piece 5 -->
-        <div class="reveal-elem casket-scene" data-cat="citrine">
+        <div class="reveal-elem casket-scene" data-cat="citrine asscher step-cut">
           <div class="casket-box bg-white rounded-3xl p-6 border border-stone-200/90 shadow-sm hover:shadow-2xl transition duration-500 cursor-pointer" onclick="openVelvetTray('Asscher Citrine Halo Pendant', 8400, 'Madeira Citrine', '18K Yellow Gold & Diamond Halo', 'https://goshwara.com/cdn/shop/files/Pendant_menu_500x.jpg?v=1769015032')">
             <div class="aspect-square bg-stone-950 rounded-2xl overflow-hidden mb-6 relative p-5 border border-white/10 group shadow-inner">
               
@@ -966,7 +1285,7 @@
               <div class="casket-lid absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-stone-850 to-stone-950 border-t border-x border-amber-400/40 rounded-t-2xl p-3 flex flex-col justify-between z-20 shadow-xl">
                 <div class="flex items-center justify-between text-[8.5px] font-mono tracking-widest text-gold-300">
                   <span>GOSHWARA ATELIER</span>
-                  <span class="text-amber-400">✦ MADEIRA</span>
+                  <span class="text-amber-400">✦ ASSCHER STEP-CUT</span>
                 </div>
                 <div class="w-10 h-0.5 rounded-full bg-amber-400/50 mx-auto"></div>
               </div>
@@ -975,7 +1294,7 @@
               <div class="casket-spotlight absolute inset-0 bg-radial from-amber-500/25 via-transparent to-transparent pointer-events-none transition-all duration-500"></div>
 
               <span class="absolute top-4 left-4 z-30 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-amber-950/80 text-amber-200 font-mono font-medium border border-amber-400/40 backdrop-blur-md">
-                Madeira Citrine &bull; Asscher
+                15.40 ct Asscher &bull; 12.9g 18K
               </span>
 
               <div class="casket-interior relative z-10 w-full h-full flex items-center justify-center">
@@ -983,29 +1302,32 @@
               </div>
 
               <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-stone-900/95 text-gold-300 border border-gold-400 text-[10px] uppercase tracking-[0.2em] font-medium text-center shadow-xl opacity-0 group-hover:opacity-100 transition duration-300 z-30">
-                ✦ Unbox Casket & 3.5X Loupe ✦
+                ✦ Unbox 8-Point Spec Ledger &amp; 3.5X Loupe ✦
               </div>
             </div>
 
-            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono block mb-1">Goshwara Classics</span>
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono block mb-1">Goshwara Classics &bull; Asscher Step-Cut</span>
             <h4 class="font-serif text-2xl text-stone-900 font-normal mb-2">Asscher Citrine Halo Pendant</h4>
-            <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
+            <p class="text-[10.5px] font-mono text-stone-500 mb-3 bg-pearl px-3 py-1.5 rounded-lg border border-stone-200/80">
+              16.0 × 16.0 × 9.1 mm (Ratio 1.00) &bull; 12.9g 18K Gold
+            </p>
+            <p class="text-xs text-stone-600 font-light leading-relaxed mb-5">
               Hypnotic windmill step facets reflecting rich amber honey hues, encapsulated by micro-pavé diamonds.
             </p>
             <div class="flex items-center justify-between pt-4 border-t border-stone-100">
               <div>
-                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Private Acquisition</span>
-                <span class="text-xs text-stone-500 font-serif italic">Price Upon Application (P.O.A.)</span>
+                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Direct &amp; Salon Acquisition</span>
+                <span class="text-xs text-stone-800 font-cinzel font-semibold">$8,400 USD</span>
               </div>
               <span class="text-[10px] uppercase tracking-[0.2em] text-stone-900 group-hover:text-gold-700 font-semibold underline underline-offset-4">
-                Inspect 3.5X Loupe →
+                Inspect Specs &amp; Loupe →
               </span>
             </div>
           </div>
         </div>
 
         <!-- Piece 6 -->
-        <div class="reveal-elem casket-scene" data-cat="topaz">
+        <div class="reveal-elem casket-scene" data-cat="topaz cushion step-cut">
           <div class="casket-box bg-white rounded-3xl p-6 border border-stone-200/90 shadow-sm hover:shadow-2xl transition duration-500 cursor-pointer" onclick="openVelvetTray('Gossip Multi-Gem Link Bracelet', 11200, 'London Blue Topaz & Amethyst', '18K Solid Gold Links', 'https://goshwara.com/cdn/shop/files/Bracelet_menu_500x.jpg?v=1769015072')">
             <div class="aspect-square bg-stone-950 rounded-2xl overflow-hidden mb-6 relative p-5 border border-white/10 group shadow-inner">
               
@@ -1013,7 +1335,7 @@
               <div class="casket-lid absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-stone-850 to-stone-950 border-t border-x border-gold-400/40 rounded-t-2xl p-3 flex flex-col justify-between z-20 shadow-xl">
                 <div class="flex items-center justify-between text-[8.5px] font-mono tracking-widest text-gold-300">
                   <span>GOSHWARA ATELIER</span>
-                  <span class="text-gold-400">✦ FINE LINKS</span>
+                  <span class="text-gold-400">✦ STEP &amp; CUSHION LINKS</span>
                 </div>
                 <div class="w-10 h-0.5 rounded-full bg-gold-400/50 mx-auto"></div>
               </div>
@@ -1022,7 +1344,7 @@
               <div class="casket-spotlight absolute inset-0 bg-radial from-gold-500/25 via-transparent to-transparent pointer-events-none transition-all duration-500"></div>
 
               <span class="absolute top-4 left-4 z-30 px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-stone-900/90 text-gold-300 font-mono font-medium border border-gold-400/40 backdrop-blur-md">
-                Multi-Gem Topaz &bull; 18K Solid
+                32.50 ctw Calibrated &bull; 34.6g 18K
               </span>
 
               <div class="casket-interior relative z-10 w-full h-full flex items-center justify-center">
@@ -1030,25 +1352,24 @@
               </div>
 
               <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-stone-900/95 text-gold-300 border border-gold-400 text-[10px] uppercase tracking-[0.2em] font-medium text-center shadow-xl opacity-0 group-hover:opacity-100 transition duration-300 z-30">
-                ✦ Unbox Casket & 3.5X Loupe ✦
+                ✦ Unbox 8-Point Spec Ledger &amp; 3.5X Loupe ✦
               </div>
             </div>
-              <div class="absolute inset-x-6 bottom-4 py-3 rounded-xl bg-stone-900 text-gold-300 border border-gold-400 text-[10.5px] uppercase tracking-[0.2em] font-medium text-center shadow-xl opacity-0 group-hover:opacity-100 transition duration-300">
-                ✦ Open Velvet Box & Loupe ✦
-              </div>
-            </div>
-            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono block mb-1">Gossip Fine Collection</span>
+            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-600 font-mono block mb-1">Gossip Fine Collection &bull; Calibrated Suite</span>
             <h4 class="font-serif text-2xl text-stone-900 font-normal mb-2">Gossip Multi-Gem Link Bracelet</h4>
-            <p class="text-xs text-stone-600 font-light leading-relaxed mb-6">
-              Interlocking solid gold links studded with alternate cushion and round bezel-set natural stones.
+            <p class="text-[10.5px] font-mono text-stone-500 mb-3 bg-pearl px-3 py-1.5 rounded-lg border border-stone-200/80">
+              185 × 11.4 mm &bull; 1.15 ctw Baguettes &bull; 34.6g 18K Gold
+            </p>
+            <p class="text-xs text-stone-600 font-light leading-relaxed mb-5">
+              Interlocking solid gold links studded with alternate cushion and step-cut bezel-set natural stones.
             </p>
             <div class="flex items-center justify-between pt-4 border-t border-stone-100">
               <div>
-                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Private Acquisition</span>
-                <span class="text-xs text-stone-500 font-serif italic">Price Upon Application (P.O.A.)</span>
+                <span class="text-[9.5px] uppercase tracking-[0.25em] text-gold-700 block font-mono font-medium">Direct &amp; Salon Acquisition</span>
+                <span class="text-xs text-stone-800 font-cinzel font-semibold">$11,200 USD</span>
               </div>
               <span class="text-[10px] uppercase tracking-[0.2em] text-stone-900 group-hover:text-gold-700 font-semibold underline underline-offset-4">
-                Inspect 3.5X Loupe →
+                Inspect Specs &amp; Loupe →
               </span>
             </div>
           </div>
@@ -1258,24 +1579,35 @@
               </div>
             </div>
 
-            <!-- Gemological Specification Grid -->
-            <h5 class="text-xs uppercase tracking-[0.2em] font-mono text-stone-500 mb-3">Gemological Provenance Dossier</h5>
-            <div class="grid grid-cols-2 gap-3 text-xs mb-6">
-              <div class="p-3.5 rounded-xl bg-white border border-stone-200">
-                <span class="text-stone-400 block font-mono text-[9.5px] uppercase">Primary Gemstone</span>
-                <span class="font-serif text-base text-stone-900 font-medium" id="trayGem">Royal Amethyst</span>
+            <!-- Gemological Specification Grid (Upgraded 8-Point Collector Ledger) -->
+            <div class="flex items-center justify-between mb-3">
+              <h5 class="text-xs uppercase tracking-[0.2em] font-mono text-stone-500">8-Point Gemological Specification Ledger</h5>
+              <span class="px-2.5 py-0.5 rounded bg-emerald-50 border border-emerald-300 text-[9px] font-mono text-emerald-800 uppercase tracking-wider">GIA / Gübelin Verified</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5 text-xs mb-6">
+              <div class="p-3 rounded-xl bg-white border border-stone-200">
+                <span class="text-stone-400 block font-mono text-[9px] uppercase">01. Center Stone & Cut</span>
+                <span class="font-serif text-sm text-stone-900 font-semibold" id="trayGem">Royal Amethyst (Cushion Cut)</span>
               </div>
-              <div class="p-3.5 rounded-xl bg-white border border-stone-200">
-                <span class="text-stone-400 block font-mono text-[9.5px] uppercase">Mounting Metal</span>
-                <span class="font-serif text-base text-stone-900 font-medium" id="trayMetal">18K Solid Gold</span>
+              <div class="p-3 rounded-xl bg-white border border-stone-200">
+                <span class="text-stone-400 block font-mono text-[9px] uppercase">02. Exact Dimensions (L×W×D)</span>
+                <span class="font-mono text-xs text-stone-900 font-semibold" id="trayDims">18.0 × 18.0 × 9.4 mm</span>
               </div>
-              <div class="p-3.5 rounded-xl bg-white border border-stone-200">
-                <span class="text-stone-400 block font-mono text-[9.5px] uppercase">Laboratory Registry</span>
-                <span class="font-serif text-base text-stone-900 font-medium">NY-8942-GIA / Gübelin</span>
+              <div class="p-3 rounded-xl bg-white border border-stone-200">
+                <span class="text-stone-400 block font-mono text-[9px] uppercase">03. Diamond Accent Cut</span>
+                <span class="font-serif text-sm text-stone-900 font-medium" id="trayDiamondCut">0.48 ct Step-Cut Baguettes (F-G/VS)</span>
               </div>
-              <div class="p-3.5 rounded-xl bg-white border border-stone-200">
-                <span class="text-stone-400 block font-mono text-[9.5px] uppercase">Discreet Delivery</span>
-                <span class="font-serif text-base text-stone-900 font-medium">Armored White-Glove Courier</span>
+              <div class="p-3 rounded-xl bg-white border border-stone-200">
+                <span class="text-stone-400 block font-mono text-[9px] uppercase">04. 18K Gold Gram Weight</span>
+                <span class="font-mono text-xs text-stone-900 font-semibold" id="trayGoldWeight">14.2 Grams Solid 18K Yellow Gold</span>
+              </div>
+              <div class="p-3 rounded-xl bg-white border border-stone-200">
+                <span class="text-stone-400 block font-mono text-[9px] uppercase">05. Origin & Treatment</span>
+                <span class="font-serif text-sm text-emerald-800 font-medium" id="trayOrigin">100% Natural • Unenhanced</span>
+              </div>
+              <div class="p-3 rounded-xl bg-white border border-stone-200">
+                <span class="text-stone-400 block font-mono text-[9px] uppercase">06. Authorized Salon Routing</span>
+                <span class="font-serif text-sm text-stone-900 font-medium" id="trayStockist">NYC 5th Ave • Saks • Neiman Marcus</span>
               </div>
             </div>
           </div>
@@ -1283,11 +1615,11 @@
           <!-- CTAs -->
           <div class="space-y-3">
             <button onclick="bookPieceFromTray()" class="w-full py-4 rounded-full text-xs uppercase tracking-[0.25em] font-semibold text-white bg-stone-900 hover:bg-gold-600 shadow-xl transition cursor-pointer">
-              Reserve Private Viewing In Mumbai / Delhi
+              Reserve Private Viewing (NYC / Retail Partner / Mumbai)
             </button>
-            <a id="trayWaLink" href="https://wa.me/919920000000" target="_blank" class="w-full py-4 rounded-full text-xs uppercase tracking-[0.25em] font-medium text-stone-900 border border-stone-300 hover:border-gold-500 hover:bg-gold-50 flex items-center justify-center gap-2 transition cursor-pointer">
+            <a id="trayWaLink" href="https://wa.me/12129379777" target="_blank" class="w-full py-4 rounded-full text-xs uppercase tracking-[0.25em] font-medium text-stone-900 border border-stone-300 hover:border-gold-500 hover:bg-gold-50 flex items-center justify-center gap-2 transition cursor-pointer">
               <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-              <span>Consult Dedicated Gemologist On WhatsApp</span>
+              <span>Request 10-Sec Natural Daylight Video on WhatsApp</span>
             </a>
           </div>
 
@@ -1808,26 +2140,95 @@
     }
 
     // ----------------------------------------------------
-    // 10. Velvet Box Modal with 3.5X Loupe Lens
+    // 10. Velvet Box Modal with 3.5X Loupe & 8-Point Spec Ledger
     // ----------------------------------------------------
     let activePieceUSD = 9950;
 
+    const PIECE_SPECS = {
+      'Cushion Cut Manhattan Pendant': {
+        gem: '18.60 ct Royal Amethyst (Cushion Cut)',
+        dims: '18.0 × 18.0 × 9.4 mm',
+        diamondCut: '0.48 ct Step-Cut Baguettes (F-G / VS)',
+        goldWeight: '14.2 Grams Solid 18K Yellow Gold',
+        origin: '100% Natural • Unenhanced (Brazil)',
+        stockist: 'NYC 5th Ave • Saks • Neiman Marcus'
+      },
+      'Three-Stone Architectural Ring': {
+        gem: '14.85 ct London Blue Topaz (Emerald Step-Cut)',
+        dims: '16.4 × 13.2 × 8.1 mm',
+        diamondCut: '0.62 ct Tapered Baguette & Micro-Pavé (F-G / VS1)',
+        goldWeight: '13.6 Grams Solid 18K Yellow Gold',
+        origin: 'Natural Topaz • Swiss-Irradiated London Blue',
+        stockist: 'NYC 5th Ave • Bergdorf Goodman • Tiny Jewel Box'
+      },
+      'Rainforest Emerald Choker Suite': {
+        gem: '38.40 ct Colombian Muzo Emeralds (Step & Cabochon)',
+        dims: '415 mm Articulated Collar • 14.2 mm Drop',
+        diamondCut: '6.85 ct Baguette & Marquise Diamonds (F / VVS-VS)',
+        goldWeight: '68.4 Grams Solid 18K Honey Yellow Gold',
+        origin: '100% Natural Unheated Muzo (GIA Certified)',
+        stockist: 'NYC 5th Ave Flagship • Private Armored Viewing'
+      },
+      'Double Drop Rubellite Earrings': {
+        gem: '16.20 ct Rubellite Tourmaline (Sculpted Cabochon)',
+        dims: '34.5 × 12.8 × 7.2 mm',
+        diamondCut: '0.74 ct Micro-Pavé Diamond Borders (F-G / VS)',
+        goldWeight: '15.8 Grams Solid 18K Yellow Gold',
+        origin: '100% Natural • Untreated Raspberry Rubellite',
+        stockist: 'NYC 5th Ave • Saks Fifth Avenue • Razny Jewelers'
+      },
+      'Asscher Citrine Halo Pendant': {
+        gem: '15.40 ct Madeira Citrine (Octagonal Asscher Step-Cut)',
+        dims: '16.0 × 16.0 × 9.1 mm',
+        diamondCut: '0.55 ct Architectural Halo Diamonds (F-G / VS)',
+        goldWeight: '12.9 Grams Solid 18K Yellow Gold',
+        origin: '100% Natural Golden Madeira (Rio Grande do Sul)',
+        stockist: 'NYC 5th Ave • Neiman Marcus • Hamilton Jewelers'
+      },
+      'Gossip Multi-Gem Link Bracelet': {
+        gem: '32.50 ct Emerald-Cut London Blue Topaz & Amethyst',
+        dims: '185 mm Length × 11.4 mm Width',
+        diamondCut: '1.15 ct Bar-Set Baguette Diamond Clasps (F-G / VS)',
+        goldWeight: '34.6 Grams Solid 18K Yellow Gold Links',
+        origin: '100% Natural Hand-Matched Calibrated Suite',
+        stockist: 'NYC 5th Ave • CD Peacock • London Jewelers'
+      }
+    };
+
     function openVelvetTray(title, usdPrice, gem, metal, img) {
       activePieceUSD = usdPrice;
+      const spec = PIECE_SPECS[title] || {
+        gem: `${gem} (Architectural Cut)`,
+        dims: '16.5 × 13.0 × 8.2 mm',
+        diamondCut: '0.50 ct Baguette & Pavé Diamonds (F-G / VS)',
+        goldWeight: '14.0 Grams Solid 18K Yellow Gold',
+        origin: '100% Natural • GIA / Gübelin Verified',
+        stockist: 'NYC 5th Ave • Saks • Neiman Marcus'
+      };
+
       document.getElementById('trayTitle').innerText = title;
-      document.getElementById('trayGem').innerText = gem;
-      document.getElementById('trayMetal').innerText = metal;
+      document.getElementById('trayGem').innerText = spec.gem;
+      const dimsEl = document.getElementById('trayDims');
+      if (dimsEl) dimsEl.innerText = spec.dims;
+      const diaEl = document.getElementById('trayDiamondCut');
+      if (diaEl) diaEl.innerText = spec.diamondCut;
+      const goldEl = document.getElementById('trayGoldWeight');
+      if (goldEl) goldEl.innerText = spec.goldWeight;
+      const origEl = document.getElementById('trayOrigin');
+      if (origEl) origEl.innerText = spec.origin;
+      const stockEl = document.getElementById('trayStockist');
+      if (stockEl) stockEl.innerText = spec.stockist;
       
       const imgEl = document.getElementById('trayImg');
       if (imgEl) imgEl.src = img;
 
       const priceEl = document.getElementById('trayPrice');
       if (priceEl) {
-        priceEl.innerText = 'Price Upon Application';
+        priceEl.innerText = usdPrice ? `$${usdPrice.toLocaleString('en-US')} USD` : 'Price Upon Application';
       }
 
       const waLink = document.getElementById('trayWaLink');
-      if (waLink) waLink.href = `https://wa.me/919920000000?text=Hello%20Goshwara%20Concierge,%20I%20would%20like%20to%20inquire%20about%20a%20private%20viewing%20for%20the%20${encodeURIComponent(title)}.`;
+      if (waLink) waLink.href = `https://wa.me/12129379777?text=Hello%20Goshwara%20NYC%20Salon,%20please%20send%20me%20the%2010-second%20natural%20daylight%20finger-roll%20video%20and%20spec%20dossier%20for%20the%20${encodeURIComponent(title)}.`;
 
       const modal = document.getElementById('velvetBoxModal');
       if (modal) {
@@ -2053,7 +2454,7 @@
     }
 
     // ----------------------------------------------------
-    // 15. Vault Collection Filter
+    // 15. Vault Collection Filter (Fixed Selector)
     // ----------------------------------------------------
     function filterVault(filter) {
       document.querySelectorAll('#gemFilters button').forEach(b => {
@@ -2064,14 +2465,202 @@
         }
       });
 
-      document.querySelectorAll('#vaultGrid .tilt-card-wrapper').forEach(card => {
-        if (filter === 'all' || card.dataset.cat === filter) {
+      document.querySelectorAll('#vaultGrid .casket-scene').forEach(card => {
+        const cats = (card.dataset.cat || '').split(' ');
+        if (filter === 'all' || cats.includes(filter)) {
           card.style.display = 'block';
         } else {
           card.style.display = 'none';
         }
       });
       playChime(520);
+    }
+
+    // ----------------------------------------------------
+    // 16. 9:16 Optical Loupe & Vector Specification Studio
+    // ----------------------------------------------------
+    const SPEC_REEL_DATA = [
+      {
+        title: 'Manhattan Architectural Cushion Ring',
+        sub: '18K YELLOW GOLD • NATURAL DAYLIGHT STUDY',
+        img: 'https://goshwara.com/cdn/shop/files/Ring_menu.jpg?v=1768837689',
+        scale: '1.75',
+        origin: '46% 39%',
+        caliperTop: '16.4 × 13.2 × 8.1 mm',
+        caliperTopSub: 'FACE-UP L × W × D',
+        caliperBot: '18K GOLD • 13.6g',
+        caliperBotSub: 'HAND-FORGED GALLERY',
+        s1: '11.85 ct Cushion Step-Cut',
+        s2: '16.4 × 13.2 × 8.1 mm (L×W×D)',
+        s3: '0.45 ctw Pavé & Bezel (F-G / VS1)',
+        s4: '13.6 Grams Solid 18K Yellow Gold',
+        s5: 'Natural Brazilian • Unheated',
+        s6: '64.2% Depth • Compass Prong'
+      },
+      {
+        title: 'Manhattan Asscher Diamond Pendant',
+        sub: '18K SOLID GOLD • OCTAGONAL HALL OF MIRRORS',
+        img: 'https://goshwara.com/cdn/shop/files/Pendant_menu.jpg?v=1769015032',
+        scale: '1.52',
+        origin: '53% 47%',
+        caliperTop: '12.5 × 12.5 × 7.6 mm',
+        caliperTopSub: '1.00 SYMMETRIC RATIO',
+        caliperBot: '18K GOLD • 11.4g',
+        caliperBotSub: 'OCTAGONAL BEZEL COLLAR',
+        s1: '6.90 ct Asscher Step-Cut',
+        s2: '12.5 × 12.5 × 7.6 mm (Ratio 1.00)',
+        s3: '0.38 ctw Architectural Bail (F-G / VS)',
+        s4: '11.4 Grams Solid 18K Yellow Gold',
+        s5: '100% Natural • Unenhanced',
+        s6: '61.5% Depth • Step-Cut Windmill'
+      },
+      {
+        title: 'Queen Rainforest Emerald Choker',
+        sub: 'COLOMBIAN MUZO RESERVE • HAUTE JOAILLERIE',
+        img: 'https://goshwara.com/cdn/shop/files/Rain_forest_collection_500x.jpg?v=1748553985',
+        scale: '1.65',
+        origin: '50% 42%',
+        caliperTop: '34.20 CTW MUZO SUITE',
+        caliperTopSub: 'UNHEATED COLOMBIAN',
+        caliperBot: '18K GOLD • 68.4g',
+        caliperBotSub: 'ARTICULATED COLLAR',
+        s1: '34.20 ctw Colombian Muzo Emeralds',
+        s2: '415 mm Collar • 14.2 mm Center Drop',
+        s3: '8.65 ctw Baguette & Marquise (F / VVS)',
+        s4: '68.4 Grams Solid 18K Honey Gold',
+        s5: '100% Natural Unheated (GIA Dossier)',
+        s6: 'Step-Cut & Sculpted Cabochon'
+      },
+      {
+        title: 'Rock ’N’ Roll London Blue Ring',
+        sub: 'THREE-STONE ARCHITECTURAL STEP-CUT',
+        img: 'https://goshwara.com/cdn/shop/files/Ring_menu_500x.jpg?v=1768837689',
+        scale: '1.68',
+        origin: '48% 41%',
+        caliperTop: '15.8 × 12.4 × 7.9 mm',
+        caliperTopSub: 'THREE-STONE SPREAD',
+        caliperBot: '18K GOLD • 14.1g',
+        caliperBotSub: 'MICRO-PAVÉ CATHEDRAL',
+        s1: '8.40 ct London Blue Topaz (Emerald Cut)',
+        s2: '15.8 × 12.4 × 7.9 mm (L×W×D)',
+        s3: '0.62 ctw Tapered Baguette & Pavé',
+        s4: '14.1 Grams Solid 18K Yellow Gold',
+        s5: 'Natural Topaz • Deep Oceanic Blue',
+        s6: '63.8% Depth • Low-Profile Bezel'
+      }
+    ];
+
+    let opticalBlurEnabled = true;
+    let vectorCalipersEnabled = true;
+
+    function selectSpecReel(idx) {
+      const d = SPEC_REEL_DATA[idx];
+      if (!d) return;
+
+      document.querySelectorAll('#specStudioButtons .spec-reel-btn').forEach((btn, i) => {
+        if (i === idx) {
+          btn.className = "spec-reel-btn active w-full p-3.5 rounded-2xl bg-stone-800 border border-gold-400 text-left flex items-center justify-between transition cursor-pointer";
+        } else {
+          btn.className = "spec-reel-btn w-full p-3.5 rounded-2xl bg-stone-950/60 border border-white/10 hover:border-gold-400/50 text-left flex items-center justify-between transition cursor-pointer";
+        }
+      });
+
+      const bgImg = document.getElementById('reelBgBlurImg');
+      const sharpImg = document.getElementById('reelSharpImg');
+      if (bgImg && sharpImg) {
+        bgImg.src = d.img;
+        sharpImg.src = d.img;
+        bgImg.style.transform = `scale(${d.scale})`;
+        bgImg.style.transformOrigin = d.origin;
+        sharpImg.style.transform = `scale(${d.scale})`;
+        sharpImg.style.transformOrigin = d.origin;
+      }
+
+      document.getElementById('svgCaliperTop').textContent = d.caliperTop;
+      document.getElementById('svgCaliperTopSub').textContent = d.caliperTopSub;
+      document.getElementById('svgCaliperBot').textContent = d.caliperBot;
+      document.getElementById('svgCaliperBotSub').textContent = d.caliperBotSub;
+
+      document.getElementById('reelTitle').innerText = d.title;
+      document.getElementById('reelSub').innerText = d.sub;
+      document.getElementById('reelSpec1').innerText = d.s1;
+      document.getElementById('reelSpec2').innerText = d.s2;
+      document.getElementById('reelSpec3').innerText = d.s3;
+      document.getElementById('reelSpec4').innerText = d.s4;
+      document.getElementById('reelSpec5').innerText = d.s5;
+      document.getElementById('reelSpec6').innerText = d.s6;
+
+      const waBtn = document.getElementById('specReelWaBtn');
+      if (waBtn) {
+        waBtn.href = `https://wa.me/12129379777?text=Hello%20Goshwara%20NYC%20Salon,%20I%20would%20like%20to%20request%20the%2010-second%20natural%20daylight%20video%20and%20exact%20specs%20for%20the%20${encodeURIComponent(d.title)}.`;
+      }
+      playChime(740);
+    }
+
+    function toggleOpticalBlur() {
+      opticalBlurEnabled = !opticalBlurEnabled;
+      const bgImg = document.getElementById('reelBgBlurImg');
+      const btn = document.getElementById('btnToggleBlur');
+      if (bgImg) {
+        bgImg.style.filter = opticalBlurEnabled
+          ? 'blur(22px) brightness(0.42) saturate(0.8)'
+          : 'blur(0px) brightness(0.88) saturate(1.0)';
+      }
+      if (btn) {
+        btn.innerText = opticalBlurEnabled ? '✦ Radial Bokeh: ON' : '✦ Radial Bokeh: OFF';
+        btn.className = opticalBlurEnabled
+          ? 'p-3 rounded-xl bg-emerald-950/80 border border-emerald-400/60 text-emerald-200 text-xs font-mono text-center transition cursor-pointer'
+          : 'p-3 rounded-xl bg-stone-950 border border-white/15 text-stone-400 text-xs font-mono text-center transition cursor-pointer';
+      }
+      playChime(580);
+    }
+
+    function toggleVectorCalipers() {
+      vectorCalipersEnabled = !vectorCalipersEnabled;
+      const svg = document.getElementById('reelVectorSvg');
+      const btn = document.getElementById('btnToggleCalipers');
+      if (svg) {
+        svg.style.opacity = vectorCalipersEnabled ? '1' : '0';
+      }
+      if (btn) {
+        btn.innerText = vectorCalipersEnabled ? '✦ SVG Calipers: ON' : '✦ SVG Calipers: OFF';
+        btn.className = vectorCalipersEnabled
+          ? 'p-3 rounded-xl bg-stone-800 border border-gold-400/60 text-gold-300 text-xs font-mono text-center transition cursor-pointer'
+          : 'p-3 rounded-xl bg-stone-950 border border-white/15 text-stone-400 text-xs font-mono text-center transition cursor-pointer';
+      }
+      playChime(660);
+    }
+
+    function setReelLight(kelvin) {
+      const sharpImg = document.getElementById('reelSharpImg');
+      const badge = document.getElementById('reelLightBadge');
+      const btns = {
+        '5500K': document.getElementById('reelLight5500'),
+        '4000K': document.getElementById('reelLight4000'),
+        '2700K': document.getElementById('reelLight2700')
+      };
+
+      Object.keys(btns).forEach(k => {
+        if (btns[k]) {
+          btns[k].className = (k === kelvin)
+            ? 'py-2 px-2 rounded-lg bg-gold-400 text-stone-950 font-bold cursor-pointer'
+            : 'py-2 px-2 rounded-lg bg-stone-800 text-stone-300 hover:text-white cursor-pointer';
+        }
+      });
+
+      if (sharpImg && badge) {
+        if (kelvin === '5500K') {
+          sharpImg.style.filter = 'contrast(1.08) saturate(1.12) brightness(1.02)';
+          badge.innerText = '5500K NATURAL DAYLIGHT • ZERO RETOUCHING';
+        } else if (kelvin === '4000K') {
+          sharpImg.style.filter = 'contrast(1.12) saturate(1.18) sepia(0.08)';
+          badge.innerText = '4000K FIFTH AVE SALON • HALOGEN SPOT';
+        } else {
+          sharpImg.style.filter = 'contrast(1.15) saturate(1.25) sepia(0.22) brightness(0.96)';
+          badge.innerText = '2700K EVENING GALA • WARM CANDLELIGHT FIRE';
+        }
+      }
+      playChime(820);
     }
 
     // Set date picker default to tomorrow
