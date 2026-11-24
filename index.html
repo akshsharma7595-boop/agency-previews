@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FLAGSHIP SYSTEMS | Creative Engineering & Kinetic Digital Flagships</title>
-  <meta name="description" content="Awwwards-calibre 3D kinematic digital flagships, WebGL spatial interfaces, and high-converting client pipelines engineered with Charles Liu 60/30/10 color harmony.">
+  <meta name="description" content="Obsidian dark luxury 3D digital flagships, WebGL spatial interfaces, and high-converting client pipelines engineered with hairline border beams and micro-haptics.">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230C1B48'/><polygon points='50,15 85,35 85,75 50,90 15,75 15,35' fill='none' stroke='%23F2EA1E' stroke-width='6'/><circle cx='50' cy='52' r='10' fill='%2362A7EA'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23060709'/><polygon points='50,16 84,36 84,74 50,92 16,74 16,36' fill='none' stroke='%23F2EA1E' stroke-width='6'/><circle cx='50' cy='52' r='10' fill='%235A9FE2'/></svg>">
 
   <!-- Elite Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,15 +21,17 @@
       theme: {
         extend: {
           colors: {
+            obsidian: '#060709',
+            obsidiansurface: '#0B0E14',
+            obsidiancard: '#10141E',
+            obsidianborder: 'rgba(255, 255, 255, 0.08)',
             glacier: '#5A9FE2',
-            glacierlight: '#7FB4ED',
+            glacierlight: '#8EBAEB',
             navy: '#0C1B48',
-            navylight: '#152968',
             lemon: '#F2EA1E',
             lemonhover: '#E5DD18',
             snow: '#FFFFFF',
-            snowtint: '#F4F8FC',
-            stonecard: '#EEF4FA',
+            muted: '#8E96A4',
           },
           fontFamily: {
             syne: ['Syne', 'sans-serif'],
@@ -49,132 +51,157 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
-    /* Charles Liu Visual Hierarchy: 60% Glacier, 30% Navy & White, 10% Lemon */
+    /* Dark Luxury Obsidian Global Tokens */
     body {
-      background-color: #5A9FE2;
-      color: #0C1B48;
+      background-color: #060709;
+      color: #FFFFFF;
       overflow-x: hidden;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     }
 
-    /* Soft Origin UI Frosted Glass HUD */
-    .origin-hud {
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 0 20px 40px -15px rgba(12, 27, 72, 0.12);
+    /* Custom Luxury Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #060709; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #F2EA1E; }
+
+    /* 1px Hairline Spotlight Cards */
+    .spotlight-card {
+      position: relative;
+      background: rgba(11, 14, 20, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .spotlight-card:hover {
+      border-color: rgba(255, 255, 255, 0.22);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.09), transparent 45%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before {
+      opacity: 1;
     }
 
-    .origin-pill {
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 10px 25px -5px rgba(12, 27, 72, 0.08);
+    /* Animated 1px Border Beam */
+    .border-beam-box {
+      position: relative;
+      overflow: hidden;
+    }
+    .border-beam-box::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: conic-gradient(from 0deg, transparent 0 340deg, #F2EA1E 360deg);
+      animation: rotate-beam 4s linear infinite;
+      z-index: 0;
+      opacity: 0.8;
+    }
+    @keyframes rotate-beam {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .beam-inner {
+      position: relative;
+      z-index: 1;
+      background: #0B0E14;
+      border-radius: inherit;
     }
 
-    /* High-Impact Lemon Button */
-    .btn-lemon {
+    /* Tactile Lemon Action Button */
+    .btn-lemon-primary {
       background: #F2EA1E;
-      color: #0C1B48;
+      color: #060709;
       font-family: 'Archivo Black', sans-serif;
       text-transform: uppercase;
-      box-shadow: 0 16px 35px -8px rgba(242, 234, 30, 0.55), 0 0 0 6px rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.05em;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 25px rgba(242, 234, 30, 0.25);
     }
-    .btn-lemon:hover {
+    .btn-lemon-primary:hover {
       background: #E5DD18;
-      transform: scale(1.04) translateY(-2px);
-      box-shadow: 0 22px 45px -8px rgba(242, 234, 30, 0.7), 0 0 0 8px rgba(255, 255, 255, 0.5);
-    }
-    .btn-lemon:active {
-      transform: scale(0.97);
+      box-shadow: 0 0 35px rgba(242, 234, 30, 0.45);
+      transform: translateY(-2px);
     }
 
-    /* 3D Perspective Card Tilt */
-    .card-3d-wrapper {
-      perspective: 1200px;
-    }
-    .card-3d {
-      transform-style: preserve-3d;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
-    }
-    .card-3d:hover {
-      box-shadow: 0 30px 60px -15px rgba(12, 27, 72, 0.18);
+    .glass-hud {
+      background: rgba(11, 14, 20, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* Kinetic Marquee */
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .animate-marquee {
-      display: flex;
-      width: 200%;
-      animation: marquee 24s linear infinite;
-    }
-    .animate-marquee:hover {
-      animation-play-state: paused;
-    }
-
-    /* Selection Highlight */
-    ::selection {
-      background: #F2EA1E;
-      color: #0C1B48;
+    .text-tight {
+      letter-spacing: -0.04em;
     }
   </style>
 </head>
+<body class="selection:bg-lemon selection:text-obsidian antialiased">
 
-<body class="font-sans antialiased selection:bg-lemon selection:text-navy relative">
+  <!-- Micro-Film Noise Grain Texture Overlay -->
+  <div class="fixed inset-0 pointer-events-none opacity-[0.035] z-50 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
-  <!-- FIXED THREE.JS 3D SCENE IN BACKGROUND (ATMOSPHERIC PRISMATIC CORE) -->
-  <div id="canvas-container" class="fixed inset-0 pointer-events-none z-0">
-    <canvas id="webglCanvas" class="w-full h-full"></canvas>
-  </div>
+  <!-- Ambient Obsidian Background Glows -->
+  <div class="fixed -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-glacier/10 filter blur-[140px] pointer-events-none z-0"></div>
+  <div class="fixed top-[45%] -right-40 w-[600px] h-[600px] bg-navy/40 filter blur-[160px] pointer-events-none z-0"></div>
 
   <!-- ======================================================== -->
-  <!-- 1. NAVIGATION BAR (ORIGIN UI TACTILE HUD)                -->
+  <!-- 1. FLOATING LUXURY HUD NAVIGATION                        -->
   <!-- ======================================================== -->
-  <header class="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 py-5 transition-all">
-    <div class="max-w-7xl mx-auto flex items-center justify-between origin-hud px-6 py-3.5 rounded-full">
+  <header class="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 py-4 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex items-center justify-between glass-hud rounded-2xl px-6 py-3.5 shadow-2xl">
       
-      <!-- Brand Logo -->
-      <a href="#" class="flex items-center gap-3.5 group">
-        <div class="w-10 h-10 rounded-xl bg-lemon flex items-center justify-center text-navy font-archivo text-xl shadow-md group-hover:scale-105 transition-transform">
-          F
+      <!-- Brand & Status -->
+      <a href="./" class="flex items-center gap-3.5 group">
+        <div class="w-9 h-9 rounded-xl bg-lemon flex items-center justify-center font-archivo text-obsidian text-sm font-black shadow-lg group-hover:scale-105 transition-transform">
+          FS
         </div>
         <div>
-          <span class="font-syne font-extrabold text-lg tracking-wider text-navy flex items-center gap-1">
-            FLAGSHIP<span class="text-yellow-500">.</span>OS
-          </span>
-          <span class="block font-mono text-[9px] uppercase tracking-widest text-slate-500 -mt-0.5 font-semibold">
-            CREATIVE ENGINEERING
-          </span>
+          <div class="flex items-center gap-2">
+            <span class="font-archivo text-sm sm:text-base tracking-wider text-snow">FLAGSHIP SYSTEMS</span>
+            <span class="px-2 py-0.5 text-[9px] font-mono font-bold bg-lemon/20 text-lemon border border-lemon/40 rounded-full">v4.0 OS</span>
+          </div>
+          <p class="text-[10px] font-mono text-muted tracking-tight hidden sm:block">CREATIVE ENGINEERING &bull; KINETIC DIGITAL FLAGSHIPS</p>
         </div>
       </a>
 
-      <!-- Navigation Links -->
-      <nav class="hidden md:flex items-center gap-8 font-space text-xs font-bold uppercase tracking-wider text-navy">
-        <a href="#showroom" class="hover:text-blue-600 transition-colors flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-lemon animate-pulse"></span>
-          Showroom
+      <!-- Center Telemetry HUD -->
+      <div class="hidden lg:flex items-center gap-6 font-mono text-xs">
+        <a href="#showroom" class="text-muted hover:text-snow transition-colors flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-lemon"></span>
+          <span>THE SHOWROOM</span>
         </a>
-        <a href="#palette" class="hover:text-blue-600 transition-colors">60/30/10 Ratio</a>
-        <a href="#standard" class="hover:text-blue-600 transition-colors">The Standard</a>
-        <a href="#sprint" class="hover:text-blue-600 transition-colors">72h Sprint</a>
-      </nav>
+        <a href="#architecture" class="text-muted hover:text-snow transition-colors">ARCHITECTURE</a>
+        <a href="#philosophy" class="text-muted hover:text-snow transition-colors">THE OBSIDIAN RULE</a>
+        <div class="flex items-center gap-2 px-3 py-1 rounded-lg bg-obsidianborder text-[11px] text-muted">
+          <span>FPS:</span>
+          <span id="navFps" class="text-lemon font-bold">60</span>
+        </div>
+      </div>
 
-      <!-- Right Action Controls -->
+      <!-- Action Suite -->
       <div class="flex items-center gap-3">
-        <!-- Audio Synth Toggle -->
-        <button id="audioToggleBtn" onclick="toggleAudioEngine()" class="origin-pill px-3.5 py-2 rounded-full text-navy font-mono text-[10px] font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-white transition cursor-pointer" title="Synthesizer Drone Toggle">
-          <span id="audioStatusDot" class="w-2 h-2 rounded-full bg-slate-400"></span>
-          <span id="audioStatusText">AUDIO: OFF</span>
+        <!-- Mechanical Drone Audio Synthesizer -->
+        <button id="audioToggleBtn" onclick="toggleAmbientAudio()" class="px-3 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-xs font-mono font-medium flex items-center gap-2 transition-all">
+          <span id="audioIcon">🔇</span>
+          <span id="audioText" class="hidden sm:inline">AUDIO: OFF</span>
         </button>
 
-        <!-- Claim Sprint CTA -->
-        <a href="#sprint" class="btn-lemon px-5 py-2.5 rounded-full text-xs flex items-center gap-2">
-          <span>Start Sprint</span>
-          <span class="font-mono text-[11px]">&rarr;</span>
+        <!-- Rapid Sprint CTA -->
+        <a href="#contact" class="px-4 py-2 rounded-xl btn-lemon-primary text-xs flex items-center gap-2 cursor-pointer shadow-md">
+          <span>BOOK SPRINT</span>
+          <span>→</span>
         </a>
       </div>
 
@@ -182,473 +209,339 @@
   </header>
 
   <!-- ======================================================== -->
-  <!-- 2. HERO: CHARLES LIU 60/30/10 ATMOSPHERIC SHOWROOM       -->
+  <!-- 2. DARK LUXURY HERO & 3D SPATIAL CORE                    -->
   <!-- ======================================================== -->
-  <section id="hero" class="relative z-10 min-h-screen flex flex-col justify-between pt-36 pb-20 px-6 sm:px-10 max-w-7xl mx-auto">
-    
-    <!-- Top Origin UI Telemetry HUD -->
-    <div class="flex flex-wrap items-center justify-between gap-4 pointer-events-auto">
-      <div class="origin-pill px-4 py-2 rounded-full text-xs font-mono text-navy font-semibold flex items-center gap-3">
-        <span class="flex h-2 w-2 relative">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-        </span>
-        <span>PALETTE: <strong>60% GLACIER &bull; 30% NAVY &bull; 10% LEMON</strong></span>
-        <span class="text-slate-300">|</span>
-        <span class="text-blue-700 font-bold">FPS: <span id="fpsCounter">60</span></span>
-        <span class="text-slate-300">|</span>
-        <span class="text-slate-600">EDGE: <strong>&lt; 380MS</strong></span>
+  <section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-6 sm:px-10 z-10">
+    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Hero Narrative (Left 7 Cols) -->
+      <div class="lg:col-span-7 flex flex-col justify-center text-left">
+        
+        <!-- Monospace Status Badge -->
+        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-muted font-mono text-xs mb-6 w-fit">
+          <span class="w-2 h-2 rounded-full bg-lemon animate-ping"></span>
+          <span class="text-snow">AESTHETIC UPGRADE</span>
+          <span class="text-white/30">&bull;</span>
+          <span class="text-lemon font-bold">DARK LUXURY OS</span>
+        </div>
+
+        <!-- Hero Headline -->
+        <h1 class="font-archivo text-4xl sm:text-6xl xl:text-7xl uppercase text-tight leading-[0.95] text-snow mb-6">
+          DIGITAL FLAGSHIPS <br>
+          <span class="text-lemon">THAT GET PAID.</span>
+        </h1>
+
+        <!-- Subheading -->
+        <p class="font-sans text-base sm:text-lg text-muted max-w-xl leading-relaxed mb-8 font-light">
+          We engineer high-ticket digital flagships with hairline border beams, true 3D spatial kinematics, and 60 FPS performance—moving far beyond generic boilerplate templates into high-trust commercial assets.
+        </p>
+
+        <!-- CTA Cluster -->
+        <div class="flex flex-wrap items-center gap-4 mb-12">
+          <a href="#showroom" class="px-8 py-4 rounded-2xl btn-lemon-primary text-sm flex items-center gap-3">
+            <span>EXPLORE SHOWROOM</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+          </a>
+          <a href="./chrono-studio/" target="_blank" class="px-6 py-4 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-snow font-mono text-xs font-semibold flex items-center gap-2 transition-all">
+            <span>⚡ NEW: AURA CHRONO 3D</span>
+            <span class="text-lemon">↗</span>
+          </a>
+        </div>
+
+        <!-- Telemetry Proof Row -->
+        <div class="grid grid-cols-3 gap-4 border-t border-white/[0.08] pt-6 max-w-lg font-mono text-xs">
+          <div>
+            <div class="text-muted text-[11px]">HAIRLINE BORDERS</div>
+            <div class="text-snow font-archivo text-lg mt-0.5 font-bold">1PX BEAM</div>
+            <div class="text-[10px] text-lemon mt-0.5">Cursor Spotlight</div>
+          </div>
+          <div>
+            <div class="text-muted text-[11px]">GEOMETRY</div>
+            <div class="text-snow font-archivo text-lg mt-0.5 font-bold">60.0 FPS</div>
+            <div class="text-[10px] text-lemon mt-0.5">Damped Inertia</div>
+          </div>
+          <div>
+            <div class="text-muted text-[11px]">CLIENT CONVERSION</div>
+            <div class="text-snow font-archivo text-lg mt-0.5 font-bold">+340%</div>
+            <div class="text-[10px] text-lemon mt-0.5">High-Trust Architecture</div>
+          </div>
+        </div>
+
       </div>
 
-      <!-- 3D Polyhedron Mode Switcher -->
-      <div class="origin-pill px-3 py-1.5 rounded-full flex items-center gap-1.5 text-xs font-mono">
-        <span class="text-slate-500 text-[10px] uppercase tracking-widest pl-2 font-bold">3D Artifact:</span>
-        <button onclick="setShaderMode(0)" id="modeBtn0" class="px-3 py-1 rounded-full bg-navy text-white font-bold text-[10px] uppercase transition cursor-pointer">Prismatic</button>
-        <button onclick="setShaderMode(1)" id="modeBtn1" class="px-3 py-1 rounded-full text-navy hover:bg-slate-100 font-bold text-[10px] uppercase transition cursor-pointer">Wireframe</button>
-        <button onclick="setShaderMode(2)" id="modeBtn2" class="px-3 py-1 rounded-full text-navy hover:bg-slate-100 font-bold text-[10px] uppercase transition cursor-pointer">Vortex</button>
+      <!-- 3D Kinetic Geometric Installation (Right 5 Cols) -->
+      <div class="lg:col-span-5 h-[480px] sm:h-[540px] relative flex items-center justify-center">
+        
+        <!-- Border Beam Card Framing Canvas -->
+        <div class="border-beam-box rounded-3xl p-[1px] w-full h-full shadow-2xl">
+          <div class="beam-inner w-full h-full p-4 flex flex-col justify-between relative overflow-hidden">
+            
+            <!-- Canvas Header Tag -->
+            <div class="flex items-center justify-between z-10 px-2 pt-2 font-mono text-[11px]">
+              <span class="text-muted flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-lemon"></span>
+                <span>SPATIAL PRISM // THREE.JS</span>
+              </span>
+              <span class="text-lemon">DRAG TO ORBIT</span>
+            </div>
+
+            <!-- WebGL Canvas Container -->
+            <div id="hero3dContainer" class="absolute inset-0 cursor-grab active:cursor-grabbing"></div>
+
+            <!-- Canvas Footer Metrics -->
+            <div class="flex items-center justify-between z-10 px-2 pb-2 font-mono text-[10px] text-muted">
+              <span>REFRACTIVE SHADER</span>
+              <span>12,400 POLYS</span>
+            </div>
+
+          </div>
+        </div>
+
       </div>
+
     </div>
-
-    <!-- Center Giant Split Kinetic Typography -->
-    <div class="my-auto py-10 pointer-events-none select-none">
-      <div class="font-mono text-xs sm:text-sm font-bold tracking-[0.24em] uppercase text-navy/90 mb-4 flex items-center gap-3">
-        <span class="w-8 h-[2px] bg-navy inline-block"></span>
-        <span>Awwwards-Calibre Creative Engineering Studio</span>
-      </div>
-
-      <h1 class="font-syne font-extrabold text-5xl sm:text-7xl md:text-8xl lg:text-[7.6rem] tracking-tight leading-[0.88] uppercase text-white drop-shadow-md">
-        WE BUILD <br>
-        <span class="font-archivo text-lemon">DIGITAL</span>
-        <span class="font-archivo text-navy drop-shadow-none">FLAGSHIPS.</span>
-      </h1>
-
-      <p class="font-space text-navy font-medium text-base sm:text-xl max-w-2xl mt-8 leading-relaxed pointer-events-auto">
-        We eliminate generic 2D templates and slow agencies. We design, code, and deploy custom <strong class="text-white">3D kinematic interfaces</strong>, <strong class="text-white">spatial WebGL physics</strong>, and <strong class="text-white">high-converting client pipelines</strong> for visionary industry leaders.
-      </p>
-
-      <!-- Action Cluster -->
-      <div class="flex flex-wrap items-center gap-4 mt-10 pointer-events-auto">
-        <a href="#showroom" class="btn-lemon px-8 py-4 rounded-full text-xs sm:text-sm flex items-center gap-3">
-          <span>Explore 3D Showroom</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
-        </a>
-
-        <a href="#palette" class="origin-pill px-7 py-4 rounded-full text-navy font-space font-bold uppercase tracking-wider text-xs sm:text-sm hover:bg-white transition-all flex items-center gap-2">
-          <span>Explore 60/30/10 Science</span>
-          <span class="text-yellow-500 font-bold">&bull;</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Bottom Origin UI Metric Cards -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-white/30 pointer-events-auto font-mono text-xs">
-      <div class="p-4 rounded-2xl origin-pill">
-        <div class="text-navy font-bold text-xl sm:text-2xl font-archivo">72 HOURS</div>
-        <div class="text-[10px] text-slate-600 uppercase tracking-wider mt-1 font-semibold">Sprint Kickoff to Live Launch</div>
-      </div>
-      <div class="p-4 rounded-2xl origin-pill">
-        <div class="text-blue-800 font-bold text-xl sm:text-2xl font-archivo">100% RAW CODE</div>
-        <div class="text-[10px] text-slate-600 uppercase tracking-wider mt-1 font-semibold">Zero Bloated CMS Dependencies</div>
-      </div>
-      <div class="p-4 rounded-2xl origin-pill">
-        <div class="text-navy font-bold text-xl sm:text-2xl font-archivo">3D KINEMATICS</div>
-        <div class="text-[10px] text-slate-600 uppercase tracking-wider mt-1 font-semibold">Real-Time Three.js Shaders</div>
-      </div>
-      <div class="p-4 rounded-2xl origin-pill">
-        <div class="text-emerald-700 font-bold text-xl sm:text-2xl font-archivo">₹0 RISK</div>
-        <div class="text-[10px] text-slate-600 uppercase tracking-wider mt-1 font-semibold">Review Working Build First</div>
-      </div>
-    </div>
-
   </section>
 
   <!-- ======================================================== -->
-  <!-- 2.5 KINETIC MARQUEE TICKER (CHARLES LIU LEMON + NAVY)    -->
+  <!-- 3. THE SHOWROOM (CURATED HIGH-TICKET FLAGSHIPS)          -->
   <!-- ======================================================== -->
-  <div class="w-full py-4 bg-lemon text-navy overflow-hidden select-none font-archivo uppercase text-sm sm:text-base font-extrabold tracking-widest relative z-20 shadow-md">
-    <div class="animate-marquee flex items-center gap-12 whitespace-nowrap">
-      <span>★ THREE.JS 3D SPATIAL ARCHITECTURE</span>
-      <span>★ CHARLES LIU 60/30/10 COLOR SCIENCE</span>
-      <span>★ CASBERRY PARTICLE VORTEX SIMULATION</span>
-      <span>★ 1-CLICK INSTANT WHATSAPP CLIENT PIPELINES</span>
-      <span>★ AWWWARDS CALIBRE KINETIC TYPOGRAPHY</span>
-      <span>★ SUB-380MS GLOBAL EDGE CDN PERFORMANCE</span>
-      <span>★ THREE.JS 3D SPATIAL ARCHITECTURE</span>
-      <span>★ CHARLES LIU 60/30/10 COLOR SCIENCE</span>
-      <span>★ CASBERRY PARTICLE VORTEX SIMULATION</span>
-      <span>★ 1-CLICK INSTANT WHATSAPP CLIENT PIPELINES</span>
+  <section id="showroom" class="py-28 px-6 sm:px-10 relative z-20 border-t border-white/[0.08] bg-[#07090E]">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div>
+          <div class="text-xs font-mono font-bold text-lemon uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-lemon animate-pulse"></span>
+            <span>PRODUCTION SHOWROOM</span>
+          </div>
+          <h2 class="font-archivo text-3xl sm:text-5xl uppercase text-tight text-snow">
+            CURATED DIGITAL <span class="text-lemon">FLAGSHIPS.</span>
+          </h2>
+        </div>
+        <p class="font-sans text-muted max-w-md text-sm sm:text-base font-light leading-relaxed">
+          Each production is engineered with real-time WebGL kinematics, custom shaders, and tactile micro-interactions built to command high-ticket client trust.
+        </p>
+      </div>
+
+      <!-- Production Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Flagship 01: AURA CHRONO OS -->
+        <div class="spotlight-card rounded-3xl p-7 flex flex-col justify-between h-full group">
+          <div>
+            <div class="flex items-center justify-between mb-5 font-mono text-[11px]">
+              <span class="px-3 py-1 rounded-full bg-lemon/10 text-lemon border border-lemon/30 font-bold">
+                01 // 3D HOROLOGY
+              </span>
+              <span class="text-emerald-400 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Live Production
+              </span>
+            </div>
+
+            <!-- Preview Visual Block -->
+            <div class="h-52 rounded-2xl bg-gradient-to-br from-[#0B1528] via-[#080E1C] to-[#04070E] p-6 flex flex-col justify-between text-white mb-6 border border-white/[0.06] relative overflow-hidden group-hover:border-lemon/40 transition-colors">
+              <div class="flex justify-between items-start font-mono text-[10px]">
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-white/10">CALIBRE 01</span>
+                <span class="text-lemon font-bold">28,800 VPH</span>
+              </div>
+              <div>
+                <div class="font-archivo text-2xl uppercase text-snow mb-1">
+                  AURA <span class="text-lemon">CHRONO</span>
+                </div>
+                <p class="text-[11px] font-mono text-glacierlight">
+                  Z-Axis Calibre Explosion &bull; Kinetic Tourbillon
+                </p>
+              </div>
+            </div>
+
+            <h3 class="font-archivo text-xl uppercase text-snow mb-2 group-hover:text-lemon transition-colors">
+              Aura Chrono OS
+            </h3>
+            <p class="font-sans text-muted text-xs leading-relaxed mb-6">
+              Awwwards-calibre luxury chronometer featuring real-time Z-axis mechanical explosion, oscillating tourbillon balance wheel, live Zurich clock synchronization, and Web Audio tick synthesizer.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 mb-8 font-mono text-[10px] text-muted">
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Z-Axis Explosion</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Tourbillon 4Hz</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">PBR Sapphire</span>
+            </div>
+          </div>
+
+          <a href="./chrono-studio/" target="_blank" class="w-full py-3.5 rounded-2xl btn-lemon-primary text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
+            <span>Launch Chrono Experience</span>
+            <span>→</span>
+          </a>
+        </div>
+
+        <!-- Flagship 02: ALTAVAL Powder Mountain OS -->
+        <div class="spotlight-card rounded-3xl p-7 flex flex-col justify-between h-full group">
+          <div>
+            <div class="flex items-center justify-between mb-5 font-mono text-[11px]">
+              <span class="px-3 py-1 rounded-full bg-glacier/10 text-glacierlight border border-glacier/30 font-bold">
+                02 // EXPERIMENTAL 3D
+              </span>
+              <span class="text-emerald-400 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Live Production
+              </span>
+            </div>
+
+            <!-- Preview Visual Block -->
+            <div class="h-52 rounded-2xl bg-gradient-to-br from-[#122A4E] via-[#0E1F3B] to-[#060D1A] p-6 flex flex-col justify-between text-white mb-6 border border-white/[0.06] relative overflow-hidden group-hover:border-glacier/40 transition-colors">
+              <div class="flex justify-between items-start font-mono text-[10px]">
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-white/10">3,200M RESORT</span>
+                <span class="text-lemon font-bold">100% POWDER</span>
+              </div>
+              <div>
+                <div class="font-archivo text-2xl uppercase text-snow mb-1">
+                  ALTAVAL <span class="text-lemon">OS</span>
+                </div>
+                <p class="text-[11px] font-mono text-glacierlight">
+                  Kinematic Gondola &bull; Elevation Topography
+                </p>
+              </div>
+            </div>
+
+            <h3 class="font-archivo text-xl uppercase text-snow mb-2 group-hover:text-glacierlight transition-colors">
+              ALTAVAL Alpine OS
+            </h3>
+            <p class="font-sans text-muted text-xs leading-relaxed mb-6">
+              Ultra-luxury Swiss alpine resort flagship engineered with Three.js snow vortex particle physics, real-time elevation topography mesh, and decoupled GSAP mouse parallax.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 mb-8 font-mono text-[10px] text-muted">
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Three.js Snow Vortex</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Topography Mesh</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">GSAP Scrub</span>
+            </div>
+          </div>
+
+          <a href="./powder-studio/" target="_blank" class="w-full py-3.5 rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.1] text-snow font-archivo text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-2 cursor-pointer">
+            <span>Launch ALTAVAL OS</span>
+            <span>→</span>
+          </a>
+        </div>
+
+        <!-- Flagship 03: FLAGSHIP CRANE OS -->
+        <div class="spotlight-card rounded-3xl p-7 flex flex-col justify-between h-full group">
+          <div>
+            <div class="flex items-center justify-between mb-5 font-mono text-[11px]">
+              <span class="px-3 py-1 rounded-full bg-white/[0.06] text-snow border border-white/[0.1] font-bold">
+                03 // PHYSICAL 3D
+              </span>
+              <span class="text-emerald-400 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Live Production
+              </span>
+            </div>
+
+            <!-- Preview Visual Block -->
+            <div class="h-52 rounded-2xl bg-gradient-to-br from-[#1C2333] via-[#131924] to-[#090D14] p-6 flex flex-col justify-between text-white mb-6 border border-white/[0.06] relative overflow-hidden group-hover:border-white/30 transition-colors">
+              <div class="flex justify-between items-start font-mono text-[10px]">
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-white/10">GANTRY PULLEY</span>
+                <span class="text-lemon font-bold">ZERO OVERLAP</span>
+              </div>
+              <div>
+                <div class="font-archivo text-2xl uppercase text-snow mb-1">
+                  CRANE <span class="text-lemon">OS</span>
+                </div>
+                <p class="text-[11px] font-mono text-muted">
+                  Spaced Containers &bull; Dual-Cable Physics
+                </p>
+              </div>
+            </div>
+
+            <h3 class="font-archivo text-xl uppercase text-snow mb-2 group-hover:text-snow transition-colors">
+              Flagship Crane OS
+            </h3>
+            <p class="font-sans text-muted text-xs leading-relaxed mb-6">
+              Industrial gantry unboxing engine with real-time 3D cargo containers that unbox into interactive project viewports with generous air-gap spacing and overhead rail kinematics.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 mb-8 font-mono text-[10px] text-muted">
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Crane Kinematics</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Container Unboxing</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Studio Lighting</span>
+            </div>
+          </div>
+
+          <a href="./crane-studio/" target="_blank" class="w-full py-3.5 rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.1] text-snow font-archivo text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-2 cursor-pointer">
+            <span>Launch Crane OS</span>
+            <span>→</span>
+          </a>
+        </div>
+
+      </div>
+
     </div>
-  </div>
+  </section>
 
   <!-- ======================================================== -->
-  <!-- 3. INTERACTIVE 3D SHOWROOM (WHITE BACKDROP SECTION)      -->
+  <!-- 4. THIRD-PARTY APP & N8N AUTOMATION PIPELINE             -->
   <!-- ======================================================== -->
-  <section id="showroom" class="py-28 px-6 sm:px-10 relative z-20 bg-snow text-navy">
+  <section id="architecture" class="py-24 px-6 sm:px-10 relative z-20 border-t border-white/[0.08] bg-obsidian">
     <div class="max-w-7xl mx-auto">
       
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>
-          <div class="text-xs font-mono font-bold text-blue-600 uppercase tracking-widest mb-2 flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-lemon border border-navy inline-block"></span>
-            <span>Curated Production Flagships</span>
+          <div class="text-xs font-mono font-bold text-lemon uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span>⚡ SYSTEM ARCHITECTURE</span>
           </div>
-          <h2 class="font-syne font-extrabold text-4xl sm:text-6xl uppercase tracking-tight text-navy">
-            THE SHOWROOM
+          <h2 class="font-archivo text-3xl sm:text-5xl uppercase text-tight text-snow">
+            AUTOMATION &bull; <span class="text-lemon">N8N PIPELINE.</span>
           </h2>
         </div>
-        <p class="font-space text-slate-600 max-w-md text-sm sm:text-base font-medium">
-          Explore production digital flagships engineered with real-time physics, custom shaders, and tactile micro-interactions.
+        <p class="font-sans text-muted max-w-md text-sm font-light leading-relaxed">
+          How we connect 3rd-party visual powerhouses (Spline 3D, Framer, Webflow) into an automated agency pipeline using n8n workflows.
         </p>
       </div>
 
-      <!-- Production Grid (4 Curated Flagships) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- 3-Tier Integration Architecture -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         
-        <!-- Flagship 01: ALTAVAL Powder Mountain OS -->
-        <div class="card-3d-wrapper group">
-          <div class="card-3d bg-white rounded-3xl p-8 border border-slate-200 shadow-xl flex flex-col justify-between h-full relative overflow-hidden transition">
-            
-            <div class="flex items-center justify-between mb-6">
-              <span class="px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 font-mono text-[11px] font-bold uppercase tracking-wider">
-                01 / Awwwards Experimental
-              </span>
-              <span class="flex items-center gap-2 text-xs font-mono text-emerald-600 font-semibold">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                Live Production
-              </span>
-            </div>
-
-            <div class="h-64 rounded-2xl bg-gradient-to-br from-[#5A9FE2] to-[#0C1B48] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner group-hover:scale-[1.01] transition-transform">
-              <div class="flex justify-between items-start">
-                <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/40 backdrop-blur-md">ALTAVAL &bull; 3,200M</span>
-                <span class="font-archivo text-navy text-xs px-3 py-1 rounded-full bg-lemon">60/30/10 PALETTE</span>
-              </div>
-              
-              <div>
-                <div class="font-archivo text-4xl sm:text-5xl tracking-tighter text-white drop-shadow-md leading-none mb-2">
-                  POW<span class="text-lemon">DER</span>
-                </div>
-                <p class="text-xs text-sky-100 font-space font-medium">
-                  Alpine Resort OS &bull; 1,600-Poly Dynamic Topography Lab
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <h3 class="font-syne font-bold text-2xl uppercase text-navy mb-2 group-hover:text-blue-600 transition-colors">
-                ALTAVAL Alpine Resort OS
-              </h3>
-              <p class="font-space text-slate-600 text-xs sm:text-sm mb-6 leading-relaxed">
-                Engineered with Casberry AI WebGL snow particle vortex physics, Charles Liu 60/30/10 visual balance, a 3D kinetic gondola cutting across split-tone typography, and real-time mountain topography elevation mesh.
-              </p>
-
-              <div class="flex flex-wrap gap-2 mb-8 font-mono text-[10px] text-slate-600">
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">WebGL Particle Vortex</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Three.js 1600-Poly Terrain</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Charles Liu 60/30/10</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Origin UI Micro-Haptics</span>
-              </div>
-            </div>
-
-            <a href="./powder-studio/" target="_blank" class="w-full py-4 rounded-2xl btn-lemon text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
-              <span>Launch ALTAVAL OS Experience</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
-
-          </div>
-        </div>
-
-        <!-- Flagship 02: AURA CHRONO OS (3D Exploded Calibre) -->
-        <div class="card-3d-wrapper group">
-          <div class="card-3d bg-white rounded-3xl p-8 border border-slate-200 shadow-xl flex flex-col justify-between h-full relative overflow-hidden transition">
-            
-            <div class="flex items-center justify-between mb-6">
-              <span class="px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 font-mono text-[11px] font-bold uppercase tracking-wider">
-                02 / 3D Exploded Horology OS
-              </span>
-              <span class="flex items-center gap-2 text-xs font-mono text-emerald-600 font-semibold">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                Live Production
-              </span>
-            </div>
-
-            <div class="h-64 rounded-2xl bg-gradient-to-br from-[#0C1B48] via-[#152968] to-[#07102C] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner group-hover:scale-[1.01] transition-transform">
-              <div class="flex justify-between items-start">
-                <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/60 backdrop-blur-md">CALIBRE 01 &bull; EXPLODED 3D</span>
-                <span class="font-archivo text-navy text-xs px-3 py-1 rounded-full bg-lemon">28,800 VPH</span>
-              </div>
-              
-              <div>
-                <div class="font-syne font-extrabold text-3xl sm:text-4xl tracking-tighter text-white drop-shadow-md leading-tight mb-2">
-                  AURA <span class="text-lemon">CHRONO</span>
-                </div>
-                <p class="text-xs text-blue-200 font-space font-medium">
-                  Z-Axis Calibre Explosion &bull; Kinetic Tourbillon Gearing &bull; 60 FPS
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <h3 class="font-syne font-bold text-2xl uppercase text-navy mb-2 group-hover:text-blue-600 transition-colors">
-                AURA CHRONO OS
-              </h3>
-              <p class="font-space text-slate-600 text-xs sm:text-sm mb-6 leading-relaxed">
-                Awwwards-calibre luxury chronometer featuring real-time Z-axis mechanical explosion, oscillating tourbillon balance wheel, live Zurich clock synchronization, and dynamic PBR materials.
-              </p>
-
-              <div class="flex flex-wrap gap-2 mb-8 font-mono text-[10px] text-slate-600">
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Z-Axis Explosion</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Kinematic Tourbillon</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">PBR Sapphire Shader</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">28,800 VPH Audio Synthesizer</span>
-              </div>
-            </div>
-
-            <a href="./chrono-studio/" target="_blank" class="w-full py-4 rounded-2xl btn-lemon text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
-              <span>Launch CHRONO OS Experience</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
-
-          </div>
-        </div>
-
-        <!-- Flagship 03: FLAGSHIP CRANE OS -->
-        <div class="card-3d-wrapper group">
-          <div class="card-3d bg-white rounded-3xl p-8 border border-slate-200 shadow-xl flex flex-col justify-between h-full relative overflow-hidden transition">
-            
-            <div class="flex items-center justify-between mb-6">
-              <span class="px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 font-mono text-[11px] font-bold uppercase tracking-wider">
-                02 / 3D Kinematics & Unboxing
-              </span>
-              <span class="flex items-center gap-2 text-xs font-mono text-emerald-600 font-semibold">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                Live Production
-              </span>
-            </div>
-
-            <div class="h-64 rounded-2xl bg-gradient-to-br from-[#1E40AF] to-[#0F172A] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner group-hover:scale-[1.01] transition-transform">
-              <div class="flex justify-between items-start">
-                <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/40 backdrop-blur-md">CRANE OS &bull; PHYSICAL 3D</span>
-                <span class="font-archivo text-navy text-xs px-3 py-1 rounded-full bg-lemon">ZERO OVERLAP</span>
-              </div>
-              
-              <div>
-                <div class="font-syne font-extrabold text-3xl sm:text-4xl tracking-tighter text-white drop-shadow-md leading-tight mb-2">
-                  UNBOXING <span class="text-lemon">OS</span>
-                </div>
-                <p class="text-xs text-blue-200 font-space font-medium">
-                  Dual-Cable Mechanical Pulley &bull; Harmonious Spaced Containers
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <h3 class="font-syne font-bold text-2xl uppercase text-navy mb-2 group-hover:text-blue-600 transition-colors">
-                FLAGSHIP CRANE OS
-              </h3>
-              <p class="font-space text-slate-600 text-xs sm:text-sm mb-6 leading-relaxed">
-                Built with real-time Three.js spatial kinematics, physical cargo containers that unbox into interactive project viewports, and custom studio lighting with zero container overlap.
-              </p>
-
-              <div class="flex flex-wrap gap-2 mb-8 font-mono text-[10px] text-slate-600">
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Three.js Kinematics</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">3D Mechanical Pulley</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Spaced Container Unboxing</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Studio Camera Orbit</span>
-              </div>
-            </div>
-
-            <a href="./crane-studio/" target="_blank" class="w-full py-4 rounded-2xl bg-navy hover:bg-black text-white font-space font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md">
-              <span>Launch CRANE OS Experience</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
-
-          </div>
-        </div>
-
-        <!-- Flagship 03: KURA ARCHITECTURAL RESIDENCES -->
-        <div class="card-3d-wrapper group">
-          <div class="card-3d bg-white rounded-3xl p-8 border border-slate-200 shadow-xl flex flex-col justify-between h-full relative overflow-hidden transition">
-            
-            <div class="flex items-center justify-between mb-6">
-              <span class="px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 font-mono text-[11px] font-bold uppercase tracking-wider">
-                03 / Spatial Architecture & Interiors
-              </span>
-              <span class="flex items-center gap-2 text-xs font-mono text-emerald-600 font-semibold">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                Live Production
-              </span>
-            </div>
-
-            <div class="h-64 rounded-2xl bg-gradient-to-br from-[#2C1A14] to-[#120A07] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner group-hover:scale-[1.01] transition-transform">
-              <div class="flex justify-between items-start">
-                <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/60">STUDIO ARCHITECTURE</span>
-                <span class="font-mono text-amber-300 text-xs px-3 py-1 rounded-full bg-black/50 border border-amber-300/40">SPATIAL</span>
-              </div>
-              
-              <div>
-                <div class="font-syne font-bold text-3xl sm:text-4xl tracking-wider text-amber-100 mb-2">
-                  FORM & SPACE
-                </div>
-                <p class="text-xs text-amber-200/90 font-space font-medium">
-                  Architectural Curation &bull; Minimalist Spatial Materiality
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <h3 class="font-syne font-bold text-2xl uppercase text-navy mb-2 group-hover:text-blue-600 transition-colors">
-                Studio Form & Space
-              </h3>
-              <p class="font-space text-slate-600 text-xs sm:text-sm mb-6 leading-relaxed">
-                Minimalist architectural and luxury interior design digital flagship featuring spatial materiality swatches, high-end residential case studies, and WhatsApp VIP consultation.
-              </p>
-
-              <div class="flex flex-wrap gap-2 mb-8 font-mono text-[10px] text-slate-600">
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Spatial Materiality</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Architectural Minimal</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Residential Case Studies</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">VIP Client Direct</span>
-              </div>
-            </div>
-
-            <a href="./interior/" target="_blank" class="w-full py-4 rounded-2xl bg-amber-800 hover:bg-amber-900 text-white font-space font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md">
-              <span>Launch Studio Experience</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
-
-          </div>
-        </div>
-
-        <!-- Flagship 04: AURA PRECISION AESTHETIC CLINIC -->
-        <div class="card-3d-wrapper group">
-          <div class="card-3d bg-white rounded-3xl p-8 border border-slate-200 shadow-xl flex flex-col justify-between h-full relative overflow-hidden transition">
-            
-            <div class="flex items-center justify-between mb-6">
-              <span class="px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-mono text-[11px] font-bold uppercase tracking-wider">
-                04 / High-Trust Medical Aesthetics
-              </span>
-              <span class="flex items-center gap-2 text-xs font-mono text-emerald-600 font-semibold">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                Live Production
-              </span>
-            </div>
-
-            <div class="h-64 rounded-2xl bg-gradient-to-br from-[#0F2942] to-[#0A192F] p-6 flex flex-col justify-between text-white mb-6 relative overflow-hidden shadow-inner group-hover:scale-[1.01] transition-transform">
-              <div class="flex justify-between items-start">
-                <span class="font-mono text-xs px-2.5 py-1 rounded bg-black/60">PRECISION CLINICAL</span>
-                <span class="font-mono text-emerald-300 text-xs px-3 py-1 rounded-full bg-black/50 border border-emerald-300/40">30-SEC STEPPER</span>
-              </div>
-              
-              <div>
-                <div class="font-syne font-bold text-3xl sm:text-4xl tracking-wider text-emerald-200 mb-2">
-                  AURA AESTHETICS
-                </div>
-                <p class="text-xs text-emerald-100 font-space font-medium">
-                  High-Trust Clinical Flagship &bull; Surgical & Dermatological Care
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <h3 class="font-syne font-bold text-2xl uppercase text-navy mb-2 group-hover:text-blue-600 transition-colors">
-                Aura Precision Aesthetics
-              </h3>
-              <p class="font-space text-slate-600 text-xs sm:text-sm mb-6 leading-relaxed">
-                High-trust medical aesthetics flagship featuring a 30-second patient appointment scheduling stepper, procedure comparison grids, and verified surgical credentials.
-              </p>
-
-              <div class="flex flex-wrap gap-2 mb-8 font-mono text-[10px] text-slate-600">
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">30-Sec Patient Stepper</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">High-Trust Architecture</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Doctor Credentialing</span>
-                <span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">Direct Conversion</span>
-              </div>
-            </div>
-
-            <a href="./clinic/" target="_blank" class="w-full py-4 rounded-2xl bg-emerald-700 hover:bg-emerald-800 text-white font-space font-bold uppercase tracking-wider text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md">
-              <span>Launch Clinic Experience</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
-
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ======================================================== -->
-  <!-- 4. CHARLES LIU 60/30/10 COLOR SCIENCE SECTION            -->
-  <!-- ======================================================== -->
-  <section id="palette" class="py-24 px-6 sm:px-10 relative z-20 bg-stonecard text-navy border-y border-slate-200">
-    <div class="max-w-7xl mx-auto">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="font-mono text-xs text-blue-600 font-bold uppercase tracking-widest block mb-2">
-          // Design Psychology & Harmony Rules
-        </span>
-        <h2 class="font-syne font-extrabold text-3xl sm:text-5xl uppercase text-navy tracking-tight">
-          THE CHARLES LIU 60 / 30 / 10 SCIENCE
-        </h2>
-        <p class="font-space text-slate-600 text-sm sm:text-base mt-4 font-medium">
-          Why most websites fail: they pick 10 competing colors with zero hierarchy. We engineer interfaces using rigorous color theory that guides client focus with natural visual comfort.
-        </p>
-      </div>
-
-      <!-- Color Swatches Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        
-        <!-- Swatch 1: 60% Glacier Blue -->
-        <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-lg flex flex-col justify-between">
+        <!-- Pipeline Node 1 -->
+        <div class="spotlight-card rounded-3xl p-7 flex flex-col justify-between">
           <div>
-            <div class="h-32 rounded-2xl bg-glacier mb-6 flex items-end p-4 text-white font-archivo text-xl shadow-md">
-              #5A9FE2
+            <div class="w-10 h-10 rounded-xl bg-lemon/10 text-lemon flex items-center justify-center font-archivo font-bold mb-6">
+              01
             </div>
-            <div class="font-mono text-xs text-blue-600 font-bold uppercase mb-1">60% Dominant Atmosphere</div>
-            <h3 class="font-syne font-bold text-2xl uppercase text-navy mb-3">Glacier Blue</h3>
-            <p class="font-space text-slate-600 text-xs sm:text-sm leading-relaxed">
-              Creates expansiveness, calmness, and breathing room. Sets the brand's expansive digital canvas without sensory fatigue.
+            <h3 class="font-archivo text-lg text-snow uppercase mb-2">SPLINE 3D &bull; ASSET ENGINE</h3>
+            <p class="text-xs font-sans text-muted leading-relaxed mb-4">
+              Instead of coding low-poly primitives by hand, we design photorealistic, glass-refracting 3D assets in Spline. Spline exports an instant WebGL runtime embed code (`@splinetool/runtime`) with zero loading friction.
             </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-slate-100 font-mono text-[11px] text-slate-500 font-semibold">
-            Applied to: Hero canvas, skies, ambient particles
-          </div>
+          <div class="font-mono text-[10px] text-lemon font-bold">EXPORT: WEBGL RUNTIME // EMBED API</div>
         </div>
 
-        <!-- Swatch 2: 30% Midnight Navy & Snow White -->
-        <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-lg flex flex-col justify-between">
+        <!-- Pipeline Node 2 -->
+        <div class="spotlight-card rounded-3xl p-7 flex flex-col justify-between">
           <div>
-            <div class="h-32 rounded-2xl bg-navy mb-6 flex items-end p-4 text-white font-archivo text-xl shadow-md">
-              #0C1B48
+            <div class="w-10 h-10 rounded-xl bg-glacier/10 text-glacierlight flex items-center justify-center font-archivo font-bold mb-6">
+              02
             </div>
-            <div class="font-mono text-xs text-slate-600 font-bold uppercase mb-1">30% Structural Frame</div>
-            <h3 class="font-syne font-bold text-2xl uppercase text-navy mb-3">Midnight Navy & Snow</h3>
-            <p class="font-space text-slate-600 text-xs sm:text-sm leading-relaxed">
-              Provides razor-sharp typographic contrast, editorial layout grounding, and architectural structure that builds immediate trust.
+            <h3 class="font-archivo text-lg text-snow uppercase mb-2">N8N WORKFLOW CONTROLLER</h3>
+            <p class="text-xs font-sans text-muted leading-relaxed mb-4">
+              n8n receives client briefs via Webhook, formats the bespoke copy with an LLM agent, injects the customized 3D scene embed URL, commits to GitHub repository, and triggers an instant Vercel/GitHub Pages deployment.
             </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-slate-100 font-mono text-[11px] text-slate-500 font-semibold">
-            Applied to: Headlines, body copy, card frames
-          </div>
+          <div class="font-mono text-[10px] text-glacierlight font-bold">ROUTER: WEBHOOK &rarr; LLM &rarr; GITHUB PUSH</div>
         </div>
 
-        <!-- Swatch 3: 10% Electric Lemon -->
-        <div class="bg-white p-8 rounded-3xl border border-lemon shadow-lg flex flex-col justify-between">
+        <!-- Pipeline Node 3 -->
+        <div class="spotlight-card rounded-3xl p-7 flex flex-col justify-between">
           <div>
-            <div class="h-32 rounded-2xl bg-lemon mb-6 flex items-end p-4 text-navy font-archivo text-xl shadow-md">
-              #F2EA1E
+            <div class="w-10 h-10 rounded-xl bg-white/[0.08] text-snow flex items-center justify-center font-archivo font-bold mb-6">
+              03
             </div>
-            <div class="font-mono text-xs text-yellow-600 font-bold uppercase mb-1">10% High-Voltage Focal Point</div>
-            <h3 class="font-syne font-bold text-2xl uppercase text-navy mb-3">Electric Lemon</h3>
-            <p class="font-space text-slate-600 text-xs sm:text-sm leading-relaxed">
-              The high-voltage conversion catalyst. Sits at maximum retinal salience so clients intuitively know where to look and click.
+            <h3 class="font-archivo text-lg text-snow uppercase mb-2">CLIENT DISPATCH & CRM</h3>
+            <p class="text-xs font-sans text-muted leading-relaxed mb-4">
+              Once deployed, n8n uses a headless browser node to capture full-page high-definition preview screenshots, uploads them to Google Drive/Notion CRM, and dispatches a personalized preview link via WhatsApp/Email.
             </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-slate-100 font-mono text-[11px] text-slate-500 font-semibold">
-            Applied to: Conversion buttons, primary CTAs, active status
-          </div>
+          <div class="font-mono text-[10px] text-snow font-bold">DELIVERY: SCREENSHOT &rarr; WHATSAPP API</div>
         </div>
 
       </div>
@@ -657,474 +550,248 @@
   </section>
 
   <!-- ======================================================== -->
-  <!-- 5. THE STANDARD (WHY TYPICAL AGENCIES FAIL)              -->
+  <!-- 5. RAPID SPRINT BOOKING MODAL / TERMINAL                  -->
   <!-- ======================================================== -->
-  <section id="standard" class="py-24 px-6 sm:px-10 relative z-20 bg-snow text-navy">
-    <div class="max-w-7xl mx-auto">
+  <section id="contact" class="py-24 px-6 sm:px-10 relative z-20 border-t border-white/[0.08] bg-[#07080C]">
+    <div class="max-w-4xl mx-auto">
       
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="font-mono text-xs text-red-600 font-bold uppercase tracking-widest block mb-2">
-          // Architectural Benchmark
-        </span>
-        <h2 class="font-syne font-extrabold text-3xl sm:text-5xl uppercase text-navy tracking-tight">
-          WHY 95% OF AGENCY WEBSITES FAIL
-        </h2>
-        <p class="font-space text-slate-600 text-sm sm:text-base mt-4 font-medium">
-          Most agencies sell bloated WordPress themes with 40 active plugins, fake drop shadows, and passive forms that high-net-worth clients immediately bounce from.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-        
-        <!-- Legacy Agency Way -->
-        <div class="p-8 rounded-3xl bg-red-50/60 border border-red-200 relative">
-          <div class="flex items-center gap-3 mb-6">
-            <span class="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-sm">✕</span>
-            <h3 class="font-syne font-bold text-xl text-red-900 uppercase">The Generic Agency Way</h3>
+      <div class="border-beam-box rounded-3xl p-[1px] shadow-2xl">
+        <div class="beam-inner p-8 sm:p-12 rounded-3xl text-center">
+          
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lemon/10 text-lemon border border-lemon/30 font-mono text-xs font-bold mb-6">
+            <span class="w-2 h-2 rounded-full bg-lemon"></span>
+            <span>72-HOUR FLAGSHIP SPRINT</span>
           </div>
-          <ul class="space-y-4 font-space text-xs sm:text-sm text-slate-700 font-medium">
-            <li class="flex items-start gap-3">
-              <span class="text-red-500 font-bold">•</span>
-              <span><strong>Generic 2D Tailwind / Bootstrap Grids:</strong> Flat box layouts with zero kinetic identity or spatial depth that look like every other template.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-red-500 font-bold">•</span>
-              <span><strong>Bloated 4-8s Mobile Load Times:</strong> Heavy plugin chains that cause over 55% of paid ad visitors to bounce before the first screen loads.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-red-500 font-bold">•</span>
-              <span><strong>Passive "Submit" Form Black Holes:</strong> High-ticket clients never want to fill out 8-field forms to wait 48 hours for an email reply.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-red-500 font-bold">•</span>
-              <span><strong>6 to 8 Weeks of Wireframe Excuses:</strong> Endless bureaucratic delays while your competitors capture market momentum.</span>
-            </li>
-          </ul>
-        </div>
 
-        <!-- The Flagship Standard -->
-        <div class="p-8 rounded-3xl bg-white border-2 border-navy shadow-xl relative">
-          <div class="flex items-center gap-3 mb-6">
-            <span class="w-8 h-8 rounded-full bg-lemon text-navy flex items-center justify-center font-bold text-sm">✓</span>
-            <h3 class="font-syne font-bold text-xl text-navy uppercase">The Flagship Systems Standard</h3>
+          <h2 class="font-archivo text-3xl sm:text-5xl uppercase text-tight text-snow mb-4">
+            UPGRADE YOUR DIGITAL <span class="text-lemon">PRESENCE.</span>
+          </h2>
+          <p class="font-sans text-muted max-w-xl mx-auto text-sm leading-relaxed mb-8">
+            Deploy an Awwwards-calibre 3D digital flagship engineered to convert high-ticket clientele. Direct WhatsApp engineering consultation with our lead technical architect.
+          </p>
+
+          <a href="https://wa.me/918796016600?text=Hello%20Flagship%20Systems%2C%20I%20am%20interested%20in%20commissioning%20a%20Dark%20Luxury%203D%20Digital%20Flagship." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl btn-lemon-primary text-sm shadow-xl">
+            <span>START WHATSAPP SPRINT</span>
+            <span>→</span>
+          </a>
+
+          <div class="mt-8 font-mono text-[11px] text-muted">
+            GUARANTEE: 60 FPS OPTIMIZATION &bull; ZERO CODE PENETRATION &bull; FULL COMMERCIAL IP OWNERSHIP
           </div>
-          <ul class="space-y-4 font-space text-xs sm:text-sm text-slate-800 font-medium">
-            <li class="flex items-start gap-3">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>Awwwards-Calibre 3D Kinematics:</strong> Real-time WebGL geometry, particle vortex simulations, and kinetic typography that command instant authority.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>Sub-380ms Global Edge CDN Delivery:</strong> Zero-bloat custom code engineered directly on modern browser APIs for instant rendering.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>1-Click Instant WhatsApp Conversion:</strong> Direct pipeline routing verified high-intent leads straight to your executive desk with pre-filled telemetry.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>72-Hour Rapid Sprint Guarantee:</strong> We move at venture speed. Complete custom digital flagship live in 72 hours, review build first.</span>
-            </li>
-          </ul>
-        </div>
 
+        </div>
       </div>
 
     </div>
   </section>
 
   <!-- ======================================================== -->
-  <!-- 6. HIGH-TICKET 72-HOUR SPRINT TERMINAL (CONVERSION)      -->
+  <!-- 6. FOOTER                                                -->
   <!-- ======================================================== -->
-  <section id="sprint" class="py-24 px-6 sm:px-10 relative z-20 bg-glacier text-navy">
-    <div class="origin-hud rounded-3xl p-8 sm:p-14 border border-white max-w-4xl mx-auto shadow-2xl">
-      
-      <div class="max-w-3xl mx-auto text-center mb-12">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lemon text-navy font-mono text-[11px] font-bold uppercase tracking-wider mb-4 shadow-sm">
-          ★ Limited Sprint Slots: 2 This Month
-        </div>
-        <h2 class="font-syne font-extrabold text-3xl sm:text-5xl uppercase text-navy tracking-tight leading-tight">
-          CLAIM YOUR 72-HOUR DIGITAL FLAGSHIP SPRINT
-        </h2>
-        <p class="font-space text-slate-700 text-xs sm:text-base mt-4 font-medium">
-          Tell us about your brand. We will engineer a custom working 3D digital flagship prototype in 72 hours with ₹0 upfront commitment. Review the live build before you invest.
-        </p>
-      </div>
-
-      <!-- Interactive Scope Configuration -->
-      <div class="max-w-2xl mx-auto space-y-6">
-        
-        <div>
-          <label class="font-mono text-xs text-navy uppercase tracking-wider block mb-2 font-bold">Select Your Industry Standard:</label>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 font-space text-xs">
-            <button type="button" onclick="selectTier(this, 'Aesthetic Medicine & Surgical Clinics')" class="tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold border-navy bg-yellow-50 text-navy">
-              Medical Clinic
-            </button>
-            <button type="button" onclick="selectTier(this, 'Haute Luxury & Bespoke Horology')" class="tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold text-slate-700">
-              Haute Luxury
-            </button>
-            <button type="button" onclick="selectTier(this, 'High-Ticket Real Estate & Architecture')" class="tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold text-slate-700">
-              Prime Estates
-            </button>
-            <button type="button" onclick="selectTier(this, 'Alpine Resorts & Adventure')" class="tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold text-slate-700">
-              Alpine Resorts
-            </button>
-            <button type="button" onclick="selectTier(this, 'Elite Athletics & Performance')" class="tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold text-slate-700">
-              Elite Athletics
-            </button>
-            <button type="button" onclick="selectTier(this, 'Bespoke Studio & Agency')" class="tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold text-slate-700">
-              Bespoke Studio
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <label class="font-mono text-xs text-navy uppercase tracking-wider block mb-2 font-bold">Your Business Name / Brand Domain:</label>
-          <input type="text" id="brandInput" placeholder="e.g., Aurum Medical Aesthetics / www.aurum.clinic" class="w-full px-5 py-3.5 rounded-xl bg-white border border-slate-300 text-navy placeholder-slate-400 font-space text-sm focus:outline-none focus:border-navy transition shadow-sm">
-        </div>
-
-        <!-- 1-Click WhatsApp Kickoff -->
-        <button onclick="launchWhatsAppSprint()" class="w-full py-4.5 rounded-2xl btn-lemon text-sm flex items-center justify-center gap-3 cursor-pointer mt-4">
-          <svg class="w-5 h-5 text-navy" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/></svg>
-          <span>Kick Off 72-Hour Sprint On WhatsApp</span>
-          <span class="font-mono text-sm">&rarr;</span>
-        </button>
-
-        <div class="flex items-center justify-center gap-6 font-mono text-[11px] text-slate-600 font-semibold pt-2">
-          <span>✓ ₹0 Upfront Commitment</span>
-          <span>✓ Review Working Build First</span>
-          <span>✓ 100% Confidential</span>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ======================================================== -->
-  <!-- 7. EDITORIAL FOOTER (MIDNIGHT NAVY)                      -->
-  <!-- ======================================================== -->
-  <footer class="py-14 px-6 sm:px-10 bg-navy text-slate-300 font-mono text-xs relative z-20">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-      
+  <footer class="py-12 px-6 sm:px-10 border-t border-white/[0.08] bg-obsidian text-muted font-mono text-xs">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-3">
-        <span class="font-syne font-extrabold text-lg text-white">FLAGSHIP<span class="text-lemon">.</span>OS</span>
-        <span class="text-slate-500">&bull;</span>
-        <span class="text-slate-300">STUDIO FOR CREATIVE ENGINEERING</span>
+        <span class="w-2 h-2 rounded-full bg-lemon"></span>
+        <span class="text-snow font-bold">FLAGSHIP SYSTEMS</span>
+        <span>// CREATIVE ENGINEERING</span>
       </div>
-
-      <div class="text-center md:text-right text-slate-400 font-space text-[11px]">
-        <span>© 2026 Flagship Systems &bull; 60/30/10 Color Harmony &bull; Edge CDN Enabled</span>
+      <div>
+        <span>THE OBSIDIAN STANDARD &bull; 1PX BORDER BEAMS &bull; 60 FPS WEBGL</span>
       </div>
-
+      <div>
+        <a href="#showroom" class="text-lemon hover:underline">RETURN TO TOP ↑</a>
+      </div>
     </div>
   </footer>
 
   <!-- ======================================================== -->
-  <!-- 8. THREE.JS 3D SCENE & WEB AUDIO SYNTHESIZER SCRIPT      -->
+  <!-- 7. THREE.JS LUXURY DARK PRISM & SPOTLIGHT CONTROLLER    -->
   <!-- ======================================================== -->
   <script>
-    let scene, camera, renderer, coreMesh, wireMesh, particleSystem;
-    let clock = new THREE.Clock();
-    let mouseX = 0, mouseY = 0;
-    let targetX = 0, targetY = 0;
-    let currentSpeed = 1.0;
-    let currentShaderMode = 0;
+    // ----------------------------------------------------
+    // MOUSE SPOTLIGHT BORDER TRACKER
+    // ----------------------------------------------------
+    document.querySelectorAll('.spotlight-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
 
-    const canvas = document.getElementById('webglCanvas');
+    // ----------------------------------------------------
+    // THREE.JS DARK LUXURY SPATIAL PRISM CORE
+    // ----------------------------------------------------
+    let scene, camera, renderer, crystalMesh, wireframeMesh, pointLight;
+    let targetRotationX = 0;
+    let targetRotationY = 0;
+    let isDragging = false;
+    let prevMousePos = { x: 0, y: 0 };
 
-    function initThree() {
+    function initHero3D() {
+      const container = document.getElementById('hero3dContainer');
+      if (!container) return;
+
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
       scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x5A9FE2, 0.025);
+      camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+      camera.position.set(0, 0, 7.5);
 
-      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-      camera.position.z = 24;
-
-      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+      renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.3;
+      container.appendChild(renderer.domElement);
 
-      // 1. Core Geometric Polyhedron (Crisp White / Silver Prismatic Core)
-      const coreGeo = new THREE.IcosahedronGeometry(5.2, 1);
-      const coreMat = new THREE.MeshStandardMaterial({
-        color: 0xFFFFFF,
-        roughness: 0.1,
-        metalness: 0.3,
+      // Studio Lighting for Dark Glass & Metal
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+      scene.add(ambientLight);
+
+      const keyLight = new THREE.DirectionalLight(0xF2EA1E, 2.4);
+      keyLight.position.set(5, 5, 5);
+      scene.add(keyLight);
+
+      const fillLight = new THREE.DirectionalLight(0x5A9FE2, 2.0);
+      fillLight.position.set(-5, -3, 3);
+      scene.add(fillLight);
+
+      pointLight = new THREE.PointLight(0xF2EA1E, 1.5, 10);
+      pointLight.position.set(0, 0, 0);
+      scene.add(pointLight);
+
+      // Geometry: Precision Icosahedron Prism
+      const geometry = new THREE.IcosahedronGeometry(2.4, 0);
+
+      // Glass Material (Reflective Obsidian)
+      const material = new THREE.MeshPhysicalMaterial({
+        color: 0x0C1220,
+        emissive: 0x050810,
+        metalness: 0.85,
+        roughness: 0.12,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.08,
+        reflectivity: 0.95,
         transparent: true,
         opacity: 0.88,
       });
-      coreMesh = new THREE.Mesh(coreGeo, coreMat);
-      scene.add(coreMesh);
 
-      // 2. Outer Wireframe Cage (Deep Midnight Navy with Lemon Vertices)
-      const wireGeo = new THREE.IcosahedronGeometry(6.6, 2);
-      const wireMat = new THREE.MeshStandardMaterial({
-        color: 0x0C1B48,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.65,
+      crystalMesh = new THREE.Mesh(geometry, material);
+      scene.add(crystalMesh);
+
+      // Wireframe Accent Cage (Electric Lemon Edge Highlights)
+      const wireGeo = new THREE.WireframeGeometry(geometry);
+      const wireMat = new THREE.LineBasicMaterial({ color: 0xF2EA1E, linewidth: 2, transparent: true, opacity: 0.6 });
+      wireframeMesh = new THREE.LineSegments(wireGeo, wireMat);
+      crystalMesh.add(wireframeMesh);
+
+      // Mouse drag controls
+      container.addEventListener('mousedown', e => {
+        isDragging = true;
+        prevMousePos = { x: e.clientX, y: e.clientY };
       });
-      wireMesh = new THREE.Mesh(wireGeo, wireMat);
-      scene.add(wireMesh);
-
-      // 3. Ambient Atmospheric Snow Particles (1,200 White & Lemon Particles)
-      const particleCount = 1200;
-      const particleGeo = new THREE.BufferGeometry();
-      const positions = new Float32Array(particleCount * 3);
-      const colors = new Float32Array(particleCount * 3);
-
-      const colorWhite = new THREE.Color(0xFFFFFF);
-      const colorLemon = new THREE.Color(0xF2EA1E);
-
-      for (let i = 0; i < particleCount * 3; i += 3) {
-        positions[i] = (Math.random() - 0.5) * 60;
-        positions[i + 1] = (Math.random() - 0.5) * 60;
-        positions[i + 2] = (Math.random() - 0.5) * 45;
-
-        const mixedColor = Math.random() > 0.85 ? colorLemon : colorWhite;
-        colors[i] = mixedColor.r;
-        colors[i + 1] = mixedColor.g;
-        colors[i + 2] = mixedColor.b;
-      }
-
-      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-      const particleMat = new THREE.PointsMaterial({
-        size: 0.18,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.85,
-        blending: THREE.NormalBlending
-      });
-
-      particleSystem = new THREE.Points(particleGeo, particleMat);
-      scene.add(particleSystem);
-
-      // Lighting
-      const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.85);
-      scene.add(ambientLight);
-
-      const dirLight1 = new THREE.DirectionalLight(0xF2EA1E, 1.2);
-      dirLight1.position.set(15, 20, 15);
-      scene.add(dirLight1);
-
-      const dirLight2 = new THREE.DirectionalLight(0xFFFFFF, 1.0);
-      dirLight2.position.set(-15, -15, 10);
-      scene.add(dirLight2);
-
-      window.addEventListener('mousemove', onMouseMove);
-      window.addEventListener('resize', onWindowResize);
-    }
-
-    function onMouseMove(e) {
-      mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-      mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-    }
-
-    function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    // FPS Meter
-    let lastFrameTime = performance.now();
-    let frameCount = 0;
-    const fpsCounter = document.getElementById('fpsCounter');
-
-    function animateThree() {
-      requestAnimationFrame(animateThree);
-      const delta = clock.getDelta();
-      const elapsedTime = clock.getElapsedTime();
-
-      frameCount++;
-      const now = performance.now();
-      if (now - lastFrameTime >= 500) {
-        if (fpsCounter) fpsCounter.textContent = Math.round((frameCount * 1000) / (now - lastFrameTime));
-        frameCount = 0;
-        lastFrameTime = now;
-      }
-
-      targetX = mouseX * 2.2;
-      targetY = mouseY * 1.8;
-      camera.position.x += (targetX - camera.position.x) * 0.05;
-      camera.position.y += (targetY - camera.position.y) * 0.05;
-      camera.lookAt(0, 0, 0);
-
-      const rotSpeed = delta * currentSpeed;
-      if (coreMesh) {
-        coreMesh.rotation.x += rotSpeed * 0.25;
-        coreMesh.rotation.y += rotSpeed * 0.40;
-      }
-      if (wireMesh) {
-        wireMesh.rotation.x -= rotSpeed * 0.20;
-        wireMesh.rotation.y -= rotSpeed * 0.35;
-      }
-
-      if (particleSystem) {
-        particleSystem.rotation.y = elapsedTime * 0.04 * currentSpeed;
-        const positions = particleSystem.geometry.attributes.position.array;
-        for (let i = 0; i < positions.length; i += 3) {
-          positions[i + 1] += Math.sin(elapsedTime * 1.2 + positions[i]) * 0.012;
+      window.addEventListener('mouseup', () => isDragging = false);
+      window.addEventListener('mousemove', e => {
+        if (!isDragging) {
+          // Subtle mouse parallax
+          const rect = container.getBoundingClientRect();
+          const normX = (e.clientX - rect.left) / rect.width - 0.5;
+          const normY = (e.clientY - rect.top) / rect.height - 0.5;
+          targetRotationY = normX * 1.5;
+          targetRotationX = normY * 1.5;
+          return;
         }
-        particleSystem.geometry.attributes.position.needsUpdate = true;
-      }
-
-      renderer.render(scene, camera);
-    }
-
-    initThree();
-    animateThree();
-
-    function setShaderMode(mode) {
-      currentShaderMode = mode;
-      const b0 = document.getElementById('modeBtn0');
-      const b1 = document.getElementById('modeBtn1');
-      const b2 = document.getElementById('modeBtn2');
-
-      [b0, b1, b2].forEach((b, idx) => {
-        if (!b) return;
-        if (idx === mode) {
-          b.className = 'px-3 py-1 rounded-full bg-navy text-white font-bold text-[10px] uppercase transition cursor-pointer';
-        } else {
-          b.className = 'px-3 py-1 rounded-full text-navy hover:bg-slate-100 font-bold text-[10px] uppercase transition cursor-pointer';
-        }
+        const deltaX = e.clientX - prevMousePos.x;
+        const deltaY = e.clientY - prevMousePos.y;
+        targetRotationY += deltaX * 0.01;
+        targetRotationX += deltaY * 0.01;
+        prevMousePos = { x: e.clientX, y: e.clientY };
       });
 
-      if (mode === 0) {
-        if (coreMesh) coreMesh.visible = true;
-        if (wireMesh) wireMesh.visible = true;
-        if (particleSystem) particleSystem.material.size = 0.18;
-      } else if (mode === 1) {
-        if (coreMesh) coreMesh.visible = false;
-        if (wireMesh) wireMesh.visible = true;
-        if (particleSystem) particleSystem.material.size = 0.12;
-      } else if (mode === 2) {
-        if (coreMesh) coreMesh.visible = false;
-        if (wireMesh) wireMesh.visible = true;
-        if (particleSystem) particleSystem.material.size = 0.30;
+      window.addEventListener('resize', () => {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      });
+
+      let lastTime = performance.now();
+      let frames = 0;
+
+      function renderLoop(time) {
+        requestAnimationFrame(renderLoop);
+
+        // Autonomous kinetic tumble
+        if (!isDragging) {
+          crystalMesh.rotation.y += 0.006;
+          crystalMesh.rotation.x += 0.003;
+        }
+
+        // Damped inertia
+        crystalMesh.rotation.y += (targetRotationY - crystalMesh.rotation.y) * 0.05;
+        crystalMesh.rotation.x += (targetRotationX - crystalMesh.rotation.x) * 0.05;
+
+        // FPS meter
+        frames++;
+        if (time - lastTime >= 1000) {
+          const fps = Math.round((frames * 1000) / (time - lastTime));
+          const fpsEl = document.getElementById('navFps');
+          if (fpsEl) fpsEl.textContent = fps;
+          frames = 0;
+          lastTime = time;
+        }
+
+        renderer.render(scene, camera);
       }
-      synthesizeTick();
+      renderLoop(performance.now());
     }
 
-    // Web Audio Synthesizer
+    // ----------------------------------------------------
+    // AMBIENT ANALOG SYNTHESIZER (WEB AUDIO API)
+    // ----------------------------------------------------
     let audioCtx = null;
+    let osc1 = null;
+    let osc2 = null;
     let isAudioPlaying = false;
-    let osc1 = null, osc2 = null, masterGain = null;
 
-    function toggleAudioEngine() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
+    function toggleAmbientAudio() {
+      if (isAudioPlaying) {
+        if (osc1) { osc1.stop(); osc1.disconnect(); }
+        if (osc2) { osc2.stop(); osc2.disconnect(); }
+        isAudioPlaying = false;
+        document.getElementById('audioIcon').textContent = '🔇';
+        document.getElementById('audioText').textContent = 'AUDIO: OFF';
+      } else {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
 
-      const dot = document.getElementById('audioStatusDot');
-      const txt = document.getElementById('audioStatusText');
-
-      if (!isAudioPlaying) {
-        masterGain = audioCtx.createGain();
-        masterGain.gain.setValueAtTime(0.01, audioCtx.currentTime);
-        masterGain.gain.exponentialRampToValueAtTime(0.06, audioCtx.currentTime + 1.5);
+        const masterGain = audioCtx.createGain();
+        masterGain.gain.setValueAtTime(0.035, audioCtx.currentTime);
         masterGain.connect(audioCtx.destination);
 
+        // Low harmonic warm ambient drone
         osc1 = audioCtx.createOscillator();
         osc1.type = 'sine';
-        osc1.frequency.setValueAtTime(65.41, audioCtx.currentTime);
+        osc1.frequency.setValueAtTime(55, audioCtx.currentTime); // A1 note
+        osc1.connect(masterGain);
+        osc1.start();
 
         osc2 = audioCtx.createOscillator();
         osc2.type = 'triangle';
-        osc2.frequency.setValueAtTime(130.81, audioCtx.currentTime);
-
-        const filter = audioCtx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(360, audioCtx.currentTime);
-
-        osc1.connect(filter);
-        osc2.connect(filter);
-        filter.connect(masterGain);
-
-        osc1.start();
+        osc2.frequency.setValueAtTime(110, audioCtx.currentTime); // A2 note
+        osc2.connect(masterGain);
         osc2.start();
 
         isAudioPlaying = true;
-        if (dot) dot.className = 'w-2 h-2 rounded-full bg-lemon animate-ping';
-        if (txt) txt.textContent = 'AUDIO: ON';
-      } else {
-        if (masterGain) {
-          masterGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.6);
-          setTimeout(() => {
-            if (osc1) osc1.stop();
-            if (osc2) osc2.stop();
-          }, 600);
-        }
-        isAudioPlaying = false;
-        if (dot) dot.className = 'w-2 h-2 rounded-full bg-slate-400';
-        if (txt) txt.textContent = 'AUDIO: OFF';
+        document.getElementById('audioIcon').textContent = '🔊';
+        document.getElementById('audioText').textContent = 'AUDIO: 55Hz ON';
       }
     }
 
-    function synthesizeTick() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-
-      try {
-        const tickOsc = audioCtx.createOscillator();
-        const tickGain = audioCtx.createGain();
-        tickOsc.type = 'sine';
-        tickOsc.frequency.setValueAtTime(750, audioCtx.currentTime);
-        tickOsc.frequency.exponentialRampToValueAtTime(250, audioCtx.currentTime + 0.04);
-
-        tickGain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-        tickGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
-
-        tickOsc.connect(tickGain);
-        tickGain.connect(audioCtx.destination);
-
-        tickOsc.start();
-        tickOsc.stop(audioCtx.currentTime + 0.05);
-      } catch (e) {}
-    }
-
-    let selectedIndustry = 'Aesthetic Medicine & Surgical Clinics';
-
-    function selectTier(btn, industry) {
-      selectedIndustry = industry;
-      document.querySelectorAll('.tier-btn').forEach(b => {
-        b.className = 'tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold text-slate-700';
-      });
-      btn.className = 'tier-btn px-4 py-3 rounded-xl bg-white border border-slate-300 text-left hover:border-navy transition cursor-pointer font-bold border-navy bg-yellow-50 text-navy';
-      synthesizeTick();
-    }
-
-    function launchWhatsAppSprint() {
-      const brandInput = document.getElementById('brandInput').value.trim() || 'Visionary Client';
-      const text = encodeURIComponent(
-        `Hello Flagship Systems,\n\nI want to claim a 72-Hour Digital Flagship Sprint.\n\n` +
-        `• Brand / Domain: ${brandInput}\n` +
-        `• Industry Standard: ${selectedIndustry}\n` +
-        `• Design Standard: Charles Liu 60/30/10 Harmony & 3D Kinematics\n\n` +
-        `Please share the kickoff protocol and timeline.`
-      );
-      window.open(`https://wa.me/918882967595?text=${text}`, '_blank');
-    }
-
-    document.querySelectorAll('.card-3d-wrapper').forEach(wrapper => {
-      const card = wrapper.querySelector('.card-3d');
-      wrapper.addEventListener('mousemove', (e) => {
-        const rect = wrapper.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -6;
-        const rotateY = ((x - centerX) / centerX) * 6;
-        card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.015, 1.015, 1.015)`;
-      });
-
-      wrapper.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-      });
-    });
+    window.addEventListener('DOMContentLoaded', initHero3D);
   </script>
-
 </body>
 </html>
