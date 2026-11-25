@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FLAGSHIP SYSTEMS | Creative Engineering & Kinetic Digital Flagships</title>
-  <meta name="description" content="Obsidian dark luxury 3D digital flagships, WebGL spatial interfaces, and high-converting client pipelines engineered with hairline border beams and micro-haptics.">
+  <title>FLAGSHIP SYSTEMS | Kinetic Digital Flagships & Creative Engineering</title>
+  <meta name="description" content="Next-generation digital flagships engineered with Motion Primitives, Kokonut UI bento grids, Anime.js kinetic kinematics, and the Charles Liu 60/30/10 palette.">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23060709'/><polygon points='50,16 84,36 84,74 50,92 16,74 16,36' fill='none' stroke='%23F2EA1E' stroke-width='6'/><circle cx='50' cy='52' r='10' fill='%235A9FE2'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230C1B48'/><polygon points='50,16 84,36 84,74 50,92 16,74 16,36' fill='none' stroke='%23F2EA1E' stroke-width='6'/><circle cx='50' cy='52' r='10' fill='%235A9FE2'/></svg>">
 
   <!-- Elite Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,17 +21,19 @@
       theme: {
         extend: {
           colors: {
-            obsidian: '#060709',
-            obsidiansurface: '#0B0E14',
-            obsidiancard: '#10141E',
-            obsidianborder: 'rgba(255, 255, 255, 0.08)',
             glacier: '#5A9FE2',
             glacierlight: '#8EBAEB',
+            glacierdark: '#3578BD',
+            glacierice: '#E8F2FC',
             navy: '#0C1B48',
+            navylight: '#152A68',
+            navydark: '#07102C',
+            navysurface: '#0E1E4F',
             lemon: '#F2EA1E',
             lemonhover: '#E5DD18',
             snow: '#FFFFFF',
-            muted: '#8E96A4',
+            snowtint: '#F4F8FC',
+            muted: '#8CA3CA',
           },
           fontFamily: {
             syne: ['Syne', 'sans-serif'],
@@ -45,161 +47,185 @@
     };
   </script>
 
-  <!-- Three.js + GSAP + ScrollTrigger -->
+  <!-- Anime.js & Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
-    /* Dark Luxury Obsidian Global Tokens */
+    /* Charles Liu 60/30/10 Harmony:
+       60% Glacier Blue Atmosphere (#5A9FE2 / #0C1B48 Deep Alpine Gradients)
+       30% Midnight Navy & Crisp White Architecture
+       10% Electric Lemon (#F2EA1E) Focal Triggers
+    */
     body {
-      background-color: #060709;
+      background-color: #07102C;
       color: #FFFFFF;
       overflow-x: hidden;
       font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     }
 
-    /* Custom Luxury Scrollbar */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: #060709; }
-    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }
+    /* Custom Alpine Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #07102C; }
+    ::-webkit-scrollbar-thumb { background: #5A9FE2; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #F2EA1E; }
 
-    /* 1px Hairline Spotlight Cards */
-    .spotlight-card {
+    /* Kokonut UI Bento Card & Frosted Surface */
+    .kokonut-card {
       position: relative;
-      background: rgba(11, 14, 20, 0.82);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      background: rgba(14, 30, 79, 0.65);
+      border: 1px solid rgba(90, 159, 226, 0.24);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       overflow: hidden;
-      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .spotlight-card:hover {
-      border-color: rgba(255, 255, 255, 0.22);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+    .kokonut-card:hover {
+      border-color: rgba(242, 234, 30, 0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px -10px rgba(7, 16, 44, 0.8), 0 0 25px rgba(90, 159, 226, 0.2);
     }
-    .spotlight-card::before {
+
+    /* Motion Primitives Spotlight Effect */
+    .kokonut-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.09), transparent 45%);
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(242, 234, 30, 0.08), transparent 45%);
       pointer-events: none;
       opacity: 0;
-      transition: opacity 0.35s ease;
+      transition: opacity 0.4s ease;
       z-index: 1;
     }
-    .spotlight-card:hover::before {
+    .kokonut-card:hover::before {
       opacity: 1;
     }
 
-    /* Animated 1px Border Beam */
-    .border-beam-box {
-      position: relative;
-      overflow: hidden;
-    }
-    .border-beam-box::after {
-      content: '';
+    /* Kokonut UI Corner L-Accents */
+    .corner-accent {
       position: absolute;
-      inset: -2px;
-      border-radius: inherit;
-      background: conic-gradient(from 0deg, transparent 0 340deg, #F2EA1E 360deg);
-      animation: rotate-beam 4s linear infinite;
-      z-index: 0;
-      opacity: 0.8;
+      width: 8px;
+      height: 8px;
+      border-color: #F2EA1E;
+      pointer-events: none;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
     }
-    @keyframes rotate-beam {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .kokonut-card:hover .corner-accent {
+      opacity: 1;
     }
-    .beam-inner {
-      position: relative;
-      z-index: 1;
-      background: #0B0E14;
-      border-radius: inherit;
-    }
+    .corner-tl { top: 0; left: 0; border-top: 2px solid; border-left: 2px solid; }
+    .corner-tr { top: 0; right: 0; border-top: 2px solid; border-right: 2px solid; }
+    .corner-bl { bottom: 0; left: 0; border-bottom: 2px solid; border-left: 2px solid; }
+    .corner-br { bottom: 0; right: 0; border-bottom: 2px solid; border-right: 2px solid; }
 
-    /* Tactile Lemon Action Button */
-    .btn-lemon-primary {
+    /* Motion Primitives Animated Shimmer Button */
+    .btn-shimmer-lemon {
+      position: relative;
       background: #F2EA1E;
-      color: #060709;
+      color: #07102C;
       font-family: 'Archivo Black', sans-serif;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 0 25px rgba(242, 234, 30, 0.25);
+      letter-spacing: 0.04em;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(242, 234, 30, 0.35);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .btn-lemon-primary:hover {
+    .btn-shimmer-lemon:hover {
       background: #E5DD18;
-      box-shadow: 0 0 35px rgba(242, 234, 30, 0.45);
+      box-shadow: 0 0 35px rgba(242, 234, 30, 0.6);
       transform: translateY(-2px);
     }
-
-    .glass-hud {
-      background: rgba(11, 14, 20, 0.75);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .btn-shimmer-lemon::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -60%;
+      width: 40%; height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+      transform: rotate(25deg);
+      animation: shimmer-sweep 3.5s infinite;
+    }
+    @keyframes shimmer-sweep {
+      0% { left: -60%; }
+      30%, 100% { left: 140%; }
     }
 
-    .text-tight {
-      letter-spacing: -0.04em;
+    /* Floating Navigation Pill */
+    .motion-nav {
+      background: rgba(12, 27, 72, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(90, 159, 226, 0.3);
+      box-shadow: 0 15px 35px -10px rgba(7, 16, 44, 0.9);
+    }
+
+    /* Watermelon UI Glow Dot */
+    .live-dot {
+      box-shadow: 0 0 12px #F2EA1E, 0 0 24px #F2EA1E;
+    }
+
+    /* Anime.js Interactive Path SVG Canvas */
+    #kineticCanvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
     }
   </style>
 </head>
-<body class="selection:bg-lemon selection:text-obsidian antialiased">
+<body class="selection:bg-lemon selection:text-navy antialiased">
 
-  <!-- Micro-Film Noise Grain Texture Overlay -->
-  <div class="fixed inset-0 pointer-events-none opacity-[0.035] z-50 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+  <!-- Alpine Glacier Atmospheric Radial Lights (Charles Liu 60% Atmosphere) -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-gradient-to-b from-glacier/25 via-glacierdark/15 to-transparent filter blur-[130px] pointer-events-none z-0"></div>
+  <div class="fixed bottom-0 -right-40 w-[700px] h-[700px] bg-navylight/30 filter blur-[160px] pointer-events-none z-0"></div>
 
-  <!-- Ambient Obsidian Background Glows -->
-  <div class="fixed -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-glacier/10 filter blur-[140px] pointer-events-none z-0"></div>
-  <div class="fixed top-[45%] -right-40 w-[600px] h-[600px] bg-navy/40 filter blur-[160px] pointer-events-none z-0"></div>
+  <!-- Background Anime.js Kinetic Particle & Grid Canvas -->
+  <canvas id="kineticCanvas"></canvas>
 
   <!-- ======================================================== -->
-  <!-- 1. FLOATING LUXURY HUD NAVIGATION                        -->
+  <!-- 1. MOTION PRIMITIVES FLOATING GLASS NAVIGATION           -->
   <!-- ======================================================== -->
-  <header class="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 py-4 transition-all duration-300">
-    <div class="max-w-7xl mx-auto flex items-center justify-between glass-hud rounded-2xl px-6 py-3.5 shadow-2xl">
+  <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-4 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex items-center justify-between motion-nav rounded-2xl px-5 sm:px-7 py-3.5">
       
-      <!-- Brand & Status -->
-      <a href="./" class="flex items-center gap-3.5 group">
-        <div class="w-9 h-9 rounded-xl bg-lemon flex items-center justify-center font-archivo text-obsidian text-sm font-black shadow-lg group-hover:scale-105 transition-transform">
+      <!-- Brand & Version -->
+      <a href="./" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-lemon flex items-center justify-center font-archivo text-navy text-base font-black shadow-lg group-hover:scale-105 transition-transform duration-300">
           FS
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="font-archivo text-sm sm:text-base tracking-wider text-snow">FLAGSHIP SYSTEMS</span>
-            <span class="px-2 py-0.5 text-[9px] font-mono font-bold bg-lemon/20 text-lemon border border-lemon/40 rounded-full">v4.0 OS</span>
+            <span class="font-archivo text-base tracking-wider text-snow">FLAGSHIP SYSTEMS</span>
+            <span class="px-2 py-0.5 text-[10px] font-mono font-bold bg-lemon/20 text-lemon border border-lemon/40 rounded-full">v5.0 KINETIC</span>
           </div>
-          <p class="text-[10px] font-mono text-muted tracking-tight hidden sm:block">CREATIVE ENGINEERING &bull; KINETIC DIGITAL FLAGSHIPS</p>
+          <p class="text-[10px] font-mono text-glacierlight tracking-tight hidden sm:block">CHARLES LIU 60/30/10 &bull; MOTION PRIMITIVES OS</p>
         </div>
       </a>
 
-      <!-- Center Telemetry HUD -->
-      <div class="hidden lg:flex items-center gap-6 font-mono text-xs">
-        <a href="#showroom" class="text-muted hover:text-snow transition-colors flex items-center gap-2">
-          <span class="w-1.5 h-1.5 rounded-full bg-lemon"></span>
-          <span>THE SHOWROOM</span>
+      <!-- Center Dynamic Telemetry Menu -->
+      <div class="hidden lg:flex items-center gap-7 font-mono text-xs">
+        <a href="#bento" class="text-snow/80 hover:text-lemon transition-colors flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-lemon live-dot animate-pulse"></span>
+          <span>BENTO SHOWROOM</span>
         </a>
-        <a href="#architecture" class="text-muted hover:text-snow transition-colors">ARCHITECTURE</a>
-        <a href="#philosophy" class="text-muted hover:text-snow transition-colors">THE OBSIDIAN RULE</a>
-        <div class="flex items-center gap-2 px-3 py-1 rounded-lg bg-obsidianborder text-[11px] text-muted">
-          <span>FPS:</span>
-          <span id="navFps" class="text-lemon font-bold">60</span>
+        <a href="#kinetics" class="text-snow/80 hover:text-lemon transition-colors">KINETICS ENGINE</a>
+        <a href="#architecture" class="text-snow/80 hover:text-lemon transition-colors">N8N ARCHITECTURE</a>
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navysurface/80 border border-glacier/30 text-[11px]">
+          <span class="text-muted">CALIBRE:</span>
+          <span id="navFps" class="text-lemon font-bold font-mono">60 FPS</span>
         </div>
       </div>
 
       <!-- Action Suite -->
       <div class="flex items-center gap-3">
-        <!-- Mechanical Drone Audio Synthesizer -->
-        <button id="audioToggleBtn" onclick="toggleAmbientAudio()" class="px-3 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-xs font-mono font-medium flex items-center gap-2 transition-all">
-          <span id="audioIcon">🔇</span>
-          <span id="audioText" class="hidden sm:inline">AUDIO: OFF</span>
+        <!-- Mechanical Sound Engine -->
+        <button id="soundToggleBtn" onclick="toggleAudio()" class="px-3 py-2 rounded-xl bg-navysurface/90 hover:bg-navylight border border-glacier/30 text-xs font-mono font-medium flex items-center gap-2 transition-all">
+          <span id="soundIcon">🔊</span>
+          <span id="soundLabel" class="hidden sm:inline">AUDIO: ON</span>
         </button>
 
-        <!-- Rapid Sprint CTA -->
-        <a href="#contact" class="px-4 py-2 rounded-xl btn-lemon-primary text-xs flex items-center gap-2 cursor-pointer shadow-md">
+        <!-- Shimmer Action Button -->
+        <a href="#contact" class="px-4 sm:px-5 py-2.5 rounded-xl btn-shimmer-lemon text-xs flex items-center gap-2 cursor-pointer shadow-md">
           <span>BOOK SPRINT</span>
           <span>→</span>
         </a>
@@ -209,91 +235,103 @@
   </header>
 
   <!-- ======================================================== -->
-  <!-- 2. DARK LUXURY HERO & 3D SPATIAL CORE                    -->
+  <!-- 2. HERO SECTION & MOTION PRIMITIVES KINETIC STAGE       -->
   <!-- ======================================================== -->
-  <section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-6 sm:px-10 z-10">
+  <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-6 sm:px-10 z-10">
     <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
       
-      <!-- Hero Narrative (Left 7 Cols) -->
+      <!-- Hero Narrative (Left 7 Columns) -->
       <div class="lg:col-span-7 flex flex-col justify-center text-left">
         
-        <!-- Monospace Status Badge -->
-        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-muted font-mono text-xs mb-6 w-fit">
-          <span class="w-2 h-2 rounded-full bg-lemon animate-ping"></span>
-          <span class="text-snow">AESTHETIC UPGRADE</span>
-          <span class="text-white/30">&bull;</span>
-          <span class="text-lemon font-bold">DARK LUXURY OS</span>
+        <!-- Kokonut UI Animated Pill Badge -->
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-navysurface/90 border border-glacier/30 font-mono text-xs mb-6 w-fit shadow-lg">
+          <span class="w-2 h-2 rounded-full bg-lemon live-dot animate-ping"></span>
+          <span class="text-glacierlight font-semibold">KOKONUT UI</span>
+          <span class="text-glacier/40">&bull;</span>
+          <span class="text-lemon font-bold">ANIME.JS MOTION SUITE</span>
         </div>
 
-        <!-- Hero Headline -->
-        <h1 class="font-archivo text-4xl sm:text-6xl xl:text-7xl uppercase text-tight leading-[0.95] text-snow mb-6">
+        <!-- Staggered Animated Headline (Anime.js Target) -->
+        <h1 id="heroTitle" class="font-archivo text-4xl sm:text-6xl xl:text-7xl uppercase tracking-[-0.03em] leading-[0.95] text-snow mb-6">
           DIGITAL FLAGSHIPS <br>
-          <span class="text-lemon">THAT GET PAID.</span>
+          <span class="text-lemon drop-shadow-[0_0_35px_rgba(242,234,30,0.35)]">ENGINEERED TO WIN.</span>
         </h1>
 
         <!-- Subheading -->
-        <p class="font-sans text-base sm:text-lg text-muted max-w-xl leading-relaxed mb-8 font-light">
-          We engineer high-ticket digital flagships with hairline border beams, true 3D spatial kinematics, and 60 FPS performance—moving far beyond generic boilerplate templates into high-trust commercial assets.
+        <p class="font-sans text-base sm:text-lg text-glacierice/90 max-w-xl leading-relaxed mb-8 font-normal">
+          High-ticket creative engineering blending the Charles Liu 60/30/10 aesthetic with Kokonut UI bento grids, Motion Primitives micro-interactions, and 60 FPS Three.js spatial physics.
         </p>
 
-        <!-- CTA Cluster -->
-        <div class="flex flex-wrap items-center gap-4 mb-12">
-          <a href="#showroom" class="px-8 py-4 rounded-2xl btn-lemon-primary text-sm flex items-center gap-3">
-            <span>EXPLORE SHOWROOM</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-          </a>
-          <a href="./chrono-studio/" target="_blank" class="px-6 py-4 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-snow font-mono text-xs font-semibold flex items-center gap-2 transition-all">
-            <span>⚡ NEW: AURA CHRONO 3D</span>
-            <span class="text-lemon">↗</span>
-          </a>
+        <!-- Kokonut UI Command / Quick Action Bar (⌘K Style) -->
+        <div class="w-full max-w-xl mb-10 kokonut-card rounded-2xl p-2.5 flex items-center justify-between gap-3 shadow-xl">
+          <div class="flex items-center gap-3 pl-3">
+            <span class="text-lemon text-sm">⌘</span>
+            <input type="text" id="cmdInput" placeholder="Quick Launch: 'chrono', 'powder', 'crane'..." class="bg-transparent text-xs font-mono text-snow placeholder:text-muted focus:outline-none w-48 sm:w-64" onkeydown="handleCmd(event)">
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="triggerCmd('chrono')" class="px-2.5 py-1.5 rounded-lg bg-navysurface hover:bg-glacierdark border border-glacier/30 text-[11px] font-mono text-snow transition-all">
+              ⚡ CHRONO
+            </button>
+            <button onclick="triggerCmd('powder')" class="px-2.5 py-1.5 rounded-lg bg-navysurface hover:bg-glacierdark border border-glacier/30 text-[11px] font-mono text-snow transition-all">
+              ❄ ALPINE
+            </button>
+            <button onclick="triggerCmd('crane')" class="px-2.5 py-1.5 rounded-lg bg-navysurface hover:bg-glacierdark border border-glacier/30 text-[11px] font-mono text-snow transition-all">
+              🏗 CRANE
+            </button>
+          </div>
         </div>
 
-        <!-- Telemetry Proof Row -->
-        <div class="grid grid-cols-3 gap-4 border-t border-white/[0.08] pt-6 max-w-lg font-mono text-xs">
+        <!-- Telemetry Stats Row -->
+        <div class="grid grid-cols-3 gap-6 border-t border-glacier/20 pt-6 max-w-lg font-mono text-xs">
           <div>
-            <div class="text-muted text-[11px]">HAIRLINE BORDERS</div>
-            <div class="text-snow font-archivo text-lg mt-0.5 font-bold">1PX BEAM</div>
-            <div class="text-[10px] text-lemon mt-0.5">Cursor Spotlight</div>
+            <div class="text-muted text-[11px]">PALETTE RATIO</div>
+            <div class="text-lemon font-archivo text-lg mt-0.5 font-bold">60 / 30 / 10</div>
+            <div class="text-[10px] text-glacierlight mt-0.5">Glacier &bull; Navy &bull; Lemon</div>
           </div>
           <div>
-            <div class="text-muted text-[11px]">GEOMETRY</div>
-            <div class="text-snow font-archivo text-lg mt-0.5 font-bold">60.0 FPS</div>
-            <div class="text-[10px] text-lemon mt-0.5">Damped Inertia</div>
+            <div class="text-muted text-[11px]">ANIMATION</div>
+            <div class="text-snow font-archivo text-lg mt-0.5 font-bold">ANIME.JS</div>
+            <div class="text-[10px] text-lemon mt-0.5">Spring Physics</div>
           </div>
           <div>
-            <div class="text-muted text-[11px]">CLIENT CONVERSION</div>
-            <div class="text-snow font-archivo text-lg mt-0.5 font-bold">+340%</div>
-            <div class="text-[10px] text-lemon mt-0.5">High-Trust Architecture</div>
+            <div class="text-muted text-[11px]">COMPONENTS</div>
+            <div class="text-snow font-archivo text-lg mt-0.5 font-bold">KOKONUT</div>
+            <div class="text-[10px] text-lemon mt-0.5">Motion Primitives</div>
           </div>
         </div>
 
       </div>
 
-      <!-- 3D Kinetic Geometric Installation (Right 5 Cols) -->
+      <!-- Hero 3D Spatial Visualizer (Right 5 Columns) -->
       <div class="lg:col-span-5 h-[480px] sm:h-[540px] relative flex items-center justify-center">
         
-        <!-- Border Beam Card Framing Canvas -->
-        <div class="border-beam-box rounded-3xl p-[1px] w-full h-full shadow-2xl">
-          <div class="beam-inner w-full h-full p-4 flex flex-col justify-between relative overflow-hidden">
-            
-            <!-- Canvas Header Tag -->
-            <div class="flex items-center justify-between z-10 px-2 pt-2 font-mono text-[11px]">
-              <span class="text-muted flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-lemon"></span>
-                <span>SPATIAL PRISM // THREE.JS</span>
-              </span>
-              <span class="text-lemon">DRAG TO ORBIT</span>
-            </div>
+        <!-- Kokonut UI Bento Frame for 3D Viewport -->
+        <div class="kokonut-card rounded-3xl p-6 w-full h-full shadow-2xl flex flex-col justify-between relative group">
+          <div class="corner-accent corner-tl"></div>
+          <div class="corner-accent corner-tr"></div>
+          <div class="corner-accent corner-bl"></div>
+          <div class="corner-accent corner-br"></div>
 
-            <!-- WebGL Canvas Container -->
-            <div id="hero3dContainer" class="absolute inset-0 cursor-grab active:cursor-grabbing"></div>
+          <!-- Card Header HUD -->
+          <div class="flex items-center justify-between z-10 font-mono text-xs">
+            <span class="text-glacierlight flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-lemon animate-ping"></span>
+              <span>KINETIC GLACIER CORE</span>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-lemon/20 text-lemon border border-lemon/40 text-[10px] font-bold">
+              THREE.JS + ANIME.JS
+            </span>
+          </div>
 
-            <!-- Canvas Footer Metrics -->
-            <div class="flex items-center justify-between z-10 px-2 pb-2 font-mono text-[10px] text-muted">
-              <span>REFRACTIVE SHADER</span>
-              <span>12,400 POLYS</span>
-            </div>
+          <!-- WebGL Three.js Container -->
+          <div id="hero3dStage" class="absolute inset-0 cursor-grab active:cursor-grabbing"></div>
 
+          <!-- Card Footer Controls -->
+          <div class="flex items-center justify-between z-10 font-mono text-[11px] pt-3 border-t border-glacier/20">
+            <span class="text-muted">ROTATION: INERTIA DAMPED</span>
+            <button onclick="pulseCore()" class="px-2.5 py-1 rounded-lg bg-lemon hover:bg-lemonhover text-navy font-bold text-[10px] shadow transition-all">
+              ⚡ PULSE CORE
+            </button>
           </div>
         </div>
 
@@ -303,173 +341,204 @@
   </section>
 
   <!-- ======================================================== -->
-  <!-- 3. THE SHOWROOM (CURATED HIGH-TICKET FLAGSHIPS)          -->
+  <!-- 3. KOKONUT UI ASYMMETRICAL BENTO SHOWROOM                -->
   <!-- ======================================================== -->
-  <section id="showroom" class="py-28 px-6 sm:px-10 relative z-20 border-t border-white/[0.08] bg-[#07090E]">
+  <section id="bento" class="py-24 px-6 sm:px-10 relative z-20 bg-navydark/90 border-t border-glacier/20">
     <div class="max-w-7xl mx-auto">
       
-      <!-- Section Header -->
+      <!-- Section Title -->
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>
           <div class="text-xs font-mono font-bold text-lemon uppercase tracking-widest mb-3 flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-lemon animate-pulse"></span>
-            <span>PRODUCTION SHOWROOM</span>
+            <span class="w-2.5 h-2.5 rounded-full bg-lemon live-dot inline-block"></span>
+            <span>KOKONUT UI BENTO SHOWROOM</span>
           </div>
-          <h2 class="font-archivo text-3xl sm:text-5xl uppercase text-tight text-snow">
-            CURATED DIGITAL <span class="text-lemon">FLAGSHIPS.</span>
+          <h2 class="font-archivo text-3xl sm:text-5xl uppercase tracking-tight text-snow">
+            CURATED DIGITAL <span class="text-lemon">PRODUCTIONS.</span>
           </h2>
         </div>
-        <p class="font-sans text-muted max-w-md text-sm sm:text-base font-light leading-relaxed">
-          Each production is engineered with real-time WebGL kinematics, custom shaders, and tactile micro-interactions built to command high-ticket client trust.
+        <p class="font-sans text-glacierlight max-w-md text-sm sm:text-base font-normal leading-relaxed">
+          High-trust commercial assets engineered with genuine spatial kinematics, PBR material shaders, and seamless 60 FPS performance.
         </p>
       </div>
 
-      <!-- Production Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Asymmetrical Bento Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
         
-        <!-- Flagship 01: AURA CHRONO OS -->
-        <div class="spotlight-card rounded-3xl p-7 flex flex-col justify-between h-full group">
+        <!-- BENTO 01: AURA CHRONO OS (Large 8-Col Feature Tile) -->
+        <div class="md:col-span-12 lg:col-span-8 kokonut-card rounded-3xl p-8 flex flex-col justify-between group">
+          <div class="corner-accent corner-tl"></div>
+          <div class="corner-accent corner-tr"></div>
+          <div class="corner-accent corner-bl"></div>
+          <div class="corner-accent corner-br"></div>
+
           <div>
-            <div class="flex items-center justify-between mb-5 font-mono text-[11px]">
-              <span class="px-3 py-1 rounded-full bg-lemon/10 text-lemon border border-lemon/30 font-bold">
-                01 // 3D HOROLOGY
+            <div class="flex items-center justify-between mb-6 font-mono text-xs">
+              <span class="px-3 py-1 rounded-full bg-lemon/20 text-lemon border border-lemon/40 font-bold">
+                01 // 3D EXPLODED HOROLOGY
               </span>
-              <span class="text-emerald-400 flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                Live Production
+              <span class="text-emerald-400 flex items-center gap-2 font-bold">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                LIVE PRODUCTION
               </span>
             </div>
 
-            <!-- Preview Visual Block -->
-            <div class="h-52 rounded-2xl bg-gradient-to-br from-[#0B1528] via-[#080E1C] to-[#04070E] p-6 flex flex-col justify-between text-white mb-6 border border-white/[0.06] relative overflow-hidden group-hover:border-lemon/40 transition-colors">
-              <div class="flex justify-between items-start font-mono text-[10px]">
-                <span class="px-2 py-0.5 rounded bg-black/60 border border-white/10">CALIBRE 01</span>
-                <span class="text-lemon font-bold">28,800 VPH</span>
+            <!-- Visual Stage -->
+            <div class="h-64 sm:h-72 rounded-2xl bg-gradient-to-br from-navy via-navylight to-[#0A163B] p-7 flex flex-col justify-between border border-glacier/30 mb-6 relative overflow-hidden group-hover:border-lemon/60 transition-colors">
+              <div class="flex justify-between items-start font-mono text-xs">
+                <span class="px-3 py-1 rounded-lg bg-black/60 border border-white/10">ZURICH SYNCHRONIZED</span>
+                <span class="text-lemon font-bold font-archivo text-sm">28,800 VPH (4Hz)</span>
               </div>
               <div>
-                <div class="font-archivo text-2xl uppercase text-snow mb-1">
-                  AURA <span class="text-lemon">CHRONO</span>
+                <div class="font-archivo text-3xl sm:text-4xl uppercase text-snow mb-2">
+                  AURA <span class="text-lemon">CHRONO OS</span>
                 </div>
-                <p class="text-[11px] font-mono text-glacierlight">
-                  Z-Axis Calibre Explosion &bull; Kinetic Tourbillon
+                <p class="text-xs sm:text-sm font-sans text-glacierlight max-w-lg">
+                  Real-time Z-axis mechanical deconstruction: sapphire crystal dome, tachymeter bezel, dial plate, oscillating tourbillon gear train, and exhibition rotor.
                 </p>
               </div>
             </div>
 
-            <h3 class="font-archivo text-xl uppercase text-snow mb-2 group-hover:text-lemon transition-colors">
-              Aura Chrono OS
-            </h3>
-            <p class="font-sans text-muted text-xs leading-relaxed mb-6">
-              Awwwards-calibre luxury chronometer featuring real-time Z-axis mechanical explosion, oscillating tourbillon balance wheel, live Zurich clock synchronization, and Web Audio tick synthesizer.
+            <p class="font-sans text-glacierice text-xs sm:text-sm leading-relaxed mb-6">
+              Built for high-end luxury watchmakers and product configurators. Features real-time PBR material customization (Titanium, 18K Champagne Gold, DLC Onyx) and a synthesized 4Hz mechanical tick engine via Web Audio API.
             </p>
 
-            <div class="flex flex-wrap gap-1.5 mb-8 font-mono text-[10px] text-muted">
-              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Z-Axis Explosion</span>
-              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Tourbillon 4Hz</span>
-              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">PBR Sapphire</span>
+            <div class="flex flex-wrap gap-2 mb-8 font-mono text-xs text-glacierlight">
+              <span class="px-3 py-1 rounded-lg bg-navysurface border border-glacier/30">Z-Axis Deconstruction</span>
+              <span class="px-3 py-1 rounded-lg bg-navysurface border border-glacier/30">Kinematic Tourbillon</span>
+              <span class="px-3 py-1 rounded-lg bg-navysurface border border-glacier/30">PBR Sapphire Shaders</span>
+              <span class="px-3 py-1 rounded-lg bg-navysurface border border-glacier/30">Zurich Master Clock</span>
             </div>
           </div>
 
-          <a href="./chrono-studio/" target="_blank" class="w-full py-3.5 rounded-2xl btn-lemon-primary text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
-            <span>Launch Chrono Experience</span>
+          <a href="./chrono-studio/" target="_blank" class="w-full py-4 rounded-2xl btn-shimmer-lemon text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg">
+            <span>Launch AURA CHRONO OS Studio</span>
             <span>→</span>
           </a>
         </div>
 
-        <!-- Flagship 02: ALTAVAL Powder Mountain OS -->
-        <div class="spotlight-card rounded-3xl p-7 flex flex-col justify-between h-full group">
+        <!-- BENTO 02: ALTAVAL POWDER MOUNTAIN OS (4-Col Side Feature) -->
+        <div class="md:col-span-12 lg:col-span-4 kokonut-card rounded-3xl p-8 flex flex-col justify-between group">
+          <div class="corner-accent corner-tl"></div>
+          <div class="corner-accent corner-tr"></div>
+          <div class="corner-accent corner-bl"></div>
+          <div class="corner-accent corner-br"></div>
+
           <div>
-            <div class="flex items-center justify-between mb-5 font-mono text-[11px]">
-              <span class="px-3 py-1 rounded-full bg-glacier/10 text-glacierlight border border-glacier/30 font-bold">
+            <div class="flex items-center justify-between mb-6 font-mono text-xs">
+              <span class="px-3 py-1 rounded-full bg-glacier/20 text-glacierlight border border-glacier/40 font-bold">
                 02 // EXPERIMENTAL 3D
               </span>
-              <span class="text-emerald-400 flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                Live Production
+              <span class="text-emerald-400 flex items-center gap-1.5 font-bold">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                ACTIVE
               </span>
             </div>
 
-            <!-- Preview Visual Block -->
-            <div class="h-52 rounded-2xl bg-gradient-to-br from-[#122A4E] via-[#0E1F3B] to-[#060D1A] p-6 flex flex-col justify-between text-white mb-6 border border-white/[0.06] relative overflow-hidden group-hover:border-glacier/40 transition-colors">
-              <div class="flex justify-between items-start font-mono text-[10px]">
-                <span class="px-2 py-0.5 rounded bg-black/60 border border-white/10">3,200M RESORT</span>
-                <span class="text-lemon font-bold">100% POWDER</span>
-              </div>
+            <div class="h-56 rounded-2xl bg-gradient-to-br from-[#122A4E] via-[#0E1F3B] to-[#060D1A] p-6 flex flex-col justify-between border border-glacier/30 mb-6 group-hover:border-glacier/60 transition-colors">
+              <div class="font-mono text-xs text-lemon font-bold">3,200M ALPINE RESORT</div>
               <div>
                 <div class="font-archivo text-2xl uppercase text-snow mb-1">
                   ALTAVAL <span class="text-lemon">OS</span>
                 </div>
                 <p class="text-[11px] font-mono text-glacierlight">
-                  Kinematic Gondola &bull; Elevation Topography
+                  Snow Vortex &bull; Topography Mesh
                 </p>
               </div>
             </div>
 
-            <h3 class="font-archivo text-xl uppercase text-snow mb-2 group-hover:text-glacierlight transition-colors">
-              ALTAVAL Alpine OS
-            </h3>
-            <p class="font-sans text-muted text-xs leading-relaxed mb-6">
-              Ultra-luxury Swiss alpine resort flagship engineered with Three.js snow vortex particle physics, real-time elevation topography mesh, and decoupled GSAP mouse parallax.
+            <h3 class="font-archivo text-xl uppercase text-snow mb-2">ALTAVAL Alpine OS</h3>
+            <p class="font-sans text-xs text-glacierice leading-relaxed mb-6">
+              Swiss luxury resort digital flagship featuring interactive WebGL snow vortex particle physics, real-time elevation topography mesh, and decoupled GSAP mouse parallax.
             </p>
-
-            <div class="flex flex-wrap gap-1.5 mb-8 font-mono text-[10px] text-muted">
-              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Three.js Snow Vortex</span>
-              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Topography Mesh</span>
-              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">GSAP Scrub</span>
-            </div>
           </div>
 
-          <a href="./powder-studio/" target="_blank" class="w-full py-3.5 rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.1] text-snow font-archivo text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-2 cursor-pointer">
+          <a href="./powder-studio/" target="_blank" class="w-full py-3.5 rounded-2xl bg-navysurface hover:bg-glacierdark border border-glacier/40 text-snow font-archivo text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer">
             <span>Launch ALTAVAL OS</span>
             <span>→</span>
           </a>
         </div>
 
-        <!-- Flagship 03: FLAGSHIP CRANE OS -->
-        <div class="spotlight-card rounded-3xl p-7 flex flex-col justify-between h-full group">
+        <!-- BENTO 03: FLAGSHIP CRANE OS (6-Col Bottom Feature) -->
+        <div class="md:col-span-12 lg:col-span-6 kokonut-card rounded-3xl p-8 flex flex-col justify-between group">
+          <div class="corner-accent corner-tl"></div>
+          <div class="corner-accent corner-tr"></div>
+          <div class="corner-accent corner-bl"></div>
+          <div class="corner-accent corner-br"></div>
+
           <div>
-            <div class="flex items-center justify-between mb-5 font-mono text-[11px]">
-              <span class="px-3 py-1 rounded-full bg-white/[0.06] text-snow border border-white/[0.1] font-bold">
+            <div class="flex items-center justify-between mb-6 font-mono text-xs">
+              <span class="px-3 py-1 rounded-full bg-lemon/20 text-lemon border border-lemon/40 font-bold">
                 03 // PHYSICAL 3D
               </span>
-              <span class="text-emerald-400 flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                Live Production
+              <span class="text-emerald-400 flex items-center gap-1.5 font-bold">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                UNBOXING
               </span>
             </div>
 
-            <!-- Preview Visual Block -->
-            <div class="h-52 rounded-2xl bg-gradient-to-br from-[#1C2333] via-[#131924] to-[#090D14] p-6 flex flex-col justify-between text-white mb-6 border border-white/[0.06] relative overflow-hidden group-hover:border-white/30 transition-colors">
-              <div class="flex justify-between items-start font-mono text-[10px]">
-                <span class="px-2 py-0.5 rounded bg-black/60 border border-white/10">GANTRY PULLEY</span>
-                <span class="text-lemon font-bold">ZERO OVERLAP</span>
-              </div>
+            <div class="h-48 rounded-2xl bg-gradient-to-br from-[#1C2333] to-[#0A101C] p-6 flex flex-col justify-between border border-glacier/30 mb-6">
+              <div class="font-mono text-xs text-lemon font-bold">DUAL-CABLE GANTRY PULLEY</div>
               <div>
                 <div class="font-archivo text-2xl uppercase text-snow mb-1">
                   CRANE <span class="text-lemon">OS</span>
                 </div>
-                <p class="text-[11px] font-mono text-muted">
-                  Spaced Containers &bull; Dual-Cable Physics
+                <p class="text-[11px] font-mono text-glacierlight">
+                  Spaced Containers &bull; 0 Overlap
                 </p>
               </div>
             </div>
 
-            <h3 class="font-archivo text-xl uppercase text-snow mb-2 group-hover:text-snow transition-colors">
-              Flagship Crane OS
-            </h3>
-            <p class="font-sans text-muted text-xs leading-relaxed mb-6">
-              Industrial gantry unboxing engine with real-time 3D cargo containers that unbox into interactive project viewports with generous air-gap spacing and overhead rail kinematics.
+            <h3 class="font-archivo text-xl uppercase text-snow mb-2">Flagship Crane OS</h3>
+            <p class="font-sans text-xs text-glacierice leading-relaxed mb-6">
+              Industrial gantry unboxing engine featuring 4 physical cargo containers that unbox into interactive project viewports with generous air-gap spacing and overhead rail kinematics.
             </p>
-
-            <div class="flex flex-wrap gap-1.5 mb-8 font-mono text-[10px] text-muted">
-              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Crane Kinematics</span>
-              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Container Unboxing</span>
-              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.06]">Studio Lighting</span>
-            </div>
           </div>
 
-          <a href="./crane-studio/" target="_blank" class="w-full py-3.5 rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.1] text-snow font-archivo text-xs tracking-wider uppercase transition-all flex items-center justify-center gap-2 cursor-pointer">
+          <a href="./crane-studio/" target="_blank" class="w-full py-3.5 rounded-2xl bg-navysurface hover:bg-glacierdark border border-glacier/40 text-snow font-archivo text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer">
             <span>Launch Crane OS</span>
+            <span>→</span>
+          </a>
+        </div>
+
+        <!-- BENTO 04: STUDIO FORM & SPACE (6-Col Bottom Feature) -->
+        <div class="md:col-span-12 lg:col-span-6 kokonut-card rounded-3xl p-8 flex flex-col justify-between group">
+          <div class="corner-accent corner-tl"></div>
+          <div class="corner-accent corner-tr"></div>
+          <div class="corner-accent corner-bl"></div>
+          <div class="corner-accent corner-br"></div>
+
+          <div>
+            <div class="flex items-center justify-between mb-6 font-mono text-xs">
+              <span class="px-3 py-1 rounded-full bg-glacier/20 text-glacierlight border border-glacier/40 font-bold">
+                04 // SPATIAL ARCHITECTURE
+              </span>
+              <span class="text-emerald-400 flex items-center gap-1.5 font-bold">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                MINIMALIST
+              </span>
+            </div>
+
+            <div class="h-48 rounded-2xl bg-gradient-to-br from-[#19274A] to-[#0B1530] p-6 flex flex-col justify-between border border-glacier/30 mb-6">
+              <div class="font-mono text-xs text-lemon font-bold">TURNKEY RESIDENTIAL INTERIORS</div>
+              <div>
+                <div class="font-archivo text-2xl uppercase text-snow mb-1">
+                  FORM &amp; <span class="text-lemon">SPACE</span>
+                </div>
+                <p class="text-[11px] font-mono text-glacierlight">
+                  Spatial Materiality Swatches
+                </p>
+              </div>
+            </div>
+
+            <h3 class="font-archivo text-xl uppercase text-snow mb-2">Studio Form &amp; Space</h3>
+            <p class="font-sans text-xs text-glacierice leading-relaxed mb-6">
+              Minimalist architectural and luxury interior design digital flagship featuring spatial materiality swatches, high-end residential case studies, and WhatsApp VIP consultation.
+            </p>
+          </div>
+
+          <a href="./interior/" target="_blank" class="w-full py-3.5 rounded-2xl bg-navysurface hover:bg-glacierdark border border-glacier/40 text-snow font-archivo text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer">
+            <span>Launch Studio Experience</span>
             <span>→</span>
           </a>
         </div>
@@ -482,63 +551,60 @@
   <!-- ======================================================== -->
   <!-- 4. THIRD-PARTY APP & N8N AUTOMATION PIPELINE             -->
   <!-- ======================================================== -->
-  <section id="architecture" class="py-24 px-6 sm:px-10 relative z-20 border-t border-white/[0.08] bg-obsidian">
+  <section id="architecture" class="py-24 px-6 sm:px-10 relative z-20 border-t border-glacier/20 bg-navydark">
     <div class="max-w-7xl mx-auto">
       
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>
           <div class="text-xs font-mono font-bold text-lemon uppercase tracking-widest mb-3 flex items-center gap-2">
-            <span>⚡ SYSTEM ARCHITECTURE</span>
+            <span>⚡ AUTOMATED WORKFLOW ENGINE</span>
           </div>
-          <h2 class="font-archivo text-3xl sm:text-5xl uppercase text-tight text-snow">
-            AUTOMATION &bull; <span class="text-lemon">N8N PIPELINE.</span>
+          <h2 class="font-archivo text-3xl sm:text-5xl uppercase tracking-tight text-snow">
+            N8N &bull; <span class="text-lemon">INTEGRATION PIPELINE.</span>
           </h2>
         </div>
-        <p class="font-sans text-muted max-w-md text-sm font-light leading-relaxed">
-          How we connect 3rd-party visual powerhouses (Spline 3D, Framer, Webflow) into an automated agency pipeline using n8n workflows.
+        <p class="font-sans text-glacierlight max-w-md text-sm font-normal leading-relaxed">
+          How we leverage third-party visual engines (Spline 3D, Framer, Webflow) and automate client delivery using n8n workflows.
         </p>
       </div>
 
       <!-- 3-Tier Integration Architecture -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <!-- Pipeline Node 1 -->
-        <div class="spotlight-card rounded-3xl p-7 flex flex-col justify-between">
+        <div class="kokonut-card rounded-3xl p-7 flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-lemon/10 text-lemon flex items-center justify-center font-archivo font-bold mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-lemon/20 text-lemon flex items-center justify-center font-archivo font-bold text-lg mb-6">
               01
             </div>
-            <h3 class="font-archivo text-lg text-snow uppercase mb-2">SPLINE 3D &bull; ASSET ENGINE</h3>
-            <p class="text-xs font-sans text-muted leading-relaxed mb-4">
-              Instead of coding low-poly primitives by hand, we design photorealistic, glass-refracting 3D assets in Spline. Spline exports an instant WebGL runtime embed code (`@splinetool/runtime`) with zero loading friction.
+            <h3 class="font-archivo text-lg text-snow uppercase mb-2">SPLINE 3D ASSET ENGINE</h3>
+            <p class="text-xs font-sans text-glacierice leading-relaxed mb-4">
+              Design photorealistic, glass-refracting 3D assets visually in Spline. Export clean WebGL runtime embeds with zero loading friction directly into client flagships.
             </p>
           </div>
           <div class="font-mono text-[10px] text-lemon font-bold">EXPORT: WEBGL RUNTIME // EMBED API</div>
         </div>
 
-        <!-- Pipeline Node 2 -->
-        <div class="spotlight-card rounded-3xl p-7 flex flex-col justify-between">
+        <div class="kokonut-card rounded-3xl p-7 flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-glacier/10 text-glacierlight flex items-center justify-center font-archivo font-bold mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-glacier/20 text-glacierlight flex items-center justify-center font-archivo font-bold text-lg mb-6">
               02
             </div>
             <h3 class="font-archivo text-lg text-snow uppercase mb-2">N8N WORKFLOW CONTROLLER</h3>
-            <p class="text-xs font-sans text-muted leading-relaxed mb-4">
-              n8n receives client briefs via Webhook, formats the bespoke copy with an LLM agent, injects the customized 3D scene embed URL, commits to GitHub repository, and triggers an instant Vercel/GitHub Pages deployment.
+            <p class="text-xs font-sans text-glacierice leading-relaxed mb-4">
+              n8n ingests client briefs, formats bespoke copy with an AI agent node, injects customized 3D scenes, pushes commits to GitHub, and triggers instant deployments.
             </p>
           </div>
-          <div class="font-mono text-[10px] text-glacierlight font-bold">ROUTER: WEBHOOK &rarr; LLM &rarr; GITHUB PUSH</div>
+          <div class="font-mono text-[10px] text-glacierlight font-bold">ROUTER: WEBHOOK &rarr; LLM &rarr; GITHUB API</div>
         </div>
 
-        <!-- Pipeline Node 3 -->
-        <div class="spotlight-card rounded-3xl p-7 flex flex-col justify-between">
+        <div class="kokonut-card rounded-3xl p-7 flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-white/[0.08] text-snow flex items-center justify-center font-archivo font-bold mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-white/[0.08] text-snow flex items-center justify-center font-archivo font-bold text-lg mb-6">
               03
             </div>
-            <h3 class="font-archivo text-lg text-snow uppercase mb-2">CLIENT DISPATCH & CRM</h3>
-            <p class="text-xs font-sans text-muted leading-relaxed mb-4">
-              Once deployed, n8n uses a headless browser node to capture full-page high-definition preview screenshots, uploads them to Google Drive/Notion CRM, and dispatches a personalized preview link via WhatsApp/Email.
+            <h3 class="font-archivo text-lg text-snow uppercase mb-2">AUTOMATED DISPATCH & CRM</h3>
+            <p class="text-xs font-sans text-glacierice leading-relaxed mb-4">
+              Once deployed, n8n captures full-page 4K preview screenshots using headless browser nodes, updates Notion CRM, and delivers the live link via WhatsApp/Email.
             </p>
           </div>
           <div class="font-mono text-[10px] text-snow font-bold">DELIVERY: SCREENSHOT &rarr; WHATSAPP API</div>
@@ -550,36 +616,38 @@
   </section>
 
   <!-- ======================================================== -->
-  <!-- 5. RAPID SPRINT BOOKING MODAL / TERMINAL                  -->
+  <!-- 5. 72-HOUR RAPID SPRINT TERMINAL                         -->
   <!-- ======================================================== -->
-  <section id="contact" class="py-24 px-6 sm:px-10 relative z-20 border-t border-white/[0.08] bg-[#07080C]">
+  <section id="contact" class="py-24 px-6 sm:px-10 relative z-20 border-t border-glacier/20 bg-[#07102C]">
     <div class="max-w-4xl mx-auto">
       
-      <div class="border-beam-box rounded-3xl p-[1px] shadow-2xl">
-        <div class="beam-inner p-8 sm:p-12 rounded-3xl text-center">
-          
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lemon/10 text-lemon border border-lemon/30 font-mono text-xs font-bold mb-6">
-            <span class="w-2 h-2 rounded-full bg-lemon"></span>
-            <span>72-HOUR FLAGSHIP SPRINT</span>
-          </div>
+      <div class="kokonut-card rounded-3xl p-8 sm:p-14 text-center shadow-2xl relative">
+        <div class="corner-accent corner-tl"></div>
+        <div class="corner-accent corner-tr"></div>
+        <div class="corner-accent corner-bl"></div>
+        <div class="corner-accent corner-br"></div>
 
-          <h2 class="font-archivo text-3xl sm:text-5xl uppercase text-tight text-snow mb-4">
-            UPGRADE YOUR DIGITAL <span class="text-lemon">PRESENCE.</span>
-          </h2>
-          <p class="font-sans text-muted max-w-xl mx-auto text-sm leading-relaxed mb-8">
-            Deploy an Awwwards-calibre 3D digital flagship engineered to convert high-ticket clientele. Direct WhatsApp engineering consultation with our lead technical architect.
-          </p>
-
-          <a href="https://wa.me/918796016600?text=Hello%20Flagship%20Systems%2C%20I%20am%20interested%20in%20commissioning%20a%20Dark%20Luxury%203D%20Digital%20Flagship." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl btn-lemon-primary text-sm shadow-xl">
-            <span>START WHATSAPP SPRINT</span>
-            <span>→</span>
-          </a>
-
-          <div class="mt-8 font-mono text-[11px] text-muted">
-            GUARANTEE: 60 FPS OPTIMIZATION &bull; ZERO CODE PENETRATION &bull; FULL COMMERCIAL IP OWNERSHIP
-          </div>
-
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-lemon/20 text-lemon border border-lemon/40 font-mono text-xs font-bold mb-6">
+          <span class="w-2 h-2 rounded-full bg-lemon live-dot"></span>
+          <span>72-HOUR RAPID SPRINT</span>
         </div>
+
+        <h2 class="font-archivo text-3xl sm:text-5xl uppercase tracking-tight text-snow mb-4">
+          COMMISSION YOUR <span class="text-lemon">FLAGSHIP.</span>
+        </h2>
+        <p class="font-sans text-glacierice max-w-xl mx-auto text-sm sm:text-base leading-relaxed mb-8">
+          Deploy an Awwwards-calibre 3D digital flagship engineered to convert high-ticket clientele. Direct WhatsApp consultation with our lead technical architect.
+        </p>
+
+        <a href="https://wa.me/918796016600?text=Hello%20Flagship%20Systems%2C%20I%20am%20interested%20in%20commissioning%20a%20Kinetic%203D%20Digital%20Flagship." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-9 py-4 rounded-2xl btn-shimmer-lemon text-sm shadow-xl">
+          <span>START WHATSAPP SPRINT</span>
+          <span>→</span>
+        </a>
+
+        <div class="mt-8 font-mono text-xs text-muted">
+          GUARANTEE: 60 FPS PERFORMANCE &bull; ZERO CODE PENETRATION &bull; FULL COMMERCIAL IP OWNERSHIP
+        </div>
+
       </div>
 
     </div>
@@ -588,30 +656,30 @@
   <!-- ======================================================== -->
   <!-- 6. FOOTER                                                -->
   <!-- ======================================================== -->
-  <footer class="py-12 px-6 sm:px-10 border-t border-white/[0.08] bg-obsidian text-muted font-mono text-xs">
+  <footer class="py-12 px-6 sm:px-10 border-t border-glacier/20 bg-navydark text-muted font-mono text-xs">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-3">
         <span class="w-2 h-2 rounded-full bg-lemon"></span>
         <span class="text-snow font-bold">FLAGSHIP SYSTEMS</span>
-        <span>// CREATIVE ENGINEERING</span>
+        <span>// CREATIVE ENGINEERING LAB</span>
       </div>
       <div>
-        <span>THE OBSIDIAN STANDARD &bull; 1PX BORDER BEAMS &bull; 60 FPS WEBGL</span>
+        <span>CHARLES LIU 60/30/10 &bull; MOTION PRIMITIVES &bull; ANIME.JS</span>
       </div>
       <div>
-        <a href="#showroom" class="text-lemon hover:underline">RETURN TO TOP ↑</a>
+        <a href="#bento" class="text-lemon hover:underline font-bold">RETURN TO TOP ↑</a>
       </div>
     </div>
   </footer>
 
   <!-- ======================================================== -->
-  <!-- 7. THREE.JS LUXURY DARK PRISM & SPOTLIGHT CONTROLLER    -->
+  <!-- 7. SCRIPT LOGIC: ANIME.JS + THREE.JS + MOTION PRIMITIVES -->
   <!-- ======================================================== -->
   <script>
     // ----------------------------------------------------
-    // MOUSE SPOTLIGHT BORDER TRACKER
+    // MOTION PRIMITIVES SPOTLIGHT TRACKER
     // ----------------------------------------------------
-    document.querySelectorAll('.spotlight-card').forEach(card => {
+    document.querySelectorAll('.kokonut-card').forEach(card => {
       card.addEventListener('mousemove', e => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -622,172 +690,284 @@
     });
 
     // ----------------------------------------------------
-    // THREE.JS DARK LUXURY SPATIAL PRISM CORE
+    // ANIME.JS HERO HEADLINE STAGGER ANIMATION
     // ----------------------------------------------------
-    let scene, camera, renderer, crystalMesh, wireframeMesh, pointLight;
-    let targetRotationX = 0;
-    let targetRotationY = 0;
-    let isDragging = false;
-    let prevMousePos = { x: 0, y: 0 };
+    window.addEventListener('DOMContentLoaded', () => {
+      // Anime.js entrance animation on navigation and hero
+      anime.timeline({ easing: 'easeOutExpo' })
+        .add({
+          targets: 'header',
+          translateY: [-30, 0],
+          opacity: [0, 1],
+          duration: 900
+        })
+        .add({
+          targets: '#heroTitle',
+          translateY: [40, 0],
+          opacity: [0, 1],
+          duration: 1100
+        }, '-=500')
+        .add({
+          targets: '.kokonut-card',
+          translateY: [30, 0],
+          opacity: [0, 1],
+          delay: anime.stagger(120),
+          duration: 800
+        }, '-=600');
+    });
+
+    // ----------------------------------------------------
+    // ANIME.JS KINETIC PARTICLE BACKGROUND CANVAS
+    // ----------------------------------------------------
+    const canvas = document.getElementById('kineticCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Create particles in the Glacier Blue / Lemon palette
+    for (let i = 0; i < 45; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 2 + 1,
+        color: Math.random() > 0.85 ? '#F2EA1E' : '#5A9FE2',
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        alpha: Math.random() * 0.5 + 0.2
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw subtle grid lines
+      ctx.strokeStyle = 'rgba(90, 159, 226, 0.05)';
+      ctx.lineWidth = 1;
+      const gridSize = 80;
+      for (let x = 0; x < width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      // Draw and update particles
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // ----------------------------------------------------
+    // THREE.JS GLACIER KINETIC CORE
+    // ----------------------------------------------------
+    let heroScene, heroCamera, heroRenderer, coreMesh, outerCage;
+    let targetRotX = 0, targetRotY = 0;
+    let isDraggingCore = false;
+    let prevMouse = { x: 0, y: 0 };
 
     function initHero3D() {
-      const container = document.getElementById('hero3dContainer');
+      const container = document.getElementById('hero3dStage');
       if (!container) return;
 
-      const width = container.clientWidth;
-      const height = container.clientHeight;
+      const w = container.clientWidth;
+      const h = container.clientHeight;
 
-      scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-      camera.position.set(0, 0, 7.5);
+      heroScene = new THREE.Scene();
+      heroCamera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
+      heroCamera.position.set(0, 0, 7.5);
 
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.3;
-      container.appendChild(renderer.domElement);
+      heroRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+      heroRenderer.setSize(w, h);
+      heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      heroRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+      container.appendChild(heroRenderer.domElement);
 
-      // Studio Lighting for Dark Glass & Metal
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-      scene.add(ambientLight);
+      // Studio Lighting
+      const ambLight = new THREE.AmbientLight(0xffffff, 0.9);
+      heroScene.add(ambLight);
 
-      const keyLight = new THREE.DirectionalLight(0xF2EA1E, 2.4);
-      keyLight.position.set(5, 5, 5);
-      scene.add(keyLight);
+      const keyL = new THREE.DirectionalLight(0xF2EA1E, 2.5);
+      keyL.position.set(5, 5, 5);
+      heroScene.add(keyL);
 
-      const fillLight = new THREE.DirectionalLight(0x5A9FE2, 2.0);
-      fillLight.position.set(-5, -3, 3);
-      scene.add(fillLight);
+      const fillL = new THREE.DirectionalLight(0x5A9FE2, 2.2);
+      fillL.position.set(-5, -4, 4);
+      heroScene.add(fillL);
 
-      pointLight = new THREE.PointLight(0xF2EA1E, 1.5, 10);
-      pointLight.position.set(0, 0, 0);
-      scene.add(pointLight);
-
-      // Geometry: Precision Icosahedron Prism
-      const geometry = new THREE.IcosahedronGeometry(2.4, 0);
-
-      // Glass Material (Reflective Obsidian)
-      const material = new THREE.MeshPhysicalMaterial({
-        color: 0x0C1220,
-        emissive: 0x050810,
-        metalness: 0.85,
-        roughness: 0.12,
+      // Central Glacier Core (Octahedron + Torus Knot)
+      const coreGeo = new THREE.OctahedronGeometry(2.2, 0);
+      const coreMat = new THREE.MeshPhysicalMaterial({
+        color: 0x5A9FE2,
+        emissive: 0x0C1B48,
+        metalness: 0.8,
+        roughness: 0.2,
         clearcoat: 1.0,
-        clearcoatRoughness: 0.08,
-        reflectivity: 0.95,
+        transmission: 0.65,
         transparent: true,
-        opacity: 0.88,
+        opacity: 0.9
       });
+      coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      heroScene.add(coreMesh);
 
-      crystalMesh = new THREE.Mesh(geometry, material);
-      scene.add(crystalMesh);
+      // Electric Lemon Wireframe Outer Cage
+      const cageGeo = new THREE.IcosahedronGeometry(2.7, 1);
+      const wireGeo = new THREE.WireframeGeometry(cageGeo);
+      const wireMat = new THREE.LineBasicMaterial({ color: 0xF2EA1E, transparent: true, opacity: 0.5 });
+      outerCage = new THREE.LineSegments(wireGeo, wireMat);
+      heroScene.add(outerCage);
 
-      // Wireframe Accent Cage (Electric Lemon Edge Highlights)
-      const wireGeo = new THREE.WireframeGeometry(geometry);
-      const wireMat = new THREE.LineBasicMaterial({ color: 0xF2EA1E, linewidth: 2, transparent: true, opacity: 0.6 });
-      wireframeMesh = new THREE.LineSegments(wireGeo, wireMat);
-      crystalMesh.add(wireframeMesh);
-
-      // Mouse drag controls
+      // Mouse Drag Controls
       container.addEventListener('mousedown', e => {
-        isDragging = true;
-        prevMousePos = { x: e.clientX, y: e.clientY };
+        isDraggingCore = true;
+        prevMouse = { x: e.clientX, y: e.clientY };
       });
-      window.addEventListener('mouseup', () => isDragging = false);
+      window.addEventListener('mouseup', () => isDraggingCore = false);
       window.addEventListener('mousemove', e => {
-        if (!isDragging) {
-          // Subtle mouse parallax
+        if (!isDraggingCore) {
           const rect = container.getBoundingClientRect();
           const normX = (e.clientX - rect.left) / rect.width - 0.5;
           const normY = (e.clientY - rect.top) / rect.height - 0.5;
-          targetRotationY = normX * 1.5;
-          targetRotationX = normY * 1.5;
+          targetRotY = normX * 1.8;
+          targetRotX = normY * 1.8;
           return;
         }
-        const deltaX = e.clientX - prevMousePos.x;
-        const deltaY = e.clientY - prevMousePos.y;
-        targetRotationY += deltaX * 0.01;
-        targetRotationX += deltaY * 0.01;
-        prevMousePos = { x: e.clientX, y: e.clientY };
+        const dx = e.clientX - prevMouse.x;
+        const dy = e.clientY - prevMouse.y;
+        targetRotY += dx * 0.01;
+        targetRotX += dy * 0.01;
+        prevMouse = { x: e.clientX, y: e.clientY };
       });
 
-      window.addEventListener('resize', () => {
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-      });
-
-      let lastTime = performance.now();
       let frames = 0;
+      let lastT = performance.now();
 
-      function renderLoop(time) {
-        requestAnimationFrame(renderLoop);
+      function renderCore(now) {
+        requestAnimationFrame(renderCore);
 
-        // Autonomous kinetic tumble
-        if (!isDragging) {
-          crystalMesh.rotation.y += 0.006;
-          crystalMesh.rotation.x += 0.003;
+        if (!isDraggingCore) {
+          coreMesh.rotation.y += 0.008;
+          coreMesh.rotation.x += 0.004;
+          outerCage.rotation.y -= 0.005;
+          outerCage.rotation.z += 0.003;
         }
 
-        // Damped inertia
-        crystalMesh.rotation.y += (targetRotationY - crystalMesh.rotation.y) * 0.05;
-        crystalMesh.rotation.x += (targetRotationX - crystalMesh.rotation.x) * 0.05;
+        coreMesh.rotation.y += (targetRotY - coreMesh.rotation.y) * 0.05;
+        coreMesh.rotation.x += (targetRotX - coreMesh.rotation.x) * 0.05;
 
-        // FPS meter
         frames++;
-        if (time - lastTime >= 1000) {
-          const fps = Math.round((frames * 1000) / (time - lastTime));
-          const fpsEl = document.getElementById('navFps');
-          if (fpsEl) fpsEl.textContent = fps;
+        if (now - lastT >= 1000) {
+          const fps = Math.round((frames * 1000) / (now - lastT));
+          const el = document.getElementById('navFps');
+          if (el) el.textContent = `${fps} FPS`;
           frames = 0;
-          lastTime = time;
+          lastT = now;
         }
 
-        renderer.render(scene, camera);
+        heroRenderer.render(heroScene, heroCamera);
       }
-      renderLoop(performance.now());
+      renderCore(performance.now());
+    }
+
+    // Anime.js Interactive Core Pulse
+    function pulseCore() {
+      anime({
+        targets: coreMesh.scale,
+        x: [1, 1.35, 1],
+        y: [1, 1.35, 1],
+        z: [1, 1.35, 1],
+        duration: 800,
+        easing: 'easeOutElastic(1, .5)'
+      });
+      anime({
+        targets: outerCage.scale,
+        x: [1, 1.5, 1],
+        y: [1, 1.5, 1],
+        z: [1, 1.5, 1],
+        duration: 900,
+        easing: 'easeOutElastic(1, .4)'
+      });
     }
 
     // ----------------------------------------------------
-    // AMBIENT ANALOG SYNTHESIZER (WEB AUDIO API)
+    // KOKONUT UI COMMAND BAR HANDLER
+    // ----------------------------------------------------
+    function handleCmd(e) {
+      if (e.key === 'Enter') {
+        const val = e.target.value.toLowerCase().trim();
+        triggerCmd(val);
+      }
+    }
+
+    function triggerCmd(target) {
+      if (target.includes('chrono')) {
+        window.open('./chrono-studio/', '_blank');
+      } else if (target.includes('powder') || target.includes('alpine')) {
+        window.open('./powder-studio/', '_blank');
+      } else if (target.includes('crane')) {
+        window.open('./crane-studio/', '_blank');
+      } else {
+        const bento = document.getElementById('bento');
+        if (bento) bento.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // ----------------------------------------------------
+    // AUDIO ENGINE (WEB AUDIO API)
     // ----------------------------------------------------
     let audioCtx = null;
-    let osc1 = null;
-    let osc2 = null;
-    let isAudioPlaying = false;
+    let osc = null;
+    let isPlaying = false;
 
-    function toggleAmbientAudio() {
-      if (isAudioPlaying) {
-        if (osc1) { osc1.stop(); osc1.disconnect(); }
-        if (osc2) { osc2.stop(); osc2.disconnect(); }
-        isAudioPlaying = false;
-        document.getElementById('audioIcon').textContent = '🔇';
-        document.getElementById('audioText').textContent = 'AUDIO: OFF';
+    function toggleAudio() {
+      if (isPlaying) {
+        if (osc) { osc.stop(); osc.disconnect(); }
+        isPlaying = false;
+        document.getElementById('soundIcon').textContent = '🔇';
+        document.getElementById('soundLabel').textContent = 'AUDIO: OFF';
       } else {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         if (audioCtx.state === 'suspended') audioCtx.resume();
 
-        const masterGain = audioCtx.createGain();
-        masterGain.gain.setValueAtTime(0.035, audioCtx.currentTime);
-        masterGain.connect(audioCtx.destination);
+        const gain = audioCtx.createGain();
+        gain.gain.setValueAtTime(0.025, audioCtx.currentTime);
+        gain.connect(audioCtx.destination);
 
-        // Low harmonic warm ambient drone
-        osc1 = audioCtx.createOscillator();
-        osc1.type = 'sine';
-        osc1.frequency.setValueAtTime(55, audioCtx.currentTime); // A1 note
-        osc1.connect(masterGain);
-        osc1.start();
+        osc = audioCtx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(80, audioCtx.currentTime);
+        osc.connect(gain);
+        osc.start();
 
-        osc2 = audioCtx.createOscillator();
-        osc2.type = 'triangle';
-        osc2.frequency.setValueAtTime(110, audioCtx.currentTime); // A2 note
-        osc2.connect(masterGain);
-        osc2.start();
-
-        isAudioPlaying = true;
-        document.getElementById('audioIcon').textContent = '🔊';
-        document.getElementById('audioText').textContent = 'AUDIO: 55Hz ON';
+        isPlaying = true;
+        document.getElementById('soundIcon').textContent = '🔊';
+        document.getElementById('soundLabel').textContent = 'AUDIO: ON';
       }
     }
 
